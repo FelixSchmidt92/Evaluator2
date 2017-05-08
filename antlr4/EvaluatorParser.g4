@@ -9,47 +9,39 @@ expression
 	name = nestedFunction	#function
 	| LeftParenthesis expression RightParenthesis #parentheses
 	| unaryoperator expression #unaryOperator
-	| expression binaryoperator expression #muldiv
-	| variable #variables
-	| terminal #terminale
-;
-
-terminal
-:
-   integerNumber
-   | floatNumber
-   | String
+	| expression binaryoperator expression #binaryOperator
+	| integerNumber #integerNum
+	| floatNumber  #floatNum
+	| exerciseVar #exerciseVariable
+	| fillInVar  #fillInVariable
+	| Text #text
 ;
 
 integerNumber
 :
-	Integer | (Quote Integer Quote)
+	Integer
+	| (Quote Integer Quote)
 ;
 floatNumber
 :
-	Float | (Quote Float Quote)
-;
-
-variable
-:
-	exerciseVar | fillInVar
+	Float | (Quote Float Quote) 
 ;
 
 exerciseVar
 :
-		ExerciseVariable| (Quote ExerciseVariable Quote)
+	ExerciseVariable| (Quote ExerciseVariable Quote) 
 ;
 
 fillInVar
 :
-		FillInVariable| (Quote FillInVariable Quote)
+	FillInVariable| (Quote FillInVariable Quote)
 ;
 
 unaryoperator
 :
-	Plus			#unaryPlus
-	| Minus 		#unaryMinus
-	| BooleanNot 	#unaryNot
+	Plus
+	| Minus
+	| BooleanNot
 ;
 
 binaryoperator
