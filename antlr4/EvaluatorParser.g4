@@ -6,7 +6,7 @@ options {
 
 expression
 :
-	name = nestedFunction	#function
+	nestedFunction	#function
 	| LeftParenthesis expression RightParenthesis #parentheses
 	| unaryoperator expression #unaryOperator
 	| expression binaryoperator expression #binaryOperator
@@ -59,17 +59,15 @@ binaryoperator
 	| NotEqual
 	| BooleanAnd
 	| BooleanOr
-	
 ;
 
 nestedFunction
 :
-	FunctionName FunctionOpen
+    name = FunctionName FunctionOpen
 	(
 		arguments += expression
 		(
 			ArgumentSeparator arguments += expression
 		)* 
-	)?
-	FunctionClose
+	)? FunctionClose
 ;

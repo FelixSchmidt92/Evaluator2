@@ -22,8 +22,8 @@ public class EvaluatorParser extends Parser {
 		Multiplication=6, Division=7, Modulus=8, LessThan=9, LessThanOrEqual=10, 
 		GreaterThan=11, GreaterThanOrEqual=12, Equal=13, NotEqual=14, BooleanAnd=15, 
 		BooleanOr=16, ExerciseVariable=17, FillInVariable=18, StandardVariable=19, 
-		FunctionName=20, FunctionOpen=21, FunctionClose=22, ArgumentSeparator=23, 
-		Quote=24, Integer=25, Float=26, Text=27, WS=28;
+		FunctionName=20, Quote=21, Integer=22, Float=23, Text=24, WS=25, FunctionOpen=26, 
+		ArgumentSeparator=27, WSInFunction=28, FunctionClose=29;
 	public static final int
 		RULE_expression = 0, RULE_integerNumber = 1, RULE_floatNumber = 2, RULE_exerciseVar = 3, 
 		RULE_fillInVar = 4, RULE_unaryoperator = 5, RULE_binaryoperator = 6, RULE_nestedFunction = 7;
@@ -34,16 +34,16 @@ public class EvaluatorParser extends Parser {
 
 	private static final String[] _LITERAL_NAMES = {
 		null, null, null, "'+'", "'-'", "'!'", "'*'", "'/'", "'%'", "'<'", "'<='", 
-		"'>'", "'>='", null, "'!='", "'&&'", "'||'", null, null, null, null, null, 
-		null, "','", "'''"
+		"'>'", "'>='", null, "'!='", "'&&'", "'||'", null, null, null, null, "'''", 
+		null, null, null, null, null, "','", "' '"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
 		null, "LeftParenthesis", "RightParenthesis", "Plus", "Minus", "BooleanNot", 
 		"Multiplication", "Division", "Modulus", "LessThan", "LessThanOrEqual", 
 		"GreaterThan", "GreaterThanOrEqual", "Equal", "NotEqual", "BooleanAnd", 
 		"BooleanOr", "ExerciseVariable", "FillInVariable", "StandardVariable", 
-		"FunctionName", "FunctionOpen", "FunctionClose", "ArgumentSeparator", 
-		"Quote", "Integer", "Float", "Text", "WS"
+		"FunctionName", "Quote", "Integer", "Float", "Text", "WS", "FunctionOpen", 
+		"ArgumentSeparator", "WSInFunction", "FunctionClose"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -183,7 +183,6 @@ public class EvaluatorParser extends Parser {
 		}
 	}
 	public static class FunctionContext extends ExpressionContext {
-		public NestedFunctionContext name;
 		public NestedFunctionContext nestedFunction() {
 			return getRuleContext(NestedFunctionContext.class,0);
 		}
@@ -240,7 +239,7 @@ public class EvaluatorParser extends Parser {
 				_prevctx = _localctx;
 
 				setState(17);
-				((FunctionContext)_localctx).name = nestedFunction();
+				nestedFunction();
 				}
 				break;
 			case 2:
@@ -688,11 +687,12 @@ public class EvaluatorParser extends Parser {
 	}
 
 	public static class NestedFunctionContext extends ParserRuleContext {
+		public Token name;
 		public ExpressionContext expression;
 		public List<ExpressionContext> arguments = new ArrayList<ExpressionContext>();
-		public TerminalNode FunctionName() { return getToken(EvaluatorParser.FunctionName, 0); }
 		public TerminalNode FunctionOpen() { return getToken(EvaluatorParser.FunctionOpen, 0); }
 		public TerminalNode FunctionClose() { return getToken(EvaluatorParser.FunctionClose, 0); }
+		public TerminalNode FunctionName() { return getToken(EvaluatorParser.FunctionName, 0); }
 		public List<ExpressionContext> expression() {
 			return getRuleContexts(ExpressionContext.class);
 		}
@@ -722,7 +722,7 @@ public class EvaluatorParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(69);
-			match(FunctionName);
+			((NestedFunctionContext)_localctx).name = match(FunctionName);
 			setState(70);
 			match(FunctionOpen);
 			setState(79);
@@ -784,7 +784,7 @@ public class EvaluatorParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\36V\4\2\t\2\4\3\t"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\37V\4\2\t\2\4\3\t"+
 		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\3\2\3\2\3\2\3\2\3\2"+
 		"\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\5\2!\n\2\3\2\3\2\3\2\3\2\7\2\'\n"+
 		"\2\f\2\16\2*\13\2\3\3\3\3\3\3\3\3\5\3\60\n\3\3\4\3\4\3\4\3\4\5\4\66\n"+
@@ -794,18 +794,18 @@ public class EvaluatorParser extends Parser {
 		"\6\65\3\2\2\2\b;\3\2\2\2\nA\3\2\2\2\fC\3\2\2\2\16E\3\2\2\2\20G\3\2\2\2"+
 		"\22\23\b\2\1\2\23!\5\20\t\2\24\25\7\3\2\2\25\26\5\2\2\2\26\27\7\4\2\2"+
 		"\27!\3\2\2\2\30\31\5\f\7\2\31\32\5\2\2\t\32!\3\2\2\2\33!\5\4\3\2\34!\5"+
-		"\6\4\2\35!\5\b\5\2\36!\5\n\6\2\37!\7\35\2\2 \22\3\2\2\2 \24\3\2\2\2 \30"+
+		"\6\4\2\35!\5\b\5\2\36!\5\n\6\2\37!\7\32\2\2 \22\3\2\2\2 \24\3\2\2\2 \30"+
 		"\3\2\2\2 \33\3\2\2\2 \34\3\2\2\2 \35\3\2\2\2 \36\3\2\2\2 \37\3\2\2\2!"+
 		"(\3\2\2\2\"#\f\b\2\2#$\5\16\b\2$%\5\2\2\t%\'\3\2\2\2&\"\3\2\2\2\'*\3\2"+
-		"\2\2(&\3\2\2\2()\3\2\2\2)\3\3\2\2\2*(\3\2\2\2+\60\7\33\2\2,-\7\32\2\2"+
-		"-.\7\33\2\2.\60\7\32\2\2/+\3\2\2\2/,\3\2\2\2\60\5\3\2\2\2\61\66\7\34\2"+
-		"\2\62\63\7\32\2\2\63\64\7\34\2\2\64\66\7\32\2\2\65\61\3\2\2\2\65\62\3"+
-		"\2\2\2\66\7\3\2\2\2\67<\7\23\2\289\7\32\2\29:\7\23\2\2:<\7\32\2\2;\67"+
-		"\3\2\2\2;8\3\2\2\2<\t\3\2\2\2=B\7\24\2\2>?\7\32\2\2?@\7\24\2\2@B\7\32"+
+		"\2\2(&\3\2\2\2()\3\2\2\2)\3\3\2\2\2*(\3\2\2\2+\60\7\30\2\2,-\7\27\2\2"+
+		"-.\7\30\2\2.\60\7\27\2\2/+\3\2\2\2/,\3\2\2\2\60\5\3\2\2\2\61\66\7\31\2"+
+		"\2\62\63\7\27\2\2\63\64\7\31\2\2\64\66\7\27\2\2\65\61\3\2\2\2\65\62\3"+
+		"\2\2\2\66\7\3\2\2\2\67<\7\23\2\289\7\27\2\29:\7\23\2\2:<\7\27\2\2;\67"+
+		"\3\2\2\2;8\3\2\2\2<\t\3\2\2\2=B\7\24\2\2>?\7\27\2\2?@\7\24\2\2@B\7\27"+
 		"\2\2A=\3\2\2\2A>\3\2\2\2B\13\3\2\2\2CD\t\2\2\2D\r\3\2\2\2EF\t\3\2\2F\17"+
-		"\3\2\2\2GH\7\26\2\2HQ\7\27\2\2IN\5\2\2\2JK\7\31\2\2KM\5\2\2\2LJ\3\2\2"+
+		"\3\2\2\2GH\7\26\2\2HQ\7\34\2\2IN\5\2\2\2JK\7\35\2\2KM\5\2\2\2LJ\3\2\2"+
 		"\2MP\3\2\2\2NL\3\2\2\2NO\3\2\2\2OR\3\2\2\2PN\3\2\2\2QI\3\2\2\2QR\3\2\2"+
-		"\2RS\3\2\2\2ST\7\30\2\2T\21\3\2\2\2\n (/\65;ANQ";
+		"\2RS\3\2\2\2ST\7\37\2\2T\21\3\2\2\2\n (/\65;ANQ";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
