@@ -21,9 +21,8 @@ public class EvaluatorParser extends Parser {
 		LeftParenthesis=1, RightParenthesis=2, Plus=3, Minus=4, BooleanNot=5, 
 		Multiplication=6, Division=7, Modulus=8, LessThan=9, LessThanOrEqual=10, 
 		GreaterThan=11, GreaterThanOrEqual=12, Equal=13, NotEqual=14, BooleanAnd=15, 
-		BooleanOr=16, ExerciseVariable=17, FillInVariable=18, StandardVariable=19, 
-		FunctionName=20, Quote=21, ArgumentSeparator=22, Integer=23, Float=24, 
-		String=25, WS=26;
+		BooleanOr=16, ExerciseVariable=17, FillInVariable=18, FunctionName=19, 
+		ArgumentSeparator=20, Integer=21, Float=22, String=23, WS=24;
 	public static final int
 		RULE_expression = 0, RULE_unaryoperator = 1, RULE_binaryoperator = 2, 
 		RULE_nestedFunction = 3;
@@ -33,16 +32,14 @@ public class EvaluatorParser extends Parser {
 
 	private static final String[] _LITERAL_NAMES = {
 		null, "'('", "')'", "'+'", "'-'", "'!'", "'*'", "'/'", "'%'", "'<'", "'<='", 
-		"'>'", "'>='", null, "'!='", "'&&'", "'||'", null, null, null, null, "'''", 
-		"','"
+		"'>'", "'>='", null, "'!='", "'&&'", "'||'", null, null, null, "','"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
 		null, "LeftParenthesis", "RightParenthesis", "Plus", "Minus", "BooleanNot", 
 		"Multiplication", "Division", "Modulus", "LessThan", "LessThanOrEqual", 
 		"GreaterThan", "GreaterThanOrEqual", "Equal", "NotEqual", "BooleanAnd", 
-		"BooleanOr", "ExerciseVariable", "FillInVariable", "StandardVariable", 
-		"FunctionName", "Quote", "ArgumentSeparator", "Integer", "Float", "String", 
-		"WS"
+		"BooleanOr", "ExerciseVariable", "FillInVariable", "FunctionName", "ArgumentSeparator", 
+		"Integer", "Float", "String", "WS"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -550,19 +547,19 @@ public class EvaluatorParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\34\66\4\2\t\2\4\3"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\32\66\4\2\t\2\4\3"+
 		"\t\3\4\4\t\4\4\5\t\5\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3"+
 		"\2\3\2\5\2\31\n\2\3\2\3\2\3\2\3\2\7\2\37\n\2\f\2\16\2\"\13\2\3\3\3\3\3"+
 		"\4\3\4\3\5\3\5\3\5\3\5\3\5\7\5-\n\5\f\5\16\5\60\13\5\5\5\62\n\5\3\5\3"+
 		"\5\3\5\2\3\2\6\2\4\6\b\2\4\3\2\5\7\4\2\5\6\b\22\2;\2\30\3\2\2\2\4#\3\2"+
 		"\2\2\6%\3\2\2\2\b\'\3\2\2\2\n\13\b\2\1\2\13\31\5\b\5\2\f\r\7\3\2\2\r\16"+
 		"\5\2\2\2\16\17\7\4\2\2\17\31\3\2\2\2\20\21\5\4\3\2\21\22\5\2\2\t\22\31"+
-		"\3\2\2\2\23\31\7\31\2\2\24\31\7\32\2\2\25\31\7\23\2\2\26\31\7\24\2\2\27"+
-		"\31\7\33\2\2\30\n\3\2\2\2\30\f\3\2\2\2\30\20\3\2\2\2\30\23\3\2\2\2\30"+
+		"\3\2\2\2\23\31\7\27\2\2\24\31\7\30\2\2\25\31\7\23\2\2\26\31\7\24\2\2\27"+
+		"\31\7\31\2\2\30\n\3\2\2\2\30\f\3\2\2\2\30\20\3\2\2\2\30\23\3\2\2\2\30"+
 		"\24\3\2\2\2\30\25\3\2\2\2\30\26\3\2\2\2\30\27\3\2\2\2\31 \3\2\2\2\32\33"+
 		"\f\b\2\2\33\34\5\6\4\2\34\35\5\2\2\t\35\37\3\2\2\2\36\32\3\2\2\2\37\""+
 		"\3\2\2\2 \36\3\2\2\2 !\3\2\2\2!\3\3\2\2\2\" \3\2\2\2#$\t\2\2\2$\5\3\2"+
-		"\2\2%&\t\3\2\2&\7\3\2\2\2\'(\7\26\2\2(\61\7\3\2\2).\5\2\2\2*+\7\30\2\2"+
+		"\2\2%&\t\3\2\2&\7\3\2\2\2\'(\7\25\2\2(\61\7\3\2\2).\5\2\2\2*+\7\26\2\2"+
 		"+-\5\2\2\2,*\3\2\2\2-\60\3\2\2\2.,\3\2\2\2./\3\2\2\2/\62\3\2\2\2\60.\3"+
 		"\2\2\2\61)\3\2\2\2\61\62\3\2\2\2\62\63\3\2\2\2\63\64\7\4\2\2\64\t\3\2"+
 		"\2\2\6\30 .\61";
