@@ -10,6 +10,8 @@ import org.antlr.v4.runtime.Lexer;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.uni_due.s3.evaluator.openmath.OpenMathApplication;
+import de.uni_due.s3.evaluator.openmath.OpenMathObject;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorLexer;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser;
@@ -19,7 +21,8 @@ public class TestParser {
 
 	@Test
 	public void testParser() {
-		System.out.println(ExpressionParser.parse("func(3)"));
+		OpenMathObject hello = ExpressionParser.parse("'1'");
+		System.out.println(hello);
 	}
 
 }

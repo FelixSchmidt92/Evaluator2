@@ -22,28 +22,27 @@ public class EvaluatorParser extends Parser {
 		Multiplication=6, Division=7, Modulus=8, LessThan=9, LessThanOrEqual=10, 
 		GreaterThan=11, GreaterThanOrEqual=12, Equal=13, NotEqual=14, BooleanAnd=15, 
 		BooleanOr=16, ExerciseVariable=17, FillInVariable=18, StandardVariable=19, 
-		FunctionName=20, Quote=21, Integer=22, Float=23, Text=24, WS=25, FunctionOpen=26, 
-		ArgumentSeparator=27, WSInFunction=28, FunctionClose=29;
+		FunctionName=20, Quote=21, ArgumentSeparator=22, Integer=23, Float=24, 
+		String=25, WS=26;
 	public static final int
-		RULE_expression = 0, RULE_integerNumber = 1, RULE_floatNumber = 2, RULE_exerciseVar = 3, 
-		RULE_fillInVar = 4, RULE_unaryoperator = 5, RULE_binaryoperator = 6, RULE_nestedFunction = 7;
+		RULE_expression = 0, RULE_unaryoperator = 1, RULE_binaryoperator = 2, 
+		RULE_nestedFunction = 3;
 	public static final String[] ruleNames = {
-		"expression", "integerNumber", "floatNumber", "exerciseVar", "fillInVar", 
-		"unaryoperator", "binaryoperator", "nestedFunction"
+		"expression", "unaryoperator", "binaryoperator", "nestedFunction"
 	};
 
 	private static final String[] _LITERAL_NAMES = {
-		null, null, null, "'+'", "'-'", "'!'", "'*'", "'/'", "'%'", "'<'", "'<='", 
+		null, "'('", "')'", "'+'", "'-'", "'!'", "'*'", "'/'", "'%'", "'<'", "'<='", 
 		"'>'", "'>='", null, "'!='", "'&&'", "'||'", null, null, null, null, "'''", 
-		null, null, null, null, null, "','", "' '"
+		"','"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
 		null, "LeftParenthesis", "RightParenthesis", "Plus", "Minus", "BooleanNot", 
 		"Multiplication", "Division", "Modulus", "LessThan", "LessThanOrEqual", 
 		"GreaterThan", "GreaterThanOrEqual", "Equal", "NotEqual", "BooleanAnd", 
 		"BooleanOr", "ExerciseVariable", "FillInVariable", "StandardVariable", 
-		"FunctionName", "Quote", "Integer", "Float", "Text", "WS", "FunctionOpen", 
-		"ArgumentSeparator", "WSInFunction", "FunctionClose"
+		"FunctionName", "Quote", "ArgumentSeparator", "Integer", "Float", "String", 
+		"WS"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -119,11 +118,12 @@ public class EvaluatorParser extends Parser {
 		}
 	}
 	public static class UnaryOperatorContext extends ExpressionContext {
-		public UnaryoperatorContext unaryoperator() {
-			return getRuleContext(UnaryoperatorContext.class,0);
-		}
+		public UnaryoperatorContext value;
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
+		}
+		public UnaryoperatorContext unaryoperator() {
+			return getRuleContext(UnaryoperatorContext.class,0);
 		}
 		public UnaryOperatorContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
@@ -132,40 +132,18 @@ public class EvaluatorParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class IntegerNumContext extends ExpressionContext {
-		public IntegerNumberContext integerNumber() {
-			return getRuleContext(IntegerNumberContext.class,0);
-		}
-		public IntegerNumContext(ExpressionContext ctx) { copyFrom(ctx); }
+	public static class TextValueContext extends ExpressionContext {
+		public Token value;
+		public TerminalNode String() { return getToken(EvaluatorParser.String, 0); }
+		public TextValueContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitIntegerNum(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class FloatNumContext extends ExpressionContext {
-		public FloatNumberContext floatNumber() {
-			return getRuleContext(FloatNumberContext.class,0);
-		}
-		public FloatNumContext(ExpressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitFloatNum(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class FillInVariableContext extends ExpressionContext {
-		public FillInVarContext fillInVar() {
-			return getRuleContext(FillInVarContext.class,0);
-		}
-		public FillInVariableContext(ExpressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitFillInVariable(this);
+			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitTextValue(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	public static class BinaryOperatorContext extends ExpressionContext {
+		public BinaryoperatorContext value;
 		public List<ExpressionContext> expression() {
 			return getRuleContexts(ExpressionContext.class);
 		}
@@ -193,23 +171,43 @@ public class EvaluatorParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class ExerciseVariableContext extends ExpressionContext {
-		public ExerciseVarContext exerciseVar() {
-			return getRuleContext(ExerciseVarContext.class,0);
-		}
-		public ExerciseVariableContext(ExpressionContext ctx) { copyFrom(ctx); }
+	public static class FloatValueContext extends ExpressionContext {
+		public Token value;
+		public TerminalNode Float() { return getToken(EvaluatorParser.Float, 0); }
+		public FloatValueContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitExerciseVariable(this);
+			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitFloatValue(this);
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class TextContext extends ExpressionContext {
-		public TerminalNode Text() { return getToken(EvaluatorParser.Text, 0); }
-		public TextContext(ExpressionContext ctx) { copyFrom(ctx); }
+	public static class ExerciseVarNameContext extends ExpressionContext {
+		public Token name;
+		public TerminalNode ExerciseVariable() { return getToken(EvaluatorParser.ExerciseVariable, 0); }
+		public ExerciseVarNameContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitText(this);
+			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitExerciseVarName(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class IntegerValueContext extends ExpressionContext {
+		public Token value;
+		public TerminalNode Integer() { return getToken(EvaluatorParser.Integer, 0); }
+		public IntegerValueContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitIntegerValue(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class FillInVarNameContext extends ExpressionContext {
+		public Token name;
+		public TerminalNode FillInVariable() { return getToken(EvaluatorParser.FillInVariable, 0); }
+		public FillInVarNameContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitFillInVarName(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -229,91 +227,95 @@ public class EvaluatorParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(30);
+			setState(22);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,0,_ctx) ) {
-			case 1:
+			switch (_input.LA(1)) {
+			case FunctionName:
 				{
 				_localctx = new FunctionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 
-				setState(17);
+				setState(9);
 				nestedFunction();
 				}
 				break;
-			case 2:
+			case LeftParenthesis:
 				{
 				_localctx = new ParenthesesContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(18);
+				setState(10);
 				match(LeftParenthesis);
-				setState(19);
+				setState(11);
 				expression(0);
-				setState(20);
+				setState(12);
 				match(RightParenthesis);
 				}
 				break;
-			case 3:
+			case Plus:
+			case Minus:
+			case BooleanNot:
 				{
 				_localctx = new UnaryOperatorContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(22);
-				unaryoperator();
-				setState(23);
+				setState(14);
+				((UnaryOperatorContext)_localctx).value = unaryoperator();
+				setState(15);
 				expression(7);
 				}
 				break;
-			case 4:
+			case Integer:
 				{
-				_localctx = new IntegerNumContext(_localctx);
+				_localctx = new IntegerValueContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(25);
-				integerNumber();
+				setState(17);
+				((IntegerValueContext)_localctx).value = match(Integer);
 				}
 				break;
-			case 5:
+			case Float:
 				{
-				_localctx = new FloatNumContext(_localctx);
+				_localctx = new FloatValueContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(26);
-				floatNumber();
+				setState(18);
+				((FloatValueContext)_localctx).value = match(Float);
 				}
 				break;
-			case 6:
+			case ExerciseVariable:
 				{
-				_localctx = new ExerciseVariableContext(_localctx);
+				_localctx = new ExerciseVarNameContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(27);
-				exerciseVar();
+				setState(19);
+				((ExerciseVarNameContext)_localctx).name = match(ExerciseVariable);
 				}
 				break;
-			case 7:
+			case FillInVariable:
 				{
-				_localctx = new FillInVariableContext(_localctx);
+				_localctx = new FillInVarNameContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(28);
-				fillInVar();
+				setState(20);
+				((FillInVarNameContext)_localctx).name = match(FillInVariable);
 				}
 				break;
-			case 8:
+			case String:
 				{
-				_localctx = new TextContext(_localctx);
+				_localctx = new TextValueContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(29);
-				match(Text);
+				setState(21);
+				((TextValueContext)_localctx).value = match(String);
 				}
 				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(38);
+			setState(30);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,1,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
@@ -324,16 +326,16 @@ public class EvaluatorParser extends Parser {
 					{
 					_localctx = new BinaryOperatorContext(new ExpressionContext(_parentctx, _parentState));
 					pushNewRecursionContext(_localctx, _startState, RULE_expression);
-					setState(32);
+					setState(24);
 					if (!(precpred(_ctx, 6))) throw new FailedPredicateException(this, "precpred(_ctx, 6)");
-					setState(33);
-					binaryoperator();
-					setState(34);
+					setState(25);
+					((BinaryOperatorContext)_localctx).value = binaryoperator();
+					setState(26);
 					expression(7);
 					}
 					} 
 				}
-				setState(40);
+				setState(32);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,1,_ctx);
 			}
@@ -346,242 +348,6 @@ public class EvaluatorParser extends Parser {
 		}
 		finally {
 			unrollRecursionContexts(_parentctx);
-		}
-		return _localctx;
-	}
-
-	public static class IntegerNumberContext extends ParserRuleContext {
-		public TerminalNode Integer() { return getToken(EvaluatorParser.Integer, 0); }
-		public List<TerminalNode> Quote() { return getTokens(EvaluatorParser.Quote); }
-		public TerminalNode Quote(int i) {
-			return getToken(EvaluatorParser.Quote, i);
-		}
-		public IntegerNumberContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_integerNumber; }
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitIntegerNumber(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final IntegerNumberContext integerNumber() throws RecognitionException {
-		IntegerNumberContext _localctx = new IntegerNumberContext(_ctx, getState());
-		enterRule(_localctx, 2, RULE_integerNumber);
-		try {
-			setState(45);
-			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case Integer:
-				enterOuterAlt(_localctx, 1);
-				{
-				setState(41);
-				match(Integer);
-				}
-				break;
-			case Quote:
-				enterOuterAlt(_localctx, 2);
-				{
-				{
-				setState(42);
-				match(Quote);
-				setState(43);
-				match(Integer);
-				setState(44);
-				match(Quote);
-				}
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class FloatNumberContext extends ParserRuleContext {
-		public TerminalNode Float() { return getToken(EvaluatorParser.Float, 0); }
-		public List<TerminalNode> Quote() { return getTokens(EvaluatorParser.Quote); }
-		public TerminalNode Quote(int i) {
-			return getToken(EvaluatorParser.Quote, i);
-		}
-		public FloatNumberContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_floatNumber; }
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitFloatNumber(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final FloatNumberContext floatNumber() throws RecognitionException {
-		FloatNumberContext _localctx = new FloatNumberContext(_ctx, getState());
-		enterRule(_localctx, 4, RULE_floatNumber);
-		try {
-			setState(51);
-			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case Float:
-				enterOuterAlt(_localctx, 1);
-				{
-				setState(47);
-				match(Float);
-				}
-				break;
-			case Quote:
-				enterOuterAlt(_localctx, 2);
-				{
-				{
-				setState(48);
-				match(Quote);
-				setState(49);
-				match(Float);
-				setState(50);
-				match(Quote);
-				}
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class ExerciseVarContext extends ParserRuleContext {
-		public TerminalNode ExerciseVariable() { return getToken(EvaluatorParser.ExerciseVariable, 0); }
-		public List<TerminalNode> Quote() { return getTokens(EvaluatorParser.Quote); }
-		public TerminalNode Quote(int i) {
-			return getToken(EvaluatorParser.Quote, i);
-		}
-		public ExerciseVarContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_exerciseVar; }
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitExerciseVar(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final ExerciseVarContext exerciseVar() throws RecognitionException {
-		ExerciseVarContext _localctx = new ExerciseVarContext(_ctx, getState());
-		enterRule(_localctx, 6, RULE_exerciseVar);
-		try {
-			setState(57);
-			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case ExerciseVariable:
-				enterOuterAlt(_localctx, 1);
-				{
-				setState(53);
-				match(ExerciseVariable);
-				}
-				break;
-			case Quote:
-				enterOuterAlt(_localctx, 2);
-				{
-				{
-				setState(54);
-				match(Quote);
-				setState(55);
-				match(ExerciseVariable);
-				setState(56);
-				match(Quote);
-				}
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class FillInVarContext extends ParserRuleContext {
-		public TerminalNode FillInVariable() { return getToken(EvaluatorParser.FillInVariable, 0); }
-		public List<TerminalNode> Quote() { return getTokens(EvaluatorParser.Quote); }
-		public TerminalNode Quote(int i) {
-			return getToken(EvaluatorParser.Quote, i);
-		}
-		public FillInVarContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_fillInVar; }
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitFillInVar(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final FillInVarContext fillInVar() throws RecognitionException {
-		FillInVarContext _localctx = new FillInVarContext(_ctx, getState());
-		enterRule(_localctx, 8, RULE_fillInVar);
-		try {
-			setState(63);
-			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case FillInVariable:
-				enterOuterAlt(_localctx, 1);
-				{
-				setState(59);
-				match(FillInVariable);
-				}
-				break;
-			case Quote:
-				enterOuterAlt(_localctx, 2);
-				{
-				{
-				setState(60);
-				match(Quote);
-				setState(61);
-				match(FillInVariable);
-				setState(62);
-				match(Quote);
-				}
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
 		}
 		return _localctx;
 	}
@@ -603,12 +369,12 @@ public class EvaluatorParser extends Parser {
 
 	public final UnaryoperatorContext unaryoperator() throws RecognitionException {
 		UnaryoperatorContext _localctx = new UnaryoperatorContext(_ctx, getState());
-		enterRule(_localctx, 10, RULE_unaryoperator);
+		enterRule(_localctx, 2, RULE_unaryoperator);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(65);
+			setState(33);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << Plus) | (1L << Minus) | (1L << BooleanNot))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -658,12 +424,12 @@ public class EvaluatorParser extends Parser {
 
 	public final BinaryoperatorContext binaryoperator() throws RecognitionException {
 		BinaryoperatorContext _localctx = new BinaryoperatorContext(_ctx, getState());
-		enterRule(_localctx, 12, RULE_binaryoperator);
+		enterRule(_localctx, 4, RULE_binaryoperator);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(67);
+			setState(35);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << Plus) | (1L << Minus) | (1L << Multiplication) | (1L << Division) | (1L << Modulus) | (1L << LessThan) | (1L << LessThanOrEqual) | (1L << GreaterThan) | (1L << GreaterThanOrEqual) | (1L << Equal) | (1L << NotEqual) | (1L << BooleanAnd) | (1L << BooleanOr))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -690,8 +456,8 @@ public class EvaluatorParser extends Parser {
 		public Token name;
 		public ExpressionContext expression;
 		public List<ExpressionContext> arguments = new ArrayList<ExpressionContext>();
-		public TerminalNode FunctionOpen() { return getToken(EvaluatorParser.FunctionOpen, 0); }
-		public TerminalNode FunctionClose() { return getToken(EvaluatorParser.FunctionClose, 0); }
+		public TerminalNode LeftParenthesis() { return getToken(EvaluatorParser.LeftParenthesis, 0); }
+		public TerminalNode RightParenthesis() { return getToken(EvaluatorParser.RightParenthesis, 0); }
 		public TerminalNode FunctionName() { return getToken(EvaluatorParser.FunctionName, 0); }
 		public List<ExpressionContext> expression() {
 			return getRuleContexts(ExpressionContext.class);
@@ -716,45 +482,45 @@ public class EvaluatorParser extends Parser {
 
 	public final NestedFunctionContext nestedFunction() throws RecognitionException {
 		NestedFunctionContext _localctx = new NestedFunctionContext(_ctx, getState());
-		enterRule(_localctx, 14, RULE_nestedFunction);
+		enterRule(_localctx, 6, RULE_nestedFunction);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(69);
+			setState(37);
 			((NestedFunctionContext)_localctx).name = match(FunctionName);
-			setState(70);
-			match(FunctionOpen);
-			setState(79);
+			setState(38);
+			match(LeftParenthesis);
+			setState(47);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << LeftParenthesis) | (1L << Plus) | (1L << Minus) | (1L << BooleanNot) | (1L << ExerciseVariable) | (1L << FillInVariable) | (1L << FunctionName) | (1L << Quote) | (1L << Integer) | (1L << Float) | (1L << Text))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << LeftParenthesis) | (1L << Plus) | (1L << Minus) | (1L << BooleanNot) | (1L << ExerciseVariable) | (1L << FillInVariable) | (1L << FunctionName) | (1L << Integer) | (1L << Float) | (1L << String))) != 0)) {
 				{
-				setState(71);
+				setState(39);
 				((NestedFunctionContext)_localctx).expression = expression(0);
 				((NestedFunctionContext)_localctx).arguments.add(((NestedFunctionContext)_localctx).expression);
-				setState(76);
+				setState(44);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==ArgumentSeparator) {
 					{
 					{
-					setState(72);
+					setState(40);
 					match(ArgumentSeparator);
-					setState(73);
+					setState(41);
 					((NestedFunctionContext)_localctx).expression = expression(0);
 					((NestedFunctionContext)_localctx).arguments.add(((NestedFunctionContext)_localctx).expression);
 					}
 					}
-					setState(78);
+					setState(46);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
 				}
 			}
 
-			setState(81);
-			match(FunctionClose);
+			setState(49);
+			match(RightParenthesis);
 			}
 		}
 		catch (RecognitionException re) {
@@ -784,28 +550,22 @@ public class EvaluatorParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\37V\4\2\t\2\4\3\t"+
-		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\3\2\3\2\3\2\3\2\3\2"+
-		"\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\5\2!\n\2\3\2\3\2\3\2\3\2\7\2\'\n"+
-		"\2\f\2\16\2*\13\2\3\3\3\3\3\3\3\3\5\3\60\n\3\3\4\3\4\3\4\3\4\5\4\66\n"+
-		"\4\3\5\3\5\3\5\3\5\5\5<\n\5\3\6\3\6\3\6\3\6\5\6B\n\6\3\7\3\7\3\b\3\b\3"+
-		"\t\3\t\3\t\3\t\3\t\7\tM\n\t\f\t\16\tP\13\t\5\tR\n\t\3\t\3\t\3\t\2\3\2"+
-		"\n\2\4\6\b\n\f\16\20\2\4\3\2\5\7\4\2\5\6\b\22\2[\2 \3\2\2\2\4/\3\2\2\2"+
-		"\6\65\3\2\2\2\b;\3\2\2\2\nA\3\2\2\2\fC\3\2\2\2\16E\3\2\2\2\20G\3\2\2\2"+
-		"\22\23\b\2\1\2\23!\5\20\t\2\24\25\7\3\2\2\25\26\5\2\2\2\26\27\7\4\2\2"+
-		"\27!\3\2\2\2\30\31\5\f\7\2\31\32\5\2\2\t\32!\3\2\2\2\33!\5\4\3\2\34!\5"+
-		"\6\4\2\35!\5\b\5\2\36!\5\n\6\2\37!\7\32\2\2 \22\3\2\2\2 \24\3\2\2\2 \30"+
-		"\3\2\2\2 \33\3\2\2\2 \34\3\2\2\2 \35\3\2\2\2 \36\3\2\2\2 \37\3\2\2\2!"+
-		"(\3\2\2\2\"#\f\b\2\2#$\5\16\b\2$%\5\2\2\t%\'\3\2\2\2&\"\3\2\2\2\'*\3\2"+
-		"\2\2(&\3\2\2\2()\3\2\2\2)\3\3\2\2\2*(\3\2\2\2+\60\7\30\2\2,-\7\27\2\2"+
-		"-.\7\30\2\2.\60\7\27\2\2/+\3\2\2\2/,\3\2\2\2\60\5\3\2\2\2\61\66\7\31\2"+
-		"\2\62\63\7\27\2\2\63\64\7\31\2\2\64\66\7\27\2\2\65\61\3\2\2\2\65\62\3"+
-		"\2\2\2\66\7\3\2\2\2\67<\7\23\2\289\7\27\2\29:\7\23\2\2:<\7\27\2\2;\67"+
-		"\3\2\2\2;8\3\2\2\2<\t\3\2\2\2=B\7\24\2\2>?\7\27\2\2?@\7\24\2\2@B\7\27"+
-		"\2\2A=\3\2\2\2A>\3\2\2\2B\13\3\2\2\2CD\t\2\2\2D\r\3\2\2\2EF\t\3\2\2F\17"+
-		"\3\2\2\2GH\7\26\2\2HQ\7\34\2\2IN\5\2\2\2JK\7\35\2\2KM\5\2\2\2LJ\3\2\2"+
-		"\2MP\3\2\2\2NL\3\2\2\2NO\3\2\2\2OR\3\2\2\2PN\3\2\2\2QI\3\2\2\2QR\3\2\2"+
-		"\2RS\3\2\2\2ST\7\37\2\2T\21\3\2\2\2\n (/\65;ANQ";
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\34\66\4\2\t\2\4\3"+
+		"\t\3\4\4\t\4\4\5\t\5\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3"+
+		"\2\3\2\5\2\31\n\2\3\2\3\2\3\2\3\2\7\2\37\n\2\f\2\16\2\"\13\2\3\3\3\3\3"+
+		"\4\3\4\3\5\3\5\3\5\3\5\3\5\7\5-\n\5\f\5\16\5\60\13\5\5\5\62\n\5\3\5\3"+
+		"\5\3\5\2\3\2\6\2\4\6\b\2\4\3\2\5\7\4\2\5\6\b\22\2;\2\30\3\2\2\2\4#\3\2"+
+		"\2\2\6%\3\2\2\2\b\'\3\2\2\2\n\13\b\2\1\2\13\31\5\b\5\2\f\r\7\3\2\2\r\16"+
+		"\5\2\2\2\16\17\7\4\2\2\17\31\3\2\2\2\20\21\5\4\3\2\21\22\5\2\2\t\22\31"+
+		"\3\2\2\2\23\31\7\31\2\2\24\31\7\32\2\2\25\31\7\23\2\2\26\31\7\24\2\2\27"+
+		"\31\7\33\2\2\30\n\3\2\2\2\30\f\3\2\2\2\30\20\3\2\2\2\30\23\3\2\2\2\30"+
+		"\24\3\2\2\2\30\25\3\2\2\2\30\26\3\2\2\2\30\27\3\2\2\2\31 \3\2\2\2\32\33"+
+		"\f\b\2\2\33\34\5\6\4\2\34\35\5\2\2\t\35\37\3\2\2\2\36\32\3\2\2\2\37\""+
+		"\3\2\2\2 \36\3\2\2\2 !\3\2\2\2!\3\3\2\2\2\" \3\2\2\2#$\t\2\2\2$\5\3\2"+
+		"\2\2%&\t\3\2\2&\7\3\2\2\2\'(\7\26\2\2(\61\7\3\2\2).\5\2\2\2*+\7\30\2\2"+
+		"+-\5\2\2\2,*\3\2\2\2-\60\3\2\2\2.,\3\2\2\2./\3\2\2\2/\62\3\2\2\2\60.\3"+
+		"\2\2\2\61)\3\2\2\2\61\62\3\2\2\2\62\63\3\2\2\2\63\64\7\4\2\2\64\t\3\2"+
+		"\2\2\6\30 .\61";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

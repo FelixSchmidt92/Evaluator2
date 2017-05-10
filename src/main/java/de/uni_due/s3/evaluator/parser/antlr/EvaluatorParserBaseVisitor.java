@@ -32,21 +32,7 @@ public class EvaluatorParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> i
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitIntegerNum(EvaluatorParser.IntegerNumContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitFloatNum(EvaluatorParser.FloatNumContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitFillInVariable(EvaluatorParser.FillInVariableContext ctx) { return visitChildren(ctx); }
+	@Override public T visitTextValue(EvaluatorParser.TextValueContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -67,42 +53,28 @@ public class EvaluatorParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> i
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitExerciseVariable(EvaluatorParser.ExerciseVariableContext ctx) { return visitChildren(ctx); }
+	@Override public T visitFloatValue(EvaluatorParser.FloatValueContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitText(EvaluatorParser.TextContext ctx) { return visitChildren(ctx); }
+	@Override public T visitExerciseVarName(EvaluatorParser.ExerciseVarNameContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitIntegerNumber(EvaluatorParser.IntegerNumberContext ctx) { return visitChildren(ctx); }
+	@Override public T visitIntegerValue(EvaluatorParser.IntegerValueContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitFloatNumber(EvaluatorParser.FloatNumberContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitExerciseVar(EvaluatorParser.ExerciseVarContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitFillInVar(EvaluatorParser.FillInVarContext ctx) { return visitChildren(ctx); }
+	@Override public T visitFillInVarName(EvaluatorParser.FillInVarNameContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

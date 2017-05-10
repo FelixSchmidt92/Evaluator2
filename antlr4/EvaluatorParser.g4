@@ -8,33 +8,13 @@ expression
 :
 	nestedFunction	#function
 	| LeftParenthesis expression RightParenthesis #parentheses
-	| unaryoperator expression #unaryOperator
-	| expression binaryoperator expression #binaryOperator
-	| integerNumber #integerNum
-	| floatNumber  #floatNum
-	| exerciseVar #exerciseVariable
-	| fillInVar  #fillInVariable
-	| Text #text
-;
-
-integerNumber
-:
-	Integer
-	| (Quote Integer Quote)
-;
-floatNumber
-:
-	Float | (Quote Float Quote) 
-;
-
-exerciseVar
-:
-	ExerciseVariable| (Quote ExerciseVariable Quote) 
-;
-
-fillInVar
-:
-	FillInVariable| (Quote FillInVariable Quote)
+	| value = unaryoperator expression #unaryOperator
+	| expression value = binaryoperator expression #binaryOperator
+	| value = Integer #integerValue
+	| value = Float  #floatValue
+	| name = ExerciseVariable #exerciseVarName
+	| name = FillInVariable  #fillInVarName
+    | value = String #textValue
 ;
 
 unaryoperator
@@ -63,11 +43,11 @@ binaryoperator
 
 nestedFunction
 :
-    name = FunctionName FunctionOpen
+    name = FunctionName LeftParenthesis
 	(
 		arguments += expression
 		(
 			ArgumentSeparator arguments += expression
 		)* 
-	)? FunctionClose
+	)? RightParenthesis
 ;
