@@ -8,8 +8,8 @@ expression
 :
 	nestedFunction	#function
 	| LeftParenthesis expression RightParenthesis #parentheses
-	| value = unaryoperator expression #unaryOperator
-	| expression value = binaryoperator expression #binaryOperator
+	| operator = unaryoperator expression #unaryOperator
+	| expression operator = binaryoperator expression #binaryOperator
 	| value = Integer #integerValue
 	| value = Float  #floatValue
 	| name = ExerciseVariable #exerciseVarName

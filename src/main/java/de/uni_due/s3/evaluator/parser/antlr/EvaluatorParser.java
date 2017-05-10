@@ -118,7 +118,7 @@ public class EvaluatorParser extends Parser {
 		}
 	}
 	public static class UnaryOperatorContext extends ExpressionContext {
-		public UnaryoperatorContext value;
+		public UnaryoperatorContext operator;
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
@@ -143,7 +143,7 @@ public class EvaluatorParser extends Parser {
 		}
 	}
 	public static class BinaryOperatorContext extends ExpressionContext {
-		public BinaryoperatorContext value;
+		public BinaryoperatorContext operator;
 		public List<ExpressionContext> expression() {
 			return getRuleContexts(ExpressionContext.class);
 		}
@@ -261,7 +261,7 @@ public class EvaluatorParser extends Parser {
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(14);
-				((UnaryOperatorContext)_localctx).value = unaryoperator();
+				((UnaryOperatorContext)_localctx).operator = unaryoperator();
 				setState(15);
 				expression(7);
 				}
@@ -329,7 +329,7 @@ public class EvaluatorParser extends Parser {
 					setState(24);
 					if (!(precpred(_ctx, 6))) throw new FailedPredicateException(this, "precpred(_ctx, 6)");
 					setState(25);
-					((BinaryOperatorContext)_localctx).value = binaryoperator();
+					((BinaryOperatorContext)_localctx).operator = binaryoperator();
 					setState(26);
 					expression(7);
 					}

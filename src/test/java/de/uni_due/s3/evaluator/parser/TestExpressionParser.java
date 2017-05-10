@@ -12,11 +12,15 @@ public class TestExpressionParser {
 	public void testIntegerValue() {
 		assertTrue(ExpressionParser.parse("'1'").equals(OpenMathObjectCreator.createOpenMathInteger(1)));
 		assertTrue(ExpressionParser.parse("1").equals(OpenMathObjectCreator.createOpenMathInteger(1)));
+		assertTrue(ExpressionParser.parse("'5'").equals(OpenMathObjectCreator.createOpenMathInteger(5)));
+		assertTrue(ExpressionParser.parse("5").equals(OpenMathObjectCreator.createOpenMathInteger(5)));
+	}
+	
+	@Test
+	public void testUnaryOperator() {
 		assertTrue(ExpressionParser.parse("'-1'").equals(OpenMathObjectCreator.createOpenMathInteger(-1)));
 		assertTrue(ExpressionParser.parse("-1").equals(OpenMathObjectCreator.createOpenMathInteger(-1)));
 		assertTrue(ExpressionParser.parse("'+1'").equals(OpenMathObjectCreator.createOpenMathInteger(1)));
 		assertTrue(ExpressionParser.parse("+1").equals(OpenMathObjectCreator.createOpenMathInteger(1)));
-		assertTrue(ExpressionParser.parse("'5'").equals(OpenMathObjectCreator.createOpenMathInteger(5)));
-		assertTrue(ExpressionParser.parse("5").equals(OpenMathObjectCreator.createOpenMathInteger(5)));
 	}
 }

@@ -1,8 +1,8 @@
 package de.uni_due.s3.evaluator.parser;
 
-import de.uni_due.s3.evaluator.openmath.OpenMathApplication;
 import de.uni_due.s3.evaluator.openmath.OpenMathObject;
 import de.uni_due.s3.evaluator.openmath.OpenMathObjectCreator;
+import de.uni_due.s3.evaluator.parser.antlr.EvaluatorLexer;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParserBaseVisitor;
 
@@ -29,10 +29,18 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Open
 	 * </p>
 	 */
 	@Override
-	public OpenMathObject visitUnaryOperator(EvaluatorParser.UnaryOperatorContext ctx)  {
-		if (ctx.value.getText().equals("-")) {
+	public OpenMathObject visitUnaryOperator(EvaluatorParser.UnaryOperatorContext ctx) {
+		switch (ctx.operator.getText()) {
+		case "-":
 			return OpenMathObjectCreator.createOpenMathApplication("arith1", "unary_minus", visit(ctx.expression()));
-		} //TODO
+		case "+":
+			;
+		case "!":
+			;
+		default:
+			;
+		}
+		// FIXME - Should throw an exception!
 		return null;
 	}
 
@@ -46,7 +54,6 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Open
 	 */
 	@Override
 	public OpenMathObject visitTextValue(EvaluatorParser.TextValueContext ctx) {
-		System.out.println(ctx.value.getText());
 		return OpenMathObjectCreator.createOpenMathString(ctx.value.getText());
 	}
 
@@ -60,7 +67,36 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Open
 	 */
 	@Override
 	public OpenMathObject visitBinaryOperator(EvaluatorParser.BinaryOperatorContext ctx) {
-		return visitChildren(ctx);
+		switch (ctx.operator.getText()) {
+		case "*":
+			return null;
+		case "/":
+			return null;
+		case "%":
+			return null;
+		case "+":
+			return null;
+		case "-":
+			return null;
+		case "<":
+			return null;
+		case "<=":
+			return null;
+		case ">":
+			return null;
+		case ">=":
+			return null;
+		case "==":
+			return null;
+		case "!=":
+			return null;
+		case "&&":
+			return null;
+		case "||":
+			return null;
+		default:
+			return null;
+		}
 	}
 
 	/**
@@ -114,7 +150,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Open
 	public OpenMathObject visitIntegerValue(EvaluatorParser.IntegerValueContext ctx) {
 		String value = ctx.value.getText();
 		if (value.startsWith("'") && value.endsWith("'")) {
-			value = value.substring(1, value.length()-1);
+			value = value.substring(1, value.length() - 1);
 		}
 		return OpenMathObjectCreator.createOpenMathInteger(Integer.parseInt(value));
 	}
