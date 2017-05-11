@@ -1,5 +1,8 @@
 package de.uni_due.s3.evaluator.openmath;
 
+import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.UnaryOperatorContext;
+import de.uni_due.s3.evaluator.unaryOperator.UnaryOperator;
+
 public class OpenMathInteger extends OpenMathObject {
 
 	private int value;
@@ -11,6 +14,11 @@ public class OpenMathInteger extends OpenMathObject {
 
 	public int getValue() {
 		return value;
+	}
+	
+	@Override
+	public boolean isInteger() {
+		return true;
 	}
 
 	public void setValue(int value) {

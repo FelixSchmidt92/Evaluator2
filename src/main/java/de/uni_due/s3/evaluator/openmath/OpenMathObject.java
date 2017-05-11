@@ -1,5 +1,8 @@
 package de.uni_due.s3.evaluator.openmath;
 
+import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser;
+import de.uni_due.s3.evaluator.unaryOperator.UnaryOperator;
+
 /**
  * Represents an OpenMathObject
  */
@@ -37,6 +40,17 @@ public abstract class OpenMathObject {
 	public String getXML() {
 		return "<OMOBJ>" + getPartialXML() + "</OMOBJ>";
 	}
+	
+	/**
+	 * Returns true, if OpenMathObject represent a positive or negative float (or double). 
+	 * 
+	 * Negative floats have an OpenMathApplication representation.
+	 * -> It is not enough to test if an OpenMathObject is OpenMathFloat!
+	 * @return
+	 */
+	public boolean isFloat() {
+		return false;
+	}
 
 	/**
 	 * Checks whether this OpenMathObject is a fraction.
@@ -44,6 +58,17 @@ public abstract class OpenMathObject {
 	 * @return true or false depending on whether this OpenMathObject is a fraction
 	 */
 	public boolean isFraction() {
+		return false;
+	}
+	
+	/**
+	 * Returns true if OpenMathObject represent a positive or negative integer.
+	 * 
+	 * Negative integers have an OpenMathApplication representation.
+	 * -> It is not enough to test if an OpenMathObject is OpenMathInteger!
+	 * @return boolean
+	 */
+	public boolean isInteger() {
 		return false;
 	}
 

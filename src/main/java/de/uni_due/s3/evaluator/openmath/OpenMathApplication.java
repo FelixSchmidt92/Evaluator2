@@ -3,6 +3,9 @@ package de.uni_due.s3.evaluator.openmath;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.UnaryOperatorContext;
+import de.uni_due.s3.evaluator.unaryOperator.UnaryOperator;
+
 public class OpenMathApplication extends OpenMathObject {
 
 	private List<OpenMathObject> arguments;
@@ -51,8 +54,22 @@ public class OpenMathApplication extends OpenMathObject {
 	}
 
 	@Override
+	public boolean isFloat() {
+		return (head instanceof OpenMathSymbol
+				&& (head == OpenMathSymbols.ARITH1_UNARY_MINUS || head == OpenMathSymbols.ARITH1_UNARY_PLUS)
+				&& arguments.size() == 1 && arguments.get(0).isInteger());
+	}
+
+	@Override
 	public boolean isFraction() {
 		return head.isFraction();
+	}
+
+	@Override
+	public boolean isInteger() {
+		return (head instanceof OpenMathSymbol
+				&& (head == OpenMathSymbols.ARITH1_UNARY_MINUS || head == OpenMathSymbols.ARITH1_UNARY_PLUS)
+				&& arguments.size() == 1 && arguments.get(0).isInteger());
 	}
 
 	public void setHead(OpenMathObject head) {

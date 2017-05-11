@@ -1,5 +1,8 @@
 package de.uni_due.s3.evaluator.openmath;
 
+import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.UnaryOperatorContext;
+import de.uni_due.s3.evaluator.unaryOperator.UnaryOperator;
+
 public class OpenMathString extends OpenMathObject {
 
 	private String value;
@@ -47,5 +50,5 @@ public class OpenMathString extends OpenMathObject {
 			return false;
 		return true;
 	}
-
+	
 }

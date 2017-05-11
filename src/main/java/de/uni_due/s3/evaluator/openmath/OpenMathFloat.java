@@ -1,5 +1,8 @@
 package de.uni_due.s3.evaluator.openmath;
 
+import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.UnaryOperatorContext;
+import de.uni_due.s3.evaluator.unaryOperator.UnaryOperator;
+
 public class OpenMathFloat extends OpenMathObject {
 
 	private double value;
@@ -13,6 +16,11 @@ public class OpenMathFloat extends OpenMathObject {
 		return value;
 	}
 
+	@Override
+	public boolean isFloat() {
+		return true;
+	}
+	
 	public void setValue(double value) {
 		this.value = value;
 	}
@@ -40,5 +48,5 @@ public class OpenMathFloat extends OpenMathObject {
 			return false;
 		return true;
 	}
-
+	
 }

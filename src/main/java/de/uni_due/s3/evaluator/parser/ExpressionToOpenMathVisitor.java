@@ -1,10 +1,13 @@
 package de.uni_due.s3.evaluator.parser;
 
+import de.uni_due.s3.evaluator.openmath.OpenMathInteger;
 import de.uni_due.s3.evaluator.openmath.OpenMathObject;
 import de.uni_due.s3.evaluator.openmath.OpenMathObjectCreator;
+import de.uni_due.s3.evaluator.openmath.OpenMathSymbols;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorLexer;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParserBaseVisitor;
+import de.uni_due.s3.evaluator.unaryOperator.UnaryOperator;
 
 public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<OpenMathObject> {
 	/**
@@ -30,18 +33,8 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Open
 	 */
 	@Override
 	public OpenMathObject visitUnaryOperator(EvaluatorParser.UnaryOperatorContext ctx) {
-		switch (ctx.operator.getText()) {
-		case "-":
-			return OpenMathObjectCreator.createOpenMathApplication("arith1", "unary_minus", visit(ctx.expression()));
-		case "+":
-			return visit(ctx.expression());
-		case "!":
-			return OpenMathObjectCreator.createOpenMathApplication("logic1", "not", visit(ctx.expression()));
-		default:
-			;
-		}
-		// FIXME - Should throw an exception!
-		return null;
+		OpenMathObject child = visit(ctx.expression());
+		return UnaryOperator.evaluate(ctx, child);
 	}
 
 	/**
