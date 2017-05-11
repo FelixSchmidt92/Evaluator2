@@ -1,9 +1,15 @@
 package de.uni_due.s3.evaluator.parser;
 
-import org.antlr.v4.runtime.ANTLRInputStream;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.StringReader;
+
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 
+import de.uni_due.s3.evaluator.exceptions.ParserException;
 import de.uni_due.s3.evaluator.openmath.OpenMathObject;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorLexer;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser;
@@ -11,8 +17,14 @@ import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser;
 public class ExpressionParser {
 
 	public static OpenMathObject parse(String expression) {
-		ANTLRInputStream antlrInputStream = new ANTLRInputStream(expression);
-		EvaluatorLexer evaluatorLexer = new EvaluatorLexer(antlrInputStream);
+		Reader input = new StringReader(expression);
+		CharStream cstream = null;
+		try {
+			cstream = CharStreams.fromReader(input);
+		} catch (IOException e) {
+			throw new ParserException("IOException at CharStream", e);
+		}
+		EvaluatorLexer evaluatorLexer = new EvaluatorLexer(cstream);
 		
 		evaluatorLexer.removeErrorListeners(); 	//default ErrorListener
 		evaluatorLexer.addErrorListener(new LexerErrorStrategy());

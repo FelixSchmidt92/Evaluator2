@@ -1,11 +1,15 @@
 package de.uni_due.s3.evaluator.parser.antlr;
 
+import java.io.IOException;
+import java.io.Reader;
+import java.io.StringReader;
 import java.util.BitSet;
 import java.util.Random;
 
 import org.antlr.v4.runtime.ANTLRErrorListener;
-import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.BailErrorStrategy;
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.Parser;
 import org.antlr.v4.runtime.RecognitionException;
@@ -14,6 +18,7 @@ import org.antlr.v4.runtime.atn.ATNConfigSet;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.junit.Test;
 
+import de.uni_due.s3.evaluator.exceptions.ParserException;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorLexer;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser;
 
@@ -134,8 +139,14 @@ public class TestWithGrammarGenerator {
 	}
 	
 	private EvaluatorParser createParser(String textArgument){
-		ANTLRInputStream antlr = new ANTLRInputStream(textArgument);
-	    EvaluatorLexer lexer = new EvaluatorLexer(antlr);
+		Reader input = new StringReader(textArgument);
+		CharStream cstream = null;
+		try {
+			cstream = CharStreams.fromReader(input);
+		} catch (IOException e) {
+			throw new RuntimeException("IOExceptionError at createParser", e);
+		}
+	    EvaluatorLexer lexer = new EvaluatorLexer(cstream);
 	    lexer.removeErrorListeners();
 	    lexer.addErrorListener(new TestExceptionListener());
 	    CommonTokenStream tokens = new CommonTokenStream(lexer);
