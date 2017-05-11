@@ -34,9 +34,9 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Open
 		case "-":
 			return OpenMathObjectCreator.createOpenMathApplication("arith1", "unary_minus", visit(ctx.expression()));
 		case "+":
-			;
+			return visit(ctx.expression());
 		case "!":
-			;
+			return OpenMathObjectCreator.createOpenMathApplication("logic1", "not", visit(ctx.expression()));
 		default:
 			;
 		}
