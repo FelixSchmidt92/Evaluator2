@@ -29,7 +29,4 @@ public class LexerErrorStrategy extends ConsoleErrorListener{
 			String msg, RecognitionException e) {
 		throw new ParserException("Error at Position: " + charPositionInLine + ", " + msg);
 	}
-
-	
-	
 }
