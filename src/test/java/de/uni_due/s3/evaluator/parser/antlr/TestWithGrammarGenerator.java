@@ -128,7 +128,7 @@ public class TestWithGrammarGenerator {
 	@Test  //Test with FillIn, Exercise, Number and String
 	public void testGrammarGeneratorAtFunctionInFunctionWithBinOppsAsTerminalRecursivelyRandom(){ 
 		for (int i =0; i < 1000; i++){ 
-			int t = 1 + new Random().nextInt(5);
+			int t = 1 + new Random().nextInt(3);
 			createParser(gen.genRandomFunctionRecursionWithBinaryTerms(t, 1 + new Random().nextInt(5), t)).expression();
 		}
 	}

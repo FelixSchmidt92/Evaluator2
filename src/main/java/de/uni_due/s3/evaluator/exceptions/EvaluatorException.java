@@ -13,11 +13,11 @@ public class EvaluatorException extends RuntimeException {
 	 */
 	private static final long serialVersionUID = 4541164827328210954L;
 	
-	EvaluatorException(String message) {
+	public EvaluatorException(String message) {
 		super(message);
 	}
 	
-	EvaluatorException(String message, Throwable cause) {
+	public EvaluatorException(String message, Throwable cause) {
 		super(message, cause);
 	}
 
