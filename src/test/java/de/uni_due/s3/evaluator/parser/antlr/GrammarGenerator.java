@@ -25,10 +25,9 @@ public class GrammarGenerator {
 	private char[] alphabetUmlauts = (alphabetString + umlautsString).toCharArray(); // [a-zA-Z_äöüÄÖÜ]
 	
 	private String[] unaryOperators = {"+", "-", "!", ""};
-	private String[] binaryOperators = {"+", "-", "*", "/", 
+	private String[] binaryOperators = {"+", "-", "*", "/", "%",
 										"<", "<=", ">", ">=", 
-										"=", "==", "!=", "!",
-										"%", "&&", "||"};
+										"=", "==", "!=", "&&", "||"};
 	
 
 	/**

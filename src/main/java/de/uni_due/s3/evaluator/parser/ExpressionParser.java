@@ -13,8 +13,15 @@ public class ExpressionParser {
 	public static OpenMathObject parse(String expression) {
 		ANTLRInputStream antlrInputStream = new ANTLRInputStream(expression);
 		EvaluatorLexer evaluatorLexer = new EvaluatorLexer(antlrInputStream);
+		
+		evaluatorLexer.removeErrorListeners(); 	//default ErrorListener
+		evaluatorLexer.addErrorListener(new LexerErrorStrategy());
+		
 		CommonTokenStream commonTokenStream = new CommonTokenStream(evaluatorLexer);
 		EvaluatorParser evaluatorParser = new EvaluatorParser(commonTokenStream);
+		
+		evaluatorParser.setErrorHandler(new ParserErrorStrategy()); // default ErrorStrategy
+		
 		ParseTree tree = evaluatorParser.expression();
 		ExpressionToOpenMathVisitor visitor = new ExpressionToOpenMathVisitor();
 		return visitor.visit(tree);
