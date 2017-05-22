@@ -87,7 +87,23 @@ public class TestOpenMathApplication {
 									 + "<OMA><OMS cd=\"NoSet\" name=\"NotTerminal\"/></OMA></OMA></OMOBJ>"));
 	}
 	
-	
-	
-	
+	@Test 
+	public void testEquals(){
+		LinkedList<OpenMathObject<?>> ll = new LinkedList<>();
+		LinkedList<OpenMathObject<?>> llTwo = new LinkedList<>();
+		LinkedList<OpenMathObject<?>> llThree = new LinkedList<>();
+		
+		OpenMathApplication oma = new OpenMathApplication("set1", "set", ll);
+		
+		OpenMathApplication omaTwo = new OpenMathApplication("set1", "set", llTwo);
+		
+		OpenMathApplication omaThree = new OpenMathApplication("set1", "set", llThree);
+		omaThree.addChild(new OpenMathApplication("set1", "set", ll));
+		
+		
+		assertTrue(oma.equals(oma));
+		assertTrue(oma.equals(omaTwo));
+		assertTrue(!oma.equals(omaThree));
+		assertTrue(!omaTwo.equals(omaThree));
+	}
 }

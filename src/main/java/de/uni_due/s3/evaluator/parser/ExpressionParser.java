@@ -10,13 +10,13 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 import de.uni_due.s3.evaluator.exceptions.ParserException;
-import de.uni_due.s3.evaluator.openmath.OpenMathObject;
+import de.uni_due.s3.evaluator.openmath.NewOpenMath.OpenMathObject;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorLexer;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser;
 
 public class ExpressionParser {
 
-	public static OpenMathObject parse(String expression) {
+	public static OpenMathObject<?> parse(String expression) {
 		Reader input = new StringReader(expression);
 		CharStream cstream = null;
 		try {

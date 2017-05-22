@@ -40,6 +40,14 @@ public class OpenMathTerminalLexicon {
 				return false;
 			}
 			
+		case "arith1":
+			switch(name){
+			case "unary_minus":
+				return true;
+			default:
+				return false;
+			}
+			
 		default:
 			return false;
 		}

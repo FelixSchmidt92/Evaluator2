@@ -140,4 +140,32 @@ public class OpenMathApplication extends OpenMathObject<OpenMathObject<?>>{
 		childs.add(omo);
 	}
 
+	
+	/**
+	 * This method checks, if this object equals to another Object.
+	 * 
+	 * @param Object, the Object to check with
+	 */
+	@Override
+	public boolean equals(Object obj){
+		if(this == obj)
+			return true;
+		
+		if(obj == null)
+			return false;
+			
+		if (obj.getClass() == this.getClass()){
+			if (!((OpenMathApplication)obj).cd.equals(this.cd))
+				return false;
+			
+			if (!((OpenMathApplication)obj).name.equals(this.name))
+				return false;
+			
+			if (((OpenMathApplication)obj).childs.equals(this.childs))
+				return true;
+		}
+		
+		return false;
+		
+	}
 }

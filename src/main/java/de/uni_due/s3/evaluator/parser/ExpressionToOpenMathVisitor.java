@@ -1,15 +1,19 @@
 package de.uni_due.s3.evaluator.parser;
 
-import de.uni_due.s3.evaluator.openmath.OpenMathInteger;
-import de.uni_due.s3.evaluator.openmath.OpenMathObject;
-import de.uni_due.s3.evaluator.openmath.OpenMathObjectCreator;
-import de.uni_due.s3.evaluator.openmath.OpenMathSymbols;
-import de.uni_due.s3.evaluator.parser.antlr.EvaluatorLexer;
-import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser;
-import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParserBaseVisitor;
-import de.uni_due.s3.evaluator.unaryOperator.UnaryOperator;
+import java.util.LinkedList;
+import java.util.List;
 
-public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<OpenMathObject> {
+import de.uni_due.s3.evaluator.exceptions.EvaluatorException;
+import de.uni_due.s3.evaluator.openmath.NewOpenMath.OpenMathApplication;
+import de.uni_due.s3.evaluator.openmath.NewOpenMath.OpenMathFloat;
+import de.uni_due.s3.evaluator.openmath.NewOpenMath.OpenMathInteger;
+import de.uni_due.s3.evaluator.openmath.NewOpenMath.OpenMathObject;
+import de.uni_due.s3.evaluator.openmath.NewOpenMath.OpenMathString;
+import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser;
+import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.ExpressionContext;
+import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParserBaseVisitor;
+
+public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<OpenMathObject<?>> {
 	/**
 	 * {@inheritDoc}
 	 *
@@ -19,7 +23,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Open
 	 * </p>
 	 */
 	@Override
-	public OpenMathObject visitParentheses(EvaluatorParser.ParenthesesContext ctx) {
+	public OpenMathObject<?> visitParentheses(EvaluatorParser.ParenthesesContext ctx) {
 		return visitChildren(ctx);
 	}
 
@@ -32,9 +36,14 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Open
 	 * </p>
 	 */
 	@Override
-	public OpenMathObject visitUnaryOperator(EvaluatorParser.UnaryOperatorContext ctx) {
-		OpenMathObject child = visit(ctx.expression());
-		return UnaryOperator.evaluate(ctx, child);
+	public OpenMathObject<?> visitUnaryOperator(EvaluatorParser.UnaryOperatorContext ctx) {
+		List<OpenMathObject<?>> child = new LinkedList<>();
+		child.add(visit(ctx.expression()));
+		if (ctx.unaryoperator().getText().equals("-")){
+			return new OpenMathApplication("arith1", "unary_minus", child);
+		}
+		return new OpenMathApplication("arith1", "unary_plus", child);
+		// TODO direct evaluation of unary Operators?
 	}
 
 	/**
@@ -46,8 +55,8 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Open
 	 * </p>
 	 */
 	@Override
-	public OpenMathObject visitTextValue(EvaluatorParser.TextValueContext ctx) {
-		return OpenMathObjectCreator.createOpenMathString(ctx.value.getText());
+	public OpenMathObject<?> visitTextValue(EvaluatorParser.TextValueContext ctx) {
+		return new OpenMathString(ctx.getText().substring(1, ctx.getText().length()-1));
 	}
 
 	/**
@@ -59,36 +68,40 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Open
 	 * </p>
 	 */
 	@Override
-	public OpenMathObject visitBinaryOperator(EvaluatorParser.BinaryOperatorContext ctx) {
+	public OpenMathObject<?> visitBinaryOperator(EvaluatorParser.BinaryOperatorContext ctx) {
+		List<OpenMathObject<?>> childs = new LinkedList<>();
+		childs.add(visit(ctx.getChild(0))); // Left side
+		childs.add(visit(ctx.getChild(2))); // Right side
+		
 		switch (ctx.operator.getText()) {
 		case "*":
-			return null;
+			return new OpenMathApplication("arith1", "times", childs);
 		case "/":
-			return null;
+			return new OpenMathApplication("arith1", "divide", childs);
 		case "%":
-			return null;
+			return new OpenMathApplication("NoRepresentation", "Modulus", childs); //TODO No Representation
 		case "+":
-			return null;
+			return new OpenMathApplication("arith1", "plus", childs);
 		case "-":
-			return null;
+			return new OpenMathApplication("arith1", "minus", childs);
 		case "<":
-			return null;
+			return new OpenMathApplication("relation1", "lt", childs);
 		case "<=":
-			return null;
+			return new OpenMathApplication("relation1", "leq", childs);
 		case ">":
-			return null;
+			return new OpenMathApplication("relation1", "gt", childs);
 		case ">=":
-			return null;
+			return new OpenMathApplication("relation1", "geq", childs);
 		case "==":
-			return null;
+			return new OpenMathApplication("relation1", "eq", childs);
 		case "!=":
-			return null;
+			return new OpenMathApplication("relation1", "neq", childs);
 		case "&&":
-			return null;
+			return new OpenMathApplication("logic1", "and", childs);
 		case "||":
-			return null;
+			return new OpenMathApplication("logic1", "or", childs);
 		default:
-			return null;
+			throw new EvaluatorException("BinaryOperator not supported");
 		}
 	}
 
@@ -101,7 +114,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Open
 	 * </p>
 	 */
 	@Override
-	public OpenMathObject visitFunction(EvaluatorParser.FunctionContext ctx) {
+	public OpenMathObject<?> visitFunction(EvaluatorParser.FunctionContext ctx) {
 		return visitChildren(ctx);
 	}
 
@@ -114,8 +127,12 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Open
 	 * </p>
 	 */
 	@Override
-	public OpenMathObject visitFloatValue(EvaluatorParser.FloatValueContext ctx) {
-		return visitChildren(ctx);
+	public OpenMathObject<?> visitFloatValue(EvaluatorParser.FloatValueContext ctx) {
+		String value = ctx.getText();
+		if (value.startsWith("'")){
+			value = value.substring(1, value.length()-1);
+		}
+		return new OpenMathFloat(Double.valueOf(value));
 	}
 
 	/**
@@ -127,8 +144,8 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Open
 	 * </p>
 	 */
 	@Override
-	public OpenMathObject visitExerciseVarName(EvaluatorParser.ExerciseVarNameContext ctx) {
-		return visitChildren(ctx);
+	public OpenMathObject<?> visitExerciseVarName(EvaluatorParser.ExerciseVarNameContext ctx) {
+		return null; //TODO get the OpenMath of this variable!
 	}
 
 	/**
@@ -140,12 +157,12 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Open
 	 * </p>
 	 */
 	@Override
-	public OpenMathObject visitIntegerValue(EvaluatorParser.IntegerValueContext ctx) {
+	public OpenMathObject<?> visitIntegerValue(EvaluatorParser.IntegerValueContext ctx) {
 		String value = ctx.value.getText();
 		if (value.startsWith("'") && value.endsWith("'")) {
 			value = value.substring(1, value.length() - 1);
 		}
-		return OpenMathObjectCreator.createOpenMathInteger(Integer.parseInt(value));
+		return new OpenMathInteger(Integer.valueOf(value));
 	}
 
 	/**
@@ -157,7 +174,20 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Open
 	 * </p>
 	 */
 	@Override
-	public OpenMathObject visitFillInVarName(EvaluatorParser.FillInVarNameContext ctx) {
+	public OpenMathObject<?> visitFillInVarName(EvaluatorParser.FillInVarNameContext ctx) {
+		return null; //TODO get the OpenMath of this variable!
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 * </p>
+	 */
+	@Override
+	public OpenMathObject<?> visitUnaryoperator(EvaluatorParser.UnaryoperatorContext ctx) {
 		return visitChildren(ctx);
 	}
 
@@ -170,7 +200,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Open
 	 * </p>
 	 */
 	@Override
-	public OpenMathObject visitUnaryoperator(EvaluatorParser.UnaryoperatorContext ctx) {
+	public OpenMathObject<?> visitBinaryoperator(EvaluatorParser.BinaryoperatorContext ctx) {
 		return visitChildren(ctx);
 	}
 
@@ -183,20 +213,11 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Open
 	 * </p>
 	 */
 	@Override
-	public OpenMathObject visitBinaryoperator(EvaluatorParser.BinaryoperatorContext ctx) {
-		return visitChildren(ctx);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>
-	 * The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.
-	 * </p>
-	 */
-	@Override
-	public OpenMathObject visitNestedFunction(EvaluatorParser.NestedFunctionContext ctx) {
-		return visitChildren(ctx);
+	public OpenMathObject<?> visitNestedFunction(EvaluatorParser.NestedFunctionContext ctx) {
+		List<OpenMathObject<?>> childs = new LinkedList<>();
+		for (ExpressionContext child : ctx.arguments){
+			childs.add(visit(child));
+		}
+		return new OpenMathApplication("evaluator2", ctx.name.getText(), childs);
 	}
 }

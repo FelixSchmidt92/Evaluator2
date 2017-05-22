@@ -68,4 +68,26 @@ public abstract class OpenMathObject<Key>{
 	public boolean isTerminal(){
 		return true;
 	}
+	
+	/**
+	 * This method checks, if this object equals to another Object.
+	 * 
+	 * @param Object, the Object to check with
+	 */
+	@Override
+	public boolean equals(Object obj){
+		if(this == obj)
+			return true;
+		
+		if(obj == null)
+			return false;
+			
+		if (obj.getClass() == this.getClass()){
+			if (((OpenMathObject<?>)obj).value.equals(this.value))
+				return true;
+		}
+		
+		return false;
+		
+	}
 }

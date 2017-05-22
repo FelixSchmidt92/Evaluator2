@@ -17,6 +17,15 @@ public class TestOpenMathObject {
 		}
 	};
 	
+	// Abstract Implementation
+	OpenMathObject<?> omo2 = new OpenMathObject<OpenMathObject<?>>() {
+
+		@Override
+		public String getPartialXML() {
+			return "something else";
+		}
+	};
+	
 	@Test
 	public void testGetValue(){
 		assertTrue(omo.getValue() == null);
@@ -33,7 +42,15 @@ public class TestOpenMathObject {
 	}
 	
 	@Test
-	public void testisTerminal(){
+	public void testIsTerminal(){
 		assertTrue(omo.isTerminal());
+	}
+	
+	@Test
+	public void testEquals(){
+		assertTrue(!omo.equals(null));
+		assertTrue(omo.equals(omo));
+		assertTrue(!omo.equals(omo2));
+		assertTrue(!omo2.equals(omo));
 	}
 }
