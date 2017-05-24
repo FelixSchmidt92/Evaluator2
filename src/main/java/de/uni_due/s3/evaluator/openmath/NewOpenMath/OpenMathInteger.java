@@ -6,7 +6,7 @@ package de.uni_due.s3.evaluator.openmath.NewOpenMath;
  * 
  * @author dlux
  */
-public class OpenMathInteger extends OpenMathObject<Integer>{
+public class OpenMathInteger extends OpenMathTerminal<Integer>{
 
 	public OpenMathInteger(int value) {
 		this.value = value;

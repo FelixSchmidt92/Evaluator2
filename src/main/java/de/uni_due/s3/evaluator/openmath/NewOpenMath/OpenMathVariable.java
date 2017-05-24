@@ -6,7 +6,7 @@ package de.uni_due.s3.evaluator.openmath.NewOpenMath;
  * 
  * @author dlux
  */
-public class OpenMathVariable extends OpenMathObject<String>{
+public class OpenMathVariable extends OpenMathTerminal<String>{
 
 	public OpenMathVariable(String value) {
 		this.value = value;
@@ -16,6 +16,5 @@ public class OpenMathVariable extends OpenMathObject<String>{
 	protected String getPartialXML() {
 		return "<OMV name=\"" + value +"\"/>";
 	}
-	
 
 }

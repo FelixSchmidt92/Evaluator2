@@ -6,7 +6,7 @@ package de.uni_due.s3.evaluator.openmath.NewOpenMath;
  * 
  * @author dlux
  */
-public class OpenMathFloat extends OpenMathObject<Double>{
+public class OpenMathFloat extends OpenMathTerminal<Double>{
 
 	public OpenMathFloat(double value) {
 		this.value = value;

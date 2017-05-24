@@ -34,50 +34,49 @@ public class OpenMathApplication extends OpenMathObject<OpenMathObject<?>>{
 	}
 
 	/**
-	 * This Function checks if the OMA is COMPLETELY a Terminal (including all Child Nodes and itself)
-	 * If thats the Case it returns itself.
-	 * If Not the Function evaluate() will be called to handle the evaluation
+	 * This method returns Always an OpenMathTerminal!
+	 * This method calls evaluate();
 	 * 
-	 * @return an OpenMathObject<?> Terminal always
+	 * @return an OpenMathTerminal<?> Terminal, always
 	 */
 	@Override
-	public OpenMathObject<?> getValue() {
-		if (isTerminal()){
-			return this;
-		}
+	public OpenMathTerminal<?> getValue() {
 		return evaluate();
 	}
 	
 	/**
 	 * This Function does all the logic to evaluate child Nodes first.
-	 * Then the parent Node. After Evaluation this Function returns always 
-	 * an Terminal Node. If this OMA is a Terminal it returns itself.
-	 * If not return the Function Result (which should always be an Result!)
+	 * Then the parent Node. 
+	 * (OR checking if it has to be evaluated, e.g for countNodes it is unnecessary)
 	 * 
+	 * After Evaluation this Function returns always an Terminal Node.
 	 * 
-	 * @see OpenMathTerminalLexicon where OMA can check if itself is a Terminal
-	 * @return An OpenMathObject<?> Terminal
+	 * @return An OpenMathTerminal<?> Terminal, always
+	 * @UnderConstruction This Function makes currently NonSense
 	 */
 	@Override
-	protected OpenMathObject<?> evaluate(){
-		//First evaluate childs. Terminals give themselfes to parent.
-		List<OpenMathObject<?>> evalChilds = new LinkedList<>();
-		for(OpenMathObject<?> child : childs){
-			evalChilds.add(child.evaluate());
-		}
-		
-		if(OpenMathTerminalLexicon.TerminalCheck(cd, name)){	
-			// OMA is Terminal return new OMA Terminal
-			return new OpenMathApplication(cd, name, evalChilds);
-		}else{
-			// OMA is not a Terminal return result of Function as Terminal
-			// TODO Getting another Terminal as return  
-			// TODO TestCase for this Function
-			// Look here up which cd to use (maybe one in Evaluator) and which name it has
-			// then call the specific function  for this specific cd name combination
-			// and give this function ALWAYS the evalChilds-List
-			return null;
-		}
+	protected OpenMathTerminal<?> evaluate(){
+
+		//First Check if childs has to be evaluated!
+		//if (OpenMathSymbols.needsEvaluation){ 	//<-- check for specific cd and name
+			//First evaluate childs. OpenMathTerminal give themselfes to parent.
+			List<OpenMathObject<?>> evalChilds = new LinkedList<>();
+			for(OpenMathObject<?> child : childs){
+				evalChilds.add(child.evaluate());
+			}
+		//}else{
+			//No need to evaluate, so set evalchilds = childs
+			evalChilds = childs;
+		//}
+
+
+		// Look here up which cd to use (maybe one in Evaluator) and which name it has
+		// then call the specific function with OpenMathSymbol for this specific cd, name combination
+		// and give this function ALWAYS the evalChilds-List
+			
+		// TODO returning the result (OpenMathTerminal)
+		// TODO TestCase for this Function
+		return null;
 	}
 
 	@Override
@@ -104,31 +103,13 @@ public class OpenMathApplication extends OpenMathObject<OpenMathObject<?>>{
 	}
 	
 	/**
-	 * Checks First itself if it is a Terminal, then the Childs if they are Terminals
+	 * Returns if OMA is a Terminal (which is always false)
 	 * 
-	 * @see OpenMathTerminalLexicon where OMA can check if itseld is a Terminal
-	 * @return true If Itself and all childs are Terimals
+	 * @return false, because OMA is NOT a Terminal
 	 */
 	@Override
 	public boolean isTerminal(){
-		if(OpenMathTerminalLexicon.TerminalCheck(cd, name) && areChildsTerminals()){
-			return true;
-		}
 		return false;
-	}
-	
-	/**
-	 * Check if all childs are Terminals
-	 * 
-	 * @return true if all childs are Terminals
-	 */
-	private boolean areChildsTerminals(){
-		for (OpenMathObject<?> child  :childs){
-			if(!child.isTerminal()){
-				return false;		
-			}
-		}
-		return true;
 	}
 	
 	/**

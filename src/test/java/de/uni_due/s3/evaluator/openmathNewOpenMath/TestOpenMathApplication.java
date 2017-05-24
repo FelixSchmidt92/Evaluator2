@@ -19,13 +19,13 @@ public class TestOpenMathApplication {
 		LinkedList<OpenMathObject<?>> llThree = new LinkedList<>();
 		
 		OpenMathApplication oma = new OpenMathApplication("set1", "set", ll);
-		assertTrue(oma.isTerminal());
+		assertTrue(!oma.isTerminal());
 		
-		OpenMathApplication omaTwo = new OpenMathApplication("NoSet", "NotTerminal", llTwo);
+		OpenMathApplication omaTwo = new OpenMathApplication("WriteSmtg", "Here Too", llTwo);
 		assertTrue(!omaTwo.isTerminal());
 		
 		oma.addChild(new OpenMathApplication("linalg2", "matrix", llThree));
-		assertTrue(oma.isTerminal());
+		assertTrue(!oma.isTerminal());
 		
 		oma.addChild(omaTwo);
 		assertTrue(!oma.isTerminal());

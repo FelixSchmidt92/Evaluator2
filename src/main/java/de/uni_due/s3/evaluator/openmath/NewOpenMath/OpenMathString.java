@@ -6,7 +6,7 @@ package de.uni_due.s3.evaluator.openmath.NewOpenMath;
  * 
  * @author dlux
  */
-public class OpenMathString extends OpenMathObject<String>{
+public class OpenMathString extends OpenMathTerminal<String>{
 
 	public OpenMathString(String value) {
 		this.value = value;
