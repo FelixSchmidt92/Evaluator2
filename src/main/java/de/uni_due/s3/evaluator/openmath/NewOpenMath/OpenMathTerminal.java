@@ -14,4 +14,6 @@ package de.uni_due.s3.evaluator.openmath.NewOpenMath;
  */
 public abstract class OpenMathTerminal<Key> extends OpenMathObject<Key>{
 
+
+
 }

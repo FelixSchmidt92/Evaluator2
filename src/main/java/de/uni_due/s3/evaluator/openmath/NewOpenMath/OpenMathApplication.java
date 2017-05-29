@@ -6,13 +6,10 @@ import java.util.List;
 
 /**
  * This Class is an OpenMathSymbol combined with an OpenMathApplication
- * It is also a Terminal and not a Terminal. 
+ * It is NOT a Terminal. 
  * 
- * Set, Matrix, Vector are Terminals The terminals for OMA are all 
- * specified in @see OpenMathTerminalLexicon
- * 
- * Arith1 Plus ... are not, they are calculable, so the Functions are called 
- * from this OpenMathObject
+ * Arith1 Plus ... are not Terminals, they are calculable, so these Functions are called 
+ * from this OpenMathObject by getValue()
  * 
  * @author dlux
  */
@@ -49,7 +46,7 @@ public class OpenMathApplication extends OpenMathObject<OpenMathObject<?>>{
 	 * Then the parent Node. 
 	 * (OR checking if it has to be evaluated, e.g for countNodes it is unnecessary)
 	 * 
-	 * After Evaluation this Function returns always an Terminal Node.
+	 * After Evaluation this Function returns always a Terminal Node.
 	 * 
 	 * @return An OpenMathTerminal<?> Terminal, always
 	 * @UnderConstruction This Function makes currently NonSense

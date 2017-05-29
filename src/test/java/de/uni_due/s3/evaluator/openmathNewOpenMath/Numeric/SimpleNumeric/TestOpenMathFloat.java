@@ -1,10 +1,10 @@
-package de.uni_due.s3.evaluator.openmathNewOpenMath;
+package de.uni_due.s3.evaluator.openmathNewOpenMath.Numeric.SimpleNumeric;
 
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import de.uni_due.s3.evaluator.openmath.NewOpenMath.OpenMathFloat;
+import de.uni_due.s3.evaluator.openmath.NewOpenMath.Numeric.SimpleNumeric.OpenMathFloat;
 
 
 public class TestOpenMathFloat {

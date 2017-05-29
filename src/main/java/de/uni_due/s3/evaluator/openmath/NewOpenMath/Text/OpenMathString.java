@@ -1,4 +1,4 @@
-package de.uni_due.s3.evaluator.openmath.NewOpenMath;
+package de.uni_due.s3.evaluator.openmath.NewOpenMath.Text;
 
 /**
  * This Class is a Terminal
@@ -6,7 +6,7 @@ package de.uni_due.s3.evaluator.openmath.NewOpenMath;
  * 
  * @author dlux
  */
-public class OpenMathString extends OpenMathTerminal<String>{
+public class OpenMathString extends OpenMathText<String>{
 
 	public OpenMathString(String value) {
 		this.value = value;

@@ -1,4 +1,4 @@
-package de.uni_due.s3.evaluator.openmath.NewOpenMath;
+package de.uni_due.s3.evaluator.openmath.NewOpenMath.Numeric.SimpleNumeric;
 
 /**
  * This Class is a Terminal
@@ -6,7 +6,7 @@ package de.uni_due.s3.evaluator.openmath.NewOpenMath;
  * 
  * @author dlux
  */
-public class OpenMathInteger extends OpenMathTerminal<Integer>{
+public class OpenMathInteger extends OpenMathSimpleNumeric<Integer>{
 
 	public OpenMathInteger(int value) {
 		this.value = value;

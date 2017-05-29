@@ -1,10 +1,10 @@
-package de.uni_due.s3.evaluator.openmathNewOpenMath;
+package de.uni_due.s3.evaluator.openmathNewOpenMath.Text;
 
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import de.uni_due.s3.evaluator.openmath.NewOpenMath.OpenMathString;
+import de.uni_due.s3.evaluator.openmath.NewOpenMath.Text.OpenMathString;
 
 public class TestOpenMathString {
 

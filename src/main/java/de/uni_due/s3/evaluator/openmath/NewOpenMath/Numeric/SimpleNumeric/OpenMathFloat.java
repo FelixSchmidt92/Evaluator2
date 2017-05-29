@@ -1,4 +1,4 @@
-package de.uni_due.s3.evaluator.openmath.NewOpenMath;
+package de.uni_due.s3.evaluator.openmath.NewOpenMath.Numeric.SimpleNumeric;
 
 /**
  * This is a Terminal
@@ -6,7 +6,7 @@ package de.uni_due.s3.evaluator.openmath.NewOpenMath;
  * 
  * @author dlux
  */
-public class OpenMathFloat extends OpenMathTerminal<Double>{
+public class OpenMathFloat extends OpenMathSimpleNumeric<Double>{
 
 	public OpenMathFloat(double value) {
 		this.value = value;
