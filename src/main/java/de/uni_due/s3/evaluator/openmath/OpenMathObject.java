@@ -1,7 +1,5 @@
 package de.uni_due.s3.evaluator.openmath;
 
-import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser;
-import de.uni_due.s3.evaluator.unaryOperator.UnaryOperator;
 
 /**
  * Represents an OpenMathObject

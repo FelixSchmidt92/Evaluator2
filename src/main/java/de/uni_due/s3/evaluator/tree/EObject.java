@@ -1,24 +1,17 @@
-package de.uni_due.s3.evaluator.openmath.NewOpenMath;
+package de.uni_due.s3.evaluator.tree;
 
 /**
  * This Class is the abstract Class for OpenMathObjects.
  * With the Key it can return Strings, Integers, Floats, OpenMathObjects. etc..
  * 
  * 
- * 
+ *  TODO
  * @author dlux
  *
  * @param <Key>
  */
-public abstract class OpenMathObject<Key>{
-
-	protected String cd = null;
-	protected String name = null;
-	protected Key value;
+public abstract class EObject{
 	
-	public Key getValue(){
-		return value;
-	}
 	
 	/**
 	 * protected evaluation of the OpenMathObject
@@ -27,7 +20,7 @@ public abstract class OpenMathObject<Key>{
 	 * 
 	 * @return itself if not implemented otherwise
 	 */
-	protected OpenMathObject<?> evaluate(){
+	public EObject evaluate(){
 		return this;
 	}
 	
@@ -37,18 +30,9 @@ public abstract class OpenMathObject<Key>{
 	 * 
 	 * @return an String in form of XML
 	 */
-	public String getXML(){
+	public String getOpenMathSyntax(){
 		return "<OMOBJ>" + getPartialXML() + "</OMOBJ>";
 	}
-	
-	/**
-	 * Abstract function
-	 * Get the partial XML-Representation of this object (like getXML excluding OMOBJ)
-	 * 
-	 * @return
-	 */
-	protected abstract String getPartialXML();
-	
 	
 	/**
 	 * Get the Number of Nodes in this OpenMathObject
@@ -59,15 +43,34 @@ public abstract class OpenMathObject<Key>{
 		return 1;
 	}
 	
+	/**
+	 * TODO 
+	 * @return
+	 */
+	abstract protected String getPartialXML();
 	
 	/**
-	 * Checks if itself is a Terminal (The abstract Class "is a Terminal")
-	 * 
-	 * @return true (if not implemented otherwise)
+	 * TODO
+	 * @return
 	 */
-	public boolean isTerminal(){
-		return true;
-	}
+	abstract protected String getSageSyntax();
+	
+	/**
+	 * 
+	 * @return
+	 */
+	abstract protected String getRSyntax();
+	
+	/**
+	 * 
+	 * @return
+	 */
+	abstract protected String getSymjaSyntax();
+	
+
+	@Override 
+	abstract public String toString();
+
 	
 	/**
 	 * This method checks, if this object equals to another Object.
@@ -81,11 +84,6 @@ public abstract class OpenMathObject<Key>{
 		
 		if(obj == null)
 			return false;
-			
-		if (obj.getClass() == this.getClass()){
-			if (((OpenMathObject<?>)obj).value.equals(this.value))
-				return true;
-		}
 		
 		return false;
 		

@@ -3,8 +3,6 @@ package de.uni_due.s3.evaluator.openmath;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.UnaryOperatorContext;
-import de.uni_due.s3.evaluator.unaryOperator.UnaryOperator;
 
 public class OpenMathApplication extends OpenMathObject {
 

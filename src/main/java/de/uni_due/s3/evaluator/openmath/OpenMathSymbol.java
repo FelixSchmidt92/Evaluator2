@@ -1,7 +1,5 @@
 package de.uni_due.s3.evaluator.openmath;
 
-import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.UnaryOperatorContext;
-import de.uni_due.s3.evaluator.unaryOperator.UnaryOperator;
 
 public class OpenMathSymbol extends OpenMathObject {
 
