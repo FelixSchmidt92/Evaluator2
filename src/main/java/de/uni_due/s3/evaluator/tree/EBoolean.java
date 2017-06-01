@@ -12,6 +12,15 @@ public class EBoolean extends EObject{
 
 	private boolean value;
 	
+	/**
+	 * Constructs an EBoolean
+	 * 
+	 * @param value the value to be saved in EBoolean
+	 */
+	public EBoolean(boolean value) {
+		this.value = value;
+	}
+
 	@Override
 	protected String getPartialOpenMathXML() {
 		return null;

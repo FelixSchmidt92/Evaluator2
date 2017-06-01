@@ -3,7 +3,7 @@ package de.uni_due.s3.evaluator.tree;
 import de.uni_due.s3.evaluator.tree.EObject;
 
 /**
- * This Class EInteger is a Terminal. 
+ * This Class EString is a Terminal. 
  * 
  * It just inherits from EObject and implements the methods.
  * 
@@ -13,6 +13,15 @@ import de.uni_due.s3.evaluator.tree.EObject;
 public class EString extends EObject{
 
 	private String value;
+
+	/**
+	 * Construct an EString
+	 * 
+	 * @param value the String value, which will be saved
+	 */
+	public EString(String value) {
+		this.value = value;
+	}
 
 	@Override
 	protected String getPartialOpenMathXML() {

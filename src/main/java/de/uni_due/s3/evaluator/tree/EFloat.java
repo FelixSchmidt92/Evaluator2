@@ -12,6 +12,16 @@ public class EFloat extends EObject {
 
 	private double value;
 
+	
+	/**
+	 * Constructs an EFloat
+	 * 
+	 * @param value the value which will be saved in EFLoat
+	 */
+	public EFloat(double value) {
+		this.value = value;
+	}
+
 	@Override
 	protected String getPartialOpenMathXML() {
 		return null;

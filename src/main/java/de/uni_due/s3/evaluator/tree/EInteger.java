@@ -12,6 +12,15 @@ public class EInteger extends EObject{
 
 	private int value;
 
+	/**
+	 * Constructs an EInteger
+	 * 
+	 * @param value the value which should be saved in this EInteger
+	 */
+	public EInteger(int value) {
+		this.value = value;
+	}
+
 	@Override
 	protected String getPartialOpenMathXML() {
 		return null;
