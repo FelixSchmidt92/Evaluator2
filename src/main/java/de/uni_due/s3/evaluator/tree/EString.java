@@ -3,42 +3,48 @@ package de.uni_due.s3.evaluator.tree;
 import de.uni_due.s3.evaluator.tree.EObject;
 
 /**
- * TODO
- * @author dlux
+ * This Class EInteger is a Terminal. 
+ * 
+ * It just inherits from EObject and implements the methods.
+ * 
+ * @UnderConstruction TODO implement abstract methods
+ * @author dlux, frichtscheid, spobel
  */
 public class EString extends EObject{
 
 	private String value;
+
 	@Override
-	protected String getPartialXML() {
-		// TODO Auto-generated method stub
+	protected String getPartialOpenMathXML() {
+		return null;
+	}
+	
+	@Override
+	public String getSageSyntax() {
 		return null;
 	}
 
 	@Override
-	protected String getSageSyntax() {
-		// TODO Auto-generated method stub
+	public String getRSyntax() {
 		return null;
 	}
 
 	@Override
-	protected String getRSyntax() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected String getSymjaSyntax() {
-		// TODO Auto-generated method stub
+	public String getSymjaSyntax() {
 		return null;
 	}
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	
+	
+	/**
+	 * Returns the value of EString
+	 * 
+	 * @return a String
+	 */
 	public String getValue() {
 		return value;
 	}

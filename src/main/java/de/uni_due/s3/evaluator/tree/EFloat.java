@@ -1,44 +1,47 @@
 package de.uni_due.s3.evaluator.tree;
 
 /**
- * TODO
+ * This Class EFloat is a Terminal. 
  * 
- * @author dlux
+ * It just inherits from EObject and implements the methods.
+ * 
+ * @UnderConstruction TODO implement abstract methods
+ * @author dlux, frichtscheid, spobel
  */
 public class EFloat extends EObject {
 
 	private double value;
 
 	@Override
-	protected String getPartialXML() {
-		// TODO Auto-generated method stub
+	protected String getPartialOpenMathXML() {
+		return null;
+	}
+	
+	@Override
+	public String getSageSyntax() {
 		return null;
 	}
 
 	@Override
-	protected String getSageSyntax() {
-		// TODO Auto-generated method stub
+	public String getRSyntax() {
 		return null;
 	}
 
 	@Override
-	protected String getRSyntax() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected String getSymjaSyntax() {
-		// TODO Auto-generated method stub
+	public String getSymjaSyntax() {
 		return null;
 	}
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/**
+	 * Returns the value of EFloat
+	 * 
+	 * @return a Double Value
+	 */
 	public double getValue() {
 		return value;
 	}

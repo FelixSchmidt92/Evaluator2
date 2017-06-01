@@ -1,22 +1,22 @@
 package de.uni_due.s3.evaluator.tree;
 
 /**
- * This Class EInteger is a Terminal. 
+ * This Class EBoolean is a Terminal. 
  * 
  * It just inherits from EObject and implements the methods.
  * 
  * @UnderConstruction TODO implement abstract methods
  * @author dlux, frichtscheid, spobel
  */
-public class EInteger extends EObject{
+public class EBoolean extends EObject{
 
-	private int value;
-
+	private boolean value;
+	
 	@Override
 	protected String getPartialOpenMathXML() {
 		return null;
 	}
-	
+
 	@Override
 	public String getSageSyntax() {
 		return null;
@@ -38,11 +38,11 @@ public class EInteger extends EObject{
 	}
 
 	/**
-	 * Returns the value of EInteger
+	 * Returns the value of EBoolean
 	 * 
-	 * @return an Integer 
+	 * @return true or false as Boolean
 	 */
-	public int getValue() {
+	public boolean getValue(){
 		return value;
 	}
 }
