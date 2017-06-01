@@ -18,7 +18,6 @@ import org.antlr.v4.runtime.atn.ATNConfigSet;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.junit.Test;
 
-import de.uni_due.s3.evaluator.exceptions.ParserException;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorLexer;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser;
 
