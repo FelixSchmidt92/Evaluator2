@@ -8,7 +8,7 @@ import de.uni_due.s3.evaluator.tree.function.EFunction;
 public class Times extends EFunction{
 
 	@Override
-	protected EObject execute(List<EObject> childs) {
+	protected EObject execute(List<EObject> arguments) {
 		// TODO Auto-generated method stub
 		return null;
 	}
