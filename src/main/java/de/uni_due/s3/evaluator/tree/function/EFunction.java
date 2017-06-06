@@ -31,7 +31,7 @@ public abstract class EFunction {
 	 * 	      minArgs and maxArgs 
 	 * @return a new specific EObject, the result after Execution
 	 */
-	abstract protected EObject execute(List<EObject> arguments);
+	abstract protected EObject execute(List<EObject> arguments); //FIXME spobel wir sollten noch mal über die Benennung evaluate und execute nachdenken
 	
 	/**
 	 * First: Check If maxArgs can be infinitely.
