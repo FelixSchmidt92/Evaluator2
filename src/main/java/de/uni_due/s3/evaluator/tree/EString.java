@@ -25,27 +25,27 @@ public class EString extends EObject{
 
 	@Override
 	protected String getPartialOpenMathXML() {
-		return null;
+		return "<OMSTR>" + this.toString() + "</OMSTR>";
 	}
 	
 	@Override
 	public String getSageSyntax() {
-		return null;
+		return this.toString();
 	}
 
 	@Override
 	public String getRSyntax() {
-		return null;
+		return this.toString();
 	}
 
 	@Override
 	public String getSymjaSyntax() {
-		return null;
+		return this.toString();
 	}
 
 	@Override
 	public String toString() {
-		return null;
+		return this.getValue();
 	}
 	
 	
@@ -55,6 +55,6 @@ public class EString extends EObject{
 	 * @return a String
 	 */
 	public String getValue() {
-		return value;
+		return this.value;
 	}
 }

@@ -24,27 +24,27 @@ public class EFloat extends EObject {
 
 	@Override
 	protected String getPartialOpenMathXML() {
-		return null;
+		return "<OMF>" + this.toString() + "</OMF>";
 	}
 	
 	@Override
 	public String getSageSyntax() {
-		return null;
+		return this.toString();
 	}
 
 	@Override
 	public String getRSyntax() {
-		return null;
+		return this.toString();
 	}
 
 	@Override
 	public String getSymjaSyntax() {
-		return null;
+		return this.toString();
 	}
 
 	@Override
 	public String toString() {
-		return null;
+		return Double.toString(this.getValue());
 	}
 
 	/**
@@ -53,6 +53,6 @@ public class EFloat extends EObject {
 	 * @return a Double Value
 	 */
 	public double getValue() {
-		return value;
+		return this.value;
 	}
 }

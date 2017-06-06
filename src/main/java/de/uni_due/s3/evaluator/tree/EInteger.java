@@ -5,7 +5,6 @@ package de.uni_due.s3.evaluator.tree;
  * 
  * It just inherits from EObject and implements the methods.
  * 
- * @UnderConstruction TODO implement abstract methods
  * @author dlux, frichtscheid, spobel
  */
 public class EInteger extends EObject{
@@ -23,27 +22,27 @@ public class EInteger extends EObject{
 
 	@Override
 	protected String getPartialOpenMathXML() {
-		return null;
+		return "<OMI>" + this.toString() + "</OMI>";
 	}
 	
 	@Override
 	public String getSageSyntax() {
-		return null;
+		return this.toString();
 	}
 
 	@Override
 	public String getRSyntax() {
-		return null;
+		return this.toString();
 	}
 
 	@Override
 	public String getSymjaSyntax() {
-		return null;
+		return this.toString();
 	}
 
 	@Override
 	public String toString() {
-		return null;
+		return Integer.toString(this.getValue());
 	}
 
 	/**
@@ -52,6 +51,6 @@ public class EInteger extends EObject{
 	 * @return an Integer 
 	 */
 	public int getValue() {
-		return value;
+		return this.value;
 	}
 }

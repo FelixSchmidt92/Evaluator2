@@ -1,15 +1,13 @@
 package de.uni_due.s3.evaluator.parser;
 
-import java.util.LinkedList;
-import java.util.List;
-
-import de.uni_due.s3.evaluator.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser;
-import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.ExpressionContext;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParserBaseVisitor;
+import de.uni_due.s3.evaluator.tree.EFloat;
+import de.uni_due.s3.evaluator.tree.EInteger;
 import de.uni_due.s3.evaluator.tree.EObject;
+import de.uni_due.s3.evaluator.tree.EString;
 
-public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<EObject> {
+public class ExpressionToEvaluatorOpenMathVisitor extends EvaluatorParserBaseVisitor<EObject> {
 	/**
 	 * {@inheritDoc}
 	 *
@@ -46,7 +44,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<EObj
 	 */
 	@Override
 	public EObject visitTextValue(EvaluatorParser.TextValueContext ctx) {
-		return null;
+		return new EString(ctx.value.getText());
 	}
 
 	/**
@@ -85,7 +83,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<EObj
 	 */
 	@Override
 	public EObject visitFloatValue(EvaluatorParser.FloatValueContext ctx) {
-		return null;
+		return new EFloat(Double.parseDouble(ctx.value.getText()));
 	}
 
 	/**
@@ -111,7 +109,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<EObj
 	 */
 	@Override
 	public EObject visitIntegerValue(EvaluatorParser.IntegerValueContext ctx) {
-		return null;
+		return new EInteger(Integer.parseInt(ctx.value.getText()));
 	}
 
 	/**

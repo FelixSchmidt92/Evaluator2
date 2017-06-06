@@ -35,7 +35,7 @@ public class ExpressionParser {
 		evaluatorParser.setErrorHandler(new ParserErrorStrategy()); // default ErrorStrategy
 		
 		ParseTree tree = evaluatorParser.expression();
-		ExpressionToOpenMathVisitor visitor = new ExpressionToOpenMathVisitor();
+		ExpressionToEvaluatorOpenMathVisitor visitor = new ExpressionToEvaluatorOpenMathVisitor();
 		return visitor.visit(tree);
 	}
 }

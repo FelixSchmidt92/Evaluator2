@@ -23,27 +23,27 @@ public class EBoolean extends EObject{
 
 	@Override
 	protected String getPartialOpenMathXML() {
-		return null;
+		return this.toString();
 	}
 
 	@Override
 	public String getSageSyntax() {
-		return null;
+		return this.toString();
 	}
 
 	@Override
 	public String getRSyntax() {
-		return null;
+		return this.toString();
 	}
 
 	@Override
 	public String getSymjaSyntax() {
-		return null;
+		return this.toString();
 	}
 
 	@Override
 	public String toString() {
-		return null;
+		return Boolean.toString(this.getValue());
 	}
 
 	/**
@@ -52,6 +52,6 @@ public class EBoolean extends EObject{
 	 * @return true or false as Boolean
 	 */
 	public boolean getValue(){
-		return value;
+		return this.value;
 	}
 }
