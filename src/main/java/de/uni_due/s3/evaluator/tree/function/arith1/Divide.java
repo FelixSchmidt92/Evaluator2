@@ -7,6 +7,10 @@ import de.uni_due.s3.evaluator.tree.function.EFunction;
 
 public class Divide extends EFunction{
 
+	Divide(String cd, String name) {
+		super(cd, name);
+	}
+
 	@Override
 	protected EObject execute(List<EObject> arguments) {
 		// TODO Auto-generated method stub

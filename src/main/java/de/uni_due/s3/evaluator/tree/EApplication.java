@@ -49,53 +49,49 @@ public class EApplication extends EObject{
 		List<EObject> evaluatedArguments = new LinkedList<EObject>();
 		if (function.argumentsShouldBeEvaluated()) {
 		//Iterate over every argument and evaluate
-			for(EObject eObj : arguments){ //FIXME spobel sollten wir arguments (private) hier nutzen ? wäre für die zukunft besser mit dem getter zu arbeiten ?
+			for(EObject eObj : arguments){
 				evaluatedArguments.add(eObj.evaluate()); 
 			}
 		} else {
 		//do not evaluate just pass through
 			evaluatedArguments = arguments;
 		}
-		//FIXME spobel ??? sollte an dieser Stelle nicht die argument Liste aus diesem Object überschrieben werden ?
-		// würde man jetzt auf die arguments zugreifen wären sie wieder die alten ? 
 		return function.evaluate(evaluatedArguments);
 	}
 
 
 	@Override
-	public String getSageSyntax() { //FIXME spobel sollte das auch an die Function delegiert werden ? sollte ja iwie eine für eine Matrix darstellung geben ... 
-		return null;
+	public String getSageSyntax() {
+		return function.getSageSyntax(arguments);
 	}
 
 
 	@Override
 	public String getRSyntax() {
-		return null;
+		return function.getRSyntax(arguments);
 	}
 
 
 	@Override
 	public String getSymjaSyntax() {
+		return function.getSymjaSyntax(arguments);
+	}
+
+
+	@Override
+	public String toString() { //FIXME spobel
 		return null;
 	}
 
 
 	@Override
-	public String toString() {
+	protected String getPartialOpenMathXML() { //FIXME spobel
 		return null;
 	}
-
-
-	@Override
-	protected String getPartialOpenMathXML() {
-		return null;
-	}
-	
 	
 	@Override
 	public int countNodes(){
-		int count = 1; // 1 --> Count yourself!
-		//FIXME spobel muss die efunction auch gezählt werden ?
+		int count = 2; // 2 --> Count yourself and EFunction!
 		for (EObject eObj: arguments){
 			count += eObj.countNodes();
 		}

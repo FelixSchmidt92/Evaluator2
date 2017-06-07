@@ -27,17 +27,17 @@ public class EBoolean extends EObject{
 	}
 
 	@Override
-	public String getSageSyntax() {
+	public String getSageSyntax() { //FIXME dlux
 		return this.toString();
 	}
 
 	@Override
-	public String getRSyntax() {
+	public String getRSyntax() { //FIXME dlux
 		return this.toString();
 	}
 
 	@Override
-	public String getSymjaSyntax() {
+	public String getSymjaSyntax() { //FIXME dlux
 		return this.toString();
 	}
 

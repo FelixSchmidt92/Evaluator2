@@ -23,6 +23,14 @@ import de.uni_due.s3.evaluator.tree.EObject;
  */
 public abstract class EFunction {
 	
+	private String cd;
+	private String name;
+	
+	protected EFunction(String cd, String name) {
+		this.cd = cd;
+		this.name = name;
+	}
+	
 	/**
 	 * Here happens the Logic of every single Function.
 	 * The arguments-List is in Range of minArgs and maxArgs.
@@ -31,7 +39,7 @@ public abstract class EFunction {
 	 * 	      minArgs and maxArgs 
 	 * @return a new specific EObject, the result after Execution
 	 */
-	abstract protected EObject execute(List<EObject> arguments); //FIXME spobel wir sollten noch mal über die Benennung evaluate und execute nachdenken
+	abstract protected EObject execute(List<EObject> arguments);
 	
 	/**
 	 * First: Check If maxArgs can be infinitely.
@@ -102,5 +110,26 @@ public abstract class EFunction {
 	 * 
 	 * @return the maximum number of Arguments as Integer
 	 */
-	abstract protected int maxArgs();	
+	abstract protected int maxArgs();
+	
+	public String getOpenMathSymbolCd() {
+		return this.cd;
+	}
+	
+	public String getOpenMathSymbolName() {
+		return this.name;
+	}
+	
+	
+	public String getSageSyntax(List<EObject> arguments) {
+		throw new NoCASRepresentationAvaliableException("");//FIXME spobel hier fehlt noch message
+	}
+	
+	public String getSymjaSyntax(List<EObject> arguments) {
+		throw new NoCASRepresentationAvaliableException("");//FIXME spobel hier fehlt noch message
+	}
+	
+	public String getRSyntax(List<EObject> arguments) {
+		throw new NoCASRepresentationAvaliableException("");//FIXME spobel hier fehlt noch message
+	}
 }
