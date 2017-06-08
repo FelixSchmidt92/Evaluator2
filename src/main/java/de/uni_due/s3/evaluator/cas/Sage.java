@@ -15,7 +15,6 @@ import java.util.TimerTask;
 import org.apache.log4j.Logger;
 
 import de.uni_due.s3.evaluator.exceptions.CASNotAvailableException;
-import de.uni_due.s3.evaluator.tree.EObject;
 
 /**
  * This class provides an interface to execute sage commands. To execute a Sage
@@ -54,7 +53,7 @@ public class Sage {
 	 * @throws NoCASConnectionsException
 	 *             if there is no working SageServer connection anymore.
 	 */
-	public static EObject evaluateInCAS(String sageExpression) throws CASEvaluationException {
+	public static Object evaluateInCAS(String sageExpression) throws CASEvaluationException {
 		if (!initFlag) {
 			throw new CASNotAvailableException("Jack did not initialized a Sage CAS connection.");
 		}
@@ -97,7 +96,7 @@ public class Sage {
 		return sageToEObject(casResult);
 	}
 
-	private static EObject sageToEObject(String casResult) {
+	private static Object sageToEObject(String casResult) {
 		// FIXME spobel SAGEPHRASEBOOK
 		return null;
 	}

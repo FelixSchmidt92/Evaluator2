@@ -12,17 +12,16 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import de.uni_due.s3.evaluator.exceptions.ParserException;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorLexer;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser;
-import de.uni_due.s3.evaluator.tree.EObject;
 
 public class ExpressionParser {
 
-	public static EObject parse(String expression) {
+	public static Object parse(String expression) {
 		Reader input = new StringReader(expression);
 		CharStream cstream = null;
 		try {
 			cstream = CharStreams.fromReader(input);
 		} catch (IOException e) {
-			throw new ParserException("IOException at CharStream", e);
+			throw new ParserException("IOException at CharStream", e); //TODO dlux Exception verfeinern
 		}
 		EvaluatorLexer evaluatorLexer = new EvaluatorLexer(cstream);
 		

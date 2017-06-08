@@ -1,12 +1,11 @@
-package de.uni_due.s3.evaluator.tree.function;
+package de.uni_due.s3.evaluator.function;
 
 import java.util.List;
 
 import de.uni_due.s3.evaluator.exceptions.FunctionArgumentNumberException;
-import de.uni_due.s3.evaluator.tree.EObject;
 
 /**
- * EFuntion is an abstract Class where functions can be executed
+ * Funtion is an abstract Class where functions can be executed
  * with the ArgumentList. All Classes which inherit this Class <b>have to</b>
  * implement minArgs, maxArgs and the execute method(where the logic should be).
  * 
@@ -15,31 +14,23 @@ import de.uni_due.s3.evaluator.tree.EObject;
  * If this Function is not listed in OpenMath, use the jack*1 package
  * (then this Function is a jack-specific one, '*' can be string, matrix etc..).
  * 
- * Getting an EFunction can be achieved with the FunctionFactory.
+ * Getting an Function can be achieved with the FunctionFactory.
  * This Class will contain all available Functions for this Evaluator.
  * By Adding a new Function make this Function also available at FunctionFactory.
  * 
  * @author dlux, frichtscheid, spobel
  */
-public abstract class EFunction {
-	
-	private String cd;
-	private String name;
-	
-	protected EFunction(String cd, String name) {
-		this.cd = cd;
-		this.name = name;
-	}
-	
+public abstract class Function {
+
 	/**
 	 * Here happens the Logic of every single Function.
 	 * The arguments-List is in Range of minArgs and maxArgs.
 	 * 
 	 * @param arguments with a length beforeHand-Check like specified in
 	 * 	      minArgs and maxArgs 
-	 * @return a new specific EObject, the result after Execution
+	 * @return a new specific Object, the result after Execution
 	 */
-	abstract protected EObject execute(List<EObject> arguments);
+	abstract protected Object execute(List<Object> arguments);
 	
 	/**
 	 * First: Check If maxArgs can be infinitely.
@@ -52,7 +43,7 @@ public abstract class EFunction {
 	 * @param arguments A List of Arguments for this Function
 	 * @return the result of execution as an EObject
 	 */
-	public EObject evaluate(List<EObject> arguments){
+	public Object evaluate(List<Object> arguments){
 		
 		//Check max, if infinitely set max to Integer.MAX_VALUE
 		int max = maxArgs();
@@ -64,8 +55,8 @@ public abstract class EFunction {
 			//Arguments.size is not between minArgs and maxArgs so throw Error
 			
 			String cause = "The Number of Arguments for the Function: "
-			+ this.toString() + " are not between" + minArgs()
-			+ " to " + maxArgs() + ". Actual Number of Arguments passed: " + arguments.size();
+			+ this.toString() + " are not between " + minArgs()
+			+ " and " + maxArgs() + ". Actual Number of Arguments passed: " + arguments.size();
 			throw new FunctionArgumentNumberException(cause);
 		}
 		
@@ -74,7 +65,7 @@ public abstract class EFunction {
 	
 	
 	/**
-	 * This method is called by EApplication, to tell it
+	 * This method is called by """TODO OMOBJVisitor""", to tell it
 	 * if it has to evaluate the arguments or not.
 	 * 
 	 * Override this method in a Function and set return to false 
@@ -111,25 +102,4 @@ public abstract class EFunction {
 	 * @return the maximum number of Arguments as Integer
 	 */
 	abstract protected int maxArgs();
-	
-	public String getOpenMathSymbolCd() {
-		return this.cd;
-	}
-	
-	public String getOpenMathSymbolName() {
-		return this.name;
-	}
-	
-	
-	public String getSageSyntax(List<EObject> arguments) {
-		throw new NoCASRepresentationAvaliableException("");//FIXME spobel hier fehlt noch message
-	}
-	
-	public String getSymjaSyntax(List<EObject> arguments) {
-		throw new NoCASRepresentationAvaliableException("");//FIXME spobel hier fehlt noch message
-	}
-	
-	public String getRSyntax(List<EObject> arguments) {
-		throw new NoCASRepresentationAvaliableException("");//FIXME spobel hier fehlt noch message
-	}
 }

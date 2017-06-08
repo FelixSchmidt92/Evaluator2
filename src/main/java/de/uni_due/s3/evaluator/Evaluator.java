@@ -2,7 +2,6 @@ package de.uni_due.s3.evaluator;
 
 import java.util.HashMap;
 
-import de.uni_due.s3.evaluator.tree.EObject;
 
 /**
  * 
@@ -13,8 +12,8 @@ import de.uni_due.s3.evaluator.tree.EObject;
 public abstract class Evaluator<TOMOBJ> {
 
 	private Converter<TOMOBJ> eObjectConverter;
-	private HashMap<String, EObject> exerciseVariableMap;
-	private HashMap<String, EObject> fillInVariableMap;
+	private HashMap<String, Object> exerciseVariableMap;
+	private HashMap<String, Object> fillInVariableMap;
 
 	public Evaluator(Converter<TOMOBJ> eObjectConverter) {
 		this.eObjectConverter = eObjectConverter;
