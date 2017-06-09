@@ -82,7 +82,6 @@ public class OMVisitor {
 
 		List<Object> arguments = new ArrayList<Object>(omel.size()-1);
 
-
 		for(int i=0;i<omel.size()-1;i++){
 			Object o = omel.get(i+1);
 			if(o instanceof OMA){

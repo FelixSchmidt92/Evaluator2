@@ -12,71 +12,107 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 import org.junit.Test;
+import org.junit.internal.runners.statements.Fail;
 
 import de.uni_due.s3.openmath.OMSTR;
 import de.uni_due.s3.openmath.OMF;
 import de.uni_due.s3.openmath.OMI;
 import de.uni_due.s3.openmath.OMS;
 import de.uni_due.s3.openmath.OMA;
+import de.uni_due.s3.openmath.OMConverter;
 
 public class TestExpressionParser {
 	
 	@Test
-	public void testText(){
-		assertEquals(((OMSTR)ExpressionParser.parse("'test'")).getContent(), "test");
-		assertEquals(((OMSTR)ExpressionParser.parse("'test123'")).getContent(), "test123");
+	public void testText() throws JAXBException{
+		
+		assertEquals(OMConverter.toString(ExpressionParser.parse("'test'")),"<OMSTR>test</OMSTR>");
+		assertEquals(OMConverter.toString(ExpressionParser.parse("'hello world'")),"<OMSTR>hello world</OMSTR>");
+		assertEquals(OMConverter.toString(ExpressionParser.parse("'Th1S i5 G00D'")),"<OMSTR>Th1S i5 G00D</OMSTR>");
 	}
 	
 	@Test
-	public void testFloat(){
-		assertTrue(((OMF)ExpressionParser.parse("2.1")).getDec() == 2.1);
-		assertTrue(((OMF)ExpressionParser.parse("'2.138923893'")).getDec()== 2.138923893);
+	public void testFloat() throws JAXBException{
+		
+		assertEquals(OMConverter.toString(ExpressionParser.parse("2.1")),"<OMF dec=\"2.1\"/>");
+		assertEquals(OMConverter.toString(ExpressionParser.parse("2.138923893")),"<OMF dec=\"2.138923893\"/>");
 	}
 	
 	@Test
-	public void testInteger(){
-		assertEquals(((OMI)ExpressionParser.parse("3")).getValue() ,"3");
-		assertEquals(((OMI)ExpressionParser.parse("'2233'")).getValue(), "2233");
+	public void testInteger() throws JAXBException{
+		
+		assertEquals(OMConverter.toString(ExpressionParser.parse("3")),"<OMI>3</OMI>");
+		assertEquals(OMConverter.toString(ExpressionParser.parse("10000")),"<OMI>10000</OMI>");
+		assertEquals(OMConverter.toString(ExpressionParser.parse("-10")),"<OMA>"
+																			+ "<OMS name=\"unary_minus\" cd=\"arith1\"/>"
+																			+ "<OMI>10</OMI>"
+																		+ "</OMA>");
 	}
 	
 	@Test
-	public void testUnary(){
-		assertEquals(((OMS)(((OMA)ExpressionParser.parse("!3")).getOmel().get(0))).getName(), "not");
-		assertEquals(((OMA)ExpressionParser.parse("+1")).getOmel().size(), 2);
+	public void testApplicationUnary() throws Exception{
+		
+		// TODO this is not openmath standard. The not operation should just work with booleans!
+		// see https://www.openmath.org/cd/logic1.xhtml
+		
+		assertEquals(OMConverter.toString(ExpressionParser.parse("!3")),"<OMA>"
+																			+ "<OMS name=\"not\" cd=\"logic1\"/>"
+																			+ "<OMI>3</OMI>"
+																		+ "</OMA>");
+		assertEquals(OMConverter.toString(ExpressionParser.parse("+3")),"<OMA>"
+																			+ "<OMS name=\"unary_plus\" cd=\"arith1\"/>"
+																			+ "<OMI>3</OMI>"
+																		+ "</OMA>");
+		throw new Exception("This is not openmath standard");
 	}
 	
 	@Test
-	public void testBinary(){
-		assertTrue(((OMA)ExpressionParser.parse("1+2")).getOmel().get(0) instanceof OMS);
-		assertTrue(((OMA)ExpressionParser.parse("1+2")).getOmel().get(1) instanceof OMI);
-		assertTrue(((OMA)ExpressionParser.parse("1+2")).getOmel().get(2) instanceof OMI);
+	public void testApplicationBinary() throws JAXBException{
+		
+		assertEquals(OMConverter.toString(ExpressionParser.parse("2+3")),"<OMA>"
+																			+ "<OMS name=\"plus\" cd=\"arith1\"/>"
+																			+ "<OMI>2</OMI>"
+																			+ "<OMI>3</OMI>"																			
+																		+ "</OMA>");
+		
+		assertEquals(OMConverter.toString(ExpressionParser.parse("2.0+3")),"<OMA>"
+																				+ "<OMS name=\"plus\" cd=\"arith1\"/>"
+																				+ "<OMF dec=\"2.0\"/>"
+																				+ "<OMI>3</OMI>"																			
+																			+ "</OMA>");
+		assertEquals(OMConverter.toString(ExpressionParser.parse("2.0/3")),"<OMA>"
+																				+ "<OMS name=\"divide\" cd=\"arith1\"/>"
+																				+ "<OMF dec=\"2.0\"/>"
+																				+ "<OMI>3</OMI>"																			
+																			+ "</OMA>");
 	}
 	
 	@Test
-	public void testFunction() throws JAXBException{
-		assertEquals(((OMA)ExpressionParser.parse("plus(1, 3)")).getOmel().size(), 3);
-	}
+	public void testApplicationFunction() throws JAXBException{
+		assertEquals(OMConverter.toString(ExpressionParser.parse("plus(1.0,3)")),"<OMA>"
+																					+ "<OMS name=\"plus\" cd=\"arith1\"/>"
+																					+ "<OMF dec=\"1.0\"/>"
+																					+ "<OMI>3</OMI>"																			
+																				+ "</OMA>");
 	
-
-	@Test
-	public void testParser() {
-		assertTrue(ExpressionParser.parse("--1").equals(/*OpenMathObjectCreator.createOpenMathInteger(+1)*/null));
-	}
-	
-	@Test
-	public void testIntegerValue() {
-		assertTrue(ExpressionParser.parse("-1").equals(/*OpenMathObjectCreator.createOpenMathInteger(-1)*/null));
-		assertTrue(ExpressionParser.parse("'1'").equals(/*OpenMathObjectCreator.createOpenMathInteger(1)*/null));
-		assertTrue(ExpressionParser.parse("1").equals(/*OpenMathObjectCreator.createOpenMathInteger(1)*/null));
-		assertTrue(ExpressionParser.parse("'5'").equals(/*OpenMathObjectCreator.createOpenMathInteger(5)*/null));
-		assertTrue(ExpressionParser.parse("5").equals(/*OpenMathObjectCreator.createOpenMathInteger(5)*/null));
 	}
 	
 	@Test
-	public void testUnaryOperator() {
-		assertTrue(ExpressionParser.parse("'-1'").equals(/*OpenMathObjectCreator.createOpenMathInteger(-1)*/null));
-		assertTrue(ExpressionParser.parse("-1").equals(/*OpenMathObjectCreator.createOpenMathInteger(-1)*/null));
-		assertTrue(ExpressionParser.parse("'+1'").equals(/*OpenMathObjectCreator.createOpenMathInteger(1)*/null));
-		assertTrue(ExpressionParser.parse("+1").equals(/*OpenMathObjectCreator.createOpenMathInteger(1)*/null));
+	public void testApplicationNestedFunction() throws JAXBException{
+		assertEquals(OMConverter.toString(ExpressionParser.parse("plus(2/3,plus(1.0,3))")),"<OMA>"
+																							+ "<OMS name=\"plus\" cd=\"arith1\"/>"
+																							+ "<OMA>"
+																								+ "<OMS name=\"divide\" cd=\"arith1\"/>"
+																								+ "<OMI>2</OMI>"
+																								+ "<OMI>3</OMI>"
+																							+ "</OMA>"
+																							+"<OMA>"
+																								+ "<OMS name=\"plus\" cd=\"arith1\"/>"
+																								+ "<OMF dec=\"1.0\"/>"
+																								+ "<OMI>3</OMI>"																			
+																							+ "</OMA>"																			
+																						+ "</OMA>");
+	
 	}
+	
 }
