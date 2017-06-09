@@ -1,8 +1,8 @@
-package de.uni_due.s3.evaluator.function.arith1;
+package de.uni_due.s3.evaluator.core.function.arith1;
 
 import java.util.List;
 
-import de.uni_due.s3.evaluator.function.Function;
+import de.uni_due.s3.evaluator.core.function.Function;
 
 public class Minus extends Function{
 

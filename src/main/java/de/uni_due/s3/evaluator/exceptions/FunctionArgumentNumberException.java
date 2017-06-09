@@ -1,6 +1,6 @@
 package de.uni_due.s3.evaluator.exceptions;
 
-public class FunctionArgumentNumberException extends EvaluatorException{
+public class FunctionArgumentNumberException extends FunctionException{
 
 	public FunctionArgumentNumberException(String message) {
 		super(message);

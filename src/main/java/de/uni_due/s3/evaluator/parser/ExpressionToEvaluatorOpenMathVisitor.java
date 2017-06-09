@@ -1,6 +1,6 @@
 package de.uni_due.s3.evaluator.parser;
 
-import de.uni_due.s3.evaluator.function.FunctionFactory;
+import de.uni_due.s3.evaluator.core.function.FunctionFactory;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.ExpressionContext;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParserBaseVisitor;
@@ -279,8 +279,8 @@ public class ExpressionToEvaluatorOpenMathVisitor extends EvaluatorParserBaseVis
 	@Override
 	public Object visitNestedFunction(EvaluatorParser.NestedFunctionContext ctx) {
 		OMS oms = new OMS();
-		oms.setCd(FunctionFactory.getInstance().getOMOBJContentDictionary(ctx.name.getText()));
-		oms.setName(FunctionFactory.getInstance().getOMOBJName(ctx.name.getText()));
+		oms.setCd(FunctionFactory.getInstance().getFunctionContendDictionary(ctx.name.getText()));
+		oms.setName(FunctionFactory.getInstance().getFunctionName(ctx.name.getText()));
 		
 		OMA oma = new OMA();
 		oma.getOmel().add(oms);

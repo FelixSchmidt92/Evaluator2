@@ -1,7 +1,12 @@
-package de.uni_due.s3.evaluator.function;
+package de.uni_due.s3.evaluator.core.function;
 
 import java.util.HashMap;
 
+import de.uni_due.s3.evaluator.core.function.arith1.Divide;
+import de.uni_due.s3.evaluator.core.function.arith1.Minus;
+import de.uni_due.s3.evaluator.core.function.arith1.Plus;
+import de.uni_due.s3.evaluator.core.function.arith1.Times;
+import de.uni_due.s3.evaluator.exceptions.FunctionDoesNotExistException;
 import de.uni_due.s3.evaluator.function.arith1.*;
 
 
@@ -85,20 +90,26 @@ public class FunctionFactory {
 	 * @return the specific Function 
 	 */
 	public Function getFunction(String name){
-		return (Function)functions.get(name)[0];
+		if(functions.containsKey(name))
+			return (Function)functions.get(name)[0];
+		else
+			 throw new FunctionDoesNotExistException(name);
 	}
 	
 	
 	/**
-	 * This method returns the contentDictionary of the specific function 
-	 * for ExpressionToEvaluatorOpenMathVisitor. It needs its Content-Dictionary
-	 * to generate the Tree (needed for OMS)
+	 * This method returns the contentDictionary of the specific function. 
+	 * It is mainly used by the expressionParser and the OMVisitor.
 	 * 
+	 * It throws a FunctionDoesNotExistException at runtime if the function is not found in the HashMap. The evaluator user has to deal with this exception
 	 * @param name the name (key)(in lower case) of this Function
 	 * @return the specific contentDictionary as String
 	 */
-	public String getOMOBJContentDictionary(String name){
-		return (String)functions.get(name)[1];
+	public String getFunctionContendDictionary(String name){
+		if(functions.containsKey(name))
+			return (String)functions.get(name)[1];
+		else
+		  throw new FunctionDoesNotExistException(name);
 	}
 	
 	
@@ -110,7 +121,7 @@ public class FunctionFactory {
 	 * @param name the name (key)(in lower case) of this Function
 	 * @return the specific Name as String
 	 */
-	public String getOMOBJName(String name){
+	public String getFunctionName(String name){
 		return (String)functions.get(name)[2];
 	}
 }
