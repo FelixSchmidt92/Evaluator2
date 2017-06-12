@@ -5,7 +5,6 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.core.function.FunctionFactory;
-import de.uni_due.s3.evaluator.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator.exceptions.FunctionContentDictionaryMismatch;
 import de.uni_due.s3.evaluator.exceptions.FunctionDoesNotExistException;
 import de.uni_due.s3.openmath.OMA;
@@ -122,7 +121,7 @@ public class OMVisitor {
 	public Function visit(OMS oms){
 		//System.out.println("visit oms");
 		FunctionFactory ff = FunctionFactory.getInstance();
-		String fcd = ff.getFunctionContendDictionary(oms.getName());
+		String fcd = ff.getFunctionContentDictionary(oms.getName());
 		//check if the function is in the correct content-dictionary
 		if (fcd.equals(oms.getCd())){
 			Function f = FunctionFactory.getInstance().getFunction(oms.getName());

@@ -106,10 +106,12 @@ public class ExpressionToEvaluatorOpenMathVisitor extends EvaluatorParserBaseVis
 			oms.setName("divide");
 			break;
 
-//		case "%":   //TODO which CD and Name??
-//			oms.setCd("arith1");
-//			oms.setName("unary_plus");
-//			break;
+		case "%":   //FIXME dlux there is a representation of it, but only over sets of integers
+					//it also has to be the second parameter inside a OMA, ALWAYS.
+					//defining here an own cd and name to have this as an binary operator
+			oms.setCd("jackbinary1");
+			oms.setName("modulus");
+			break;
 
 		case "<":
 			oms.setCd("relation1");
@@ -137,8 +139,8 @@ public class ExpressionToEvaluatorOpenMathVisitor extends EvaluatorParserBaseVis
 			break;
 
 		case "==":
-			oms.setCd("arith1");		//TODO Correct CD and Name?
-			oms.setName("eq");
+			oms.setCd("logic1"); // equivalent "==" as "≡"
+			oms.setName("equivalent");
 			break;
 
 		case "!=":
@@ -279,7 +281,7 @@ public class ExpressionToEvaluatorOpenMathVisitor extends EvaluatorParserBaseVis
 	@Override
 	public Object visitNestedFunction(EvaluatorParser.NestedFunctionContext ctx) {
 		OMS oms = new OMS();
-		oms.setCd(FunctionFactory.getInstance().getFunctionContendDictionary(ctx.name.getText()));
+		oms.setCd(FunctionFactory.getInstance().getFunctionContentDictionary(ctx.name.getText()));
 		oms.setName(FunctionFactory.getInstance().getFunctionName(ctx.name.getText()));
 		
 		OMA oma = new OMA();

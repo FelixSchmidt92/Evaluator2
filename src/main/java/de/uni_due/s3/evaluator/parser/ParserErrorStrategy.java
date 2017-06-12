@@ -30,7 +30,7 @@ public class ParserErrorStrategy extends BailErrorStrategy{
 	}
 	
 	/**
-	 * This method is called by a NoViableAltException nut should be catched 
+	 * This method is called by a NoViableAltException and should be catched 
 	 * beforehand by sync
 	 * 
 	 * Examples, where this method is called:   ' / 2',  '(()))', ';', '?', '#'

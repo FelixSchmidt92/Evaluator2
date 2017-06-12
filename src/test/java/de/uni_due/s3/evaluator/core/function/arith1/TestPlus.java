@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import de.uni_due.s3.evaluator.core.function.arith1.Plus;
 import de.uni_due.s3.openmath.OMI;
 
 public class TestPlus {

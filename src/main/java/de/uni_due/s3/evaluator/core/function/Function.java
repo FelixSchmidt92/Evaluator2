@@ -5,7 +5,7 @@ import java.util.List;
 import de.uni_due.s3.evaluator.exceptions.FunctionArgumentNumberException;
 
 /**
- * Funtion is an abstract Class where functions can be executed
+ * Function is an abstract Class where functions can be executed
  * with the ArgumentList. All Classes which inherit this Class <b>have to</b>
  * implement minArgs, maxArgs and the execute method(where the logic should be).
  * 
@@ -15,7 +15,7 @@ import de.uni_due.s3.evaluator.exceptions.FunctionArgumentNumberException;
  * (then this Function is a jack-specific one, '*' can be string, matrix etc..).
  * 
  * Getting an Function can be achieved with the FunctionFactory.
- * This Class will contain all available Functions for this Evaluator.
+ * The FunctionFactory-Class will contain all available Functions for this Evaluator.
  * By Adding a new Function make this Function also available at FunctionFactory.
  * 
  * @author dlux, frichtscheid, spobel
@@ -34,7 +34,7 @@ public abstract class Function {
 	
 	/**
 	 * First: Check If maxArgs can be infinitely.
-	 * Second:Check if arguments length is in Range of minArgs maxArgs
+	 * Second:Check if arguments length is in Range of minArgs and maxArgs
 	 * 		  to ensure for execute() that the correct number of Arguments 
 	 * 		  are passed.
 	 * Then:  call execute with the correct number of arguments.
@@ -65,7 +65,7 @@ public abstract class Function {
 	
 	
 	/**
-	 * This method is called by """TODO OMOBJVisitor""", to tell it
+	 * This method is called by OMVisitor, to tell it
 	 * if it has to evaluate the arguments or not.
 	 * 
 	 * Override this method in a Function and set return to false 

@@ -2,12 +2,8 @@ package de.uni_due.s3.evaluator.core.function;
 
 import java.util.HashMap;
 
-import de.uni_due.s3.evaluator.core.function.arith1.Divide;
-import de.uni_due.s3.evaluator.core.function.arith1.Minus;
-import de.uni_due.s3.evaluator.core.function.arith1.Plus;
-import de.uni_due.s3.evaluator.core.function.arith1.Times;
 import de.uni_due.s3.evaluator.exceptions.FunctionDoesNotExistException;
-import de.uni_due.s3.evaluator.function.arith1.*;
+import de.uni_due.s3.evaluator.core.function.arith1.*;
 
 
 /**
@@ -83,11 +79,12 @@ public class FunctionFactory {
 	
 	
 	/**
-	 * This method returns the specific Function for """TODO OMOBJVisitor"""
-	 * So it is used by """TODO OMOBJVisitor"""
+	 * This method returns the specific Function for OMVisitor
+	 * So it is used by OMVisitor
 	 * 
 	 * @param name the name (key)(in lower case) of this Function
 	 * @return the specific Function 
+	 * @throws FunctionDoesNotExistException if Function is not found in HashMap
 	 */
 	public Function getFunction(String name){
 		if(functions.containsKey(name))
@@ -101,11 +98,11 @@ public class FunctionFactory {
 	 * This method returns the contentDictionary of the specific function. 
 	 * It is mainly used by the expressionParser and the OMVisitor.
 	 * 
-	 * It throws a FunctionDoesNotExistException at runtime if the function is not found in the HashMap. The evaluator user has to deal with this exception
 	 * @param name the name (key)(in lower case) of this Function
 	 * @return the specific contentDictionary as String
+	 * @throws FunctionDoesNotExisExcetion if the function is not found in the HashMap. The evaluator user has to deal with this exception
 	 */
-	public String getFunctionContendDictionary(String name){
+	public String getFunctionContentDictionary(String name){
 		if(functions.containsKey(name))
 			return (String)functions.get(name)[1];
 		else
@@ -116,12 +113,16 @@ public class FunctionFactory {
 	/**
 	 * This method returns the name of the specific function 
 	 * for ExpressionToEvaluatorOpenMathVisitor. It needs its name
-	 * to generate the Tree (needed for OMS)
+	 * to generate the Tree (needed for OMS in parser/ExpressionToEvaluatorOpenMathVisitor)
 	 * 
 	 * @param name the name (key)(in lower case) of this Function
 	 * @return the specific Name as String
+	 * @throws FunctionDoesNotExistException if function is not found in HashMap.
 	 */
 	public String getFunctionName(String name){
-		return (String)functions.get(name)[2];
+		if(functions.containsKey(name))
+			return (String)functions.get(name)[2];
+		else
+		  throw new FunctionDoesNotExistException(name);
 	}
 }
