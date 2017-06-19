@@ -21,7 +21,8 @@ public class ExpressionToEvaluatorOpenMathVisitor extends EvaluatorParserBaseVis
 	 */
 	@Override
 	public Object visitParentheses(EvaluatorParser.ParenthesesContext ctx) {
-		return visitChildren(ctx);
+		return visit(ctx.getChild(1)); 	//visit second child only (there are only Arguments 
+										//in between the parentheses)
 	}
 
 	/**

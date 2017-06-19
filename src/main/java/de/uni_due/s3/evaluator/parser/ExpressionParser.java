@@ -9,13 +9,21 @@ import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 
+import de.uni_due.s3.evaluator.core.OMVisitor;
 import de.uni_due.s3.evaluator.exceptions.ParserException;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorLexer;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser;
+import de.uni_due.s3.openmath.OMA;
+import de.uni_due.s3.openmath.OMF;
+import de.uni_due.s3.openmath.OMI;
+import de.uni_due.s3.openmath.OMOBJ;
+import de.uni_due.s3.openmath.OMS;
+import de.uni_due.s3.openmath.OMSTR;
+import de.uni_due.s3.openmath.OMV;
 
 /**
  * This class contains only one Function 'parse' to parse the expression to the 
- * """TODO OMOBJ"""-Tree.
+ * TODO OpenMath-Tree and evaluate this tree by using OMVisitor.
  * 
  * Use this class instead of the EvaluatorLexar and EvaluatorParser for parsing expressions.
  * This method also detects Errors (with LexarErrorStrategy and ParserErrorStrategy) which the 
@@ -26,17 +34,17 @@ import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser;
 public class ExpressionParser {
 
 	/**
-	 * This Function returns the """TODO OMOBJ"""-Structure of the given String.
-	 * The Tree returned from this function is not evaluated only build by the parser.
+	 * This Function returns the """TODO evaluated OpenMath-Tree"""-Structure of the given String.
+	 * The Tree returned from this function is evaluated and build by the parser.
 	 * 
 	 *  
 	 * @param expression the String which is in 'Evaluator-Language'.
-	 * @return an """TODO OMOBJ"""-Tree from the given String.
+	 * @return TODO an evaluated standardized OpenMath-Tree as in JAXB from the given String.
 	 * @throws ParserException if the given String is null or not parsable.
 	 * 
 	 * @UnderConstruction  FIXME dlux returns an OMOBJ as Object or an OMA, OMI, OMV??
 	 */
-	public static Object parse(String expression) {
+	public static OMOBJ parse(String expression) {
 		if (expression == null){
 			// empty String passed to this function
 			throw new ParserException("Expression passed to this Parser is null!");
@@ -68,6 +76,54 @@ public class ExpressionParser {
 		evaluatorParser.setErrorHandler(new ParserErrorStrategy()); 
 		
 		ParseTree tree = evaluatorParser.expression();
-		return new ExpressionToEvaluatorOpenMathVisitor().visit(tree);
+		
+		// Putting the parsed OpenMath-Tree in OMOBJ and visit OMVisitor for Evaluation
+		Object omUnknown = new ExpressionToEvaluatorOpenMathVisitor().visit(tree);
+
+		
+		// Convert Tree to OMOBJ, evaluate it and again convert the evaluated
+		// tree to OMOBJ
+		return convertToOmobj(new OMVisitor().visit(convertToOmobj(omUnknown)));
+	}
+	
+	/**
+	 * This method just gets an unknown OpenMathObject and wraps it into an OMOBJ.
+	 * Only add Objects which an OMOBJ can store in here otherwise null will be returned.
+	 * 
+	 * @param omUnknown The Object which should be wrapped into OMOBJ (has to be one of the JAXB-Classes)
+	 * @return an OMOBJ containing the omOnknown at the correct spot
+	 */
+	private static OMOBJ convertToOmobj(Object omUnknown){
+		OMOBJ omobj = new OMOBJ();
+		
+		switch (omUnknown.getClass().getSimpleName()){
+		case "OMF":
+			omobj.setOMF((OMF) omUnknown);
+			break;
+			
+		case "OMI":
+			omobj.setOMI((OMI) omUnknown);
+			break;
+			
+		case "OMS":
+			omobj.setOMS((OMS) omUnknown);
+			break;
+			
+		case "OMSTR":
+			omobj.setOMSTR((OMSTR) omUnknown);
+			break;
+			
+		case "OMV":
+			omobj.setOMV((OMV) omUnknown);
+			break;
+			
+		case "OMA":
+			omobj.setOMA((OMA) omUnknown);
+			break;
+			
+		default :
+			omobj = null;
+		}
+		return omobj;
 	}
 }
