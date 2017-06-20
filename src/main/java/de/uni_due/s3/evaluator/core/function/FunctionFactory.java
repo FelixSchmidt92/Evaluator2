@@ -57,7 +57,71 @@ public class FunctionFactory {
 		functions.put("minus", 		new Object[]{new Minus(), "arith1", "minus"});
 		functions.put("times", 		new Object[]{new Times(), "arith1", "times"});
 		functions.put("divide", 	new Object[]{new Divide(), "arith1", "divide"});
+//		functions.put("abs", 		new Object[]{new Abs(), "arith1", "abs"});
+		//functions.put("modulus",	new Object[]{new Modulus(), ""});
 		
+		//Rounding
+//		functions.put("ceil", 	new Object[]{new Ceiling(), "rounding1", "ceiling"});
+
+		//Relationen
+//		functions.put("lessthan",			new Object[]{new LessThan(), 			"relation1", "lt"});
+//		functions.put("lessthanorequal", 	new Object[]{new LessThanOrEqual(), 	"relation1", "leq"});
+//		functions.put("greaterthan", 		new Object[]{new GreaterThan(), 		"relation1", "gt"});
+//		functions.put("greaterthanorequal", new Object[]{new GreaterThanOrEqual(), 	"relation1", "geq"});
+//		functions.put("equal", 				new Object []{new Equal(), 				"relation1", "eq"});
+//		functions.put("notequal", 			new Object[]{new NotEqual(), 			"relation1", "neq"});
+		
+		//Logic
+//		functions.put("booleanor", 			new Object[]{new BooleanOr(), "logic1", "or"});
+//		functions.put("booleanand", 		new Object[]{new BooleanAnd(), "logic1", "and"});
+		
+		
+		//Trigonometrie
+//		functions.put("sin", 	new Object[]{new Sin(), 	"transc1", "sin"});
+//		functions.put("cos", 	new Object[]{new Cos(), 	"transc1", "cos"});
+//		functions.put("tan", 	new Object[]{new Tan(), 	"transc1", "tan"});
+//		functions.put("asin", 	new Object[]{new ArcSin(), 	"transc1", "arcsin"});
+//		functions.put("acos", 	new Object[]{new ArcCos(), 	"transc1", "arccos"});
+//		functions.put("atan", 	new Object[]{new ArcTan(), 	"transc1", "arctan"});
+//		functions.put("atan2", 	new Object[]{new ArcTan2(), "transc2", "arctan"}); 
+		
+		
+		//Polynome
+//		functions.put("deg", new Object[]{new Degree(), "polynomial1", "degree"});
+//		functions.put("dependsOn", new Object[]{new DependsOn(), "polynomialJACK", "dependsOn"});
+//		functions.put("derive", new Object[]{new Derive(), "polynomialJACK", "derive"});
+//		functions.put("equalsExpr", new Object[]{new EqualsExpr(), "polynomialJACK", "equalsExpr"});
+//		functions.put("equalscplx", new Object[]{new EqualsCplx(), "polynomialJACK", "evalcplx"});
+//		functions.put("evaleq", new Object[]{new EvalEq(), "polynomialJACK", "evalEq"});
+//		functions.put("evalpolynomial", new Object[]{new EvalPolynomial(), "polynomialJACK", "evalPolynomial"});
+//		functions.put("evalPolynomialCplx", new Object[]{new EvalPolynomialCplx(), "polynomialJACK", "evalPolynomialCplx"});
+//		functions.put("evalterm2", new Object[]{new EvalTerm2(), "polynomialJACK", "evalterm2"});
+//		functions.put("expand", new Object[]{new Expand(), "polynomial1", "expand"});
+//		functions.put("factorOf", new Object[]{new FactorOf(), "polynomialJACK", "factorOf"});
+//		functions.put("integrate", new Object[]{new Integrate(), "polynomialJACK", "integrate"});
+//		functions.put("isLinearlyIndependent", new Object[]{new IsLinearlyIndependent(), "polynomialJACK", "isLinearlyIndependent"});
+//		functions.put("isPolynomial", new Object[]{new IsPolynomial(), "polynomialJACK", "isPolynomial"});
+//		functions.put("numberOfVariables", new Object[]{new NumberOfVariables(), "polynomialJACK", "numberOfVariables"});
+		
+		//Lineare Algebra
+//		functions.put("vector", new Object[]{new Vector(), "linalg2", "vector"});
+//		functions.put("matrix", new Object[]{new Matrix(), "linalg2", "matrix"});
+//		functions.put("matrixrow", new Object[]{new MatrixRow(), "linalg2", "matrixrow"});
+//		functions.put("equalBasis", new Object[]{new EqualBasis(), "linalgJACK", "equalBasis"});
+//		functions.put("randomMatrixEigenvalue", new Object[]{new RandomMatrixEigenvalue(), "linalgJACK", "randomMatrixEigenvalue"});
+//		functions.put("randomMatrixRank", new Object[]{new RandomMatrixRank(), "linalgJACK", "randomMatrixRank"});
+		
+		//List
+//		functions.put("set", new Object[]{new Set(), "list1", "list"});
+//		functions.put("chooseFromComplement", new Object[]{new ChooseFromComplement(), "listJACK", "chooseFromComplement"})
+		
+		//CAS
+//		functions.put("evaluateInR", new Object[]{new EvaluateInR(), "casJACK", "evaluateInR"});
+//		functions.put("evaluateInSage", new Object[]{new EvaluateInSage(), "casJACK", "evaluateInSage"});
+//		functions.put("evaluateInSymja", new Object[]{new EvaluateInSymja(), "casJACK", "evaluateInSymja"});
+		
+		//String
+//		functions.put("charAt", new Object[]{new CharAt(), "stringJACK", "chatAt"});
 	}
 	
 	
