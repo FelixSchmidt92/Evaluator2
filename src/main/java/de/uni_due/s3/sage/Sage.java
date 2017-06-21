@@ -1,4 +1,4 @@
-package de.uni_due.s3.evaluator.cas;
+package de.uni_due.s3.sage;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -14,6 +14,7 @@ import java.util.TimerTask;
 
 import org.apache.log4j.Logger;
 
+import de.uni_due.s3.evaluator.exceptions.CASEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.CASNotAvailableException;
 
 /**

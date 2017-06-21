@@ -17,7 +17,7 @@ public class NumberUtils {
 	 * @throws InputMismatchException
 	 *             wenn obj kein OMF oder OMI ist
 	 */
-	public static Double omiomfToDouble(Object obj) throws InputMismatchException {
+	public static Double convertOMIOMFToDouble(Object obj) throws InputMismatchException {
 		if (obj instanceof OMI) {
 			return Double.parseDouble(((OMI) obj).getValue());
 		} else if (obj instanceof OMF) {
@@ -35,7 +35,7 @@ public class NumberUtils {
 	 * @param result 
 	 * @return OMF oder OMI
 	 */
-	public static Object doubleToOMIOMF(Double result) {
+	public static Object convertDoubleToOMIOMF(Double result) {
 		if (((double) result.intValue()) == result.doubleValue()) {
 			OMI omiResult = new OMI();
 			omiResult.setValue(String.valueOf(result.intValue()));

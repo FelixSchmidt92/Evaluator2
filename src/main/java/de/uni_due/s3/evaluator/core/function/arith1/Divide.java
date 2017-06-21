@@ -15,14 +15,14 @@ public class Divide extends Function{
 		Object left = arguments.get(0);
 		Object right = arguments.get(1);
 		try {
-			Double leftValue = NumberUtils.omiomfToDouble(left);
-			Double rightValue = NumberUtils.omiomfToDouble(right);
-			return NumberUtils.doubleToOMIOMF(leftValue / rightValue);
+			Double leftValue = NumberUtils.convertOMIOMFToDouble(left);
+			Double rightValue = NumberUtils.convertOMIOMFToDouble(right);
+			return NumberUtils.convertDoubleToOMIOMF(leftValue / rightValue);
 		} catch (InputMismatchException e) {
 			throw new FunctionArgumentMismatchException("Operator '/' accepts only integer, float, double values.");
 		}
 	}
-
+	
 	@Override
 	protected int minArgs() {
 		return 2;

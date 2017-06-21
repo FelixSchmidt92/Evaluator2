@@ -1,4 +1,4 @@
-package de.uni_due.s3.evaluator.cas;
+package de.uni_due.s3.evaluator.exceptions;
 
 /**
  * 

@@ -58,22 +58,42 @@ public class FunctionFactory {
 		functions.put("times", 		new Object[]{new Times(), "arith1", "times"});
 		functions.put("divide", 	new Object[]{new Divide(), "arith1", "divide"});
 //		functions.put("abs", 		new Object[]{new Abs(), "arith1", "abs"});
-		//functions.put("modulus",	new Object[]{new Modulus(), ""});
+//		functions.put("gcd", 		new Object[]{new GCD(), "arith1", "gcd"});
+//		functions.put("modulus",	new Object[]{new Modulus(), ""});
+		
+		//Integer
+//		functions.put("IEEEremainder", new Object[]{new IEEERemainder(), "integer1", "remainder"});
 		
 		//Rounding
 //		functions.put("ceil", 	new Object[]{new Ceiling(), "rounding1", "ceiling"});
+//		functions.put("floor", 	new Object[]{new Floor(), "rounding1", "floor"}); 
+		
+		//Binary
+//		functions.put("convertToBinary", new Object[]{new ConvertToBinary(), "binaryJACK", "convertToBinary"});
+//		functions.put("equalsBinary", new Object[]{new EqualsBinary(), "binaryJACK", "equalsBinary"});
+		
 
+		//OpenMathFunctions
+//		functions.put("countBasicOperations", new Object[]{new CountBasicOperations(), "openmathJACK", "countBasicOperations"});
+//		functions.put("countNodes", new Object[]{new CountNodes(), "openmathJACK", "countNodes"});
+//		functions.put("getDenominator", new Object[]{new GetDenominator(), "openmathJACK", "getDenominator"});
+//		functions.put("getNumerator", new Object[]{new GetNumerator(), "openmathJACK", "getNumerator"});
+		
 		//Relationen
 //		functions.put("lessthan",			new Object[]{new LessThan(), 			"relation1", "lt"});
 //		functions.put("lessthanorequal", 	new Object[]{new LessThanOrEqual(), 	"relation1", "leq"});
 //		functions.put("greaterthan", 		new Object[]{new GreaterThan(), 		"relation1", "gt"});
 //		functions.put("greaterthanorequal", new Object[]{new GreaterThanOrEqual(), 	"relation1", "geq"});
-//		functions.put("equal", 				new Object []{new Equal(), 				"relation1", "eq"});
+//		functions.put("equal",				new Object[]{new Equal(), 				"relation1", "eq"});
+		//FIXME hier noch mal gedanken machen, sollten beide methoden einfach beides können ?
+//		functions.put("equals",				new Object[]{new Equal(),				"relation1", "eq"}); //TEXT und ZAHLEN
+//		functions.put("equalssemisem", 		new Object[]{new EqualsSemiSem(), 		"relationJACK", "equalssemisem"});
 //		functions.put("notequal", 			new Object[]{new NotEqual(), 			"relation1", "neq"});
 		
 		//Logic
 //		functions.put("booleanor", 			new Object[]{new BooleanOr(), "logic1", "or"});
 //		functions.put("booleanand", 		new Object[]{new BooleanAnd(), "logic1", "and"});
+//		functions.put("ifthenelse",			new Object[]{new IfThenElse(), "logicJACK","ifthenelse"});
 		
 		
 		//Trigonometrie
@@ -84,6 +104,7 @@ public class FunctionFactory {
 //		functions.put("acos", 	new Object[]{new ArcCos(), 	"transc1", "arccos"});
 //		functions.put("atan", 	new Object[]{new ArcTan(), 	"transc1", "arctan"});
 //		functions.put("atan2", 	new Object[]{new ArcTan2(), "transc2", "arctan"}); 
+//		functions.put("exp", 	new Object[]{new Exp(), "transc1", "exp"}); 
 		
 		
 		//Polynome
@@ -114,6 +135,9 @@ public class FunctionFactory {
 		//List
 //		functions.put("set", new Object[]{new Set(), "list1", "list"});
 //		functions.put("chooseFromComplement", new Object[]{new ChooseFromComplement(), "listJACK", "chooseFromComplement"})
+//		functions.put("getFromOrderedSet", new Object[]{new GetFromOrderedSet(), "listJACK", "getFromOrderedSet"});
+//		functions.put("getFromSet", new Object[]{new getFromSet(), "listJACK", "getFromSet"});
+		
 		
 		//CAS
 //		functions.put("evaluateInR", new Object[]{new EvaluateInR(), "casJACK", "evaluateInR"});
@@ -122,6 +146,21 @@ public class FunctionFactory {
 		
 		//String
 //		functions.put("charAt", new Object[]{new CharAt(), "stringJACK", "chatAt"});
+//		functions.put("compareTo", new Object[]{new CompareTo(), "stringJACK", "compareTo"});
+//		functions.put("compareToIgnoreCase", new Object[]{new CompareToIgnoreCase(), "stringJACK", "compareToIgnoreCase"});
+//		functions.put("concat", new Object[]{new Concat(), "stringJACK", "concat"});
+//		functions.put("compareTo", new Object[]{new CompareTo(), "stringJACK", "compareTo"});
+//		functions.put("endsWith", new Object[]{new EndsWith(), "stringJACK", "endsWith"});
+//		functions.put("equalsIgnoreCase", new Object[]{new EqualsIgnoreCase(), "stringJACK", "equalsIgnoreCase"});
+//		functions.put("indexOf", new Object[]{new IndexOf(), "stringJACK", "indexOf"});
+		
+		//Evaluate
+//		functions.put("eval", new Object[]{new Eval(), "evalJACK", "eval"});
+		
+		//Constanten
+		
+		//TestTerminal
+//		functions.put("isEmpty", new Object[]{new Eval(), "evalJACK", "eval"});
 	}
 	
 	
