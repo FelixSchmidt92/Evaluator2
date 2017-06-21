@@ -75,10 +75,9 @@ public class OMVisitor {
 	 * @return one of OMA,OMF,OMI,OMS,OMSTR or OMV. It depends on function used in the OMS.
 	 */
 	public Object visit(OMA oma){
-		//System.out.println("visit oma");
 		List<Object> omel = oma.getOmel();
 		Function function = visit((OMS) omel.get(0));
-
+		System.out.println("visit oma "+ function.toString());
 		List<Object> arguments = new ArrayList<Object>(omel.size()-1);
 
 		for(int i=0;i<omel.size()-1;i++){

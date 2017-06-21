@@ -4,6 +4,8 @@ import java.util.HashMap;
 
 import de.uni_due.s3.evaluator.exceptions.FunctionDoesNotExistException;
 import de.uni_due.s3.evaluator.core.function.arith1.*;
+import de.uni_due.s3.evaluator.core.function.set1.Set;
+import de.uni_due.s3.evaluator.core.function.set1.Size;
 
 
 /**
@@ -133,7 +135,8 @@ public class FunctionFactory {
 //		functions.put("randomMatrixRank", new Object[]{new RandomMatrixRank(), "linalgJACK", "randomMatrixRank"});
 		
 		//List
-//		functions.put("set", new Object[]{new Set(), "list1", "list"});
+		functions.put("set", new Object[]{new Set(), "set1", "set"});
+		functions.put("size", new Object[]{new Size(),"set1","size"});
 //		functions.put("chooseFromComplement", new Object[]{new ChooseFromComplement(), "listJACK", "chooseFromComplement"})
 //		functions.put("getFromOrderedSet", new Object[]{new GetFromOrderedSet(), "listJACK", "getFromOrderedSet"});
 //		functions.put("getFromSet", new Object[]{new getFromSet(), "listJACK", "getFromSet"});
