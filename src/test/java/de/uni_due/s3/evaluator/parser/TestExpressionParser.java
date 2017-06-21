@@ -115,4 +115,9 @@ public class TestExpressionParser {
 	
 	}
 	
+	@Test
+	public void test() throws JAXBException{
+		System.out.println(OMConverter.toString(ExpressionParser.parse("size(set(1,2,3))")));
+	}
+	
 }
