@@ -53,6 +53,6 @@ public class TestPlus {
 	
 	@Test
 	public void testPlus(){
-		assertEquals(ExpressionParser.parse(parameter).getOMI().getValue(), expected);
+		assertEquals(ExpressionParser.parse(parameter,null,null).getOMI().getValue(), expected);
 	}
 }

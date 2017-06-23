@@ -37,6 +37,6 @@ public class TestLexerErrorStrategy {
 
 	@Test(expected=ParserException.class)
 	public void testSyntaxError(){
-		ExpressionParser.parse(parameter);
+		ExpressionParser.parse(parameter,null,null);
 	}
 }

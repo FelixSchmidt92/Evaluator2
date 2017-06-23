@@ -59,6 +59,11 @@ public class OMConverter {
 	
 	}
 	
+	/**
+	 * Returns the element which is wrapped in an OMOBJ-Object
+	 * @param omobj
+	 * @return OMA, OMF, OMI, OMS, OMSTR or OMV
+	 */
 	public static Object toElement(OMOBJ omobj){
 		
 		if (omobj.getOMA() != null) {
