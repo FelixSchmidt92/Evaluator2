@@ -1,4 +1,4 @@
-package de.uni_due.s3.openmath;
+package de.uni_due.s3.evaluator.core;
 
 import java.io.StringReader;
 import java.io.StringWriter;
@@ -23,6 +23,7 @@ public class OMConverter {
 	 * @return 
 	 * @throws JAXBException
 	 */
+	@SuppressWarnings("unchecked")
 	public static <T> T toObject(String xmlOpenMath) throws JAXBException{
 		JAXBContext context = JAXBContext.newInstance("de.uni_due.s3.openmath");
 		Unmarshaller unmarshaller = context.createUnmarshaller();
@@ -45,7 +46,7 @@ public class OMConverter {
 		String result = sw.toString();
 		//removing some unused xml tags
 		result = result.replace("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>", "");
-		if(!result.contains("OMOBJ")){
+		if(result.contains("OMOBJ")){
 			String toBeDeleted = " xmlns:ns2=\"http://www.openmath.org/OpenMath\"";
 			if (result.contains(toBeDeleted)){
 				result = result.replace(toBeDeleted, "");

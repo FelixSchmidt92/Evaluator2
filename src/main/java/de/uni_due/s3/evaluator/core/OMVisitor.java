@@ -6,7 +6,7 @@ import java.util.List;
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.core.function.FunctionFactory;
 import de.uni_due.s3.evaluator.exceptions.FunctionContentDictionaryMismatch;
-import de.uni_due.s3.evaluator.exceptions.FunctionDoesNotExistException;
+import de.uni_due.s3.evaluator.exceptions.FunctionNotImplementedException;
 import de.uni_due.s3.openmath.OMA;
 import de.uni_due.s3.openmath.OMF;
 import de.uni_due.s3.openmath.OMI;
@@ -30,32 +30,34 @@ public class OMVisitor {
 	 * Visits a OMOBJ object and return its child object. The kind of child is determined by the OMOBJ object.
 	 * At the moment OMA,OMF,OMI,OMS,OMSTR and OMV are those children which will be returned.
 	 * @param omobj the whole OpenMath object starting with <OMOBJ>...
-	 * @return one of OMA,OMF,OMI,OMS,OMSTR or OMV.
+	 * @return omobj-object.
 	 */
-	public Object visit(OMOBJ omobj) {
-		//System.out.println("visit OMOBJ");
+	public static OMOBJ visit(OMOBJ omobj) {
+		Object visitedElement = null;
 		if (omobj.getOMA() != null) {
-			return visit(omobj.getOMA());
+			visitedElement =  visit(omobj.getOMA());
 
 		} else if (omobj.getOMF() != null) {
-			return (omobj.getOMF());
+			visitedElement =  (omobj.getOMF());
 
 		} else if (omobj.getOMI() != null) {
-			return (omobj.getOMI());
+			visitedElement = (omobj.getOMI());
 
 		} else if (omobj.getOMS() != null) {
-			return (omobj.getOMS());
+			visitedElement = (omobj.getOMS());
 
 		} else if (omobj.getOMSTR() != null) {
-			return (omobj.getOMSTR());
+			visitedElement = (omobj.getOMSTR());
 
 		} else if (omobj.getOMV() != null) {
-			return (omobj.getOMV());
+			visitedElement = (omobj.getOMV());
 
 		} else {
 			// TODO
 			throw new RuntimeException();
 		}
+		
+		return OMCreator.createOMOBJ(visitedElement);
 	}
 
 	/**
@@ -74,7 +76,7 @@ public class OMVisitor {
 	 * @param oma OpenMath application object <OMA>...</OMA>
 	 * @return one of OMA,OMF,OMI,OMS,OMSTR or OMV. It depends on function used in the OMS.
 	 */
-	public Object visit(OMA oma){
+	public static Object visit(OMA oma){
 		List<Object> omel = oma.getOmel();
 		Function function = visit((OMS) omel.get(0));
 		System.out.println("visit oma "+ function.toString());
@@ -113,11 +115,10 @@ public class OMVisitor {
 	 * 
 	 * @param oms OpenMath symbol object.
 	 * @return a concrete Implementation of the Function class.
-	 * @throws FunctionDoesNotExistException when the specified function does not exists.
-	 * @throws FunctionContentDictionaryMismath if the requested function has a false content-dictionary (cd).
+	 * @throws FunctionNotImplementedException when the specified function does not exists or has another cd than the requested function has.
 	 */
 
-	public Function visit(OMS oms){
+	public static Function visit(OMS oms){
 		//System.out.println("visit oms");
 		FunctionFactory ff = FunctionFactory.getInstance();
 		String fcd = ff.getFunctionContentDictionary(oms.getName());
@@ -127,9 +128,9 @@ public class OMVisitor {
 			if(f != null)
 				return FunctionFactory.getInstance().getFunction(oms.getName());
 			else
-				throw new FunctionDoesNotExistException(oms.getName());
+				throw new FunctionNotImplementedException(oms.getName());
 		}else{
-			throw new FunctionContentDictionaryMismatch(oms.getName(), fcd, oms.getCd());
+			throw new FunctionNotImplementedException(oms.getName(), oms.getCd());
 		}
 	}
 

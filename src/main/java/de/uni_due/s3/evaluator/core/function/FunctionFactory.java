@@ -2,7 +2,7 @@ package de.uni_due.s3.evaluator.core.function;
 
 import java.util.HashMap;
 
-import de.uni_due.s3.evaluator.exceptions.FunctionDoesNotExistException;
+import de.uni_due.s3.evaluator.exceptions.FunctionNotImplementedException;
 import de.uni_due.s3.evaluator.core.function.arith1.*;
 import de.uni_due.s3.evaluator.core.function.set1.Set;
 import de.uni_due.s3.evaluator.core.function.set1.Size;
@@ -190,13 +190,13 @@ public class FunctionFactory {
 	 * 
 	 * @param name the name (key)(in lower case) of this Function
 	 * @return the specific Function 
-	 * @throws FunctionDoesNotExistException if Function is not found in HashMap
+	 * @throws FunctionNotImplementedException if Function is not found in HashMap
 	 */
 	public Function getFunction(String name){
 		if(functions.containsKey(name))
 			return (Function)functions.get(name)[0];
 		else
-			 throw new FunctionDoesNotExistException(name);
+			 throw new FunctionNotImplementedException(name);
 	}
 	
 	
@@ -206,29 +206,29 @@ public class FunctionFactory {
 	 * 
 	 * @param name the name (key)(in lower case) of this Function
 	 * @return the specific contentDictionary as String
-	 * @throws FunctionDoesNotExisExcetion if the function is not found in the HashMap. The evaluator user has to deal with this exception
+	 * @throws FunctionNotImplementedException if the function is not found in the HashMap. The evaluator user has to deal with this exception
 	 */
 	public String getFunctionContentDictionary(String name){
 		if(functions.containsKey(name))
 			return (String)functions.get(name)[1];
 		else
-		  throw new FunctionDoesNotExistException(name);
+		  throw new FunctionNotImplementedException(name);
 	}
 	
 	
 	/**
 	 * This method returns the name of the specific function 
-	 * for ExpressionToEvaluatorOpenMathVisitor. It needs its name
+	 * for ExpressionToOpenMathVisitor. It needs its name
 	 * to generate the Tree (needed for OMS in parser/ExpressionToEvaluatorOpenMathVisitor)
 	 * 
 	 * @param name the name (key)(in lower case) of this Function
 	 * @return the specific Name as String
-	 * @throws FunctionDoesNotExistException if function is not found in HashMap.
+	 * @throws FunctionNotImplementedException if function is not found in HashMap.
 	 */
 	public String getFunctionName(String name){
 		if(functions.containsKey(name))
 			return (String)functions.get(name)[2];
 		else
-		  throw new FunctionDoesNotExistException(name);
+		  throw new FunctionNotImplementedException(name);
 	}
 }

@@ -8,8 +8,8 @@ import org.junit.Test;
 
 import de.uni_due.s3.openmath.OMI;
 import de.uni_due.s3.openmath.OMOBJ;
+import de.uni_due.s3.evaluator.core.OMConverter;
 import de.uni_due.s3.openmath.OMA;
-import de.uni_due.s3.openmath.OMConverter;
 
 public class TestOMConverter {
 

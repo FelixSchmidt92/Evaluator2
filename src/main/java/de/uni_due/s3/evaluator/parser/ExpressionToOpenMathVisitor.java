@@ -10,7 +10,7 @@ import de.uni_due.s3.openmath.OMI;
 import de.uni_due.s3.openmath.OMS;
 import de.uni_due.s3.openmath.OMSTR;
 
-public class ExpressionToEvaluatorOpenMathVisitor extends EvaluatorParserBaseVisitor<Object> {
+public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Object> {
 	/**
 	 * {@inheritDoc}
 	 *
@@ -34,7 +34,7 @@ public class ExpressionToEvaluatorOpenMathVisitor extends EvaluatorParserBaseVis
 	 * </p>
 	 */
 	@Override
-	public Object visitUnaryOperator(EvaluatorParser.UnaryOperatorContext ctx) {
+	public OMA visitUnaryOperator(EvaluatorParser.UnaryOperatorContext ctx) {
 		OMS oms = new OMS();
 
 		switch (ctx.operator.getText()){
@@ -68,7 +68,7 @@ public class ExpressionToEvaluatorOpenMathVisitor extends EvaluatorParserBaseVis
 	 * </p>
 	 */
 	@Override
-	public Object visitTextValue(EvaluatorParser.TextValueContext ctx) {
+	public OMSTR visitTextValue(EvaluatorParser.TextValueContext ctx) {
 		OMSTR omstr = new OMSTR();
 		omstr.setContent(ctx.getText().substring(1, ctx.getText().length()-1)); //delete ' at beginning and end
 		return omstr;
@@ -83,7 +83,7 @@ public class ExpressionToEvaluatorOpenMathVisitor extends EvaluatorParserBaseVis
 	 * </p>
 	 */
 	@Override
-	public Object visitBinaryOperator(EvaluatorParser.BinaryOperatorContext ctx) {
+	public OMA visitBinaryOperator(EvaluatorParser.BinaryOperatorContext ctx) {
 		OMS oms = new OMS();
 		
 		switch (ctx.operator.getText()){
@@ -190,7 +190,7 @@ public class ExpressionToEvaluatorOpenMathVisitor extends EvaluatorParserBaseVis
 	 * </p>
 	 */
 	@Override
-	public Object visitFloatValue(EvaluatorParser.FloatValueContext ctx) {
+	public OMF visitFloatValue(EvaluatorParser.FloatValueContext ctx) {
 		OMF omf = new OMF();
 		if (ctx.getText().startsWith("'")){  //delete ' at beginning and end if exists
 			omf.setDec(Double.parseDouble(ctx.getText().substring(1, ctx.getText().length()-1))); 
@@ -222,7 +222,7 @@ public class ExpressionToEvaluatorOpenMathVisitor extends EvaluatorParserBaseVis
 	 * </p>
 	 */
 	@Override
-	public Object visitIntegerValue(EvaluatorParser.IntegerValueContext ctx) {
+	public OMI visitIntegerValue(EvaluatorParser.IntegerValueContext ctx) {
 		OMI omi = new OMI();
 		if (ctx.getText().startsWith("'")){  //delete ' at beginning and end if exists
 			omi.setValue(ctx.getText().substring(1, ctx.getText().length()-1)); 
@@ -280,7 +280,7 @@ public class ExpressionToEvaluatorOpenMathVisitor extends EvaluatorParserBaseVis
 	 * </p>
 	 */
 	@Override
-	public Object visitNestedFunction(EvaluatorParser.NestedFunctionContext ctx) {
+	public OMA visitNestedFunction(EvaluatorParser.NestedFunctionContext ctx) {
 		OMS oms = new OMS();
 		oms.setCd(FunctionFactory.getInstance().getFunctionContentDictionary(ctx.name.getText()));
 		oms.setName(FunctionFactory.getInstance().getFunctionName(ctx.name.getText()));

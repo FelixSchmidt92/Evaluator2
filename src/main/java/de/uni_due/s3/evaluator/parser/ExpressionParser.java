@@ -78,47 +78,47 @@ public class ExpressionParser {
 		ParseTree tree = evaluatorParser.expression();
 		
 		// Putting the parsed OpenMath-Tree in OMOBJ and visit OMVisitor for Evaluation
-		Object omUnknown = new ExpressionToEvaluatorOpenMathVisitor().visit(tree);
+		Object omobjElementsTree = new ExpressionToOpenMathVisitor().visit(tree);
 
 		
 		// Convert Tree to OMOBJ, evaluate it and again convert the evaluated
 		// tree to OMOBJ
-		return convertToOmobj(new OMVisitor().visit(convertToOmobj(omUnknown)));
+		return convertToOmobj(omobjElementsTree);
 	}
 	
 	/**
 	 * This method just gets an unknown OpenMathObject and wraps it into an OMOBJ.
 	 * Only add Objects which an OMOBJ can store in here otherwise null will be returned.
 	 * 
-	 * @param omUnknown The Object which should be wrapped into OMOBJ (has to be one of the JAXB-Classes)
+	 * @param omElement The Object which should be wrapped into OMOBJ (has to be one of the JAXB-Classes)
 	 * @return an OMOBJ containing the omOnknown at the correct spot
 	 */
-	private static OMOBJ convertToOmobj(Object omUnknown){
+	private static OMOBJ convertToOmobj(Object omElement){
 		OMOBJ omobj = new OMOBJ();
 		
-		switch (omUnknown.getClass().getSimpleName()){
+		switch (omElement.getClass().getSimpleName()){
 		case "OMF":
-			omobj.setOMF((OMF) omUnknown);
+			omobj.setOMF((OMF) omElement);
 			break;
 			
 		case "OMI":
-			omobj.setOMI((OMI) omUnknown);
+			omobj.setOMI((OMI) omElement);
 			break;
 			
 		case "OMS":
-			omobj.setOMS((OMS) omUnknown);
+			omobj.setOMS((OMS) omElement);
 			break;
 			
 		case "OMSTR":
-			omobj.setOMSTR((OMSTR) omUnknown);
+			omobj.setOMSTR((OMSTR) omElement);
 			break;
 			
 		case "OMV":
-			omobj.setOMV((OMV) omUnknown);
+			omobj.setOMV((OMV) omElement);
 			break;
 			
 		case "OMA":
-			omobj.setOMA((OMA) omUnknown);
+			omobj.setOMA((OMA) omElement);
 			break;
 			
 		default :
