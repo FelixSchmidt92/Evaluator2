@@ -10,6 +10,9 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+import de.uni_due.s3.evaluator.exceptions.OMObjectNotSupportedException;
+import de.uni_due.s3.openmath.OMOBJ;
+
 /**
  * Converts OpenMath as a String to OpenMath objects and vice versa
  * @author frichtscheid
@@ -54,6 +57,32 @@ public class OMConverter {
 		}
 		return result;
 	
+	}
+	
+	public static Object toElement(OMOBJ omobj){
+		
+		if (omobj.getOMA() != null) {
+			return (omobj.getOMA());
+
+		} else if (omobj.getOMF() != null) {
+			return(omobj.getOMF());
+
+		} else if (omobj.getOMI() != null) {
+			return(omobj.getOMI());
+
+		} else if (omobj.getOMS() != null) {
+			return(omobj.getOMS());
+
+		} else if (omobj.getOMSTR() != null) {
+			return(omobj.getOMSTR());
+
+		} else if (omobj.getOMV() != null) {
+			return(omobj.getOMV());
+
+		} else {
+			// TODO
+			throw new OMObjectNotSupportedException(omobj);
+		}
 	}
 	
 	

@@ -1,16 +1,35 @@
 package de.uni_due.s3.evaluator.parser;
 
+import java.util.Map;
+
+import de.uni_due.s3.evaluator.core.OMConverter;
 import de.uni_due.s3.evaluator.core.function.FunctionFactory;
+import de.uni_due.s3.evaluator.exceptions.UndefinedExerciseVariableException;
+import de.uni_due.s3.evaluator.exceptions.UndefinedFillInVariableException;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.ExpressionContext;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParserBaseVisitor;
 import de.uni_due.s3.openmath.OMA;
 import de.uni_due.s3.openmath.OMF;
 import de.uni_due.s3.openmath.OMI;
+import de.uni_due.s3.openmath.OMOBJ;
 import de.uni_due.s3.openmath.OMS;
 import de.uni_due.s3.openmath.OMSTR;
 
+	
 public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Object> {
+	
+	/**
+	 * These variables are defined by the evaluator-class and are used to integrate the variables into the OM-tree
+	 */
+	private Map<String,OMOBJ> exerciseVariableMap;
+	private Map<Integer,OMOBJ> fillInVariableMap;
+	
+	public ExpressionToOpenMathVisitor(Map<String,OMOBJ> exerciseVariableMap, Map<Integer,OMOBJ> fillInVariableMap) {
+		this.exerciseVariableMap = exerciseVariableMap;
+		this.fillInVariableMap = fillInVariableMap;
+	}
+	
 	/**
 	 * {@inheritDoc}
 	 *
@@ -204,13 +223,19 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	 * {@inheritDoc}
 	 *
 	 * <p>
-	 * The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.
+	 * Get the content of a ExerciseVariable(eg. [var=a]), which is wrapped in a OMOBJ-Object and returns the unwrapped content
 	 * </p>
 	 */
 	@Override
-	public Object visitExerciseVarName(EvaluatorParser.ExerciseVarNameContext ctx) {
-		return null; //TODO get the OpenMath of this variable!
+	public Object visitExerciseVarName(EvaluatorParser.ExerciseVarNameContext ctx) throws UndefinedExerciseVariableException {
+		String var = ctx.getText();	//eg. [var=a]
+		String varName = var.substring(var.indexOf('=')+1,var.indexOf(']'));	//eg. a
+		if(exerciseVariableMap.containsKey(varName)){
+			OMOBJ varOmobj = exerciseVariableMap.get(varName);
+			return OMConverter.toElement(varOmobj);	//removes the OMOBJ-tags and returns the child of the OMOBJ-Object
+		}else{
+			throw new UndefinedExerciseVariableException(varName);
+		}
 	}
 
 	/**
@@ -236,13 +261,20 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	 * {@inheritDoc}
 	 *
 	 * <p>
-	 * The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.
+	 * Gets the content of a FillInVariable(eg. [pos=1]), which is wrapped in an OMOBJ-Object and returns the unwrapped content.
+	 * 
 	 * </p>
 	 */
 	@Override
 	public Object visitFillInVarName(EvaluatorParser.FillInVarNameContext ctx) {
-		return null; //TODO get the OpenMath of this variable!
+		String var = ctx.getText();	//eg. [pos=1]
+		int varNumber = Integer.parseInt(var.substring(var.indexOf('=')+1,var.indexOf(']')));	//eg. 1
+		if(fillInVariableMap.containsKey(varNumber)){
+			OMOBJ varOmobj = fillInVariableMap.get(varNumber);
+			return OMConverter.toElement(varOmobj);	//removes the OMOBJ-tags and returns the child of the OMOBJ-Object
+		}else{
+			throw new UndefinedFillInVariableException(varNumber);
+		}
 	}
 
 	/**

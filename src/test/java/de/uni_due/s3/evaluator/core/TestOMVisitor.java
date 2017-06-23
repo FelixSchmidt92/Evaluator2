@@ -14,6 +14,7 @@ import org.junit.Test;
 import de.uni_due.s3.evaluator.core.function.arith1.Plus;
 import de.uni_due.s3.evaluator.exceptions.EvaluatorException;
 import de.uni_due.s3.openmath.OMA;
+import de.uni_due.s3.openmath.OMB;
 import de.uni_due.s3.openmath.OMF;
 import de.uni_due.s3.openmath.OMI;
 import de.uni_due.s3.openmath.OMOBJ;
@@ -143,5 +144,12 @@ public class TestOMVisitor {
 				+ "</OMA>"));
 		
 		result = omv.visit(oma);
+	}
+	
+	@Test
+	public void testNotImplementedOMobject(){
+		OMOBJ omobj = new OMOBJ();
+		omobj.setOMB(new OMB());
+		OMVisitor.visit(omobj);
 	}
 }

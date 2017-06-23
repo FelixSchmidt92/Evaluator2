@@ -28,7 +28,7 @@ public class Evaluator {
 	 * @return the result of the evaluated expression as OpenMath-Object (JAXB)
 	 */
 	public OMOBJ evaluate(String expression){
-		OMOBJ omobj = ExpressionParser.parse(expression);
+		OMOBJ omobj = ExpressionParser.parse(expression,exerciseVariableMap,fillInVariableMap);
 		return OMVisitor.visit(omobj);	
 	}
 	

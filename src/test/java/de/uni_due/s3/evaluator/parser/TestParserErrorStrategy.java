@@ -42,6 +42,6 @@ public class TestParserErrorStrategy {
 	
 	@Test(expected=ParserException.class)
 	public void testSyncANDRecoverInlineANDReportNoViableAlternative(){
-		ExpressionParser.parse(parameter);
+		ExpressionParser.parse(parameter,null,null);
 	}
 }

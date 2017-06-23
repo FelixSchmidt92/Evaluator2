@@ -7,6 +7,7 @@ import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.core.function.FunctionFactory;
 import de.uni_due.s3.evaluator.exceptions.FunctionContentDictionaryMismatch;
 import de.uni_due.s3.evaluator.exceptions.FunctionNotImplementedException;
+import de.uni_due.s3.evaluator.exceptions.OMObjectNotSupportedException;
 import de.uni_due.s3.openmath.OMA;
 import de.uni_due.s3.openmath.OMF;
 import de.uni_due.s3.openmath.OMI;
@@ -54,7 +55,7 @@ public class OMVisitor {
 
 		} else {
 			// TODO
-			throw new RuntimeException();
+			throw new OMObjectNotSupportedException(omobj);
 		}
 		
 		return OMCreator.createOMOBJ(visitedElement);

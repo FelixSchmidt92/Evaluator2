@@ -3,6 +3,7 @@ package de.uni_due.s3.evaluator.parser;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
+import java.util.Map;
 
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
@@ -44,7 +45,7 @@ public class ExpressionParser {
 	 * 
 	 * @UnderConstruction  FIXME dlux returns an OMOBJ as Object or an OMA, OMI, OMV??
 	 */
-	public static OMOBJ parse(String expression) {
+	public static OMOBJ parse(String expression,Map<String,OMOBJ> exerciseVariableMap, Map<Integer,OMOBJ> fillInVariableMap) {
 		if (expression == null){
 			// empty String passed to this function
 			throw new ParserException("Expression passed to this Parser is null!");
@@ -78,7 +79,7 @@ public class ExpressionParser {
 		ParseTree tree = evaluatorParser.expression();
 		
 		// Putting the parsed OpenMath-Tree in OMOBJ and visit OMVisitor for Evaluation
-		Object omobjElementsTree = new ExpressionToOpenMathVisitor().visit(tree);
+		Object omobjElementsTree = new ExpressionToOpenMathVisitor(exerciseVariableMap,fillInVariableMap).visit(tree);
 
 		
 		// Convert Tree to OMOBJ, evaluate it and again convert the evaluated
