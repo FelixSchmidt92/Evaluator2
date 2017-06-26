@@ -29,7 +29,7 @@ public class TestEvaluator {
 	public void testEvaluateWithException() throws JAXBException{
 		eval.evaluate("abcdefghxjc()");
 		eval.evaluate("123cdefghxjc()");
-		eval.evaluate("abcdefghxjc");	//should this throw a another exception?
+		eval.evaluate("abcdefghxjc");	//should this throw a another exception? (dlux: this throws a ParserException from ParserErrorStrategy)
 		
 		eval.evaluate((OMOBJ)OMConverter.toObject("<OMOBJ><OMA>"
 				+ "<OMS name=\"abcdefggg\" cd=\"arith1\"/>"

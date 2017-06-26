@@ -126,9 +126,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 			oms.setName("divide");
 			break;
 
-		case "%":   //FIXME dlux there is a representation of it, but only over sets of integers
-					//it also has to be the second parameter inside a OMA, ALWAYS.
-					//defining here an own cd and name to have this as an binary operator
+		case "%":   //defining here an own cd and name to have this as an binary operator
 			oms.setCd("jackbinary1");
 			oms.setName("modulus");
 			break;

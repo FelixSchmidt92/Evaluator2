@@ -43,7 +43,7 @@ public class ExpressionParser {
 	 * @return TODO an evaluated standardized OpenMath-Tree as in JAXB from the given String.
 	 * @throws ParserException if the given String is null or not parsable.
 	 * 
-	 * @UnderConstruction  FIXME dlux returns an OMOBJ as Object or an OMA, OMI, OMV??
+	 * @UnderConstruction
 	 */
 	public static OMOBJ parse(String expression,Map<String,OMOBJ> exerciseVariableMap, Map<Integer,OMOBJ> fillInVariableMap) {
 		if (expression == null){
