@@ -3,9 +3,10 @@ package de.uni_due.s3.evaluator.parser;
 import java.util.Map;
 
 import de.uni_due.s3.evaluator.core.OMConverter;
-import de.uni_due.s3.evaluator.core.function.FunctionFactory;
 import de.uni_due.s3.evaluator.exceptions.UndefinedExerciseVariableException;
 import de.uni_due.s3.evaluator.exceptions.UndefinedFillInVariableException;
+import de.uni_due.s3.evaluator.omdictionary.OMSEvaluatorSyntaxDictionary;
+import de.uni_due.s3.evaluator.omdictionary.OMSymbol;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.ExpressionContext;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParserBaseVisitor;
@@ -16,20 +17,20 @@ import de.uni_due.s3.openmath.OMOBJ;
 import de.uni_due.s3.openmath.OMS;
 import de.uni_due.s3.openmath.OMSTR;
 
-	
 public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Object> {
-	
+
 	/**
-	 * These variables are defined by the evaluator-class and are used to integrate the variables into the OM-tree
+	 * These variables are defined by the evaluator-class and are used to
+	 * integrate the variables into the OM-tree
 	 */
-	private Map<String,OMOBJ> exerciseVariableMap;
-	private Map<Integer,OMOBJ> fillInVariableMap;
-	
-	public ExpressionToOpenMathVisitor(Map<String,OMOBJ> exerciseVariableMap, Map<Integer,OMOBJ> fillInVariableMap) {
+	private Map<String, OMOBJ> exerciseVariableMap;
+	private Map<Integer, OMOBJ> fillInVariableMap;
+
+	public ExpressionToOpenMathVisitor(Map<String, OMOBJ> exerciseVariableMap, Map<Integer, OMOBJ> fillInVariableMap) {
 		this.exerciseVariableMap = exerciseVariableMap;
 		this.fillInVariableMap = fillInVariableMap;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 *
@@ -40,8 +41,9 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	 */
 	@Override
 	public Object visitParentheses(EvaluatorParser.ParenthesesContext ctx) {
-		return visit(ctx.getChild(1)); 	//visit second child only (there are only Arguments 
-										//in between the parentheses)
+		return visit(ctx.getChild(1)); // visit second child only (there are
+										// only Arguments
+										// in between the parentheses)
 	}
 
 	/**
@@ -56,7 +58,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	public OMA visitUnaryOperator(EvaluatorParser.UnaryOperatorContext ctx) {
 		OMS oms = new OMS();
 
-		switch (ctx.operator.getText()){
+		switch (ctx.operator.getText()) {
 		case "+":
 			oms.setCd("arith1");
 			oms.setName("unary_plus");
@@ -88,8 +90,13 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	 */
 	@Override
 	public OMSTR visitTextValue(EvaluatorParser.TextValueContext ctx) {
-		OMSTR omstr = new OMSTR();
-		omstr.setContent(ctx.getText().substring(1, ctx.getText().length()-1)); //delete ' at beginning and end
+		OMSTR omstr = new OMSTR(); //FIXME enthält der Text eine Variable [pos= var=] muss diese ersetzt werden?!
+		omstr.setContent(ctx.getText().substring(1, ctx.getText().length() - 1)); // delete
+																					// '
+																					// at
+																					// beginning
+																					// and
+																					// end
 		return omstr;
 	}
 
@@ -104,8 +111,8 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	@Override
 	public OMA visitBinaryOperator(EvaluatorParser.BinaryOperatorContext ctx) {
 		OMS oms = new OMS();
-		
-		switch (ctx.operator.getText()){
+
+		switch (ctx.operator.getText()) {
 		case "+":
 			oms.setCd("arith1");
 			oms.setName("plus");
@@ -126,7 +133,8 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 			oms.setName("divide");
 			break;
 
-		case "%":   //defining here an own cd and name to have this as an binary operator
+		case "%": // defining here an own cd and name to have this as an binary
+					// operator
 			oms.setCd("jackbinary1");
 			oms.setName("modulus");
 			break;
@@ -176,12 +184,12 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 			oms.setName("or");
 			break;
 		}
-		
+
 		OMA oma = new OMA();
-		oma.getOmel().add(oms);		//add OMS and children
-		oma.getOmel().add(visit(ctx.getChild(0))); //left side
+		oma.getOmel().add(oms); // add OMS and children
+		oma.getOmel().add(visit(ctx.getChild(0))); // left side
 		oma.getOmel().add(visit(ctx.getChild(2))); // right side
-		
+
 		return oma;
 	}
 
@@ -209,9 +217,10 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	@Override
 	public OMF visitFloatValue(EvaluatorParser.FloatValueContext ctx) {
 		OMF omf = new OMF();
-		if (ctx.getText().startsWith("'")){  //delete ' at beginning and end if exists
-			omf.setDec(Double.parseDouble(ctx.getText().substring(1, ctx.getText().length()-1))); 
-		}else{
+		if (ctx.getText().startsWith("'")) { // delete ' at beginning and end if
+												// exists
+			omf.setDec(Double.parseDouble(ctx.getText().substring(1, ctx.getText().length() - 1)));
+		} else {
 			omf.setDec(Double.parseDouble(ctx.getText()));
 		}
 		return omf;
@@ -221,17 +230,22 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	 * {@inheritDoc}
 	 *
 	 * <p>
-	 * Get the content of a ExerciseVariable(eg. [var=a]), which is wrapped in a OMOBJ-Object and returns the unwrapped content
+	 * Get the content of a ExerciseVariable(eg. [var=a]), which is wrapped in a
+	 * OMOBJ-Object and returns the unwrapped content
 	 * </p>
 	 */
 	@Override
-	public Object visitExerciseVarName(EvaluatorParser.ExerciseVarNameContext ctx) throws UndefinedExerciseVariableException {
-		String var = ctx.getText();	//eg. [var=a]
-		String varName = var.substring(var.indexOf('=')+1,var.indexOf(']'));	//eg. a
-		if(exerciseVariableMap.containsKey(varName)){
+	public Object visitExerciseVarName(EvaluatorParser.ExerciseVarNameContext ctx)
+			throws UndefinedExerciseVariableException {
+		String var = ctx.getText(); // eg. [var=a]
+		String varName = var.substring(var.indexOf('=') + 1, var.indexOf(']')); // eg.
+																				// a
+		if (exerciseVariableMap.containsKey(varName)) {
 			OMOBJ varOmobj = exerciseVariableMap.get(varName);
-			return OMConverter.toElement(varOmobj);	//removes the OMOBJ-tags and returns the child of the OMOBJ-Object
-		}else{
+			return OMConverter.toElement(varOmobj); // removes the OMOBJ-tags
+													// and returns the child of
+													// the OMOBJ-Object
+		} else {
 			throw new UndefinedExerciseVariableException(varName);
 		}
 	}
@@ -247,9 +261,10 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	@Override
 	public OMI visitIntegerValue(EvaluatorParser.IntegerValueContext ctx) {
 		OMI omi = new OMI();
-		if (ctx.getText().startsWith("'")){  //delete ' at beginning and end if exists
-			omi.setValue(ctx.getText().substring(1, ctx.getText().length()-1)); 
-		}else{
+		if (ctx.getText().startsWith("'")) { // delete ' at beginning and end if
+												// exists
+			omi.setValue(ctx.getText().substring(1, ctx.getText().length() - 1));
+		} else {
 			omi.setValue(ctx.getText());
 		}
 		return omi;
@@ -259,18 +274,22 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	 * {@inheritDoc}
 	 *
 	 * <p>
-	 * Gets the content of a FillInVariable(eg. [pos=1]), which is wrapped in an OMOBJ-Object and returns the unwrapped content.
+	 * Gets the content of a FillInVariable(eg. [pos=1]), which is wrapped in an
+	 * OMOBJ-Object and returns the unwrapped content.
 	 * 
 	 * </p>
 	 */
 	@Override
 	public Object visitFillInVarName(EvaluatorParser.FillInVarNameContext ctx) {
-		String var = ctx.getText();	//eg. [pos=1]
-		int varNumber = Integer.parseInt(var.substring(var.indexOf('=')+1,var.indexOf(']')));	//eg. 1
-		if(fillInVariableMap.containsKey(varNumber)){
+		String var = ctx.getText(); // eg. [pos=1]
+		int varNumber = Integer.parseInt(var.substring(var.indexOf('=') + 1, var.indexOf(']'))); // eg.
+																									// 1
+		if (fillInVariableMap.containsKey(varNumber)) {
 			OMOBJ varOmobj = fillInVariableMap.get(varNumber);
-			return OMConverter.toElement(varOmobj);	//removes the OMOBJ-tags and returns the child of the OMOBJ-Object
-		}else{
+			return OMConverter.toElement(varOmobj); // removes the OMOBJ-tags
+													// and returns the child of
+													// the OMOBJ-Object
+		} else {
 			throw new UndefinedFillInVariableException(varNumber);
 		}
 	}
@@ -312,13 +331,14 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	@Override
 	public OMA visitNestedFunction(EvaluatorParser.NestedFunctionContext ctx) {
 		OMS oms = new OMS();
-		oms.setCd(FunctionFactory.getInstance().getFunctionContentDictionary(ctx.name.getText()));
-		oms.setName(FunctionFactory.getInstance().getFunctionName(ctx.name.getText()));
-		
+		OMSymbol dictionarySymbol = OMSEvaluatorSyntaxDictionary.getOMSymbol(ctx.name.getText());
+		oms.setCd(dictionarySymbol.getCd());
+		oms.setName(dictionarySymbol.getName());
+
 		OMA oma = new OMA();
 		oma.getOmel().add(oms);
-		
-		for (ExpressionContext childctx : ctx.arguments){
+
+		for (ExpressionContext childctx : ctx.arguments) {
 			oma.getOmel().add(visit(childctx));
 		}
 		return oma;

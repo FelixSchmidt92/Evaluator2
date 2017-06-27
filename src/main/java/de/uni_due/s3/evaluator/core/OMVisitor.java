@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.uni_due.s3.evaluator.core.function.Function;
-import de.uni_due.s3.evaluator.core.function.FunctionFactory;
-import de.uni_due.s3.evaluator.exceptions.FunctionContentDictionaryMismatch;
 import de.uni_due.s3.evaluator.exceptions.FunctionNotImplementedException;
 import de.uni_due.s3.evaluator.exceptions.OMObjectNotSupportedException;
+import de.uni_due.s3.evaluator.omdictionary.OMSFunctionDictionary;
+import de.uni_due.s3.evaluator.omdictionary.OMSymbol;
 import de.uni_due.s3.openmath.OMA;
 import de.uni_due.s3.openmath.OMF;
 import de.uni_due.s3.openmath.OMI;
@@ -120,19 +120,7 @@ public class OMVisitor {
 	 */
 
 	public static Function visit(OMS oms){
-		//System.out.println("visit oms");
-		FunctionFactory ff = FunctionFactory.getInstance();
-		String fcd = ff.getFunctionContentDictionary(oms.getName());
-		//check if the function is in the correct content-dictionary
-		if (fcd.equals(oms.getCd())){
-			Function f = FunctionFactory.getInstance().getFunction(oms.getName());
-			if(f != null)
-				return FunctionFactory.getInstance().getFunction(oms.getName());
-			else
-				throw new FunctionNotImplementedException(oms.getName());
-		}else{
-			throw new FunctionNotImplementedException(oms.getName(), oms.getCd());
-		}
+		return OMSFunctionDictionary.getFunction(new OMSymbol(oms.getCd(), oms.getName()));
 	}
 
 

@@ -71,7 +71,7 @@ public class OMOBJToSageStringConverter {
 		
 		
 		
-		
+		//FIXME hier auch ein OMSDictionary !?
 		/*
 		 * OMS Terminal-Declaration, just add here new Terminals, nothing else to do elsewhere
 		 */

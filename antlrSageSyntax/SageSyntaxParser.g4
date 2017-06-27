@@ -59,7 +59,7 @@ simple_stmt
 
 term
 :
-	(FLOAT | INT)
+	(term | FLOAT | INT)
 	(
 			SPACE ADD SPACE
 			| SPACE SUB SPACE
