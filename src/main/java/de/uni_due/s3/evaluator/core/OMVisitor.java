@@ -7,7 +7,6 @@ import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.exceptions.FunctionNotImplementedException;
 import de.uni_due.s3.evaluator.exceptions.OMObjectNotSupportedException;
 import de.uni_due.s3.evaluator.omdictionary.OMSFunctionDictionary;
-import de.uni_due.s3.evaluator.omdictionary.OMSymbol;
 import de.uni_due.s3.openmath.OMA;
 import de.uni_due.s3.openmath.OMF;
 import de.uni_due.s3.openmath.OMI;
@@ -120,7 +119,7 @@ public class OMVisitor {
 	 */
 
 	public static Function visit(OMS oms){
-		return OMSFunctionDictionary.getFunction(new OMSymbol(oms.getCd(), oms.getName()));
+		return OMSFunctionDictionary.getFunction(oms);
 	}
 
 

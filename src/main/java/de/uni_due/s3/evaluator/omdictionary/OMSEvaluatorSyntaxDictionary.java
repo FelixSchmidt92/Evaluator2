@@ -4,10 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import de.uni_due.s3.evaluator.exceptions.FunctionNotImplementedException;
+import de.uni_due.s3.openmath.OMS;
 
 public class OMSEvaluatorSyntaxDictionary {
 	
-	private static Map<String, OMSymbol> functionSymbolMap = new HashMap<String, OMSymbol>();
+	private static Map<String, OMS> functionSymbolMap = new HashMap<String, OMS>();
 	/**
 	 * OMSEvaluatorSyntaxDictionary. Hier wird den Funktionen, die im Evaluator angegeben
 	 * werden können das zugehörige OMSymbol zugeordnet.
@@ -120,7 +121,7 @@ public class OMSEvaluatorSyntaxDictionary {
 	 * @throws FunctionNotImplementedException
 	 *             if Function is not found in HashMap
 	 */
-	public static OMSymbol getOMSymbol(String name) {
+	public static OMS getOMS(String name) {
 		if (functionSymbolMap.containsKey(name)) {
 			return functionSymbolMap.get(name);
 		} else {

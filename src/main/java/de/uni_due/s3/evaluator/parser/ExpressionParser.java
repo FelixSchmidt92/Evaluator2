@@ -91,7 +91,7 @@ public class ExpressionParser {
 	 * Only add Objects which an OMOBJ can store in here otherwise null will be returned.
 	 * 
 	 * @param omElement The Object which should be wrapped into OMOBJ (has to be one of the JAXB-Classes)
-	 * @return an OMOBJ containing the omOnknown at the correct spot
+	 * @return an OMOBJ containing the omElement at the correct spot
 	 */
 	private static OMOBJ convertToOmobj(Object omElement){
 		OMOBJ omobj = new OMOBJ();

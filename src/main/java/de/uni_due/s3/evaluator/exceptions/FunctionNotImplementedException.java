@@ -1,6 +1,6 @@
 package de.uni_due.s3.evaluator.exceptions;
 
-import de.uni_due.s3.evaluator.omdictionary.OMSymbol;
+import de.uni_due.s3.openmath.OMS;
 
 public class FunctionNotImplementedException extends FunctionException{
 	
@@ -9,8 +9,8 @@ public class FunctionNotImplementedException extends FunctionException{
 	 */
 	private static final long serialVersionUID = 8997318712583267590L;
 
-	public FunctionNotImplementedException(OMSymbol omSymbol){
-		super("the requested function: " + omSymbol.getName() + " with cd: " + omSymbol.getCd() + " does not exist");
+	public FunctionNotImplementedException(OMS oms){
+		super("the requested function: " + oms.getName() + " with cd: " + oms.getCd() + " does not exist");
 	}
 	
 	public FunctionNotImplementedException(String name){

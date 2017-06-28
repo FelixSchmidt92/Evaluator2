@@ -6,7 +6,6 @@ import de.uni_due.s3.evaluator.core.OMConverter;
 import de.uni_due.s3.evaluator.exceptions.UndefinedExerciseVariableException;
 import de.uni_due.s3.evaluator.exceptions.UndefinedFillInVariableException;
 import de.uni_due.s3.evaluator.omdictionary.OMSEvaluatorSyntaxDictionary;
-import de.uni_due.s3.evaluator.omdictionary.OMSymbol;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.ExpressionContext;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParserBaseVisitor;
@@ -330,13 +329,8 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	 */
 	@Override
 	public OMA visitNestedFunction(EvaluatorParser.NestedFunctionContext ctx) {
-		OMS oms = new OMS();
-		OMSymbol dictionarySymbol = OMSEvaluatorSyntaxDictionary.getOMSymbol(ctx.name.getText());
-		oms.setCd(dictionarySymbol.getCd());
-		oms.setName(dictionarySymbol.getName());
-
 		OMA oma = new OMA();
-		oma.getOmel().add(oms);
+		oma.getOmel().add(OMSEvaluatorSyntaxDictionary.getOMS(ctx.name.getText()));
 
 		for (ExpressionContext childctx : ctx.arguments) {
 			oma.getOmel().add(visit(childctx));
