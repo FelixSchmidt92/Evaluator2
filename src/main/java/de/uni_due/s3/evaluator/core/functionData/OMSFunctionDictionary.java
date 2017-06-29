@@ -1,9 +1,8 @@
-package de.uni_due.s3.evaluator.omdictionary;
+package de.uni_due.s3.evaluator.core.functionData;
 
 import java.util.HashMap;
 
 import de.uni_due.s3.evaluator.exceptions.FunctionNotImplementedException;
-import de.uni_due.s3.openmath.OMS;
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.Abs;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.Divide;
@@ -85,8 +84,14 @@ import de.uni_due.s3.evaluator.core.function.functions.transc2.ArcTan2;
  */
 public class OMSFunctionDictionary {
 	
-	private static HashMap<OMS, Function> functions = new HashMap<>();
+	private HashMap<OMSymbol, Function> functions = new HashMap<>();
 
+	private static OMSFunctionDictionary omsfd = new OMSFunctionDictionary();
+	
+	public static OMSFunctionDictionary getInstance(){
+		return omsfd;
+	}
+	
 	/**
 	 * Here you can add (register) the Functions which are available for the
 	 * Evaluator in the HashMap.
@@ -100,7 +105,7 @@ public class OMSFunctionDictionary {
 	 * The  Parameter: The Object which implements this functionName (can
 	 * also be null)
 	 */
-	static {
+	private OMSFunctionDictionary() {
 		functions.put(OMSymbol.ARITH1_PLUS, new Plus());
 		functions.put(OMSymbol.ARITH1_MINUS, new Minus());
 		functions.put(OMSymbol.ARITH1_TIMES, new Times());
@@ -196,8 +201,7 @@ public class OMSFunctionDictionary {
 
 
 	/**
-	 * This method returns the specific Function for OMVisitor So it is used by
-	 * OMVisitor
+	 * This method returns the specific Function. 
 	 * 
 	 * @param name
 	 *            the name (key)(in lower case) of this Function
@@ -205,11 +209,11 @@ public class OMSFunctionDictionary {
 	 * @throws FunctionNotImplementedException
 	 *             if Function is not found in HashMap
 	 */
-	public static Function getFunction(OMS oms) {
-		if (functions.containsKey(oms)) {
-			return functions.get(oms);
+	public Function getFunction(OMSymbol omsymbol) {
+		if (functions.containsKey(omsymbol)) {
+			return functions.get(omsymbol);
 		} else {
-			throw new FunctionNotImplementedException(oms);
+			throw new FunctionNotImplementedException(omsymbol);
 		}
 	}
 }

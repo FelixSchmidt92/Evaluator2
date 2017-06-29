@@ -1,4 +1,4 @@
-package de.uni_due.s3.evaluator.core;
+package de.uni_due.s3.JAXBOpenMath.OMUtils;
 
 import java.io.StringReader;
 import java.io.StringWriter;
@@ -8,8 +8,8 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+import de.uni_due.s3.JAXBOpenMath.openmath.OMOBJ;
 import de.uni_due.s3.evaluator.exceptions.OMObjectNotSupportedException;
-import de.uni_due.s3.openmath.OMOBJ;
 
 /**
  * Converts OpenMath as a String to OpenMath objects and vice versa
@@ -26,7 +26,7 @@ public class OMConverter {
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T> T toObject(String xmlOpenMath) throws JAXBException{
-		JAXBContext context = JAXBContext.newInstance("de.uni_due.s3.openmath");
+		JAXBContext context = JAXBContext.newInstance("de.uni_due.s3.JAXBOpenMath.openmath");
 		Unmarshaller unmarshaller = context.createUnmarshaller();
 
 		return (T) unmarshaller.unmarshal(new StringReader(xmlOpenMath));		
@@ -39,7 +39,7 @@ public class OMConverter {
 	 * @throws JAXBException
 	 */
 	public static String toString(Object omobj) throws JAXBException{
-		JAXBContext context = JAXBContext.newInstance("de.uni_due.s3.openmath");
+		JAXBContext context = JAXBContext.newInstance("de.uni_due.s3.JAXBOpenMath.openmath");
 		Marshaller marshaller = context.createMarshaller();
 		StringWriter sw = new StringWriter();
 		

@@ -7,13 +7,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
-import de.uni_due.s3.openmath.OMA;
-import de.uni_due.s3.openmath.OMF;
-import de.uni_due.s3.openmath.OMI;
-import de.uni_due.s3.openmath.OMOBJ;
-import de.uni_due.s3.openmath.OMS;
-import de.uni_due.s3.openmath.OMSTR;
-import de.uni_due.s3.openmath.OMV;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMA;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMF;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMI;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMOBJ;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMSTR;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMV;
 
 /**
  * This Class only converts a finite amount of OMOBJ-Objects into Sage-Syntax.

@@ -1,10 +1,10 @@
 package de.uni_due.s3.evaluator.core.function;
 
-import de.uni_due.s3.openmath.OMA;
-import de.uni_due.s3.openmath.OMF;
-import de.uni_due.s3.openmath.OMI;
-import de.uni_due.s3.openmath.OMS;
-import de.uni_due.s3.openmath.OMSTR;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMA;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMF;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMI;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMSTR;
 
 public class OMTypeChecker {
 

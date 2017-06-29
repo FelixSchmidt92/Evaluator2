@@ -6,7 +6,7 @@
 // Generated on: 2015.06.21 at 11:42:50 PM CEST
 //
 
-package de.uni_due.s3.openmath;
+package de.uni_due.s3.JAXBOpenMath.openmath;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -28,38 +28,28 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * 
  * <pre>
  * &lt;complexType>
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *   &lt;simpleContent>
+ *     &lt;restriction base="&lt;http://www.w3.org/2001/XMLSchema>anyType">
  *       &lt;attGroup ref="{http://www.openmath.org/OpenMath}common.attributes"/>
  *     &lt;/restriction>
- *   &lt;/complexContent>
+ *   &lt;/simpleContent>
  * &lt;/complexType>
  * </pre>
  * 
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {"content"})
-@XmlRootElement(name = "OMSTR")
-public class OMSTR {
+@XmlType(name = "", propOrder = {"value"})
+@XmlRootElement(name = "OMI")
+public class OMI {
 
   @XmlValue
-  protected String content;
+  protected String value;
   @XmlAttribute(name = "id")
   @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
   @XmlID
   @XmlSchemaType(name = "ID")
   protected String id;
-
-  /**
-   * Gets the value of the content property.
-   * 
-   * @return possible object is {@link String }
-   * 
-   */
-  public String getContent() {
-    return content;
-  }
 
   /**
    * Gets the value of the id property.
@@ -72,13 +62,13 @@ public class OMSTR {
   }
 
   /**
-   * Sets the value of the content property.
+   * Gets the value of the value property.
    * 
-   * @param value allowed object is {@link String }
+   * @return possible object is {@link String }
    * 
    */
-  public void setContent(String value) {
-    this.content = value;
+  public String getValue() {
+    return value;
   }
 
   /**
@@ -89,6 +79,16 @@ public class OMSTR {
    */
   public void setId(String value) {
     this.id = value;
+  }
+
+  /**
+   * Sets the value of the value property.
+   * 
+   * @param value allowed object is {@link String }
+   * 
+   */
+  public void setValue(String value) {
+    this.value = value;
   }
 
 }

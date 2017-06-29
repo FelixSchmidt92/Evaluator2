@@ -1,6 +1,6 @@
 package de.uni_due.s3.evaluator.exceptions;
 
-import de.uni_due.s3.openmath.OMOBJ;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMOBJ;
 
 /**
  * Should be thrown when a OMOBJ-object contains a child that can't be processed or has no child to processes.

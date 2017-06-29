@@ -11,16 +11,17 @@ import static org.junit.Assert.*;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import de.uni_due.s3.JAXBOpenMath.openmath.OMA;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMB;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMF;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMI;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMOBJ;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMSTR;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMV;
+import de.uni_due.s3.evaluator.core.function.OMVisitor;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.Plus;
 import de.uni_due.s3.evaluator.exceptions.EvaluatorException;
-import de.uni_due.s3.openmath.OMA;
-import de.uni_due.s3.openmath.OMB;
-import de.uni_due.s3.openmath.OMF;
-import de.uni_due.s3.openmath.OMI;
-import de.uni_due.s3.openmath.OMOBJ;
-import de.uni_due.s3.openmath.OMS;
-import de.uni_due.s3.openmath.OMSTR;
-import de.uni_due.s3.openmath.OMV;
 
 
 

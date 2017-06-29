@@ -31,4 +31,10 @@ public class Minus extends Function {
 	protected int maxArgs() {
 		return 2;
 	}
+	
+	@Override
+	public String getPartialSageSyntax(List<Object> arguments){
+		return getSageSyntax(arguments.get(0)) + " - " + getSageSyntax(arguments.get(1));
+	}
+	
 }

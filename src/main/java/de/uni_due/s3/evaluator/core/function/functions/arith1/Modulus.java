@@ -23,5 +23,9 @@ public class Modulus extends Function {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	public String getPartialSage(List<Object> arguments){
+		return getSageSyntax(arguments.get(0)) + " % " + getSageSyntax(arguments.get(1));
+	}
 
 }

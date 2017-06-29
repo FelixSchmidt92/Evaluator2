@@ -17,15 +17,15 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.internal.runners.statements.Fail;
 
-import de.uni_due.s3.openmath.OMSTR;
-import de.uni_due.s3.openmath.OMF;
-import de.uni_due.s3.openmath.OMI;
-import de.uni_due.s3.openmath.OMOBJ;
-import de.uni_due.s3.openmath.OMS;
-import de.uni_due.s3.evaluator.core.OMConverter;
+import de.uni_due.s3.JAXBOpenMath.OMUtils.OMConverter;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMA;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMF;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMI;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMOBJ;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMSTR;
 import de.uni_due.s3.evaluator.exceptions.ParserException;
 import de.uni_due.s3.evaluator.exceptions.UndefinedExerciseVariableException;
-import de.uni_due.s3.openmath.OMA;
 
 public class TestExpressionParser {
 	

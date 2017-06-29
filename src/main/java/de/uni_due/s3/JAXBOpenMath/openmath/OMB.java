@@ -6,7 +6,7 @@
 // Generated on: 2015.06.21 at 11:42:50 PM CEST
 //
 
-package de.uni_due.s3.openmath;
+package de.uni_due.s3.JAXBOpenMath.openmath;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -29,9 +29,9 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * <pre>
  * &lt;complexType>
  *   &lt;simpleContent>
- *     &lt;restriction base="&lt;http://www.w3.org/2001/XMLSchema>anyType">
+ *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>base64Binary">
  *       &lt;attGroup ref="{http://www.openmath.org/OpenMath}common.attributes"/>
- *     &lt;/restriction>
+ *     &lt;/extension>
  *   &lt;/simpleContent>
  * &lt;/complexType>
  * </pre>
@@ -40,11 +40,11 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {"value"})
-@XmlRootElement(name = "OMI")
-public class OMI {
+@XmlRootElement(name = "OMB")
+public class OMB {
 
   @XmlValue
-  protected String value;
+  protected byte[] value;
   @XmlAttribute(name = "id")
   @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
   @XmlID
@@ -64,10 +64,9 @@ public class OMI {
   /**
    * Gets the value of the value property.
    * 
-   * @return possible object is {@link String }
-   * 
+   * @return possible object is byte[]
    */
-  public String getValue() {
+  public byte[] getValue() {
     return value;
   }
 
@@ -84,10 +83,9 @@ public class OMI {
   /**
    * Sets the value of the value property.
    * 
-   * @param value allowed object is {@link String }
-   * 
+   * @param value allowed object is byte[]
    */
-  public void setValue(String value) {
+  public void setValue(byte[] value) {
     this.value = value;
   }
 

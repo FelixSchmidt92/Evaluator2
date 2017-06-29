@@ -3,6 +3,7 @@ package de.uni_due.s3.evaluator.core.function;
 import java.util.List;
 
 import de.uni_due.s3.evaluator.exceptions.FunctionArgumentNumberException;
+import de.uni_due.s3.evaluator.exceptions.NoFunctionToCASException;
 
 /**
  * Function is an abstract Class where functions can be executed
@@ -44,7 +45,19 @@ public abstract class Function {
 	 * @return the result of execution as an EObject
 	 */
 	public Object evaluate(List<Object> arguments){
-		
+		argsBetweenMinMax(arguments); //Check
+		return execute(arguments);
+	}
+	
+	
+	/**
+	 * This Method just tests if the length of the Arguments is in between minArgs
+	 * and maxArgs. If not then a FunctionArgumentNumberException is thrown.
+	 * 
+	 * @throws FunctionArgumentNumberException if number of Arguments is not between
+	 * @param arguments the List of arguments
+	 */
+	public void argsBetweenMinMax(List<Object> arguments){
 		//Check max, if infinitely set max to Integer.MAX_VALUE
 		int max = maxArgs();
 		if(maxArgs() < 0){
@@ -59,8 +72,6 @@ public abstract class Function {
 			+ " and " + maxArgs() + ". Actual Number of Arguments passed: " + arguments.size();
 			throw new FunctionArgumentNumberException(cause);
 		}
-		
-		return execute(arguments);
 	}
 	
 	
@@ -102,4 +113,51 @@ public abstract class Function {
 	 * @return the maximum number of Arguments as Integer
 	 */
 	abstract protected int maxArgs();
+	
+	
+	
+	/**********************************************************/
+	/******************Translator Section**********************/
+	/**********************************************************/
+	
+	/**
+	 * Call this Function, if you need your argument in Sage Syntax.
+	 * 
+	 * In getPartialSageSyntax:
+	 * 	Call this Function on every argument, to get the Sage-Syntax of this argument
+	 * 
+	 * @param omElement the argument, which should be represented in Sage
+	 * @return a String representation of this argument in Sage
+	 */
+	protected String getSageSyntax(Object omElement){
+		return new SageVisitor().visit(omElement);
+	}
+	
+	
+	/**
+	 * Define here how the Syntax should look like in Sage for this specific Function
+	 * All Arguments that are passed here can be recursively called 
+	 * again with getSageSyntax(omElement). So only deal here with the 
+	 * Representation of this Function and call (usually) the arguments in getSageSyntax(omElement)
+	 * For Examples: see Plus, Minus or Set
+	 * 
+	 * @param arguments A List of Arguments for this Function. Note: The arguments are not evaluated!
+	 * @return A String Representation of this Function AND all innerFunction
+	 */
+	protected String getPartialSageSyntax(List<Object> arguments){
+		throw new NoFunctionToCASException("There is no Implementation of this Method to the "
+				+ "specific CAS-String. Class of this Function: " + this.getClass());
+	}
+	
+	
+	/**
+	 * Add here more Translators from OMOBJ to CAS
+	 */
+	
+	/**********************************************************/
+	/******************Translator Section**********************/
+	/**********************************************************/
+	
+	
+	
 }

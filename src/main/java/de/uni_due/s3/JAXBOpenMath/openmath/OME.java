@@ -6,7 +6,7 @@
 // Generated on: 2015.06.21 at 11:42:50 PM CEST
 //
 
-package de.uni_due.s3.openmath;
+package de.uni_due.s3.JAXBOpenMath.openmath;
 
 import java.util.ArrayList;
 import java.util.List;

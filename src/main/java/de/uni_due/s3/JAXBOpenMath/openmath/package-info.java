@@ -9,4 +9,4 @@
 
 @javax.xml.bind.annotation.XmlSchema(
     elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
-package de.uni_due.s3.openmath;
+package de.uni_due.s3.JAXBOpenMath.openmath;

@@ -1,14 +1,22 @@
-package de.uni_due.s3.evaluator.omdictionary;
+package de.uni_due.s3.evaluator.core.functionData;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import de.uni_due.s3.evaluator.exceptions.FunctionNotImplementedException;
-import de.uni_due.s3.openmath.OMS;
 
 public class OMSEvaluatorSyntaxDictionary {
 	
-	private static Map<String, OMS> functionSymbolMap = new HashMap<String, OMS>();
+	private Map<String, OMSymbol> functionSymbolMap = new HashMap<String, OMSymbol>();
+	
+	private static OMSEvaluatorSyntaxDictionary omsesd = new OMSEvaluatorSyntaxDictionary();
+	
+	
+	public static OMSEvaluatorSyntaxDictionary getInstance(){
+		return omsesd;
+	}
+	
+	
 	/**
 	 * OMSEvaluatorSyntaxDictionary. Hier wird den Funktionen, die im Evaluator angegeben
 	 * werden können das zugehörige OMSymbol zugeordnet.
@@ -18,7 +26,7 @@ public class OMSEvaluatorSyntaxDictionary {
 	 * Außerdem muss eine neue Function auch in der FunctionFactory hinzugefügt werden.
 	 * OpenMathSymbole müssen in der Klasse OMSymbol ergänzt werden.
 	 */
-	static {
+	private OMSEvaluatorSyntaxDictionary() {
 		functionSymbolMap.put("plus", OMSymbol.ARITH1_PLUS);
 		functionSymbolMap.put("minus", OMSymbol.ARITH1_MINUS);
 		functionSymbolMap.put("times", OMSymbol.ARITH1_TIMES);
@@ -121,7 +129,7 @@ public class OMSEvaluatorSyntaxDictionary {
 	 * @throws FunctionNotImplementedException
 	 *             if Function is not found in HashMap
 	 */
-	public static OMS getOMS(String name) {
+	public OMSymbol getOMSymbol(String name) {
 		if (functionSymbolMap.containsKey(name)) {
 			return functionSymbolMap.get(name);
 		} else {

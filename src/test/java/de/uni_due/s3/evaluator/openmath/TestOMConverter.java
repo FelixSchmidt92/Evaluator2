@@ -6,10 +6,10 @@ import javax.xml.bind.JAXBException;
 
 import org.junit.Test;
 
-import de.uni_due.s3.openmath.OMI;
-import de.uni_due.s3.openmath.OMOBJ;
-import de.uni_due.s3.evaluator.core.OMConverter;
-import de.uni_due.s3.openmath.OMA;
+import de.uni_due.s3.JAXBOpenMath.OMUtils.OMConverter;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMA;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMI;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMOBJ;
 
 public class TestOMConverter {
 

@@ -1,22 +1,23 @@
-package de.uni_due.s3.evaluator.core;
+package de.uni_due.s3.evaluator.core.function;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import de.uni_due.s3.evaluator.core.function.Function;
+import de.uni_due.s3.JAXBOpenMath.OMUtils.OMCreator;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMA;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMF;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMI;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMOBJ;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMSTR;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMV;
+import de.uni_due.s3.evaluator.core.functionData.OMSFunctionDictionary;
+import de.uni_due.s3.evaluator.core.functionData.OMSymbol;
 import de.uni_due.s3.evaluator.exceptions.FunctionNotImplementedException;
 import de.uni_due.s3.evaluator.exceptions.OMObjectNotSupportedException;
-import de.uni_due.s3.evaluator.omdictionary.OMSFunctionDictionary;
-import de.uni_due.s3.openmath.OMA;
-import de.uni_due.s3.openmath.OMF;
-import de.uni_due.s3.openmath.OMI;
-import de.uni_due.s3.openmath.OMOBJ;
-import de.uni_due.s3.openmath.OMS;
-import de.uni_due.s3.openmath.OMSTR;
-import de.uni_due.s3.openmath.OMV;
 
 /**
- * A visitor for the OpenMath-structure, represented by classes in the OpenMath package, like OMOBJ{@link de.uni_due.s3.openmath.OMOBJ}.
+ * A visitor for the OpenMath-structure, represented by classes in the OpenMath package, like OMOBJ{@link de.uni_due.s3.JAXBOpenMath.openmath.OMOBJ}.
  * It is used to traverse the OpenMath structure and do specific actions for every type of OpenMath object.
  * 
  * For now (09.06.17) it can only traverse OMOBJ,OMA,OMF,OMI,OMS,OMSTR and OMV. All other OpenMath objects are not supported.
@@ -119,7 +120,7 @@ public class OMVisitor {
 	 */
 
 	public static Function visit(OMS oms){
-		return OMSFunctionDictionary.getFunction(oms);
+		return OMSFunctionDictionary.getInstance().getFunction(new OMSymbol(oms.getCd(), oms.getName()));
 	}
 
 

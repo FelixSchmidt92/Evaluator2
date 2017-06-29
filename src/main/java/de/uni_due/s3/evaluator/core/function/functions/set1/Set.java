@@ -2,9 +2,9 @@ package de.uni_due.s3.evaluator.core.function.functions.set1;
 
 import java.util.List;
 
+import de.uni_due.s3.JAXBOpenMath.openmath.OMA;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
 import de.uni_due.s3.evaluator.core.function.Function;
-import de.uni_due.s3.openmath.OMA;
-import de.uni_due.s3.openmath.OMS;
 
 public class Set extends Function {
 
@@ -36,5 +36,15 @@ public class Set extends Function {
 		return -1;
 	}
 	
+	@Override
+	public String getPartialSageSyntax(List<Object> arguments){
+		String set = "{";
+			for(Object arg : arguments){
+				set += getSageSyntax(arg) + ", ";
+			}
+			set = set.substring(0, set.length() - 2); // Removing ", "
+		
+		return set + "}";
+	}
 
 }

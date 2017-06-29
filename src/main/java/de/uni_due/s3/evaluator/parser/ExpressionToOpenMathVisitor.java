@@ -2,19 +2,21 @@ package de.uni_due.s3.evaluator.parser;
 
 import java.util.Map;
 
-import de.uni_due.s3.evaluator.core.OMConverter;
+import de.uni_due.s3.JAXBOpenMath.OMUtils.OMConverter;
+import de.uni_due.s3.JAXBOpenMath.OMUtils.OMCreator;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMA;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMF;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMI;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMOBJ;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMSTR;
+import de.uni_due.s3.evaluator.core.functionData.OMSEvaluatorSyntaxDictionary;
+import de.uni_due.s3.evaluator.core.functionData.OMSymbol;
 import de.uni_due.s3.evaluator.exceptions.UndefinedExerciseVariableException;
 import de.uni_due.s3.evaluator.exceptions.UndefinedFillInVariableException;
-import de.uni_due.s3.evaluator.omdictionary.OMSEvaluatorSyntaxDictionary;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.ExpressionContext;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParserBaseVisitor;
-import de.uni_due.s3.openmath.OMA;
-import de.uni_due.s3.openmath.OMF;
-import de.uni_due.s3.openmath.OMI;
-import de.uni_due.s3.openmath.OMOBJ;
-import de.uni_due.s3.openmath.OMS;
-import de.uni_due.s3.openmath.OMSTR;
 
 public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Object> {
 
@@ -330,8 +332,9 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	@Override
 	public OMA visitNestedFunction(EvaluatorParser.NestedFunctionContext ctx) {
 		OMA oma = new OMA();
-		oma.getOmel().add(OMSEvaluatorSyntaxDictionary.getOMS(ctx.name.getText()));
-
+		OMSymbol omsymbol = OMSEvaluatorSyntaxDictionary.getInstance().getOMSymbol(ctx.name.getText());
+		
+		oma.getOmel().add(OMCreator.createOMS(omsymbol.getCd(), omsymbol.getName()));
 		for (ExpressionContext childctx : ctx.arguments) {
 			oma.getOmel().add(visit(childctx));
 		}

@@ -15,8 +15,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
+import de.uni_due.s3.JAXBOpenMath.openmath.OMOBJ;
 import de.uni_due.s3.evaluator.exceptions.EvaluatorException;
-import de.uni_due.s3.openmath.OMOBJ;
 
 @RunWith(Parameterized.class)
 public class TestOMOBJToSageStringConverter {

@@ -1,15 +1,15 @@
-package de.uni_due.s3.evaluator.core;
+package de.uni_due.s3.JAXBOpenMath.OMUtils;
 
 import java.util.List;
 
+import de.uni_due.s3.JAXBOpenMath.openmath.OMA;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMF;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMI;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMOBJ;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMSTR;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMV;
 import de.uni_due.s3.evaluator.exceptions.EvaluatorException;
-import de.uni_due.s3.openmath.OMA;
-import de.uni_due.s3.openmath.OMF;
-import de.uni_due.s3.openmath.OMI;
-import de.uni_due.s3.openmath.OMOBJ;
-import de.uni_due.s3.openmath.OMS;
-import de.uni_due.s3.openmath.OMSTR;
-import de.uni_due.s3.openmath.OMV;
 
 public class OMCreator {
 
@@ -75,6 +75,7 @@ public class OMCreator {
 	 * @return OMS
 	 */
 	public static OMS createOMS(final String cd, final String name){
+
 		OMS oms = new OMS();
 		oms.setCd(cd);
 		oms.setName(name);

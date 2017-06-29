@@ -2,9 +2,9 @@ package de.uni_due.s3.evaluator;
 
 import java.util.HashMap;
 
-import de.uni_due.s3.evaluator.core.OMVisitor;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMOBJ;
+import de.uni_due.s3.evaluator.core.function.OMVisitor;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
-import de.uni_due.s3.openmath.OMOBJ;
 
 /**
  * TODO

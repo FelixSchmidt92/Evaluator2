@@ -6,25 +6,22 @@
 // Generated on: 2015.06.21 at 11:42:50 PM CEST
 //
 
-package de.uni_due.s3.openmath;
+package de.uni_due.s3.JAXBOpenMath.openmath;
 
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlMixed;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import org.w3c.dom.Element;
 
 /**
  * <p>
@@ -37,12 +34,12 @@ import org.w3c.dom.Element;
  * &lt;complexType>
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;choice maxOccurs="unbounded" minOccurs="0">
+ *       &lt;sequence>
  *         &lt;group ref="{http://www.openmath.org/OpenMath}omel"/>
- *         &lt;group ref="{http://www.openmath.org/OpenMath}notom"/>
- *       &lt;/choice>
+ *         &lt;element ref="{http://www.openmath.org/OpenMath}OMBVAR"/>
+ *         &lt;group ref="{http://www.openmath.org/OpenMath}omel"/>
+ *       &lt;/sequence>
  *       &lt;attGroup ref="{http://www.openmath.org/OpenMath}compound.attributes"/>
- *       &lt;attribute name="encoding" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -52,16 +49,18 @@ import org.w3c.dom.Element;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {"content"})
-@XmlRootElement(name = "OMFOREIGN")
-public class OMFOREIGN {
+@XmlRootElement(name = "OMBIND")
+public class OMBIND {
 
   @XmlElementRefs({
+      @XmlElementRef(name = "OMATTR", namespace = "http://www.openmath.org/OpenMath",
+          type = JAXBElement.class),
       @XmlElementRef(name = "OMBIND", namespace = "http://www.openmath.org/OpenMath",
           type = OMBIND.class),
       @XmlElementRef(name = "OMF", namespace = "http://www.openmath.org/OpenMath",
           type = OMF.class),
-      @XmlElementRef(name = "OMATTR", namespace = "http://www.openmath.org/OpenMath",
-          type = JAXBElement.class),
+      @XmlElementRef(name = "OMBVAR", namespace = "http://www.openmath.org/OpenMath",
+          type = OMBVAR.class),
       @XmlElementRef(name = "OME", namespace = "http://www.openmath.org/OpenMath",
           type = OME.class),
       @XmlElementRef(name = "OMA", namespace = "http://www.openmath.org/OpenMath",
@@ -78,11 +77,7 @@ public class OMFOREIGN {
           type = OMR.class),
       @XmlElementRef(name = "OMI", namespace = "http://www.openmath.org/OpenMath",
           type = OMI.class)})
-  @XmlMixed
-  @XmlAnyElement
   protected List<Object> content;
-  @XmlAttribute(name = "encoding")
-  protected String encoding;
   @XmlAttribute(name = "cdbase")
   @XmlSchemaType(name = "anyURI")
   protected String cdbase;
@@ -103,7 +98,17 @@ public class OMFOREIGN {
   }
 
   /**
-   * Gets the value of the content property.
+   * Gets the rest of the content model.
+   * 
+   * <p>
+   * You are getting this "catch-all" property because of the following reason: The field name "OMS"
+   * is used by two different parts of a schema. See: line 15 of
+   * file:/home/daniel/workspace/de.uni_due.s3.jack2.server.core.util. evaluator/jaxb/openmath2.xsd
+   * line 15 of file:/home/daniel/workspace/de.uni_due.s3.jack2.server.core.util.
+   * evaluator/jaxb/openmath2.xsd
+   * <p>
+   * To get rid of this property, apply a property customization to one of both of the following
+   * declarations to change their names: Gets the value of the content property.
    * 
    * <p>
    * This accessor method returns a reference to the live list, not a snapshot. Therefore any
@@ -120,9 +125,8 @@ public class OMFOREIGN {
    * 
    * <p>
    * Objects of the following type(s) are allowed in the list {@link OMF } {@link OMBIND }
-   * {@link String } {@link OMA } {@link OME } {@link JAXBElement }{@code <}{@link OME.OMATTR }
-   * {@code >} {@link OMV } {@link OMS } {@link OMB } {@link OMSTR } {@link OMI } {@link OMR }
-   * {@link Element }
+   * {@link JAXBElement }{@code <}{@link OME.OMATTR }{@code >} {@link OMBVAR } {@link OMA }
+   * {@link OME } {@link OMV } {@link OMS } {@link OMB } {@link OMSTR } {@link OMI } {@link OMR }
    * 
    * 
    */
@@ -131,16 +135,6 @@ public class OMFOREIGN {
       content = new ArrayList<Object>();
     }
     return this.content;
-  }
-
-  /**
-   * Gets the value of the encoding property.
-   * 
-   * @return possible object is {@link String }
-   * 
-   */
-  public String getEncoding() {
-    return encoding;
   }
 
   /**
@@ -161,16 +155,6 @@ public class OMFOREIGN {
    */
   public void setCdbase(String value) {
     this.cdbase = value;
-  }
-
-  /**
-   * Sets the value of the encoding property.
-   * 
-   * @param value allowed object is {@link String }
-   * 
-   */
-  public void setEncoding(String value) {
-    this.encoding = value;
   }
 
   /**

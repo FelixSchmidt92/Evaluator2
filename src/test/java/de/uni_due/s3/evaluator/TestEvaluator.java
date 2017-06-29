@@ -6,9 +6,12 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.uni_due.s3.evaluator.core.OMConverter;
+import de.uni_due.s3.JAXBOpenMath.OMUtils.OMConverter;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMOBJ;
+import de.uni_due.s3.evaluator.core.function.OMVisitor;
+import de.uni_due.s3.evaluator.core.function.SageVisitor;
 import de.uni_due.s3.evaluator.exceptions.FunctionNotImplementedException;
-import de.uni_due.s3.openmath.OMOBJ;
+import de.uni_due.s3.evaluator.parser.ExpressionParser;
 
 public class TestEvaluator {
 
@@ -46,5 +49,9 @@ public class TestEvaluator {
 																			+ "<OMI>13</OMI>"																			
 																		+ "</OMA></OMOBJ>"))));
 	}
+	
+	
+
+	
 	
 }

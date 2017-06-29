@@ -6,7 +6,7 @@
 // Generated on: 2015.06.21 at 11:42:50 PM CEST
 //
 
-package de.uni_due.s3.openmath;
+package de.uni_due.s3.JAXBOpenMath.openmath;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;attGroup ref="{http://www.openmath.org/OpenMath}common.attributes"/>
- *       &lt;attribute name="href" use="required" type="{http://www.w3.org/2001/XMLSchema}anyURI" />
+ *       &lt;attribute name="name" use="required" type="{http://www.w3.org/2001/XMLSchema}NCName" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -40,27 +40,18 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
-@XmlRootElement(name = "OMR")
-public class OMR {
+@XmlRootElement(name = "OMV")
+public class OMV {
 
-  @XmlAttribute(name = "href", required = true)
-  @XmlSchemaType(name = "anyURI")
-  protected String href;
+  @XmlAttribute(name = "name", required = true)
+  @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
+  @XmlSchemaType(name = "NCName")
+  protected String name;
   @XmlAttribute(name = "id")
   @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
   @XmlID
   @XmlSchemaType(name = "ID")
   protected String id;
-
-  /**
-   * Gets the value of the href property.
-   * 
-   * @return possible object is {@link String }
-   * 
-   */
-  public String getHref() {
-    return href;
-  }
 
   /**
    * Gets the value of the id property.
@@ -73,13 +64,13 @@ public class OMR {
   }
 
   /**
-   * Sets the value of the href property.
+   * Gets the value of the name property.
    * 
-   * @param value allowed object is {@link String }
+   * @return possible object is {@link String }
    * 
    */
-  public void setHref(String value) {
-    this.href = value;
+  public String getName() {
+    return name;
   }
 
   /**
@@ -90,6 +81,16 @@ public class OMR {
    */
   public void setId(String value) {
     this.id = value;
+  }
+
+  /**
+   * Sets the value of the name property.
+   * 
+   * @param value allowed object is {@link String }
+   * 
+   */
+  public void setName(String value) {
+    this.name = value;
   }
 
 }

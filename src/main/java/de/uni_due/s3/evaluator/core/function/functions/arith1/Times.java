@@ -32,4 +32,9 @@ public class Times extends Function {
 		return 2;
 	}
 
+	@Override
+	public String getPartialSageSyntax(List<Object> arguments){
+		return getSageSyntax(arguments.get(0)) + " * " + getSageSyntax(arguments.get(1));
+	}
+	
 }
