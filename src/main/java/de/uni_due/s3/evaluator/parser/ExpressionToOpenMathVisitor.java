@@ -3,7 +3,6 @@ package de.uni_due.s3.evaluator.parser;
 import java.util.Map;
 
 import de.uni_due.s3.JAXBOpenMath.OMUtils.OMConverter;
-import de.uni_due.s3.JAXBOpenMath.OMUtils.OMCreator;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMA;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMF;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMI;
@@ -11,7 +10,6 @@ import de.uni_due.s3.JAXBOpenMath.openmath.OMOBJ;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMSTR;
 import de.uni_due.s3.evaluator.core.functionData.OMSEvaluatorSyntaxDictionary;
-import de.uni_due.s3.evaluator.core.functionData.OMSymbol;
 import de.uni_due.s3.evaluator.exceptions.UndefinedExerciseVariableException;
 import de.uni_due.s3.evaluator.exceptions.UndefinedFillInVariableException;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser;
@@ -332,9 +330,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	@Override
 	public OMA visitNestedFunction(EvaluatorParser.NestedFunctionContext ctx) {
 		OMA oma = new OMA();
-		OMSymbol omsymbol = OMSEvaluatorSyntaxDictionary.getInstance().getOMSymbol(ctx.name.getText());
-		
-		oma.getOmel().add(OMCreator.createOMS(omsymbol.getCd(), omsymbol.getName()));
+		oma.getOmel().add(OMSEvaluatorSyntaxDictionary.getInstance().getOMS(ctx.name.getText()));
 		for (ExpressionContext childctx : ctx.arguments) {
 			oma.getOmel().add(visit(childctx));
 		}

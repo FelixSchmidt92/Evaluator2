@@ -3,11 +3,12 @@ package de.uni_due.s3.evaluator.core.functionData;
 import java.util.HashMap;
 import java.util.Map;
 
+import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
 import de.uni_due.s3.evaluator.exceptions.FunctionNotImplementedException;
 
 public class OMSEvaluatorSyntaxDictionary {
 	
-	private Map<String, OMSymbol> functionSymbolMap = new HashMap<String, OMSymbol>();
+	private Map<String, OMS> functionSymbolMap = new HashMap<String, OMS>();
 	
 	private static OMSEvaluatorSyntaxDictionary omsesd = new OMSEvaluatorSyntaxDictionary();
 	
@@ -129,7 +130,7 @@ public class OMSEvaluatorSyntaxDictionary {
 	 * @throws FunctionNotImplementedException
 	 *             if Function is not found in HashMap
 	 */
-	public OMSymbol getOMSymbol(String name) {
+	public OMS getOMS(String name) {
 		if (functionSymbolMap.containsKey(name)) {
 			return functionSymbolMap.get(name);
 		} else {

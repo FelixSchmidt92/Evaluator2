@@ -3,6 +3,7 @@ package de.uni_due.s3.evaluator.core.functionData;
 import java.util.HashMap;
 
 import de.uni_due.s3.evaluator.exceptions.FunctionNotImplementedException;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.Abs;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.Divide;
@@ -84,7 +85,7 @@ import de.uni_due.s3.evaluator.core.function.functions.transc2.ArcTan2;
  */
 public class OMSFunctionDictionary {
 	
-	private HashMap<OMSymbol, Function> functions = new HashMap<>();
+	private HashMap<OMS, Function> functions = new HashMap<>();
 
 	private static OMSFunctionDictionary omsfd = new OMSFunctionDictionary();
 	
@@ -209,11 +210,11 @@ public class OMSFunctionDictionary {
 	 * @throws FunctionNotImplementedException
 	 *             if Function is not found in HashMap
 	 */
-	public Function getFunction(OMSymbol omsymbol) {
-		if (functions.containsKey(omsymbol)) {
-			return functions.get(omsymbol);
+	public Function getFunction(OMS oms) {
+		if (functions.containsKey(oms)) {
+			return functions.get(oms);
 		} else {
-			throw new FunctionNotImplementedException(omsymbol);
+			throw new FunctionNotImplementedException(new OMSymbol("", ""));
 		}
 	}
 }

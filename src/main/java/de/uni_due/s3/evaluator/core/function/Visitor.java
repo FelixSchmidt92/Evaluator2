@@ -11,7 +11,6 @@ import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMSTR;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMV;
 import de.uni_due.s3.evaluator.core.functionData.OMSFunctionDictionary;
-import de.uni_due.s3.evaluator.core.functionData.OMSymbol;
 
 
 /**
@@ -136,7 +135,7 @@ public abstract class Visitor {
 		}
 		
 		OMS oms = (OMS) oma.getOmel().get(0); // First element of OMA is always an OMS
-		Function function = OMSFunctionDictionary.getInstance().getFunction(new OMSymbol(oms.getCd(), oms.getName()));  
+		Function function = OMSFunctionDictionary.getInstance().getFunction(oms);  
 		//Get function
 		
 		function.argsBetweenMinMax(omel);	// Check for Correct amount of Arguments	

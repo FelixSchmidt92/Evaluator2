@@ -12,7 +12,6 @@ import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMSTR;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMV;
 import de.uni_due.s3.evaluator.core.functionData.OMSFunctionDictionary;
-import de.uni_due.s3.evaluator.core.functionData.OMSymbol;
 import de.uni_due.s3.evaluator.exceptions.FunctionNotImplementedException;
 import de.uni_due.s3.evaluator.exceptions.OMObjectNotSupportedException;
 
@@ -120,7 +119,7 @@ public class OMVisitor {
 	 */
 
 	public static Function visit(OMS oms){
-		return OMSFunctionDictionary.getInstance().getFunction(new OMSymbol(oms.getCd(), oms.getName()));
+		return OMSFunctionDictionary.getInstance().getFunction(oms);
 	}
 
 
