@@ -144,7 +144,7 @@ public abstract class Function {
 	 * @param arguments A List of Arguments for this Function. Note: The arguments are not evaluated!
 	 * @return A String Representation of this Function AND all innerFunction
 	 */
-	protected String getPartialSageSyntax(List<Object> arguments){
+	public String getPartialSageSyntax(List<Object> arguments){
 		throw new NoFunctionToCASException("There is no Implementation of this Method to the "
 				+ "specific CAS-String. Class of this Function: " + this.getClass());
 	}

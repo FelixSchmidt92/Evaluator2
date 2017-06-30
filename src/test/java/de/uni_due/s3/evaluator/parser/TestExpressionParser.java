@@ -68,10 +68,6 @@ public class TestExpressionParser {
 	
 	@Test
 	public void testApplicationUnary() throws Exception{
-		
-		// TODO this is not openmath standard. The not operation should just work with booleans!
-		// see https://www.openmath.org/cd/logic1.xhtml
-		
 		assertEquals(OMConverter.toString(ExpressionParser.parse("!3",null,null)),"<OMOBJ><OMA>"
 																			+ "<OMS name=\"not\" cd=\"logic1\"/>"
 																			+ "<OMI>3</OMI>"
@@ -80,7 +76,7 @@ public class TestExpressionParser {
 																			+ "<OMS name=\"unary_plus\" cd=\"arith1\"/>"
 																			+ "<OMI>3</OMI>"
 																		+ "</OMA></OMOBJ>");
-		throw new Exception("This is not openmath standard");
+	
 	}
 	
 	@Test

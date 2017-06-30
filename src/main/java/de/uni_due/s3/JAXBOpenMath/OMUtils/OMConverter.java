@@ -8,7 +8,11 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+import de.uni_due.s3.JAXBOpenMath.openmath.OMF;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMI;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMOBJ;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMSTR;
+import de.uni_due.s3.evaluator.exceptions.OMOBJChildNotSupportedException;
 import de.uni_due.s3.evaluator.exceptions.OMObjectNotSupportedException;
 
 /**
@@ -63,29 +67,31 @@ public class OMConverter {
 	 * @return OMA, OMF, OMI, OMS, OMSTR or OMV
 	 */
 	public static Object toElement(OMOBJ omobj){
-		
-		if (omobj.getOMA() != null) {
-			return (omobj.getOMA());
-
-		} else if (omobj.getOMF() != null) {
-			return(omobj.getOMF());
-
-		} else if (omobj.getOMI() != null) {
-			return(omobj.getOMI());
-
-		} else if (omobj.getOMS() != null) {
-			return(omobj.getOMS());
-
-		} else if (omobj.getOMSTR() != null) {
-			return(omobj.getOMSTR());
-
-		} else if (omobj.getOMV() != null) {
-			return(omobj.getOMV());
-
-		} else {
-			// TODO
-			throw new OMObjectNotSupportedException(omobj);
+		if(omobj != null){
+			if (omobj.getOMA() != null) {
+				return (omobj.getOMA());
+	
+			} else if (omobj.getOMF() != null) {
+				return(omobj.getOMF());
+	
+			} else if (omobj.getOMI() != null) {
+				return(omobj.getOMI());
+	
+			} else if (omobj.getOMS() != null) {
+				return(omobj.getOMS());
+	
+			} else if (omobj.getOMSTR() != null) {
+				return(omobj.getOMSTR());
+	
+			} else if (omobj.getOMV() != null) {
+				return(omobj.getOMV());
+	
+			} else {
+				// TODO
+				throw new OMOBJChildNotSupportedException(omobj);
+			}
 		}
+		throw new OMObjectNotSupportedException(omobj);
 	}
 	
 	

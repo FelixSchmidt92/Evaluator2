@@ -29,7 +29,6 @@ public class TestSageSyntax {
 			System.out.println(new OMToSageVisitor().visit(omobj4));
 		}catch(NoFunctionToCASException e){
 			System.out.println("The Method in EqualsSemiSem is not implemtened");
-		}
-		
+		}	
 	}
 }

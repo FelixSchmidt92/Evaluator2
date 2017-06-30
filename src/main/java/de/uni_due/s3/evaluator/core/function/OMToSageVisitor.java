@@ -12,12 +12,12 @@ public class OMToSageVisitor extends OMToCasVisitor {
 	
 	@Override
 	protected String visit(OMF omf) {
-		return "RealNumber(" + omf.getDec() + ")";
+		return Double.toString(omf.getDec()) ;
 	}
 
 	@Override
 	protected String visit(OMI omi) {
-		return  "Integer(" + omi.getValue() + ")";
+		return   omi.getValue();
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class OMToSageVisitor extends OMToCasVisitor {
 	}
 
 	@Override
-	protected String visit(OMV omv) {
+	protected String visit(OMV omv) {	//FIXME so werden nur variablen angelegt, aber nicht genutzt
 		return "var('" + omv.getName() +"')";
 	}
 
