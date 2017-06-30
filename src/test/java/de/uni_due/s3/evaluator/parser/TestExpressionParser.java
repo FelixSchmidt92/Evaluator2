@@ -166,4 +166,18 @@ public class TestExpressionParser {
 		
 	}
 	
+	@Test
+	public void testMathTerm() throws JAXBException{
+		System.out.println(OMConverter.toString(ExpressionParser.parse("3+(5-7)",null,null)));
+		assertEquals(OMConverter.toString(ExpressionParser.parse("3+(5-7)",null,null)),"<OMOBJ><OMA>"
+				+ "<OMS name=\"plus\" cd=\"arith1\"/>"
+				+ "<OMI>3</OMI>"
+				+"<OMA>"
+					+ "<OMS name=\"minus\" cd=\"arith1\"/>"
+					+ "<OMI>5</OMI>"
+					+ "<OMI>7</OMI>"
+				+ "</OMA>"																			
+			+ "</OMA></OMOBJ>");
+	}
+	
 }

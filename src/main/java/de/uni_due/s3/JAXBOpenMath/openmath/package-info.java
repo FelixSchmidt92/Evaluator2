@@ -6,7 +6,10 @@
 // schema.
 // Generated on: 2015.06.21 at 11:42:50 PM CEST
 //
-
+/**
+ * The OMS class was modified! The equal and hash methods were manually added, so that a oms can be compared to another oms.
+ * If you recompile this with JAXB please make sure that these methods will be added again.
+ */
 @javax.xml.bind.annotation.XmlSchema(
     elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
 package de.uni_due.s3.JAXBOpenMath.openmath;

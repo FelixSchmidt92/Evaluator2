@@ -13,6 +13,7 @@ import de.uni_due.s3.JAXBOpenMath.openmath.OMSTR;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMV;
 import de.uni_due.s3.evaluator.core.functionData.OMSFunctionDictionary;
 import de.uni_due.s3.evaluator.exceptions.FunctionNotImplementedException;
+import de.uni_due.s3.evaluator.exceptions.OMOBJChildNotSupportedException;
 import de.uni_due.s3.evaluator.exceptions.OMObjectNotSupportedException;
 
 /**
@@ -24,7 +25,7 @@ import de.uni_due.s3.evaluator.exceptions.OMObjectNotSupportedException;
  * @author frichtscheid
  *
  */
-public class OMVisitor {
+public class OMExecuter {
 	
 	/**
 	 * Visits a OMOBJ object and return its child object. The kind of child is determined by the OMOBJ object.
@@ -32,29 +33,32 @@ public class OMVisitor {
 	 * @param omobj the whole OpenMath object starting with <OMOBJ>...
 	 * @return omobj-object.
 	 */
-	public static OMOBJ visit(OMOBJ omobj) {
+	public static OMOBJ execute(OMOBJ omobj) throws OMOBJChildNotSupportedException{
 		Object visitedElement = null;
-		if (omobj.getOMA() != null) {
-			visitedElement =  visit(omobj.getOMA());
-
-		} else if (omobj.getOMF() != null) {
-			visitedElement =  (omobj.getOMF());
-
-		} else if (omobj.getOMI() != null) {
-			visitedElement = (omobj.getOMI());
-
-		} else if (omobj.getOMS() != null) {
-			visitedElement = (omobj.getOMS());
-
-		} else if (omobj.getOMSTR() != null) {
-			visitedElement = (omobj.getOMSTR());
-
-		} else if (omobj.getOMV() != null) {
-			visitedElement = (omobj.getOMV());
-
+		if(omobj != null){
+			if (omobj.getOMA() != null) {
+				visitedElement =  execute(omobj.getOMA());
+	
+			} else if (omobj.getOMF() != null) {
+				visitedElement =  (omobj.getOMF());
+	
+			} else if (omobj.getOMI() != null) {
+				visitedElement = (omobj.getOMI());
+	
+			} else if (omobj.getOMS() != null) {
+				visitedElement = (omobj.getOMS());
+	
+			} else if (omobj.getOMSTR() != null) {
+				visitedElement = (omobj.getOMSTR());
+	
+			} else if (omobj.getOMV() != null) {
+				visitedElement = (omobj.getOMV());
+	
+			} else {
+				throw new OMOBJChildNotSupportedException(omobj);
+			}
 		} else {
-			// TODO
-			throw new OMObjectNotSupportedException(omobj);
+			throw new OMObjectNotSupportedException(null);
 		}
 		
 		return OMCreator.createOMOBJ(visitedElement);
@@ -76,9 +80,9 @@ public class OMVisitor {
 	 * @param oma OpenMath application object <OMA>...</OMA>
 	 * @return one of OMA,OMF,OMI,OMS,OMSTR or OMV. It depends on function used in the OMS.
 	 */
-	public static Object visit(OMA oma){
+	private static Object execute(OMA oma){
 		List<Object> omel = oma.getOmel();
-		Function function = visit((OMS) omel.get(0));
+		Function function = OMSFunctionDictionary.getInstance().getFunction((OMS) omel.get(0));
 		System.out.println("visit oma "+ function.toString());
 		List<Object> arguments = new ArrayList<Object>(omel.size()-1);
 
@@ -86,7 +90,7 @@ public class OMVisitor {
 			Object o = omel.get(i+1);
 			if(o instanceof OMA){
 				if(function.argumentsShouldBeEvaluated())
-					arguments.add(i, (visit((OMA)o)) );
+					arguments.add(i, (execute((OMA)o)) );
 				else
 					arguments.add(i,(OMA)o );
 			} else if (o instanceof OMF) {
@@ -108,18 +112,6 @@ public class OMVisitor {
 
 		return function.evaluate(arguments);
 
-	}
-
-	/**
-	 * Visits a OpenMath symbol and returns a concrete Implementation of the function specified by the OMS.
-	 * 
-	 * @param oms OpenMath symbol object.
-	 * @return a concrete Implementation of the Function class.
-	 * @throws FunctionNotImplementedException when the specified function does not exists or has another cd than the requested function has.
-	 */
-
-	public static Function visit(OMS oms){
-		return OMSFunctionDictionary.getInstance().getFunction(oms);
 	}
 
 

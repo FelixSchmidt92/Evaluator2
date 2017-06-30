@@ -10,6 +10,7 @@ import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMSTR;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMV;
 import de.uni_due.s3.evaluator.exceptions.EvaluatorException;
+import de.uni_due.s3.evaluator.exceptions.OMObjectNotSupportedException;
 
 public class OMCreator {
 
@@ -22,34 +23,37 @@ public class OMCreator {
 	 */
 	public static OMOBJ createOMOBJ(Object omElement) throws EvaluatorException{
 		OMOBJ omobj = new OMOBJ();
-		
-		switch (omElement.getClass().getSimpleName()){
-		case "OMF":
-			omobj.setOMF((OMF) omElement);
-			break;
-			
-		case "OMI":
-			omobj.setOMI((OMI) omElement);
-			break;
-			
-		case "OMS":
-			omobj.setOMS((OMS) omElement);
-			break;
-			
-		case "OMSTR":
-			omobj.setOMSTR((OMSTR) omElement);
-			break;
-			
-		case "OMV":
-			omobj.setOMV((OMV) omElement);
-			break;
-			
-		case "OMA":
-			omobj.setOMA((OMA) omElement);
-			break;
-			
-		default :
-			throw new EvaluatorException("can't handle element of type"+omElement.getClass().getSimpleName());
+		if(omElement != null){
+			switch (omElement.getClass().getSimpleName()){
+			case "OMF":
+				omobj.setOMF((OMF) omElement);
+				break;
+				
+			case "OMI":
+				omobj.setOMI((OMI) omElement);
+				break;
+				
+			case "OMS":
+				omobj.setOMS((OMS) omElement);
+				break;
+				
+			case "OMSTR":
+				omobj.setOMSTR((OMSTR) omElement);
+				break;
+				
+			case "OMV":
+				omobj.setOMV((OMV) omElement);
+				break;
+				
+			case "OMA":
+				omobj.setOMA((OMA) omElement);
+				break;
+				
+			default :
+				throw new OMObjectNotSupportedException(omElement);
+			}
+		}else {
+			throw new OMObjectNotSupportedException(null);
 		}
 		return omobj;
 	}

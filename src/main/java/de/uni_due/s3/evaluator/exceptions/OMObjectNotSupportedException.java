@@ -10,9 +10,9 @@ import de.uni_due.s3.JAXBOpenMath.openmath.OMOBJ;
  */
 public class OMObjectNotSupportedException extends EvaluatorException{
 
-	public OMObjectNotSupportedException(OMOBJ obj) {
+	public OMObjectNotSupportedException(Object omElement) {
 
-		super("Object: "+obj.toString() +" has a not supported child-element");
+		super("The object: "+omElement +" has a not supported child-element");
 
 	}
 

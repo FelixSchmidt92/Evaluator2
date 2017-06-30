@@ -130,7 +130,7 @@ public abstract class Function {
 	 * @return a String representation of this argument in Sage
 	 */
 	protected String getSageSyntax(Object omElement){
-		return new SageVisitor().visit(omElement);
+		return new OMToSageVisitor().visit(omElement);
 	}
 	
 	
