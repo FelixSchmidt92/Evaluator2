@@ -1,11 +1,19 @@
 package de.uni_due.s3.evaluator.core.function;
 
-import de.uni_due.s3.JAXBOpenMath.openmath.OMA;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMF;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMI;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMSTR;
+import org.openmath.openmath.OMA;
+import org.openmath.openmath.OMF;
+import org.openmath.openmath.OMI;
+import org.openmath.openmath.OMS;
+import org.openmath.openmath.OMSTR;
 
+
+/**
+ * 
+ * Wo wird es verwendet? FIXME
+ * 
+ * @author ??
+ *
+ */
 public class OMTypeChecker {
 
 	public static boolean isOMA(Object obj){

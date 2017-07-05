@@ -2,16 +2,15 @@ package de.uni_due.s3.evaluator.core.function;
 
 import java.util.List;
 
-import de.uni_due.s3.JAXBOpenMath.openmath.OMF;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMI;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMSTR;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMV;
+import org.openmath.openmath.OMF;
+import org.openmath.openmath.OMI;
+import org.openmath.openmath.OMS;
+import org.openmath.openmath.OMSTR;
+import org.openmath.openmath.OMV;
+
+import de.uni_due.s3.evaluator.exceptions.cas.CasException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionArgumentNumberException;
-import de.uni_due.s3.evaluator.exceptions.openmath.OMOBJChildNotSupportedException;
-import de.uni_due.s3.evaluator.exceptions.openmath.OMObjectNotSupportedException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
-import de.uni_due.s3.evaluator.exceptions.representation.NoSageRepresentationAvailableException;
 
 public class OMToSageVisitor extends OMToCasVisitor {
 	
@@ -67,7 +66,7 @@ public class OMToSageVisitor extends OMToCasVisitor {
 	}
 
 	@Override
-	protected String getCASRepresentationForFunction(Function function, List<Object> omel) throws OMObjectNotSupportedException, OMOBJChildNotSupportedException, FunctionArgumentNumberException, NoRepresentationAvailableException {
+	protected String getCASRepresentationForFunction(Function function, List<Object> omel) throws FunctionArgumentNumberException, NoRepresentationAvailableException, CasException {
 		return function.getPartialSageSyntax(omel);
 	}
 

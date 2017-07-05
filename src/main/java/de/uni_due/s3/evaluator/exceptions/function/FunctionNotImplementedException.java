@@ -1,6 +1,7 @@
 package de.uni_due.s3.evaluator.exceptions.function;
 
-import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
+import org.openmath.openmath.OMS;
+
 /**
  * Is thrown when a requested function is not implemented
  * @author frichtscheid

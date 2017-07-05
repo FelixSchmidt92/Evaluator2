@@ -2,12 +2,12 @@ package de.uni_due.s3.evaluator.core.function.functions.set1;
 
 import java.util.List;
 
-import de.uni_due.s3.JAXBOpenMath.openmath.OMA;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
+import org.openmath.openmath.OMA;
+import org.openmath.openmath.OMS;
+
 import de.uni_due.s3.evaluator.core.function.Function;
+import de.uni_due.s3.evaluator.exceptions.cas.CasException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionArgumentNumberException;
-import de.uni_due.s3.evaluator.exceptions.openmath.OMOBJChildNotSupportedException;
-import de.uni_due.s3.evaluator.exceptions.openmath.OMObjectNotSupportedException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 
 public class Set extends Function {
@@ -41,7 +41,7 @@ public class Set extends Function {
 	}
 	
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws OMObjectNotSupportedException, OMOBJChildNotSupportedException, FunctionArgumentNumberException, NoRepresentationAvailableException{
+	public String getPartialSageSyntax(List<Object> arguments) throws FunctionArgumentNumberException, NoRepresentationAvailableException, CasException{
 		String set = "{";
 			for(Object arg : arguments){
 				set += getSageSyntax(arg) + ", ";

@@ -3,14 +3,13 @@ package de.uni_due.s3.evaluator.core.function.functions.arith1;
 import java.math.BigInteger;
 import java.util.List;
 
+import org.openmath.openmath.OMI;
 
-import de.uni_due.s3.JAXBOpenMath.openmath.OMI;
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.core.function.NumberUtils;
+import de.uni_due.s3.evaluator.exceptions.cas.CasException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionArgumentNumberException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
-import de.uni_due.s3.evaluator.exceptions.openmath.OMOBJChildNotSupportedException;
-import de.uni_due.s3.evaluator.exceptions.openmath.OMObjectNotSupportedException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 
 public class GCD extends Function {
@@ -39,7 +38,7 @@ public class GCD extends Function {
 	}
 	
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws OMObjectNotSupportedException, OMOBJChildNotSupportedException, FunctionArgumentNumberException, NoRepresentationAvailableException {
+	public String getPartialSageSyntax(List<Object> arguments) throws  FunctionArgumentNumberException, NoRepresentationAvailableException, CasException {
 		return "gcd("+getSageSyntax(arguments.get(0))+","+getSageSyntax(arguments.get(1));
 	}
 

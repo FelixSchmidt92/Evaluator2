@@ -5,13 +5,10 @@ import javax.xml.bind.JAXBException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.openmath.openmath.OMOBJ;
 
-import de.uni_due.s3.JAXBOpenMath.OMUtils.OMConverter;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMOBJ;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedException;
-import de.uni_due.s3.evaluator.exceptions.openmath.OMOBJChildNotSupportedException;
-import de.uni_due.s3.evaluator.exceptions.openmath.OMObjectNotSupportedException;
 import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
 
 

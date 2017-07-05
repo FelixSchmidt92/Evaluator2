@@ -1,7 +1,7 @@
 package de.uni_due.s3.evaluator.core.functionData;
 
-import de.uni_due.s3.JAXBOpenMath.OMUtils.OMCreator;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
+import org.openmath.omutils.OMCreator;
+import org.openmath.openmath.OMS;
 
 public class OMSymbol {
 	

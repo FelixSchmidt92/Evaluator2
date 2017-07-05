@@ -2,17 +2,18 @@ package de.uni_due.s3.evaluator.parser;
 
 import java.util.Map;
 
-import de.uni_due.s3.JAXBOpenMath.OMUtils.OMConverter;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMA;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMF;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMI;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMOBJ;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMSTR;
+import org.openmath.omutils.OMConverter;
+import org.openmath.omutils.OpenMathException;
+import org.openmath.openmath.OMA;
+import org.openmath.openmath.OMF;
+import org.openmath.openmath.OMI;
+import org.openmath.openmath.OMOBJ;
+import org.openmath.openmath.OMS;
+import org.openmath.openmath.OMSTR;
+
 import de.uni_due.s3.evaluator.core.functionData.OMSEvaluatorSyntaxDictionary;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedException;
-import de.uni_due.s3.evaluator.exceptions.openmath.OMOBJChildNotSupportedException;
-import de.uni_due.s3.evaluator.exceptions.openmath.OMObjectNotSupportedException;
+import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedFillInVariableException;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser;
@@ -88,14 +89,17 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	 * @throws  
 	 */
 	@Override
-	public Object visitExerciseVarName(EvaluatorParser.ExerciseVarNameContext ctx)
-			throws UndefinedExerciseVariableException, OMOBJChildNotSupportedException, OMObjectNotSupportedException {
+	public Object visitExerciseVarName(EvaluatorParser.ExerciseVarNameContext ctx){
 		String var = ctx.getText(); // eg. [var=a]
 		String varName = var.substring(var.indexOf('=') + 1, var.indexOf(']')); // eg.
 																				// a
 		if (exerciseVariableMap.containsKey(varName)) {
 			OMOBJ varOmobj = exerciseVariableMap.get(varName);
-			return OMConverter.toElement(varOmobj); // removes the OMOBJ-tags
+			try {
+				return OMConverter.toElement(varOmobj);  // removes the OMOBJ-tags
+			} catch (OpenMathException e) {
+				throw new ParserException("Unable to convert OMOBJ ot Element:" + varOmobj.toString(), e);
+			}
 													// and returns the child of
 													// the OMOBJ-Object
 		} else {
@@ -139,9 +143,14 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 																									// 1
 		if (fillInVariableMap.containsKey(varNumber)) {
 			OMOBJ varOmobj = fillInVariableMap.get(varNumber);
-			return OMConverter.toElement(varOmobj); // removes the OMOBJ-tags
-													// and returns the child of
-													// the OMOBJ-Object
+			try {
+				return OMConverter.toElement(varOmobj); // removes the OMOBJ-tags
+														// and returns the child of
+														// the OMOBJ-Object
+			} catch (OpenMathException e) {
+				throw new ParserException("Unable to convert OMOBJ ot Element:" + varOmobj.toString(), e);
+			}
+
 		} else {
 			throw new UndefinedFillInVariableException(varNumber);
 		}

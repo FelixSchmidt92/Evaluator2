@@ -1,8 +1,9 @@
 package de.uni_due.s3.evaluator.core.function;
 
-import de.uni_due.s3.JAXBOpenMath.openmath.OMF;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMI;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMSTR;
+import org.openmath.openmath.OMF;
+import org.openmath.openmath.OMI;
+import org.openmath.openmath.OMSTR;
+
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
 
 public class NumberUtils {

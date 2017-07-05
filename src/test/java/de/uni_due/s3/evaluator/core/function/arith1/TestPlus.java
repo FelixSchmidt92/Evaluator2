@@ -8,16 +8,12 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.openmath.openmath.OMOBJ;
+import org.openmath.openmath.OMS;
 
-import de.uni_due.s3.JAXBOpenMath.OMUtils.OMCreator;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMI;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMOBJ;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
 import de.uni_due.s3.evaluator.core.functionData.OMSFunctionDictionary;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionArgumentNumberException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedException;
-import de.uni_due.s3.evaluator.exceptions.openmath.OMOBJChildNotSupportedException;
-import de.uni_due.s3.evaluator.exceptions.openmath.OMObjectNotSupportedException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoSageRepresentationAvailableException;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;

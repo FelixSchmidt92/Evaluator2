@@ -4,11 +4,10 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.core.function.NumberUtils;
+import de.uni_due.s3.evaluator.exceptions.cas.CasException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionArgumentNumberException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
-import de.uni_due.s3.evaluator.exceptions.openmath.OMOBJChildNotSupportedException;
-import de.uni_due.s3.evaluator.exceptions.openmath.OMObjectNotSupportedException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 
 public class Times extends Function {
@@ -37,7 +36,7 @@ public class Times extends Function {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws OMObjectNotSupportedException, OMOBJChildNotSupportedException, FunctionArgumentNumberException, NoRepresentationAvailableException{
+	public String getPartialSageSyntax(List<Object> arguments) throws FunctionArgumentNumberException, NoRepresentationAvailableException, CasException{
 		return getSageSyntax(arguments.get(0)) + " * " + getSageSyntax(arguments.get(1));
 	}
 	

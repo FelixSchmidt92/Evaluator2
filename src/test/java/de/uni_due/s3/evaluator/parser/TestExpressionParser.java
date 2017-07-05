@@ -3,27 +3,16 @@ package de.uni_due.s3.evaluator.parser;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.io.IOException;
-import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.internal.runners.statements.Fail;
+import org.openmath.omutils.OMConverter;
+import org.openmath.openmath.OMOBJ;
 
-import de.uni_due.s3.JAXBOpenMath.OMUtils.OMConverter;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMA;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMF;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMI;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMOBJ;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMSTR;
 import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableException;
 

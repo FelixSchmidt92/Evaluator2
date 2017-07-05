@@ -10,22 +10,14 @@ import static org.junit.Assert.*;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.openmath.omutils.OMCreator;
+import org.openmath.openmath.OMA;
+import org.openmath.openmath.OMOBJ;
 
-import de.uni_due.s3.JAXBOpenMath.OMUtils.OMCreator;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMA;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMB;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMF;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMI;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMOBJ;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMSTR;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMV;
 import de.uni_due.s3.evaluator.core.function.OMExecutor;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.Plus;
 import de.uni_due.s3.evaluator.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
-import de.uni_due.s3.evaluator.exceptions.openmath.OMOBJChildNotSupportedException;
-import de.uni_due.s3.evaluator.exceptions.openmath.OMObjectNotSupportedException;
 
 
 

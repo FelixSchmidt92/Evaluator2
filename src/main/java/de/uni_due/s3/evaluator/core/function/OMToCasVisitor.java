@@ -3,17 +3,17 @@ package de.uni_due.s3.evaluator.core.function;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.uni_due.s3.JAXBOpenMath.openmath.OMA;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMF;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMI;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMOBJ;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMSTR;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMV;
+import org.openmath.openmath.OMA;
+import org.openmath.openmath.OMF;
+import org.openmath.openmath.OMI;
+import org.openmath.openmath.OMOBJ;
+import org.openmath.openmath.OMS;
+import org.openmath.openmath.OMSTR;
+import org.openmath.openmath.OMV;
+
 import de.uni_due.s3.evaluator.core.functionData.OMSFunctionDictionary;
+import de.uni_due.s3.evaluator.exceptions.cas.CasException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionArgumentNumberException;
-import de.uni_due.s3.evaluator.exceptions.openmath.OMOBJChildNotSupportedException;
-import de.uni_due.s3.evaluator.exceptions.openmath.OMObjectNotSupportedException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 
 
@@ -46,8 +46,9 @@ public abstract class OMToCasVisitor {
 	 * @return the String Representation of this omElement (including its children!)
 	 * @throws NoRepresentationAvailableException 
 	 * @throws FunctionArgumentNumberException 
+	 * @throws CasException 
 	 */
-	public String visit(Object omElement) throws OMObjectNotSupportedException, OMOBJChildNotSupportedException, FunctionArgumentNumberException, NoRepresentationAvailableException{
+	public String visit(Object omElement) throws FunctionArgumentNumberException, NoRepresentationAvailableException, CasException{
 		String result = "";
 		
 		switch (omElement.getClass().getSimpleName()){
@@ -79,8 +80,9 @@ public abstract class OMToCasVisitor {
 			break;
 			
 		default :
-			throw new OMObjectNotSupportedException(omElement);
+			throw new CasException("Unable to visit omElement: " + omElement.toString());
 		}
+		
 		return result;
 	}
 	/**
@@ -92,8 +94,9 @@ public abstract class OMToCasVisitor {
 	 * @return the String representation of this OMOBJ excluding OMOBJ!!
 	 * @throws NoRepresentationAvailableException 
 	 * @throws FunctionArgumentNumberException 
+	 * @throws CasException 
 	 */
-	private String visit(OMOBJ omobj) throws OMOBJChildNotSupportedException, FunctionArgumentNumberException, NoRepresentationAvailableException{
+	private String visit(OMOBJ omobj) throws FunctionArgumentNumberException, NoRepresentationAvailableException, CasException{
 		if(omobj != null){
 			if (omobj.getOMF() != null){
 				return visit(omobj.getOMF());
@@ -114,7 +117,7 @@ public abstract class OMToCasVisitor {
 				return visit(omobj.getOMA());
 			}
 		}
-		throw new OMOBJChildNotSupportedException(omobj);
+		throw new CasException("Unable to extract omElement from OMOBJ: " + omobj.toString());
 	}
 	
 
@@ -172,8 +175,9 @@ public abstract class OMToCasVisitor {
 	 * @return the String Representation of this oma and its childs
 	 * @throws FunctionArgumentNumberException 
 	 * @throws NoRepresentationAvailableException 
+	 * @throws CasException 
 	 */
-	private String visit(OMA oma) throws FunctionArgumentNumberException, NoRepresentationAvailableException{
+	private String visit(OMA oma) throws FunctionArgumentNumberException, NoRepresentationAvailableException, CasException{
 		List<Object> omel = new ArrayList<>();  
 		
 		for (int i = 1; i < oma.getOmel().size(); i++){
@@ -201,7 +205,7 @@ public abstract class OMToCasVisitor {
 	 * @throws OMOBJChildNotSupportedException 
 	 * @throws OMObjectNotSupportedException 
 	 */
-	protected abstract String getCASRepresentationForFunction(Function function, List<Object> omel) throws NoRepresentationAvailableException, OMObjectNotSupportedException, OMOBJChildNotSupportedException, FunctionArgumentNumberException;
+	protected abstract String getCASRepresentationForFunction(Function function, List<Object> omel) throws NoRepresentationAvailableException, FunctionArgumentNumberException, CasException;
 
 }
 	

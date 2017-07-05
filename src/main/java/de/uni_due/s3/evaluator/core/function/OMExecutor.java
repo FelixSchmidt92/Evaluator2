@@ -3,19 +3,18 @@ package de.uni_due.s3.evaluator.core.function;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.uni_due.s3.JAXBOpenMath.OMUtils.OMCreator;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMA;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMF;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMI;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMOBJ;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMSTR;
-import de.uni_due.s3.JAXBOpenMath.openmath.OMV;
+import org.openmath.omutils.OMCreator;
+import org.openmath.omutils.OpenMathException;
+import org.openmath.openmath.OMA;
+import org.openmath.openmath.OMF;
+import org.openmath.openmath.OMI;
+import org.openmath.openmath.OMOBJ;
+import org.openmath.openmath.OMS;
+import org.openmath.openmath.OMSTR;
+import org.openmath.openmath.OMV;
+
 import de.uni_due.s3.evaluator.core.functionData.OMSFunctionDictionary;
-import de.uni_due.s3.evaluator.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
-import de.uni_due.s3.evaluator.exceptions.openmath.OMOBJChildNotSupportedException;
-import de.uni_due.s3.evaluator.exceptions.openmath.OMObjectNotSupportedException;
 
 
 /**
@@ -30,14 +29,15 @@ import de.uni_due.s3.evaluator.exceptions.openmath.OMObjectNotSupportedException
 public class OMExecutor {
 	
 	/**
-	 * @throws FunctionException 
 	 * Visits a OMOBJ object and return its child object. The kind of child is determined by the OMOBJ object.
 	 * At the moment OMA,OMF,OMI,OMS,OMSTR and OMV are those children which will be returned.
+	 * 
 	 * @param omobj the whole OpenMath object starting with <OMOBJ>...
 	 * @return omobj-object.
-	 * @throws  
+	 * @throws FunctionException 
+	 * @throws OpenMathException 
 	 */
-	public static OMOBJ execute(OMOBJ omobj) throws OMOBJChildNotSupportedException,OMObjectNotSupportedException, FunctionException{
+	public static OMOBJ execute(OMOBJ omobj) throws FunctionException, OpenMathException{
 		Object visitedElement = null;
 		if(omobj != null){
 			if (omobj.getOMA() != null) {
@@ -59,10 +59,10 @@ public class OMExecutor {
 				visitedElement = (omobj.getOMV());
 	
 			} else {
-				throw new OMOBJChildNotSupportedException(omobj);
+				throw new FunctionException("Unable to find Child in OMOBJ to execute. OMOBJ: " + omobj.toString());
 			}
 		} else {
-			throw new OMObjectNotSupportedException(null);
+			throw new FunctionException("OMOBJ is null, nothing to execute here");
 		}
 		
 		return OMCreator.createOMOBJ(visitedElement);

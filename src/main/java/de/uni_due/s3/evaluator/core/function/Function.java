@@ -2,11 +2,11 @@ package de.uni_due.s3.evaluator.core.function;
 
 import java.util.List;
 
+import de.uni_due.s3.evaluator.exceptions.cas.CasException;
+import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionArgumentNumberException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
-import de.uni_due.s3.evaluator.exceptions.openmath.OMOBJChildNotSupportedException;
-import de.uni_due.s3.evaluator.exceptions.openmath.OMObjectNotSupportedException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoSageRepresentationAvailableException;
 
@@ -46,12 +46,12 @@ public abstract class Function {
 	 * 		  are passed.
 	 * Then:  call execute with the correct number of arguments.
 	 * 
-	 * @throws FunctionArgumentNumberException if number of Arguments is not between
 	 * @param arguments A List of Arguments for this Function
 	 * @return the result of execution as an EObject
 	 * @throws FunctionException 
+	 * @throws FunctionArgumentNumberException if number of Arguments is not between
 	 */
-	public Object evaluate(List<Object> arguments) throws FunctionException{
+	public Object evaluate(List<Object> arguments) throws FunctionException, FunctionInvalidArgumentException{
 		argsBetweenMinMax(arguments); //Check
 		return execute(arguments);
 	}
@@ -61,8 +61,8 @@ public abstract class Function {
 	 * This Method just tests if the length of the Arguments is in between minArgs
 	 * and maxArgs. If not then a FunctionArgumentNumberException is thrown.
 	 * 
-	 * @throws FunctionArgumentNumberException if number of Arguments is not between
 	 * @param arguments the List of arguments
+	 * @throws FunctionArgumentNumberException if number of Arguments is not between
 	 */
 	public void argsBetweenMinMax(List<Object> arguments) throws FunctionArgumentNumberException{
 		//Check max, if infinitely set max to Integer.MAX_VALUE
@@ -135,12 +135,11 @@ public abstract class Function {
 	 * 
 	 * @param omElement the argument, which should be represented in Sage
 	 * @return a String representation of this argument in Sage
-	 * @throws OMOBJChildNotSupportedException 
-	 * @throws OMObjectNotSupportedException 
 	 * @throws NoRepresentationAvailableException 
 	 * @throws FunctionArgumentNumberException 
+	 * @throws CasException 
 	 */
-	protected String getSageSyntax(Object omElement) throws OMObjectNotSupportedException, OMOBJChildNotSupportedException, FunctionArgumentNumberException, NoRepresentationAvailableException{
+	protected String getSageSyntax(Object omElement) throws FunctionArgumentNumberException, NoRepresentationAvailableException, CasException{
 		return new OMToSageVisitor().visit(omElement);
 	}
 	
@@ -154,13 +153,11 @@ public abstract class Function {
 	 * 
 	 * @param arguments A List of Arguments for this Function. Note: The arguments are not evaluated!
 	 * @return A String Representation of this Function AND all innerFunction
-	 * @throws NoSageRepresentationAvailableException 
 	 * @throws NoRepresentationAvailableException 
 	 * @throws FunctionArgumentNumberException 
-	 * @throws OMOBJChildNotSupportedException 
-	 * @throws OMObjectNotSupportedException 
+	 * @throws CasException
 	 */
-	public String getPartialSageSyntax(List<Object> arguments) throws NoSageRepresentationAvailableException, OMObjectNotSupportedException, OMOBJChildNotSupportedException, FunctionArgumentNumberException, NoRepresentationAvailableException{
+	public String getPartialSageSyntax(List<Object> arguments) throws CasException, FunctionArgumentNumberException, NoRepresentationAvailableException{
 		throw new NoSageRepresentationAvailableException("There is no sage representation for function "+this.getClass()+" implemented");
 		}
 	

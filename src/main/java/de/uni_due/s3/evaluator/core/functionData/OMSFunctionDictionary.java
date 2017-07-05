@@ -2,7 +2,8 @@ package de.uni_due.s3.evaluator.core.functionData;
 
 import java.util.HashMap;
 
-import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
+import org.openmath.openmath.OMS;
+
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.Abs;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.Divide;

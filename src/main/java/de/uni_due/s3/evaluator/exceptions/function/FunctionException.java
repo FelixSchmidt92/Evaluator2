@@ -5,7 +5,7 @@ import de.uni_due.s3.evaluator.exceptions.EvaluatorException;
 /**
  * This is the father for all exceptions which have to do with the functions
  */
-public abstract class FunctionException extends EvaluatorException{
+public class FunctionException extends EvaluatorException{
 
 	
 	private static final long serialVersionUID = 4016801474266206443L;
