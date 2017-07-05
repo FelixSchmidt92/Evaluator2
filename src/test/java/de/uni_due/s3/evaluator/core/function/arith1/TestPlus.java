@@ -3,11 +3,17 @@ package de.uni_due.s3.evaluator.core.function.arith1;
 import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import java.util.Collection;
-
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+
+import de.uni_due.s3.JAXBOpenMath.OMUtils.OMCreator;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMI;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMOBJ;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
+import de.uni_due.s3.evaluator.core.functionData.OMSFunctionDictionary;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
 
 @RunWith(Parameterized.class)
@@ -53,5 +59,16 @@ public class TestPlus {
 	@Test
 	public void testPlus(){
 		assertEquals(ExpressionParser.parse(parameter,null,null).getOMI().getValue(), expected);
+	}
+	
+	@Test
+	public void testPlusSageSyntax(){
+		OMOBJ omobj = ExpressionParser.parse("plus(5,10)", null, null);
+		List<Object> args = omobj.getOMA().getOmel();
+		OMS oms = (OMS)args.get(0);
+		args.remove(0);
+		
+		String syntax = OMSFunctionDictionary.getInstance().getFunction(oms).getPartialSageSyntax(args);
+		assertEquals("5 + 10", syntax);
 	}
 }

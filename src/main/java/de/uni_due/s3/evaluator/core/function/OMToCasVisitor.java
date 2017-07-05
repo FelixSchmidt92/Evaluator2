@@ -11,6 +11,8 @@ import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMSTR;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMV;
 import de.uni_due.s3.evaluator.core.functionData.OMSFunctionDictionary;
+import de.uni_due.s3.evaluator.exceptions.OMOBJChildNotSupportedException;
+import de.uni_due.s3.evaluator.exceptions.OMObjectNotSupportedException;
 
 
 /**
@@ -31,8 +33,52 @@ import de.uni_due.s3.evaluator.core.functionData.OMSFunctionDictionary;
  * @author dlux, spobel
  *
  */
-public abstract class Visitor {
+public abstract class OMToCasVisitor {
 	
+	/**
+	 * visits the specific omElement. If another OMA is found the method in 
+	 * callInFunctionTheMethod is called.
+	 * This method is called From the Function!
+	 * 
+	 * @param omElement the Element to visit
+	 * @return the String Representation of this omElement (including its children!)
+	 */
+	public String visit(Object omElement) throws OMObjectNotSupportedException, OMOBJChildNotSupportedException{
+		String result = "";
+		
+		switch (omElement.getClass().getSimpleName()){
+		case "OMOBJ":
+			result = visit((OMOBJ) omElement);
+			break;
+		case "OMF":
+			result = visit((OMF) omElement);
+			break;
+			
+		case "OMI":
+			result = visit((OMI) omElement);
+			break;
+			
+		case "OMS":
+			result = visit((OMS) omElement);
+			break;
+			
+		case "OMSTR":
+			result = visit((OMSTR) omElement);
+			break;
+			
+		case "OMV":
+			result = visit((OMV) omElement);
+			break;
+			
+		case "OMA":
+			result = visit((OMA) omElement);
+			break;
+			
+		default :
+			throw new OMObjectNotSupportedException(omElement);
+		}
+		return result;
+	}
 	/**
 	 * This method calls the visit-Method for Object. 
 	 * It just extracts the containing OM* in OMOBJ.
@@ -41,39 +87,31 @@ public abstract class Visitor {
 	 * @param omobj the OMOBJ-"Container"
 	 * @return the String representation of this OMOBJ excluding OMOBJ!!
 	 */
-	public String visit(OMOBJ omobj){
-		if (omobj.getOMF() != null){
-			return visit(omobj.getOMF());
+	private String visit(OMOBJ omobj) throws OMOBJChildNotSupportedException{
+		if(omobj != null){
+			if (omobj.getOMF() != null){
+				return visit(omobj.getOMF());
+			}
+			if (omobj.getOMI() != null){
+				return visit(omobj.getOMI());
+			}
+			if (omobj.getOMSTR() != null){
+				return visit(omobj.getOMSTR());
+			}
+			if (omobj.getOMV() != null){
+				return visit(omobj.getOMV());
+			}
+			if (omobj.getOMS() != null){
+				return visit(omobj.getOMS());
+			}
+			if (omobj.getOMA() != null){
+				return visit(omobj.getOMA());
+			}
 		}
-		if (omobj.getOMI() != null){
-			return visit(omobj.getOMI());
-		}
-		if (omobj.getOMSTR() != null){
-			return visit(omobj.getOMSTR());
-		}
-		if (omobj.getOMV() != null){
-			return visit(omobj.getOMV());
-		}
-		if (omobj.getOMS() != null){
-			return visit(omobj.getOMS());
-		}
-		if (omobj.getOMA() != null){
-			return visit(omobj.getOMA());
-		}
-		return null;
+		throw new OMOBJChildNotSupportedException(omobj);
 	}
 	
-	/**
-	 * visits the specific omElement. If another OMA is found the method in 
-	 * callInFunctionTheMethod is called.
-	 * This method is called From the Function!
-	 * 
-	 * @param omElement the Element to visit
-	 * @return the String Representation of this omElement (including its childs!)
-	 */
-	public String visit(Object omElement){
-		return visitMethod(omElement);	
-	}
+
 	
 	/**
 	 * Implement here the String-Representation of this OMF-Element
@@ -139,7 +177,7 @@ public abstract class Visitor {
 		//Get function
 		
 		function.argsBetweenMinMax(omel);	// Check for Correct amount of Arguments	
-		return callInFunctionTheMethod(function, omel);
+		return getCASRepresentationForFunction(function, omel);
 	}
 	
 	/**
@@ -152,48 +190,8 @@ public abstract class Visitor {
 	 * 				Not evaluated if it returns false
 	 * @return a String which is in CAS-Syntax
 	 */
-	protected abstract String callInFunctionTheMethod(Function function, List<Object> omel);
-
-	
-	
-	/**
-	 * visits the specific method for the specific omElement
-	 * 
-	 * @param omElement the element which should be visited
-	 * @return the String-Representation of this element.
-	 */
-	private  String visitMethod(Object omElement){
-		String result = "";
-		
-		switch (omElement.getClass().getSimpleName()){
-		case "OMF":
-			result = visit((OMF) omElement);
-			break;
-			
-		case "OMI":
-			result = visit((OMI) omElement);
-			break;
-			
-		case "OMS":
-			result = visit((OMS) omElement);
-			break;
-			
-		case "OMSTR":
-			result = visit((OMSTR) omElement);
-			break;
-			
-		case "OMV":
-			result = visit((OMV) omElement);
-			break;
-			
-		case "OMA":
-			result = visit((OMA) omElement);
-			break;
-			
-		default :
-			return null;
-		}
-		return result;
-	}
+	protected abstract String getCASRepresentationForFunction(Function function, List<Object> omel);
 
 }
+	
+

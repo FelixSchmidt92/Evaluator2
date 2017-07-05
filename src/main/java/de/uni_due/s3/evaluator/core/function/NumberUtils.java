@@ -2,6 +2,7 @@ package de.uni_due.s3.evaluator.core.function;
 
 import de.uni_due.s3.JAXBOpenMath.openmath.OMF;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMI;
+import de.uni_due.s3.JAXBOpenMath.openmath.OMSTR;
 import de.uni_due.s3.evaluator.exceptions.InputMismatchException;
 
 public class NumberUtils {
@@ -45,5 +46,17 @@ public class NumberUtils {
 			omfResult.setDec(result);
 			return omfResult;
 		}
+	}
+	
+	public static int valueOf(OMI omi){
+		return Integer.parseInt(omi.getValue());
+	}
+	
+	public static double valueOf(OMF omf){
+		return omf.getDec();
+	}
+	
+	public static String valueOf(OMSTR omstr){
+		return omstr.getContent();
 	}
 }

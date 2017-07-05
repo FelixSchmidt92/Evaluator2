@@ -8,16 +8,16 @@ import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMSTR;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMV;
 
-public class SageVisitor extends Visitor {
+public class OMToSageVisitor extends OMToCasVisitor {
 	
 	@Override
 	protected String visit(OMF omf) {
-		return "RealNumber(" + omf.getDec() + ")";
+		return Double.toString(omf.getDec()) ;
 	}
 
 	@Override
 	protected String visit(OMI omi) {
-		return  "Integer(" + omi.getValue() + ")";
+		return   omi.getValue();
 	}
 
 	@Override
@@ -57,12 +57,12 @@ public class SageVisitor extends Visitor {
 	}
 
 	@Override
-	protected String visit(OMV omv) {
+	protected String visit(OMV omv) {	//FIXME so werden nur variablen angelegt, aber nicht genutzt
 		return "var('" + omv.getName() +"')";
 	}
 
 	@Override
-	protected String callInFunctionTheMethod(Function function, List<Object> omel) {
+	protected String getCASRepresentationForFunction(Function function, List<Object> omel) {
 		return function.getPartialSageSyntax(omel);
 	}
 
