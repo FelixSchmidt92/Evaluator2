@@ -1,13 +1,12 @@
 package de.uni_due.s3.evaluator.exceptions.parser;
 
-import de.uni_due.s3.evaluator.exceptions.EvaluatorException;
 
 /**
  * Is thrown when an expression can't be parsed
  * @author frichtscheid
  *
  */
-public class ParserException extends EvaluatorException{
+public class ParserException extends RuntimeException{
 
 	/**
 	 * 

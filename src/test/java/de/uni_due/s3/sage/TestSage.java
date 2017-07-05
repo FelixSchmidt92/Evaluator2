@@ -6,7 +6,8 @@ import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import de.uni_due.s3.evaluator.exceptions.CASEvaluationException;
+import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
+import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 
 public class TestSage {
 
@@ -18,7 +19,7 @@ public class TestSage {
 	}
 	
 	@Test
-	public void test() throws CASEvaluationException {
+	public void test() throws CasEvaluationException, CasNotAvailableException {
 		Object result = Sage.evaluateInCAS("matrix(QQ,1,2,[3,4])");
 		System.out.println(result.toString());
 	}

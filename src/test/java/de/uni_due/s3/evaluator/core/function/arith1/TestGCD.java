@@ -16,13 +16,18 @@ import de.uni_due.s3.evaluator.core.function.OMExecutor;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.GCD;
 import de.uni_due.s3.evaluator.core.functionData.OMSEvaluatorSyntaxDictionary;
 import de.uni_due.s3.evaluator.core.functionData.OMSFunctionDictionary;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionArgumentNumberException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
+import de.uni_due.s3.evaluator.exceptions.openmath.OMOBJChildNotSupportedException;
+import de.uni_due.s3.evaluator.exceptions.openmath.OMObjectNotSupportedException;
+import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
 
 public class TestGCD {
 	
 	@Test
-	public void testGcdInteger(){
+	public void testGcdInteger() throws FunctionException{
 		GCD func = new GCD();
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(3));
@@ -33,7 +38,7 @@ public class TestGCD {
 	
 	
 	@Test
-	public void testGcdIntegration(){
+	public void testGcdIntegration() throws OMOBJChildNotSupportedException, OMObjectNotSupportedException, FunctionException{
 		OMOBJ omobj = ExpressionParser.parse("gcd(10,5)", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals("5", result.getOMI().getValue());
@@ -44,7 +49,7 @@ public class TestGCD {
 	}
 	
 	@Test
-	public void testGcdSageSyntax(){
+	public void testGcdSageSyntax() throws OMObjectNotSupportedException, OMOBJChildNotSupportedException, FunctionArgumentNumberException, NoRepresentationAvailableException{
 		GCD func = (GCD)OMSFunctionDictionary.getInstance().getFunction(OMSEvaluatorSyntaxDictionary.getInstance().getOMS("GCD"));
 		OMF omf = OMCreator.createOMF(1.0);
 		OMI omi = OMCreator.createOMI(10);
@@ -62,7 +67,7 @@ public class TestGCD {
 	}
 	
 	@Test(expected=FunctionInvalidArgumentException.class)
-	public void testGcdWithWrongArguments(){
+	public void testGcdWithWrongArguments() throws OMOBJChildNotSupportedException, OMObjectNotSupportedException, FunctionException{
 		OMOBJ omobj = ExpressionParser.parse("gcd(2,'test')", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals("5", result.getOMI().getValue());

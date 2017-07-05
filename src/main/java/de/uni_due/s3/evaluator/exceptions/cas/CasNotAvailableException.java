@@ -2,6 +2,11 @@ package de.uni_due.s3.evaluator.exceptions.cas;
 
 import de.uni_due.s3.evaluator.exceptions.EvaluatorException;
 
+/**
+ * This is thrown when their is no connection to the specified cas!
+ * @author frichtscheid
+ *
+ */
 public class CasNotAvailableException extends EvaluatorException {
 
 	/**

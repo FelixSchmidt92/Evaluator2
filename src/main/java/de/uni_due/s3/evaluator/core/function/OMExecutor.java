@@ -12,9 +12,11 @@ import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMSTR;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMV;
 import de.uni_due.s3.evaluator.core.functionData.OMSFunctionDictionary;
-import de.uni_due.s3.evaluator.exceptions.FunctionNotImplementedException;
-import de.uni_due.s3.evaluator.exceptions.OMOBJChildNotSupportedException;
-import de.uni_due.s3.evaluator.exceptions.OMObjectNotSupportedException;
+import de.uni_due.s3.evaluator.exceptions.EvaluatorException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
+import de.uni_due.s3.evaluator.exceptions.openmath.OMOBJChildNotSupportedException;
+import de.uni_due.s3.evaluator.exceptions.openmath.OMObjectNotSupportedException;
+
 
 /**
  * A visitor for the OpenMath-structure, represented by classes in the OpenMath package, like OMOBJ{@link de.uni_due.s3.JAXBOpenMath.openmath.OMOBJ}.
@@ -28,12 +30,14 @@ import de.uni_due.s3.evaluator.exceptions.OMObjectNotSupportedException;
 public class OMExecutor {
 	
 	/**
+	 * @throws FunctionException 
 	 * Visits a OMOBJ object and return its child object. The kind of child is determined by the OMOBJ object.
 	 * At the moment OMA,OMF,OMI,OMS,OMSTR and OMV are those children which will be returned.
 	 * @param omobj the whole OpenMath object starting with <OMOBJ>...
 	 * @return omobj-object.
+	 * @throws  
 	 */
-	public static OMOBJ execute(OMOBJ omobj) throws OMOBJChildNotSupportedException{
+	public static OMOBJ execute(OMOBJ omobj) throws OMOBJChildNotSupportedException,OMObjectNotSupportedException, FunctionException{
 		Object visitedElement = null;
 		if(omobj != null){
 			if (omobj.getOMA() != null) {
@@ -79,8 +83,9 @@ public class OMExecutor {
 	 * 
 	 * @param oma OpenMath application object <OMA>...</OMA>
 	 * @return one of OMA,OMF,OMI,OMS,OMSTR or OMV. It depends on function used in the OMS.
+	 * @throws FunctionException 
 	 */
-	private static Object execute(OMA oma){
+	private static Object execute(OMA oma) throws FunctionException{
 		List<Object> omel = oma.getOmel();
 		Function function = OMSFunctionDictionary.getInstance().getFunction((OMS) omel.get(0));
 		System.out.println("visit oma "+ function.toString());

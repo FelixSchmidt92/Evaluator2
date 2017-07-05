@@ -16,14 +16,20 @@ import de.uni_due.s3.evaluator.core.function.OMExecutor;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.Modulus;
 import de.uni_due.s3.evaluator.core.functionData.OMSEvaluatorSyntaxDictionary;
 import de.uni_due.s3.evaluator.core.functionData.OMSFunctionDictionary;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionArgumentNumberException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
+import de.uni_due.s3.evaluator.exceptions.openmath.OMOBJChildNotSupportedException;
+import de.uni_due.s3.evaluator.exceptions.openmath.OMObjectNotSupportedException;
+import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
+import de.uni_due.s3.evaluator.exceptions.representation.NoSageRepresentationAvailableException;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
 
 public class TestModulus {
 	
 	
 	@Test
-	public void testModulusInteger(){
+	public void testModulusInteger() throws FunctionException{
 		Modulus func = new Modulus();
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(3));
@@ -33,7 +39,7 @@ public class TestModulus {
 	}
 	
 	@Test
-	public void testModulusFloat(){
+	public void testModulusFloat() throws FunctionException{
 		Modulus func = new Modulus();
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMF(3.5));
@@ -43,7 +49,7 @@ public class TestModulus {
 	}
 	
 	@Test
-	public void testModulusMixed(){
+	public void testModulusMixed() throws FunctionException{
 		Modulus func = new Modulus();
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(10));
@@ -53,7 +59,7 @@ public class TestModulus {
 	}
 	
 	@Test
-	public void testModulusIntegration(){
+	public void testModulusIntegration() throws OMOBJChildNotSupportedException, OMObjectNotSupportedException, FunctionException{
 		OMOBJ omobj = ExpressionParser.parse("10%5", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals("0", result.getOMI().getValue());
@@ -64,7 +70,7 @@ public class TestModulus {
 	}
 	
 	@Test
-	public void testModulusSageSyntax(){
+	public void testModulusSageSyntax() throws OMObjectNotSupportedException, OMOBJChildNotSupportedException, FunctionArgumentNumberException, NoRepresentationAvailableException{
 		Modulus func = (Modulus)OMSFunctionDictionary.getInstance().getFunction(OMSEvaluatorSyntaxDictionary.getInstance().getOMS("minus"));
 		OMF omf = OMCreator.createOMF(1.0);
 		OMI omi = OMCreator.createOMI(10);
@@ -82,7 +88,7 @@ public class TestModulus {
 	}
 	
 	@Test(expected=FunctionInvalidArgumentException.class)
-	public void testMinusWithWrongArguments(){
+	public void testMinusWithWrongArguments() throws OMOBJChildNotSupportedException, OMObjectNotSupportedException, FunctionException{
 		OMOBJ omobj = ExpressionParser.parse("10%'test'", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals("5", result.getOMI().getValue());

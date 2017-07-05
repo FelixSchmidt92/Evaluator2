@@ -10,6 +10,9 @@ import de.uni_due.s3.JAXBOpenMath.openmath.OMOBJ;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMSTR;
 import de.uni_due.s3.evaluator.core.functionData.OMSEvaluatorSyntaxDictionary;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedException;
+import de.uni_due.s3.evaluator.exceptions.openmath.OMOBJChildNotSupportedException;
+import de.uni_due.s3.evaluator.exceptions.openmath.OMObjectNotSupportedException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedFillInVariableException;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser;
@@ -73,16 +76,20 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	}
 
 	/**
+	 * @throws OMObjectNotSupportedException 
+	 * @throws OMOBJChildNotSupportedException 
 	 * {@inheritDoc}
 	 *
 	 * <p>
 	 * Get the content of a ExerciseVariable(eg. [var=a]), which is wrapped in a
 	 * OMOBJ-Object and returns the unwrapped content
 	 * </p>
+	 * @throws OMObjectNotSupportedException 
+	 * @throws  
 	 */
 	@Override
 	public Object visitExerciseVarName(EvaluatorParser.ExerciseVarNameContext ctx)
-			throws UndefinedExerciseVariableException {
+			throws UndefinedExerciseVariableException, OMOBJChildNotSupportedException, OMObjectNotSupportedException {
 		String var = ctx.getText(); // eg. [var=a]
 		String varName = var.substring(var.indexOf('=') + 1, var.indexOf(']')); // eg.
 																				// a
@@ -268,7 +275,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	}
 	
 	@Override
-	public OMA visitSet(SetContext ctx) {
+	public OMA visitSet(SetContext ctx) throws FunctionNotImplementedException {
 		OMA oma = new OMA();
 		oma.getOmel().add(OMSEvaluatorSyntaxDictionary.getInstance().getOMS("set"));
 		for (ExpressionContext childctx : ctx.arguments) {
@@ -284,9 +291,10 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 * </p>
+	 * @throws FunctionNotImplementedException 
 	 */
 	@Override
-	public OMA visitNestedFunction(EvaluatorParser.NestedFunctionContext ctx) {
+	public OMA visitNestedFunction(EvaluatorParser.NestedFunctionContext ctx) throws FunctionNotImplementedException {
 		OMA oma = new OMA();
 		oma.getOmel().add(OMSEvaluatorSyntaxDictionary.getInstance().getOMS(ctx.name.getText()));
 		for (ExpressionContext childctx : ctx.arguments) {

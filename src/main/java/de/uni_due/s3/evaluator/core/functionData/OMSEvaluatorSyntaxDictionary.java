@@ -130,7 +130,7 @@ public class OMSEvaluatorSyntaxDictionary {
 	 * @throws FunctionNotImplementedException
 	 *             if Function is not found in HashMap
 	 */
-	public OMS getOMS(String name) {
+	public OMS getOMS(String name) throws FunctionNotImplementedException{
 		if (functionSymbolMap.containsKey(name)) {
 			return functionSymbolMap.get(name);
 		} else {

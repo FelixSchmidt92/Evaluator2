@@ -65,8 +65,10 @@ public class OMConverter {
 	 * Returns the element which is wrapped in an OMOBJ-Object
 	 * @param omobj
 	 * @return OMA, OMF, OMI, OMS, OMSTR or OMV
+	 * @throws OMOBJChildNotSupportedException 
+	 * @throws OMObjectNotSupportedException 
 	 */
-	public static Object toElement(OMOBJ omobj){
+	public static Object toElement(OMOBJ omobj) throws OMOBJChildNotSupportedException, OMObjectNotSupportedException{
 		if(omobj != null){
 			if (omobj.getOMA() != null) {
 				return (omobj.getOMA());

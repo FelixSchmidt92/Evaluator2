@@ -1,6 +1,6 @@
 # Download Dependencies
 #Add here your private Token from gitlab:
-YOURTOKEN="add your Token here"
+YOURTOKEN="tk3MRhz8TJyjpqMSbHLk"
 
 
 

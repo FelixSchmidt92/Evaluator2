@@ -14,13 +14,18 @@ import de.uni_due.s3.JAXBOpenMath.openmath.OMOBJ;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
 import de.uni_due.s3.evaluator.core.function.OMExecutor;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.Abs;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionArgumentNumberException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
+import de.uni_due.s3.evaluator.exceptions.openmath.OMOBJChildNotSupportedException;
+import de.uni_due.s3.evaluator.exceptions.openmath.OMObjectNotSupportedException;
+import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
 
 public class TestAbs {
 	private Abs func = new Abs();
 	@Test
-	public void testAbsInteger(){
+	public void testAbsInteger() throws FunctionException{
 	
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(-3));
@@ -29,7 +34,7 @@ public class TestAbs {
 	}
 	
 	@Test
-	public void testAbsFloat(){
+	public void testAbsFloat() throws FunctionException{
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMF(-2.5));
 		OMF result = (OMF) func.evaluate(args);
@@ -37,7 +42,7 @@ public class TestAbs {
 	}
 	
 	@Test
-	public void testAbsIntegration(){
+	public void testAbsIntegration() throws OMOBJChildNotSupportedException, OMObjectNotSupportedException, FunctionException{
 		OMOBJ omobj = ExpressionParser.parse("abs(-13)", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals("13", result.getOMI().getValue());
@@ -48,7 +53,7 @@ public class TestAbs {
 	}
 	
 	@Test
-	public void testAbsSageSyntax(){
+	public void testAbsSageSyntax() throws OMObjectNotSupportedException, OMOBJChildNotSupportedException, FunctionArgumentNumberException, NoRepresentationAvailableException{
 		OMF omf = OMCreator.createOMF(1.0);
 		OMI omi = OMCreator.createOMI(10);
 		
@@ -64,7 +69,7 @@ public class TestAbs {
 	}
 	
 	@Test(expected=FunctionInvalidArgumentException.class)
-	public void testAbsWithWrongArguments(){
+	public void testAbsWithWrongArguments() throws OMOBJChildNotSupportedException, OMObjectNotSupportedException, FunctionException{
 		OMOBJ omobj = ExpressionParser.parse("abs('test')", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals("5", result.getOMI().getValue());

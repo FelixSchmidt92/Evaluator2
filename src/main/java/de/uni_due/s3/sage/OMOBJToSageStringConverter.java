@@ -136,8 +136,9 @@ public class OMOBJToSageStringConverter {
 	 * 
 	 * @param omobj the OMOBJ-"Container"
 	 * @return the String representation of this OMOBJ in Sage-Syntax
+	 * @throws SagePhrasebookException 
 	 */
-	public String convert(OMOBJ omobj){
+	public String convert(OMOBJ omobj) throws SagePhrasebookException{
 		if (omobj.getOMF() != null){
 			return convert(omobj.getOMF());
 		}
@@ -173,7 +174,7 @@ public class OMOBJToSageStringConverter {
 	 * @return a String in Sage-Syntax
 	 * @throws SagePhrasebookException
 	 */
-	public String convert(Object omUnknown){
+	public String convert(Object omUnknown) throws SagePhrasebookException{
 		String result = null;
 		
 		switch (omUnknown.getClass().getSimpleName()){
@@ -296,8 +297,9 @@ public class OMOBJToSageStringConverter {
 	/***************Below you can add more convert*-Methods******************/
 	
 	
-	/**Converts unarys in OMALookUp into Sage*/
-	private String convertUnary(OMA unary){
+	/**Converts unarys in OMALookUp into Sage
+	 * @throws SagePhrasebookException */
+	private String convertUnary(OMA unary) throws SagePhrasebookException{
 		String cd = ((OMS)unary.getOmel().get(0)).getCd();
 		String name = ((OMS)unary.getOmel().get(0)).getName();
 		
@@ -305,8 +307,9 @@ public class OMOBJToSageStringConverter {
 	}
 	
 	
-	/**Converts binarys in OMALookUp into Sage. including simple Polynoms*/
-	private String convertArith1(OMA arith1){
+	/**Converts binarys in OMALookUp into Sage. including simple Polynoms
+	 * @throws SagePhrasebookException */
+	private String convertArith1(OMA arith1) throws SagePhrasebookException{
 		String cd = ((OMS)arith1.getOmel().get(0)).getCd();
 		String name = ((OMS)arith1.getOmel().get(0)).getName();
 		
@@ -314,32 +317,37 @@ public class OMOBJToSageStringConverter {
 									+ convert(arith1.getOmel().get(2));	
 	}
 	
-	/**Conversion of set using buildString*/
-	private String convertSet(OMA set){	
+	/**Conversion of set using buildString
+	 * @throws SagePhrasebookException */
+	private String convertSet(OMA set) throws SagePhrasebookException{	
 		return buildString("{", set.getOmel(), "}", 1);
 	}
 	
 	
-	/**Conversion of list using buildString*/
-	private String convertList(OMA list){
+	/**Conversion of list using buildString
+	 * @throws SagePhrasebookException */
+	private String convertList(OMA list) throws SagePhrasebookException{
 		return buildString("[", list.getOmel(), "]", 1);
 	}
 	
 	
-	/**Conversion of vector using buildString*/
-	private String convertVector(OMA vector){
+	/**Conversion of vector using buildString
+	 * @throws SagePhrasebookException */
+	private String convertVector(OMA vector) throws SagePhrasebookException{
 		return buildString("vector([", vector.getOmel(), "])", 1);
 	}
 	
 	
-	/**Conversion of rowmatrix using buildString*/
-	private String convertRowMatrix(OMA rowMatrix){
+	/**Conversion of rowmatrix using buildString
+	 * @throws SagePhrasebookException */
+	private String convertRowMatrix(OMA rowMatrix) throws SagePhrasebookException{
 		return buildString("matrix([[", rowMatrix.getOmel(), "]])", 1);
 	}
 	
 	
-	/**Conversion of matrix using convertList*/
-	private String convertMatrix(OMA matrix){
+	/**Conversion of matrix using convertList
+	 * @throws SagePhrasebookException */
+	private String convertMatrix(OMA matrix) throws SagePhrasebookException{
 		//convert inside of list
 		List<String> matrixRows = new LinkedList<String>();
 		for(int i = 1; i < matrix.getOmel().size(); i++){
@@ -368,8 +376,9 @@ public class OMOBJToSageStringConverter {
 	 * @param post	the postfix 
 	 * @param startPos the position where the List should start from the omel-list (usually 1)
 	 * @return a String which represents this List as a Sage-Syntax-String
+	 * @throws SagePhrasebookException 
 	 */
-	private String buildString(String pre, List<Object> omels, String post, int startPos){
+	private String buildString(String pre, List<Object> omels, String post, int startPos) throws SagePhrasebookException{
 		if(startPos < omels.size()){
 			return buildString(pre + convert(omels.get(startPos))+ ", ", omels, post, startPos + 1);
 		}else{

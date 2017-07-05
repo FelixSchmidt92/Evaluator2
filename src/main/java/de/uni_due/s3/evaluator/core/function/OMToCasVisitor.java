@@ -11,8 +11,10 @@ import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMSTR;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMV;
 import de.uni_due.s3.evaluator.core.functionData.OMSFunctionDictionary;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionArgumentNumberException;
 import de.uni_due.s3.evaluator.exceptions.openmath.OMOBJChildNotSupportedException;
 import de.uni_due.s3.evaluator.exceptions.openmath.OMObjectNotSupportedException;
+import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 
 
 /**
@@ -42,8 +44,10 @@ public abstract class OMToCasVisitor {
 	 * 
 	 * @param omElement the Element to visit
 	 * @return the String Representation of this omElement (including its children!)
+	 * @throws NoRepresentationAvailableException 
+	 * @throws FunctionArgumentNumberException 
 	 */
-	public String visit(Object omElement) throws OMObjectNotSupportedException, OMOBJChildNotSupportedException{
+	public String visit(Object omElement) throws OMObjectNotSupportedException, OMOBJChildNotSupportedException, FunctionArgumentNumberException, NoRepresentationAvailableException{
 		String result = "";
 		
 		switch (omElement.getClass().getSimpleName()){
@@ -86,8 +90,10 @@ public abstract class OMToCasVisitor {
 	 * 
 	 * @param omobj the OMOBJ-"Container"
 	 * @return the String representation of this OMOBJ excluding OMOBJ!!
+	 * @throws NoRepresentationAvailableException 
+	 * @throws FunctionArgumentNumberException 
 	 */
-	private String visit(OMOBJ omobj) throws OMOBJChildNotSupportedException{
+	private String visit(OMOBJ omobj) throws OMOBJChildNotSupportedException, FunctionArgumentNumberException, NoRepresentationAvailableException{
 		if(omobj != null){
 			if (omobj.getOMF() != null){
 				return visit(omobj.getOMF());
@@ -164,8 +170,10 @@ public abstract class OMToCasVisitor {
 	 * 
 	 * @param oma the visited oma 
 	 * @return the String Representation of this oma and its childs
+	 * @throws FunctionArgumentNumberException 
+	 * @throws NoRepresentationAvailableException 
 	 */
-	private String visit(OMA oma){
+	private String visit(OMA oma) throws FunctionArgumentNumberException, NoRepresentationAvailableException{
 		List<Object> omel = new ArrayList<>();  
 		
 		for (int i = 1; i < oma.getOmel().size(); i++){
@@ -189,8 +197,11 @@ public abstract class OMToCasVisitor {
 	 * 		  Note: These Parameter are evaluated if argumentsShouldBeEvaluated returns true.
 	 * 				Not evaluated if it returns false
 	 * @return a String which is in CAS-Syntax
+	 * @throws FunctionArgumentNumberException 
+	 * @throws OMOBJChildNotSupportedException 
+	 * @throws OMObjectNotSupportedException 
 	 */
-	protected abstract String getCASRepresentationForFunction(Function function, List<Object> omel);
+	protected abstract String getCASRepresentationForFunction(Function function, List<Object> omel) throws NoRepresentationAvailableException, OMObjectNotSupportedException, OMOBJChildNotSupportedException, FunctionArgumentNumberException;
 
 }
 	

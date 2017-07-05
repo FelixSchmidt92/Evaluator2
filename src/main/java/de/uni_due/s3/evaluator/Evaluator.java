@@ -4,6 +4,10 @@ import java.util.HashMap;
 
 import de.uni_due.s3.JAXBOpenMath.openmath.OMOBJ;
 import de.uni_due.s3.evaluator.core.function.OMExecutor;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
+import de.uni_due.s3.evaluator.exceptions.openmath.OMOBJChildNotSupportedException;
+import de.uni_due.s3.evaluator.exceptions.openmath.OMObjectNotSupportedException;
+import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
 
 /**
@@ -27,8 +31,11 @@ public class Evaluator {
 	 * @param expression
 	 *            see requirements F2.*
 	 * @return the result of the evaluated expression as OpenMath-Object (JAXB)
+	 * @throws FunctionException, ParserException 
+	 * @throws OMObjectNotSupportedException 
+	 * @throws OMOBJChildNotSupportedException 
 	 */
-	public OMOBJ evaluate(String expression) {
+	public OMOBJ evaluate(String expression) throws OMOBJChildNotSupportedException, OMObjectNotSupportedException, FunctionException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse(expression, exerciseVariableMap, fillInVariableMap);
 		return OMExecutor.execute(omobj);
 	}
@@ -39,8 +46,11 @@ public class Evaluator {
 	 * 
 	 * @param omobj
 	 * @return the evaluated OpenMath-Object
+	 * @throws FunctionException 
+	 * @throws OMObjectNotSupportedException 
+	 * @throws OMOBJChildNotSupportedException 
 	 */
-	public OMOBJ evaluate(OMOBJ omobj) {
+	public OMOBJ evaluate(OMOBJ omobj) throws OMOBJChildNotSupportedException, OMObjectNotSupportedException, FunctionException {
 		return OMExecutor.execute(omobj);
 	}
 

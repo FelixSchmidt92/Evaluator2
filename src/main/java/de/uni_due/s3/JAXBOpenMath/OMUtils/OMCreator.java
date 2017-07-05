@@ -21,7 +21,7 @@ public class OMCreator {
 	 * @param omElement The Object which should be wrapped into OMOBJ (has to be one of the JAXB-Classes)
 	 * @return an OMOBJ containing the omOnknown at the correct spot
 	 */
-	public static OMOBJ createOMOBJ(Object omElement) throws EvaluatorException{
+	public static OMOBJ createOMOBJ(Object omElement) throws OMObjectNotSupportedException,OMObjectNotSupportedException{
 		OMOBJ omobj = new OMOBJ();
 		if(omElement != null){
 			switch (omElement.getClass().getSimpleName()){

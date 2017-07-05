@@ -43,7 +43,7 @@ public class TestOMOBJToSageStringConverter {
 	
 	
 	@BeforeClass
-	public static void beforeClass(){
+	public static void beforeClass() throws EvaluatorException{
 		
 		try {
 			JAXBContext context = JAXBContext.newInstance("de.uni_due.s3.openmath");
@@ -66,14 +66,14 @@ public class TestOMOBJToSageStringConverter {
 	
 	
 	@Test
-	public void testOMF() throws JAXBException{
+	public void testOMF() throws JAXBException, SagePhrasebookException{
 		OMOBJ f = (OMOBJ) unmarshaller.unmarshal(new StringReader("<OMOBJ><OMF dec=\""+ float1 +"\"/></OMOBJ>"));
 		assertEquals(converter.convert(f), "RealNumber("+ float1 +")");
 	}
 	
 	
 	@Test
-	public void testOMI() throws JAXBException{
+	public void testOMI() throws JAXBException, SagePhrasebookException{
 		OMOBJ i = (OMOBJ) unmarshaller.unmarshal(new StringReader("<OMOBJ><OMI>"+ integer +"</OMI></OMOBJ>"));
 		assertEquals(converter.convert(i), "Integer("+ integer +")");
 		

@@ -6,7 +6,7 @@ import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
  * @author frichtscheid
  *
  */
-public class FunctionNotImplementedException extends FunctionException{
+public class FunctionNotImplementedException extends RuntimeException{
 	
 	/**
 	 * 

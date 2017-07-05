@@ -4,20 +4,24 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.core.function.NumberUtils;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionArgumentNumberException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
+import de.uni_due.s3.evaluator.exceptions.openmath.OMOBJChildNotSupportedException;
+import de.uni_due.s3.evaluator.exceptions.openmath.OMObjectNotSupportedException;
+import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 
 public class Abs extends Function{
 
 	
 	@Override
-	protected Object execute(List<Object> arguments) {
+	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentException {
 		Object arg = arguments.get(0);
 		try {
 			Double argValue = NumberUtils.convertOMIOMFToDouble(arg);
 			return NumberUtils.convertDoubleToOMIOMF(Math.abs(argValue));
 		} catch (InputMismatchException e) {
-			throw new FunctionInvalidArgumentException("Function abs accepts only integer, float, double values.");
+			throw new FunctionInvalidArgumentException(this,"integer, float, double");
 		}
 	}
 	
@@ -32,7 +36,7 @@ public class Abs extends Function{
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) {
+	public String getPartialSageSyntax(List<Object> arguments) throws OMObjectNotSupportedException, OMOBJChildNotSupportedException, FunctionArgumentNumberException, NoRepresentationAvailableException {
 		return "abs("+getSageSyntax(arguments)+")";
 	}
 

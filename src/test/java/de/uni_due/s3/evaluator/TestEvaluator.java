@@ -8,7 +8,11 @@ import org.junit.Test;
 
 import de.uni_due.s3.JAXBOpenMath.OMUtils.OMConverter;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMOBJ;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedException;
+import de.uni_due.s3.evaluator.exceptions.openmath.OMOBJChildNotSupportedException;
+import de.uni_due.s3.evaluator.exceptions.openmath.OMObjectNotSupportedException;
+import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
 
 
 public class TestEvaluator {
@@ -21,13 +25,13 @@ public class TestEvaluator {
 	}
 	
 	@Test
-	public void testEvaluateString() throws JAXBException{
+	public void testEvaluateString() throws JAXBException, OMOBJChildNotSupportedException, OMObjectNotSupportedException, FunctionException, ParserException{
 		Assert.assertEquals("<OMOBJ><OMI>4</OMI></OMOBJ>", OMConverter.toString(eval.evaluate("1+3")));
 		Assert.assertEquals("<OMOBJ><OMI>4</OMI></OMOBJ>", OMConverter.toString(eval.evaluate("plus(1,3)")));
 	}
 	
 	@Test(expected=FunctionNotImplementedException.class)
-	public void testEvaluateWithException() throws JAXBException{
+	public void testEvaluateWithException() throws JAXBException, OMOBJChildNotSupportedException, OMObjectNotSupportedException, FunctionException, ParserException{
 		eval.evaluate("abcdefghxjc()");
 		eval.evaluate("123cdefghxjc()");
 		eval.evaluate("abcdefghxjc");	//should this throw a another exception? (dlux: this throws a ParserException from ParserErrorStrategy)
@@ -40,7 +44,7 @@ public class TestEvaluator {
 	}
 	
 	@Test
-	public void testEvaluateOMOBJ() throws JAXBException{
+	public void testEvaluateOMOBJ() throws JAXBException, OMOBJChildNotSupportedException, OMObjectNotSupportedException, FunctionException{
 		Assert.assertEquals("<OMOBJ><OMI>15</OMI></OMOBJ>", OMConverter.toString(eval.evaluate((OMOBJ)OMConverter.toObject("<OMOBJ><OMA>"
 																			+ "<OMS name=\"plus\" cd=\"arith1\"/>"
 																			+ "<OMI>2</OMI>"

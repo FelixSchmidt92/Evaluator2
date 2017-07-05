@@ -17,8 +17,10 @@ import de.uni_due.s3.JAXBOpenMath.openmath.OMR;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMSTR;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMV;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionArgumentNumberException;
 import de.uni_due.s3.evaluator.exceptions.openmath.OMOBJChildNotSupportedException;
 import de.uni_due.s3.evaluator.exceptions.openmath.OMObjectNotSupportedException;
+import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 
 public class TestOMToCasVisitor {
 
@@ -71,7 +73,7 @@ public class TestOMToCasVisitor {
 	}
 	
 	@Test
-	public void testVisitObject(){
+	public void testVisitObject() throws OMObjectNotSupportedException, OMOBJChildNotSupportedException, FunctionArgumentNumberException, NoRepresentationAvailableException{
 		OMI omi = OMCreator.createOMI(1);
 		OMF omf = OMCreator.createOMF(1.0);
 		OMV omv = OMCreator.createOMV("test");
@@ -92,7 +94,7 @@ public class TestOMToCasVisitor {
 	}
 	
 	@Test
-	public void testVisitOMOBJ(){
+	public void testVisitOMOBJ() throws OMObjectNotSupportedException, OMOBJChildNotSupportedException, FunctionArgumentNumberException, NoRepresentationAvailableException{
 		OMI omi = OMCreator.createOMI(1);
 		OMF omf = OMCreator.createOMF(1.0);
 		OMV omv = OMCreator.createOMV("test");
@@ -112,13 +114,13 @@ public class TestOMToCasVisitor {
 	}
 	
 	@Test(expected=OMObjectNotSupportedException.class)
-	public void testVisitObjectWithWrongObject(){
+	public void testVisitObjectWithWrongObject() throws OMObjectNotSupportedException, OMOBJChildNotSupportedException, FunctionArgumentNumberException, NoRepresentationAvailableException{
 		vis.visit(new Integer(10));
 		vis.visit(new OMATP());
 	}
 	
 	@Test(expected=OMOBJChildNotSupportedException.class)
-	public void testVisitOMOBJWithWrongChild(){
+	public void testVisitOMOBJWithWrongChild() throws OMObjectNotSupportedException, OMOBJChildNotSupportedException, FunctionArgumentNumberException, NoRepresentationAvailableException{
 		OMR omr = new OMR();
 		OMOBJ omobj = new OMOBJ();
 		omobj.setOMR(omr);

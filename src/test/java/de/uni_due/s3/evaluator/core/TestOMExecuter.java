@@ -23,7 +23,9 @@ import de.uni_due.s3.JAXBOpenMath.openmath.OMV;
 import de.uni_due.s3.evaluator.core.function.OMExecutor;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.Plus;
 import de.uni_due.s3.evaluator.exceptions.EvaluatorException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.openmath.OMOBJChildNotSupportedException;
+import de.uni_due.s3.evaluator.exceptions.openmath.OMObjectNotSupportedException;
 
 
 
@@ -41,7 +43,7 @@ public class TestOMExecuter {
 	}
 	
 	@Test
-	public void visitorTestOMOBJ() throws JAXBException{
+	public void visitorTestOMOBJ() throws JAXBException, OMOBJChildNotSupportedException, OMObjectNotSupportedException, FunctionException{
 		OMOBJ result;
 		OMOBJ omobj;
 		//test OMI
@@ -78,7 +80,7 @@ public class TestOMExecuter {
 	}
 	
 	@Test
-	public void visitorTestOMA() throws JAXBException{
+	public void visitorTestOMA() throws JAXBException, OMOBJChildNotSupportedException, OMObjectNotSupportedException, FunctionException{
 		OMOBJ result;
 		OMA oma;
 		
@@ -96,7 +98,7 @@ public class TestOMExecuter {
 	}
 	
 	@Test
-	public void visitorTestNestedOMA() throws JAXBException{
+	public void visitorTestNestedOMA() throws JAXBException, OMOBJChildNotSupportedException, OMObjectNotSupportedException, FunctionException{
 		OMOBJ result;
 		OMA oma;
 		
@@ -113,7 +115,7 @@ public class TestOMExecuter {
 	}
 	
 	@Test(expected = EvaluatorException.class)
-	public void visitorTestWithWrongFunction() throws JAXBException{
+	public void visitorTestWithWrongFunction() throws JAXBException, OMOBJChildNotSupportedException, OMObjectNotSupportedException, FunctionException{
 		Object result;
 		OMA oma;
 		
@@ -129,7 +131,7 @@ public class TestOMExecuter {
 	}
 	
 	@Test(expected=OMOBJChildNotSupportedException.class)
-	public void testNotImplementedOMobject(){
+	public void testNotImplementedOMobject() throws OMOBJChildNotSupportedException, OMObjectNotSupportedException, FunctionException{
 		OMOBJ omobj = new OMOBJ();
 		omobj.setOMB(new OMB());
 		OMExecutor.execute(omobj);

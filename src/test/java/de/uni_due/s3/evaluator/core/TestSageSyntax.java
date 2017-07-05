@@ -6,13 +6,17 @@ import org.junit.Test;
 
 import de.uni_due.s3.JAXBOpenMath.openmath.OMOBJ;
 import de.uni_due.s3.evaluator.core.function.OMToSageVisitor;
-import de.uni_due.s3.evaluator.exceptions.NoFunctionToCASException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionArgumentNumberException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedException;
+import de.uni_due.s3.evaluator.exceptions.openmath.OMOBJChildNotSupportedException;
+import de.uni_due.s3.evaluator.exceptions.openmath.OMObjectNotSupportedException;
+import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
 
 public class TestSageSyntax {
 
 	@Test
-	public void testSageSyntax() throws JAXBException{
+	public void testSageSyntax() throws JAXBException, OMObjectNotSupportedException, OMOBJChildNotSupportedException, FunctionArgumentNumberException, NoRepresentationAvailableException{
 		OMOBJ omobj = ExpressionParser.parse("plus(1, times(2, 3))", null, null);
 		System.out.println(new OMToSageVisitor().visit(omobj));
 		
@@ -27,7 +31,7 @@ public class TestSageSyntax {
 		try{
 			OMOBJ omobj4 = ExpressionParser.parse("equalssemisem()", null, null);
 			System.out.println(new OMToSageVisitor().visit(omobj4));
-		}catch(NoFunctionToCASException e){
+		}catch(FunctionNotImplementedException e){
 			System.out.println("The Method in EqualsSemiSem is not implemtened");
 		}	
 	}

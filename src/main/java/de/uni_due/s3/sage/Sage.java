@@ -17,8 +17,8 @@ import javax.xml.bind.JAXBException;
 import org.apache.log4j.Logger;
 
 import de.uni_due.s3.JAXBOpenMath.OMUtils.OMConverter;
-import de.uni_due.s3.evaluator.exceptions.CASEvaluationException;
-import de.uni_due.s3.evaluator.exceptions.CASNotAvailableException;
+import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
+import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 
 /**
  * This class provides an interface to execute sage commands. To execute a Sage
@@ -54,10 +54,11 @@ public class Sage {
 	 * @return sageResult
 	 * @throws CasEvaluationException
 	 *             if command is not evaluatable in Sage
+	 * @throws CasNotAvailableException 
 	 * @throws NoCASConnectionsException
 	 *             if there is no working SageServer connection anymore.
 	 */
-	public static Object evaluateInCAS(String sageExpression) throws CasEvaluationException {
+	public static Object evaluateInCAS(String sageExpression) throws CasEvaluationException, CasNotAvailableException {
 		if (!initFlag) {
 			throw new CasNotAvailableException("Jack did not initialized a Sage CAS connection.");
 		}
@@ -109,10 +110,11 @@ public class Sage {
 	 * Returns a SageServer address.
 	 * 
 	 * @return IP:PORT e.g.: 192.168.68.176:8888
+	 * @throws CasNotAvailableException 
 	 * @throws NoCASConnectionsException
 	 *             if sageConnectionList is empty
 	 */
-	private static String getRandomFromConnectionList() {
+	private static String getRandomFromConnectionList() throws CasNotAvailableException {
 		if (sageConnectionsList.size() == 0) {
 			throw new CasNotAvailableException("All SageServers are not working.");
 		} else {
