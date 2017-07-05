@@ -1,4 +1,4 @@
-package de.uni_due.s3.sage;
+package de.uni_due.s3.cashandler;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
