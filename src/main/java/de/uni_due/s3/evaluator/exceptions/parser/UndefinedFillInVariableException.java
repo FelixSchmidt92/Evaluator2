@@ -1,4 +1,4 @@
-package de.uni_due.s3.evaluator.exceptions;
+package de.uni_due.s3.evaluator.exceptions.parser;
 
 /**
  * This exception class signals, that a specified FillInVariable does not exists and can't be retrieved

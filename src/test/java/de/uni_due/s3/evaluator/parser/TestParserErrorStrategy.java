@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import de.uni_due.s3.evaluator.exceptions.ParserException;
+import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
 
 /**
  * This class tests the ParserErrorStrategy.

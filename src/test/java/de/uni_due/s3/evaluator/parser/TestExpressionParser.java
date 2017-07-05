@@ -24,8 +24,8 @@ import de.uni_due.s3.JAXBOpenMath.openmath.OMI;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMOBJ;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMSTR;
-import de.uni_due.s3.evaluator.exceptions.ParserException;
-import de.uni_due.s3.evaluator.exceptions.UndefinedExerciseVariableException;
+import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
+import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableException;
 
 public class TestExpressionParser {
 	

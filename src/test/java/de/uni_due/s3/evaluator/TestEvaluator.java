@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import de.uni_due.s3.JAXBOpenMath.OMUtils.OMConverter;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMOBJ;
-import de.uni_due.s3.evaluator.exceptions.FunctionNotImplementedException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedException;
 
 
 public class TestEvaluator {

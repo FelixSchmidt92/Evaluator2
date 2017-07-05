@@ -6,7 +6,7 @@ package de.uni_due.s3.evaluator.exceptions;
  * @author spobel
  *
  */
-public class EvaluatorException extends RuntimeException {
+public class EvaluatorException extends Exception {
 
 	/**
 	 * 

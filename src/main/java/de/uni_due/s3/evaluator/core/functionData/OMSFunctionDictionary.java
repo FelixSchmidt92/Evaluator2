@@ -2,8 +2,8 @@ package de.uni_due.s3.evaluator.core.functionData;
 
 import java.util.HashMap;
 
-import de.uni_due.s3.evaluator.exceptions.FunctionNotImplementedException;
 import de.uni_due.s3.JAXBOpenMath.OMUtils.OMCreator;
+import de.uni_due.s3.evaluator.exceptions.FunctionNotImplementedException;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.Abs;
@@ -78,6 +78,7 @@ import de.uni_due.s3.evaluator.core.function.functions.transc1.Exp;
 import de.uni_due.s3.evaluator.core.function.functions.transc1.Sin;
 import de.uni_due.s3.evaluator.core.function.functions.transc1.Tan;
 import de.uni_due.s3.evaluator.core.function.functions.transc2.ArcTan2;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedException;
 
 /**
  * In This Dictionary all available Functions are registered in a HashMap.
@@ -215,7 +216,7 @@ public class OMSFunctionDictionary {
 		if (functions.containsKey(oms)) {
 			return functions.get(oms);
 		} else {
-			throw new FunctionNotImplementedException(OMCreator.createOMS("", ""));
+			throw new FunctionNotImplementedException(new OMSymbol("", ""));
 		}
 	}
 }

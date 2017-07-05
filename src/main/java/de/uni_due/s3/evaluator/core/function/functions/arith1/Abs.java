@@ -4,8 +4,8 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.core.function.NumberUtils;
-import de.uni_due.s3.evaluator.exceptions.FunctionArgumentMismatchException;
-import de.uni_due.s3.evaluator.exceptions.InputMismatchException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
+import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
 
 public class Abs extends Function{
 
@@ -17,7 +17,7 @@ public class Abs extends Function{
 			Double argValue = NumberUtils.convertOMIOMFToDouble(arg);
 			return NumberUtils.convertDoubleToOMIOMF(Math.abs(argValue));
 		} catch (InputMismatchException e) {
-			throw new FunctionArgumentMismatchException("Function abs accepts only integer, float, double values.");
+			throw new FunctionInvalidArgumentException("Function abs accepts only integer, float, double values.");
 		}
 	}
 	

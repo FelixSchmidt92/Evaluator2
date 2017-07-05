@@ -4,8 +4,8 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.core.function.NumberUtils;
-import de.uni_due.s3.evaluator.exceptions.FunctionArgumentMismatchException;
-import de.uni_due.s3.evaluator.exceptions.InputMismatchException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
+import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
 
 public class Plus extends Function {
 
@@ -25,7 +25,7 @@ public class Plus extends Function {
 			
 
 		} catch (InputMismatchException e) {
-			throw new FunctionArgumentMismatchException("Operator '+' (function plus()) accepts only integer, float, double values.");
+			throw new FunctionInvalidArgumentException("Operator '+' (function plus()) accepts only integer, float, double values.");
 		}
 	}
 

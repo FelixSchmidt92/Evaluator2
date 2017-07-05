@@ -1,7 +1,11 @@
-package de.uni_due.s3.evaluator.exceptions;
+package de.uni_due.s3.evaluator.exceptions.function;
 
 import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
-
+/**
+ * Is thrown when a requested function is not implemented
+ * @author frichtscheid
+ *
+ */
 public class FunctionNotImplementedException extends FunctionException{
 	
 	/**
@@ -9,8 +13,8 @@ public class FunctionNotImplementedException extends FunctionException{
 	 */
 	private static final long serialVersionUID = 8997318712583267590L;
 
-	public FunctionNotImplementedException(OMS oms){
-		super("the requested function: " + oms.getName() + " with cd: " + oms.getCd() + " does not exist");
+	public FunctionNotImplementedException(OMS omsymbol){
+		super("the requested function: " + omsymbol.getName() + "(cd:"+omsymbol.getCd()+") does not exist");
 	}
 	
 	public FunctionNotImplementedException(String name){

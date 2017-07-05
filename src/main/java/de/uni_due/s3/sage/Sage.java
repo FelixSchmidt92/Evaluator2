@@ -1,4 +1,4 @@
-package de.uni_due.s3.cashandler;
+package de.uni_due.s3.sage;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -52,14 +52,14 @@ public class Sage {
 	 * 
 	 * @param sageExpression
 	 * @return sageResult
-	 * @throws CASEvaluationException
+	 * @throws CasEvaluationException
 	 *             if command is not evaluatable in Sage
 	 * @throws NoCASConnectionsException
 	 *             if there is no working SageServer connection anymore.
 	 */
-	public static Object evaluateInCAS(String sageExpression) throws CASEvaluationException {
+	public static Object evaluateInCAS(String sageExpression) throws CasEvaluationException {
 		if (!initFlag) {
-			throw new CASNotAvailableException("Jack did not initialized a Sage CAS connection.");
+			throw new CasNotAvailableException("Jack did not initialized a Sage CAS connection.");
 		}
 		String casResult = "";
 		// get one Connection to a SageServer
@@ -95,19 +95,14 @@ public class Sage {
 			return evaluateInCAS(sageExpression);
 		}
 		if (casResult.startsWith("WARN: ") || casResult.equals("<built-in function exit>"))
-			throw new CASEvaluationException("Sage command: '" + sageExpression
+			throw new CasEvaluationException("Sage command: '" + sageExpression
 					+ "' could not be evaluated in Sage CAS. Result is: '" + casResult + "'.");
-		casResult.replaceAll("<OMOBJ>", "");
-		casResult.replaceAll("</OMOBJ>", "");
-		
-		Object result = null;
-		try {
-			result = OMConverter.toObject(casResult);
-		} catch (JAXBException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return result;
+		return sageToEObject(casResult);
+	}
+
+	private static Object sageToEObject(String casResult) {
+		// FIXME spobel SAGEPHRASEBOOK
+		return null;
 	}
 
 	/**
@@ -119,7 +114,7 @@ public class Sage {
 	 */
 	private static String getRandomFromConnectionList() {
 		if (sageConnectionsList.size() == 0) {
-			throw new CASNotAvailableException("All SageServers are not working.");
+			throw new CasNotAvailableException("All SageServers are not working.");
 		} else {
 			Random rand = new Random();
 			int min = 0;

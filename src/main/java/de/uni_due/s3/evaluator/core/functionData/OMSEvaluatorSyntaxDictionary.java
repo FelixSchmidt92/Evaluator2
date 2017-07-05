@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
-import de.uni_due.s3.evaluator.exceptions.FunctionNotImplementedException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedException;
 
 public class OMSEvaluatorSyntaxDictionary {
 	
