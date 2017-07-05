@@ -2,6 +2,8 @@ lexer grammar EvaluatorLexer;
 
 LeftParenthesis: '(';
 RightParenthesis: ')';
+SetOpen: '{';
+SetClose: '}';
 Plus: '+';
 Minus: '-';
 BooleanNot:	'!';
@@ -20,6 +22,7 @@ ExerciseVariable: '[var=' [a-zA-Z_öÖäÄüÜ] [a-zA-Z0-9_öÖäÄüÜ]* ']' | 
 FillInVariable: '[pos=' [0-9]+ ']' | '\'' '[pos=' [0-9]+ ']' '\'';
 FunctionName: [a-zA-Z] [a-zA-Z0-9]*;
 ArgumentSeparator: ',';
+SetArgumentSeparator: ';';
 Integer: [0-9]+ | '\'' [0-9]+ '\'';
 Float: [0-9]+( '.' [0-9]+) | ( '\'' [0-9]+( '.' [0-9]+) '\'' );
 String: '\'' .*? '\'' ;
