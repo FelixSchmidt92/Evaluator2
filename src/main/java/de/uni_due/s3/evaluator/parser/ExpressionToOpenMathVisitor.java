@@ -14,6 +14,7 @@ import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableExcept
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedFillInVariableException;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.ExpressionContext;
+import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.SetContext;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParserBaseVisitor;
 
 public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Object> {
@@ -39,57 +40,9 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	 * </p>
 	 */
 	@Override
-	public Object visitParentheses(EvaluatorParser.ParenthesesContext ctx) {
-		return visit(ctx.getChild(1)); // visit second child only (there are
-										// only Arguments
-										// in between the parentheses)
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>
-	 * The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.
-	 * </p>
-	 */
-	@Override
-	public OMA visitUnaryOperator(EvaluatorParser.UnaryOperatorContext ctx) {
-		OMS oms = new OMS();
-
-		switch (ctx.operator.getText()) {
-		case "+":
-			oms.setCd("arith1");
-			oms.setName("unary_plus");
-			break;
-
-		case "-":
-			oms.setCd("arith1");
-			oms.setName("unary_minus");
-			break;
-
-		case "!":
-			oms.setCd("logic1");
-			oms.setName("not");
-			break;
-		}
-		OMA oma = new OMA();
-		oma.getOmel().add(oms);
-		oma.getOmel().add(visitChildren(ctx));
-		return oma;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>
-	 * The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.
-	 * </p>
-	 */
-	@Override
 	public OMSTR visitTextValue(EvaluatorParser.TextValueContext ctx) {
-		OMSTR omstr = new OMSTR(); //FIXME enthält der Text eine Variable [pos= var=] muss diese ersetzt werden?!
+		OMSTR omstr = new OMSTR(); // FIXME enthält der Text eine Variable [pos=
+									// var=] muss diese ersetzt werden?!
 		omstr.setContent(ctx.getText().substring(1, ctx.getText().length() - 1)); // delete
 																					// '
 																					// at
@@ -97,112 +50,6 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 																					// and
 																					// end
 		return omstr;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>
-	 * The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.
-	 * </p>
-	 */
-	@Override
-	public OMA visitBinaryOperator(EvaluatorParser.BinaryOperatorContext ctx) {
-		OMS oms = new OMS();
-
-		switch (ctx.operator.getText()) {
-		case "+":
-			oms.setCd("arith1");
-			oms.setName("plus");
-			break;
-
-		case "-":
-			oms.setCd("arith1");
-			oms.setName("minus");
-			break;
-
-		case "*":
-			oms.setCd("arith1");
-			oms.setName("times");
-			break;
-
-		case "/":
-			oms.setCd("arith1");
-			oms.setName("divide");
-			break;
-
-		case "%": // defining here an own cd and name to have this as an binary
-					// operator
-			oms.setCd("jackbinary1");
-			oms.setName("modulus");
-			break;
-
-		case "<":
-			oms.setCd("relation1");
-			oms.setName("lt");
-			break;
-
-		case "<=":
-			oms.setCd("relation1");
-			oms.setName("leq");
-			break;
-
-		case ">":
-			oms.setCd("relation1");
-			oms.setName("gt");
-			break;
-
-		case ">=":
-			oms.setCd("relation1");
-			oms.setName("geq");
-			break;
-
-		case "=":
-			oms.setCd("relation1");
-			oms.setName("eq");
-			break;
-
-		case "==":
-			oms.setCd("logic1"); // equivalent "==" as "≡"
-			oms.setName("equivalent");
-			break;
-
-		case "!=":
-			oms.setCd("relation1");
-			oms.setName("neq");
-			break;
-
-		case "&&":
-			oms.setCd("logic1");
-			oms.setName("and");
-			break;
-
-		case "||":
-			oms.setCd("logic1");
-			oms.setName("or");
-			break;
-		}
-
-		OMA oma = new OMA();
-		oma.getOmel().add(oms); // add OMS and children
-		oma.getOmel().add(visit(ctx.getChild(0))); // left side
-		oma.getOmel().add(visit(ctx.getChild(2))); // right side
-
-		return oma;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>
-	 * The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.
-	 * </p>
-	 */
-	@Override
-	public Object visitFunction(EvaluatorParser.FunctionContext ctx) {
-		return visitChildren(ctx);
 	}
 
 	/**
@@ -302,8 +149,29 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	 * </p>
 	 */
 	@Override
-	public Object visitUnaryoperator(EvaluatorParser.UnaryoperatorContext ctx) {
-		return visitChildren(ctx);
+	public OMA visitUnaryoperator(EvaluatorParser.UnaryoperatorContext ctx) {
+		OMS oms = new OMS();
+
+		switch (ctx.operator.getText()) {
+		case "+":
+			oms.setCd("arith1");
+			oms.setName("unary_plus");
+			break;
+
+		case "-":
+			oms.setCd("arith1");
+			oms.setName("unary_minus");
+			break;
+
+		case "!":
+			oms.setCd("logic1");
+			oms.setName("not");
+			break;
+		}
+		OMA oma = new OMA();
+		oma.getOmel().add(oms);
+		oma.getOmel().add(visitChildren(ctx));
+		return oma;
 	}
 
 	/**
@@ -315,8 +183,98 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	 * </p>
 	 */
 	@Override
-	public Object visitBinaryoperator(EvaluatorParser.BinaryoperatorContext ctx) {
-		return visitChildren(ctx);
+	public OMA visitBinaryoperator(EvaluatorParser.BinaryoperatorContext ctx) {
+		OMS oms = new OMS();
+
+		switch (ctx.operator.getText()) {
+		case "+":
+			oms.setCd("arith1");
+			oms.setName("plus");
+			break;
+
+		case "-":
+			oms.setCd("arith1");
+			oms.setName("minus");
+			break;
+
+		case "*":
+			oms.setCd("arith1");
+			oms.setName("times");
+			break;
+
+		case "/":
+			oms.setCd("arith1");
+			oms.setName("divide");
+			break;
+
+		case "%": // defining here an own cd and name to have this as an binary
+					// operator
+			oms.setCd("jackbinary1");
+			oms.setName("modulus");
+			break;
+
+		case "<":
+			oms.setCd("relation1");
+			oms.setName("lt");
+			break;
+
+		case "<=":
+			oms.setCd("relation1");
+			oms.setName("leq");
+			break;
+
+		case ">":
+			oms.setCd("relation1");
+			oms.setName("gt");
+			break;
+
+		case ">=":
+			oms.setCd("relation1");
+			oms.setName("geq");
+			break;
+
+		case "=":
+			oms.setCd("relation1");
+			oms.setName("eq");
+			break;
+
+		case "==":
+			oms.setCd("logic1"); // equivalent "==" as "≡"
+			oms.setName("equivalent");
+			break;
+
+		case "!=":
+			oms.setCd("relation1");
+			oms.setName("neq");
+			break;
+
+		case "&&":
+			oms.setCd("logic1");
+			oms.setName("and");
+			break;
+
+		case "||":
+			oms.setCd("logic1");
+			oms.setName("or");
+			break;
+		}
+
+		OMA oma = new OMA();
+		oma.getOmel().add(oms); // add OMS and children
+		oma.getOmel().add(visit(ctx.getChild(0))); // left side
+		oma.getOmel().add(visit(ctx.getChild(2))); // right side
+
+		return oma;
+	}
+	
+	@Override
+	public OMA visitSet(SetContext ctx) {
+		OMA oma = new OMA();
+		oma.getOmel().add(OMSEvaluatorSyntaxDictionary.getInstance().getOMS("set"));
+		for (ExpressionContext childctx : ctx.arguments) {
+			oma.getOmel().add(visit(childctx));
+		}
+		return oma;
 	}
 
 	/**

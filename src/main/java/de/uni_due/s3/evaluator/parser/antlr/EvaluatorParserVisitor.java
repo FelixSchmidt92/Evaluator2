@@ -12,68 +12,46 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  */
 public interface EvaluatorParserVisitor<T> extends ParseTreeVisitor<T> {
 	/**
-	 * Visit a parse tree produced by the {@code parentheses}
-	 * labeled alternative in {@link EvaluatorParser#expression}.
+	 * Visit a parse tree produced by {@link EvaluatorParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitParentheses(EvaluatorParser.ParenthesesContext ctx);
+	T visitExpression(EvaluatorParser.ExpressionContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code unaryOperator}
-	 * labeled alternative in {@link EvaluatorParser#expression}.
+	 * Visit a parse tree produced by the {@code integerValue}
+	 * labeled alternative in {@link EvaluatorParser#terminal}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitUnaryOperator(EvaluatorParser.UnaryOperatorContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code textValue}
-	 * labeled alternative in {@link EvaluatorParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitTextValue(EvaluatorParser.TextValueContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code binaryOperator}
-	 * labeled alternative in {@link EvaluatorParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitBinaryOperator(EvaluatorParser.BinaryOperatorContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code function}
-	 * labeled alternative in {@link EvaluatorParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFunction(EvaluatorParser.FunctionContext ctx);
+	T visitIntegerValue(EvaluatorParser.IntegerValueContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code floatValue}
-	 * labeled alternative in {@link EvaluatorParser#expression}.
+	 * labeled alternative in {@link EvaluatorParser#terminal}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitFloatValue(EvaluatorParser.FloatValueContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code exerciseVarName}
-	 * labeled alternative in {@link EvaluatorParser#expression}.
+	 * labeled alternative in {@link EvaluatorParser#terminal}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitExerciseVarName(EvaluatorParser.ExerciseVarNameContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code integerValue}
-	 * labeled alternative in {@link EvaluatorParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitIntegerValue(EvaluatorParser.IntegerValueContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code fillInVarName}
-	 * labeled alternative in {@link EvaluatorParser#expression}.
+	 * labeled alternative in {@link EvaluatorParser#terminal}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitFillInVarName(EvaluatorParser.FillInVarNameContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code textValue}
+	 * labeled alternative in {@link EvaluatorParser#terminal}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTextValue(EvaluatorParser.TextValueContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link EvaluatorParser#unaryoperator}.
 	 * @param ctx the parse tree
@@ -86,6 +64,12 @@ public interface EvaluatorParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitBinaryoperator(EvaluatorParser.BinaryoperatorContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link EvaluatorParser#set}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSet(EvaluatorParser.SetContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link EvaluatorParser#nestedFunction}.
 	 * @param ctx the parse tree

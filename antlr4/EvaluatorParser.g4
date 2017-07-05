@@ -6,48 +6,72 @@ options {
 
 expression
 :
-	nestedFunction	#function
-	| LeftParenthesis expression RightParenthesis #parentheses
-	| operator = unaryoperator expression #unaryOperator
-	| expression operator = binaryoperator expression #binaryOperator
-	| value = Integer #integerValue
-	| value = Float  #floatValue
-	| name = ExerciseVariable #exerciseVarName
-	| name = FillInVariable  #fillInVarName
-    | value = String #textValue
+	nestedFunction
+	| LeftParenthesis expression RightParenthesis
+	| unaryoperator expression
+	| expression binaryoperator expression
+	| set
+	| terminal
+;
+
+terminal
+:
+	value = Integer # integerValue
+	| value = Float # floatValue
+	| name = ExerciseVariable # exerciseVarName
+	| name = FillInVariable # fillInVarName
+	| value = String # textValue
 ;
 
 unaryoperator
 :
-	Plus
-	| Minus
-	| BooleanNot
+	operator =
+	(
+		Plus
+		| Minus
+		| BooleanNot
+	)
 ;
 
 binaryoperator
 :
-	Multiplication
-	| Division
-	| Modulus
-	| Plus
-	| Minus
-	| LessThan
-	| LessThanOrEqual
-	| GreaterThan
-	| GreaterThanOrEqual
-	| Equal
-	| NotEqual
-	| BooleanAnd
-	| BooleanOr
+	operator =
+	(
+		Multiplication
+		| Division
+		| Modulus
+		| Plus
+		| Minus
+		| LessThan
+		| LessThanOrEqual
+		| GreaterThan
+		| GreaterThanOrEqual
+		| Equal
+		| NotEqual
+		| BooleanAnd
+		| BooleanOr
+	)
+;
+
+set
+:
+
+	SetOpen
+	(
+		arguments += expression
+		(
+			SetArgumentSeparator arguments += expression
+		)*
+	)? SetClose
 ;
 
 nestedFunction
 :
-    name = FunctionName LeftParenthesis
+	name = FunctionName LeftParenthesis
 	(
 		arguments += expression
 		(
 			ArgumentSeparator arguments += expression
-		)* 
+		)*
 	)? RightParenthesis
 ;
