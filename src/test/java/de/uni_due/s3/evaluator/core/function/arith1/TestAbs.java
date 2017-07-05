@@ -12,7 +12,7 @@ import de.uni_due.s3.JAXBOpenMath.openmath.OMF;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMI;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMOBJ;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
-import de.uni_due.s3.evaluator.core.function.OMExecuter;
+import de.uni_due.s3.evaluator.core.function.OMExecutor;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.Abs;
 import de.uni_due.s3.evaluator.exceptions.FunctionArgumentMismatchException;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
@@ -39,11 +39,11 @@ public class TestAbs {
 	@Test
 	public void testAbsIntegration(){
 		OMOBJ omobj = ExpressionParser.parse("abs(-13)", null, null);
-		OMOBJ result = OMExecuter.execute(omobj);
+		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals("13", result.getOMI().getValue());
 		
 		omobj = ExpressionParser.parse("abs(10)", null, null);
-		result = OMExecuter.execute(omobj);
+		result = OMExecutor.execute(omobj);
 		assertEquals("10", result.getOMI().getValue());
 	}
 	
@@ -66,11 +66,11 @@ public class TestAbs {
 	@Test(expected=FunctionArgumentMismatchException.class)
 	public void testAbsWithWrongArguments(){
 		OMOBJ omobj = ExpressionParser.parse("abs('test')", null, null);
-		OMOBJ result = OMExecuter.execute(omobj);
+		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals("5", result.getOMI().getValue());
 		
 		omobj = ExpressionParser.parse("abs('test')", null, null);
-		result = OMExecuter.execute(omobj);
+		result = OMExecutor.execute(omobj);
 		assertEquals("-7", result.getOMI().getValue());
 	}
 	

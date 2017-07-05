@@ -25,7 +25,7 @@ import de.uni_due.s3.evaluator.exceptions.OMObjectNotSupportedException;
  * @author frichtscheid
  *
  */
-public class OMExecuter {
+public class OMExecutor {
 	
 	/**
 	 * Visits a OMOBJ object and return its child object. The kind of child is determined by the OMOBJ object.
