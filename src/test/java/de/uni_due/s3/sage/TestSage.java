@@ -19,8 +19,13 @@ public class TestSage {
 	}
 	
 	@Test
-	public void test() throws CasEvaluationException, CasNotAvailableException {
-		Object result = Sage.evaluateInCAS("matrix(QQ,1,2,[3,4])");
-		System.out.println(result.toString());
+	public void test() {
+		try {
+			Object result = Sage.evaluateInCAS("");
+			System.out.println(result.toString());
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
 	}
 }

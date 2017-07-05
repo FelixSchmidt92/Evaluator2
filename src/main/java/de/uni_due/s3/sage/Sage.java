@@ -15,8 +15,10 @@ import java.util.TimerTask;
 import javax.xml.bind.JAXBException;
 
 import org.apache.log4j.Logger;
+import org.openmath.omutils.OMConverter;
+import org.openmath.openmath.OME;
+import org.openmath.openmath.OMOBJ;
 
-import de.uni_due.s3.JAXBOpenMath.OMUtils.OMConverter;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 
@@ -54,13 +56,17 @@ public class Sage {
 	 * @return sageResult
 	 * @throws CasEvaluationException
 	 *             if command is not evaluatable in Sage
-	 * @throws CasNotAvailableException 
+	 * @throws CasNotAvailableException
 	 * @throws NoCASConnectionsException
 	 *             if there is no working SageServer connection anymore.
 	 */
 	public static Object evaluateInCAS(String sageExpression) throws CasEvaluationException, CasNotAvailableException {
+		if (sageExpression == "") { // Python erkennt eine Leere Message nicht
+									// als Connection
+			sageExpression = " ";
+		}
 		if (!initFlag) {
-			throw new CasNotAvailableException("Jack did not initialized a Sage CAS connection.");
+			throw new CasNotAvailableException("Sage Server Connection has to be initialized.");
 		}
 		String casResult = "";
 		// get one Connection to a SageServer
@@ -95,17 +101,25 @@ public class Sage {
 			// restart evaluation without not working SageServer Connections
 			return evaluateInCAS(sageExpression);
 		}
-		if (casResult.startsWith("WARN: ") || casResult.equals("<built-in function exit>"))
-			throw new CasEvaluationException("Sage command: '" + sageExpression
-					+ "' could not be evaluated in Sage CAS. Result is: '" + casResult + "'.");
-		return OMConverter.toObject(casResult);
+		Object omobjResult = null;
+		try {
+			omobjResult = OMConverter.toObject(casResult);
+		} catch (JAXBException e) {
+			// log.error("Sage produced an JAXBException in OMConverter.", e);
+		}
+//		if (((OMOBJ) omobjResult).getOME() != null) {
+//			OME ome = ((OME) omobjResult);
+//			throw new CasEvaluationException("Sage command: '" + sageExpression
+//					+ "' could not be evaluated in Sage CAS. Error Message:" + ome.getOMSOrOMVOrOMI().get(0));
+//		}
+		return omobjResult;
 	}
 
 	/**
 	 * Returns a SageServer address.
 	 * 
 	 * @return IP:PORT e.g.: 192.168.68.176:8888
-	 * @throws CasNotAvailableException 
+	 * @throws CasNotAvailableException
 	 * @throws NoCASConnectionsException
 	 *             if sageConnectionList is empty
 	 */
@@ -172,7 +186,7 @@ public class Sage {
 						toServer.flush();
 						String resultLine;
 						while ((resultLine = fromServer.readLine()) != null) {
-							if (resultLine.equals("2")) {
+							if (resultLine.equals("<OMOBJ><OMI>2</OMI></OMOBJ>")) {
 								casConnectionIsWorking = true;
 							}
 						}
