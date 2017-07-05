@@ -57,8 +57,8 @@ public class OMToSageVisitor extends OMToCasVisitor {
 	}
 
 	@Override
-	protected String visit(OMV omv) {	//FIXME so werden nur variablen angelegt, aber nicht genutzt
-		return "var('" + omv.getName() +"')";
+	protected String visit(OMV omv) {
+		return omv.getName();
 	}
 
 	@Override

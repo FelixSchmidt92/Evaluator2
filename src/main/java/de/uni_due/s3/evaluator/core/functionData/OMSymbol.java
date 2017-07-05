@@ -4,65 +4,6 @@ import de.uni_due.s3.JAXBOpenMath.OMUtils.OMCreator;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
 
 public class OMSymbol {
-
-	private String cd, name;
-	
-	public OMSymbol(String cd, String name){
-		this.cd = cd;
-		this.name = name;
-	}
-	
-	/**
-	 * Auto-generated HashCode
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((cd == null) ? 0 : cd.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		return result;
-	}
-	
-	/**
-	 * Auto-generated Equals
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		OMSymbol other = (OMSymbol) obj;
-		if (cd == null) {
-			if (other.cd != null)
-				return false;
-		} else if (!cd.equals(other.cd))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		return true;
-	}
-	
-	
-	public String getCd(){
-		return cd;
-	}
-	
-	public String getName(){
-		return name;
-	}
-	
-	
-	
-	
-	
-	
 	
 	public static final OMS ARITH1_PLUS = OMCreator.createOMS("arith1", "plus");
 	public static final OMS ARITH1_MINUS = OMCreator.createOMS("arith1", "minus");
