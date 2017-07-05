@@ -20,7 +20,7 @@ import de.uni_due.s3.JAXBOpenMath.openmath.OMOBJ;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMSTR;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMV;
-import de.uni_due.s3.evaluator.core.function.OMExecuter;
+import de.uni_due.s3.evaluator.core.function.OMExecutor;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.Plus;
 import de.uni_due.s3.evaluator.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator.exceptions.openmath.OMOBJChildNotSupportedException;
@@ -47,32 +47,32 @@ public class TestOMExecuter {
 		//test OMI
 		omobj = (OMOBJ) unmarshaller.unmarshal(new StringReader(
 				"<OMOBJ><OMI>5</OMI></OMOBJ>"));
-		result = OMExecuter.execute(omobj);
+		result = OMExecutor.execute(omobj);
 		assertEquals( result.getOMI().getValue(),"5");
 		
 		//test OMF
 		omobj = (OMOBJ) unmarshaller.unmarshal(new StringReader(
 				"<OMOBJ><OMF dec=\"5.12345\"></OMF></OMOBJ>"));
-		result = OMExecuter.execute(omobj);
+		result = OMExecutor.execute(omobj);
 		assertTrue( result.getOMF().getDec().doubleValue() == 5.12345d);
 		
 		//test OMS
 		omobj = (OMOBJ) unmarshaller.unmarshal(new StringReader(
 				"<OMOBJ><OMS cd=\"arith1\" name=\"plus\"/></OMOBJ>"));
-		result = OMExecuter.execute(omobj);
+		result = OMExecutor.execute(omobj);
 		assertTrue( result.getOMS().getName().equals("plus"));
 		
 		//test OMSTR
 		omobj = (OMOBJ) unmarshaller.unmarshal(new StringReader(
 				"<OMOBJ><OMSTR>Hello</OMSTR></OMOBJ>"));
-		result = OMExecuter.execute(omobj);
+		result = OMExecutor.execute(omobj);
 	
 		assertTrue( result.getOMSTR().getContent().equals("Hello"));
 		
 		//test OMV
 		omobj = (OMOBJ) unmarshaller.unmarshal(new StringReader(
 				"<OMOBJ><OMV name=\"x\" /></OMOBJ>"));
-		result = OMExecuter.execute(omobj);
+		result = OMExecutor.execute(omobj);
 		assertTrue( result.getOMV().getName().equals("x"));
 	
 	}
@@ -90,7 +90,7 @@ public class TestOMExecuter {
 				+ "<OMI>5</OMI>"
 				+ "</OMA>"));
 		
-		result = OMExecuter.execute(OMCreator.createOMOBJ(oma));
+		result = OMExecutor.execute(OMCreator.createOMOBJ(oma));
 		assertTrue( result.getOMI().getValue().equals("15") );
 		
 	}
@@ -108,7 +108,7 @@ public class TestOMExecuter {
 				+ "<OMI>5</OMI>"
 				+ "</OMA>"));
 	
-		result = OMExecuter.execute(OMCreator.createOMOBJ(oma));
+		result = OMExecutor.execute(OMCreator.createOMOBJ(oma));
 		assertTrue( result.getOMI().getValue().equals("10"));
 	}
 	
@@ -125,13 +125,13 @@ public class TestOMExecuter {
 				+ "<OMI>5</OMI>"
 				+ "</OMA>"));
 		
-		result = OMExecuter.execute(OMCreator.createOMOBJ(oma));
+		result = OMExecutor.execute(OMCreator.createOMOBJ(oma));
 	}
 	
 	@Test(expected=OMOBJChildNotSupportedException.class)
 	public void testNotImplementedOMobject(){
 		OMOBJ omobj = new OMOBJ();
 		omobj.setOMB(new OMB());
-		OMExecuter.execute(omobj);
+		OMExecutor.execute(omobj);
 	}
 }

@@ -3,7 +3,7 @@ package de.uni_due.s3.evaluator;
 import java.util.HashMap;
 
 import de.uni_due.s3.JAXBOpenMath.openmath.OMOBJ;
-import de.uni_due.s3.evaluator.core.function.OMExecuter;
+import de.uni_due.s3.evaluator.core.function.OMExecutor;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
 
 /**
@@ -30,7 +30,7 @@ public class Evaluator {
 	 */
 	public OMOBJ evaluate(String expression) {
 		OMOBJ omobj = ExpressionParser.parse(expression, exerciseVariableMap, fillInVariableMap);
-		return OMExecuter.execute(omobj);
+		return OMExecutor.execute(omobj);
 	}
 
 	/**
@@ -41,7 +41,7 @@ public class Evaluator {
 	 * @return the evaluated OpenMath-Object
 	 */
 	public OMOBJ evaluate(OMOBJ omobj) {
-		return OMExecuter.execute(omobj);
+		return OMExecutor.execute(omobj);
 	}
 
 	/**

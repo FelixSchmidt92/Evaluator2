@@ -12,7 +12,7 @@ import de.uni_due.s3.JAXBOpenMath.openmath.OMF;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMI;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMOBJ;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
-import de.uni_due.s3.evaluator.core.function.OMExecuter;
+import de.uni_due.s3.evaluator.core.function.OMExecutor;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.Times;
 import de.uni_due.s3.evaluator.core.functionData.OMSEvaluatorSyntaxDictionary;
 import de.uni_due.s3.evaluator.core.functionData.OMSFunctionDictionary;
@@ -54,11 +54,11 @@ public class TestTimes {
 	@Test
 	public void testTimesIntegration(){
 		OMOBJ omobj = ExpressionParser.parse("10*5", null, null);
-		OMOBJ result = OMExecuter.execute(omobj);
+		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals("50", result.getOMI().getValue());
 		
 		omobj = ExpressionParser.parse("times(10,-17)", null, null);
-		result = OMExecuter.execute(omobj);
+		result = OMExecutor.execute(omobj);
 		assertEquals("-170", result.getOMI().getValue());
 	}
 	
@@ -83,11 +83,11 @@ public class TestTimes {
 	@Test(expected=FunctionInvalidArgumentException.class)
 	public void testMinusWithWrongArguments(){
 		OMOBJ omobj = ExpressionParser.parse("10*'test'", null, null);
-		OMOBJ result = OMExecuter.execute(omobj);
+		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals("5", result.getOMI().getValue());
 		
 		omobj = ExpressionParser.parse("times('test',17)", null, null);
-		result = OMExecuter.execute(omobj);
+		result = OMExecutor.execute(omobj);
 		assertEquals("-7", result.getOMI().getValue());
 	}
 	

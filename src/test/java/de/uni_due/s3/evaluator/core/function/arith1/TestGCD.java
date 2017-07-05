@@ -12,7 +12,7 @@ import de.uni_due.s3.JAXBOpenMath.openmath.OMF;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMI;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMOBJ;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
-import de.uni_due.s3.evaluator.core.function.OMExecuter;
+import de.uni_due.s3.evaluator.core.function.OMExecutor;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.GCD;
 import de.uni_due.s3.evaluator.core.functionData.OMSEvaluatorSyntaxDictionary;
 import de.uni_due.s3.evaluator.core.functionData.OMSFunctionDictionary;
@@ -35,11 +35,11 @@ public class TestGCD {
 	@Test
 	public void testGcdIntegration(){
 		OMOBJ omobj = ExpressionParser.parse("gcd(10,5)", null, null);
-		OMOBJ result = OMExecuter.execute(omobj);
+		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals("5", result.getOMI().getValue());
 		
 		omobj = ExpressionParser.parse("times(100,125)", null, null);
-		result = OMExecuter.execute(omobj);
+		result = OMExecutor.execute(omobj);
 		assertEquals("25", result.getOMI().getValue());
 	}
 	
@@ -64,11 +64,11 @@ public class TestGCD {
 	@Test(expected=FunctionInvalidArgumentException.class)
 	public void testGcdWithWrongArguments(){
 		OMOBJ omobj = ExpressionParser.parse("gcd(2,'test')", null, null);
-		OMOBJ result = OMExecuter.execute(omobj);
+		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals("5", result.getOMI().getValue());
 		
 		omobj = ExpressionParser.parse("gcd('test',17)", null, null);
-		result = OMExecuter.execute(omobj);
+		result = OMExecutor.execute(omobj);
 		assertEquals("-7", result.getOMI().getValue());
 	}
 	

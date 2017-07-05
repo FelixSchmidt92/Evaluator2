@@ -12,10 +12,13 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.xml.bind.JAXBException;
+
 import org.apache.log4j.Logger;
 
-import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
-import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
+import de.uni_due.s3.JAXBOpenMath.OMUtils.OMConverter;
+import de.uni_due.s3.evaluator.exceptions.CASEvaluationException;
+import de.uni_due.s3.evaluator.exceptions.CASNotAvailableException;
 
 /**
  * This class provides an interface to execute sage commands. To execute a Sage

@@ -12,7 +12,7 @@ import de.uni_due.s3.JAXBOpenMath.openmath.OMF;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMI;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMOBJ;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
-import de.uni_due.s3.evaluator.core.function.OMExecuter;
+import de.uni_due.s3.evaluator.core.function.OMExecutor;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.Divide;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.Times;
 import de.uni_due.s3.evaluator.core.functionData.OMSEvaluatorSyntaxDictionary;
@@ -55,11 +55,11 @@ public class TestDivide {
 	@Test
 	public void testDivideIntegration(){
 		OMOBJ omobj = ExpressionParser.parse("10/5", null, null);
-		OMOBJ result = OMExecuter.execute(omobj);
+		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals("2", result.getOMI().getValue());
 		
 		omobj = ExpressionParser.parse("divide(1,-4)", null, null);
-		result = OMExecuter.execute(omobj);
+		result = OMExecutor.execute(omobj);
 		assertEquals(new Double(-0.25), result.getOMF().getDec());
 	}
 	
@@ -84,11 +84,11 @@ public class TestDivide {
 	@Test(expected=FunctionInvalidArgumentException.class)
 	public void testMinusWithWrongArguments(){
 		OMOBJ omobj = ExpressionParser.parse("10/'test'", null, null);
-		OMOBJ result = OMExecuter.execute(omobj);
+		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals("5", result.getOMI().getValue());
 		
 		omobj = ExpressionParser.parse("divide('test',17)", null, null);
-		result = OMExecuter.execute(omobj);
+		result = OMExecutor.execute(omobj);
 		assertEquals("-7", result.getOMI().getValue());
 	}
 	
