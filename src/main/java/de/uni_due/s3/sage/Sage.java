@@ -12,8 +12,11 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.xml.bind.JAXBException;
+
 import org.apache.log4j.Logger;
 
+import de.uni_due.s3.JAXBOpenMath.OMUtils.OMConverter;
 import de.uni_due.s3.evaluator.exceptions.CASEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.CASNotAvailableException;
 
@@ -94,12 +97,17 @@ public class Sage {
 		if (casResult.startsWith("WARN: ") || casResult.equals("<built-in function exit>"))
 			throw new CASEvaluationException("Sage command: '" + sageExpression
 					+ "' could not be evaluated in Sage CAS. Result is: '" + casResult + "'.");
-		return sageToEObject(casResult);
-	}
-
-	private static Object sageToEObject(String casResult) {
-		// FIXME spobel SAGEPHRASEBOOK
-		return null;
+		casResult.replaceAll("<OMOBJ>", "");
+		casResult.replaceAll("</OMOBJ>", "");
+		
+		Object result = null;
+		try {
+			result = OMConverter.toObject(casResult);
+		} catch (JAXBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	/**
