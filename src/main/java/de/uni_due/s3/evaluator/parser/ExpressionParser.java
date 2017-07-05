@@ -44,7 +44,7 @@ public class ExpressionParser {
 	 * 
 	 * @UnderConstruction
 	 */
-	public static OMOBJ parse(String expression,Map<String,OMOBJ> exerciseVariableMap, Map<Integer,OMOBJ> fillInVariableMap) {
+	public static OMOBJ parse(String expression,Map<String,OMOBJ> exerciseVariableMap, Map<Integer,OMOBJ> fillInVariableMap) throws ParserException {
 		if (expression == null){
 			// empty String passed to this function
 			throw new ParserException("Expression passed to this Parser is null!");

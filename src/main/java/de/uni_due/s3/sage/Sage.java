@@ -98,12 +98,7 @@ public class Sage {
 		if (casResult.startsWith("WARN: ") || casResult.equals("<built-in function exit>"))
 			throw new CasEvaluationException("Sage command: '" + sageExpression
 					+ "' could not be evaluated in Sage CAS. Result is: '" + casResult + "'.");
-		return sageToEObject(casResult);
-	}
-
-	private static Object sageToEObject(String casResult) {
-		// FIXME spobel SAGEPHRASEBOOK
-		return null;
+		return OMConverter.toObject(casResult);
 	}
 
 	/**
