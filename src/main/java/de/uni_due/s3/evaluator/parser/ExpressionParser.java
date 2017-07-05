@@ -17,7 +17,7 @@ import de.uni_due.s3.JAXBOpenMath.openmath.OMOBJ;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMSTR;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMV;
-import de.uni_due.s3.evaluator.exceptions.ParserException;
+import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorLexer;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser;
 

@@ -18,7 +18,7 @@ import de.uni_due.s3.evaluator.core.function.OMExecuter;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.Minus;
 import de.uni_due.s3.evaluator.core.functionData.OMSEvaluatorSyntaxDictionary;
 import de.uni_due.s3.evaluator.core.functionData.OMSFunctionDictionary;
-import de.uni_due.s3.evaluator.exceptions.FunctionArgumentMismatchException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
 
 public class TestMinus {
@@ -86,7 +86,7 @@ public class TestMinus {
 		assertEquals("1.0 - 1.0",func.getPartialSageSyntax(args));
 	}
 	
-	@Test(expected=FunctionArgumentMismatchException.class)
+	@Test(expected=FunctionInvalidArgumentException.class)
 	public void testMinusWithWrongArguments(){
 		OMOBJ omobj = ExpressionParser.parse("10-'test'", null, null);
 		OMOBJ result = OMExecuter.execute(omobj);

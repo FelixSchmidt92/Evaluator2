@@ -23,7 +23,7 @@ import de.uni_due.s3.JAXBOpenMath.openmath.OMV;
 import de.uni_due.s3.evaluator.core.function.OMExecuter;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.Plus;
 import de.uni_due.s3.evaluator.exceptions.EvaluatorException;
-import de.uni_due.s3.evaluator.exceptions.OMOBJChildNotSupportedException;
+import de.uni_due.s3.evaluator.exceptions.openmath.OMOBJChildNotSupportedException;
 
 
 

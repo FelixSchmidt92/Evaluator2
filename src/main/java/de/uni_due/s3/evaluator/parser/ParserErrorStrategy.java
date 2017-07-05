@@ -6,7 +6,7 @@ import org.antlr.v4.runtime.Parser;
 import org.antlr.v4.runtime.RecognitionException;
 import org.antlr.v4.runtime.Token;
 
-import de.uni_due.s3.evaluator.exceptions.ParserException;
+import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
 
 /**
  * This is the default ErrorHandler, if the Parser cannot match to  any Token or 

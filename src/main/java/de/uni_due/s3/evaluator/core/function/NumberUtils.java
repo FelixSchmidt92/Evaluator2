@@ -3,7 +3,7 @@ package de.uni_due.s3.evaluator.core.function;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMF;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMI;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMSTR;
-import de.uni_due.s3.evaluator.exceptions.InputMismatchException;
+import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
 
 public class NumberUtils {
 

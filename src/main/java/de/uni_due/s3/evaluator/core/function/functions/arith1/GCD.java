@@ -7,7 +7,7 @@ import java.util.List;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMI;
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.core.function.NumberUtils;
-import de.uni_due.s3.evaluator.exceptions.FunctionArgumentMismatchException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
 
 public class GCD extends Function {
 
@@ -20,7 +20,7 @@ public class GCD extends Function {
 			BigInteger rightValue = BigInteger.valueOf(NumberUtils.valueOf((OMI)right));
 			return NumberUtils.convertDoubleToOMIOMF(leftValue.gcd(rightValue).doubleValue());
 		}else {
-			throw new FunctionArgumentMismatchException("Function 'gcd' accepts only integer values.");
+			throw new FunctionInvalidArgumentException("Function 'gcd' accepts only integer values.");
 		}
 	}
 

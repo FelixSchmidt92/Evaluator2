@@ -14,8 +14,8 @@ import java.util.TimerTask;
 
 import org.apache.log4j.Logger;
 
-import de.uni_due.s3.evaluator.exceptions.CASEvaluationException;
-import de.uni_due.s3.evaluator.exceptions.CASNotAvailableException;
+import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
+import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 
 /**
  * This class provides an interface to execute sage commands. To execute a Sage
@@ -49,14 +49,14 @@ public class Sage {
 	 * 
 	 * @param sageExpression
 	 * @return sageResult
-	 * @throws CASEvaluationException
+	 * @throws CasEvaluationException
 	 *             if command is not evaluatable in Sage
 	 * @throws NoCASConnectionsException
 	 *             if there is no working SageServer connection anymore.
 	 */
-	public static Object evaluateInCAS(String sageExpression) throws CASEvaluationException {
+	public static Object evaluateInCAS(String sageExpression) throws CasEvaluationException {
 		if (!initFlag) {
-			throw new CASNotAvailableException("Jack did not initialized a Sage CAS connection.");
+			throw new CasNotAvailableException("Jack did not initialized a Sage CAS connection.");
 		}
 		String casResult = "";
 		// get one Connection to a SageServer
@@ -92,7 +92,7 @@ public class Sage {
 			return evaluateInCAS(sageExpression);
 		}
 		if (casResult.startsWith("WARN: ") || casResult.equals("<built-in function exit>"))
-			throw new CASEvaluationException("Sage command: '" + sageExpression
+			throw new CasEvaluationException("Sage command: '" + sageExpression
 					+ "' could not be evaluated in Sage CAS. Result is: '" + casResult + "'.");
 		return sageToEObject(casResult);
 	}
@@ -111,7 +111,7 @@ public class Sage {
 	 */
 	private static String getRandomFromConnectionList() {
 		if (sageConnectionsList.size() == 0) {
-			throw new CASNotAvailableException("All SageServers are not working.");
+			throw new CasNotAvailableException("All SageServers are not working.");
 		} else {
 			Random rand = new Random();
 			int min = 0;

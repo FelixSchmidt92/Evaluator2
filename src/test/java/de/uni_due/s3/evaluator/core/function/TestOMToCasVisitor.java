@@ -17,8 +17,8 @@ import de.uni_due.s3.JAXBOpenMath.openmath.OMR;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMSTR;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMV;
-import de.uni_due.s3.evaluator.exceptions.OMOBJChildNotSupportedException;
-import de.uni_due.s3.evaluator.exceptions.OMObjectNotSupportedException;
+import de.uni_due.s3.evaluator.exceptions.openmath.OMOBJChildNotSupportedException;
+import de.uni_due.s3.evaluator.exceptions.openmath.OMObjectNotSupportedException;
 
 public class TestOMToCasVisitor {
 

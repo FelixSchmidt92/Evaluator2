@@ -12,8 +12,8 @@ import de.uni_due.s3.JAXBOpenMath.openmath.OMF;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMI;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMOBJ;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMSTR;
-import de.uni_due.s3.evaluator.exceptions.OMOBJChildNotSupportedException;
-import de.uni_due.s3.evaluator.exceptions.OMObjectNotSupportedException;
+import de.uni_due.s3.evaluator.exceptions.openmath.OMOBJChildNotSupportedException;
+import de.uni_due.s3.evaluator.exceptions.openmath.OMObjectNotSupportedException;
 
 /**
  * Converts OpenMath as a String to OpenMath objects and vice versa

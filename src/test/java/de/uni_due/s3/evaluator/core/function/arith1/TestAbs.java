@@ -14,7 +14,7 @@ import de.uni_due.s3.JAXBOpenMath.openmath.OMOBJ;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
 import de.uni_due.s3.evaluator.core.function.OMExecuter;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.Abs;
-import de.uni_due.s3.evaluator.exceptions.FunctionArgumentMismatchException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
 
 public class TestAbs {
@@ -63,7 +63,7 @@ public class TestAbs {
 		assertEquals("abs(1.0)",func.getPartialSageSyntax(args));
 	}
 	
-	@Test(expected=FunctionArgumentMismatchException.class)
+	@Test(expected=FunctionInvalidArgumentException.class)
 	public void testAbsWithWrongArguments(){
 		OMOBJ omobj = ExpressionParser.parse("abs('test')", null, null);
 		OMOBJ result = OMExecuter.execute(omobj);

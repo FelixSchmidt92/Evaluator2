@@ -2,8 +2,8 @@ package de.uni_due.s3.evaluator.core.function;
 
 import java.util.List;
 
-import de.uni_due.s3.evaluator.exceptions.FunctionArgumentNumberException;
 import de.uni_due.s3.evaluator.exceptions.NoFunctionToCASException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionArgumentNumberException;
 
 /**
  * Function is an abstract Class where functions can be executed

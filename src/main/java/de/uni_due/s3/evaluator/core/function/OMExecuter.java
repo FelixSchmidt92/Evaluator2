@@ -12,9 +12,9 @@ import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMSTR;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMV;
 import de.uni_due.s3.evaluator.core.functionData.OMSFunctionDictionary;
-import de.uni_due.s3.evaluator.exceptions.FunctionNotImplementedException;
-import de.uni_due.s3.evaluator.exceptions.OMOBJChildNotSupportedException;
-import de.uni_due.s3.evaluator.exceptions.OMObjectNotSupportedException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedException;
+import de.uni_due.s3.evaluator.exceptions.openmath.OMOBJChildNotSupportedException;
+import de.uni_due.s3.evaluator.exceptions.openmath.OMObjectNotSupportedException;
 
 /**
  * A visitor for the OpenMath-structure, represented by classes in the OpenMath package, like OMOBJ{@link de.uni_due.s3.JAXBOpenMath.openmath.OMOBJ}.
