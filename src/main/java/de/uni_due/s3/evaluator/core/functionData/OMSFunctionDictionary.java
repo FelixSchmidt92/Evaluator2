@@ -3,6 +3,7 @@ package de.uni_due.s3.evaluator.core.functionData;
 import java.util.HashMap;
 
 import de.uni_due.s3.evaluator.exceptions.FunctionNotImplementedException;
+import de.uni_due.s3.JAXBOpenMath.OMUtils.OMCreator;
 import de.uni_due.s3.JAXBOpenMath.openmath.OMS;
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.Abs;
@@ -214,7 +215,7 @@ public class OMSFunctionDictionary {
 		if (functions.containsKey(oms)) {
 			return functions.get(oms);
 		} else {
-			throw new FunctionNotImplementedException(new OMSymbol("", ""));
+			throw new FunctionNotImplementedException(OMCreator.createOMS("", ""));
 		}
 	}
 }
