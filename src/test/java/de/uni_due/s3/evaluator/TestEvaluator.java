@@ -5,11 +5,12 @@ import javax.xml.bind.JAXBException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.openmath.omutils.OMConverter;
+import org.openmath.omutils.OpenMathException;
 import org.openmath.openmath.OMOBJ;
 
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedException;
-import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
 
 
 public class TestEvaluator {
@@ -22,13 +23,13 @@ public class TestEvaluator {
 	}
 	
 	@Test
-	public void testEvaluateString() throws JAXBException, OMOBJChildNotSupportedException, OMObjectNotSupportedException, FunctionException, ParserException{
+	public void testEvaluateString() throws FunctionException, JAXBException, OpenMathException{
 		Assert.assertEquals("<OMOBJ><OMI>4</OMI></OMOBJ>", OMConverter.toString(eval.evaluate("1+3")));
 		Assert.assertEquals("<OMOBJ><OMI>4</OMI></OMOBJ>", OMConverter.toString(eval.evaluate("plus(1,3)")));
 	}
 	
 	@Test(expected=FunctionNotImplementedException.class)
-	public void testEvaluateWithException() throws JAXBException, OMOBJChildNotSupportedException, OMObjectNotSupportedException, FunctionException, ParserException{
+	public void testEvaluateWithException() throws FunctionException, OpenMathException, JAXBException{
 		eval.evaluate("abcdefghxjc()");
 		eval.evaluate("123cdefghxjc()");
 		eval.evaluate("abcdefghxjc");	//should this throw a another exception? (dlux: this throws a ParserException from ParserErrorStrategy)
@@ -41,7 +42,7 @@ public class TestEvaluator {
 	}
 	
 	@Test
-	public void testEvaluateOMOBJ() throws JAXBException, OMOBJChildNotSupportedException, OMObjectNotSupportedException, FunctionException{
+	public void testEvaluateOMOBJ() throws FunctionException, JAXBException, OpenMathException{
 		Assert.assertEquals("<OMOBJ><OMI>15</OMI></OMOBJ>", OMConverter.toString(eval.evaluate((OMOBJ)OMConverter.toObject("<OMOBJ><OMA>"
 																			+ "<OMS name=\"plus\" cd=\"arith1\"/>"
 																			+ "<OMI>2</OMI>"

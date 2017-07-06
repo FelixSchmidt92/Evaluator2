@@ -1,12 +1,12 @@
 # Download Dependencies
-#Add here your private Token from gitlab:
-YOURTOKEN="-9pHt86dLHfPw-uyp4f2"
+#This is the Reporters Token
+PRIVTOKEN="-9pHt86dLHfPw-uyp4f2"
 
 
 
 
 TOKEN="PRIVATE-TOKEN: "
-WGETHEADER="$TOKEN $YOURTOKEN"
+WGETHEADER="$TOKEN $PRIVTOKEN"
 
 
 

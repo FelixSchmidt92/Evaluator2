@@ -12,10 +12,10 @@ import org.openmath.openmath.OMOBJ;
 import org.openmath.openmath.OMS;
 
 import de.uni_due.s3.evaluator.core.functionData.OMSFunctionDictionary;
+import de.uni_due.s3.evaluator.exceptions.cas.CasException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionArgumentNumberException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
-import de.uni_due.s3.evaluator.exceptions.representation.NoSageRepresentationAvailableException;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
 
 @RunWith(Parameterized.class)
@@ -64,7 +64,7 @@ public class TestPlus {
 	}
 	
 	@Test
-	public void testPlusSageSyntax() throws FunctionNotImplementedException, OMObjectNotSupportedException, OMOBJChildNotSupportedException, FunctionArgumentNumberException, NoRepresentationAvailableException{
+	public void testPlusSageSyntax() throws FunctionArgumentNumberException, CasException, NoRepresentationAvailableException, FunctionNotImplementedException{
 		OMOBJ omobj = ExpressionParser.parse("plus(5,10)", null, null);
 		List<Object> args = omobj.getOMA().getOmel();
 		OMS oms = (OMS)args.get(0);

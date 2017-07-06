@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.junit.Test;
 import org.openmath.omutils.OMCreator;
+import org.openmath.omutils.OpenMathException;
 import org.openmath.openmath.OMF;
 import org.openmath.openmath.OMI;
 import org.openmath.openmath.OMOBJ;
@@ -17,6 +18,7 @@ import de.uni_due.s3.evaluator.core.function.functions.arith1.Divide;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.Times;
 import de.uni_due.s3.evaluator.core.functionData.OMSEvaluatorSyntaxDictionary;
 import de.uni_due.s3.evaluator.core.functionData.OMSFunctionDictionary;
+import de.uni_due.s3.evaluator.exceptions.cas.CasException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionArgumentNumberException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
@@ -56,7 +58,7 @@ public class TestDivide {
 	}
 	
 	@Test
-	public void testDivideIntegration() throws OMOBJChildNotSupportedException, OMObjectNotSupportedException, FunctionException{
+	public void testDivideIntegration() throws FunctionException, OpenMathException{
 		OMOBJ omobj = ExpressionParser.parse("10/5", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals("2", result.getOMI().getValue());
@@ -67,7 +69,7 @@ public class TestDivide {
 	}
 	
 	@Test
-	public void testDivideSageSyntax() throws OMObjectNotSupportedException, OMOBJChildNotSupportedException, FunctionArgumentNumberException, NoRepresentationAvailableException{
+	public void testDivideSageSyntax() throws FunctionArgumentNumberException, NoRepresentationAvailableException, CasException{
 		Divide func = (Divide)OMSFunctionDictionary.getInstance().getFunction(OMSEvaluatorSyntaxDictionary.getInstance().getOMS("times"));
 		OMF omf = OMCreator.createOMF(1.0);
 		OMI omi = OMCreator.createOMI(10);
@@ -85,7 +87,7 @@ public class TestDivide {
 	}
 	
 	@Test(expected=FunctionInvalidArgumentException.class)
-	public void testMinusWithWrongArguments() throws OMOBJChildNotSupportedException, OMObjectNotSupportedException, FunctionException{
+	public void testMinusWithWrongArguments() throws FunctionException, OpenMathException{
 		OMOBJ omobj = ExpressionParser.parse("10/'test'", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals("5", result.getOMI().getValue());

@@ -1,20 +1,18 @@
 package de.uni_due.s3.evaluator.core;
 
-import javax.xml.bind.JAXBException;
-
 import org.junit.Test;
 import org.openmath.openmath.OMOBJ;
 
 import de.uni_due.s3.evaluator.core.function.OMToSageVisitor;
+import de.uni_due.s3.evaluator.exceptions.cas.CasException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionArgumentNumberException;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
 
 public class TestSageSyntax {
 
 	@Test
-	public void testSageSyntax() throws JAXBException, OMObjectNotSupportedException, OMOBJChildNotSupportedException, FunctionArgumentNumberException, NoRepresentationAvailableException{
+	public void testSageSyntax() throws FunctionArgumentNumberException, NoRepresentationAvailableException, CasException{
 		OMOBJ omobj = ExpressionParser.parse("plus(1, times(2, 3))", null, null);
 		System.out.println(new OMToSageVisitor().visit(omobj));
 		
@@ -29,8 +27,8 @@ public class TestSageSyntax {
 		try{
 			OMOBJ omobj4 = ExpressionParser.parse("equalssemisem()", null, null);
 			System.out.println(new OMToSageVisitor().visit(omobj4));
-		}catch(FunctionNotImplementedException e){
-			System.out.println("The Method in EqualsSemiSem is not implemtened");
+		}catch(NoRepresentationAvailableException e){
+			System.out.println("The Method for the Representation of Sage in EqualsSemiSem is not implemtened");
 		}	
 	}
 }

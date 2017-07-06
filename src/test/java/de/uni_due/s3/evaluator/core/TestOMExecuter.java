@@ -11,7 +11,9 @@ import static org.junit.Assert.*;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openmath.omutils.OMCreator;
+import org.openmath.omutils.OpenMathException;
 import org.openmath.openmath.OMA;
+import org.openmath.openmath.OMB;
 import org.openmath.openmath.OMOBJ;
 
 import de.uni_due.s3.evaluator.core.function.OMExecutor;
@@ -29,13 +31,13 @@ public class TestOMExecuter {
 	@BeforeClass
 	public static void init() throws JAXBException{
 		JAXBContext context = JAXBContext
-				.newInstance("de.uni_due.s3.JAXBOpenMath.openmath");
+				.newInstance("org.openmath.openmath");
 
 		unmarshaller = context.createUnmarshaller();
 	}
 	
 	@Test
-	public void visitorTestOMOBJ() throws JAXBException, OMOBJChildNotSupportedException, OMObjectNotSupportedException, FunctionException{
+	public void visitorTestOMOBJ() throws JAXBException, FunctionException, OpenMathException{
 		OMOBJ result;
 		OMOBJ omobj;
 		//test OMI
@@ -72,7 +74,7 @@ public class TestOMExecuter {
 	}
 	
 	@Test
-	public void visitorTestOMA() throws JAXBException, OMOBJChildNotSupportedException, OMObjectNotSupportedException, FunctionException{
+	public void visitorTestOMA() throws JAXBException, FunctionException, OpenMathException{
 		OMOBJ result;
 		OMA oma;
 		
@@ -90,7 +92,7 @@ public class TestOMExecuter {
 	}
 	
 	@Test
-	public void visitorTestNestedOMA() throws JAXBException, OMOBJChildNotSupportedException, OMObjectNotSupportedException, FunctionException{
+	public void visitorTestNestedOMA() throws JAXBException, FunctionException, OpenMathException{
 		OMOBJ result;
 		OMA oma;
 		
@@ -107,7 +109,7 @@ public class TestOMExecuter {
 	}
 	
 	@Test(expected = EvaluatorException.class)
-	public void visitorTestWithWrongFunction() throws JAXBException, OMOBJChildNotSupportedException, OMObjectNotSupportedException, FunctionException{
+	public void visitorTestWithWrongFunction() throws JAXBException, FunctionException, OpenMathException{
 		Object result;
 		OMA oma;
 		
@@ -122,8 +124,8 @@ public class TestOMExecuter {
 		result = OMExecutor.execute(OMCreator.createOMOBJ(oma));
 	}
 	
-	@Test(expected=OMOBJChildNotSupportedException.class)
-	public void testNotImplementedOMobject() throws OMOBJChildNotSupportedException, OMObjectNotSupportedException, FunctionException{
+	@Test(expected=OpenMathException.class)
+	public void testNotImplementedOMobject() throws FunctionException, OpenMathException{
 		OMOBJ omobj = new OMOBJ();
 		omobj.setOMB(new OMB());
 		OMExecutor.execute(omobj);
