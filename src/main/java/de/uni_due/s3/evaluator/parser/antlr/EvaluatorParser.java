@@ -25,10 +25,11 @@ public class EvaluatorParser extends Parser {
 		ArgumentSeparator=22, SetArgumentSeparator=23, Integer=24, Float=25, String=26, 
 		WS=27;
 	public static final int
-		RULE_expression = 0, RULE_terminal = 1, RULE_unaryoperator = 2, RULE_binaryoperator = 3, 
-		RULE_set = 4, RULE_nestedFunction = 5;
+		RULE_expression = 0, RULE_unaryOperatorForExpression = 1, RULE_binaryOperatorForExpression = 2, 
+		RULE_set = 3, RULE_nestedFunction = 4;
 	public static final String[] ruleNames = {
-		"expression", "terminal", "unaryoperator", "binaryoperator", "set", "nestedFunction"
+		"expression", "unaryOperatorForExpression", "binaryOperatorForExpression", 
+		"set", "nestedFunction"
 	};
 
 	private static final String[] _LITERAL_NAMES = {
@@ -94,36 +95,209 @@ public class EvaluatorParser extends Parser {
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 	public static class ExpressionContext extends ParserRuleContext {
-		public NestedFunctionContext nestedFunction() {
-			return getRuleContext(NestedFunctionContext.class,0);
+		public ExpressionContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
 		}
-		public TerminalNode LeftParenthesis() { return getToken(EvaluatorParser.LeftParenthesis, 0); }
+		@Override public int getRuleIndex() { return RULE_expression; }
+	 
+		public ExpressionContext() { }
+		public void copyFrom(ExpressionContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	public static class TextValueContext extends ExpressionContext {
+		public Token value;
+		public TerminalNode String() { return getToken(EvaluatorParser.String, 0); }
+		public TextValueContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof EvaluatorParserListener ) ((EvaluatorParserListener)listener).enterTextValue(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof EvaluatorParserListener ) ((EvaluatorParserListener)listener).exitTextValue(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitTextValue(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class SetInExpressionContext extends ExpressionContext {
+		public SetContext set() {
+			return getRuleContext(SetContext.class,0);
+		}
+		public SetInExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof EvaluatorParserListener ) ((EvaluatorParserListener)listener).enterSetInExpression(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof EvaluatorParserListener ) ((EvaluatorParserListener)listener).exitSetInExpression(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitSetInExpression(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class BinaryContext extends ExpressionContext {
 		public List<ExpressionContext> expression() {
 			return getRuleContexts(ExpressionContext.class);
 		}
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
-		public TerminalNode RightParenthesis() { return getToken(EvaluatorParser.RightParenthesis, 0); }
-		public UnaryoperatorContext unaryoperator() {
-			return getRuleContext(UnaryoperatorContext.class,0);
+		public BinaryOperatorForExpressionContext binaryOperatorForExpression() {
+			return getRuleContext(BinaryOperatorForExpressionContext.class,0);
 		}
-		public SetContext set() {
-			return getRuleContext(SetContext.class,0);
+		public BinaryContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof EvaluatorParserListener ) ((EvaluatorParserListener)listener).enterBinary(this);
 		}
-		public TerminalContext terminal() {
-			return getRuleContext(TerminalContext.class,0);
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof EvaluatorParserListener ) ((EvaluatorParserListener)listener).exitBinary(this);
 		}
-		public BinaryoperatorContext binaryoperator() {
-			return getRuleContext(BinaryoperatorContext.class,0);
-		}
-		public ExpressionContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_expression; }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitExpression(this);
+			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitBinary(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class FloatValueContext extends ExpressionContext {
+		public Token value;
+		public TerminalNode Float() { return getToken(EvaluatorParser.Float, 0); }
+		public FloatValueContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof EvaluatorParserListener ) ((EvaluatorParserListener)listener).enterFloatValue(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof EvaluatorParserListener ) ((EvaluatorParserListener)listener).exitFloatValue(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitFloatValue(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class ExerciseVarNameContext extends ExpressionContext {
+		public Token name;
+		public TerminalNode ExerciseVariable() { return getToken(EvaluatorParser.ExerciseVariable, 0); }
+		public ExerciseVarNameContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof EvaluatorParserListener ) ((EvaluatorParserListener)listener).enterExerciseVarName(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof EvaluatorParserListener ) ((EvaluatorParserListener)listener).exitExerciseVarName(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitExerciseVarName(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class IntegerValueContext extends ExpressionContext {
+		public Token value;
+		public TerminalNode Integer() { return getToken(EvaluatorParser.Integer, 0); }
+		public IntegerValueContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof EvaluatorParserListener ) ((EvaluatorParserListener)listener).enterIntegerValue(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof EvaluatorParserListener ) ((EvaluatorParserListener)listener).exitIntegerValue(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitIntegerValue(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class NestedFunctionInExpressionContext extends ExpressionContext {
+		public NestedFunctionContext nestedFunction() {
+			return getRuleContext(NestedFunctionContext.class,0);
+		}
+		public NestedFunctionInExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof EvaluatorParserListener ) ((EvaluatorParserListener)listener).enterNestedFunctionInExpression(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof EvaluatorParserListener ) ((EvaluatorParserListener)listener).exitNestedFunctionInExpression(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitNestedFunctionInExpression(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class UnaryContext extends ExpressionContext {
+		public UnaryOperatorForExpressionContext unaryOperatorForExpression() {
+			return getRuleContext(UnaryOperatorForExpressionContext.class,0);
+		}
+		public ExpressionContext expression() {
+			return getRuleContext(ExpressionContext.class,0);
+		}
+		public UnaryContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof EvaluatorParserListener ) ((EvaluatorParserListener)listener).enterUnary(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof EvaluatorParserListener ) ((EvaluatorParserListener)listener).exitUnary(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitUnary(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class FillInVarNameContext extends ExpressionContext {
+		public Token name;
+		public TerminalNode FillInVariable() { return getToken(EvaluatorParser.FillInVariable, 0); }
+		public FillInVarNameContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof EvaluatorParserListener ) ((EvaluatorParserListener)listener).enterFillInVarName(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof EvaluatorParserListener ) ((EvaluatorParserListener)listener).exitFillInVarName(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitFillInVarName(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class ParenthesisContext extends ExpressionContext {
+		public TerminalNode LeftParenthesis() { return getToken(EvaluatorParser.LeftParenthesis, 0); }
+		public ExpressionContext expression() {
+			return getRuleContext(ExpressionContext.class,0);
+		}
+		public TerminalNode RightParenthesis() { return getToken(EvaluatorParser.RightParenthesis, 0); }
+		public ParenthesisContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof EvaluatorParserListener ) ((EvaluatorParserListener)listener).enterParenthesis(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof EvaluatorParserListener ) ((EvaluatorParserListener)listener).exitParenthesis(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitParenthesis(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -143,22 +317,29 @@ public class EvaluatorParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(23);
+			setState(25);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case FunctionName:
 				{
-				setState(13);
+				_localctx = new NestedFunctionInExpressionContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
+
+				setState(11);
 				nestedFunction();
 				}
 				break;
 			case LeftParenthesis:
 				{
-				setState(14);
+				_localctx = new ParenthesisContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
+				setState(12);
 				match(LeftParenthesis);
-				setState(15);
+				setState(13);
 				expression(0);
-				setState(16);
+				setState(14);
 				match(RightParenthesis);
 				}
 				break;
@@ -166,33 +347,74 @@ public class EvaluatorParser extends Parser {
 			case Minus:
 			case BooleanNot:
 				{
-				setState(18);
-				unaryoperator();
-				setState(19);
-				expression(4);
+				_localctx = new UnaryContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
+				setState(16);
+				unaryOperatorForExpression();
+				setState(17);
+				expression(8);
 				}
 				break;
 			case SetOpen:
 				{
-				setState(21);
+				_localctx = new SetInExpressionContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
+				setState(19);
 				set();
 				}
 				break;
-			case ExerciseVariable:
-			case FillInVariable:
 			case Integer:
+				{
+				_localctx = new IntegerValueContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
+				setState(20);
+				((IntegerValueContext)_localctx).value = match(Integer);
+				}
+				break;
 			case Float:
+				{
+				_localctx = new FloatValueContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
+				setState(21);
+				((FloatValueContext)_localctx).value = match(Float);
+				}
+				break;
+			case ExerciseVariable:
+				{
+				_localctx = new ExerciseVarNameContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
+				setState(22);
+				((ExerciseVarNameContext)_localctx).name = match(ExerciseVariable);
+				}
+				break;
+			case FillInVariable:
+				{
+				_localctx = new FillInVarNameContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
+				setState(23);
+				((FillInVarNameContext)_localctx).name = match(FillInVariable);
+				}
+				break;
 			case String:
 				{
-				setState(22);
-				terminal();
+				_localctx = new TextValueContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
+				setState(24);
+				((TextValueContext)_localctx).value = match(String);
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(31);
+			setState(33);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,1,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
@@ -201,18 +423,18 @@ public class EvaluatorParser extends Parser {
 					_prevctx = _localctx;
 					{
 					{
-					_localctx = new ExpressionContext(_parentctx, _parentState);
+					_localctx = new BinaryContext(new ExpressionContext(_parentctx, _parentState));
 					pushNewRecursionContext(_localctx, _startState, RULE_expression);
-					setState(25);
-					if (!(precpred(_ctx, 3))) throw new FailedPredicateException(this, "precpred(_ctx, 3)");
-					setState(26);
-					binaryoperator();
 					setState(27);
-					expression(4);
+					if (!(precpred(_ctx, 7))) throw new FailedPredicateException(this, "precpred(_ctx, 7)");
+					setState(28);
+					binaryOperatorForExpression();
+					setState(29);
+					expression(8);
 					}
 					} 
 				}
-				setState(33);
+				setState(35);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,1,_ctx);
 			}
@@ -229,158 +451,42 @@ public class EvaluatorParser extends Parser {
 		return _localctx;
 	}
 
-	public static class TerminalContext extends ParserRuleContext {
-		public TerminalContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_terminal; }
-	 
-		public TerminalContext() { }
-		public void copyFrom(TerminalContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	public static class TextValueContext extends TerminalContext {
-		public Token value;
-		public TerminalNode String() { return getToken(EvaluatorParser.String, 0); }
-		public TextValueContext(TerminalContext ctx) { copyFrom(ctx); }
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitTextValue(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class FloatValueContext extends TerminalContext {
-		public Token value;
-		public TerminalNode Float() { return getToken(EvaluatorParser.Float, 0); }
-		public FloatValueContext(TerminalContext ctx) { copyFrom(ctx); }
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitFloatValue(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class ExerciseVarNameContext extends TerminalContext {
-		public Token name;
-		public TerminalNode ExerciseVariable() { return getToken(EvaluatorParser.ExerciseVariable, 0); }
-		public ExerciseVarNameContext(TerminalContext ctx) { copyFrom(ctx); }
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitExerciseVarName(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class IntegerValueContext extends TerminalContext {
-		public Token value;
-		public TerminalNode Integer() { return getToken(EvaluatorParser.Integer, 0); }
-		public IntegerValueContext(TerminalContext ctx) { copyFrom(ctx); }
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitIntegerValue(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class FillInVarNameContext extends TerminalContext {
-		public Token name;
-		public TerminalNode FillInVariable() { return getToken(EvaluatorParser.FillInVariable, 0); }
-		public FillInVarNameContext(TerminalContext ctx) { copyFrom(ctx); }
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitFillInVarName(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final TerminalContext terminal() throws RecognitionException {
-		TerminalContext _localctx = new TerminalContext(_ctx, getState());
-		enterRule(_localctx, 2, RULE_terminal);
-		try {
-			setState(39);
-			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case Integer:
-				_localctx = new IntegerValueContext(_localctx);
-				enterOuterAlt(_localctx, 1);
-				{
-				setState(34);
-				((IntegerValueContext)_localctx).value = match(Integer);
-				}
-				break;
-			case Float:
-				_localctx = new FloatValueContext(_localctx);
-				enterOuterAlt(_localctx, 2);
-				{
-				setState(35);
-				((FloatValueContext)_localctx).value = match(Float);
-				}
-				break;
-			case ExerciseVariable:
-				_localctx = new ExerciseVarNameContext(_localctx);
-				enterOuterAlt(_localctx, 3);
-				{
-				setState(36);
-				((ExerciseVarNameContext)_localctx).name = match(ExerciseVariable);
-				}
-				break;
-			case FillInVariable:
-				_localctx = new FillInVarNameContext(_localctx);
-				enterOuterAlt(_localctx, 4);
-				{
-				setState(37);
-				((FillInVarNameContext)_localctx).name = match(FillInVariable);
-				}
-				break;
-			case String:
-				_localctx = new TextValueContext(_localctx);
-				enterOuterAlt(_localctx, 5);
-				{
-				setState(38);
-				((TextValueContext)_localctx).value = match(String);
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class UnaryoperatorContext extends ParserRuleContext {
+	public static class UnaryOperatorForExpressionContext extends ParserRuleContext {
 		public Token operator;
 		public TerminalNode Plus() { return getToken(EvaluatorParser.Plus, 0); }
 		public TerminalNode Minus() { return getToken(EvaluatorParser.Minus, 0); }
 		public TerminalNode BooleanNot() { return getToken(EvaluatorParser.BooleanNot, 0); }
-		public UnaryoperatorContext(ParserRuleContext parent, int invokingState) {
+		public UnaryOperatorForExpressionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_unaryoperator; }
+		@Override public int getRuleIndex() { return RULE_unaryOperatorForExpression; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof EvaluatorParserListener ) ((EvaluatorParserListener)listener).enterUnaryOperatorForExpression(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof EvaluatorParserListener ) ((EvaluatorParserListener)listener).exitUnaryOperatorForExpression(this);
+		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitUnaryoperator(this);
+			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitUnaryOperatorForExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final UnaryoperatorContext unaryoperator() throws RecognitionException {
-		UnaryoperatorContext _localctx = new UnaryoperatorContext(_ctx, getState());
-		enterRule(_localctx, 4, RULE_unaryoperator);
+	public final UnaryOperatorForExpressionContext unaryOperatorForExpression() throws RecognitionException {
+		UnaryOperatorForExpressionContext _localctx = new UnaryOperatorForExpressionContext(_ctx, getState());
+		enterRule(_localctx, 2, RULE_unaryOperatorForExpression);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(41);
-			((UnaryoperatorContext)_localctx).operator = _input.LT(1);
+			setState(36);
+			((UnaryOperatorForExpressionContext)_localctx).operator = _input.LT(1);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << Plus) | (1L << Minus) | (1L << BooleanNot))) != 0)) ) {
-				((UnaryoperatorContext)_localctx).operator = (Token)_errHandler.recoverInline(this);
+				((UnaryOperatorForExpressionContext)_localctx).operator = (Token)_errHandler.recoverInline(this);
 			}
 			else {
 				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
@@ -400,7 +506,7 @@ public class EvaluatorParser extends Parser {
 		return _localctx;
 	}
 
-	public static class BinaryoperatorContext extends ParserRuleContext {
+	public static class BinaryOperatorForExpressionContext extends ParserRuleContext {
 		public Token operator;
 		public TerminalNode Multiplication() { return getToken(EvaluatorParser.Multiplication, 0); }
 		public TerminalNode Division() { return getToken(EvaluatorParser.Division, 0); }
@@ -415,29 +521,37 @@ public class EvaluatorParser extends Parser {
 		public TerminalNode NotEqual() { return getToken(EvaluatorParser.NotEqual, 0); }
 		public TerminalNode BooleanAnd() { return getToken(EvaluatorParser.BooleanAnd, 0); }
 		public TerminalNode BooleanOr() { return getToken(EvaluatorParser.BooleanOr, 0); }
-		public BinaryoperatorContext(ParserRuleContext parent, int invokingState) {
+		public BinaryOperatorForExpressionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_binaryoperator; }
+		@Override public int getRuleIndex() { return RULE_binaryOperatorForExpression; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof EvaluatorParserListener ) ((EvaluatorParserListener)listener).enterBinaryOperatorForExpression(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof EvaluatorParserListener ) ((EvaluatorParserListener)listener).exitBinaryOperatorForExpression(this);
+		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitBinaryoperator(this);
+			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitBinaryOperatorForExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final BinaryoperatorContext binaryoperator() throws RecognitionException {
-		BinaryoperatorContext _localctx = new BinaryoperatorContext(_ctx, getState());
-		enterRule(_localctx, 6, RULE_binaryoperator);
+	public final BinaryOperatorForExpressionContext binaryOperatorForExpression() throws RecognitionException {
+		BinaryOperatorForExpressionContext _localctx = new BinaryOperatorForExpressionContext(_ctx, getState());
+		enterRule(_localctx, 4, RULE_binaryOperatorForExpression);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(43);
-			((BinaryoperatorContext)_localctx).operator = _input.LT(1);
+			setState(38);
+			((BinaryOperatorForExpressionContext)_localctx).operator = _input.LT(1);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << Plus) | (1L << Minus) | (1L << Multiplication) | (1L << Division) | (1L << Modulus) | (1L << LessThan) | (1L << LessThanOrEqual) | (1L << GreaterThan) | (1L << GreaterThanOrEqual) | (1L << Equal) | (1L << NotEqual) | (1L << BooleanAnd) | (1L << BooleanOr))) != 0)) ) {
-				((BinaryoperatorContext)_localctx).operator = (Token)_errHandler.recoverInline(this);
+				((BinaryOperatorForExpressionContext)_localctx).operator = (Token)_errHandler.recoverInline(this);
 			}
 			else {
 				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
@@ -477,6 +591,14 @@ public class EvaluatorParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_set; }
 		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof EvaluatorParserListener ) ((EvaluatorParserListener)listener).enterSet(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof EvaluatorParserListener ) ((EvaluatorParserListener)listener).exitSet(this);
+		}
+		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitSet(this);
 			else return visitor.visitChildren(this);
@@ -485,42 +607,42 @@ public class EvaluatorParser extends Parser {
 
 	public final SetContext set() throws RecognitionException {
 		SetContext _localctx = new SetContext(_ctx, getState());
-		enterRule(_localctx, 8, RULE_set);
+		enterRule(_localctx, 6, RULE_set);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(45);
+			setState(40);
 			match(SetOpen);
-			setState(54);
+			setState(49);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << LeftParenthesis) | (1L << SetOpen) | (1L << Plus) | (1L << Minus) | (1L << BooleanNot) | (1L << ExerciseVariable) | (1L << FillInVariable) | (1L << FunctionName) | (1L << Integer) | (1L << Float) | (1L << String))) != 0)) {
 				{
-				setState(46);
+				setState(41);
 				((SetContext)_localctx).expression = expression(0);
 				((SetContext)_localctx).arguments.add(((SetContext)_localctx).expression);
-				setState(51);
+				setState(46);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==SetArgumentSeparator) {
 					{
 					{
-					setState(47);
+					setState(42);
 					match(SetArgumentSeparator);
-					setState(48);
+					setState(43);
 					((SetContext)_localctx).expression = expression(0);
 					((SetContext)_localctx).arguments.add(((SetContext)_localctx).expression);
 					}
 					}
-					setState(53);
+					setState(48);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
 				}
 			}
 
-			setState(56);
+			setState(51);
 			match(SetClose);
 			}
 		}
@@ -557,6 +679,14 @@ public class EvaluatorParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_nestedFunction; }
 		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof EvaluatorParserListener ) ((EvaluatorParserListener)listener).enterNestedFunction(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof EvaluatorParserListener ) ((EvaluatorParserListener)listener).exitNestedFunction(this);
+		}
+		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitNestedFunction(this);
 			else return visitor.visitChildren(this);
@@ -565,44 +695,44 @@ public class EvaluatorParser extends Parser {
 
 	public final NestedFunctionContext nestedFunction() throws RecognitionException {
 		NestedFunctionContext _localctx = new NestedFunctionContext(_ctx, getState());
-		enterRule(_localctx, 10, RULE_nestedFunction);
+		enterRule(_localctx, 8, RULE_nestedFunction);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(58);
+			setState(53);
 			((NestedFunctionContext)_localctx).name = match(FunctionName);
-			setState(59);
+			setState(54);
 			match(LeftParenthesis);
-			setState(68);
+			setState(63);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << LeftParenthesis) | (1L << SetOpen) | (1L << Plus) | (1L << Minus) | (1L << BooleanNot) | (1L << ExerciseVariable) | (1L << FillInVariable) | (1L << FunctionName) | (1L << Integer) | (1L << Float) | (1L << String))) != 0)) {
 				{
-				setState(60);
+				setState(55);
 				((NestedFunctionContext)_localctx).expression = expression(0);
 				((NestedFunctionContext)_localctx).arguments.add(((NestedFunctionContext)_localctx).expression);
-				setState(65);
+				setState(60);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==ArgumentSeparator) {
 					{
 					{
-					setState(61);
+					setState(56);
 					match(ArgumentSeparator);
-					setState(62);
+					setState(57);
 					((NestedFunctionContext)_localctx).expression = expression(0);
 					((NestedFunctionContext)_localctx).arguments.add(((NestedFunctionContext)_localctx).expression);
 					}
 					}
-					setState(67);
+					setState(62);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
 				}
 			}
 
-			setState(70);
+			setState(65);
 			match(RightParenthesis);
 			}
 		}
@@ -627,32 +757,32 @@ public class EvaluatorParser extends Parser {
 	private boolean expression_sempred(ExpressionContext _localctx, int predIndex) {
 		switch (predIndex) {
 		case 0:
-			return precpred(_ctx, 3);
+			return precpred(_ctx, 7);
 		}
 		return true;
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\35K\4\2\t\2\4\3\t"+
-		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2"+
-		"\3\2\3\2\5\2\32\n\2\3\2\3\2\3\2\3\2\7\2 \n\2\f\2\16\2#\13\2\3\3\3\3\3"+
-		"\3\3\3\3\3\5\3*\n\3\3\4\3\4\3\5\3\5\3\6\3\6\3\6\3\6\7\6\64\n\6\f\6\16"+
-		"\6\67\13\6\5\69\n\6\3\6\3\6\3\7\3\7\3\7\3\7\3\7\7\7B\n\7\f\7\16\7E\13"+
-		"\7\5\7G\n\7\3\7\3\7\3\7\2\3\2\b\2\4\6\b\n\f\2\4\3\2\7\t\4\2\7\b\n\24\2"+
-		"Q\2\31\3\2\2\2\4)\3\2\2\2\6+\3\2\2\2\b-\3\2\2\2\n/\3\2\2\2\f<\3\2\2\2"+
-		"\16\17\b\2\1\2\17\32\5\f\7\2\20\21\7\3\2\2\21\22\5\2\2\2\22\23\7\4\2\2"+
-		"\23\32\3\2\2\2\24\25\5\6\4\2\25\26\5\2\2\6\26\32\3\2\2\2\27\32\5\n\6\2"+
-		"\30\32\5\4\3\2\31\16\3\2\2\2\31\20\3\2\2\2\31\24\3\2\2\2\31\27\3\2\2\2"+
-		"\31\30\3\2\2\2\32!\3\2\2\2\33\34\f\5\2\2\34\35\5\b\5\2\35\36\5\2\2\6\36"+
-		" \3\2\2\2\37\33\3\2\2\2 #\3\2\2\2!\37\3\2\2\2!\"\3\2\2\2\"\3\3\2\2\2#"+
-		"!\3\2\2\2$*\7\32\2\2%*\7\33\2\2&*\7\25\2\2\'*\7\26\2\2(*\7\34\2\2)$\3"+
-		"\2\2\2)%\3\2\2\2)&\3\2\2\2)\'\3\2\2\2)(\3\2\2\2*\5\3\2\2\2+,\t\2\2\2,"+
-		"\7\3\2\2\2-.\t\3\2\2.\t\3\2\2\2/8\7\5\2\2\60\65\5\2\2\2\61\62\7\31\2\2"+
-		"\62\64\5\2\2\2\63\61\3\2\2\2\64\67\3\2\2\2\65\63\3\2\2\2\65\66\3\2\2\2"+
-		"\669\3\2\2\2\67\65\3\2\2\28\60\3\2\2\289\3\2\2\29:\3\2\2\2:;\7\6\2\2;"+
-		"\13\3\2\2\2<=\7\27\2\2=F\7\3\2\2>C\5\2\2\2?@\7\30\2\2@B\5\2\2\2A?\3\2"+
-		"\2\2BE\3\2\2\2CA\3\2\2\2CD\3\2\2\2DG\3\2\2\2EC\3\2\2\2F>\3\2\2\2FG\3\2"+
-		"\2\2GH\3\2\2\2HI\7\4\2\2I\r\3\2\2\2\t\31!)\658CF";
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\35F\4\2\t\2\4\3\t"+
+		"\3\4\4\t\4\4\5\t\5\4\6\t\6\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2"+
+		"\3\2\3\2\3\2\3\2\5\2\34\n\2\3\2\3\2\3\2\3\2\7\2\"\n\2\f\2\16\2%\13\2\3"+
+		"\3\3\3\3\4\3\4\3\5\3\5\3\5\3\5\7\5/\n\5\f\5\16\5\62\13\5\5\5\64\n\5\3"+
+		"\5\3\5\3\6\3\6\3\6\3\6\3\6\7\6=\n\6\f\6\16\6@\13\6\5\6B\n\6\3\6\3\6\3"+
+		"\6\2\3\2\7\2\4\6\b\n\2\4\3\2\7\t\4\2\7\b\n\24\2M\2\33\3\2\2\2\4&\3\2\2"+
+		"\2\6(\3\2\2\2\b*\3\2\2\2\n\67\3\2\2\2\f\r\b\2\1\2\r\34\5\n\6\2\16\17\7"+
+		"\3\2\2\17\20\5\2\2\2\20\21\7\4\2\2\21\34\3\2\2\2\22\23\5\4\3\2\23\24\5"+
+		"\2\2\n\24\34\3\2\2\2\25\34\5\b\5\2\26\34\7\32\2\2\27\34\7\33\2\2\30\34"+
+		"\7\25\2\2\31\34\7\26\2\2\32\34\7\34\2\2\33\f\3\2\2\2\33\16\3\2\2\2\33"+
+		"\22\3\2\2\2\33\25\3\2\2\2\33\26\3\2\2\2\33\27\3\2\2\2\33\30\3\2\2\2\33"+
+		"\31\3\2\2\2\33\32\3\2\2\2\34#\3\2\2\2\35\36\f\t\2\2\36\37\5\6\4\2\37 "+
+		"\5\2\2\n \"\3\2\2\2!\35\3\2\2\2\"%\3\2\2\2#!\3\2\2\2#$\3\2\2\2$\3\3\2"+
+		"\2\2%#\3\2\2\2&\'\t\2\2\2\'\5\3\2\2\2()\t\3\2\2)\7\3\2\2\2*\63\7\5\2\2"+
+		"+\60\5\2\2\2,-\7\31\2\2-/\5\2\2\2.,\3\2\2\2/\62\3\2\2\2\60.\3\2\2\2\60"+
+		"\61\3\2\2\2\61\64\3\2\2\2\62\60\3\2\2\2\63+\3\2\2\2\63\64\3\2\2\2\64\65"+
+		"\3\2\2\2\65\66\7\6\2\2\66\t\3\2\2\2\678\7\27\2\28A\7\3\2\29>\5\2\2\2:"+
+		";\7\30\2\2;=\5\2\2\2<:\3\2\2\2=@\3\2\2\2><\3\2\2\2>?\3\2\2\2?B\3\2\2\2"+
+		"@>\3\2\2\2A9\3\2\2\2AB\3\2\2\2BC\3\2\2\2CD\7\4\2\2D\13\3\2\2\2\b\33#\60"+
+		"\63>A";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

@@ -20,6 +20,7 @@ import org.openmath.openmath.OMA;
 import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorLexer;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser;
+import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParserBaseVisitor;
 
 /**
  * This class contains only one Function 'parse' to parse the expression to the 
@@ -79,7 +80,6 @@ public class ExpressionParser {
 		
 		// Putting the parsed OpenMath-Tree in OMOBJ and visit OMVisitor for Evaluation
 		Object omobjElementsTree = new ExpressionToOpenMathVisitor(exerciseVariableMap,fillInVariableMap).visit(tree);
-
 		
 		// Convert Tree to OMOBJ, evaluate it and again convert the evaluated
 		// tree to OMOBJ

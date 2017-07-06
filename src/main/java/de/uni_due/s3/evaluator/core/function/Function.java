@@ -3,7 +3,6 @@ package de.uni_due.s3.evaluator.core.function;
 import java.util.List;
 
 import de.uni_due.s3.evaluator.exceptions.cas.CasException;
-import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionArgumentNumberException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
@@ -37,7 +36,7 @@ public abstract class Function {
 	 * @return a new specific Object, the result after Execution
 	 * @throws FunctionInvalidArgumentException 
 	 */
-	abstract protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentException;
+	abstract protected Object execute(List<Object> arguments) throws FunctionException;
 	
 	/**
 	 * First: Check If maxArgs can be infinitely.

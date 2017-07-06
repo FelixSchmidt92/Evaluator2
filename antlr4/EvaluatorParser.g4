@@ -6,24 +6,19 @@ options {
 
 expression
 :
-	nestedFunction
-	| LeftParenthesis expression RightParenthesis
-	| unaryoperator expression
-	| expression binaryoperator expression
-	| set
-	| terminal
-;
-
-terminal
-:
-	value = Integer # integerValue
+	nestedFunction # nestedFunctionInExpression
+	| LeftParenthesis expression RightParenthesis # parenthesis
+	| unaryOperatorForExpression expression # unary
+	| expression binaryOperatorForExpression expression # binary
+	| set # setInExpression
+	| value = Integer # integerValue
 	| value = Float # floatValue
 	| name = ExerciseVariable # exerciseVarName
 	| name = FillInVariable # fillInVarName
 	| value = String # textValue
 ;
 
-unaryoperator
+unaryOperatorForExpression
 :
 	operator =
 	(
@@ -33,7 +28,7 @@ unaryoperator
 	)
 ;
 
-binaryoperator
+binaryOperatorForExpression
 :
 	operator =
 	(
@@ -55,7 +50,6 @@ binaryoperator
 
 set
 :
-
 	SetOpen
 	(
 		arguments += expression

@@ -1,4 +1,4 @@
-package de.uni_due.s3.evaluator.core.function.arith1;
+package de.uni_due.s3.evaluator.core.function.functions.arith1;
 
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
 

@@ -2,6 +2,8 @@ package de.uni_due.s3.evaluator.parser;
 
 import java.util.Map;
 
+// Generated from EvaluatorParser.g4 by ANTLR 4.7
+import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 import org.openmath.omutils.OMConverter;
 import org.openmath.omutils.OpenMathException;
 import org.openmath.openmath.OMA;
@@ -12,10 +14,10 @@ import org.openmath.openmath.OMS;
 import org.openmath.openmath.OMSTR;
 
 import de.uni_due.s3.evaluator.core.functionData.OMSEvaluatorSyntaxDictionary;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedException;
 import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedFillInVariableException;
+import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.BinaryContext;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.BinaryOperatorForExpressionContext;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.ExerciseVarNameContext;
@@ -33,7 +35,16 @@ import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.UnaryContext;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.UnaryOperatorForExpressionContext;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParserBaseVisitor;
 
-public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Object> {
+/**
+ * This class provides an empty implementation of
+ * {@link EvaluatorParserVisitor}, which can be extended to create a visitor
+ * which only needs to handle a subset of the available methods.
+ *
+ * @param <T>
+ *            The return type of the visit operation. Use {@link Void} for
+ *            operations with no return type.
+ */
+public class ExprVisitor extends EvaluatorParserBaseVisitor<Object> {
 
 	/**
 	 * These variables are defined by the evaluator-class and are used to
@@ -41,11 +52,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	 */
 	private Map<String, OMOBJ> exerciseVariableMap;
 	private Map<Integer, OMOBJ> fillInVariableMap;
-
-	public ExpressionToOpenMathVisitor(Map<String, OMOBJ> exerciseVariableMap, Map<Integer, OMOBJ> fillInVariableMap) {
-		this.exerciseVariableMap = exerciseVariableMap;
-		this.fillInVariableMap = fillInVariableMap;
-	}
+	
 	
 	@Override
 	public OMSTR visitTextValue(TextValueContext ctx) {
@@ -62,7 +69,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 
 	@Override
 	public Object visitSetInExpression(SetInExpressionContext ctx) {
-		// @Note: Do Not change Implementation of this Method
+		// FIXME Do Nothing
 		return visitChildren(ctx);
 	}
 
@@ -140,9 +147,6 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 			oms.setCd("logic1");
 			oms.setName("or");
 			break;
-			
-			default: 
-				throw new FunctionNotImplementedException("Binary Operator " + ctx.getChild(1) + " is not supported");
 		}
 
 		OMA oma = new OMA();
@@ -198,7 +202,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 
 	@Override
 	public Object visitNestedFunctionInExpression(NestedFunctionInExpressionContext ctx) {
-		// @Note: Do Not change Implementation of this Method
+		// FIXME Do Nothing
 		return visitChildren(ctx);
 	}
 
@@ -256,13 +260,13 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 
 	@Override
 	public Object visitUnaryOperatorForExpression(UnaryOperatorForExpressionContext ctx) {
-		// @Note: Do Not change Implementation of this Method
+		// FIXME Do Nothing
 		return visitChildren(ctx);
 	}
 
 	@Override
 	public Object visitBinaryOperatorForExpression(BinaryOperatorForExpressionContext ctx) {
-		// @Note: Do Not change Implementation of this Method
+		// FIXME Do Nothing
 		return visitChildren(ctx);
 	}
 
@@ -277,7 +281,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	}
 
 	@Override
-	public Object visitNestedFunction(NestedFunctionContext ctx){
+	public Object visitNestedFunction(NestedFunctionContext ctx) {
 		OMA oma = new OMA();
 		oma.getOmel().add(OMSEvaluatorSyntaxDictionary.getInstance().getOMS(ctx.name.getText()));
 		for (ExpressionContext childctx : ctx.arguments) {
@@ -285,4 +289,5 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 		}
 		return oma;
 	}
+
 }

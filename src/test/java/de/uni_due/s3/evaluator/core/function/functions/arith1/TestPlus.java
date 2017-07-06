@@ -1,4 +1,4 @@
-package de.uni_due.s3.evaluator.core.function.arith1;
+package de.uni_due.s3.evaluator.core.function.functions.arith1;
 
 import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
@@ -8,13 +8,17 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.openmath.omutils.OpenMathException;
 import org.openmath.openmath.OMOBJ;
 import org.openmath.openmath.OMS;
 
+import de.uni_due.s3.evaluator.core.function.OMExecutor;
 import de.uni_due.s3.evaluator.core.functionData.OMSFunctionDictionary;
 import de.uni_due.s3.evaluator.exceptions.cas.CasException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionArgumentNumberException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedException;
+import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
 
@@ -23,26 +27,26 @@ public class TestPlus {
 
 	static String[][] addition = {
 			//Integer
-			{"1+1", "2"}, //[0]
-			{"1+2", "3"},
-			{"2+1", "3"},
-			{"plus(1,1)", "2"},
-			{"plus(1,2)", "3"},
-			{"plus(2,1)", "3"},
-			{"3+3+3", "9"},
-			{"plus(plus(plus(1,1), 1), 1)", "4"},
-			{"plus(  plus(plus(1,1), plus(1,1))    ,   (plus(1, plus(1,1)))    )", "7"},
-			{"plus(1+1, 1+1)", "4"},
-			
-			//Float
-			{"plus(1.0, 1.0)", "2"}, //[10]
-			{"plus(1.0, 2.0)", "3"},
-			{"plus(2.0, 1.0)", "3"},
+			{"1+1", "2", "1 + 1"}, //[0]
+			{"1+2", "3", "1 + 2"},
+			{"2+1", "3", "2 + 1"},
+//			{"plus(1,1)", "2"},
+//			{"plus(1,2)", "3"},
+//			{"plus(2,1)", "3"},
+//			{"3+3+3", "9"},
+//			{"plus(plus(plus(1,1), 1), 1)", "4"},
+//			{"plus(  plus(plus(1,1), plus(1,1))    ,   (plus(1, plus(1,1)))    )", "7"},
+//			{"plus(1+1, 1+1)", "4"},
+//			
+//			//Float
+//			{"plus(1.0, 1.0)", "2"}, //[10]
+//			{"plus(1.0, 2.0)", "3"},
+//			{"plus(2.0, 1.0)", "3"},
 			
 			//TODO dlux vector, matrix, OMAS(negative numbers), maybe complex
 			};
 	
-	private String parameter, expected;
+	private String parameter, expected, sageString;
 	
 	@Parameterized.Parameters
 	public static Collection<String[]> test(){
@@ -53,14 +57,17 @@ public class TestPlus {
 		return list;
 	}
 	
-	public TestPlus(String current, String expected){
+	public TestPlus(String current, String expected, String sageString){
 		parameter = current;
 		this.expected = expected;
+		this.sageString = sageString;
 	}
 	
 	@Test
-	public void testPlus(){
-		assertEquals(ExpressionParser.parse(parameter,null,null).getOMI().getValue(), expected);
+	public void testPlus() throws FunctionException, ParserException, OpenMathException{
+		OMOBJ t = ExpressionParser.parse(parameter,null,null);
+		
+		assertEquals(OMExecutor.execute(t).getOMI().getValue(), expected);
 	}
 	
 	@Test

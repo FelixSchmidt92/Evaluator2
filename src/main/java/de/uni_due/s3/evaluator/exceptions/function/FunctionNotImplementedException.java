@@ -6,7 +6,7 @@ import org.openmath.openmath.OMS;
  * Is thrown when a requested function is not implemented
  * @author frichtscheid
  *
- */
+ */									/*TODO FIXME dlux RuntimeException??*/
 public class FunctionNotImplementedException extends RuntimeException{
 	
 	/**
