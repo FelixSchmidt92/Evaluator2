@@ -26,8 +26,11 @@ If you want to clone this repo in eclipse, do the following:
     file. Run this file from the root-project folder.
     This means the Console is at "~/git/Evaluator2/" and your call should look
     like:
+    
     --> Windows: "lib\getDependencies.bat"
+    
     --> Linux  : "lib/getDependencies.sh"
     
-    After this you should find all Dependencies needed for this Project in the
-    lib directory and you are ready to go!
+    
+After this you should find all Dependencies needed for this Project in the
+lib directory and you are ready to go!
