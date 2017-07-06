@@ -20,7 +20,6 @@ import org.openmath.openmath.OMA;
 import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorLexer;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser;
-import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParserBaseVisitor;
 
 /**
  * This class contains only one Function 'parse' to parse the expression to the 

@@ -30,18 +30,14 @@ public class TestPlus {
 			{"1+1", "2", "1 + 1"}, //[0]
 			{"1+2", "3", "1 + 2"},
 			{"2+1", "3", "2 + 1"},
-//			{"plus(1,1)", "2"},
-//			{"plus(1,2)", "3"},
-//			{"plus(2,1)", "3"},
-//			{"3+3+3", "9"},
-//			{"plus(plus(plus(1,1), 1), 1)", "4"},
-//			{"plus(  plus(plus(1,1), plus(1,1))    ,   (plus(1, plus(1,1)))    )", "7"},
-//			{"plus(1+1, 1+1)", "4"},
-//			
-//			//Float
-//			{"plus(1.0, 1.0)", "2"}, //[10]
-//			{"plus(1.0, 2.0)", "3"},
-//			{"plus(2.0, 1.0)", "3"},
+			{"plus(1,1)", "2", "1 + 1"},
+			{"plus(1,2)", "3", "1 + 2"},
+			{"plus(2,1)", "3", "2 + 1"},
+			
+			//Float
+			{"plus(1.0, 1.0)", "2", "1.0 + 1.0"},
+			{"plus(1.0, 2.0)", "3", "1.0 + 2.0"},
+			{"plus(2.0, 1.0)", "3", "2.0 + 1.0"},
 			
 			//TODO dlux vector, matrix, OMAS(negative numbers), maybe complex
 			};
@@ -72,12 +68,12 @@ public class TestPlus {
 	
 	@Test
 	public void testPlusSageSyntax() throws FunctionArgumentNumberException, CasException, NoRepresentationAvailableException, FunctionNotImplementedException{
-		OMOBJ omobj = ExpressionParser.parse("plus(5,10)", null, null);
+		OMOBJ omobj = ExpressionParser.parse(parameter, null, null);
 		List<Object> args = omobj.getOMA().getOmel();
 		OMS oms = (OMS)args.get(0);
 		args.remove(0);
 		
 		String syntax = OMSFunctionDictionary.getInstance().getFunction(oms).getPartialSageSyntax(args);
-		assertEquals("5 + 10", syntax);
+		assertEquals(sageString, syntax);
 	}
 }

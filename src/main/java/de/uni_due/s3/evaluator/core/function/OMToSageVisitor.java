@@ -21,7 +21,7 @@ public class OMToSageVisitor extends OMToCasVisitor {
 
 	@Override
 	protected String visit(OMI omi) {
-		return   omi.getValue();
+		return omi.getValue();
 	}
 
 	@Override
