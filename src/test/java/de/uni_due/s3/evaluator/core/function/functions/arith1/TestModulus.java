@@ -23,6 +23,7 @@ import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
 
@@ -88,7 +89,7 @@ public class TestModulus {
 		assertEquals("1.0 % 1.0",func.getPartialSageSyntax(args));
 	}
 	
-	@Test(expected=FunctionInvalidArgumentException.class)
+	@Test(expected=FunctionInvalidArgumentTypeException.class)
 	public void testMinusWithWrongArguments() throws FunctionException, OpenMathException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
 		OMOBJ omobj = ExpressionParser.parse("10%'test'", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
