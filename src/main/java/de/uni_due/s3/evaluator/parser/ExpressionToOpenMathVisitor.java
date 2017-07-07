@@ -3,6 +3,7 @@ package de.uni_due.s3.evaluator.parser;
 import java.util.Map;
 
 import de.uni_due.s3.evaluator.core.functionData.OMSEvaluatorSyntaxDictionary;
+import de.uni_due.s3.evaluator.core.functionData.OMSymbol;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedException;
 import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableException;
@@ -45,12 +46,12 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 		this.exerciseVariableMap = exerciseVariableMap;
 		this.fillInVariableMap = fillInVariableMap;
 	}
-	
+
 	@Override
 	public OMSTR visitTextValue(TextValueContext ctx) {
-		OMSTR omstr = new OMSTR(); // FIXME enthält der Text eine Variable [pos=
-																		// var=] muss diese ersetzt werden?!
-		omstr.setContent(ctx.getText().substring(1, ctx.getText().length() - 1)); 	// delete
+		OMSTR omstr = new OMSTR();
+		// FIXME hier eine liste anstatt von OMSTR
+		omstr.setContent(ctx.getText().substring(1, ctx.getText().length() - 1)); // delete
 																					// '
 																					// at
 																					// beginning
@@ -67,81 +68,52 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 
 	@Override
 	public OMA visitBinary(BinaryContext ctx) {
-		OMS oms = new OMS();
+		OMS oms;
 		switch (ctx.getChild(1).getText()) {
 		case "+":
-			oms.setCd("arith1");
-			oms.setName("plus");
+			oms = OMSymbol.ARITH1_PLUS;
 			break;
-
 		case "-":
-			oms.setCd("arith1");
-			oms.setName("minus");
+			oms = OMSymbol.ARITH1_MINUS;
 			break;
-
 		case "*":
-			oms.setCd("arith1");
-			oms.setName("times");
+			oms = OMSymbol.ARITH1_TIMES;
 			break;
-
 		case "/":
-			oms.setCd("arith1");
-			oms.setName("divide");
+			oms = OMSymbol.ARITH1_DIVIDE;
 			break;
-
-		case "%": // defining here an own cd and name to have this as an binary
-					// operator
-			oms.setCd("jackbinary1");
-			oms.setName("modulus");
+		case "%":
+			oms = OMSymbol.INTEGER1_REMAINDER;
 			break;
-
 		case "<":
-			oms.setCd("relation1");
-			oms.setName("lt");
+			oms = OMSymbol.RELATION1_LT;
 			break;
-
 		case "<=":
-			oms.setCd("relation1");
-			oms.setName("leq");
+			oms = OMSymbol.RELATION1_LEQ;
 			break;
-
 		case ">":
-			oms.setCd("relation1");
-			oms.setName("gt");
+			oms = OMSymbol.RELATION1_GT;
 			break;
-
 		case ">=":
-			oms.setCd("relation1");
-			oms.setName("geq");
+			oms = OMSymbol.RELATION1_GEQ;
 			break;
-
 		case "=":
-			oms.setCd("relation1");
-			oms.setName("eq");
+			oms = OMSymbol.RELATION1_EQ;
 			break;
-
 		case "==":
-			oms.setCd("logic1"); // equivalent "==" as "≡"
-			oms.setName("equivalent");
+			oms = OMSymbol.RELATION1_EQ;
 			break;
-
 		case "!=":
-			oms.setCd("relation1");
-			oms.setName("neq");
+			oms = OMSymbol.RELATION1_NEQ;
 			break;
-
 		case "&&":
-			oms.setCd("logic1");
-			oms.setName("and");
+			oms = OMSymbol.LOGIC1_AND;
 			break;
-
 		case "||":
-			oms.setCd("logic1");
-			oms.setName("or");
+			oms = OMSymbol.LOGIC1_OR;
 			break;
-			
-			default: 
-				throw new FunctionNotImplementedException("Binary Operator " + ctx.getChild(1) + " is not supported");
+		default:
+			throw new FunctionNotImplementedException("Binary Operator " + ctx.getChild(1) + " is not supported");
 		}
 
 		OMA oma = new OMA();
@@ -172,12 +144,13 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 		if (exerciseVariableMap.containsKey(varName)) {
 			OMOBJ varOmobj = exerciseVariableMap.get(varName);
 			try {
-				return OMConverter.toElement(varOmobj);  // removes the OMOBJ-tags
+				return OMConverter.toElement(varOmobj); // removes the
+														// OMOBJ-tags
 			} catch (OpenMathException e) {
 				throw new ParserException("Unable to convert OMOBJ ot Element:" + varOmobj.toString(), e);
 			}
-													// and returns the child of
-													// the OMOBJ-Object
+			// and returns the child of
+			// the OMOBJ-Object
 		} else {
 			throw new UndefinedExerciseVariableException(varName);
 		}
@@ -202,23 +175,17 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	}
 
 	@Override
-	public OMA visitUnary(UnaryContext ctx) {
+	public Object visitUnary(UnaryContext ctx) {
 		OMS oms = new OMS();
 
 		switch (ctx.getChild(0).getText()) {
 		case "+":
-			oms.setCd("arith1");
-			oms.setName("unary_plus");
-			break;
-
+			return visit(ctx.getChild(0));
 		case "-":
-			oms.setCd("arith1");
-			oms.setName("unary_minus");
+			oms = OMSymbol.ARITH1_UNARY_MINUS;
 			break;
-
 		case "!":
-			oms.setCd("logic1");
-			oms.setName("not");
+			oms = OMSymbol.LOGIC1_NOT;
 			break;
 		}
 		OMA oma = new OMA();
@@ -235,8 +202,10 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 		if (fillInVariableMap.containsKey(varNumber)) {
 			OMOBJ varOmobj = fillInVariableMap.get(varNumber);
 			try {
-				return OMConverter.toElement(varOmobj); // removes the OMOBJ-tags
-														// and returns the child of
+				return OMConverter.toElement(varOmobj); // removes the
+														// OMOBJ-tags
+														// and returns the child
+														// of
 														// the OMOBJ-Object
 			} catch (OpenMathException e) {
 				throw new ParserException("Unable to convert OMOBJ ot Element:" + varOmobj.toString(), e);
@@ -249,7 +218,8 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 
 	@Override
 	public Object visitParenthesis(ParenthesisContext ctx) {
-		// visit second child, because first is "(" and third is ")" (both of them return NULL-PointerException)
+		// visit second child, because first is "(" and third is ")" (both of
+		// them return NULL-PointerException)
 		return visit(ctx.getChild(1));
 	}
 
@@ -276,7 +246,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	}
 
 	@Override
-	public Object visitNestedFunction(NestedFunctionContext ctx){
+	public Object visitNestedFunction(NestedFunctionContext ctx) {
 		OMA oma = new OMA();
 		oma.getOmel().add(OMSEvaluatorSyntaxDictionary.getInstance().getOMS(ctx.name.getText()));
 		for (ExpressionContext childctx : ctx.arguments) {
