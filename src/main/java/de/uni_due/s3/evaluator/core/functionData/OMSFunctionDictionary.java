@@ -7,9 +7,10 @@ import de.uni_due.s3.evaluator.core.function.functions.arith1.Abs;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.Divide;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.GCD;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.Minus;
-import de.uni_due.s3.evaluator.core.function.functions.arith1.Modulus;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.Plus;
+import de.uni_due.s3.evaluator.core.function.functions.arith1.Power;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.Times;
+import de.uni_due.s3.evaluator.core.function.functions.arith1.UnaryMinus;
 import de.uni_due.s3.evaluator.core.function.functions.binary_jack.ConvertToBinary;
 import de.uni_due.s3.evaluator.core.function.functions.binary_jack.EqualsBinary;
 import de.uni_due.s3.evaluator.core.function.functions.cas_jack.EvaluateInR;
@@ -113,7 +114,8 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.ARITH1_DIVIDE, new Divide());
 		functions.put(OMSymbol.ARITH1_ABS, new Abs());
 		functions.put(OMSymbol.ARITH1_GCD, new GCD());
-		functions.put(OMSymbol.ARITHJACK_MODULUS, new Modulus());
+		functions.put(OMSymbol.ARITH1_UNARY_MINUS, new UnaryMinus());
+		functions.put(OMSymbol.ARITH1_POWER, new Power());
 		// Integer
 		functions.put(OMSymbol.INTEGER1_REMAINDER, new Remainder());
 		// Rounding

@@ -22,7 +22,7 @@ import de.uni_due.s3.evaluator.exceptions.cas.CasException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
 
@@ -32,10 +32,10 @@ public class TestGCD {
 	public void testGcdInteger() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
 		GCD func = new GCD();
 		List<Object> args = new ArrayList<Object>(2);
-		args.add(OMCreator.createOMI(3));
-		args.add(OMCreator.createOMI(4));
+		args.add(OMCreator.createOMI(12));
+		args.add(OMCreator.createOMI(9));
 		OMI result = (OMI) func.evaluate(args);
-		assertEquals("12", result.getValue());
+		assertEquals("3", result.getValue());
 	}
 	
 	
@@ -45,14 +45,14 @@ public class TestGCD {
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals("5", result.getOMI().getValue());
 		
-		omobj = ExpressionParser.parse("times(100,125)", null, null);
+		omobj = ExpressionParser.parse("gcd(100,125)", null, null);
 		result = OMExecutor.execute(omobj);
 		assertEquals("25", result.getOMI().getValue());
 	}
 	
 	@Test
 	public void testGcdSageSyntax() throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException{
-		GCD func = (GCD)OMSFunctionDictionary.getInstance().getFunction(OMSEvaluatorSyntaxDictionary.getInstance().getOMS("GCD"));
+		GCD func = (GCD)OMSFunctionDictionary.getInstance().getFunction(OMSEvaluatorSyntaxDictionary.getInstance().getOMS("gcd"));
 		OMF omf = OMCreator.createOMF(1.0);
 		OMI omi = OMCreator.createOMI(10);
 		
@@ -68,7 +68,7 @@ public class TestGCD {
 		assertEquals("gcd(1.0,1.0)",func.getPartialSageSyntax(args));
 	}
 	
-	@Test(expected=FunctionInvalidArgumentException.class)
+	@Test(expected=FunctionInvalidArgumentTypeException.class)
 	public void testGcdWithWrongArguments() throws FunctionException, OpenMathException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
 		OMOBJ omobj = ExpressionParser.parse("gcd(2,'test')", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);

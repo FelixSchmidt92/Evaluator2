@@ -180,17 +180,20 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 
 		switch (ctx.getChild(0).getText()) {
 		case "+":
-			return visit(ctx.getChild(0));
+			return visit(ctx.getChild(1));
 		case "-":
 			oms = OMSymbol.ARITH1_UNARY_MINUS;
 			break;
 		case "!":
 			oms = OMSymbol.LOGIC1_NOT;
 			break;
+		default: 
+			throw new FunctionNotImplementedException("Unary Operator " + ctx.getChild(0) + " is not supported");
 		}
+		
 		OMA oma = new OMA();
 		oma.getOmel().add(oms);
-		oma.getOmel().add(visit(ctx.getChild(0)));
+		oma.getOmel().add(visit(ctx.getChild(1)));
 		return oma;
 	}
 

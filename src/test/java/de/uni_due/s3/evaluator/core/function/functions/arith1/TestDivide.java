@@ -15,7 +15,6 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 import de.uni_due.s3.evaluator.core.function.OMExecutor;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.Divide;
-import de.uni_due.s3.evaluator.core.function.functions.arith1.Times;
 import de.uni_due.s3.evaluator.core.functionData.OMSEvaluatorSyntaxDictionary;
 import de.uni_due.s3.evaluator.core.functionData.OMSFunctionDictionary;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
@@ -23,7 +22,7 @@ import de.uni_due.s3.evaluator.exceptions.cas.CasException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
 
@@ -72,7 +71,7 @@ public class TestDivide {
 	
 	@Test
 	public void testDivideSageSyntax() throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException{
-		Divide func = (Divide)OMSFunctionDictionary.getInstance().getFunction(OMSEvaluatorSyntaxDictionary.getInstance().getOMS("times"));
+		Divide func = (Divide)OMSFunctionDictionary.getInstance().getFunction(OMSEvaluatorSyntaxDictionary.getInstance().getOMS("divide"));
 		OMF omf = OMCreator.createOMF(1.0);
 		OMI omi = OMCreator.createOMI(10);
 		
@@ -88,7 +87,7 @@ public class TestDivide {
 		assertEquals("1.0 / 1.0",func.getPartialSageSyntax(args));
 	}
 	
-	@Test(expected=FunctionInvalidArgumentException.class)
+	@Test(expected=FunctionInvalidArgumentTypeException.class)
 	public void testMinusWithWrongArguments() throws FunctionException, OpenMathException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
 		OMOBJ omobj = ExpressionParser.parse("10/'test'", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);

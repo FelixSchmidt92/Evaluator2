@@ -35,7 +35,8 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("divide", OMSymbol.ARITH1_DIVIDE);
 		functionSymbolMap.put("abs", OMSymbol.ARITH1_ABS);
 		functionSymbolMap.put("gcd", OMSymbol.ARITH1_GCD);
-		functionSymbolMap.put("modulus", OMSymbol.ARITHJACK_MODULUS);
+		functionSymbolMap.put("pow", OMSymbol.ARITH1_POWER);
+		functionSymbolMap.put("remainder", OMSymbol.INTEGER1_REMAINDER);
 		// Integer
 		functionSymbolMap.put("IEEEremainder", OMSymbol.INTEGER1_REMAINDER);
 		// Rounding

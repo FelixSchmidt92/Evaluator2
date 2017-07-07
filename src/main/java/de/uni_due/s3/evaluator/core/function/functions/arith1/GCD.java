@@ -13,7 +13,7 @@ import de.uni_due.s3.openmath.jaxb.OMI;
 
 /**
  * Implements greatest-common-divisor with integers.
- * For example gcd(2,3) = 6
+ * For example gcd(12,6) = 3
  * @author frichtscheid
  *
  */
@@ -48,7 +48,7 @@ public class GCD extends Function {
 	
 	@Override
 	public String getPartialSageSyntax(List<Object> arguments) throws  FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException {
-		return "gcd("+getSageSyntax(arguments.get(0))+","+getSageSyntax(arguments.get(1));
+		return "gcd("+getSageSyntax(arguments.get(0))+","+getSageSyntax(arguments.get(1))+")";
 	}
 
 }

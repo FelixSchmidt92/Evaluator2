@@ -7,13 +7,24 @@ import de.uni_due.s3.evaluator.core.function.NumberUtils;
 import de.uni_due.s3.evaluator.exceptions.cas.CasException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 
+/**
+ * Implements multiplication of two numbers
+ * Example: 3*5
+ * @author frichtscheid
+ *
+ */
 public class Times extends Function {
 
+	/**
+	 * Expects two argument either of type OMI or OMF
+	 * @return OMI or OMF
+	 */
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentException {
+	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentException, FunctionInvalidArgumentTypeException {
 		Object left = arguments.get(0);
 		Object right = arguments.get(1);
 		try {
@@ -21,7 +32,7 @@ public class Times extends Function {
 			Double rightValue = NumberUtils.convertOMIOMFToDouble(right);
 			return NumberUtils.convertDoubleToOMIOMF(leftValue * rightValue);
 		} catch (InputMismatchException e) {
-			throw new FunctionInvalidArgumentException(this, "integer, float, double");
+			throw new FunctionInvalidArgumentTypeException(this, "integer, float, double");
 		}
 	}
 

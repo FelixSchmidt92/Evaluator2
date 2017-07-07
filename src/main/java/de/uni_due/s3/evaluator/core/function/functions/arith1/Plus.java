@@ -5,16 +5,14 @@ import java.util.List;
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.core.function.NumberUtils;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
-import de.uni_due.s3.evaluator.exceptions.cas.CasException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
-import de.uni_due.s3.sage.Sage;
+
 
 /**
  * Implements plus operation for numbers
@@ -42,13 +40,13 @@ public class Plus extends Function {
 			throw new FunctionInvalidArgumentTypeException(this,"integer, float, double");
 
 		//evaluate this method in sage
-		Object result = Sage.evaluateInCAS(getPartialSageSyntax(arguments));
-		System.out.println(result);
-		if(! OMTypeChecker.isOMFOrOMI(result)){
-			throw new CasEvaluationException("the result was not of type integer or double");
+		try {
+			Double leftValue = NumberUtils.convertOMIOMFToDouble(arguments.get(0));
+			Double rightValue = NumberUtils.convertOMIOMFToDouble(arguments.get(1));
+			return NumberUtils.convertDoubleToOMIOMF(leftValue + rightValue);
+		} catch (InputMismatchException e) {
+			throw new FunctionInvalidArgumentTypeException(this, "integer, float, double");
 		}
-		
-		return result;
 			
 
 	}
