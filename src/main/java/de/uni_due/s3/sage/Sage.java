@@ -18,7 +18,9 @@ import org.apache.log4j.Logger;
 
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
+import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMConverter;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * This class provides an interface to execute sage commands. To execute a Sage
@@ -55,10 +57,11 @@ public class Sage {
 	 * @throws CasEvaluationException
 	 *             if command is not evaluatable in Sage
 	 * @throws CasNotAvailableException
+	 * @throws OpenMathException 
 	 * @throws NoCASConnectionsException
 	 *             if there is no working SageServer connection anymore.
 	 */
-	public static Object evaluateInCAS(String sageExpression) throws CasEvaluationException, CasNotAvailableException {
+	public static Object evaluateInCAS(String sageExpression) throws CasEvaluationException, CasNotAvailableException, OpenMathException {
 		if (sageExpression == "") { // Python erkennt eine Leere Message nicht
 									// als Connection
 			sageExpression = " ";
@@ -99,7 +102,7 @@ public class Sage {
 			// restart evaluation without not working SageServer Connections
 			return evaluateInCAS(sageExpression);
 		}
-		Object omobjResult = null;
+		OMOBJ omobjResult = null;
 		try {
 			omobjResult = OMConverter.toObject(casResult);
 		} catch (JAXBException e) {
@@ -110,7 +113,8 @@ public class Sage {
 //			throw new CasEvaluationException("Sage command: '" + sageExpression
 //					+ "' could not be evaluated in Sage CAS. Error Message:" + ome.getOMSOrOMVOrOMI().get(0));
 //		}
-		return omobjResult;
+		//TODO: error handling
+		return OMConverter.toElement(omobjResult);
 	}
 
 	/**

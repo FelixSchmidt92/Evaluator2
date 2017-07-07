@@ -30,7 +30,7 @@ import de.uni_due.s3.evaluator.parser.ExpressionParser;
 public class TestDivide {
 	
 	@Test
-	public void testDivideInteger() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
+	public void testDivideInteger() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
 		Divide func = new Divide();
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(3));
@@ -40,7 +40,7 @@ public class TestDivide {
 	}
 	
 	@Test
-	public void testDivideFloat() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
+	public void testDivideFloat() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
 		Divide func = new Divide();
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMF(2.5));
@@ -50,7 +50,7 @@ public class TestDivide {
 	}
 	
 	@Test
-	public void testDivideMixed() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
+	public void testDivideMixed() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
 		Divide func = new Divide();
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(1000));

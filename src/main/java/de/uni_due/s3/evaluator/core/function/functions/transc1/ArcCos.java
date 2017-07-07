@@ -8,12 +8,13 @@ import de.uni_due.s3.evaluator.exceptions.cas.CasException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 import de.uni_due.s3.sage.Sage;
 
 public class ArcCos extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionInvalidNumberOfArgumentsException, CasNotAvailableException, NoRepresentationAvailableException, CasEvaluationException {
+	protected Object execute(List<Object> arguments) throws FunctionInvalidNumberOfArgumentsException, CasNotAvailableException, NoRepresentationAvailableException, CasEvaluationException, OpenMathException {
 		return Sage.evaluateInCAS(getSageSyntax(arguments));
 	}
 

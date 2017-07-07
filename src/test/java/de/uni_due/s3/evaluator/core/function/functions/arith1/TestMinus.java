@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 import de.uni_due.s3.openmath.jaxb.OMF;
 import de.uni_due.s3.openmath.jaxb.OMI;
@@ -14,7 +15,7 @@ import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.jaxb.OMSTR;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
-
+import de.uni_due.s3.sage.Sage;
 import de.uni_due.s3.evaluator.core.function.OMExecutor;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.Minus;
 import de.uni_due.s3.evaluator.core.functionData.OMSEvaluatorSyntaxDictionary;
@@ -25,17 +26,24 @@ import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
 
 public class TestMinus {
 	
+	@BeforeClass
+	public static void beforeClass(){
+		List<String> aSageConnectionsList = new ArrayList<>();
+		aSageConnectionsList.add("192.168.68.176:8989");
+		Sage.init(aSageConnectionsList);
+	}
+	
 	private OMI omi = OMCreator.createOMI(1);
 	private OMF omf = OMCreator.createOMF(2.5);
-	private OMSTR omstr = OMCreator.createOMSTR("test");
 	
 	@Test
-	public void testMinusInteger() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
+	public void testMinusInteger() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
 		Minus func = new Minus();
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(omi);
@@ -45,7 +53,7 @@ public class TestMinus {
 	}
 	
 	@Test
-	public void testMinusFloat() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
+	public void testMinusFloat() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
 		Minus func = new Minus();
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(omf);
@@ -55,7 +63,7 @@ public class TestMinus {
 	}
 	
 	@Test
-	public void testMinusMixed() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
+	public void testMinusMixed() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
 		Minus func = new Minus();
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(omi);
@@ -93,7 +101,7 @@ public class TestMinus {
 		assertEquals("1.0 - 1.0",func.getPartialSageSyntax(args));
 	}
 	
-	@Test(expected=FunctionInvalidArgumentException.class)
+	@Test(expected=FunctionInvalidArgumentTypeException.class)
 	public void testMinusWithWrongArguments() throws FunctionException, OpenMathException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
 		OMOBJ omobj = ExpressionParser.parse("10-'test'", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);

@@ -30,7 +30,7 @@ public class TestModulus {
 	
 	
 	@Test
-	public void testModulusInteger() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
+	public void testModulusInteger() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
 		Modulus func = new Modulus();
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(3));
@@ -40,7 +40,7 @@ public class TestModulus {
 	}
 	
 	@Test
-	public void testModulusFloat() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
+	public void testModulusFloat() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
 		Modulus func = new Modulus();
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMF(3.5));
@@ -50,7 +50,7 @@ public class TestModulus {
 	}
 	
 	@Test
-	public void testModulusMixed() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
+	public void testModulusMixed() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
 		Modulus func = new Modulus();
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(10));

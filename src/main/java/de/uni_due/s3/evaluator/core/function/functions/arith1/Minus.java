@@ -4,11 +4,17 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.core.function.NumberUtils;
+import de.uni_due.s3.evaluator.core.function.OMTypeChecker;
+import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasException;
+import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
+import de.uni_due.s3.sage.Sage;
 
 /**
  * Implements arithmetic minus operation.
@@ -21,18 +27,26 @@ public class Minus extends Function {
 	/**
 	 * Expects two arguments of type OMI or OMF
 	 * @return OMI or OMF
+	 * @throws CasEvaluationException 
+	 * @throws FunctionInvalidArgumentTypeException 
+	 * @throws NoRepresentationAvailableException 
+	 * @throws CasNotAvailableException 
+	 * @throws FunctionInvalidNumberOfArgumentsException 
+	 * @throws OpenMathException 
 	 */
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentException {
-		Object left = arguments.get(0);
-		Object right = arguments.get(1);
-		try {
-			Double leftValue = NumberUtils.convertOMIOMFToDouble(left);
-			Double rightValue = NumberUtils.convertOMIOMFToDouble(right);
-			return NumberUtils.convertDoubleToOMIOMF(leftValue - rightValue);
-		} catch (InputMismatchException e) {
-			throw new FunctionInvalidArgumentException(this,"integer, float, double");
+	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentException, CasEvaluationException, FunctionInvalidArgumentTypeException, FunctionInvalidNumberOfArgumentsException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+		//check if the type of arguments is correct
+		if(! (OMTypeChecker.isOMFOrOMI(arguments.get(0)) && OMTypeChecker.isOMFOrOMI(arguments.get(1))) )
+			throw new FunctionInvalidArgumentTypeException(this,"integer, float, double");
+
+		//evaluate this method in sage
+		Object result = Sage.evaluateInCAS(getPartialSageSyntax(arguments));
+		if(! OMTypeChecker.isOMFOrOMI(result)){
+			throw new CasEvaluationException("the result was not of type integer or double");
 		}
+		
+		return result;
 	}
 
 	@Override

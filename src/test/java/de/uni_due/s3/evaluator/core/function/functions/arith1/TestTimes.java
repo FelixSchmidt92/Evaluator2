@@ -29,7 +29,7 @@ import de.uni_due.s3.evaluator.parser.ExpressionParser;
 public class TestTimes {
 	
 	@Test
-	public void testTimesInteger() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
+	public void testTimesInteger() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
 		Times func = new Times();
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(3));
@@ -39,7 +39,7 @@ public class TestTimes {
 	}
 	
 	@Test
-	public void testTimesFloat() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
+	public void testTimesFloat() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
 		Times func = new Times();
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMF(2.5));
@@ -49,7 +49,7 @@ public class TestTimes {
 	}
 	
 	@Test
-	public void testTimesMixed() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
+	public void testTimesMixed() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
 		Times func = new Times();
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(1000));

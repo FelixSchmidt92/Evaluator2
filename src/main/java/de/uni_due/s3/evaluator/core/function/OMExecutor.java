@@ -92,8 +92,9 @@ public class OMExecutor {
 	 * @throws NoRepresentationAvailableException 
 	 * @throws CasNotAvailableException 
 	 * @throws CasEvaluationException 
+	 * @throws OpenMathException 
 	 */
-	private static Object execute(OMA oma) throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
+	private static Object execute(OMA oma) throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
 		List<Object> omel = oma.getOmel();
 		Function function = OMSFunctionDictionary.getInstance().getFunction((OMS) omel.get(0));
 		System.out.println("visit oma "+ function.toString());

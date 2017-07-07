@@ -10,6 +10,7 @@ import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoSageRepresentationAvailableException;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * Function is an abstract Class where functions can be executed with the
@@ -42,10 +43,11 @@ public abstract class Function {
 	 * @throws NoRepresentationAvailableException
 	 * @throws CasNotAvailableException
 	 * @throws CasEvaluationException
+	 * @throws OpenMathException 
 	 * @throws FunctionInvalidArgumentException
 	 */
 	abstract protected Object execute(List<Object> arguments) throws FunctionException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException;
+			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException;
 
 	/**
 	 * First: Check If maxArgs can be infinitely. Second:Check if arguments
@@ -60,11 +62,12 @@ public abstract class Function {
 	 * @throws NoRepresentationAvailableException
 	 * @throws CasNotAvailableException
 	 * @throws CasEvaluationException
+	 * @throws OpenMathException 
 	 * @throws FunctionInvalidNumberOfArgumentsException
 	 *             if number of Arguments is not between
 	 */
 	public Object evaluate(List<Object> arguments) throws FunctionException, FunctionInvalidArgumentException,
-			CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException {
+			CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
 		argsBetweenMinMax(arguments); // Check
 		return execute(arguments);
 	}

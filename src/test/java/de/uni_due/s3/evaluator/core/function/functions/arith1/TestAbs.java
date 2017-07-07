@@ -28,7 +28,7 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 public class TestAbs {
 	private Abs func = new Abs();
 	@Test
-	public void testAbsInteger() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
+	public void testAbsInteger() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
 	
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(-3));
@@ -37,7 +37,7 @@ public class TestAbs {
 	}
 	
 	@Test
-	public void testAbsFloat() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
+	public void testAbsFloat() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMF(-2.5));
 		OMF result = (OMF) func.evaluate(args);

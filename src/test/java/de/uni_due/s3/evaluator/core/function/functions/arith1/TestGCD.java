@@ -29,7 +29,7 @@ import de.uni_due.s3.evaluator.parser.ExpressionParser;
 public class TestGCD {
 	
 	@Test
-	public void testGcdInteger() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
+	public void testGcdInteger() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
 		GCD func = new GCD();
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(3));
