@@ -7,7 +7,7 @@ import de.uni_due.s3.evaluator.exceptions.EvaluatorException;
  * @author frichtscheid
  *
  */
-public abstract class NoRepresentationAvailableException extends EvaluatorException{
+public class NoRepresentationAvailableException extends EvaluatorException{
 
 	public NoRepresentationAvailableException(String message) {
 		super(message);

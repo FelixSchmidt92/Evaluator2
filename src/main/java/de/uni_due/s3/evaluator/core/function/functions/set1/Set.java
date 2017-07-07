@@ -41,7 +41,7 @@ public class Set extends Function {
 	}
 	
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException{
+	public String getPartialSageSyntax(List<Object> arguments) throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException{
 		String set = "{";
 			for(Object arg : arguments){
 				set += getSageSyntax(arg) + ", ";

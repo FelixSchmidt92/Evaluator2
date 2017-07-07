@@ -14,7 +14,10 @@ import org.openmath.openmath.OMSTR;
 import org.openmath.openmath.OMV;
 
 import de.uni_due.s3.evaluator.core.functionData.OMSFunctionDictionary;
+import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
+import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
+import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 
 
 /**
@@ -36,8 +39,11 @@ public class OMExecutor {
 	 * @return omobj-object.
 	 * @throws FunctionException 
 	 * @throws OpenMathException 
+	 * @throws NoRepresentationAvailableException 
+	 * @throws CasNotAvailableException 
+	 * @throws CasEvaluationException 
 	 */
-	public static OMOBJ execute(OMOBJ omobj) throws FunctionException, OpenMathException{
+	public static OMOBJ execute(OMOBJ omobj) throws FunctionException, OpenMathException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
 		Object visitedElement = null;
 		if(omobj != null){
 			if (omobj.getOMA() != null) {
@@ -84,8 +90,11 @@ public class OMExecutor {
 	 * @param oma OpenMath application object <OMA>...</OMA>
 	 * @return one of OMA,OMF,OMI,OMS,OMSTR or OMV. It depends on function used in the OMS.
 	 * @throws FunctionException 
+	 * @throws NoRepresentationAvailableException 
+	 * @throws CasNotAvailableException 
+	 * @throws CasEvaluationException 
 	 */
-	private static Object execute(OMA oma) throws FunctionException{
+	private static Object execute(OMA oma) throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
 		List<Object> omel = oma.getOmel();
 		Function function = OMSFunctionDictionary.getInstance().getFunction((OMS) omel.get(0));
 		System.out.println("visit oma "+ function.toString());

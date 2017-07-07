@@ -16,8 +16,6 @@ import javax.xml.bind.JAXBException;
 
 import org.apache.log4j.Logger;
 import org.openmath.omutils.OMConverter;
-import org.openmath.openmath.OME;
-import org.openmath.openmath.OMOBJ;
 
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
