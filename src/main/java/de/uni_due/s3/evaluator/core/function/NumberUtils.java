@@ -25,7 +25,7 @@ public class NumberUtils {
 		} else if (obj instanceof OMF) {
 			return ((OMF) obj).getDec();
 		} else {
-			throw new InputMismatchException(); // TODO vllt eine andere ?
+			throw new InputMismatchException();
 		}
 	}
 

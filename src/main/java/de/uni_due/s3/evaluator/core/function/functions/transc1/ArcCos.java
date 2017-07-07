@@ -4,10 +4,10 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
-import de.uni_due.s3.evaluator.exceptions.cas.CasException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
+import de.uni_due.s3.evaluator.exceptions.function.InvalidResultTypeException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
@@ -24,11 +24,17 @@ public class ArcCos extends Function {
 
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionInvalidNumberOfArgumentsException,
-			CasNotAvailableException, NoRepresentationAvailableException, CasEvaluationException, FunctionInvalidArgumentTypeException, OpenMathException {
-		if (! OMTypeChecker.isOMFOrOMI(arguments.get(0))) {
+			CasNotAvailableException, NoRepresentationAvailableException, CasEvaluationException,
+			FunctionInvalidArgumentTypeException, OpenMathException, InvalidResultTypeException {
+		if (!OMTypeChecker.isOMFOrOMI(arguments.get(0))) {
 			throw new FunctionInvalidArgumentTypeException(this, "integer, float, double");
 		}
-		return Sage.evaluateInCAS(getPartialSageSyntax(arguments));
+		Object result = Sage.evaluateInCAS(getPartialSageSyntax(arguments));
+
+		if (!OMTypeChecker.isOMFOrOMI(result)) {
+			throw new InvalidResultTypeException(this, "integer, float, double");
+		}
+		return result;
 	}
 
 	@Override
@@ -44,6 +50,6 @@ public class ArcCos extends Function {
 	@Override
 	public String getPartialSageSyntax(List<Object> arguments)
 			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException {
-		return getSageSyntax("arccos(" + getSageSyntax(arguments.get(0)) + ")");
+		return "arccos(" + getSageSyntax(arguments.get(0)) + ")";
 	}
 }

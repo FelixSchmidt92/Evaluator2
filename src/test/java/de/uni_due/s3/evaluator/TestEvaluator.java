@@ -1,5 +1,7 @@
 package de.uni_due.s3.evaluator;
 
+import java.util.HashMap;
+
 import javax.xml.bind.JAXBException;
 
 import org.junit.Assert;
@@ -18,26 +20,26 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestEvaluator {
 
-	private Evaluator eval;
+	private HashMap<String, OMOBJ> exerciseVariableMap;
+	private HashMap<Integer, OMOBJ> fillInVariableMap;
 	
 	@Before
 	public void init(){
-		this.eval = new Evaluator();
 	}
 	
 	@Test
 	public void testEvaluateString() throws FunctionException, JAXBException, OpenMathException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
-		Assert.assertEquals("<OMOBJ><OMI>4</OMI></OMOBJ>", OMConverter.toString(eval.evaluate("1+3")));
-		Assert.assertEquals("<OMOBJ><OMI>4</OMI></OMOBJ>", OMConverter.toString(eval.evaluate("plus(1,3)")));
+		Assert.assertEquals("<OMOBJ><OMI>4</OMI></OMOBJ>", OMConverter.toString(Evaluator.evaluate("1+3", exerciseVariableMap, fillInVariableMap)));
+		Assert.assertEquals("<OMOBJ><OMI>4</OMI></OMOBJ>", OMConverter.toString(Evaluator.evaluate("plus(1,3)", exerciseVariableMap, fillInVariableMap)));
 	}
 	
 	@Test(expected=FunctionNotImplementedException.class)
 	public void testEvaluateWithException() throws FunctionException, OpenMathException, JAXBException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
-		eval.evaluate("abcdefghxjc()");
-		eval.evaluate("123cdefghxjc()");
-		eval.evaluate("abcdefghxjc");	//should this throw a another exception? (dlux: this throws a ParserException from ParserErrorStrategy)
+		Evaluator.evaluate("abcdefghxjc()", exerciseVariableMap, fillInVariableMap);
+		Evaluator.evaluate("123cdefghxjc()", exerciseVariableMap, fillInVariableMap);
+		Evaluator.evaluate("abcdefghxjc", exerciseVariableMap, fillInVariableMap);	//should this throw a another exception? (dlux: this throws a ParserException from ParserErrorStrategy)
 		
-		eval.evaluate((OMOBJ)OMConverter.toObject("<OMOBJ><OMA>"
+		Evaluator.evaluate((OMOBJ)OMConverter.toObject("<OMOBJ><OMA>"
 				+ "<OMS name=\"abcdefggg\" cd=\"arith1\"/>"
 				+ "<OMI>2</OMI>"
 				+ "<OMI>3</OMI>"																			
@@ -46,7 +48,7 @@ public class TestEvaluator {
 	
 	@Test
 	public void testEvaluateOMOBJ() throws FunctionException, JAXBException, OpenMathException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
-		Assert.assertEquals("<OMOBJ><OMI>15</OMI></OMOBJ>", OMConverter.toString(eval.evaluate((OMOBJ)OMConverter.toObject("<OMOBJ><OMA>"
+		Assert.assertEquals("<OMOBJ><OMI>15</OMI></OMOBJ>", OMConverter.toString(Evaluator.evaluate((OMOBJ)OMConverter.toObject("<OMOBJ><OMA>"
 																			+ "<OMS name=\"plus\" cd=\"arith1\"/>"
 																			+ "<OMI>2</OMI>"
 																			+ "<OMI>13</OMI>"																			
