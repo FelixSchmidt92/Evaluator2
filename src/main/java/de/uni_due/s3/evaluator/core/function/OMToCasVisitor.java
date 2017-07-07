@@ -14,6 +14,7 @@ import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.jaxb.OMSTR;
 import de.uni_due.s3.openmath.jaxb.OMV;
+import de.uni_due.s3.openmath.omutils.OMObjectNotSupportedException;
 
 /**
  * This is a Template! For implementing an OMOBJ to CAS inherit this class.

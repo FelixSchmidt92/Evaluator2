@@ -16,6 +16,8 @@ import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.jaxb.OMSTR;
 import de.uni_due.s3.openmath.jaxb.OMV;
 import de.uni_due.s3.openmath.omutils.OMCreator;
+import de.uni_due.s3.openmath.omutils.OMOBJChildNotSupportedException;
+import de.uni_due.s3.openmath.omutils.OMObjectNotSupportedException;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 
@@ -64,10 +66,10 @@ public class OMExecutor {
 				visitedElement = (omobj.getOMV());
 	
 			} else {
-				throw new FunctionException("Unable to find Child in OMOBJ to execute. OMOBJ: " + omobj.toString());
+				throw new OMOBJChildNotSupportedException(omobj);
 			}
 		} else {
-			throw new FunctionException("OMOBJ is null, nothing to execute here");
+			throw new OMObjectNotSupportedException("OMOBJ is null, nothing to execute here");
 		}
 		
 		return OMCreator.createOMOBJ(visitedElement);

@@ -114,13 +114,13 @@ public class TestOMToCasVisitor {
 		Assert.assertEquals("omstr", vis.visit(OMCreator.createOMOBJ(omstr)));
 	}
 	
-	@Test(expected=CasException.class)
+	@Test(expected=NoRepresentationAvailableException.class)
 	public void testVisitObjectWithWrongObject() throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException{
 		vis.visit(new Integer(10));
 		vis.visit(new OMATP());
 	}
 	
-	@Test(expected=CasException.class)
+	@Test(expected=NoRepresentationAvailableException.class)
 	public void testVisitOMOBJWithWrongChild() throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException{
 		OMR omr = new OMR();
 		OMOBJ omobj = new OMOBJ();
