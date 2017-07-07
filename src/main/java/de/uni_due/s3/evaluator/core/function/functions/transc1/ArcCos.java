@@ -6,16 +6,29 @@ import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
+import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.sage.Sage;
 
+/**
+ * Implements ArcCos function. Example acos(1) = 0, acos(0) = 2 * pi =
+ * 1.57079632679490
+ * 
+ * @author spobel
+ *
+ */
 public class ArcCos extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionInvalidNumberOfArgumentsException, CasNotAvailableException, NoRepresentationAvailableException, CasEvaluationException, OpenMathException {
-		return Sage.evaluateInCAS(getSageSyntax(arguments));
+	protected Object execute(List<Object> arguments) throws FunctionInvalidNumberOfArgumentsException,
+			CasNotAvailableException, NoRepresentationAvailableException, CasEvaluationException, FunctionInvalidArgumentTypeException, OpenMathException {
+		if (! OMTypeChecker.isOMFOrOMI(arguments.get(0))) {
+			throw new FunctionInvalidArgumentTypeException(this, "integer, float, double");
+		}
+		return Sage.evaluateInCAS(getPartialSageSyntax(arguments));
 	}
 
 	@Override

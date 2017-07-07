@@ -2,6 +2,7 @@ package de.uni_due.s3.evaluator.core.function;
 
 import java.util.List;
 
+import de.uni_due.s3.evaluator.core.functionData.OMSymbol;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMF;
@@ -11,10 +12,10 @@ import de.uni_due.s3.openmath.jaxb.OMSTR;
 import de.uni_due.s3.openmath.jaxb.OMV;
 
 public class OMToSageVisitor extends OMToCasVisitor {
-	
+
 	@Override
 	protected String visit(OMF omf) {
-		return Double.toString(omf.getDec()) ;
+		return Double.toString(omf.getDec());
 	}
 
 	@Override
@@ -23,34 +24,26 @@ public class OMToSageVisitor extends OMToCasVisitor {
 	}
 
 	@Override
-	protected String visit(OMS oms) {
-		String cd = oms.getCd();
-		String name = oms.getName();
-		
-		//FIXME dlux vielleicht auslagern und terminale verallgemeineren?
-		
-		if (cd.equals("logic1") && name.equals("true")){
+	protected String visit(OMS oms) throws NoRepresentationAvailableException {
+		if (oms.equals(OMSymbol.LOGIC1_TRUE)) {
 			return "True";
-		}
-		if (cd.equals("logic1") && name.equals("false")){
+		} else if (oms.equals(OMSymbol.LOGIC1_FALSE)) {
 			return "False";
-		}
-		if (cd.equals("nums1") && name.equals("pi")){
+		} else if (oms.equals(OMSymbol.NUMS1_PI)) {
 			return "pi";
-		}
-		if (cd.equals("nums1") && name.equals("e")){
+		} else if (oms.equals(OMSymbol.NUMS1_E)) {
 			return "e";
-		}
-		if (cd.equals("nums1") && name.equals("NaN")){
+		} else if (oms.equals(OMSymbol.NUMS1_NAN)) {
 			return "NaN";
-		}
-		if (cd.equals("nums1") && name.equals("i")){
+		} else if (oms.equals(OMSymbol.NUMS1_I)) {
 			return "I";
-		}
-		if (cd.equals("nums1") && name.equals("infinity")){
+		} else if (oms.equals(OMSymbol.NUMS1_INFINITY)) {
 			return "Infinity";
+		} else {
+			throw new NoRepresentationAvailableException(
+					"There is no Sage Representation for OMS cd: " + oms.getCd() + ", name: " + oms.getName());
 		}
-		return null;
+
 	}
 
 	@Override
@@ -64,11 +57,9 @@ public class OMToSageVisitor extends OMToCasVisitor {
 	}
 
 	@Override
-	protected String getCASRepresentationForFunction(Function function, List<Object> omel) throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException {
+	protected String getCASRepresentationForFunction(Function function, List<Object> omel)
+			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException {
 		return function.getPartialSageSyntax(omel);
 	}
 
-
-
-	
 }

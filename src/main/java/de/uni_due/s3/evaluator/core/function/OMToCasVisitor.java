@@ -152,8 +152,9 @@ public abstract class OMToCasVisitor {
 	 * @param oms
 	 *            the element which is visited now
 	 * @return the String-Representation
+	 * @throws NoRepresentationAvailableException 
 	 */
-	protected abstract String visit(OMS oms);
+	protected abstract String visit(OMS oms) throws NoRepresentationAvailableException;
 
 	/**
 	 * Implement here the String-Representation of this OMSTR-Element
