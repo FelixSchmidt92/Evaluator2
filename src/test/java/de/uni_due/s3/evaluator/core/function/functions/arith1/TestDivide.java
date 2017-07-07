@@ -19,7 +19,7 @@ import de.uni_due.s3.evaluator.core.function.functions.arith1.Times;
 import de.uni_due.s3.evaluator.core.functionData.OMSEvaluatorSyntaxDictionary;
 import de.uni_due.s3.evaluator.core.functionData.OMSFunctionDictionary;
 import de.uni_due.s3.evaluator.exceptions.cas.CasException;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionArgumentNumberException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
@@ -69,7 +69,7 @@ public class TestDivide {
 	}
 	
 	@Test
-	public void testDivideSageSyntax() throws FunctionArgumentNumberException, NoRepresentationAvailableException, CasException{
+	public void testDivideSageSyntax() throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException{
 		Divide func = (Divide)OMSFunctionDictionary.getInstance().getFunction(OMSEvaluatorSyntaxDictionary.getInstance().getOMS("times"));
 		OMF omf = OMCreator.createOMF(1.0);
 		OMI omi = OMCreator.createOMI(10);

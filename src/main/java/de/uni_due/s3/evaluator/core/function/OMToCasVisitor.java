@@ -13,7 +13,7 @@ import org.openmath.openmath.OMV;
 
 import de.uni_due.s3.evaluator.core.functionData.OMSFunctionDictionary;
 import de.uni_due.s3.evaluator.exceptions.cas.CasException;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionArgumentNumberException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 
 
@@ -45,10 +45,10 @@ public abstract class OMToCasVisitor {
 	 * @param omElement the Element to visit
 	 * @return the String Representation of this omElement (including its children!)
 	 * @throws NoRepresentationAvailableException 
-	 * @throws FunctionArgumentNumberException 
+	 * @throws FunctionInvalidNumberOfArgumentsException 
 	 * @throws CasException 
 	 */
-	public String visit(Object omElement) throws FunctionArgumentNumberException, NoRepresentationAvailableException, CasException{
+	public String visit(Object omElement) throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException{
 		String result = "";
 		
 		switch (omElement.getClass().getSimpleName()){
@@ -93,10 +93,10 @@ public abstract class OMToCasVisitor {
 	 * @param omobj the OMOBJ-"Container"
 	 * @return the String representation of this OMOBJ excluding OMOBJ!!
 	 * @throws NoRepresentationAvailableException 
-	 * @throws FunctionArgumentNumberException 
+	 * @throws FunctionInvalidNumberOfArgumentsException 
 	 * @throws CasException 
 	 */
-	private String visit(OMOBJ omobj) throws FunctionArgumentNumberException, NoRepresentationAvailableException, CasException{
+	private String visit(OMOBJ omobj) throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException{
 		if(omobj != null){
 			if (omobj.getOMF() != null){
 				return visit(omobj.getOMF());
@@ -173,11 +173,11 @@ public abstract class OMToCasVisitor {
 	 * 
 	 * @param oma the visited oma 
 	 * @return the String Representation of this oma and its childs
-	 * @throws FunctionArgumentNumberException 
+	 * @throws FunctionInvalidNumberOfArgumentsException 
 	 * @throws NoRepresentationAvailableException 
 	 * @throws CasException 
 	 */
-	private String visit(OMA oma) throws FunctionArgumentNumberException, NoRepresentationAvailableException, CasException{
+	private String visit(OMA oma) throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException{
 		List<Object> omel = new ArrayList<>();  
 		
 		for (int i = 1; i < oma.getOmel().size(); i++){
@@ -201,11 +201,11 @@ public abstract class OMToCasVisitor {
 	 * 		  Note: These Parameter are evaluated if argumentsShouldBeEvaluated returns true.
 	 * 				Not evaluated if it returns false
 	 * @return a String which is in CAS-Syntax
-	 * @throws FunctionArgumentNumberException 
+	 * @throws FunctionInvalidNumberOfArgumentsException 
 	 * @throws OMOBJChildNotSupportedException 
 	 * @throws OMObjectNotSupportedException 
 	 */
-	protected abstract String getCASRepresentationForFunction(Function function, List<Object> omel) throws NoRepresentationAvailableException, FunctionArgumentNumberException, CasException;
+	protected abstract String getCASRepresentationForFunction(Function function, List<Object> omel) throws NoRepresentationAvailableException, FunctionInvalidNumberOfArgumentsException, CasException;
 
 }
 	

@@ -5,14 +5,14 @@ import org.openmath.openmath.OMOBJ;
 
 import de.uni_due.s3.evaluator.core.function.OMToSageVisitor;
 import de.uni_due.s3.evaluator.exceptions.cas.CasException;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionArgumentNumberException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
 
 public class TestSageSyntax {
 
 	@Test
-	public void testSageSyntax() throws FunctionArgumentNumberException, NoRepresentationAvailableException, CasException{
+	public void testSageSyntax() throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException{
 		OMOBJ omobj = ExpressionParser.parse("plus(1, times(2, 3))", null, null);
 		System.out.println(new OMToSageVisitor().visit(omobj));
 		

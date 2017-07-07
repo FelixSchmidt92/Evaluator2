@@ -8,7 +8,7 @@ import org.openmath.openmath.OMI;
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.core.function.NumberUtils;
 import de.uni_due.s3.evaluator.exceptions.cas.CasException;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionArgumentNumberException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 
@@ -38,7 +38,7 @@ public class GCD extends Function {
 	}
 	
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws  FunctionArgumentNumberException, NoRepresentationAvailableException, CasException {
+	public String getPartialSageSyntax(List<Object> arguments) throws  FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException {
 		return "gcd("+getSageSyntax(arguments.get(0))+","+getSageSyntax(arguments.get(1));
 	}
 

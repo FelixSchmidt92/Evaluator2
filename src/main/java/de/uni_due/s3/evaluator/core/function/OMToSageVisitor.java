@@ -9,7 +9,7 @@ import org.openmath.openmath.OMSTR;
 import org.openmath.openmath.OMV;
 
 import de.uni_due.s3.evaluator.exceptions.cas.CasException;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionArgumentNumberException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 
 public class OMToSageVisitor extends OMToCasVisitor {
@@ -66,7 +66,7 @@ public class OMToSageVisitor extends OMToCasVisitor {
 	}
 
 	@Override
-	protected String getCASRepresentationForFunction(Function function, List<Object> omel) throws FunctionArgumentNumberException, NoRepresentationAvailableException, CasException {
+	protected String getCASRepresentationForFunction(Function function, List<Object> omel) throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException {
 		return function.getPartialSageSyntax(omel);
 	}
 

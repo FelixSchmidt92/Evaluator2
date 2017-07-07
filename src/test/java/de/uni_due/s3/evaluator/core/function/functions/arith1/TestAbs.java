@@ -16,7 +16,7 @@ import org.openmath.openmath.OMS;
 import de.uni_due.s3.evaluator.core.function.OMExecutor;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.Abs;
 import de.uni_due.s3.evaluator.exceptions.cas.CasException;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionArgumentNumberException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
@@ -53,7 +53,7 @@ public class TestAbs {
 	}
 	
 	@Test
-	public void testAbsSageSyntax() throws  FunctionArgumentNumberException, NoRepresentationAvailableException, CasException{
+	public void testAbsSageSyntax() throws  FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException{
 		OMF omf = OMCreator.createOMF(1.0);
 		OMI omi = OMCreator.createOMI(10);
 		

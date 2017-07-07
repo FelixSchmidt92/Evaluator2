@@ -15,7 +15,7 @@ import org.openmath.openmath.OMS;
 import de.uni_due.s3.evaluator.core.function.OMExecutor;
 import de.uni_due.s3.evaluator.core.functionData.OMSFunctionDictionary;
 import de.uni_due.s3.evaluator.exceptions.cas.CasException;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionArgumentNumberException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedException;
 import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
@@ -67,7 +67,7 @@ public class TestPlus {
 	}
 	
 	@Test
-	public void testPlusSageSyntax() throws FunctionArgumentNumberException, CasException, NoRepresentationAvailableException, FunctionNotImplementedException{
+	public void testPlusSageSyntax() throws FunctionInvalidNumberOfArgumentsException, CasException, NoRepresentationAvailableException, FunctionNotImplementedException{
 		OMOBJ omobj = ExpressionParser.parse(parameter, null, null);
 		List<Object> args = omobj.getOMA().getOmel();
 		OMS oms = (OMS)args.get(0);
