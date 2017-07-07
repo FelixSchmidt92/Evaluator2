@@ -26,15 +26,15 @@ import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
-public class TestArcSin extends TestFunction {
+public class TestTan extends TestFunction {
 
 	private OMI omi = OMCreator.createOMI(1);
 	private OMF omf = OMCreator.createOMF(0.0);
 	private static Function func = OMSFunctionDictionary.getInstance()
-			.getFunction(OMSEvaluatorSyntaxDictionary.getInstance().getOMS("asin"));
+			.getFunction(OMSEvaluatorSyntaxDictionary.getInstance().getOMS("tan"));
 
 	@Test
-	public void testArcSinFloat() throws FunctionException, CasEvaluationException, CasNotAvailableException,
+	public void testTanFloat() throws FunctionException, CasEvaluationException, CasNotAvailableException,
 			NoRepresentationAvailableException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(omf);
@@ -43,49 +43,49 @@ public class TestArcSin extends TestFunction {
 	}
 
 	@Test
-	public void testArcSinInteger() throws FunctionException, CasEvaluationException, CasNotAvailableException,
+	public void testTanInteger() throws FunctionException, CasEvaluationException, CasNotAvailableException,
 			NoRepresentationAvailableException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(omi);
 		OMF result = (OMF) func.evaluate(args);
-		assertEquals(new Double(1.57079632679490), result.getDec());
+		assertEquals(new Double(1.5574077246549), result.getDec());
 	}
 
 	@Test
-	public void testArcSinIntegration() throws FunctionException, OpenMathException, CasEvaluationException,
+	public void testTanIntegration() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException {
-		OMOBJ omobj = ExpressionParser.parse("asin(0)", null, null);
+		OMOBJ omobj = ExpressionParser.parse("tan(0)", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals("0", result.getOMI().getValue());
 	}
 
 	@Test
-	public void testArcSinSageSyntax()
+	public void testTanSageSyntax()
 			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException {
 		OMF omf = OMCreator.createOMF(1.0);
 		List<Object> args = new ArrayList<>();
 		args.add(omf);
-		assertEquals("arcsin(1.0)", func.getPartialSageSyntax(args));
+		assertEquals("tan(1.0)", func.getPartialSageSyntax(args));
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testArcSinWithLessThanMinParam() throws FunctionException, OpenMathException, CasEvaluationException,
+	public void testTanWithLessThanMinParam() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException {
-		OMOBJ omobj = ExpressionParser.parse("asin()", null, null);
+		OMOBJ omobj = ExpressionParser.parse("tan()", null, null);
 		OMExecutor.execute(omobj);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testArcSinWithMoreThanMaxParam() throws FunctionException, OpenMathException, CasEvaluationException,
+	public void testTanWithMoreThanMaxParam() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException {
-		OMOBJ omobj = ExpressionParser.parse("asin(1,3)", null, null);
+		OMOBJ omobj = ExpressionParser.parse("tan(1,3)", null, null);
 		OMExecutor.execute(omobj);
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testArcSinWithWrongArguments() throws FunctionException, OpenMathException, CasEvaluationException,
+	public void testTanWithWrongArguments() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException {
-		OMOBJ omobj = ExpressionParser.parse("asin('Test')", null, null);
+		OMOBJ omobj = ExpressionParser.parse("tan('Test')", null, null);
 		OMExecutor.execute(omobj);
 	}
 }

@@ -26,66 +26,66 @@ import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
-public class TestArcSin extends TestFunction {
+public class TestCos extends TestFunction {
 
 	private OMI omi = OMCreator.createOMI(1);
 	private OMF omf = OMCreator.createOMF(0.0);
 	private static Function func = OMSFunctionDictionary.getInstance()
-			.getFunction(OMSEvaluatorSyntaxDictionary.getInstance().getOMS("asin"));
+			.getFunction(OMSEvaluatorSyntaxDictionary.getInstance().getOMS("cos"));
 
 	@Test
-	public void testArcSinFloat() throws FunctionException, CasEvaluationException, CasNotAvailableException,
+	public void testCosFloat() throws FunctionException, CasEvaluationException, CasNotAvailableException,
 			NoRepresentationAvailableException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(omf);
 		OMI result = (OMI) func.evaluate(args);
-		assertEquals("0", result.getValue());
+		assertEquals("1", result.getValue());
 	}
 
 	@Test
-	public void testArcSinInteger() throws FunctionException, CasEvaluationException, CasNotAvailableException,
+	public void testCosInteger() throws FunctionException, CasEvaluationException, CasNotAvailableException,
 			NoRepresentationAvailableException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(omi);
 		OMF result = (OMF) func.evaluate(args);
-		assertEquals(new Double(1.57079632679490), result.getDec());
+		assertEquals(new Double(0.54030230586814), result.getDec());
 	}
 
 	@Test
-	public void testArcSinIntegration() throws FunctionException, OpenMathException, CasEvaluationException,
+	public void testCosIntegration() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException {
-		OMOBJ omobj = ExpressionParser.parse("asin(0)", null, null);
+		OMOBJ omobj = ExpressionParser.parse("cos(0)", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
-		assertEquals("0", result.getOMI().getValue());
+		assertEquals("1", result.getOMI().getValue());
 	}
 
 	@Test
-	public void testArcSinSageSyntax()
+	public void testCosSageSyntax()
 			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException {
 		OMF omf = OMCreator.createOMF(1.0);
 		List<Object> args = new ArrayList<>();
 		args.add(omf);
-		assertEquals("arcsin(1.0)", func.getPartialSageSyntax(args));
+		assertEquals("cos(1.0)", func.getPartialSageSyntax(args));
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testArcSinWithLessThanMinParam() throws FunctionException, OpenMathException, CasEvaluationException,
+	public void testCosWithLessThanMinParam() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException {
-		OMOBJ omobj = ExpressionParser.parse("asin()", null, null);
+		OMOBJ omobj = ExpressionParser.parse("cos()", null, null);
 		OMExecutor.execute(omobj);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testArcSinWithMoreThanMaxParam() throws FunctionException, OpenMathException, CasEvaluationException,
+	public void testCosWithMoreThanMaxParam() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException {
-		OMOBJ omobj = ExpressionParser.parse("asin(1,3)", null, null);
+		OMOBJ omobj = ExpressionParser.parse("cos(1,3)", null, null);
 		OMExecutor.execute(omobj);
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testArcSinWithWrongArguments() throws FunctionException, OpenMathException, CasEvaluationException,
+	public void testCosWithWrongArguments() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException {
-		OMOBJ omobj = ExpressionParser.parse("asin('Test')", null, null);
+		OMOBJ omobj = ExpressionParser.parse("cos('Test')", null, null);
 		OMExecutor.execute(omobj);
 	}
 }
