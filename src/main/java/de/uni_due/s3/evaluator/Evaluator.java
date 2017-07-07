@@ -2,12 +2,15 @@ package de.uni_due.s3.evaluator;
 
 import java.util.HashMap;
 
-import org.openmath.omutils.OpenMathException;
-import org.openmath.openmath.OMOBJ;
 
 import de.uni_due.s3.evaluator.core.function.OMExecutor;
+import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
+import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
+import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
+import de.uni_due.s3.openmath.jaxb.OMOBJ;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * TODO
@@ -32,8 +35,11 @@ public class Evaluator {
 	 * @return the result of the evaluated expression as OpenMath-Object (JAXB)
 	 * @throws FunctionException
 	 * @throws OpenMathException 
+	 * @throws NoRepresentationAvailableException 
+	 * @throws CasNotAvailableException 
+	 * @throws CasEvaluationException 
 	 */
-	public OMOBJ evaluate(String expression) throws FunctionException, OpenMathException {
+	public OMOBJ evaluate(String expression) throws FunctionException, OpenMathException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException {
 		OMOBJ omobj = ExpressionParser.parse(expression, exerciseVariableMap, fillInVariableMap);
 		return OMExecutor.execute(omobj);
 	}
@@ -46,8 +52,11 @@ public class Evaluator {
 	 * @return the evaluated OpenMath-Object
 	 * @throws FunctionException 
 	 * @throws OpenMathException 
+	 * @throws NoRepresentationAvailableException 
+	 * @throws CasNotAvailableException 
+	 * @throws CasEvaluationException 
 	 */
-	public OMOBJ evaluate(OMOBJ omobj) throws FunctionException, OpenMathException {
+	public OMOBJ evaluate(OMOBJ omobj) throws FunctionException, OpenMathException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException {
 		return OMExecutor.execute(omobj);
 	}
 

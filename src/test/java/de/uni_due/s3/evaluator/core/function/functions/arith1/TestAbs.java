@@ -6,26 +6,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
-import org.openmath.omutils.OMCreator;
-import org.openmath.omutils.OpenMathException;
-import org.openmath.openmath.OMF;
-import org.openmath.openmath.OMI;
-import org.openmath.openmath.OMOBJ;
-import org.openmath.openmath.OMS;
+
 
 import de.uni_due.s3.evaluator.core.function.OMExecutor;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.Abs;
+import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasException;
+import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
+import de.uni_due.s3.openmath.jaxb.OMF;
+import de.uni_due.s3.openmath.jaxb.OMI;
+import de.uni_due.s3.openmath.jaxb.OMOBJ;
+import de.uni_due.s3.openmath.jaxb.OMS;
+import de.uni_due.s3.openmath.omutils.OMCreator;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestAbs {
 	private Abs func = new Abs();
 	@Test
-	public void testAbsInteger() throws FunctionException{
+	public void testAbsInteger() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
 	
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(-3));
@@ -34,7 +37,7 @@ public class TestAbs {
 	}
 	
 	@Test
-	public void testAbsFloat() throws FunctionException{
+	public void testAbsFloat() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMF(-2.5));
 		OMF result = (OMF) func.evaluate(args);
@@ -42,7 +45,7 @@ public class TestAbs {
 	}
 	
 	@Test
-	public void testAbsIntegration() throws FunctionException, OpenMathException{
+	public void testAbsIntegration() throws FunctionException, OpenMathException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
 		OMOBJ omobj = ExpressionParser.parse("abs(-13)", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals("13", result.getOMI().getValue());
@@ -69,7 +72,7 @@ public class TestAbs {
 	}
 	
 	@Test(expected=FunctionInvalidArgumentException.class)
-	public void testAbsWithWrongArguments() throws FunctionException, OpenMathException{
+	public void testAbsWithWrongArguments() throws FunctionException, OpenMathException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
 		OMOBJ omobj = ExpressionParser.parse("abs('test')", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals("5", result.getOMI().getValue());

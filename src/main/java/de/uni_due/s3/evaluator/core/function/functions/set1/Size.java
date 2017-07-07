@@ -2,10 +2,10 @@ package de.uni_due.s3.evaluator.core.function.functions.set1;
 
 import java.util.List;
 
-import org.openmath.openmath.OMA;
-import org.openmath.openmath.OMI;
 
 import de.uni_due.s3.evaluator.core.function.Function;
+import de.uni_due.s3.openmath.jaxb.OMA;
+import de.uni_due.s3.openmath.jaxb.OMI;
 
 public class Size extends Function {
 	

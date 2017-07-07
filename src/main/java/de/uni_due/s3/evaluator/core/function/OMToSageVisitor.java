@@ -2,14 +2,13 @@ package de.uni_due.s3.evaluator.core.function;
 
 import java.util.List;
 
-import org.openmath.openmath.OMF;
-import org.openmath.openmath.OMI;
-import org.openmath.openmath.OMS;
-import org.openmath.openmath.OMSTR;
-import org.openmath.openmath.OMV;
-
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
+import de.uni_due.s3.openmath.jaxb.OMF;
+import de.uni_due.s3.openmath.jaxb.OMI;
+import de.uni_due.s3.openmath.jaxb.OMS;
+import de.uni_due.s3.openmath.jaxb.OMSTR;
+import de.uni_due.s3.openmath.jaxb.OMV;
 
 public class OMToSageVisitor extends OMToCasVisitor {
 	

@@ -8,13 +8,16 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.openmath.omutils.OpenMathException;
-import org.openmath.openmath.OMOBJ;
-import org.openmath.openmath.OMS;
+
+import de.uni_due.s3.openmath.jaxb.OMOBJ;
+import de.uni_due.s3.openmath.jaxb.OMS;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 import de.uni_due.s3.evaluator.core.function.OMExecutor;
 import de.uni_due.s3.evaluator.core.functionData.OMSFunctionDictionary;
+import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasException;
+import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedException;
@@ -60,7 +63,7 @@ public class TestPlus {
 	}
 	
 	@Test
-	public void testPlus() throws FunctionException, ParserException, OpenMathException{
+	public void testPlus() throws FunctionException, ParserException, OpenMathException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
 		OMOBJ t = ExpressionParser.parse(parameter,null,null);
 		
 		assertEquals(OMExecutor.execute(t).getOMI().getValue(), expected);

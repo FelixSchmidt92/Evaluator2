@@ -3,9 +3,9 @@ package de.uni_due.s3.evaluator.core.functionData;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.openmath.openmath.OMS;
 
 import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedException;
+import de.uni_due.s3.openmath.jaxb.OMS;
 
 public class OMSEvaluatorSyntaxDictionary {
 	

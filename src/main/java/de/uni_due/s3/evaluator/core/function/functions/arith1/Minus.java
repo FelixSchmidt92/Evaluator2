@@ -10,8 +10,18 @@ import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentExcept
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 
+/**
+ * Implements arithmetic minus operation.
+ * Example 3-5 = -2
+ * @author frichtscheid
+ *
+ */
 public class Minus extends Function {
 
+	/**
+	 * Expects two arguments of type OMI or OMF
+	 * @return OMI or OMF
+	 */
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentException {
 		Object left = arguments.get(0);
@@ -36,7 +46,7 @@ public class Minus extends Function {
 	}
 	
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException{
+	public String getPartialSageSyntax(List<Object> arguments) throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException{
 		return getSageSyntax(arguments.get(0)) + " - " + getSageSyntax(arguments.get(1));
 	}
 	

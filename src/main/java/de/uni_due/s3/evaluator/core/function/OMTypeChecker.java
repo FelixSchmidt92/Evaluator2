@@ -1,10 +1,10 @@
 package de.uni_due.s3.evaluator.core.function;
 
-import org.openmath.openmath.OMA;
-import org.openmath.openmath.OMF;
-import org.openmath.openmath.OMI;
-import org.openmath.openmath.OMS;
-import org.openmath.openmath.OMSTR;
+import de.uni_due.s3.openmath.jaxb.OMA;
+import de.uni_due.s3.openmath.jaxb.OMF;
+import de.uni_due.s3.openmath.jaxb.OMI;
+import de.uni_due.s3.openmath.jaxb.OMS;
+import de.uni_due.s3.openmath.jaxb.OMSTR;
 
 /**
  * 

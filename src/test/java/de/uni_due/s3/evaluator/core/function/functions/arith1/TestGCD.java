@@ -6,18 +6,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
-import org.openmath.omutils.OMCreator;
-import org.openmath.omutils.OpenMathException;
-import org.openmath.openmath.OMF;
-import org.openmath.openmath.OMI;
-import org.openmath.openmath.OMOBJ;
-import org.openmath.openmath.OMS;
+import de.uni_due.s3.openmath.jaxb.OMF;
+import de.uni_due.s3.openmath.jaxb.OMI;
+import de.uni_due.s3.openmath.jaxb.OMOBJ;
+import de.uni_due.s3.openmath.jaxb.OMS;
+import de.uni_due.s3.openmath.omutils.OMCreator;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 import de.uni_due.s3.evaluator.core.function.OMExecutor;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.GCD;
 import de.uni_due.s3.evaluator.core.functionData.OMSEvaluatorSyntaxDictionary;
 import de.uni_due.s3.evaluator.core.functionData.OMSFunctionDictionary;
+import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasException;
+import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
@@ -27,7 +29,7 @@ import de.uni_due.s3.evaluator.parser.ExpressionParser;
 public class TestGCD {
 	
 	@Test
-	public void testGcdInteger() throws FunctionException{
+	public void testGcdInteger() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
 		GCD func = new GCD();
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(3));
@@ -38,7 +40,7 @@ public class TestGCD {
 	
 	
 	@Test
-	public void testGcdIntegration() throws FunctionException, OpenMathException{
+	public void testGcdIntegration() throws FunctionException, OpenMathException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
 		OMOBJ omobj = ExpressionParser.parse("gcd(10,5)", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals("5", result.getOMI().getValue());
@@ -67,7 +69,7 @@ public class TestGCD {
 	}
 	
 	@Test(expected=FunctionInvalidArgumentException.class)
-	public void testGcdWithWrongArguments() throws FunctionException, OpenMathException{
+	public void testGcdWithWrongArguments() throws FunctionException, OpenMathException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
 		OMOBJ omobj = ExpressionParser.parse("gcd(2,'test')", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals("5", result.getOMI().getValue());

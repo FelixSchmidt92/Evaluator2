@@ -2,13 +2,12 @@ package de.uni_due.s3.evaluator.core.function.functions.set1;
 
 import java.util.List;
 
-import org.openmath.openmath.OMA;
-import org.openmath.openmath.OMS;
 
 import de.uni_due.s3.evaluator.core.function.Function;
-import de.uni_due.s3.evaluator.exceptions.cas.CasException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
+import de.uni_due.s3.openmath.jaxb.OMA;
+import de.uni_due.s3.openmath.jaxb.OMS;
 
 public class Set extends Function {
 

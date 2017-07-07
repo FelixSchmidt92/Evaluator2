@@ -1,13 +1,13 @@
 package de.uni_due.s3.evaluator.core;
 
 import org.junit.Test;
-import org.openmath.openmath.OMOBJ;
 
 import de.uni_due.s3.evaluator.core.function.OMToSageVisitor;
 import de.uni_due.s3.evaluator.exceptions.cas.CasException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
+import de.uni_due.s3.openmath.jaxb.OMOBJ;
 
 public class TestSageSyntax {
 

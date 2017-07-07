@@ -10,11 +10,12 @@ import javax.xml.bind.JAXBException;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.openmath.omutils.OMConverter;
-import org.openmath.openmath.OMOBJ;
+
 
 import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableException;
+import de.uni_due.s3.openmath.jaxb.OMOBJ;
+import de.uni_due.s3.openmath.omutils.OMConverter;
 
 public class TestExpressionParser {
 	

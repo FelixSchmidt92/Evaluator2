@@ -3,21 +3,20 @@ package de.uni_due.s3.evaluator.core.function;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.openmath.omutils.OMCreator;
-import org.openmath.omutils.OpenMathException;
-import org.openmath.openmath.OMA;
-import org.openmath.openmath.OMF;
-import org.openmath.openmath.OMI;
-import org.openmath.openmath.OMOBJ;
-import org.openmath.openmath.OMS;
-import org.openmath.openmath.OMSTR;
-import org.openmath.openmath.OMV;
-
 import de.uni_due.s3.evaluator.core.functionData.OMSFunctionDictionary;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
+import de.uni_due.s3.openmath.jaxb.OMA;
+import de.uni_due.s3.openmath.jaxb.OMF;
+import de.uni_due.s3.openmath.jaxb.OMI;
+import de.uni_due.s3.openmath.jaxb.OMOBJ;
+import de.uni_due.s3.openmath.jaxb.OMS;
+import de.uni_due.s3.openmath.jaxb.OMSTR;
+import de.uni_due.s3.openmath.jaxb.OMV;
+import de.uni_due.s3.openmath.omutils.OMCreator;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 
 /**

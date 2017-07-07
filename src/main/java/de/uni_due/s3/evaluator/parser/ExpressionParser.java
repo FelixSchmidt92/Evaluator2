@@ -9,17 +9,18 @@ import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
-import org.openmath.openmath.OMF;
-import org.openmath.openmath.OMI;
-import org.openmath.openmath.OMOBJ;
-import org.openmath.openmath.OMS;
-import org.openmath.openmath.OMV;
-import org.openmath.openmath.OMSTR;
-import org.openmath.openmath.OMA;
+
 
 import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorLexer;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser;
+import de.uni_due.s3.openmath.jaxb.OMA;
+import de.uni_due.s3.openmath.jaxb.OMF;
+import de.uni_due.s3.openmath.jaxb.OMI;
+import de.uni_due.s3.openmath.jaxb.OMOBJ;
+import de.uni_due.s3.openmath.jaxb.OMS;
+import de.uni_due.s3.openmath.jaxb.OMSTR;
+import de.uni_due.s3.openmath.jaxb.OMV;
 
 /**
  * This class contains only one Function 'parse' to parse the expression to the 

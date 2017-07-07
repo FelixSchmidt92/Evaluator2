@@ -10,16 +10,23 @@ import static org.junit.Assert.*;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.openmath.omutils.OMCreator;
-import org.openmath.omutils.OpenMathException;
-import org.openmath.openmath.OMA;
-import org.openmath.openmath.OMB;
-import org.openmath.openmath.OMOBJ;
+
+import de.uni_due.s3.openmath.jaxb.OMA;
+import de.uni_due.s3.openmath.jaxb.OMB;
+import de.uni_due.s3.openmath.jaxb.OMF;
+import de.uni_due.s3.openmath.jaxb.OMI;
+import de.uni_due.s3.openmath.jaxb.OMOBJ;
+import de.uni_due.s3.openmath.jaxb.OMS;
+import de.uni_due.s3.openmath.omutils.OMCreator;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 import de.uni_due.s3.evaluator.core.function.OMExecutor;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.Plus;
 import de.uni_due.s3.evaluator.exceptions.EvaluatorException;
+import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
+import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
+import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 
 
 
@@ -37,7 +44,7 @@ public class TestOMExecuter {
 	}
 	
 	@Test
-	public void visitorTestOMOBJ() throws JAXBException, FunctionException, OpenMathException{
+	public void visitorTestOMOBJ() throws JAXBException, FunctionException, OpenMathException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
 		OMOBJ result;
 		OMOBJ omobj;
 		//test OMI
@@ -74,7 +81,7 @@ public class TestOMExecuter {
 	}
 	
 	@Test
-	public void visitorTestOMA() throws JAXBException, FunctionException, OpenMathException{
+	public void visitorTestOMA() throws JAXBException, FunctionException, OpenMathException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
 		OMOBJ result;
 		OMA oma;
 		
@@ -92,7 +99,7 @@ public class TestOMExecuter {
 	}
 	
 	@Test
-	public void visitorTestNestedOMA() throws JAXBException, FunctionException, OpenMathException{
+	public void visitorTestNestedOMA() throws JAXBException, FunctionException, OpenMathException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
 		OMOBJ result;
 		OMA oma;
 		
@@ -109,7 +116,7 @@ public class TestOMExecuter {
 	}
 	
 	@Test(expected = EvaluatorException.class)
-	public void visitorTestWithWrongFunction() throws JAXBException, FunctionException, OpenMathException{
+	public void visitorTestWithWrongFunction() throws JAXBException, FunctionException, OpenMathException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
 		Object result;
 		OMA oma;
 		
@@ -125,7 +132,7 @@ public class TestOMExecuter {
 	}
 	
 	@Test(expected=OpenMathException.class)
-	public void testNotImplementedOMobject() throws FunctionException, OpenMathException{
+	public void testNotImplementedOMobject() throws FunctionException, OpenMathException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
 		OMOBJ omobj = new OMOBJ();
 		omobj.setOMB(new OMB());
 		OMExecutor.execute(omobj);

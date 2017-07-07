@@ -6,30 +6,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
-import org.openmath.omutils.OMCreator;
-import org.openmath.omutils.OpenMathException;
-import org.openmath.openmath.OMF;
-import org.openmath.openmath.OMI;
-import org.openmath.openmath.OMOBJ;
-import org.openmath.openmath.OMS;
+import de.uni_due.s3.openmath.jaxb.OMF;
+import de.uni_due.s3.openmath.jaxb.OMI;
+import de.uni_due.s3.openmath.jaxb.OMOBJ;
+import de.uni_due.s3.openmath.jaxb.OMS;
+import de.uni_due.s3.openmath.omutils.OMCreator;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 import de.uni_due.s3.evaluator.core.function.OMExecutor;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.Modulus;
 import de.uni_due.s3.evaluator.core.functionData.OMSEvaluatorSyntaxDictionary;
 import de.uni_due.s3.evaluator.core.functionData.OMSFunctionDictionary;
+import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasException;
+import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
-import de.uni_due.s3.evaluator.exceptions.representation.NoSageRepresentationAvailableException;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
 
 public class TestModulus {
 	
 	
 	@Test
-	public void testModulusInteger() throws FunctionException{
+	public void testModulusInteger() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
 		Modulus func = new Modulus();
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(3));
@@ -39,7 +40,7 @@ public class TestModulus {
 	}
 	
 	@Test
-	public void testModulusFloat() throws FunctionException{
+	public void testModulusFloat() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
 		Modulus func = new Modulus();
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMF(3.5));
@@ -49,7 +50,7 @@ public class TestModulus {
 	}
 	
 	@Test
-	public void testModulusMixed() throws FunctionException{
+	public void testModulusMixed() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
 		Modulus func = new Modulus();
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(10));
@@ -59,7 +60,7 @@ public class TestModulus {
 	}
 	
 	@Test
-	public void testModulusIntegration() throws FunctionException, OpenMathException{
+	public void testModulusIntegration() throws FunctionException, OpenMathException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
 		OMOBJ omobj = ExpressionParser.parse("10%5", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals("0", result.getOMI().getValue());
@@ -88,7 +89,7 @@ public class TestModulus {
 	}
 	
 	@Test(expected=FunctionInvalidArgumentException.class)
-	public void testMinusWithWrongArguments() throws FunctionException, OpenMathException{
+	public void testMinusWithWrongArguments() throws FunctionException, OpenMathException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
 		OMOBJ omobj = ExpressionParser.parse("10%'test'", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals("5", result.getOMI().getValue());

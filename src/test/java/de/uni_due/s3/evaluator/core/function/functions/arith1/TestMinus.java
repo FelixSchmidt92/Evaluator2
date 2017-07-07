@@ -7,19 +7,21 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.Test;
-import org.openmath.omutils.OMCreator;
-import org.openmath.omutils.OpenMathException;
-import org.openmath.openmath.OMF;
-import org.openmath.openmath.OMI;
-import org.openmath.openmath.OMOBJ;
-import org.openmath.openmath.OMS;
-import org.openmath.openmath.OMSTR;
+import de.uni_due.s3.openmath.jaxb.OMF;
+import de.uni_due.s3.openmath.jaxb.OMI;
+import de.uni_due.s3.openmath.jaxb.OMOBJ;
+import de.uni_due.s3.openmath.jaxb.OMS;
+import de.uni_due.s3.openmath.jaxb.OMSTR;
+import de.uni_due.s3.openmath.omutils.OMCreator;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 import de.uni_due.s3.evaluator.core.function.OMExecutor;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.Minus;
 import de.uni_due.s3.evaluator.core.functionData.OMSEvaluatorSyntaxDictionary;
 import de.uni_due.s3.evaluator.core.functionData.OMSFunctionDictionary;
+import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasException;
+import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
@@ -33,7 +35,7 @@ public class TestMinus {
 	private OMSTR omstr = OMCreator.createOMSTR("test");
 	
 	@Test
-	public void testMinusInteger() throws FunctionException{
+	public void testMinusInteger() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
 		Minus func = new Minus();
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(omi);
@@ -43,7 +45,7 @@ public class TestMinus {
 	}
 	
 	@Test
-	public void testMinusFloat() throws FunctionException{
+	public void testMinusFloat() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
 		Minus func = new Minus();
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(omf);
@@ -53,7 +55,7 @@ public class TestMinus {
 	}
 	
 	@Test
-	public void testMinusMixed() throws FunctionException{
+	public void testMinusMixed() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
 		Minus func = new Minus();
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(omi);
@@ -63,7 +65,7 @@ public class TestMinus {
 	}
 	
 	@Test
-	public void testMinusIntegration() throws FunctionException, OpenMathException{
+	public void testMinusIntegration() throws FunctionException, OpenMathException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
 		OMOBJ omobj = ExpressionParser.parse("10-5", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals("5", result.getOMI().getValue());
@@ -92,7 +94,7 @@ public class TestMinus {
 	}
 	
 	@Test(expected=FunctionInvalidArgumentException.class)
-	public void testMinusWithWrongArguments() throws FunctionException, OpenMathException{
+	public void testMinusWithWrongArguments() throws FunctionException, OpenMathException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
 		OMOBJ omobj = ExpressionParser.parse("10-'test'", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals("5", result.getOMI().getValue());

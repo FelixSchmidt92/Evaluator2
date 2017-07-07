@@ -8,12 +8,16 @@ import java.util.Collection;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.openmath.omutils.OpenMathException;
-import org.openmath.openmath.OMOBJ;
+
+import de.uni_due.s3.openmath.jaxb.OMOBJ;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 import de.uni_due.s3.evaluator.core.function.OMExecutor;
+import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
+import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
+import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
 
 @RunWith(Parameterized.class)
@@ -46,7 +50,7 @@ public class TestCharAt {
 	}
 	
 	@Test
-	public void testCharAt() throws FunctionException, ParserException, OpenMathException{
+	public void testCharAt() throws FunctionException, ParserException, OpenMathException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
 		OMOBJ t = ExpressionParser.parse(parameter,null,null);
 		
 		assertEquals(OMExecutor.execute(t).getOMSTR().getContent(), expected);
@@ -55,7 +59,7 @@ public class TestCharAt {
 		
 
 	@Test(expected=FunctionException.class)
-	public void testCharAtFunctionException() throws FunctionException, ParserException, OpenMathException{
+	public void testCharAtFunctionException() throws FunctionException, ParserException, OpenMathException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
 		OMOBJ t = ExpressionParser.parse(currentError,null,null);
 		OMExecutor.execute(t);
 	

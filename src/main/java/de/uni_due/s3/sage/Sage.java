@@ -15,10 +15,10 @@ import java.util.TimerTask;
 import javax.xml.bind.JAXBException;
 
 import org.apache.log4j.Logger;
-import org.openmath.omutils.OMConverter;
 
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
+import de.uni_due.s3.openmath.omutils.OMConverter;
 
 /**
  * This class provides an interface to execute sage commands. To execute a Sage

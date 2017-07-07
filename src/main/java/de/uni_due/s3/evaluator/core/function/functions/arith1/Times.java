@@ -36,7 +36,7 @@ public class Times extends Function {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException{
+	public String getPartialSageSyntax(List<Object> arguments) throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException{
 		return getSageSyntax(arguments.get(0)) + " * " + getSageSyntax(arguments.get(1));
 	}
 	
