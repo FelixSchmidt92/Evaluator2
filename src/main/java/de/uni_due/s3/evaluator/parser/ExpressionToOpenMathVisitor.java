@@ -30,6 +30,7 @@ import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.jaxb.OMSTR;
 import de.uni_due.s3.openmath.omutils.OMConverter;
+import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Object> {
@@ -70,78 +71,35 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 		OMS oms = new OMS();
 		switch (ctx.getChild(1).getText()) {
 		case "+":
-			oms.setCd("arith1");
-			oms.setName("plus");
-			break;
-
+			oms = OMCreator.createOMS("arith1", "plus");break;
 		case "-":
-			oms.setCd("arith1");
-			oms.setName("minus");
-			break;
-
+			oms = OMCreator.createOMS("arith1", "minus");break;
 		case "*":
-			oms.setCd("arith1");
-			oms.setName("times");
-			break;
-
+			oms = OMCreator.createOMS("arith1", "times");break;
 		case "/":
-			oms.setCd("arith1");
-			oms.setName("divide");
-			break;
-
-		case "%": // defining here an own cd and name to have this as an binary
-					// operator
-			oms.setCd("jackbinary1");
-			oms.setName("modulus");
-			break;
-
+			oms = OMCreator.createOMS("arith1", "divide");break;
+		case "%":
+			oms = OMCreator.createOMS("jackbinary1", "modulus");break;
 		case "<":
-			oms.setCd("relation1");
-			oms.setName("lt");
-			break;
-
+			oms = OMCreator.createOMS("relation1", "lt");break;
 		case "<=":
-			oms.setCd("relation1");
-			oms.setName("leq");
-			break;
-
+			oms = OMCreator.createOMS("relation1", "leq");break;
 		case ">":
-			oms.setCd("relation1");
-			oms.setName("gt");
-			break;
-
+			oms = OMCreator.createOMS("relation1", "gt");break;
 		case ">=":
-			oms.setCd("relation1");
-			oms.setName("geq");
-			break;
-
+			oms = OMCreator.createOMS("relation1", "geq");break;
 		case "=":
-			oms.setCd("relation1");
-			oms.setName("eq");
-			break;
-
+			oms = OMCreator.createOMS("relation1", "eq");break;
 		case "==":
-			oms.setCd("logic1"); // equivalent "==" as "≡"
-			oms.setName("equivalent");
-			break;
-
+			oms = OMCreator.createOMS("logic1", "equivalent");break;
 		case "!=":
-			oms.setCd("relation1");
-			oms.setName("neq");
-			break;
-
+			oms = OMCreator.createOMS("relation1", "neq");break;
 		case "&&":
-			oms.setCd("logic1");
-			oms.setName("and");
-			break;
-
+			oms = OMCreator.createOMS("logic1", "and");break;
 		case "||":
-			oms.setCd("logic1");
-			oms.setName("or");
-			break;
-			
-			default: 
-				throw new FunctionNotImplementedException("Binary Operator " + ctx.getChild(1) + " is not supported");
+			oms = OMCreator.createOMS("logic1", "or");break;
+		default: 
+			throw new FunctionNotImplementedException("Binary Operator " + ctx.getChild(1).getText() + " is not supported");
 		}
 
 		OMA oma = new OMA();
@@ -207,23 +165,15 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 
 		switch (ctx.getChild(0).getText()) {
 		case "+":
-			oms.setCd("arith1");
-			oms.setName("unary_plus");
-			break;
-
+			oms = OMCreator.createOMS("arith1", "unary_plus");break;
 		case "-":
-			oms.setCd("arith1");
-			oms.setName("unary_minus");
-			break;
-
+			oms = OMCreator.createOMS("arith1", "unary_minus");break;
 		case "!":
-			oms.setCd("logic1");
-			oms.setName("not");
-			break;
+			oms = OMCreator.createOMS("logic1", "not");break;
 		}
 		OMA oma = new OMA();
 		oma.getOmel().add(oms);
-		oma.getOmel().add(visit(ctx.getChild(0)));
+		oma.getOmel().add(visit(ctx.getChild(1)));
 		return oma;
 	}
 
