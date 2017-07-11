@@ -23,9 +23,8 @@ public class Abs extends Function{
 	 */
 	@Override
 	protected Object execute(List<Object> arguments) throws  FunctionInvalidArgumentTypeException{
-		Object arg = arguments.get(0);
 		try {
-			Double argValue = NumberUtils.convertOMIOMFToDouble(arg);
+			Double argValue = NumberUtils.convertOMIOMFToDouble(arguments.get(0));
 			return NumberUtils.convertDoubleToOMIOMF(Math.abs(argValue));
 		} catch (InputMismatchException e) {
 			throw new FunctionInvalidArgumentTypeException(this,"integer, float, double");

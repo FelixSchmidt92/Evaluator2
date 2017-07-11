@@ -1,10 +1,8 @@
 package de.uni_due.s3.evaluator.core.function;
 
-
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.openmath.jaxb.OMF;
 import de.uni_due.s3.openmath.jaxb.OMI;
-import de.uni_due.s3.openmath.jaxb.OMSTR;
 
 public class NumberUtils {
 
@@ -49,15 +47,11 @@ public class NumberUtils {
 		}
 	}
 	
-	public static int valueOf(OMI omi){
-		return Integer.parseInt(omi.getValue());
-	}
-	
-	public static double valueOf(OMF omf){
-		return omf.getDec();
-	}
-	
-	public static String valueOf(OMSTR omstr){
-		return omstr.getContent();
+	public static int convertOMIToInteger(Object obj) throws InputMismatchException {
+		if (obj instanceof OMI) {
+			return Integer.parseInt(((OMI) obj).getValue());
+		} else {
+			throw new InputMismatchException();
+		}
 	}
 }

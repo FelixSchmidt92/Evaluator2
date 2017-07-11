@@ -5,14 +5,13 @@ import java.util.List;
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.core.function.NumberUtils;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 
 /**
- * Implements multiplication of two numbers
- * Example: 3*5
+ * Implements multiplication of two numbers Example: 3*5
+ * 
  * @author frichtscheid
  *
  */
@@ -20,15 +19,14 @@ public class Times extends Function {
 
 	/**
 	 * Expects two argument either of type OMI or OMF
+	 * 
 	 * @return OMI or OMF
 	 */
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentException, FunctionInvalidArgumentTypeException {
-		Object left = arguments.get(0);
-		Object right = arguments.get(1);
+	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException {
 		try {
-			Double leftValue = NumberUtils.convertOMIOMFToDouble(left);
-			Double rightValue = NumberUtils.convertOMIOMFToDouble(right);
+			Double leftValue = NumberUtils.convertOMIOMFToDouble(arguments.get(0));
+			Double rightValue = NumberUtils.convertOMIOMFToDouble(arguments.get(1));
 			return NumberUtils.convertDoubleToOMIOMF(leftValue * rightValue);
 		} catch (InputMismatchException e) {
 			throw new FunctionInvalidArgumentTypeException(this, "integer, float, double");
@@ -46,8 +44,9 @@ public class Times extends Function {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException{
+	public String getPartialSageSyntax(List<Object> arguments)
+			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException {
 		return getSageSyntax(arguments.get(0)) + " * " + getSageSyntax(arguments.get(1));
 	}
-	
+
 }

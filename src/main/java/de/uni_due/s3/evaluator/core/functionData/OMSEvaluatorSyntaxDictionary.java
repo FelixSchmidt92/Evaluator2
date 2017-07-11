@@ -121,6 +121,10 @@ public class OMSEvaluatorSyntaxDictionary {
 		// TestTerminal
 		functionSymbolMap.put("isEmpty", OMSymbol.TESTTERMINALJACK_ISEMPTY);
 		functionSymbolMap.put("isPolynomial", OMSymbol.TESTTERMINALJACK_ISPOLYNOMIAL);
+		
+		functionSymbolMap.put("matrix", OMSymbol.LINALG2_MATRIX);
+		functionSymbolMap.put("matrixrow", OMSymbol.LINALG2_MATRIXROW);
+		functionSymbolMap.put("vector", OMSymbol.LINALG2_VECTOR);
 	}
 	
 	/**

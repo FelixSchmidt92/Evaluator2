@@ -85,27 +85,27 @@ import de.uni_due.s3.openmath.jaxb.OMS;
  * @author dlux, frichtscheid, spobel
  */
 public class OMSFunctionDictionary {
-	
+
 	private HashMap<OMS, Function> functions = new HashMap<>();
 
 	private static OMSFunctionDictionary omsfd = new OMSFunctionDictionary();
-	
-	public static OMSFunctionDictionary getInstance(){
+
+	public static OMSFunctionDictionary getInstance() {
 		return omsfd;
 	}
-	
+
 	/**
 	 * Here you can add (register) the Functions which are available for the
 	 * Evaluator in the HashMap.
 	 * 
-	 * The static only adds Functions to the HashMap. There is nothing else
-	 * to do here.
+	 * The static only adds Functions to the HashMap. There is nothing else to
+	 * do here.
 	 * 
 	 * Explanation: The key of this HashMap (First Parameter) defines the
 	 * OMSymbol
 	 * 
-	 * The  Parameter: The Object which implements this functionName (can
-	 * also be null)
+	 * The Parameter: The Object which implements this functionName (can also be
+	 * null)
 	 */
 	private OMSFunctionDictionary() {
 		functions.put(OMSymbol.ARITH1_PLUS, new Plus());
@@ -193,7 +193,7 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.STRINGJACK_INDEXOF, new IndexOf());
 		// Evaluate
 		functions.put(OMSymbol.EVALJACK_EVAL, new Eval());
-		//Complex
+		// Complex
 		functions.put(OMSymbol.COMPLEXJACK_EVALCPLX, new EvalCplx());
 		// Constanten
 
@@ -202,9 +202,8 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.TESTTERMINALJACK_ISPOLYNOMIAL, new IsPolynomial());
 	}
 
-
 	/**
-	 * This method returns the specific Function. 
+	 * This method returns the specific Function.
 	 * 
 	 * @param name
 	 *            the name (key)(in lower case) of this Function
@@ -212,7 +211,7 @@ public class OMSFunctionDictionary {
 	 * @throws FunctionNotImplementedException
 	 *             if Function is not found in HashMap
 	 */
-	public Function getFunction(OMS oms) throws FunctionNotImplementedException{
+	public Function getFunction(OMS oms) throws FunctionNotImplementedException {
 		if (functions.containsKey(oms)) {
 			return functions.get(oms);
 		} else {

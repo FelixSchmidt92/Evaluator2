@@ -23,11 +23,9 @@ public class Divide extends Function{
 	 */
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException {
-		Object left = arguments.get(0);
-		Object right = arguments.get(1);
 		try {
-			Double leftValue = NumberUtils.convertOMIOMFToDouble(left);
-			Double rightValue = NumberUtils.convertOMIOMFToDouble(right);
+			Double leftValue = NumberUtils.convertOMIOMFToDouble(arguments.get(0));
+			Double rightValue = NumberUtils.convertOMIOMFToDouble(arguments.get(1));
 			return NumberUtils.convertDoubleToOMIOMF(leftValue / rightValue);
 		} catch (InputMismatchException e) {
 			throw new FunctionInvalidArgumentTypeException(this,"integer, float, double");
