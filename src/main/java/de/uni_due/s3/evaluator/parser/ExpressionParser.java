@@ -3,15 +3,21 @@ package de.uni_due.s3.evaluator.parser;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
-import java.util.Map;
+import java.util.HashMap;
 
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 
-
+import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedRuntimeException;
 import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
+import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableException;
+import de.uni_due.s3.evaluator.exceptions.parser.UndefinedFillInVariableException;
+import de.uni_due.s3.evaluator.exceptions.parserruntime.ParserRuntimeException;
+import de.uni_due.s3.evaluator.exceptions.parserruntime.UndefinedExerciseVariableRuntimeException;
+import de.uni_due.s3.evaluator.exceptions.parserruntime.UndefinedFillInVariableRuntimeException;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorLexer;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser;
 import de.uni_due.s3.openmath.jaxb.OMA;
@@ -41,49 +47,64 @@ public class ExpressionParser {
 	 *  
 	 * @param expression the String which is in 'Evaluator-Language'.
 	 * @return TODO an evaluated standardized OpenMath-Tree as in JAXB from the given String.
-	 * @throws ParserException if the given String is null or not parsable.
+	 * @throws UndefinedFillInVariableException 
+	 * @throws UndefinedExerciseVariableException 
+	 * @throws ParserException 
+	 * @throws FunctionNotImplementedException 
+	 * @throws ParserRuntimeException if the given String is null or not parsable.
 	 * 
 	 * @UnderConstruction
 	 */
-	public static OMOBJ parse(String expression,Map<String,OMOBJ> exerciseVariableMap, Map<Integer,OMOBJ> fillInVariableMap) throws ParserException {
-		if (expression == null){
-			// empty String passed to this function
-			throw new ParserException("Expression passed to this Parser is null!");
-		}
-		
-		
-		Reader input = new StringReader(expression);
-		CharStream cstream = null;
+	public static OMOBJ parse(String expression, HashMap<String,OMOBJ> exerciseVariableMap, HashMap<Integer, OMOBJ> fillInVariableMap) throws UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException, FunctionNotImplementedException {
 		try {
-			cstream = CharStreams.fromReader(input);
-		} catch (IOException e) {
-			//Some weird String given to the Reader 
-			String cause = "IOException thrown by Reader creating an CharStream."
-					+ "The expression passed to the Reader: " + expression;
-			throw new ParserException(cause, e); 
+			if (expression == null){
+				// empty String passed to this function
+				throw new ParserRuntimeException("Expression passed to this Parser is null!");
+			}
+			
+			
+			Reader input = new StringReader(expression);
+			CharStream cstream = null;
+			try {
+				cstream = CharStreams.fromReader(input);
+			} catch (IOException e) {
+				//Some weird String given to the Reader 
+				String cause = "IOException thrown by Reader creating an CharStream."
+						+ "The expression passed to the Reader: " + expression;
+				throw new ParserRuntimeException(cause, e); 
+			}
+			
+			
+			EvaluatorLexer evaluatorLexer = new EvaluatorLexer(cstream);
+			
+			//set default ErrorListener
+			evaluatorLexer.removeErrorListeners(); 
+			evaluatorLexer.addErrorListener(new LexerErrorStrategy());
+			
+			CommonTokenStream commonTokenStream = new CommonTokenStream(evaluatorLexer);
+			EvaluatorParser evaluatorParser = new EvaluatorParser(commonTokenStream);
+			
+			//set default ErrorStrategy
+			evaluatorParser.setErrorHandler(new ParserErrorStrategy()); 
+			
+			ParseTree tree = evaluatorParser.expression();
+			
+			// Putting the parsed OpenMath-Tree in OMOBJ and visit OMVisitor for Evaluation
+			Object omobjElementsTree = new ExpressionToOpenMathVisitor(exerciseVariableMap,fillInVariableMap).visit(tree);
+			
+			// Convert Tree to OMOBJ, evaluate it and again convert the evaluated
+			// tree to OMOBJ
+			return convertToOmobj(omobjElementsTree);
+		} catch (UndefinedFillInVariableRuntimeException e) {
+			throw new UndefinedFillInVariableException(e);
+		} catch (UndefinedExerciseVariableRuntimeException e) {
+			throw new UndefinedExerciseVariableException(e);
+		} catch (ParserRuntimeException e) {
+			throw new ParserException(e);
+		} catch (FunctionNotImplementedRuntimeException e) {
+			throw new FunctionNotImplementedException(e);
 		}
 		
-		
-		EvaluatorLexer evaluatorLexer = new EvaluatorLexer(cstream);
-		
-		//set default ErrorListener
-		evaluatorLexer.removeErrorListeners(); 
-		evaluatorLexer.addErrorListener(new LexerErrorStrategy());
-		
-		CommonTokenStream commonTokenStream = new CommonTokenStream(evaluatorLexer);
-		EvaluatorParser evaluatorParser = new EvaluatorParser(commonTokenStream);
-		
-		//set default ErrorStrategy
-		evaluatorParser.setErrorHandler(new ParserErrorStrategy()); 
-		
-		ParseTree tree = evaluatorParser.expression();
-		
-		// Putting the parsed OpenMath-Tree in OMOBJ and visit OMVisitor for Evaluation
-		Object omobjElementsTree = new ExpressionToOpenMathVisitor(exerciseVariableMap,fillInVariableMap).visit(tree);
-		
-		// Convert Tree to OMOBJ, evaluate it and again convert the evaluated
-		// tree to OMOBJ
-		return convertToOmobj(omobjElementsTree);
 	}
 	
 	/**

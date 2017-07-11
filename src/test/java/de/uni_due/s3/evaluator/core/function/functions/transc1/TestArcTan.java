@@ -18,6 +18,9 @@ import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
+import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
+import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableException;
+import de.uni_due.s3.evaluator.exceptions.parser.UndefinedFillInVariableException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMF;
@@ -53,7 +56,8 @@ public class TestArcTan extends TestFunction {
 
 	@Test
 	public void testArcTanIntegration() throws FunctionException, OpenMathException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException {
+			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
+			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("atan(0)", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals("0", result.getOMI().getValue());
@@ -70,21 +74,24 @@ public class TestArcTan extends TestFunction {
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testArcTanWithLessThanMinParam() throws FunctionException, OpenMathException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException {
+			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
+			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("atan()", null, null);
 		OMExecutor.execute(omobj);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testArcTanWithMoreThanMaxParam() throws FunctionException, OpenMathException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException {
+			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
+			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("atan(1,3)", null, null);
 		OMExecutor.execute(omobj);
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void testArcTanWithWrongArguments() throws FunctionException, OpenMathException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException {
+			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
+			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("atan('Test')", null, null);
 		OMExecutor.execute(omobj);
 	}

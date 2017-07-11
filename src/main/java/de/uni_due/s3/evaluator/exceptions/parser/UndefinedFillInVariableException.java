@@ -1,19 +1,18 @@
 package de.uni_due.s3.evaluator.exceptions.parser;
 
-/**
- * This exception class signals, that a specified FillInVariable does not exists and can't be retrieved
- * 
- * @author frichtscheid
- *
- */
-public class UndefinedFillInVariableException extends ParserException{
+import de.uni_due.s3.evaluator.exceptions.EvaluatorException;
+import de.uni_due.s3.evaluator.exceptions.parserruntime.UndefinedFillInVariableRuntimeException;
 
-	public UndefinedFillInVariableException(int number) {
-		super("There is no FillIn variable at position "+number);
+public class UndefinedFillInVariableException extends EvaluatorException {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3523089020334909078L;
+
+	public UndefinedFillInVariableException(UndefinedFillInVariableRuntimeException e) {
+		super(e.getMessage());
 		// TODO Auto-generated constructor stub
 	}
-
-
-	private static final long serialVersionUID = 1L;
 
 }

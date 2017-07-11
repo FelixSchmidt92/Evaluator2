@@ -1,25 +1,13 @@
 package de.uni_due.s3.evaluator.exceptions.function;
 
-import de.uni_due.s3.openmath.jaxb.OMS;
+public class FunctionNotImplementedException extends FunctionException {
 
-/**
- * Is thrown when a requested function is not implemented
- * @author frichtscheid
- *
- */									/*TODO FIXME dlux RuntimeException??*/
-public class FunctionNotImplementedException extends RuntimeException{
-	
 	/**
-	 * 
+	 * This is a wrapper for FunctionNotImplementedRuntimeException thrown in parser.
 	 */
-	private static final long serialVersionUID = 8997318712583267590L;
+	private static final long serialVersionUID = 5655763396362526145L;
 
-	public FunctionNotImplementedException(OMS omsymbol){
-		super("the requested function: " + omsymbol.getName() + "(cd:"+omsymbol.getCd()+") does not exist");
+	public FunctionNotImplementedException(FunctionNotImplementedRuntimeException e) {
+		super(e.getMessage());
 	}
-	
-	public FunctionNotImplementedException(String name){
-		super("the requested function: " + name + " does not exist");
-	}
-
 }

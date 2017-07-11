@@ -8,6 +8,7 @@ import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgume
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * Implements the abs-function.
@@ -20,9 +21,10 @@ public class Abs extends Function{
 	/**
 	 * Expects one argument of type OMI or OMF
 	 * @return OMI or OMF
+	 * @throws OpenMathException 
 	 */
 	@Override
-	protected Object execute(List<Object> arguments) throws  FunctionInvalidArgumentTypeException{
+	protected Object execute(List<Object> arguments) throws  FunctionInvalidArgumentTypeException, OpenMathException{
 		try {
 			Double argValue = NumberUtils.convertOMIOMFToDouble(arguments.get(0));
 			return NumberUtils.convertDoubleToOMIOMF(Math.abs(argValue));

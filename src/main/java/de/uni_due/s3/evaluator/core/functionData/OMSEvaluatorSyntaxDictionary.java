@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedRuntimeException;
 import de.uni_due.s3.openmath.jaxb.OMS;
 
 public class OMSEvaluatorSyntaxDictionary {
@@ -133,14 +133,14 @@ public class OMSEvaluatorSyntaxDictionary {
 	 * @param name
 	 *            the name (key)(in lower case) of this OMSymbol
 	 * @return the specific OMSymbol
-	 * @throws FunctionNotImplementedException
+	 * @throws FunctionNotImplementedRuntimeException
 	 *             if Function is not found in HashMap
 	 */
-	public OMS getOMS(String name) throws FunctionNotImplementedException{
+	public OMS getOMS(String name) throws FunctionNotImplementedRuntimeException{
 		if (functionSymbolMap.containsKey(name)) {
 			return functionSymbolMap.get(name);
 		} else {
-			throw new FunctionNotImplementedException(name);
+			throw new FunctionNotImplementedRuntimeException(name);
 		}
 	}
 }

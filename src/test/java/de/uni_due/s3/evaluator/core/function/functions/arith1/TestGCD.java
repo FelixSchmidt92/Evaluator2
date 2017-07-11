@@ -21,15 +21,20 @@ import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedException;
+import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
+import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableException;
+import de.uni_due.s3.evaluator.exceptions.parser.UndefinedFillInVariableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
 
 public class TestGCD {
-	
+
 	@Test
-	public void testGcdInteger() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
+	public void testGcdInteger() throws FunctionException, CasEvaluationException, CasNotAvailableException,
+			NoRepresentationAvailableException, OpenMathException {
 		GCD func = new GCD();
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(12));
@@ -37,46 +42,53 @@ public class TestGCD {
 		OMI result = (OMI) func.evaluate(args);
 		assertEquals("3", result.getValue());
 	}
-	
-	
+
 	@Test
-	public void testGcdIntegration() throws FunctionException, OpenMathException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
+	public void testGcdIntegration() throws FunctionException, OpenMathException, CasEvaluationException,
+			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
+			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("gcd(10,5)", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals("5", result.getOMI().getValue());
-		
+
 		omobj = ExpressionParser.parse("gcd(100,125)", null, null);
 		result = OMExecutor.execute(omobj);
 		assertEquals("25", result.getOMI().getValue());
 	}
-	
+
+	@SuppressWarnings("unused")
 	@Test
-	public void testGcdSageSyntax() throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException{
-		GCD func = (GCD)OMSFunctionDictionary.getInstance().getFunction(OMSEvaluatorSyntaxDictionary.getInstance().getOMS("gcd"));
+	public void testGcdSageSyntax() throws FunctionInvalidNumberOfArgumentsException,
+			NoRepresentationAvailableException, CasException, FunctionNotImplementedException,
+			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
+		GCD func = (GCD) OMSFunctionDictionary.getInstance()
+				.getFunction(OMSEvaluatorSyntaxDictionary.getInstance().getOMS("gcd"));
 		OMF omf = OMCreator.createOMF(1.0);
 		OMI omi = OMCreator.createOMI(10);
-		
+
 		OMOBJ omobj = ExpressionParser.parse("gcd(5,10)", null, null);
 		List<Object> args = omobj.getOMA().getOmel();
-		OMS oms = (OMS)args.get(0);
+		OMS oms = (OMS) args.get(0);
 		args.remove(0);
-		
+
 		assertEquals("gcd(5,10)", func.getPartialSageSyntax(args));
 		args = new ArrayList<Object>(2);
 		args.add(omf);
 		args.add(omf);
-		assertEquals("gcd(1.0,1.0)",func.getPartialSageSyntax(args));
+		assertEquals("gcd(1.0,1.0)", func.getPartialSageSyntax(args));
 	}
-	
-	@Test(expected=FunctionInvalidArgumentTypeException.class)
-	public void testGcdWithWrongArguments() throws FunctionException, OpenMathException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
+
+	@Test(expected = FunctionInvalidArgumentTypeException.class)
+	public void testGcdWithWrongArguments() throws FunctionException, OpenMathException, CasEvaluationException,
+			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
+			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("gcd(2,'test')", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals("5", result.getOMI().getValue());
-		
+
 		omobj = ExpressionParser.parse("gcd('test',17)", null, null);
 		result = OMExecutor.execute(omobj);
 		assertEquals("-7", result.getOMI().getValue());
 	}
-	
+
 }

@@ -32,7 +32,7 @@ public class Minus extends Function {
 	 * @throws OpenMathException
 	 */
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException {
+	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException, OpenMathException {
 		try {
 			Double leftValue = NumberUtils.convertOMIOMFToDouble(arguments.get(0));
 			Double rightValue = NumberUtils.convertOMIOMFToDouble(arguments.get(1));

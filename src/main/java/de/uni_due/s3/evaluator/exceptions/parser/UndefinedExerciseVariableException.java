@@ -1,18 +1,18 @@
 package de.uni_due.s3.evaluator.exceptions.parser;
 
-/**
- * This exception class signals, that the specified ExerciseVariable does not exists and can't be retrieved.
- * 
- * @author frichtscheid
- *
- */
-public class UndefinedExerciseVariableException extends ParserException{
+import de.uni_due.s3.evaluator.exceptions.EvaluatorException;
+import de.uni_due.s3.evaluator.exceptions.parserruntime.UndefinedExerciseVariableRuntimeException;
 
-	public UndefinedExerciseVariableException(String variableName) {
-		super("There is no exerciseVariable with name "+variableName);
+public class UndefinedExerciseVariableException extends EvaluatorException {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3163649617908472677L;
+
+	public UndefinedExerciseVariableException(UndefinedExerciseVariableRuntimeException e) {
+		super(e.getMessage());
+		// TODO Auto-generated constructor stub
 	}
-
-
-	private static final long serialVersionUID = 1L;
 
 }

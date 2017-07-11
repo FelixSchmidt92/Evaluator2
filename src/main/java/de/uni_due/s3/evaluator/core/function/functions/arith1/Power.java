@@ -8,6 +8,7 @@ import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeEx
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * Implements the Math.pow function for functions Example: 2^3 = 8 or Usage:
@@ -23,9 +24,10 @@ public class Power extends Function {
 	 * 
 	 * @return OMI or OMF
 	 * @throws FunctionInvalidArgumentTypeException 
+	 * @throws OpenMathException 
 	 */
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException   {
+	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException, OpenMathException   {
 		try {
 			Double b = NumberUtils.convertOMIOMFToDouble(arguments.get(0));
 			Double e = NumberUtils.convertOMIOMFToDouble(arguments.get(1));

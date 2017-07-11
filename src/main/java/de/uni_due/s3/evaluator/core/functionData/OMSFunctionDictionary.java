@@ -76,7 +76,7 @@ import de.uni_due.s3.evaluator.core.function.functions.transc1.Exp;
 import de.uni_due.s3.evaluator.core.function.functions.transc1.Sin;
 import de.uni_due.s3.evaluator.core.function.functions.transc1.Tan;
 import de.uni_due.s3.evaluator.core.function.functions.transc2.ArcTan2;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedRuntimeException;
 import de.uni_due.s3.openmath.jaxb.OMS;
 
 /**
@@ -208,14 +208,14 @@ public class OMSFunctionDictionary {
 	 * @param name
 	 *            the name (key)(in lower case) of this Function
 	 * @return the specific Function
-	 * @throws FunctionNotImplementedException
+	 * @throws FunctionNotImplementedRuntimeException
 	 *             if Function is not found in HashMap
 	 */
-	public Function getFunction(OMS oms) throws FunctionNotImplementedException {
+	public Function getFunction(OMS oms) throws FunctionNotImplementedRuntimeException {
 		if (functions.containsKey(oms)) {
 			return functions.get(oms);
 		} else {
-			throw new FunctionNotImplementedException(oms);
+			throw new FunctionNotImplementedRuntimeException(oms);
 		}
 	}
 }

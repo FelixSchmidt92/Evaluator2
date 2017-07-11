@@ -6,7 +6,7 @@ import org.antlr.v4.runtime.Parser;
 import org.antlr.v4.runtime.RecognitionException;
 import org.antlr.v4.runtime.Token;
 
-import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
+import de.uni_due.s3.evaluator.exceptions.parserruntime.ParserRuntimeException;
 
 /**
  * This is the default ErrorHandler, if the Parser cannot match to  any Token or 
@@ -26,7 +26,7 @@ public class ParserErrorStrategy extends BailErrorStrategy{
 	 */
 	@Override
 	public void recover(Parser recognizer,  RecognitionException e){
-		throw new ParserException("RecoverException in ParserErrorStrategy", e);
+		throw new ParserRuntimeException("RecoverException in ParserErrorStrategy", e);
 	}
 	
 	/**
@@ -41,7 +41,7 @@ public class ParserErrorStrategy extends BailErrorStrategy{
 	protected void reportNoViableAlternative(Parser recognizer, NoViableAltException e) {
 		String msg = "Parsing-Error at Character: " + getTokenErrorDisplay(e.getOffendingToken()) 
 				   + " and Position: " + e.getOffendingToken().getCharPositionInLine();
-		throw new ParserException(msg , e);
+		throw new ParserRuntimeException(msg , e);
 	}
 	
 	/**
@@ -53,7 +53,7 @@ public class ParserErrorStrategy extends BailErrorStrategy{
 	 */
 	@Override
 	public Token recoverInline(Parser recognizer) throws RecognitionException {
-		throw new ParserException("Could not recognize Tokens before Position: " + recognizer.getCurrentToken().getCharPositionInLine());
+		throw new ParserRuntimeException("Could not recognize Tokens before Position: " + recognizer.getCurrentToken().getCharPositionInLine());
 	}
 
 	/**
@@ -71,7 +71,7 @@ public class ParserErrorStrategy extends BailErrorStrategy{
 		if(!recognizer.getExpectedTokens().contains(typeNum)){ // if not in Expected Tokens
 			String msg = "Error at Token: '" + recognizer.getCurrentToken().getText()
 					   + "', at Character Position: " + recognizer.getCurrentToken().getCharPositionInLine();
-			throw new ParserException(msg);
+			throw new ParserRuntimeException(msg);
 		}
 	}
 }

@@ -8,6 +8,7 @@ import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeEx
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * Implements openMath unary_minus for numbers Example: -3, -4.56
@@ -21,9 +22,10 @@ public class UnaryMinus extends Function {
 	 * Expects one argument of type OMI or OMF
 	 * 
 	 * @return OMI or OMF
+	 * @throws OpenMathException 
 	 */
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException {
+	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException, OpenMathException {
 		try {
 			Double value = NumberUtils.convertOMIOMFToDouble(arguments.get(0));
 			return NumberUtils.convertDoubleToOMIOMF(value * -1);

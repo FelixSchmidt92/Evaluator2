@@ -27,7 +27,7 @@ public class Plus extends Function {
 	 * FunctionInvalidArgumentTypeException @throws
 	 */
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException {
+	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException, OpenMathException {
 		// evaluate this method in sage
 		try {
 			Double leftValue = NumberUtils.convertOMIOMFToDouble(arguments.get(0));

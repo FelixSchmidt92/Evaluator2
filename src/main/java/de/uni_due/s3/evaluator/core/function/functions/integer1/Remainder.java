@@ -10,6 +10,7 @@ import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMI;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 
 /**
@@ -24,9 +25,10 @@ public class Remainder extends Function{
 	 * Expects two argument of type OMI
 	 * @return OMI
 	 * @throws FunctionInvalidArgumentTypeException 
+	 * @throws OpenMathException 
 	 */
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException {
+	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException, OpenMathException {
 		if(! (OMTypeChecker.isOMI(arguments.get(0)) && OMTypeChecker.isOMI(arguments.get(1))))
 			throw new FunctionInvalidArgumentTypeException(this,"integer");
 		

@@ -1,0 +1,103 @@
+package de.uni_due.s3.evaluator.core.function.integration;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import javax.xml.bind.JAXBException;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+
+import de.uni_due.s3.evaluator.Evaluator;
+import de.uni_due.s3.evaluator.exceptions.InvalidResultTypeException;
+import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
+import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
+import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
+import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableException;
+import de.uni_due.s3.evaluator.exceptions.parser.UndefinedFillInVariableException;
+import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
+import de.uni_due.s3.openmath.jaxb.OMOBJ;
+import de.uni_due.s3.openmath.omutils.OMConverter;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
+import de.uni_due.s3.sage.Sage;
+
+public abstract class TestIntegration {
+
+	/**
+	 * [var=X] Map
+	 * <ul>
+	 * <li>a -> OMI 0</li>
+	 * <li>b -> OMI 1</li>
+	 * <li>c -> OMI -1</li>
+	 * <li>d -> OMF 1.5</li>
+	 * <li>e -> OMF -12.5</li>
+	 * <li>f -> OMF 0.0</li>
+	 * </ul>
+	 */
+	protected static HashMap<String, OMOBJ> exerciseVariableMap;
+	
+	private static void resetExerciseVariableMap() {
+		exerciseVariableMap = new HashMap<String, OMOBJ>();
+		try {
+			exerciseVariableMap.put("a", OMConverter.toObject("<OMOBJ><OMI>0</OMI></OMOBJ>"));
+			exerciseVariableMap.put("b", OMConverter.toObject("<OMOBJ><OMI>1</OMI></OMOBJ>"));
+			exerciseVariableMap.put("c", OMConverter.toObject("<OMOBJ><OMI>-1</OMI></OMOBJ>"));
+			exerciseVariableMap.put("d", OMConverter.toObject("<OMOBJ><OMF dec=\"1.5\"/></OMOBJ>"));
+			exerciseVariableMap.put("e", OMConverter.toObject("<OMOBJ><OMF dec=\"-12.5\"/></OMOBJ>"));
+			exerciseVariableMap.put("f", OMConverter.toObject("<OMOBJ><OMF dec=\"0.0\"/></OMOBJ>"));
+		} catch (JAXBException e) {
+			throw new RuntimeException("Erzeugung der OpenMath exercise Variablen für TestIntegration fehlgeschlagen", e);
+		}
+	}
+
+	/**
+	 * [pos=X] Map
+	 * <ul>
+	 * <li>1 -> OMI 0</li>
+	 * <li>2 -> OMI 1</li>
+	 * <li>3 -> OMI -1</li>
+	 * <li>4 -> OMF 1.5</li>
+	 * <li>5 -> OMF -12.5</li>
+	 * <li>6 -> OMF 0.0</li>
+	 * </ul>
+	 */
+	protected static HashMap<Integer, OMOBJ> fillInVariableMap;
+	
+	private static void resetFillInVariableMap() {
+		fillInVariableMap = new HashMap<Integer, OMOBJ>();
+		try {
+			fillInVariableMap.put(1, OMConverter.toObject("<OMOBJ><OMI>0</OMI></OMOBJ>"));
+			fillInVariableMap.put(2, OMConverter.toObject("<OMOBJ><OMI>1</OMI></OMOBJ>"));
+			fillInVariableMap.put(3, OMConverter.toObject("<OMOBJ><OMI>-1</OMI></OMOBJ>"));
+			fillInVariableMap.put(4, OMConverter.toObject("<OMOBJ><OMF dec=\"1.5\"/></OMOBJ>"));
+			fillInVariableMap.put(5, OMConverter.toObject("<OMOBJ><OMF dec=\"-12.5\"/></OMOBJ>"));
+			fillInVariableMap.put(6, OMConverter.toObject("<OMOBJ><OMF dec=\"0.0\"/></OMOBJ>"));
+		} catch (JAXBException e) {
+			throw new RuntimeException("Erzeugung der OpenMath fillIn Variablen für TestIntegration fehlgeschlagen", e);
+		}
+	}
+
+	@BeforeClass
+	public static void beforeClass() throws CasEvaluationException, FunctionException, CasNotAvailableException,
+			NoRepresentationAvailableException, OpenMathException, JAXBException {
+		resetFillInVariableMap();
+		resetExerciseVariableMap();
+		List<String> aSageConnectionsList = new ArrayList<>();
+		aSageConnectionsList.add("192.168.68.176:8989");
+		Sage.init(aSageConnectionsList);
+
+	}
+
+	protected double getNumberResult(String expression)
+			throws CasEvaluationException, FunctionException, CasNotAvailableException,
+			NoRepresentationAvailableException, InvalidResultTypeException, OpenMathException,
+			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
+		return Evaluator.getNumberResult(expression, exerciseVariableMap, fillInVariableMap);
+	}
+	
+	@AfterClass
+	public static void afterClass() {
+	}
+}

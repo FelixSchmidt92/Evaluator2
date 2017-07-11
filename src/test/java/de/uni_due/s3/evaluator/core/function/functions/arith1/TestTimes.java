@@ -21,15 +21,20 @@ import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedException;
+import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
+import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableException;
+import de.uni_due.s3.evaluator.exceptions.parser.UndefinedFillInVariableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
 
 public class TestTimes {
-	
+
 	@Test
-	public void testTimesInteger() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
+	public void testTimesInteger() throws FunctionException, CasEvaluationException, CasNotAvailableException,
+			NoRepresentationAvailableException, OpenMathException {
 		Times func = new Times();
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(3));
@@ -37,9 +42,10 @@ public class TestTimes {
 		OMI result = (OMI) func.evaluate(args);
 		assertEquals("12", result.getValue());
 	}
-	
+
 	@Test
-	public void testTimesFloat() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
+	public void testTimesFloat() throws FunctionException, CasEvaluationException, CasNotAvailableException,
+			NoRepresentationAvailableException, OpenMathException {
 		Times func = new Times();
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMF(2.5));
@@ -47,9 +53,10 @@ public class TestTimes {
 		OMF result = (OMF) func.evaluate(args);
 		assertEquals(new Double(14.5), result.getDec());
 	}
-	
+
 	@Test
-	public void testTimesMixed() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
+	public void testTimesMixed() throws FunctionException, CasEvaluationException, CasNotAvailableException,
+			NoRepresentationAvailableException, OpenMathException {
 		Times func = new Times();
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(1000));
@@ -57,45 +64,53 @@ public class TestTimes {
 		OMI result = (OMI) func.evaluate(args);
 		assertEquals("4892", result.getValue());
 	}
-	
+
 	@Test
-	public void testTimesIntegration() throws FunctionException, OpenMathException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
+	public void testTimesIntegration() throws FunctionException, OpenMathException, CasEvaluationException,
+			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
+			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("10*5", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals("50", result.getOMI().getValue());
-		
+
 		omobj = ExpressionParser.parse("times(10,-17)", null, null);
 		result = OMExecutor.execute(omobj);
 		assertEquals("-170", result.getOMI().getValue());
 	}
-	
+
+	@SuppressWarnings("unused")
 	@Test
-	public void testTimesSageSyntax() throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException{
-		Times func = (Times)OMSFunctionDictionary.getInstance().getFunction(OMSEvaluatorSyntaxDictionary.getInstance().getOMS("times"));
+	public void testTimesSageSyntax() throws FunctionInvalidNumberOfArgumentsException,
+			NoRepresentationAvailableException, CasException, FunctionNotImplementedException,
+			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
+		Times func = (Times) OMSFunctionDictionary.getInstance()
+				.getFunction(OMSEvaluatorSyntaxDictionary.getInstance().getOMS("times"));
 		OMF omf = OMCreator.createOMF(1.0);
 		OMI omi = OMCreator.createOMI(10);
-		
+
 		OMOBJ omobj = ExpressionParser.parse("times(5,10)", null, null);
 		List<Object> args = omobj.getOMA().getOmel();
-		OMS oms = (OMS)args.get(0);
+		OMS oms = (OMS) args.get(0);
 		args.remove(0);
-		
+
 		assertEquals("5 * 10", func.getPartialSageSyntax(args));
 		args = new ArrayList<Object>(2);
 		args.add(omf);
 		args.add(omf);
-		assertEquals("1.0 * 1.0",func.getPartialSageSyntax(args));
+		assertEquals("1.0 * 1.0", func.getPartialSageSyntax(args));
 	}
-	
-	@Test(expected=FunctionInvalidArgumentTypeException.class)
-	public void testTimesWithWrongArguments() throws FunctionException, OpenMathException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
+
+	@Test(expected = FunctionInvalidArgumentTypeException.class)
+	public void testTimesWithWrongArguments() throws FunctionException, OpenMathException, CasEvaluationException,
+			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
+			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("10*'test'", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals("5", result.getOMI().getValue());
-		
+
 		omobj = ExpressionParser.parse("times('test',17)", null, null);
 		result = OMExecutor.execute(omobj);
 		assertEquals("-7", result.getOMI().getValue());
 	}
-	
+
 }

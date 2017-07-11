@@ -18,6 +18,9 @@ import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
+import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
+import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableException;
+import de.uni_due.s3.evaluator.exceptions.parser.UndefinedFillInVariableException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMF;
@@ -32,7 +35,6 @@ public class TestArcCos extends TestFunction {
 	private OMF omf = OMCreator.createOMF(0.0);
 	private static Function func = OMSFunctionDictionary.getInstance()
 			.getFunction(OMSEvaluatorSyntaxDictionary.getInstance().getOMS("acos"));
-	
 
 	@Test
 	public void testArcCosInteger() throws FunctionException, CasEvaluationException, CasNotAvailableException,
@@ -54,7 +56,8 @@ public class TestArcCos extends TestFunction {
 
 	@Test
 	public void testArcCosIntegration() throws FunctionException, OpenMathException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException {
+			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
+			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("acos(1)", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals("0", result.getOMI().getValue());
@@ -71,21 +74,24 @@ public class TestArcCos extends TestFunction {
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testArcCosWithLessThanMinParam() throws FunctionException, OpenMathException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException {
+			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
+			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("acos()", null, null);
 		OMExecutor.execute(omobj);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testArcCosWithMoreThanMaxParam() throws FunctionException, OpenMathException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException {
+			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
+			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("acos(1,3)", null, null);
 		OMExecutor.execute(omobj);
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void testArcCosWithWrongArguments() throws FunctionException, OpenMathException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException {
+			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
+			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("acos('Test')", null, null);
 		OMExecutor.execute(omobj);
 	}

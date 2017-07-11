@@ -1,13 +1,13 @@
 package de.uni_due.s3.evaluator.parser;
 
-import java.util.Map;
+import java.util.HashMap;
 
 import de.uni_due.s3.evaluator.core.functionData.OMSEvaluatorSyntaxDictionary;
 import de.uni_due.s3.evaluator.core.functionData.OMSymbol;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedException;
-import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
-import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableException;
-import de.uni_due.s3.evaluator.exceptions.parser.UndefinedFillInVariableException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedRuntimeException;
+import de.uni_due.s3.evaluator.exceptions.parserruntime.ParserRuntimeException;
+import de.uni_due.s3.evaluator.exceptions.parserruntime.UndefinedExerciseVariableRuntimeException;
+import de.uni_due.s3.evaluator.exceptions.parserruntime.UndefinedFillInVariableRuntimeException;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.BinaryContext;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.BinaryOperatorForExpressionContext;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.ExerciseVarNameContext;
@@ -39,10 +39,10 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	 * These variables are defined by the evaluator-class and are used to
 	 * integrate the variables into the OM-tree
 	 */
-	private Map<String, OMOBJ> exerciseVariableMap;
-	private Map<Integer, OMOBJ> fillInVariableMap;
+	private HashMap<String, OMOBJ> exerciseVariableMap;
+	private HashMap<Integer, OMOBJ> fillInVariableMap;
 
-	public ExpressionToOpenMathVisitor(Map<String, OMOBJ> exerciseVariableMap, Map<Integer, OMOBJ> fillInVariableMap) {
+	public ExpressionToOpenMathVisitor(HashMap<String, OMOBJ> exerciseVariableMap, HashMap<Integer, OMOBJ> fillInVariableMap) {
 		this.exerciseVariableMap = exerciseVariableMap;
 		this.fillInVariableMap = fillInVariableMap;
 	}
@@ -113,7 +113,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 			oms = OMSymbol.LOGIC1_OR;
 			break;
 		default:
-			throw new FunctionNotImplementedException("Binary Operator " + ctx.getChild(1) + " is not supported");
+			throw new FunctionNotImplementedRuntimeException("Binary Operator " + ctx.getChild(1) + " is not supported");
 		}
 
 		OMA oma = new OMA();
@@ -147,12 +147,12 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 				return OMConverter.toElement(varOmobj); // removes the
 														// OMOBJ-tags
 			} catch (OpenMathException e) {
-				throw new ParserException("Unable to convert OMOBJ ot Element:" + varOmobj.toString(), e);
+				throw new ParserRuntimeException("Unable to convert OMOBJ ot Element:" + varOmobj.toString(), e);
 			}
 			// and returns the child of
 			// the OMOBJ-Object
 		} else {
-			throw new UndefinedExerciseVariableException(varName);
+			throw new UndefinedExerciseVariableRuntimeException(varName);
 		}
 	}
 
@@ -188,7 +188,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 			oms = OMSymbol.LOGIC1_NOT;
 			break;
 		default: 
-			throw new FunctionNotImplementedException("Unary Operator " + ctx.getChild(0) + " is not supported");
+			throw new FunctionNotImplementedRuntimeException("Unary Operator " + ctx.getChild(0) + " is not supported");
 		}
 		
 		OMA oma = new OMA();
@@ -211,11 +211,11 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 														// of
 														// the OMOBJ-Object
 			} catch (OpenMathException e) {
-				throw new ParserException("Unable to convert OMOBJ ot Element:" + varOmobj.toString(), e);
+				throw new ParserRuntimeException("Unable to convert OMOBJ ot Element:" + varOmobj.toString(), e);
 			}
 
 		} else {
-			throw new UndefinedFillInVariableException(varNumber);
+			throw new UndefinedFillInVariableRuntimeException(varNumber);
 		}
 	}
 

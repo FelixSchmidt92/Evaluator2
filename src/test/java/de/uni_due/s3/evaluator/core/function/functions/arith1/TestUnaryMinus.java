@@ -14,6 +14,9 @@ import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
+import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
+import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableException;
+import de.uni_due.s3.evaluator.exceptions.parser.UndefinedFillInVariableException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMF;
@@ -25,50 +28,57 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 public class TestUnaryMinus {
 
 	private UnaryMinus func = new UnaryMinus();
+
 	@Test
-	public void testUnaryMinusInteger() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
+	public void testUnaryMinusInteger() throws FunctionException, CasEvaluationException, CasNotAvailableException,
+			NoRepresentationAvailableException, OpenMathException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(3));
 		OMI result = (OMI) func.evaluate(args);
 		assertEquals("-3", result.getValue());
 	}
-	
+
 	@Test
-	public void testUnaryMinusFloat() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
+	public void testUnaryMinusFloat() throws FunctionException, CasEvaluationException, CasNotAvailableException,
+			NoRepresentationAvailableException, OpenMathException {
 
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMF(2.5));
 		OMF result = (OMF) func.evaluate(args);
 		assertEquals(new Double(-2.5), result.getDec());
 	}
-	
 
-	
 	@Test
-	public void testUnaryMinusIntegration() throws FunctionException, OpenMathException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
+	public void testUnaryMinusIntegration() throws FunctionException, OpenMathException, CasEvaluationException,
+			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
+			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("-1075", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals("-1075", result.getOMI().getValue());
-		
+
 		omobj = ExpressionParser.parse("-2075.32", null, null);
 		result = OMExecutor.execute(omobj);
 		assertEquals(new Double(-2075.32), result.getOMF().getDec());
 	}
-	
+
 	@Test
-	public void testUnaryMinusSageSyntax() throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException{
+	public void testUnaryMinusSageSyntax()
+			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException {
 		OMF omf = OMCreator.createOMF(1.0);
 
-		List<Object>args = new ArrayList<Object>(1);
+		List<Object> args = new ArrayList<Object>(1);
 		args.add(omf);
 
-		assertEquals("-1.0",func.getPartialSageSyntax(args));
+		assertEquals("-1.0", func.getPartialSageSyntax(args));
 	}
-	
-	@Test(expected=FunctionInvalidArgumentTypeException.class)
-	public void testUnaryMinusWithWrongArguments() throws FunctionException, OpenMathException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
+
+	@SuppressWarnings("unused")
+	@Test(expected = FunctionInvalidArgumentTypeException.class)
+	public void testUnaryMinusWithWrongArguments() throws FunctionException, OpenMathException, CasEvaluationException,
+			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
+			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("-'test'", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 	}
-	
+
 }

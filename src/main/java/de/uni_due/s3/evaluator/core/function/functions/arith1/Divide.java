@@ -8,6 +8,7 @@ import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgume
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * Implements division with integer and/or float
@@ -20,9 +21,10 @@ public class Divide extends Function{
 	/**
 	 * It expects two arguments. Each argument has to be an OMI or OMF
 	 * @return OMI or OMF.
+	 * @throws OpenMathException 
 	 */
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException {
+	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException, OpenMathException {
 		try {
 			Double leftValue = NumberUtils.convertOMIOMFToDouble(arguments.get(0));
 			Double rightValue = NumberUtils.convertOMIOMFToDouble(arguments.get(1));

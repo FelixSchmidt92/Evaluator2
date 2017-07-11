@@ -1,23 +1,18 @@
 package de.uni_due.s3.evaluator.exceptions.parser;
 
+import de.uni_due.s3.evaluator.exceptions.EvaluatorException;
+import de.uni_due.s3.evaluator.exceptions.parserruntime.ParserRuntimeException;
 
-/**
- * Is thrown when an expression can't be parsed
- * @author frichtscheid
- *
- */
-public class ParserException extends RuntimeException{
+public class ParserException extends EvaluatorException {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -7059884607867146481L;
+	private static final long serialVersionUID = -1240445747209609498L;
 
-	public ParserException(String message) {
-		super(message);
+	public ParserException(ParserRuntimeException e) {
+		super(e.getMessage());
+		// TODO Auto-generated constructor stub
 	}
-	
-	public ParserException(String message, Throwable cause) {
-		super(message, cause);
-	}
+
 }

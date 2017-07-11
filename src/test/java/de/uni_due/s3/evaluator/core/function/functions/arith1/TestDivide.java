@@ -21,15 +21,20 @@ import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedException;
+import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
+import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableException;
+import de.uni_due.s3.evaluator.exceptions.parser.UndefinedFillInVariableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
 
 public class TestDivide {
-	
+
 	@Test
-	public void testDivideInteger() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
+	public void testDivideInteger() throws FunctionException, CasEvaluationException, CasNotAvailableException,
+			NoRepresentationAvailableException, OpenMathException {
 		Divide func = new Divide();
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(3));
@@ -37,19 +42,21 @@ public class TestDivide {
 		OMF result = (OMF) func.evaluate(args);
 		assertEquals(new Double(0.75), result.getDec());
 	}
-	
+
 	@Test
-	public void testDivideFloat() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
+	public void testDivideFloat() throws FunctionException, CasEvaluationException, CasNotAvailableException,
+			NoRepresentationAvailableException, OpenMathException {
 		Divide func = new Divide();
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMF(2.5));
 		args.add(OMCreator.createOMF(5.6));
 		OMF result = (OMF) func.evaluate(args);
-		assertEquals(new Double(2.5/5.6), result.getDec());
+		assertEquals(new Double(2.5 / 5.6), result.getDec());
 	}
-	
+
 	@Test
-	public void testDivideMixed() throws FunctionException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
+	public void testDivideMixed() throws FunctionException, CasEvaluationException, CasNotAvailableException,
+			NoRepresentationAvailableException, OpenMathException {
 		Divide func = new Divide();
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(1000));
@@ -57,45 +64,53 @@ public class TestDivide {
 		OMI result = (OMI) func.evaluate(args);
 		assertEquals("500", result.getValue());
 	}
-	
+
 	@Test
-	public void testDivideIntegration() throws FunctionException, OpenMathException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
+	public void testDivideIntegration() throws FunctionException, OpenMathException, CasEvaluationException,
+			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
+			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("10/5", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals("2", result.getOMI().getValue());
-		
+
 		omobj = ExpressionParser.parse("divide(1,-4)", null, null);
 		result = OMExecutor.execute(omobj);
 		assertEquals(new Double(-0.25), result.getOMF().getDec());
 	}
-	
+
+	@SuppressWarnings("unused")
 	@Test
-	public void testDivideSageSyntax() throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException{
-		Divide func = (Divide)OMSFunctionDictionary.getInstance().getFunction(OMSEvaluatorSyntaxDictionary.getInstance().getOMS("divide"));
+	public void testDivideSageSyntax() throws FunctionInvalidNumberOfArgumentsException,
+			NoRepresentationAvailableException, CasException, FunctionNotImplementedException,
+			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
+		Divide func = (Divide) OMSFunctionDictionary.getInstance()
+				.getFunction(OMSEvaluatorSyntaxDictionary.getInstance().getOMS("divide"));
 		OMF omf = OMCreator.createOMF(1.0);
 		OMI omi = OMCreator.createOMI(10);
-		
+
 		OMOBJ omobj = ExpressionParser.parse("divide(5,10)", null, null);
 		List<Object> args = omobj.getOMA().getOmel();
-		OMS oms = (OMS)args.get(0);
+		OMS oms = (OMS) args.get(0);
 		args.remove(0);
-		
+
 		assertEquals("5 / 10", func.getPartialSageSyntax(args));
 		args = new ArrayList<Object>(2);
 		args.add(omf);
 		args.add(omf);
-		assertEquals("1.0 / 1.0",func.getPartialSageSyntax(args));
+		assertEquals("1.0 / 1.0", func.getPartialSageSyntax(args));
 	}
-	
-	@Test(expected=FunctionInvalidArgumentTypeException.class)
-	public void testMinusWithWrongArguments() throws FunctionException, OpenMathException, CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException{
+
+	@Test(expected = FunctionInvalidArgumentTypeException.class)
+	public void testMinusWithWrongArguments() throws FunctionException, OpenMathException, CasEvaluationException,
+			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
+			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("10/'test'", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals("5", result.getOMI().getValue());
-		
+
 		omobj = ExpressionParser.parse("divide('test',17)", null, null);
 		result = OMExecutor.execute(omobj);
 		assertEquals("-7", result.getOMI().getValue());
 	}
-	
+
 }

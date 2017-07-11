@@ -7,7 +7,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
+import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedException;
 import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
+import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableException;
+import de.uni_due.s3.evaluator.exceptions.parser.UndefinedFillInVariableException;
+import de.uni_due.s3.evaluator.exceptions.parserruntime.ParserRuntimeException;
 
 /**
  * This class tests the LexerErrorStrategy
@@ -18,25 +22,28 @@ import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
  */
 @RunWith(Parameterized.class)
 public class TestLexerErrorStrategy {
-	
-	static String SpecialCharacters = "#?&^°_\";:@~§`|µ¸}{¬̣··";  //Characters which are not 
-	private String parameter;									 //expected for the Syntax
-	
+
+	static String SpecialCharacters = "#?&^°_\";:@~§`|µ¸}{¬̣··"; // Characters
+																	// which are
+																	// not
+	private String parameter; // expected for the Syntax
+
 	@Parameterized.Parameters
-	public static Collection<String> test(){
+	public static Collection<String> test() {
 		ArrayList<String> list = new ArrayList<String>();
-		for (char a : SpecialCharacters.toCharArray()){
+		for (char a : SpecialCharacters.toCharArray()) {
 			list.add(String.valueOf(a));
 		}
 		return list;
 	}
-	
-	public TestLexerErrorStrategy(String current){
+
+	public TestLexerErrorStrategy(String current) {
 		parameter = current;
 	}
 
-	@Test(expected=ParserException.class)
-	public void testSyntaxError(){
-		ExpressionParser.parse(parameter,null,null);
+	@Test(expected = ParserRuntimeException.class)
+	public void testSyntaxError() throws FunctionNotImplementedException, UndefinedFillInVariableException,
+			UndefinedExerciseVariableException, ParserException {
+		ExpressionParser.parse(parameter, null, null);
 	}
 }

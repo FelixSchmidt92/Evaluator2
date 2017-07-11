@@ -3,6 +3,9 @@ package de.uni_due.s3.evaluator.core.function;
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.openmath.jaxb.OMF;
 import de.uni_due.s3.openmath.jaxb.OMI;
+import de.uni_due.s3.openmath.jaxb.OMOBJ;
+import de.uni_due.s3.openmath.omutils.OMConverter;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class NumberUtils {
 
@@ -16,8 +19,13 @@ public class NumberUtils {
 	 * @return Double Wert von OMF bzw. OMI
 	 * @throws InputMismatchException
 	 *             wenn obj kein OMF oder OMI ist
+	 * @throws OpenMathException 
 	 */
-	public static Double convertOMIOMFToDouble(Object obj) throws InputMismatchException {
+	public static Double convertOMIOMFToDouble(Object obj) throws InputMismatchException, OpenMathException {
+		if (obj instanceof OMOBJ) {
+			obj = OMConverter.toElement((OMOBJ) obj);
+		}
+		
 		if (obj instanceof OMI) {
 			return Double.parseDouble(((OMI) obj).getValue());
 		} else if (obj instanceof OMF) {
@@ -32,7 +40,7 @@ public class NumberUtils {
 	 * bzw. OMI. OMI wird erzeugt wenn es eine als Integer darstellbare Zahl
 	 * ist. Sonst OMF.
 	 * 
-	 * @param result 
+	 * @param result
 	 * @return OMF oder OMI
 	 */
 	public static Object convertDoubleToOMIOMF(Double result) {
@@ -46,7 +54,7 @@ public class NumberUtils {
 			return omfResult;
 		}
 	}
-	
+
 	public static int convertOMIToInteger(Object obj) throws InputMismatchException {
 		if (obj instanceof OMI) {
 			return Integer.parseInt(((OMI) obj).getValue());

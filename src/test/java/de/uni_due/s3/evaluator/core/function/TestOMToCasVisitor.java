@@ -94,6 +94,7 @@ public class TestOMToCasVisitor {
 		Assert.assertEquals("function",vis.visit(oma));
 	}
 	
+	@SuppressWarnings("unused")
 	@Test
 	public void testVisitOMOBJ() throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, OpenMathException, CasException{
 		OMI omi = OMCreator.createOMI(1);

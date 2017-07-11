@@ -8,6 +8,7 @@ import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeEx
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * Returns Euler's number e raised to the power of the argument. Example e^2,
@@ -20,7 +21,7 @@ import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailab
 public class Exp extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException {
+	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException, OpenMathException {
 		Double result = null;
 		try {
 			result = Math.exp(NumberUtils.convertOMIOMFToDouble(arguments.get(0)));
