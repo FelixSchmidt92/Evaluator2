@@ -45,7 +45,7 @@ public class TestParserErrorStrategy {
 		parameter = current;
 	}
 
-	@Test(expected = ParserRuntimeException.class)
+	@Test(expected = ParserException.class)
 	public void testSyncANDRecoverInlineANDReportNoViableAlternative() throws FunctionNotImplementedException,
 			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
 		ExpressionParser.parse(parameter, null, null);

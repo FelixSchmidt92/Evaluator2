@@ -1,6 +1,6 @@
 package de.uni_due.s3.evaluator.parser;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -125,22 +125,25 @@ public class TestExpressionToOpenMathVisitor{
 			String[] unary = {"+","-","!"};
 			String getUnary = unary[new Random().nextInt(unary.length)];
 			String val = gen.genRandomTerminalWithOutEXandFILLVariable(5, null);
-			OMA oma = (OMA) visitor.visit(parse(getUnary + val));
+			Object obj = visitor.visit(parse(getUnary + val));
 			
-			OMS oms = null;
 			switch(getUnary){
 			case "+":
-				oms = OMCreator.createOMS("arith1", "unary_plus");break;
+				assertTrue(!(obj instanceof OMS)); //because it should just visit the next one
+				break;
 			case "-":
-				oms = OMCreator.createOMS("arith1", "unary_minus");break;
+				testUnaryMinusAndLogicNot((OMA) obj, OMCreator.createOMS("arith1", "unary_minus"));break;
 			case "!":
-				oms = OMCreator.createOMS("logic1", "not");break;
+				testUnaryMinusAndLogicNot((OMA) obj, OMCreator.createOMS("logic1", "not"));break;
 			}
-
-			assertEquals(oms.getCd(),((OMS)oma.getOmel().get(0)).getCd());
-			assertEquals(oms.getName(),((OMS)oma.getOmel().get(0)).getName());
 		}
 	}
+	/**@testVisitUnary*/
+	private void testUnaryMinusAndLogicNot(OMA oma, OMS oms){
+		assertEquals(oms.getCd(),((OMS)oma.getOmel().get(0)).getCd());
+		assertEquals(oms.getName(),((OMS)oma.getOmel().get(0)).getName());
+	}
+	
 	
 	@Test
 	public void testVisitBinary(){
@@ -164,7 +167,7 @@ public class TestExpressionToOpenMathVisitor{
 			case "/":
 				oms = OMCreator.createOMS("arith1", "divide");break;
 			case "%":
-				oms = OMCreator.createOMS("jackbinary1", "modulus");break;
+				oms = OMCreator.createOMS("integer1", "remainder");break;
 			case "<":
 				oms = OMCreator.createOMS("relation1", "lt");break;
 			case "<=":
@@ -176,7 +179,7 @@ public class TestExpressionToOpenMathVisitor{
 			case "=":
 				oms = OMCreator.createOMS("relation1", "eq");break;
 			case "==":
-				oms = OMCreator.createOMS("logic1", "equivalent");break;
+				oms = OMCreator.createOMS("relation1", "eq");break;
 			case "!=":
 				oms = OMCreator.createOMS("relation1", "neq");break;
 			case "&&":
@@ -185,8 +188,8 @@ public class TestExpressionToOpenMathVisitor{
 				oms = OMCreator.createOMS("logic1", "or");break;
 			}
 
-			assertEquals(oms.getCd(),((OMS)oma.getOmel().get(0)).getCd());
 			assertEquals(oms.getName(),((OMS)oma.getOmel().get(0)).getName());
+			assertEquals(oms.getCd(),((OMS)oma.getOmel().get(0)).getCd());
 		}
 	}
 	

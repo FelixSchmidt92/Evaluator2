@@ -41,7 +41,7 @@ public class TestLexerErrorStrategy {
 		parameter = current;
 	}
 
-	@Test(expected = ParserRuntimeException.class)
+	@Test(expected = ParserException.class)
 	public void testSyntaxError() throws FunctionNotImplementedException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
 		ExpressionParser.parse(parameter, null, null);
