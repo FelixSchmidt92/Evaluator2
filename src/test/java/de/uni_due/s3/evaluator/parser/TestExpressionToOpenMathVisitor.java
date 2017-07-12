@@ -7,7 +7,6 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.text.DecimalFormat;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 import org.antlr.v4.runtime.CharStream;
@@ -17,7 +16,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
+import de.uni_due.s3.evaluator.exceptions.parserruntime.ParserRuntimeException;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorLexer;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser;
 import de.uni_due.s3.evaluator.parser.antlr.GrammarGenerator;
@@ -31,8 +30,8 @@ import de.uni_due.s3.openmath.omutils.OMCreator;
 
 public class TestExpressionToOpenMathVisitor{
 	
-	private static Map<String, OMOBJ> exerciseVariableMap;
-	private static Map<Integer, OMOBJ> fillInVariableMap;
+	private static HashMap<String, OMOBJ> exerciseVariableMap;
+	private static HashMap<Integer, OMOBJ> fillInVariableMap;
 	private static OMOBJ t1 = null;
 	private static OMOBJ t2 = null;
 	
@@ -46,7 +45,7 @@ public class TestExpressionToOpenMathVisitor{
 		try {
 			cstream = CharStreams.fromReader(input);
 		} catch (IOException e) {
-			throw new ParserException(text + " was not parsable");
+			throw new ParserRuntimeException(text + " was not parsable");
 		}
 		
 		EvaluatorLexer evaluatorLexer = new EvaluatorLexer(cstream);
