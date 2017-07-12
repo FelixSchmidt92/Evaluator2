@@ -52,7 +52,7 @@ public class TestRemainder {
 
 		omobj = ExpressionParser.parse("remainder(3,-2)", null, null);
 		result = OMExecutor.execute(omobj);
-		assertEquals("-1", result.getOMI().getValue());
+		assertEquals("1", result.getOMI().getValue());
 	}
 
 	@SuppressWarnings("unused")

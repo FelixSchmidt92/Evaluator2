@@ -12,7 +12,6 @@ public class TestSage {
 	public static void beforeClass(){
 		List<String> aSageConnectionsList = new ArrayList<>();
 		aSageConnectionsList.add("192.168.68.176:8989");
-		aSageConnectionsList.add("132.252.68.109:8989");
 		Sage.init(aSageConnectionsList);
 	}
 
