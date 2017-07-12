@@ -1,12 +1,12 @@
 package de.uni_due.s3.evaluator.exceptions.parserruntime;
 
-
 /**
  * Is thrown when an expression can't be parsed
+ * 
  * @author frichtscheid
  *
  */
-public class ParserRuntimeException extends RuntimeException{
+public class ParserRuntimeException extends RuntimeException {
 
 	/**
 	 * 
@@ -16,7 +16,7 @@ public class ParserRuntimeException extends RuntimeException{
 	public ParserRuntimeException(String message) {
 		super(message);
 	}
-	
+
 	public ParserRuntimeException(String message, Throwable cause) {
 		super(message, cause);
 	}

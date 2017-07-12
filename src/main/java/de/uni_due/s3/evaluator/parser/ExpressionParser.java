@@ -96,11 +96,11 @@ public class ExpressionParser {
 			// tree to OMOBJ
 			return convertToOmobj(omobjElementsTree);
 		} catch (UndefinedFillInVariableRuntimeException e) {
-			throw new UndefinedFillInVariableException(e);
+			throw new UndefinedFillInVariableException(e.getMessage());
 		} catch (UndefinedExerciseVariableRuntimeException e) {
-			throw new UndefinedExerciseVariableException(e);
+			throw new UndefinedExerciseVariableException(e.getMessage());
 		} catch (ParserRuntimeException e) {
-			throw new ParserException(e);
+			throw new ParserException(e.getMessage());
 		} catch (FunctionNotImplementedRuntimeException e) {
 			throw new FunctionNotImplementedException(e);
 		}
