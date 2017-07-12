@@ -22,14 +22,12 @@ public class Exp extends Function {
 
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException, OpenMathException {
-		Double result = null;
 		try {
-			result = Math.exp(NumberUtils.convertOMIOMFToDouble(arguments.get(0)));
+			Double result = Math.exp(NumberUtils.convertOMIOMFToDouble(arguments.get(0)));
+			return NumberUtils.convertDoubleToOMIOMF(result);
 		} catch (InputMismatchException e) {
 			throw new FunctionInvalidArgumentTypeException(this, "integer, float, double");
 		}
-
-		return NumberUtils.convertDoubleToOMIOMF(result);
 	}
 
 	@Override
