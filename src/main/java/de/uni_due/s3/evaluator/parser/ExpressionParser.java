@@ -102,7 +102,7 @@ public class ExpressionParser {
 		} catch (ParserRuntimeException e) {
 			throw new ParserException(e.getMessage());
 		} catch (FunctionNotImplementedRuntimeException e) {
-			throw new FunctionNotImplementedException(e);
+			throw new FunctionNotImplementedException(e.getMessage());
 		}
 		
 	}
