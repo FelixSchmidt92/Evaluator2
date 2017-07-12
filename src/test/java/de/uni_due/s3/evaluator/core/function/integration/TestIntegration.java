@@ -9,14 +9,9 @@ import javax.xml.bind.JAXBException;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 
-import de.uni_due.s3.evaluator.Evaluator;
-import de.uni_due.s3.evaluator.exceptions.InvalidResultTypeException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
-import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
-import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableException;
-import de.uni_due.s3.evaluator.exceptions.parser.UndefinedFillInVariableException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMConverter;
@@ -37,7 +32,7 @@ public abstract class TestIntegration {
 	 * </ul>
 	 */
 	protected static HashMap<String, OMOBJ> exerciseVariableMap;
-	
+
 	private static void resetExerciseVariableMap() {
 		exerciseVariableMap = new HashMap<String, OMOBJ>();
 		try {
@@ -48,7 +43,8 @@ public abstract class TestIntegration {
 			exerciseVariableMap.put("e", OMConverter.toObject("<OMOBJ><OMF dec=\"-12.5\"/></OMOBJ>"));
 			exerciseVariableMap.put("f", OMConverter.toObject("<OMOBJ><OMF dec=\"0.0\"/></OMOBJ>"));
 		} catch (JAXBException e) {
-			throw new RuntimeException("Erzeugung der OpenMath exercise Variablen für TestIntegration fehlgeschlagen", e);
+			throw new RuntimeException("Erzeugung der OpenMath exercise Variablen für TestIntegration fehlgeschlagen",
+					e);
 		}
 	}
 
@@ -64,7 +60,7 @@ public abstract class TestIntegration {
 	 * </ul>
 	 */
 	protected static HashMap<Integer, OMOBJ> fillInVariableMap;
-	
+
 	private static void resetFillInVariableMap() {
 		fillInVariableMap = new HashMap<Integer, OMOBJ>();
 		try {
@@ -90,13 +86,6 @@ public abstract class TestIntegration {
 
 	}
 
-	protected double getNumberResult(String expression)
-			throws CasEvaluationException, FunctionException, CasNotAvailableException,
-			NoRepresentationAvailableException, InvalidResultTypeException, OpenMathException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
-		return Evaluator.getNumberResult(expression, exerciseVariableMap, fillInVariableMap);
-	}
-	
 	@AfterClass
 	public static void afterClass() {
 	}
