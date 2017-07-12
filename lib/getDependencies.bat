@@ -1,10 +1,13 @@
-powershell -nologo "Invoke-WebRequest -Uri "https://s3gitlab.paluno.uni-due.de/api/v4/projects/137/jobs/artifacts/master/download?job=run-build\"&\"private_token=-9pHt86dLHfPw-uyp4f2 -OutFile lib\this.zip
+cd lib 
 
-powershell -nologo "Expand-Archive -Path lib\this.zip -DestinationPath lib"
-%powershell -nologe "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('lib\this.zip', 'lib'); }"  For Powershell 3 or higher
+powershell -nologo "Invoke-WebRequest -Uri "https://s3gitlab.paluno.uni-due.de/api/v4/projects/137/jobs/artifacts/master/download?job=run-build\"&\"private_token=-9pHt86dLHfPw-uyp4f2 -OutFile this.zip
 
-xcopy /Y /F /S lib\target\JAXBOpenMath-2.0.jar lib
 
-rmdir /S /Q lib\target
+powershell -NoProfile -encodedCommand JABzAGgAZQBsAGwAXwBhAHAAcAA9AG4AZQB3AC0AbwBiAGoAZQBjAHQAIAAtAGMAbwBtACAAcwBoAGUAbABsAC4AYQBwAHAAbABpAGMAYQB0AGkAbwBuAAoAJABmAGkAbABlAG4AYQBtAGUAIAA9ACAAIgB0AGgAaQBzAC4AegBpAHAAIgAKACQAegBpAHAAXwBmAGkAbABlACAAPQAgACQAcwBoAGUAbABsAF8AYQBwAHAALgBuAGEAbQBlAHMAcABhAGMAZQAoACgARwBlAHQALQBMAG8AYwBhAHQAaQBvAG4AKQAuAFAAYQB0AGgAIAArACAAIgBcACQAZgBpAGwAZQBuAGEAbQBlACIAKQAKACQAZABlAHMAdABpAG4AYQB0AGkAbwBuACAAPQAgACQAcwBoAGUAbABsAF8AYQBwAHAALgBuAGEAbQBlAHMAcABhAGMAZQAoACgARwBlAHQALQBMAG8AYwBhAHQAaQBvAG4AKQAuAFAAYQB0AGgAKQAKACQAZABlAHMAdABpAG4AYQB0AGkAbwBuAC4AQwBvAHAAeQBoAGUAcgBlACgAJAB6AGkAcABfAGYAaQBsAGUALgBpAHQAZQBtAHMAKAApACkA
 
-del lib\this.zip
+xcopy /Y /F /S target\JAXBOpenMath-2.0.jar .\
+
+rmdir /S /Q target
+
+del this.zip
+

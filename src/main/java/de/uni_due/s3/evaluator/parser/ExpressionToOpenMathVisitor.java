@@ -31,6 +31,7 @@ import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.jaxb.OMSTR;
 import de.uni_due.s3.openmath.omutils.OMConverter;
+import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Object> {
@@ -71,49 +72,105 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 		OMS oms;
 		switch (ctx.getChild(1).getText()) {
 		case "+":
+<<<<<<< HEAD
 			oms = OMSymbol.ARITH1_PLUS;
 			break;
+=======
+			oms = OMCreator.createOMS("arith1", "plus");break;
+>>>>>>> refs/heads/master
 		case "-":
+<<<<<<< HEAD
 			oms = OMSymbol.ARITH1_MINUS;
 			break;
+=======
+			oms = OMCreator.createOMS("arith1", "minus");break;
+>>>>>>> refs/heads/master
 		case "*":
+<<<<<<< HEAD
 			oms = OMSymbol.ARITH1_TIMES;
 			break;
+=======
+			oms = OMCreator.createOMS("arith1", "times");break;
+>>>>>>> refs/heads/master
 		case "/":
+<<<<<<< HEAD
 			oms = OMSymbol.ARITH1_DIVIDE;
 			break;
 		case "%":
 			oms = OMSymbol.INTEGER1_REMAINDER;
 			break;
+=======
+			oms = OMCreator.createOMS("arith1", "divide");break;
+		case "%":
+			oms = OMCreator.createOMS("jackbinary1", "modulus");break;
+>>>>>>> refs/heads/master
 		case "<":
+<<<<<<< HEAD
 			oms = OMSymbol.RELATION1_LT;
 			break;
+=======
+			oms = OMCreator.createOMS("relation1", "lt");break;
+>>>>>>> refs/heads/master
 		case "<=":
+<<<<<<< HEAD
 			oms = OMSymbol.RELATION1_LEQ;
 			break;
+=======
+			oms = OMCreator.createOMS("relation1", "leq");break;
+>>>>>>> refs/heads/master
 		case ">":
+<<<<<<< HEAD
 			oms = OMSymbol.RELATION1_GT;
 			break;
+=======
+			oms = OMCreator.createOMS("relation1", "gt");break;
+>>>>>>> refs/heads/master
 		case ">=":
+<<<<<<< HEAD
 			oms = OMSymbol.RELATION1_GEQ;
 			break;
+=======
+			oms = OMCreator.createOMS("relation1", "geq");break;
+>>>>>>> refs/heads/master
 		case "=":
+<<<<<<< HEAD
 			oms = OMSymbol.RELATION1_EQ;
 			break;
+=======
+			oms = OMCreator.createOMS("relation1", "eq");break;
+>>>>>>> refs/heads/master
 		case "==":
+<<<<<<< HEAD
 			oms = OMSymbol.RELATION1_EQ;
 			break;
+=======
+			oms = OMCreator.createOMS("logic1", "equivalent");break;
+>>>>>>> refs/heads/master
 		case "!=":
+<<<<<<< HEAD
 			oms = OMSymbol.RELATION1_NEQ;
 			break;
+=======
+			oms = OMCreator.createOMS("relation1", "neq");break;
+>>>>>>> refs/heads/master
 		case "&&":
+<<<<<<< HEAD
 			oms = OMSymbol.LOGIC1_AND;
 			break;
+=======
+			oms = OMCreator.createOMS("logic1", "and");break;
+>>>>>>> refs/heads/master
 		case "||":
+<<<<<<< HEAD
 			oms = OMSymbol.LOGIC1_OR;
 			break;
 		default:
 			throw new FunctionNotImplementedRuntimeException("Binary Operator " + ctx.getChild(1) + " is not supported");
+=======
+			oms = OMCreator.createOMS("logic1", "or");break;
+		default: 
+			throw new FunctionNotImplementedException("Binary Operator " + ctx.getChild(1).getText() + " is not supported");
+>>>>>>> refs/heads/master
 		}
 
 		OMA oma = new OMA();
@@ -180,15 +237,27 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 
 		switch (ctx.getChild(0).getText()) {
 		case "+":
+<<<<<<< HEAD
 			return visit(ctx.getChild(1));
+=======
+			oms = OMCreator.createOMS("arith1", "unary_plus");break;
+>>>>>>> refs/heads/master
 		case "-":
+<<<<<<< HEAD
 			oms = OMSymbol.ARITH1_UNARY_MINUS;
 			break;
+=======
+			oms = OMCreator.createOMS("arith1", "unary_minus");break;
+>>>>>>> refs/heads/master
 		case "!":
+<<<<<<< HEAD
 			oms = OMSymbol.LOGIC1_NOT;
 			break;
 		default: 
 			throw new FunctionNotImplementedRuntimeException("Unary Operator " + ctx.getChild(0) + " is not supported");
+=======
+			oms = OMCreator.createOMS("logic1", "not");break;
+>>>>>>> refs/heads/master
 		}
 		
 		OMA oma = new OMA();

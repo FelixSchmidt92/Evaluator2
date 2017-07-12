@@ -238,6 +238,21 @@ public class GrammarGenerator {
 	
 	
 	/**
+	 * Generates a Random Terminal without Pos and Var
+	 * 
+	 * @param builder null (or prefix of Terminal)
+	 * @param maxLength The Max length of this Terminal (Length is between 1 to length)
+	 * @return returns a String with a random Terminal 
+	 */
+	public String genRandomTerminalWithOutEXandFILLVariable(int maxLength, String builder){
+		if(builder == null){
+			return genRandomTerminalWithOutEXandFILLVariable(maxLength, "");
+		}
+			return builder += TerminalWithOutEXandFILLVariable.values()[new Random().nextInt(TerminalWithOutEXandFILLVariable.values().length)].make(maxLength);
+	}
+	
+	
+	/**
 	 * Generates [a-zA-Z]+ [a-zA-Z0-9]*   where length represents how often the expression should be repeated
 	 * Calling: genRandomFunctionName(length, null)
 	 * 
