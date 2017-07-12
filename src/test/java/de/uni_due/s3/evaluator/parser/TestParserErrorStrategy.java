@@ -11,7 +11,6 @@ import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedExcepti
 import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedFillInVariableException;
-import de.uni_due.s3.evaluator.exceptions.parserruntime.ParserRuntimeException;
 
 /**
  * This class tests the ParserErrorStrategy.

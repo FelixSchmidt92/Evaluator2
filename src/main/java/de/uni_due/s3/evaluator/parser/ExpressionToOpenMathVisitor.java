@@ -1,6 +1,11 @@
 package de.uni_due.s3.evaluator.parser;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.hamcrest.core.SubstringMatcher;
 
 import de.uni_due.s3.evaluator.core.functionData.OMSEvaluatorSyntaxDictionary;
 import de.uni_due.s3.evaluator.core.functionData.OMSymbol;
@@ -31,6 +36,7 @@ import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.jaxb.OMSTR;
 import de.uni_due.s3.openmath.omutils.OMConverter;
+import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Object> {
@@ -48,16 +54,52 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	}
 
 	@Override
-	public OMSTR visitTextValue(TextValueContext ctx) {
-		OMSTR omstr = new OMSTR();
-		// FIXME hier eine liste anstatt von OMSTR
-		omstr.setContent(ctx.getText().substring(1, ctx.getText().length() - 1)); // delete
-																					// '
-																					// at
-																					// beginning
-																					// and
-																					// end
-		return omstr;
+	public Object visitTextValue(TextValueContext ctx) {
+		ArrayList<Object> omel = new ArrayList<>();
+		
+		
+		String val = ctx.getText().substring(1, ctx.getText().length()-1);
+		Pattern varposPattern = Pattern.compile("\\[var=[a-zA-Z0-9äöü]+?\\]|\\[pos=[0-9]+?\\]");
+		Matcher varposMatcher = varposPattern.matcher(val); //PatternMatcher finds [pos=*] or [val=*]
+
+		int stringPointer = 0; //Pointer to get string subsequences
+		while (varposMatcher.find()){
+			OMSTR omstr = OMCreator.createOMSTR(val.substring(stringPointer, varposMatcher.start()));
+			stringPointer = varposMatcher.end();
+			
+			if(omstr.getContent().length() != 0){
+				omel.add(omstr);	// Add leading OMSTR of pos/val
+			}
+			
+			String varposVal = val.substring(varposMatcher.start() + 5, varposMatcher.end() -1); //remove "[pos=" and "]"
+			OMOBJ omobjvar = exerciseVariableMap.get(varposVal);
+			try {
+				Object varObj = OMConverter.toElement(omobjvar);
+				omel.add(varObj);
+			} catch (OpenMathException e) {
+				OMOBJ omobjpos = fillInVariableMap.get(Integer.parseInt(varposVal));
+				try {
+					Object posObj = OMConverter.toElement(omobjpos);
+					omel.add(posObj);
+				} catch (OpenMathException e1) {
+					e1.printStackTrace();
+				}
+			}
+			
+		}
+		if(stringPointer != 0 && stringPointer < val.length()){
+			OMSTR omstr = OMCreator.createOMSTR(val.substring(stringPointer));
+			omel.add(omstr);	// Add OMSTRs after pos/val
+		}
+		
+		
+		if (omel.isEmpty()){
+			return OMCreator.createOMSTR(ctx.getText().substring(1, ctx.getText().length()-1));
+			//delete ' at beginning and end
+		}else{
+			return OMCreator.createOMA(OMCreator.createOMS("jacksrtring1", "textValue"), omel);
+			//return jackspecific String with variables in String
+		}
 	}
 
 	@Override
