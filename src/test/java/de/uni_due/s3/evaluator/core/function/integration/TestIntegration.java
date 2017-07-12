@@ -1,22 +1,15 @@
 package de.uni_due.s3.evaluator.core.function.integration;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import javax.xml.bind.JAXBException;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 
-import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
-import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
-import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMConverter;
-import de.uni_due.s3.openmath.omutils.OpenMathException;
-import de.uni_due.s3.sage.Sage;
+import de.uni_due.s3.sage.TestSage;
 
 public abstract class TestIntegration {
 
@@ -76,14 +69,10 @@ public abstract class TestIntegration {
 	}
 
 	@BeforeClass
-	public static void beforeClass() throws CasEvaluationException, FunctionException, CasNotAvailableException,
-			NoRepresentationAvailableException, OpenMathException, JAXBException {
+	public static void beforeClass() {
+		TestSage.initSage();
 		resetFillInVariableMap();
 		resetExerciseVariableMap();
-		List<String> aSageConnectionsList = new ArrayList<>();
-		aSageConnectionsList.add("192.168.68.176:8989");
-		Sage.init(aSageConnectionsList);
-
 	}
 
 	@AfterClass

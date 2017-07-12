@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.BeforeClass;
 import org.junit.Test;
 import de.uni_due.s3.openmath.jaxb.OMF;
 import de.uni_due.s3.openmath.jaxb.OMI;
@@ -13,8 +12,8 @@ import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
-import de.uni_due.s3.sage.Sage;
 import de.uni_due.s3.evaluator.core.function.OMExecutor;
+import de.uni_due.s3.evaluator.core.function.functions.TestFunction;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.Minus;
 import de.uni_due.s3.evaluator.core.functionData.OMSEvaluatorSyntaxDictionary;
 import de.uni_due.s3.evaluator.core.functionData.OMSFunctionDictionary;
@@ -31,14 +30,7 @@ import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeEx
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
 
-public class TestMinus {
-
-	@BeforeClass
-	public static void beforeClass() {
-		List<String> aSageConnectionsList = new ArrayList<>();
-		aSageConnectionsList.add("192.168.68.176:8989");
-		Sage.init(aSageConnectionsList);
-	}
+public class TestMinus extends TestFunction {
 
 	private OMI omi = OMCreator.createOMI(1);
 	private OMF omf = OMCreator.createOMF(2.5);

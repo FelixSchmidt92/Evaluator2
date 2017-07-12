@@ -10,6 +10,10 @@ public class TestSage {
 
 	@BeforeClass
 	public static void beforeClass(){
+		initSage();
+	}
+	
+	public static void initSage() {
 		List<String> aSageConnectionsList = new ArrayList<>();
 		aSageConnectionsList.add("192.168.68.176:8989");
 		Sage.init(aSageConnectionsList);
