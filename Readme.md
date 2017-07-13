@@ -15,22 +15,15 @@ subtree and return an OpenMath-Objects.
 
 Cloning this Repo:
 
-Maven firstly checks if all Dependencies are available, but these have to be 
-downloaded beforehand. So it results in an Project full of errors.
+Maven has an old version of the Jars in the lib-Folder. (To satisfy Maven)
 
-If you want to clone this repo in eclipse, do the following:
+This may cause Errors by some tests or by Evaluator2 iteself.
 
---> Import it as usual, via the Import-Wizard in eclipse (Import -> git Project)
+To refresh and get the actual dependencies, do the following -->
 
---> After Importing the repo you have to run ONCE the getDependencies(.sh|.bat)
-    file. Run this file from the root-project folder.
-    This means the Console is at "~/git/Evaluator2/" and your call should look
-    like:
+--> After importing the repo you have to run Maven generate-Ressources (or another Maven LifeCycle)
+	After Maven completed its procedure it automatically downloaded the newest Version of the 
+	Dependencies, which are included it the lib folder.
+	
     
-    --> Windows: "lib\getDependencies.bat"
-    
-    --> Linux  : "lib/getDependencies.sh"
-    
-    
-After this you should find all Dependencies needed for this Project in the
-lib directory and you are ready to go!
+After this, you are ready to go!

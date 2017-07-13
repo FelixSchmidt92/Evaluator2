@@ -1,168 +1,141 @@
 package de.uni_due.s3.evaluator.parser;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 
-import javax.xml.bind.JAXBException;
-
-import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
 import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedException;
 import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedFillInVariableException;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
-import de.uni_due.s3.openmath.omutils.OMConverter;
+import de.uni_due.s3.openmath.omutils.OMCreator;
 
+
+@RunWith(Parameterized.class)
 public class TestExpressionParser {
 
-	private HashMap<String, OMOBJ> exerciseVariableMap;
-	private HashMap<Integer, OMOBJ> fillInVariableMap;
-
-	@Before
-	public void init() throws JAXBException {
-		exerciseVariableMap = new HashMap<String, OMOBJ>();
-		fillInVariableMap = new HashMap<Integer, OMOBJ>();
-
-		exerciseVariableMap.put("a", OMConverter.toObject("<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\"><OMI>3</OMI></OMOBJ>"));
-		fillInVariableMap.put(1, OMConverter
-				.toObject("<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\"><OMA><OMS cd=\"arith1\" name=\"plus\" /><OMI>3</OMI><OMI>5</OMI></OMA></OMOBJ>"));
-
+	private static HashMap<String, OMOBJ> exerciseVariableMap;
+	private static HashMap<Integer, OMOBJ> fillInVariableMap;
+	
+	private String oms, omi, omstr, omf, oma, pos, var, treeSring;
+	private static String[][] input = {
+				{"e","1","'String'","1.0","plus(1,2)", "[pos=1]", "[var=a]", "'First' + 'Second'"},
+				{"pi","15","'Another'","1.0","1+2", "[pos=2]", "[var=b]", "'plus(4,3,1,23,1.1)'"},
+				{"omega","22","'abc123'","2.222", "1+2", "[pos=3]", "[var=c]", "plus(plus(plus(plus(plus(1, 'test')))))"},
+	};
+	
+	@Parameterized.Parameters
+	public static Collection<String[]> test() {
+		ArrayList<String[]> list = new ArrayList<String[]>();
+		for (String[] in : input) {
+			list.add(in);
+		}
+		return list;
 	}
-
-	@Test
-	public void testText() throws JAXBException, FunctionNotImplementedException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException {
-		assertEquals(OMConverter.toString(ExpressionParser.parse("'test'", null, null)),
-				"<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\"><OMSTR>test</OMSTR></OMOBJ>");
-		assertEquals(OMConverter.toString(ExpressionParser.parse("'hello world'", null, null)),
-				"<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\"><OMSTR>hello world</OMSTR></OMOBJ>");
-		assertEquals(OMConverter.toString(ExpressionParser.parse("'Th1S i5 G00D'", null, null)),
-				"<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\"><OMSTR>Th1S i5 G00D</OMSTR></OMOBJ>");
+	
+	
+	public TestExpressionParser(String oms, String omi, String omstr, String omf, String oma, String pos, String var, String treeString) {
+		this.oms = oms;
+		this.omi = omi;
+		this.omstr = omstr;
+		this.omf = omf;
+		this.oma = oma;
+		this.pos = pos;
+		this.var = var;
+		this.treeSring = treeString;
 	}
-
-	@Test
-	public void testFloat() throws JAXBException, FunctionNotImplementedException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException {
-
-		assertEquals(OMConverter.toString(ExpressionParser.parse("2.1", null, null)),
-				"<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\"><OMF dec=\"2.1\"/></OMOBJ>");
-		assertEquals(OMConverter.toString(ExpressionParser.parse("2.138923893", null, null)),
-				"<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\"><OMF dec=\"2.138923893\"/></OMOBJ>");
+	
+	@BeforeClass
+	public static void beforeClass(){
+		exerciseVariableMap = new HashMap<>();
+		fillInVariableMap = new HashMap<>();
+		
+		OMOBJ t1 = new OMOBJ();
+		OMOBJ t2 = new OMOBJ();
+		OMOBJ t3 = new OMOBJ();
+		
+		t1.setOMSTR(OMCreator.createOMSTR("Test"));
+		t2.setOMI(OMCreator.createOMI(99));
+		t3.setOMF(OMCreator.createOMF(99.99));
+		
+		exerciseVariableMap.put("a", t1);
+		exerciseVariableMap.put("b", t2);
+		exerciseVariableMap.put("c", t3);
+		
+		fillInVariableMap.put(1, t1);
+		fillInVariableMap.put(2, t2);
+		fillInVariableMap.put(3, t3);
 	}
-
-	@Test
-	public void testInteger() throws JAXBException, FunctionNotImplementedException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException {
-
-		assertEquals(OMConverter.toString(ExpressionParser.parse("3", null, null)), "<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\"><OMI>3</OMI></OMOBJ>");
-		assertEquals(OMConverter.toString(ExpressionParser.parse("10000", null, null)),
-				"<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\"><OMI>10000</OMI></OMOBJ>");
-		assertEquals(OMConverter.toString(ExpressionParser.parse("-10", null, null)),
-				"<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\"><OMA>" + "<OMS name=\"unary_minus\" cd=\"arith1\"/>" + "<OMI>10</OMI>" + "</OMA></OMOBJ>");
-	}
-
-	@Test
-	public void testApplicationUnary() throws Exception {
-		assertEquals(OMConverter.toString(ExpressionParser.parse("!3", null, null)),
-				"<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\"><OMA>" + "<OMS name=\"not\" cd=\"logic1\"/>" + "<OMI>3</OMI>" + "</OMA></OMOBJ>");
-		assertEquals(OMConverter.toString(ExpressionParser.parse("-3", null, null)),
-				"<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\"><OMA>" + "<OMS name=\"unary_minus\" cd=\"arith1\"/>" + "<OMI>3</OMI>" + "</OMA></OMOBJ>");
-
-	}
-
-	@Test
-	public void testApplicationBinary() throws JAXBException, FunctionNotImplementedException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
-
-		assertEquals(OMConverter.toString(ExpressionParser.parse("2+3", null, null)), "<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\"><OMA>"
-				+ "<OMS name=\"plus\" cd=\"arith1\"/>" + "<OMI>2</OMI>" + "<OMI>3</OMI>" + "</OMA></OMOBJ>");
-
-		assertEquals(OMConverter.toString(ExpressionParser.parse("2.0+3", null, null)), "<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\"><OMA>"
-				+ "<OMS name=\"plus\" cd=\"arith1\"/>" + "<OMF dec=\"2.0\"/>" + "<OMI>3</OMI>" + "</OMA></OMOBJ>");
-		assertEquals(OMConverter.toString(ExpressionParser.parse("2.0/3", null, null)), "<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\"><OMA>"
-				+ "<OMS name=\"divide\" cd=\"arith1\"/>" + "<OMF dec=\"2.0\"/>" + "<OMI>3</OMI>" + "</OMA></OMOBJ>");
-	}
-
-	@Test
-	public void testApplicationFunction() throws JAXBException, FunctionNotImplementedException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
-		assertEquals(OMConverter.toString(ExpressionParser.parse("plus(1.0,3)", null, null)), "<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\"><OMA>"
-				+ "<OMS name=\"plus\" cd=\"arith1\"/>" + "<OMF dec=\"1.0\"/>" + "<OMI>3</OMI>" + "</OMA></OMOBJ>");
-
-	}
-
-	@Test
-	public void testApplicationNestedFunction() throws JAXBException, FunctionNotImplementedException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
-		assertEquals(OMConverter.toString(ExpressionParser.parse("plus(2/3,plus(1.0,3))", null, null)),
-				"<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\"><OMA>" + "<OMS name=\"plus\" cd=\"arith1\"/>" + "<OMA>" + "<OMS name=\"divide\" cd=\"arith1\"/>"
-						+ "<OMI>2</OMI>" + "<OMI>3</OMI>" + "</OMA>" + "<OMA>" + "<OMS name=\"plus\" cd=\"arith1\"/>"
-						+ "<OMF dec=\"1.0\"/>" + "<OMI>3</OMI>" + "</OMA>" + "</OMA></OMOBJ>");
-	}
-
-	@Test
-	public void testExerciseVariable() throws JAXBException, FunctionNotImplementedException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
-		assertTrue(ExpressionParser.parse("[var=a]", exerciseVariableMap, fillInVariableMap) != null);
-		assertEquals("<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\"><OMI>3</OMI></OMOBJ>",
-				OMConverter.toString(ExpressionParser.parse("[var=a]", exerciseVariableMap, fillInVariableMap)));
-		assertEquals("<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\"><OMI>3</OMI></OMOBJ>",
-				OMConverter.toString(ExpressionParser.parse("'[var=a]'", exerciseVariableMap, fillInVariableMap)));
-		assertEquals("<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\"><OMA><OMS name=\"plus\" cd=\"arith1\"/><OMI>3</OMI><OMI>4</OMI></OMA></OMOBJ>",
-				OMConverter.toString(ExpressionParser.parse("[var=a] + 4", exerciseVariableMap, fillInVariableMap)));
-
-		// FIXME
-		assertEquals("<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\"><OMA><OMS name=\"textValueWithVars\" cd=\"string_jack\"/><OMSTR>i am in a string </OMSTR><OMI>3</OMI><OMSTR> and in another </OMSTR><OMI>3</OMI></OMA></OMOBJ>", OMConverter.toString(
-				ExpressionParser.parse("'i am in a string [var=a] and in another [var=a]'", exerciseVariableMap, fillInVariableMap)));
-
-	}
-
-	@Test(expected = ParserException.class)
-	public void testExerciseVariableWithIllegalName() throws FunctionNotImplementedException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
-		ExpressionParser.parse("[var=abcd?!''§$%&]", exerciseVariableMap, fillInVariableMap);
-	}
-
-	@Test(expected = UndefinedExerciseVariableException.class)
-	public void testExerciseVariableWithException() throws FunctionNotImplementedException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
-		ExpressionParser.parse("[var=abcd]", exerciseVariableMap, fillInVariableMap);
-	}
-
-	@Test
-	public void testTest() throws FunctionNotImplementedException, UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
-		ExpressionParser.parse("'Text'", exerciseVariableMap, fillInVariableMap);
+	@Ignore
+	@Test/*TODO FIXME dlux what about PI or E or OMEGA?*/
+	public void testParseOMS() throws FunctionNotImplementedException, UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException{
+		OMOBJ omobj = ExpressionParser.parse(oms, null, null);
+		OMOBJ expected = new OMOBJ();
+		expected.setOMS(OMCreator.createOMS("", ""));
+		assertEquals(expected, omobj);
 	}
 	
 	@Test
-	public void testFillInVariable() throws JAXBException, FunctionNotImplementedException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
-		assertTrue(ExpressionParser.parse("[var=a]", exerciseVariableMap, fillInVariableMap) != null);
-		assertEquals("<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\"><OMA><OMS name=\"plus\" cd=\"arith1\"/><OMI>3</OMI><OMI>5</OMI></OMA></OMOBJ>",
-				OMConverter.toString(ExpressionParser.parse("[pos=1]", exerciseVariableMap, fillInVariableMap)));
-		assertEquals("<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\"><OMA><OMS name=\"plus\" cd=\"arith1\"/><OMI>3</OMI><OMI>5</OMI></OMA></OMOBJ>",
-				OMConverter.toString(ExpressionParser.parse("'[pos=1]'", exerciseVariableMap, fillInVariableMap)));
-		assertEquals(
-				"<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\"><OMA><OMS name=\"plus\" cd=\"arith1\"/><OMA><OMS name=\"plus\" cd=\"arith1\"/><OMI>3</OMI><OMI>5</OMI></OMA><OMI>4</OMI></OMA></OMOBJ>",
-				OMConverter.toString(ExpressionParser.parse("[pos=1] + 4", exerciseVariableMap, fillInVariableMap)));
-
-		// FIXME
-		assertEquals("<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\"><OMA><OMS name=\"textValueWithVars\" cd=\"string_jack\"/><OMSTR>i am in a string </OMSTR><OMA><OMS name=\"plus\" cd=\"arith1\"/><OMI>3</OMI><OMI>5</OMI></OMA><OMSTR> anotherone</OMSTR><OMA><OMS name=\"plus\" cd=\"arith1\"/><OMI>3</OMI><OMI>5</OMI></OMA><OMSTR> and last one</OMSTR></OMA></OMOBJ>", OMConverter.toString(
-				ExpressionParser.parse("'i am in a string [pos=1] anotherone[pos=1] and last one'", exerciseVariableMap, fillInVariableMap)));
-
+	public void testParseOMI() throws FunctionNotImplementedException, UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException{
+		OMOBJ omobj = ExpressionParser.parse(omi, null, null);
+		OMOBJ expected = new OMOBJ();
+		expected.setOMI(OMCreator.createOMI(Integer.parseInt(omi)));
+		assertEquals(expected, omobj);
 	}
-
+	
 	@Test
-	public void testMathTerm() throws JAXBException, FunctionNotImplementedException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException {
-		assertEquals(OMConverter.toString(ExpressionParser.parse("3+(5-7)", null, null)),
-				"<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\"><OMA>" + "<OMS name=\"plus\" cd=\"arith1\"/>" + "<OMI>3</OMI>" + "<OMA>"
-						+ "<OMS name=\"minus\" cd=\"arith1\"/>" + "<OMI>5</OMI>" + "<OMI>7</OMI>" + "</OMA>"
-						+ "</OMA></OMOBJ>");
+	public void testParseOMSTR() throws FunctionNotImplementedException, UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException{
+		OMOBJ omobj = ExpressionParser.parse(omstr, null, null);
+		OMOBJ expected = new OMOBJ();
+		expected.setOMSTR(OMCreator.createOMSTR(omstr.substring(1, omstr.length()-1)));
+		assertEquals(expected, omobj);
 	}
-
+	
+	@Test
+	public void testParseOMF() throws FunctionNotImplementedException, UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException{
+		OMOBJ omobj = ExpressionParser.parse(omf, null, null);
+		OMOBJ expected = new OMOBJ();
+		expected.setOMF(OMCreator.createOMF(Double.parseDouble(omf)));
+		assertEquals(expected, omobj);
+	}
+	
+	@Test
+	public void testParseOMA() throws FunctionNotImplementedException, UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException{
+		OMOBJ omobj = ExpressionParser.parse(oma, null, null);
+		OMOBJ expected = new OMOBJ();
+		ArrayList<Object> omel = new ArrayList<>();
+		omel.add(OMCreator.createOMI(1));
+		omel.add(OMCreator.createOMI(2));
+		expected.setOMA(OMCreator.createOMA(OMCreator.createOMS("arith1", "plus"), omel));
+		assertEquals(expected, omobj);
+	}
+	
+	@Test
+	public void testParserExerciseVariable() throws FunctionNotImplementedException, UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException{
+		OMOBJ expected = exerciseVariableMap.get(var.substring(5, var.length()-1));
+		OMOBJ actual = ExpressionParser.parse(var, exerciseVariableMap, fillInVariableMap);
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testParserFillInVariable() throws FunctionNotImplementedException, UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException{
+		System.out.println(pos.substring(5, pos.length()-1));
+		OMOBJ expected = fillInVariableMap.get(Integer.parseInt(pos.substring(5, pos.length()-1)));
+		OMOBJ actual = ExpressionParser.parse(pos, exerciseVariableMap, fillInVariableMap);
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testCreateParseTree(){
+		ExpressionParser.createParseTree(treeSring);
+	}
 }
