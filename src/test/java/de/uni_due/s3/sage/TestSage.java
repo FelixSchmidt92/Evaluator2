@@ -6,27 +6,25 @@ import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
+import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
+
 public class TestSage {
 
 	@BeforeClass
-	public static void beforeClass(){
+	public static void beforeClass() {
 		initSage();
 	}
-	
+
 	public static void initSage() {
 		List<String> aSageConnectionsList = new ArrayList<>();
 		aSageConnectionsList.add("192.168.68.176:8989");
 		Sage.init(aSageConnectionsList);
 	}
 
-	@Test
-	public void test() {
-		try {
-			Object result = Sage.evaluateInCAS("");
-			System.out.println(result.toString());
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-
+	@Test(expected = OpenMathException.class)
+	public void test() throws CasEvaluationException, CasNotAvailableException, OpenMathException {
+		Sage.evaluateInCAS("");
 	}
 }

@@ -5,13 +5,12 @@ import java.util.HashMap;
 import javax.xml.bind.JAXBException;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedRuntimeException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedException;
 import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedFillInVariableException;
@@ -25,50 +24,34 @@ public class TestEvaluator {
 	private HashMap<String, OMOBJ> exerciseVariableMap;
 	private HashMap<Integer, OMOBJ> fillInVariableMap;
 
-	@Before
-	public void init() {
-	}
 
 	@Test
 	public void testEvaluateString() throws FunctionException, JAXBException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
-		Assert.assertEquals("<OMOBJ><OMI>4</OMI></OMOBJ>",
+		Assert.assertEquals("<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\"><OMI>4</OMI></OMOBJ>",
 				OMConverter.toString(Evaluator.evaluate("1+3", exerciseVariableMap, fillInVariableMap)));
-		Assert.assertEquals("<OMOBJ><OMI>4</OMI></OMOBJ>",
+		Assert.assertEquals("<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\"><OMI>4</OMI></OMOBJ>",
 				OMConverter.toString(Evaluator.evaluate("plus(1,3)", exerciseVariableMap, fillInVariableMap)));
 	}
 
-	@Test(expected = FunctionNotImplementedRuntimeException.class)
+	@Test(expected = FunctionNotImplementedException.class)
 	public void testEvaluateWithException() throws FunctionException, OpenMathException, JAXBException,
 			CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException,
 			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
 		Evaluator.evaluate("abcdefghxjc()", exerciseVariableMap, fillInVariableMap);
 		Evaluator.evaluate("123cdefghxjc()", exerciseVariableMap, fillInVariableMap);
-		Evaluator.evaluate("abcdefghxjc", exerciseVariableMap, fillInVariableMap); // should
-																					// this
-																					// throw
-																					// a
-																					// another
-																					// exception?
-																					// (dlux:
-																					// this
-																					// throws
-																					// a
-																					// ParserException
-																					// from
-																					// ParserErrorStrategy)
-
-		Evaluator.evaluate((OMOBJ) OMConverter.toObject("<OMOBJ><OMA>" + "<OMS name=\"abcdefggg\" cd=\"arith1\"/>"
+		Evaluator.evaluate("abcdefghxjc", exerciseVariableMap, fillInVariableMap); 
+		Evaluator.evaluate((OMOBJ) OMConverter.toObject("<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\"><OMA>" + "<OMS name=\"abcdefggg\" cd=\"arith1\"/>"
 				+ "<OMI>2</OMI>" + "<OMI>3</OMI>" + "</OMA></OMOBJ>"));
 	}
 
 	@Test
 	public void testEvaluateOMOBJ() throws FunctionException, JAXBException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException {
-		Assert.assertEquals("<OMOBJ><OMI>15</OMI></OMOBJ>",
+		Assert.assertEquals("<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\"><OMI>15</OMI></OMOBJ>",
 				OMConverter.toString(Evaluator
-						.evaluate((OMOBJ) OMConverter.toObject("<OMOBJ><OMA>" + "<OMS name=\"plus\" cd=\"arith1\"/>"
+						.evaluate((OMOBJ) OMConverter.toObject("<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\"><OMA>" + "<OMS name=\"plus\" cd=\"arith1\"/>"
 								+ "<OMI>2</OMI>" + "<OMI>13</OMI>" + "</OMA></OMOBJ>"))));
 	}
 

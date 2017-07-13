@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.hamcrest.core.SubstringMatcher;
+import org.antlr.v4.runtime.tree.ParseTree;
 
 import de.uni_due.s3.evaluator.core.functionData.OMSEvaluatorSyntaxDictionary;
 import de.uni_due.s3.evaluator.core.functionData.OMSymbol;
@@ -53,52 +53,72 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 		this.fillInVariableMap = fillInVariableMap;
 	}
 
+	/**
+	 * TODO FIXME dlux spobel frichtscheid mayeb get a TextExpression, TextWithVariable and 
+	 * 			  TextOnly visit methods with anltr?
+	 */
 	@Override
 	public Object visitTextValue(TextValueContext ctx) {
+
+		
+		String val = ctx.getText().substring(1, ctx.getText().length()-1); //the input
+		
+		/*Return if the InputString is an Expression*/
+		try{
+			ParseTree tree = ExpressionParser.createParseTree(val); 
+			return this.visit(tree);
+		}catch(ParserRuntimeException e){
+			// do nothing continue Code below (In String is no Expression!)
+		}
+		
+		/*Return if the InputString is a Text with or without variables*/
 		ArrayList<Object> omel = new ArrayList<>();
-		
-		
-		String val = ctx.getText().substring(1, ctx.getText().length()-1);
 		Pattern varposPattern = Pattern.compile("\\[var=[a-zA-Z0-9äöü]+?\\]|\\[pos=[0-9]+?\\]");
 		Matcher varposMatcher = varposPattern.matcher(val); //PatternMatcher finds [pos=*] or [val=*]
 
+		
 		int stringPointer = 0; //Pointer to get string subsequences
 		while (varposMatcher.find()){
 			OMSTR omstr = OMCreator.createOMSTR(val.substring(stringPointer, varposMatcher.start()));
 			stringPointer = varposMatcher.end();
 			
 			if(omstr.getContent().length() != 0){
-				omel.add(omstr);	// Add leading OMSTR of pos/val
+				omel.add(omstr);	// Add leading OMSTR of pos/val Variables
 			}
 			
-			String varposVal = val.substring(varposMatcher.start() + 5, varposMatcher.end() -1); //remove "[pos=" and "]"
-			OMOBJ omobjvar = exerciseVariableMap.get(varposVal);
-			try {
-				Object varObj = OMConverter.toElement(omobjvar);
-				omel.add(varObj);
-			} catch (OpenMathException e) {
+			boolean isVar = val.substring(varposMatcher.start(), varposMatcher.end()).contains("var");
+			String varposVal = val.substring(varposMatcher.start() + 5, varposMatcher.end() -1); //remove "[pos=" and "]" or "[var="
+			
+			/*extracting the pos OR var value*/
+			if (isVar){
+				OMOBJ omobjvar = exerciseVariableMap.get(varposVal);
+				try {
+					Object varObj = OMConverter.toElement(omobjvar);
+					omel.add(varObj);
+				} catch (OpenMathException e) {
+				throw new UndefinedExerciseVariableRuntimeException(varposVal);
+				}
+			}else{
 				OMOBJ omobjpos = fillInVariableMap.get(Integer.parseInt(varposVal));
 				try {
 					Object posObj = OMConverter.toElement(omobjpos);
 					omel.add(posObj);
 				} catch (OpenMathException e1) {
-					e1.printStackTrace();
+					throw new UndefinedFillInVariableRuntimeException(Integer.parseInt(varposVal));
 				}
 			}
-			
 		}
 		if(stringPointer != 0 && stringPointer < val.length()){
 			OMSTR omstr = OMCreator.createOMSTR(val.substring(stringPointer));
-			omel.add(omstr);	// Add OMSTRs after pos/val
+			omel.add(omstr);	// Maybe add one OMSTR after pos/val Variables 
 		}
-		
 		
 		if (omel.isEmpty()){
 			return OMCreator.createOMSTR(ctx.getText().substring(1, ctx.getText().length()-1));
-			//delete ' at beginning and end
+			//return OMSTR as usual (no pos or var Variables are found in String)
 		}else{
-			return OMCreator.createOMA(OMCreator.createOMS("jacksrtring1", "textValue"), omel);
-			//return jackspecific String with variables in String
+			return OMCreator.createOMA(OMCreator.createOMS("string_jack", "textValueWithVars"), omel);
+			//return jack-specific String with variables in String
 		}
 	}
 

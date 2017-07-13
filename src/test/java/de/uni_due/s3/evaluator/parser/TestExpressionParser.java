@@ -116,7 +116,7 @@ public class TestExpressionParser {
 				OMConverter.toString(ExpressionParser.parse("[var=a] + 4", exerciseVariableMap, fillInVariableMap)));
 
 		// FIXME
-		assertEquals("<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\"><OMA><OMS name=\"textValue\" cd=\"jacksrtring1\"/><OMSTR>i am in a string </OMSTR><OMI>3</OMI><OMSTR> and in another </OMSTR><OMI>3</OMI></OMA></OMOBJ>", OMConverter.toString(
+		assertEquals("<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\"><OMA><OMS name=\"textValueWithVars\" cd=\"string_jack\"/><OMSTR>i am in a string </OMSTR><OMI>3</OMI><OMSTR> and in another </OMSTR><OMI>3</OMI></OMA></OMOBJ>", OMConverter.toString(
 				ExpressionParser.parse("'i am in a string [var=a] and in another [var=a]'", exerciseVariableMap, fillInVariableMap)));
 
 	}
@@ -151,7 +151,7 @@ public class TestExpressionParser {
 				OMConverter.toString(ExpressionParser.parse("[pos=1] + 4", exerciseVariableMap, fillInVariableMap)));
 
 		// FIXME
-		assertEquals("<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\"><OMA><OMS name=\"textValue\" cd=\"jacksrtring1\"/><OMSTR>i am in a string </OMSTR><OMA><OMS name=\"plus\" cd=\"arith1\"/><OMI>3</OMI><OMI>5</OMI></OMA><OMSTR> anotherone</OMSTR><OMA><OMS name=\"plus\" cd=\"arith1\"/><OMI>3</OMI><OMI>5</OMI></OMA><OMSTR> and last one</OMSTR></OMA></OMOBJ>", OMConverter.toString(
+		assertEquals("<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\"><OMA><OMS name=\"textValueWithVars\" cd=\"string_jack\"/><OMSTR>i am in a string </OMSTR><OMA><OMS name=\"plus\" cd=\"arith1\"/><OMI>3</OMI><OMI>5</OMI></OMA><OMSTR> anotherone</OMSTR><OMA><OMS name=\"plus\" cd=\"arith1\"/><OMI>3</OMI><OMI>5</OMI></OMA><OMSTR> and last one</OMSTR></OMA></OMOBJ>", OMConverter.toString(
 				ExpressionParser.parse("'i am in a string [pos=1] anotherone[pos=1] and last one'", exerciseVariableMap, fillInVariableMap)));
 
 	}

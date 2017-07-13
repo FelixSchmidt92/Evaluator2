@@ -288,8 +288,9 @@ public class GrammarGenerator {
 		if (builder == null){
 			return genRandomUTF8StringValue(length, "");
 		}else{
-			if (builder.contains("'")){
+			if (builder.contains("'") || builder.contains("\\")){
 				builder = builder.replaceAll("'", ""); // remove ', because its not allowed
+				builder = builder.replaceAll("\\\\", ""); // remove \ form String, it causes Problem as escape Sign
 				return genRandomUTF8StringValue(length + 1, builder);
 			}else if (length == 0){
 				return "'" + builder + "'";
@@ -452,6 +453,9 @@ public class GrammarGenerator {
 			return new byte[] {b1[0], bn[0], bn[1], bn[2]};
 		
 		default:		   // is it xxxx x000?
+			if(b1[0] <= 0x1F){
+				b1[0] = 0x20; //Remove Command Signs!
+			}
 			b1[0] = (byte) (b1[0] & 0x7F); // set to 0xxx xxxx
 			return b1;
 		}

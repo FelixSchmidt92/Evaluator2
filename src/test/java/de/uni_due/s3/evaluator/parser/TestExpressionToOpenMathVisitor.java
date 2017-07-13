@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -14,19 +15,24 @@ import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
+import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedRuntimeException;
 import de.uni_due.s3.evaluator.exceptions.parserruntime.ParserRuntimeException;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorLexer;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser;
 import de.uni_due.s3.evaluator.parser.antlr.GrammarGenerator;
+import de.uni_due.s3.evaluator.parser.antlr.RetryRule;
 import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OMF;
 import de.uni_due.s3.openmath.jaxb.OMI;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.jaxb.OMSTR;
+import de.uni_due.s3.openmath.omutils.OMConverter;
 import de.uni_due.s3.openmath.omutils.OMCreator;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestExpressionToOpenMathVisitor{
 	
@@ -38,6 +44,9 @@ public class TestExpressionToOpenMathVisitor{
 	private static GrammarGenerator gen;
 	
 	private static ExpressionToOpenMathVisitor visitor;
+	
+	//Retrying here 3 Times if a Test fails, caused by an invalid UTF-8 String
+	@Rule public RetryRule retry = new RetryRule(3);
 	
 	private ParseTree parse(String text){
 		Reader input = new StringReader(text);
@@ -108,13 +117,47 @@ public class TestExpressionToOpenMathVisitor{
 	}
 	
 	@Test
-	public void testVisitTextValue(){
+	public void testVisitTextONLYValue(){
 		for (int i = 0; i < 10000; i++){
 			String value = gen.genRandomUTF8StringValue(50, null);
 			OMSTR omstr = (OMSTR) visitor.visit(parse(value));
 			
 			value = value.substring(1, value.length()-1);
 			assertEquals(value, omstr.getContent());
+		}
+	}
+	
+	/**
+	 * TODO dlux Errors are thrown by Random UTF-8 Strings in pre, mid and pst Also marked in
+	 * 		ExpressionToOpenMathVisitor for another solution
+	 * @throws OpenMathException if Maps contains something wrong, which is defined here
+	 */
+	@Test
+	public void testVisitTextWithPosAndVarValue() throws OpenMathException{
+		OMSTR pre = OMCreator.createOMSTR("First ");
+		OMSTR mid = OMCreator.createOMSTR(" Second ");
+		OMSTR pst = OMCreator.createOMSTR(" Third");
+		
+		
+		Object obj = visitor.visit(parse("'" + pre.getContent() + "[var=abc]" 
+										+ mid.getContent() + "[pos=1]" 
+										+ pst.getContent() + "'"));
+		ArrayList<Object> omel = new ArrayList<>();
+		omel.add(pre);
+		omel.add(OMConverter.toElement(exerciseVariableMap.get("abc")));
+		omel.add(mid);
+		omel.add(OMConverter.toElement(fillInVariableMap.get(1)));
+		omel.add(pst);
+		OMA oma = OMCreator.createOMA(OMCreator.createOMS("string_jack", "textValueWithVars"), omel);
+		
+		assertEquals(oma, obj);
+	}
+	
+	@Test(expected = FunctionNotImplementedRuntimeException.class)
+	public void testVisitTextWithExpressionValue(){
+		for (int i = 0; i < 10000; i++){
+			String expression = gen.genRandomFunctionRecursionWithBinaryTerms(4, new Random().nextInt(5), 4);
+			visitor.visit(parse(expression));
 		}
 	}
 	
@@ -128,7 +171,7 @@ public class TestExpressionToOpenMathVisitor{
 			Object obj = visitor.visit(parse(getUnary + val));
 			
 			switch(getUnary){
-			case "+":
+			case "+": //FIXME dlux what about e or pi or omega
 				assertTrue(!(obj instanceof OMS)); //because it should just visit the next one
 				break;
 			case "-":
@@ -210,6 +253,66 @@ public class TestExpressionToOpenMathVisitor{
 		assertEquals(TestExpressionToOpenMathVisitor.t1.getOMI().getValue(), t1.getValue());
 		assertEquals(TestExpressionToOpenMathVisitor.t2.getOMSTR().getContent(), t2.getContent());
 	}
+	
+	@Test(expected=FunctionNotImplementedRuntimeException.class)
+	public void testVisitNestedFunctionException(){
+		for(int i = 0; i < 10000; i++){
+			visitor.visit(parse(gen.genRandomFunctionRecursion(4, new Random().nextInt(5), 4)));
+		}
+	}
+	
+	@Test
+	public void testVisitNestedFunction(){
+		Object obj = visitor.visit(parse("plus(1, 2)"));
+		ArrayList<Object> omel = new ArrayList<>();
+		omel.add(OMCreator.createOMI(1));
+		omel.add(OMCreator.createOMI(2));
+		
+		OMA oma = OMCreator.createOMA(OMCreator.createOMS("arith1", "plus"), omel);
+		
+		assertEquals(oma, obj);
+	}
+	
 
+	@Test
+	public void testVisitSet(){
+		//test if set accepts many different Set Combinations
+		for (int i = 0; i < 10000; i++){
+
+			String builder = "{   ";
+			for (int j = 0; j < new Random().nextInt(50); j++){
+				String t = gen.genRandomTerminalWithOutEXandFILLVariable(5, null);
+				builder += "   " +  t + "   ;";
+			}
+			builder = builder.substring(0, builder.length()-1) + "   }";
+			visitor.visit(parse(builder));
+		}
+		
+		//test one specific set
+		ArrayList<Object> omel = new ArrayList<>();
+		omel.add(OMCreator.createOMSTR("abc"));
+		omel.add(OMCreator.createOMI(1));
+		omel.add(OMCreator.createOMF(1.1));
+		OMA oma = OMCreator.createOMA(OMCreator.createOMS("set1", "set"), omel);
+		
+		Object obj = visitor.visit(parse("{'abc';1;1.1}"));
+		assertEquals(oma, obj);
+	}
+
+	
+	@Test
+	public void visitParenthesis(){
+		String term = gen.genRandomTerminalWithOutEXandFILLVariable(5, null);
+		for(int j = 0; j < new Random().nextInt(10); j++){
+			term = "( " + term + " )";
+		}
+		Object obj = visitor.visit(parse(term));
+		
+		if (obj instanceof OMI || obj instanceof OMF || obj instanceof OMSTR){
+			
+		}else{
+			throw new RuntimeException("Error parsing with Parenthesis. Not Found: (OMI|OMF|OMSTR)");
+		}
+	}
 	
 }
