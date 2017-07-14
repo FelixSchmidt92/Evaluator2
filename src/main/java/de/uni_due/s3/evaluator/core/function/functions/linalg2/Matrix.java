@@ -11,8 +11,8 @@ import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeEx
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.function.InvalidResultTypeException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
+import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
-import de.uni_due.s3.sage.Sage;
 
 public class Matrix extends Function {
 
@@ -25,18 +25,12 @@ public class Matrix extends Function {
 				throw new FunctionInvalidArgumentTypeException(this, "matrixrow");
 			}
 		}
-
-		Object result = Sage.evaluateInCAS(getPartialSageSyntax(arguments));
-
-		if (!(LinalgUtils.isOMAwithOMS(result, OMSymbol.LINALG2_MATRIX))) {
-			throw new InvalidResultTypeException(this, "matrix");
-		}
-		return result;
+		return OMCreator.createOMA(OMSymbol.LINALG2_MATRIX, arguments);
 	}
 
 	@Override
 	protected int minArgs() {
-		return -1;
+		return 1;
 	}
 
 	@Override
