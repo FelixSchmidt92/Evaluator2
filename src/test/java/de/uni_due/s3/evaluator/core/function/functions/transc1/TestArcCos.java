@@ -10,8 +10,6 @@ import org.junit.Test;
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.core.function.OMExecutor;
 import de.uni_due.s3.evaluator.core.function.functions.TestFunction;
-import de.uni_due.s3.evaluator.core.functionData.OMSEvaluatorSyntaxDictionary;
-import de.uni_due.s3.evaluator.core.functionData.OMSFunctionDictionary;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
@@ -23,24 +21,19 @@ import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableExcept
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedFillInVariableException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
-import de.uni_due.s3.openmath.jaxb.OMF;
-import de.uni_due.s3.openmath.jaxb.OMI;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestArcCos extends TestFunction {
 
-	private OMI omi = OMCreator.createOMI(1);
-	private OMF omf = OMCreator.createOMF(0.0);
-	private static Function func = OMSFunctionDictionary.getInstance()
-			.getFunction(OMSEvaluatorSyntaxDictionary.getInstance().getOMS("acos"));
+	private static Function func = new ArcCos();
 
 	@Test
 	public void testArcCosInteger() throws FunctionException, CasEvaluationException, CasNotAvailableException,
 			NoRepresentationAvailableException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
-		args.add(omi);
+		args.add(OMCreator.createOMI(1));
 		Object result = func.evaluate(args);
 		assertEquals(OMCreator.createOMI(0), result);
 	}
@@ -49,7 +42,7 @@ public class TestArcCos extends TestFunction {
 	public void testArcCosFloat() throws FunctionException, CasEvaluationException, CasNotAvailableException,
 			NoRepresentationAvailableException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
-		args.add(omf);
+		args.add(OMCreator.createOMF(0.0));
 		Object result = func.evaluate(args);
 		assertEquals(OMCreator.createOMF(1.57079632679490), result);
 	}
@@ -60,16 +53,15 @@ public class TestArcCos extends TestFunction {
 			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("acos(1)", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
-		assertEquals("0", result.getOMI().getValue());
+		assertEquals(OMCreator.createOMI(0), result.getOMI());
 	}
 
 	@Test
 	public void testArcCosSageSyntax()
 			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException {
-		OMF omf = OMCreator.createOMF(1.0);
 		List<Object> args = new ArrayList<>();
-		args.add(omf);
-		assertEquals("arccos(1.0)", func.getPartialSageSyntax(args));
+		args.add(OMCreator.createOMF(1.0));
+		assertEquals("arccos(1)", func.getPartialSageSyntax(args));
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)

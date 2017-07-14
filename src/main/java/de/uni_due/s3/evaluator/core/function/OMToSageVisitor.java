@@ -15,7 +15,12 @@ public class OMToSageVisitor extends OMToCasVisitor {
 
 	@Override
 	protected String visit(OMF omf) {
-		return Double.toString(omf.getDec());
+		double value = omf.getDec();
+		if (value == (int) value) {
+			return Integer.toString((int)value);
+		} else {
+			return Double.toString(value);
+		}	
 	}
 
 	@Override
