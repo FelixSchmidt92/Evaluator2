@@ -7,7 +7,6 @@ import de.uni_due.s3.evaluator.core.functionData.OMSymbol;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
-import de.uni_due.s3.openmath.omutils.OMCreator;
 
 /**
  * Implements Openmath relation1 eq operation.
