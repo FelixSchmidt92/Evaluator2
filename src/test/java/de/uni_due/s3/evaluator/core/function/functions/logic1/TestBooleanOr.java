@@ -9,8 +9,6 @@ import org.junit.Test;
 
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.core.function.OMExecutor;
-import de.uni_due.s3.evaluator.core.functionData.OMSEvaluatorSyntaxDictionary;
-import de.uni_due.s3.evaluator.core.functionData.OMSFunctionDictionary;
 import de.uni_due.s3.evaluator.core.functionData.OMSymbol;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasException;
@@ -29,87 +27,91 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestBooleanOr {
 
-	private final Function func = OMSFunctionDictionary.getInstance()
-			.getFunction(OMSEvaluatorSyntaxDictionary.getInstance().getOMS("booleanor"));
-	private List<Object> args;
-	private Object result;
-	
+	private final Function func = new BooleanOr();
+
 	@Test
-	public void TestBooleanOrWithBothArgumentsTrue() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
-		args = new ArrayList<Object>(2);
+	public void TestBooleanOrWithBothArgumentsTrue() throws FunctionInvalidArgumentException, CasEvaluationException,
+			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+		List<Object> args = new ArrayList<Object>();
 		args.add(OMSymbol.LOGIC1_TRUE);
-		args.add(OMSymbol.LOGIC1_TRUE);	
-		result = func.evaluate(args);
-		assertEquals(OMSymbol.LOGIC1_TRUE,result);
+		args.add(OMSymbol.LOGIC1_TRUE);
+		Object result = func.evaluate(args);
+		assertEquals(OMSymbol.LOGIC1_TRUE, result);
 	}
-	
+
 	@Test
-	public void TestBooleanOrWithOneTrueOneFalse() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
-		args = new ArrayList<Object>(2);
+	public void TestBooleanOrWithOneTrueOneFalse1() throws FunctionInvalidArgumentException, CasEvaluationException,
+			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+		List<Object> args = new ArrayList<Object>();
 		args.add(OMSymbol.LOGIC1_TRUE);
-		args.add(OMSymbol.LOGIC1_FALSE);		
-		result = func.evaluate(args);
-		assertEquals(OMSymbol.LOGIC1_TRUE,result);
-		
-		args = new ArrayList<Object>(2);
+		args.add(OMSymbol.LOGIC1_FALSE);
+		Object result = func.evaluate(args);
+		assertEquals(OMSymbol.LOGIC1_TRUE, result);
+	}
+
+	@Test
+	public void TestBooleanOrWithOneTrueOneFalse2() throws FunctionInvalidArgumentException, CasEvaluationException,
+			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+		List<Object> args = new ArrayList<Object>();
 		args.add(OMSymbol.LOGIC1_FALSE);
 		args.add(OMSymbol.LOGIC1_TRUE);
-		result = func.evaluate(args);
-		assertEquals(OMSymbol.LOGIC1_TRUE,result);		
+		Object result = func.evaluate(args);
+		assertEquals(OMSymbol.LOGIC1_TRUE, result);
 	}
-	
+
 	@Test
-	public void TestBooleanOrWithBothArgumentsFalse() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
-		args = new ArrayList<Object>(2);
+	public void TestBooleanOrWithBothArgumentsFalse() throws FunctionInvalidArgumentException, CasEvaluationException,
+			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMSymbol.LOGIC1_FALSE);
 		args.add(OMSymbol.LOGIC1_FALSE);
-		result = func.evaluate(args);
-		assertEquals(OMSymbol.LOGIC1_FALSE,result);
+		Object result = func.evaluate(args);
+		assertEquals(OMSymbol.LOGIC1_FALSE, result);
 	}
-	
+
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testBooleanOrWithLessThanMinParam() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
-		args = new ArrayList<Object>(2);	
+	public void testBooleanOrWithLessThanMinParam() throws FunctionInvalidArgumentException, CasEvaluationException,
+			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+		List<Object> args = new ArrayList<Object>();
 		args.add(OMSymbol.LOGIC1_FALSE);
-		result = func.evaluate(args);
+		Object result = func.evaluate(args);
 		assertEquals(OMSymbol.LOGIC1_TRUE, result);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testBooleanOrWithMoreThanMaxParam() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
-		args = new ArrayList<Object>(2);	
+	public void testBooleanOrWithMoreThanMaxParam() throws FunctionInvalidArgumentException, CasEvaluationException,
+			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+		List<Object> args = new ArrayList<Object>();
 		args.add(OMSymbol.LOGIC1_FALSE);
 		args.add(OMSymbol.LOGIC1_FALSE);
 		args.add(OMSymbol.LOGIC1_FALSE);
-		result = func.evaluate(args);
+		Object result = func.evaluate(args);
 		assertEquals(OMSymbol.LOGIC1_FALSE, result);
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testBooleanOrWithWrongArguments() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
-		args = new ArrayList<Object>(2);	
+	public void testBooleanOrWithWrongArguments() throws FunctionInvalidArgumentException, CasEvaluationException,
+			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+		List<Object> args = new ArrayList<Object>();
 		args.add(OMSymbol.ARITH1_DIVIDE);
 		args.add(OMSymbol.LOGIC1_FALSE);
-		result = func.evaluate(args);
+		Object result = func.evaluate(args);
 		assertEquals(OMSymbol.LOGIC1_FALSE, result);
 	}
-	
+
 	@Test
 	public void testBooleanOrIntegration() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
-		OMOBJ omobj;
-		OMOBJ result;
-		
-		omobj = ExpressionParser.parse("(1<2) || (2==1)", null, null);
-		result = OMExecutor.execute(omobj);
+		OMOBJ omobj = ExpressionParser.parse("(1<2) || (2==1)", null, null);
+		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals(OMSymbol.LOGIC1_TRUE, result.getOMS());
 	}
 
 	@Test
 	public void testBooleanOrSageSyntax()
 			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException {
-		args = new ArrayList<Object>(2);		
+		List<Object> args = new ArrayList<Object>();
 		args.add(OMSymbol.LOGIC1_TRUE);
 		args.add(OMSymbol.LOGIC1_TRUE);
 		assertEquals("True | True", func.getPartialSageSyntax(args));
