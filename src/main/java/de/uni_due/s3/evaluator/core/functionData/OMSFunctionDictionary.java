@@ -26,6 +26,7 @@ import de.uni_due.s3.evaluator.core.function.functions.linalg_jack.IsLinearlyInd
 import de.uni_due.s3.evaluator.core.function.functions.linalg_jack.RandomMatrixEigenvalue;
 import de.uni_due.s3.evaluator.core.function.functions.linalg_jack.RandomMatrixRank;
 import de.uni_due.s3.evaluator.core.function.functions.logic1.BooleanAnd;
+import de.uni_due.s3.evaluator.core.function.functions.logic1.BooleanNot;
 import de.uni_due.s3.evaluator.core.function.functions.logic1.BooleanOr;
 import de.uni_due.s3.evaluator.core.function.functions.logic_jack.IfThenElse;
 import de.uni_due.s3.evaluator.core.function.functions.openmath_jack.CountBasicOperations;
@@ -142,6 +143,7 @@ public class OMSFunctionDictionary {
 		// Logic
 		functions.put(OMSymbol.LOGIC1_OR, new BooleanOr());
 		functions.put(OMSymbol.LOGIC1_AND, new BooleanAnd());
+		functions.put(OMSymbol.LOGIC1_NOT, new BooleanNot());
 		functions.put(OMSymbol.LOGICJACK_IFTHENELSE, new IfThenElse());
 		// Trigonometrie
 		functions.put(OMSymbol.TRANSC1_SIN, new Sin());

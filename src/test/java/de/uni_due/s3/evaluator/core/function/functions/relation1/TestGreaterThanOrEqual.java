@@ -24,9 +24,7 @@ import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableExcept
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedFillInVariableException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
-import de.uni_due.s3.openmath.jaxb.OMF;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
-import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
