@@ -9,8 +9,6 @@ import static org.junit.Assert.*;
 
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.core.function.OMExecutor;
-import de.uni_due.s3.evaluator.core.functionData.OMSEvaluatorSyntaxDictionary;
-import de.uni_due.s3.evaluator.core.functionData.OMSFunctionDictionary;
 import de.uni_due.s3.evaluator.core.functionData.OMSymbol;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasException;
@@ -30,86 +28,100 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestLessThanOrEqual {
 
-	private final Function func = OMSFunctionDictionary.getInstance()
-			.getFunction(OMSEvaluatorSyntaxDictionary.getInstance().getOMS("lessthanorequal"));
-	
-	private List<Object> args;
-	private Object result;
-	
+	private final Function func = new LessThanOrEqual();
+
 	@Test
-	public void testLessThanOrEqualOMI() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
-		args = new ArrayList<Object>(2);		
+	public void testLessThanOrEqualOMI1() throws FunctionInvalidArgumentException, CasEvaluationException,
+			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(10));
 		args.add(OMCreator.createOMI(1));
-		result = func.evaluate(args);
+		Object result = func.evaluate(args);
 		assertEquals(OMSymbol.LOGIC1_FALSE, result);
-		
-		args = new ArrayList<Object>(2);
-		args.add(OMCreator.createOMI(109345));
-		args.add(OMCreator.createOMI(109345));
-		result = func.evaluate(args);
-		assertEquals(OMSymbol.LOGIC1_TRUE, result);	
 	}
-	
+
 	@Test
-	public void Less() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
-		args = new ArrayList<Object>(2);		
+	public void testLessThanOrEqualOMI2() throws FunctionInvalidArgumentException, CasEvaluationException,
+			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+		List<Object> args = new ArrayList<Object>(2);
+		args.add(OMCreator.createOMI(109345));
+		args.add(OMCreator.createOMI(109345));
+		Object result = func.evaluate(args);
+		assertEquals(OMSymbol.LOGIC1_TRUE, result);
+	}
+
+	@Test
+	public void Less1() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
+			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMF(0.546363));
 		args.add(OMCreator.createOMF(0.546362));
-		result = func.evaluate(args);
+		Object result = func.evaluate(args);
 		assertEquals(OMSymbol.LOGIC1_FALSE, result);
-		
-		args = new ArrayList<Object>(2);
-		args.add(OMCreator.createOMF(12.3045));
-		args.add(OMCreator.createOMF(12.3045));
-		result = func.evaluate(args);
-		assertEquals(OMSymbol.LOGIC1_TRUE, result);	
 	}
-	
+
 	@Test
-	public void testLessThanOrEqualOMFAndOMI() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
-		args = new ArrayList<Object>(2);		
+	public void Less2() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
+			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+		List<Object> args = new ArrayList<Object>(2);
+		args.add(OMCreator.createOMF(12.3045));
+		args.add(OMCreator.createOMF(12.3045));
+		Object result = func.evaluate(args);
+		assertEquals(OMSymbol.LOGIC1_TRUE, result);
+	}
+
+	@Test
+	public void testLessThanOrEqualOMFAndOMI1() throws FunctionInvalidArgumentException, CasEvaluationException,
+			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMF(0.546363));
 		args.add(OMCreator.createOMI(-3));
-		result = func.evaluate(args);
+		Object result = func.evaluate(args);
 		assertEquals(OMSymbol.LOGIC1_FALSE, result);
-		
-		args = new ArrayList<Object>(2);
+	}
+
+	@Test
+	public void testLessThanOrEqualOMFAndOMI2() throws FunctionInvalidArgumentException, CasEvaluationException,
+			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(20));
 		args.add(OMCreator.createOMF(20.00f));
-		result = func.evaluate(args);
-		assertEquals(OMSymbol.LOGIC1_TRUE, result);	
+		Object result = func.evaluate(args);
+		assertEquals(OMSymbol.LOGIC1_TRUE, result);
 	}
-	
-	
-	
+
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testGreaterThanOrEqualWithLessThanMinParam() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
-		args = new ArrayList<Object>(2);	
+	public void testGreaterThanOrEqualWithLessThanMinParam()
+			throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
+			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMSTR("test"));
-		result = func.evaluate(args);
+		func.evaluate(args);
 		fail("there should be an error");
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testLessThanOrEqualWithMoreThanMaxParam() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
-		args = new ArrayList<Object>(2);	
+	public void testLessThanOrEqualWithMoreThanMaxParam()
+			throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
+			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMSTR("test"));
 		args.add(OMCreator.createOMSTR("test"));
 		args.add(OMCreator.createOMSTR("test"));
-		result = func.evaluate(args);
+		func.evaluate(args);
 		fail("there should be an error");
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testLessThanOrEqualWithWrongArguments() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
-		args = new ArrayList<Object>(2);	
+	public void testLessThanOrEqualWithWrongArguments() throws FunctionInvalidArgumentException, CasEvaluationException,
+			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+		List<Object> args = new ArrayList<Object>(2);
 		args.add(null);
 		args.add(OMCreator.createOMSTR(null));
-		result = func.evaluate(args);
+		func.evaluate(args);
 		fail("there should be an error");
 	}
-	
+
 	@Test
 	public void testLessThanOrEqualIntegration() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
@@ -122,7 +134,7 @@ public class TestLessThanOrEqual {
 	@Test
 	public void testLessThanSageSyntax()
 			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException {
-		args = new ArrayList<Object>(2);		
+		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(5));
 		args.add(OMCreator.createOMI(9));
 		assertEquals("5 <= 9", func.getPartialSageSyntax(args));

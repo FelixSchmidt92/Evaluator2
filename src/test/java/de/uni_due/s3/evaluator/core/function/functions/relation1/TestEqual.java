@@ -9,8 +9,6 @@ import static org.junit.Assert.*;
 
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.core.function.OMExecutor;
-import de.uni_due.s3.evaluator.core.functionData.OMSEvaluatorSyntaxDictionary;
-import de.uni_due.s3.evaluator.core.functionData.OMSFunctionDictionary;
 import de.uni_due.s3.evaluator.core.functionData.OMSymbol;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasException;
@@ -25,133 +23,162 @@ import de.uni_due.s3.evaluator.exceptions.parser.UndefinedFillInVariableExceptio
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
-import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestEqual {
 
-	private final Function func = OMSFunctionDictionary.getInstance()
-			.getFunction(OMSEvaluatorSyntaxDictionary.getInstance().getOMS("equal"));
-	
-	private List<Object> args;
-	private Object result;
-	
+	private static Function func = new Equal();
+
 	@Test
-	public void testEqualsOMI() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
-		args = new ArrayList<Object>(2);		
+	public void testEqualsOMI1() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
+			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(10));
 		args.add(OMCreator.createOMI(10));
-		result = func.evaluate(args);
+		Object result = func.evaluate(args);
 		assertEquals(OMSymbol.LOGIC1_TRUE, result);
-		
-		args = new ArrayList<Object>(2);
+	}
+
+	@Test
+	public void testEqualsOMI2() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
+			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+
+		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(120976));
 		args.add(OMCreator.createOMI(12));
-		result = func.evaluate(args);
-		assertEquals(OMSymbol.LOGIC1_FALSE, result);	
+		Object result = func.evaluate(args);
+		assertEquals(OMSymbol.LOGIC1_FALSE, result);
 	}
-	
+
 	@Test
-	public void testEqualsOMF() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
-		args = new ArrayList<Object>(2);		
+	public void testEqualsOMF1() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
+			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(0.546363));
 		args.add(OMCreator.createOMF(0.546363));
-		result = func.evaluate(args);
+		Object result = func.evaluate(args);
 		assertEquals(OMSymbol.LOGIC1_TRUE, result);
-		
-		args = new ArrayList<Object>(2);
+	}
+
+	@Test
+	public void testEqualsOMF2() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
+			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(12.3045));
 		args.add(OMCreator.createOMF(12.3044));
-		result = func.evaluate(args);
-		assertEquals(OMSymbol.LOGIC1_FALSE, result);	
+		Object result = func.evaluate(args);
+		assertEquals(OMSymbol.LOGIC1_FALSE, result);
 	}
-	
+
 	@Test
-	public void testEqualsOMS() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
-		args = new ArrayList<Object>(2);		
-		args.add(OMCreator.createOMS("arith1","plus"));
-		args.add(OMCreator.createOMS("arith1","plus"));
-		result = func.evaluate(args);
+	public void testEqualsOMS1() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
+			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+		List<Object> args = new ArrayList<Object>();
+		args.add(OMSymbol.ARITH1_PLUS);
+		args.add(OMSymbol.ARITH1_PLUS);
+		Object result = func.evaluate(args);
 		assertEquals(OMSymbol.LOGIC1_TRUE, result);
-		
-		args = new ArrayList<Object>(2);
-		args.add(OMCreator.createOMS("realtion1","eq"));
-		args.add(OMCreator.createOMS("arith1","plus"));
-		result = func.evaluate(args);
-		assertEquals(OMSymbol.LOGIC1_FALSE, result);	
 	}
-	
+
 	@Test
-	public void testEqualsOMA() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
-		OMS oms = OMCreator.createOMS("linalg2", "matrixrow");
-		ArrayList<Object> arguments = new ArrayList<Object>(3);
-		ArrayList<Object> arguments2 = new ArrayList<Object>(3);
-		
-		arguments.add(OMCreator.createOMI(10));
-		arguments.add(OMCreator.createOMI(-10));
-		arguments.add(OMCreator.createOMI(30));
-		arguments2.add(OMCreator.createOMI(10));
-		arguments2.add(OMCreator.createOMI(20));
-		arguments2.add(OMCreator.createOMI(30));
-		
-		args = new ArrayList<Object>(2);
-		args.add(OMCreator.createOMA(oms,arguments));
-		args.add(OMCreator.createOMA(oms,arguments));	
-		result = func.evaluate(args);
+	public void testEqualsOMS2() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
+			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+		List<Object> args = new ArrayList<Object>();
+		args.add(OMSymbol.ARITH1_MINUS);
+		args.add(OMSymbol.ARITH1_PLUS);
+		Object result = func.evaluate(args);
+		assertEquals(OMSymbol.LOGIC1_FALSE, result);
+	}
+
+	@Test
+	public void testEqualsOMA1() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
+			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+		ArrayList<Object> matrixRow1 = new ArrayList<Object>();
+
+		matrixRow1.add(OMCreator.createOMI(10));
+		matrixRow1.add(OMCreator.createOMI(-10));
+		matrixRow1.add(OMCreator.createOMI(30));
+
+		ArrayList<Object> args = new ArrayList<Object>(2);
+		args.add(OMCreator.createOMA(OMSymbol.LINALG2_MATRIXROW, matrixRow1));
+		args.add(OMCreator.createOMA(OMSymbol.LINALG2_MATRIXROW, matrixRow1));
+		Object result = func.evaluate(args);
 		assertEquals(OMSymbol.LOGIC1_TRUE, result);
-			
-		args = new ArrayList<Object>(2);
-		args.add(OMCreator.createOMA(oms,arguments));
-		args.add(OMCreator.createOMA(oms,arguments2));
-		result = func.evaluate(args);
-		assertEquals(OMSymbol.LOGIC1_FALSE, result);	
 	}
-	
+
 	@Test
-	public void testEqualsOMSTR() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
-		args = new ArrayList<Object>(2);	
+	public void testEqualsOMA2() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
+			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+		ArrayList<Object> matrixRow1 = new ArrayList<Object>();
+
+		matrixRow1.add(OMCreator.createOMI(10));
+		matrixRow1.add(OMCreator.createOMI(-10));
+		matrixRow1.add(OMCreator.createOMI(30));
+
+		ArrayList<Object> matrixRow2 = new ArrayList<Object>();
+
+		matrixRow2.add(OMCreator.createOMI(10));
+		matrixRow2.add(OMCreator.createOMI(20));
+		matrixRow2.add(OMCreator.createOMI(30));
+
+		ArrayList<Object> args = new ArrayList<Object>(2);
+		args.add(OMCreator.createOMA(OMSymbol.LINALG2_MATRIXROW, matrixRow1));
+		args.add(OMCreator.createOMA(OMSymbol.LINALG2_MATRIXROW, matrixRow2));
+		Object result = func.evaluate(args);
+		assertEquals(OMSymbol.LOGIC1_FALSE, result);
+	}
+
+	@Test
+	public void testEqualsOMSTR1() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
+			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+		ArrayList<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("test"));
 		args.add(OMCreator.createOMSTR("test"));
-		result = func.evaluate(args);
+		Object result = func.evaluate(args);
 		assertEquals(OMSymbol.LOGIC1_TRUE, result);
-		
-		args = new ArrayList<Object>(2);
+	}
+
+	@Test
+	public void testEqualsOMSTR2() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
+			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+		ArrayList<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("test"));
 		args.add(OMCreator.createOMSTR("tes t"));
-		result = func.evaluate(args);
-		assertEquals(OMSymbol.LOGIC1_FALSE, result);	
+		Object result = func.evaluate(args);
+		assertEquals(OMSymbol.LOGIC1_FALSE, result);
 	}
-	
+
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testEqualsWithLessThanMinParam() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
-		args = new ArrayList<Object>(2);	
+	public void testEqualsWithLessThanMinParam() throws FunctionInvalidArgumentException, CasEvaluationException,
+			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+		ArrayList<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("test"));
-		result = func.evaluate(args);
+		Object result = func.evaluate(args);
 		assertEquals(OMSymbol.LOGIC1_TRUE, result);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testEqualsWithMoreThanMaxParam() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
-		args = new ArrayList<Object>(2);	
+	public void testEqualsWithMoreThanMaxParam() throws FunctionInvalidArgumentException, CasEvaluationException,
+			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+		ArrayList<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("test"));
 		args.add(OMCreator.createOMSTR("test"));
 		args.add(OMCreator.createOMSTR("test"));
-		result = func.evaluate(args);
-		assertEquals(OMSymbol.LOGIC1_TRUE, result);
+		func.evaluate(args);
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testEqualsWithWrongArguments() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
-		args = new ArrayList<Object>(2);	
+	public void testEqualsWithWrongArguments() throws FunctionInvalidArgumentException, CasEvaluationException,
+			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+		ArrayList<Object> args = new ArrayList<Object>(2);
 		args.add(null);
 		args.add(OMCreator.createOMSTR(null));
-		result = func.evaluate(args);
-		assertEquals(OMSymbol.LOGIC1_TRUE, result);
+		func.evaluate(args);
 	}
-	
+
 	@Test
-	public void testEqualsIntegration() throws FunctionException, OpenMathException, CasEvaluationException,
+	public void testEqualsIntegration1() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("equal(10,10)", null, null);
@@ -160,9 +187,27 @@ public class TestEqual {
 	}
 
 	@Test
+	public void testEqualsIntegration2() throws FunctionException, OpenMathException, CasEvaluationException,
+			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
+			UndefinedExerciseVariableException, ParserException {
+		OMOBJ omobj = ExpressionParser.parse("10=10", null, null);
+		OMOBJ result = OMExecutor.execute(omobj);
+		assertEquals(OMSymbol.LOGIC1_TRUE, result.getOMS());
+	}
+
+	@Test
+	public void testEqualsIntegration3() throws FunctionException, OpenMathException, CasEvaluationException,
+			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
+			UndefinedExerciseVariableException, ParserException {
+		OMOBJ omobj = ExpressionParser.parse("10==10", null, null);
+		OMOBJ result = OMExecutor.execute(omobj);
+		assertEquals(OMSymbol.LOGIC1_TRUE, result.getOMS());
+	}
+
+	@Test
 	public void testEqualsSageSyntax()
 			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException {
-		args = new ArrayList<Object>(2);		
+		ArrayList<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(10));
 		args.add(OMCreator.createOMI(10));
 		assertEquals("10 == 10", func.getPartialSageSyntax(args));
