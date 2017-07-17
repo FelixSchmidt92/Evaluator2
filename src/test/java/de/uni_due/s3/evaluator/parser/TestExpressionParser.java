@@ -128,7 +128,6 @@ public class TestExpressionParser {
 	
 	@Test
 	public void testParserFillInVariable() throws FunctionNotImplementedException, UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException{
-		System.out.println(pos.substring(5, pos.length()-1));
 		OMOBJ expected = fillInVariableMap.get(Integer.parseInt(pos.substring(5, pos.length()-1)));
 		OMOBJ actual = ExpressionParser.parse(pos, exerciseVariableMap, fillInVariableMap);
 		assertEquals(expected, actual);

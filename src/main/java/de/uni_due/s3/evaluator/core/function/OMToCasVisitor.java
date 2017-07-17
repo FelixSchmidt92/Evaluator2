@@ -33,7 +33,7 @@ import de.uni_due.s3.openmath.omutils.OMObjectNotSupportedException;
  * method visit(omElement) the String representation will be returned for this
  * omElement including its childs.
  * 
- * @author dlux, spobel
+ * @author dlux, spobel, frichtscheid
  *
  */
 public abstract class OMToCasVisitor {
@@ -54,6 +54,9 @@ public abstract class OMToCasVisitor {
 	public String visit(Object omElement)
 			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException {
 		String result = "";
+		
+		if(omElement == null)
+			throw new NoRepresentationAvailableException("No Representation available for a Null-Object");
 
 		switch (omElement.getClass().getSimpleName()) {
 		case "OMOBJ":
@@ -188,6 +191,8 @@ public abstract class OMToCasVisitor {
 	 * @throws CasException
 	 */
 	private String visit(OMA oma) throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException {
+
+		
 		List<Object> omel = new ArrayList<>();
 
 		for (int i = 1; i < oma.getOmel().size(); i++) {

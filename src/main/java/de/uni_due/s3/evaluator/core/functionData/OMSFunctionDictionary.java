@@ -78,6 +78,7 @@ import de.uni_due.s3.evaluator.core.function.functions.transc1.Tan;
 import de.uni_due.s3.evaluator.core.function.functions.transc2.ArcTan2;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedRuntimeException;
 import de.uni_due.s3.openmath.jaxb.OMS;
+import de.uni_due.s3.openmath.omutils.OMCreator;
 
 /**
  * In This Dictionary all available Functions are registered in a HashMap.
@@ -212,6 +213,9 @@ public class OMSFunctionDictionary {
 	 *             if Function is not found in HashMap
 	 */
 	public Function getFunction(OMS oms) throws FunctionNotImplementedRuntimeException {
+		if (oms == null)
+			throw new FunctionNotImplementedRuntimeException(OMCreator.createOMS("NULL", "NULL"));
+			
 		if (functions.containsKey(oms)) {
 			return functions.get(oms);
 		} else {

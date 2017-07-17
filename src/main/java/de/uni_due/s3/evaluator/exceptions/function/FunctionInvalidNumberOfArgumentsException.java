@@ -12,8 +12,8 @@ public class FunctionInvalidNumberOfArgumentsException extends FunctionException
 
 	public FunctionInvalidNumberOfArgumentsException(Function function, int minArgs, int maxArgs,
 			int actualArgumentSize) {
-		super("Function: " + function.getClass().getSimpleName() + "got " + actualArgumentSize
-				+ "but needs Arguments between " + minArgs + "," + maxArgs);
+		super("Function: " + function.getClass().getSimpleName() + " got " + actualArgumentSize
+				+ " but needs Arguments between " + minArgs + " and " + maxArgs);
 	}
 
 	/**

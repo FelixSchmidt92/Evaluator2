@@ -85,6 +85,7 @@ public class TestOMToCasVisitor {
 		args.add(omi);
 		OMA oma = OMCreator.createOMA(oms, args);
 		OMOBJ omobj = OMCreator.createOMOBJ(omi);
+		
 		Assert.assertEquals("omi",vis.visit(omobj));
 		Assert.assertEquals("omi",vis.visit(omi));
 		Assert.assertEquals("oms",vis.visit(oms));
@@ -94,7 +95,6 @@ public class TestOMToCasVisitor {
 		Assert.assertEquals("function",vis.visit(oma));
 	}
 	
-	@SuppressWarnings("unused")
 	@Test
 	public void testVisitOMOBJ() throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, OpenMathException, CasException{
 		OMI omi = OMCreator.createOMI(1);
@@ -108,11 +108,13 @@ public class TestOMToCasVisitor {
 		OMA oma = OMCreator.createOMA(oms, args);
 		OMOBJ omobj = OMCreator.createOMOBJ(omi);
 		
+		Assert.assertEquals("omi",vis.visit(omobj));
 		Assert.assertEquals("omi", vis.visit(OMCreator.createOMOBJ(omi)));
 		Assert.assertEquals("omf", vis.visit(OMCreator.createOMOBJ(omf)));
 		Assert.assertEquals("oms", vis.visit(OMCreator.createOMOBJ(oms)));
 		Assert.assertEquals("omv", vis.visit(OMCreator.createOMOBJ(omv)));
 		Assert.assertEquals("omstr", vis.visit(OMCreator.createOMOBJ(omstr)));
+		Assert.assertEquals("function",vis.visit(oma));
 	}
 	
 	@Test(expected=NoRepresentationAvailableException.class)

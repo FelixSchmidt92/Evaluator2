@@ -20,13 +20,13 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
  * If you want to add a new Function please refer to the OpenMath Content
  * Dictionaries (www.openmath.org/cd/) and add the new Function to the (maybe
  * new) correct Package If this Function is not listed in OpenMath, use the
- * jack*1 package (then this Function is a jack-specific one, '*' can be string,
- * matrix etc..).
+ * *_jack package (then this Function is a jack-specific one, '*' can be linalg,
+ * string etc..).
  * 
- * Getting an Function can be achieved with the FunctionFactory. The
- * FunctionFactory-Class will contain all available Functions for this
+ * Getting an Function can be achieved with the OMSFunctionDictionary. The
+ * OMSFunctionDictionary-Class will contain all available Functions for this
  * Evaluator. By Adding a new Function make this Function also available at
- * FunctionFactory.
+ * OMSFunctionDictionary.
  * 
  * @author dlux, frichtscheid, spobel
  */
@@ -74,7 +74,7 @@ public abstract class Function {
 
 	/**
 	 * This Method just tests if the length of the Arguments is in between
-	 * minArgs and maxArgs. If not then a FunctionArgumentNumberException is
+	 * minArgs and maxArgs. If not then a FunctionInvalidNumberOfArgumentsException is
 	 * thrown.
 	 * 
 	 * @param arguments
