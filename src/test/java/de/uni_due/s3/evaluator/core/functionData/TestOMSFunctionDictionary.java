@@ -1,4 +1,4 @@
-package de.uni_due.s3.evaluator.core.function.functionData;
+package de.uni_due.s3.evaluator.core.functionData;
 
 import static org.junit.Assert.assertTrue;
 
