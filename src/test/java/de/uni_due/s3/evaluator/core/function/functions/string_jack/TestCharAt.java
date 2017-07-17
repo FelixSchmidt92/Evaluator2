@@ -3,68 +3,78 @@ package de.uni_due.s3.evaluator.core.function.functions.string_jack;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
+import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
-
+import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.core.function.OMExecutor;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedFillInVariableException;
-import de.uni_due.s3.evaluator.exceptions.parserruntime.ParserRuntimeException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
 
-@RunWith(Parameterized.class)
 public class TestCharAt {
+	private static Function func = new CharAt();
 
-	static String[][] addition = { { "charAt('abc', 0)", "a", "charAt('abc', 3)" }, // [0]
-			{ "charAt('abc', 1)", "b", "charAt('', 0)" }, { "charAt('abc', 2)", "c", "charAt('abc', -1)" },
-			{ "charAt('Halloo', 0)", "H", "charAt('1', 1)" }, { "charAt('Halloo', 5)", "o", "charAt('1.0', 1)" },
-			{ "charAt('Halloo', 3)", "l", "charAt('1', 'abc')" }, };
-
-	private String parameter, expected, currentError;
-
-	@Parameterized.Parameters
-	public static Collection<String[]> test() {
-		ArrayList<String[]> list = new ArrayList<String[]>();
-		for (String[] a : addition) {
-			list.add(a);
-		}
-		return list;
+	@Test
+	public void testCharAtInteger() throws FunctionException, CasEvaluationException, CasNotAvailableException,
+			NoRepresentationAvailableException, OpenMathException {
+		List<Object> args = new ArrayList<Object>();
+		args.add(OMCreator.createOMSTR("Test"));
+		args.add(OMCreator.createOMI(1));
+		Object result = func.evaluate(args);
+		assertEquals(OMCreator.createOMSTR("e"), result);
 	}
 
-	public TestCharAt(String current, String expected, String currentError) {
-		parameter = current;
-		this.expected = expected;
-		this.currentError = currentError;
+	@Test(expected = FunctionInvalidArgumentTypeException.class)
+	public void testCharAtFloat() throws FunctionException, CasEvaluationException, CasNotAvailableException,
+			NoRepresentationAvailableException, OpenMathException {
+		List<Object> args = new ArrayList<Object>();
+		args.add(OMCreator.createOMSTR("Test"));
+		args.add(OMCreator.createOMF(0.0));
+		func.evaluate(args);
 	}
 
 	@Test
-	public void testCharAt() throws FunctionException, ParserRuntimeException, OpenMathException,
-			CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
-		OMOBJ t = ExpressionParser.parse(parameter, null, null);
-
-		assertEquals(OMExecutor.execute(t).getOMSTR().getContent(), expected);
-
+	public void testCharAtIntegration() throws FunctionException, OpenMathException, CasEvaluationException,
+			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
+			UndefinedExerciseVariableException, ParserException {
+		OMOBJ omobj = ExpressionParser.parse("charAt('Hallo', 3)", null, null);
+		OMOBJ result = OMExecutor.execute(omobj);
+		assertEquals(OMCreator.createOMSTR("l"), result.getOMSTR());
 	}
 
-	@Test(expected = FunctionException.class)
-	public void testCharAtFunctionException() throws FunctionException, ParserRuntimeException, OpenMathException,
-			CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
-		OMOBJ t = ExpressionParser.parse(currentError, null, null);
-		OMExecutor.execute(t);
-
+	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
+	public void testCharAtWithLessThanMinParam() throws FunctionException, OpenMathException, CasEvaluationException,
+			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
+			UndefinedExerciseVariableException, ParserException {
+		OMOBJ omobj = ExpressionParser.parse("charAt('Test')", null, null);
+		OMExecutor.execute(omobj);
 	}
 
+	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
+	public void testCharAtWithMoreThanMaxParam() throws FunctionException, OpenMathException, CasEvaluationException,
+			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
+			UndefinedExerciseVariableException, ParserException {
+		OMOBJ omobj = ExpressionParser.parse("charAt('Test',2,'Test')", null, null);
+		OMExecutor.execute(omobj);
+	}
+
+	@Test(expected = FunctionInvalidArgumentTypeException.class)
+	public void testCharAtWithWrongArguments() throws FunctionException, OpenMathException, CasEvaluationException,
+			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
+			UndefinedExerciseVariableException, ParserException {
+		OMOBJ omobj = ExpressionParser.parse("charAt('Test','Te')", null, null);
+		OMExecutor.execute(omobj);
+	}
 }

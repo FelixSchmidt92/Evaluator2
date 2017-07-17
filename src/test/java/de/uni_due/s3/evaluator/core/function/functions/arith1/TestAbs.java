@@ -21,10 +21,7 @@ import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
-import de.uni_due.s3.openmath.jaxb.OMF;
-import de.uni_due.s3.openmath.jaxb.OMI;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
-import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
@@ -34,52 +31,55 @@ public class TestAbs {
 	@Test
 	public void testAbsInteger() throws FunctionException, CasEvaluationException, CasNotAvailableException,
 			NoRepresentationAvailableException, OpenMathException {
-
-		List<Object> args = new ArrayList<Object>(2);
+		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(-3));
-		OMI result = (OMI) func.evaluate(args);
-		assertEquals("3", result.getValue());
+		Object result = func.evaluate(args);
+		assertEquals(OMCreator.createOMI(3), result);
 	}
 
 	@Test
 	public void testAbsFloat() throws FunctionException, CasEvaluationException, CasNotAvailableException,
 			NoRepresentationAvailableException, OpenMathException {
-		List<Object> args = new ArrayList<Object>(2);
+		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(-2.5));
-		OMF result = (OMF) func.evaluate(args);
-		assertEquals(new Double(2.5), result.getDec());
+		Object result = func.evaluate(args);
+		assertEquals(OMCreator.createOMF(2.5), result);
 	}
 
 	@Test
-	public void testAbsIntegration() throws FunctionException, OpenMathException, CasEvaluationException,
+	public void testAbsIntegration1() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("abs(-13)", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
-		assertEquals("13", result.getOMI().getValue());
-
-		omobj = ExpressionParser.parse("abs(10)", null, null);
-		result = OMExecutor.execute(omobj);
-		assertEquals("10", result.getOMI().getValue());
+		assertEquals(OMCreator.createOMI(13), result.getOMI());
 	}
 
-	@SuppressWarnings("unused")
 	@Test
-	public void testAbsSageSyntax() throws FunctionInvalidNumberOfArgumentsException,
+	public void testAbsIntegration2() throws FunctionException, OpenMathException, CasEvaluationException,
+			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
+			UndefinedExerciseVariableException, ParserException {
+		OMOBJ omobj = ExpressionParser.parse("abs(10)", null, null);
+		OMOBJ result = OMExecutor.execute(omobj);
+		assertEquals(OMCreator.createOMI(10), result.getOMI());
+	}
+
+	@Test
+	public void testAbsSageSyntax1() throws FunctionInvalidNumberOfArgumentsException,
 			NoRepresentationAvailableException, CasException, FunctionNotImplementedException,
 			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
-		OMF omf = OMCreator.createOMF(1.0);
-		OMI omi = OMCreator.createOMI(10);
-
-		OMOBJ omobj = ExpressionParser.parse("abs(5)", null, null);
-		List<Object> args = omobj.getOMA().getOmel();
-		OMS oms = (OMS) args.get(0);
-		args.remove(0);
-
+		List<Object> args = new ArrayList<>();
+		args.add(OMCreator.createOMI(5));
 		assertEquals("abs(5)", func.getPartialSageSyntax(args));
-		args = new ArrayList<Object>(2);
-		args.add(omf);
-		assertEquals("abs(1.0)", func.getPartialSageSyntax(args));
+	}
+	
+	@Test
+	public void testAbsSageSyntax2() throws FunctionInvalidNumberOfArgumentsException,
+			NoRepresentationAvailableException, CasException, FunctionNotImplementedException,
+			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
+		List<Object> args = new ArrayList<>();
+		args.add(OMCreator.createOMF(1.0));
+		assertEquals("abs(1)", func.getPartialSageSyntax(args));
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
@@ -87,12 +87,7 @@ public class TestAbs {
 			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("abs('test')", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
-		assertEquals("5", result.getOMI().getValue());
-
-		omobj = ExpressionParser.parse("abs('test')", null, null);
-		result = OMExecutor.execute(omobj);
-		assertEquals("-7", result.getOMI().getValue());
+		OMExecutor.execute(omobj);
 	}
 
 }

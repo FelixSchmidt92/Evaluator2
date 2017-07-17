@@ -4,6 +4,7 @@ import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.openmath.jaxb.OMF;
 import de.uni_due.s3.openmath.jaxb.OMI;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
+import de.uni_due.s3.openmath.jaxb.OMSTR;
 import de.uni_due.s3.openmath.omutils.OMConverter;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
@@ -21,9 +22,13 @@ public class NumberUtils {
 	 *             wenn obj kein OMF oder OMI ist
 	 * @throws OpenMathException 
 	 */
-	public static Double convertOMIOMFToDouble(Object obj) throws InputMismatchException, OpenMathException {
+	public static Double convertOMIOMFToDouble(Object obj) throws InputMismatchException {
 		if (obj instanceof OMOBJ) {
-			obj = OMConverter.toElement((OMOBJ) obj);
+			try {
+				obj = OMConverter.toElement((OMOBJ) obj);
+			} catch (OpenMathException e) {
+				throw new InputMismatchException();
+			}
 		}
 		
 		if (obj instanceof OMI) {
@@ -56,8 +61,32 @@ public class NumberUtils {
 	}
 
 	public static int convertOMIToInteger(Object obj) throws InputMismatchException {
+		if (obj instanceof OMOBJ) {
+			try {
+				obj = OMConverter.toElement((OMOBJ) obj);
+			} catch (OpenMathException e) {
+				throw new InputMismatchException();
+			}
+		}
+		
 		if (obj instanceof OMI) {
 			return Integer.parseInt(((OMI) obj).getValue());
+		} else {
+			throw new InputMismatchException();
+		}
+	}
+	
+	public static String convertOMSTRToSring(Object obj) throws InputMismatchException {
+		if (obj instanceof OMOBJ) {
+			try {
+				obj = OMConverter.toElement((OMOBJ) obj);
+			} catch (OpenMathException e) {
+				throw new InputMismatchException();
+			}
+		}
+		
+		if (obj instanceof OMSTR) {
+			return ((OMSTR) obj).getContent();
 		} else {
 			throw new InputMismatchException();
 		}

@@ -23,16 +23,12 @@ import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableExcept
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedFillInVariableException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
-import de.uni_due.s3.openmath.jaxb.OMF;
-import de.uni_due.s3.openmath.jaxb.OMI;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestSin extends TestFunction {
 
-	private OMI omi = OMCreator.createOMI(1);
-	private OMF omf = OMCreator.createOMF(0.0);
 	private static Function func = OMSFunctionDictionary.getInstance()
 			.getFunction(OMSEvaluatorSyntaxDictionary.getInstance().getOMS("sin"));
 
@@ -40,18 +36,18 @@ public class TestSin extends TestFunction {
 	public void testSinFloat() throws FunctionException, CasEvaluationException, CasNotAvailableException,
 			NoRepresentationAvailableException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
-		args.add(omf);
-		OMI result = (OMI) func.evaluate(args);
-		assertEquals("0", result.getValue());
+		args.add(OMCreator.createOMF(0.0));
+		Object result = func.evaluate(args);
+		assertEquals(OMCreator.createOMI(0), result);
 	}
 
 	@Test
 	public void testSinInteger() throws FunctionException, CasEvaluationException, CasNotAvailableException,
 			NoRepresentationAvailableException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
-		args.add(omi);
-		OMF result = (OMF) func.evaluate(args);
-		assertEquals(new Double(0.841470984807897), result.getDec());
+		args.add(OMCreator.createOMI(1));
+		Object result = func.evaluate(args);
+		assertEquals(OMCreator.createOMF(0.841470984807897), result);
 	}
 
 	@Test
@@ -60,16 +56,15 @@ public class TestSin extends TestFunction {
 			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("sin(0)", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
-		assertEquals("0", result.getOMI().getValue());
+		assertEquals(OMCreator.createOMI(0), result.getOMI());
 	}
 
 	@Test
 	public void testSinSageSyntax()
 			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException {
-		OMF omf = OMCreator.createOMF(1.0);
 		List<Object> args = new ArrayList<>();
-		args.add(omf);
-		assertEquals("sin(1.0)", func.getPartialSageSyntax(args));
+		args.add(OMCreator.createOMF(1.0));
+		assertEquals("sin(1)", func.getPartialSageSyntax(args));
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)

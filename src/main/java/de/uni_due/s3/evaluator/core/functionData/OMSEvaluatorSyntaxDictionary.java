@@ -63,6 +63,7 @@ public class OMSEvaluatorSyntaxDictionary {
 		// Logic
 		functionSymbolMap.put("booleanor", OMSymbol.LOGIC1_OR);
 		functionSymbolMap.put("booleanand", OMSymbol.LOGIC1_AND);
+		functionSymbolMap.put("booleannot",OMSymbol.LOGIC1_NOT);
 		functionSymbolMap.put("ifthenelse", OMSymbol.LOGICJACK_IFTHENELSE);
 		// Trigonometrie
 		functionSymbolMap.put("sin", OMSymbol.TRANSC1_SIN);

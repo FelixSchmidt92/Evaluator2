@@ -1,4 +1,4 @@
-package de.uni_due.s3.evaluator.core.function.functions.transc1;
+package de.uni_due.s3.evaluator.core.function.functions.linalg2;
 
 import static org.junit.Assert.assertEquals;
 
@@ -10,11 +10,11 @@ import org.junit.Test;
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.core.function.OMExecutor;
 import de.uni_due.s3.evaluator.core.function.functions.TestFunction;
+import de.uni_due.s3.evaluator.core.functionData.OMSymbol;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableException;
@@ -25,66 +25,58 @@ import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
-public class TestArcTan extends TestFunction {
+public class TestMatrixRow extends TestFunction {
 
-	private static Function func = new ArcTan();
+	private static Function func = new MatrixRow();
 
 	@Test
-	public void testArcTanFloat() throws FunctionException, CasEvaluationException, CasNotAvailableException,
+	public void testMatrixRowInteger() throws FunctionException, CasEvaluationException, CasNotAvailableException,
+			NoRepresentationAvailableException, OpenMathException {
+		List<Object> args = new ArrayList<Object>();
+		args.add(OMCreator.createOMI(1));
+		args.add(OMCreator.createOMI(2));
+		args.add(OMCreator.createOMI(3));
+		args.add(OMCreator.createOMI(4));
+		Object result = func.evaluate(args);
+		assertEquals(OMCreator.createOMA(OMSymbol.LINALG2_MATRIXROW, args), result);
+	}
+
+	@Test
+	public void testMatrixRowFloat() throws FunctionException, CasEvaluationException, CasNotAvailableException,
 			NoRepresentationAvailableException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(0.0));
 		Object result = func.evaluate(args);
-		assertEquals(OMCreator.createOMI(0), result);
+		assertEquals(OMCreator.createOMA(OMSymbol.LINALG2_MATRIXROW, args), result);
 	}
 
 	@Test
-	public void testArcTanInteger() throws FunctionException, CasEvaluationException, CasNotAvailableException,
-			NoRepresentationAvailableException, OpenMathException {
+	public void testMatrixRowIntegration() throws FunctionException, OpenMathException, CasEvaluationException,
+			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
+			UndefinedExerciseVariableException, ParserException {
+		OMOBJ omobj = ExpressionParser.parse("matrixrow(1,3,0.0)", null, null);
+		OMOBJ result = OMExecutor.execute(omobj);
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(1));
-		Object result = func.evaluate(args);
-		assertEquals(OMCreator.createOMF(0.785398163397448), result);
+		args.add(OMCreator.createOMI(3));
+		args.add(OMCreator.createOMF(0.0));
+		assertEquals(OMCreator.createOMA(OMSymbol.LINALG2_MATRIXROW, args), result.getOMA());
 	}
 
 	@Test
-	public void testArcTanIntegration() throws FunctionException, OpenMathException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException {
-		OMOBJ omobj = ExpressionParser.parse("atan(0)", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
-		assertEquals(OMCreator.createOMI(0), result.getOMI());
-	}
-
-	@Test
-	public void testArcTanSageSyntax()
+	public void testMatrixRowSageSyntax()
 			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException {
 		List<Object> args = new ArrayList<>();
-		args.add(OMCreator.createOMF(1.0));
-		assertEquals("arctan(1)", func.getPartialSageSyntax(args));
+		args.add(OMCreator.createOMF(0.0));
+		args.add(OMCreator.createOMI(1));
+		assertEquals("[0,1]", func.getPartialSageSyntax(args));
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testArcTanWithLessThanMinParam() throws FunctionException, OpenMathException, CasEvaluationException,
+	public void testMatrixRowWithLessThanMinParam() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
-		OMOBJ omobj = ExpressionParser.parse("atan()", null, null);
-		OMExecutor.execute(omobj);
-	}
-
-	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testArcTanWithMoreThanMaxParam() throws FunctionException, OpenMathException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException {
-		OMOBJ omobj = ExpressionParser.parse("atan(1,3)", null, null);
-		OMExecutor.execute(omobj);
-	}
-
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testArcTanWithWrongArguments() throws FunctionException, OpenMathException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException {
-		OMOBJ omobj = ExpressionParser.parse("atan('Test')", null, null);
+		OMOBJ omobj = ExpressionParser.parse("matrixrow()", null, null);
 		OMExecutor.execute(omobj);
 	}
 }

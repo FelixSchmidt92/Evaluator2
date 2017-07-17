@@ -3,7 +3,6 @@ package de.uni_due.s3.evaluator.core.function.functions.linalg2;
 import java.util.List;
 
 import de.uni_due.s3.evaluator.core.function.Function;
-import de.uni_due.s3.evaluator.core.function.LinalgUtils;
 import de.uni_due.s3.evaluator.core.functionData.OMSymbol;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
@@ -11,8 +10,9 @@ import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeEx
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.function.InvalidResultTypeException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
+import de.uni_due.s3.openmath.omutils.OMCreator;
+import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
-import de.uni_due.s3.sage.Sage;
 
 public class Matrix extends Function {
 
@@ -21,22 +21,16 @@ public class Matrix extends Function {
 			CasEvaluationException, FunctionInvalidNumberOfArgumentsException, CasNotAvailableException,
 			NoRepresentationAvailableException, OpenMathException, InvalidResultTypeException {
 		for (Object arg : arguments) {
-			if (!(LinalgUtils.isOMAwithOMS(arg, OMSymbol.LINALG2_MATRIXROW))) {
+			if (!(OMTypeChecker.isOMAWithSymbol(arg, OMSymbol.LINALG2_MATRIXROW))) {
 				throw new FunctionInvalidArgumentTypeException(this, "matrixrow");
 			}
 		}
-
-		Object result = Sage.evaluateInCAS(getPartialSageSyntax(arguments));
-
-		if (!(LinalgUtils.isOMAwithOMS(result, OMSymbol.LINALG2_MATRIX))) {
-			throw new InvalidResultTypeException(this, "matrix");
-		}
-		return result;
+		return OMCreator.createOMA(OMSymbol.LINALG2_MATRIX, arguments);
 	}
 
 	@Override
 	protected int minArgs() {
-		return -1;
+		return 1;
 	}
 
 	@Override
