@@ -5,35 +5,41 @@ import java.util.List;
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.core.function.NumberUtils;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
- * Implements division with integer and/or float
- * Example: 4/3 = 1.33333...
+ * Implements division with integer and/or float Example: 4/3 = 1.33333...
+ * 
  * @author frichtscheid
  *
  */
-public class Divide extends Function{
+public class Divide extends Function {
 
 	/**
 	 * It expects two arguments. Each argument has to be an OMI or OMF
+	 * 
 	 * @return OMI or OMF.
-	 * @throws OpenMathException 
+	 * @throws OpenMathException
+	 * @throws FunctionInvalidArgumentException
 	 */
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException, OpenMathException {
+	protected Object execute(List<Object> arguments)
+			throws FunctionInvalidArgumentTypeException, OpenMathException, FunctionInvalidArgumentException {
 		try {
 			Double leftValue = NumberUtils.convertOMIOMFToDouble(arguments.get(0));
 			Double rightValue = NumberUtils.convertOMIOMFToDouble(arguments.get(1));
 			return NumberUtils.convertDoubleToOMIOMF(leftValue / rightValue);
 		} catch (InputMismatchException e) {
-			throw new FunctionInvalidArgumentTypeException(this,"integer, float, double");
+			throw new FunctionInvalidArgumentTypeException(this, "integer, float, double");
+		} catch (IllegalArgumentException e) {
+			throw new FunctionInvalidArgumentException(this, "Second argument of Division / has to be unequal zero.");
 		}
 	}
-	
+
 	@Override
 	protected int minArgs() {
 		return 2;
@@ -45,7 +51,8 @@ public class Divide extends Function{
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException{
+	public String getPartialSageSyntax(List<Object> arguments)
+			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException {
 		return getSageSyntax(arguments.get(0)) + " / " + getSageSyntax(arguments.get(1));
 	}
 
