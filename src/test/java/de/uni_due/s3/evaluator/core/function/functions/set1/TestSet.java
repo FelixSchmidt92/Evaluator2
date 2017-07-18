@@ -13,7 +13,6 @@ import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedFillInVariableException;
@@ -63,12 +62,6 @@ public class TestSet {
 		result = func.evaluate(arguments);
 		assertEquals(true, result instanceof OMA);
 		assertEquals(OMCreator.createOMA(OMSymbol.SET1_SET,arguments), result);
-	}
-	
-	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testSetWithLessThanMinParam() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
-		args = new ArrayList<Object>(0);	
-		result = func.evaluate(args);
 	}
 	
 	@Test

@@ -33,13 +33,11 @@ public class Set extends Function {
 
 	@Override
 	protected int minArgs() {
-		// TODO Auto-generated method stub
-		return 1;
+		return 0;
 	}
 
 	@Override
 	protected int maxArgs() {
-		// TODO Auto-generated method stub
 		return -1;
 	}
 	

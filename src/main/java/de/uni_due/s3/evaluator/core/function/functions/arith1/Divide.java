@@ -32,11 +32,12 @@ public class Divide extends Function {
 		try {
 			Double leftValue = NumberUtils.convertOMIOMFToDouble(arguments.get(0));
 			Double rightValue = NumberUtils.convertOMIOMFToDouble(arguments.get(1));
+			if (rightValue == 0.0) {
+				throw new FunctionInvalidArgumentException(this, "Second argument of Division / has to be unequal zero.");
+			}
 			return NumberUtils.convertDoubleToOMIOMF(leftValue / rightValue);
 		} catch (InputMismatchException e) {
 			throw new FunctionInvalidArgumentTypeException(this, "integer, float, double");
-		} catch (IllegalArgumentException e) {
-			throw new FunctionInvalidArgumentException(this, "Second argument of Division / has to be unequal zero.");
 		}
 	}
 
