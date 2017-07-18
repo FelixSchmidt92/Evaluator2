@@ -1,6 +1,7 @@
 package de.uni_due.s3.evaluator.core.function.functions.string_jack;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +63,7 @@ public class TestCompareTo extends TestFunction {
 			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("compareTo('Test')", null, null);
 		OMExecutor.execute(omobj);
+		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
@@ -70,6 +72,7 @@ public class TestCompareTo extends TestFunction {
 			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("compareTo('Test', 'Test', 'Test')", null, null);
 		OMExecutor.execute(omobj);
+		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
@@ -78,5 +81,6 @@ public class TestCompareTo extends TestFunction {
 			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("compareTo('Test',2)", null, null);
 		OMExecutor.execute(omobj);
+		fail();
 	}
 }

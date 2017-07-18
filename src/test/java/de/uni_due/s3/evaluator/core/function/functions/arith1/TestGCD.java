@@ -1,6 +1,7 @@
 package de.uni_due.s3.evaluator.core.function.functions.arith1;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,6 +67,7 @@ public class TestGCD extends TestFunction {
 			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("gcd(2,'test')", null, null);
 		OMExecutor.execute(omobj);
+		fail();
 	}
 
 }

@@ -76,6 +76,7 @@ public class TestBooleanAnd extends TestFunction {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMSymbol.LOGIC1_FALSE);
 		func.evaluate(args);
+		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
@@ -86,6 +87,7 @@ public class TestBooleanAnd extends TestFunction {
 		args.add(OMSymbol.LOGIC1_FALSE);
 		args.add(OMSymbol.LOGIC1_FALSE);
 		func.evaluate(args);
+		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
@@ -95,6 +97,7 @@ public class TestBooleanAnd extends TestFunction {
 		args.add(OMSymbol.ARITH1_DIVIDE);
 		args.add(OMSymbol.LOGIC1_FALSE);
 		func.evaluate(args);
+		fail();
 	}
 
 	@Test

@@ -1,6 +1,7 @@
 package de.uni_due.s3.evaluator.core.function.functions.string_jack;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,6 +64,7 @@ public class TestIndexOf extends TestFunction {
 			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("indexOf('Test')", null, null);
 		OMExecutor.execute(omobj);
+		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
@@ -71,6 +73,7 @@ public class TestIndexOf extends TestFunction {
 			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("indexOf('Test', 2 ,'Test', 3)", null, null);
 		OMExecutor.execute(omobj);
+		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
@@ -79,5 +82,6 @@ public class TestIndexOf extends TestFunction {
 			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("indexOf('Test', 4)", null, null);
 		OMExecutor.execute(omobj);
+		fail();
 	}
 }

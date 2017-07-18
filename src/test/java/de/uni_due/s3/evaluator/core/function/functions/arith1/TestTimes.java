@@ -1,6 +1,7 @@
 package de.uni_due.s3.evaluator.core.function.functions.arith1;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,6 +95,7 @@ public class TestTimes extends TestFunction {
 			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("10*'test'", null, null);
 		OMExecutor.execute(omobj);
+		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
@@ -102,6 +104,7 @@ public class TestTimes extends TestFunction {
 			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("times('test',17)", null, null);
 		OMExecutor.execute(omobj);
+		fail();
 	}
 
 }

@@ -1,6 +1,7 @@
 package de.uni_due.s3.evaluator.core.function.functions.arith1;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +49,7 @@ public class TestDivide extends TestFunction {
 		args.add(OMCreator.createOMI(3));
 		args.add(OMCreator.createOMI(0));
 		func.evaluate(args);
+		fail();
 	}
 
 	@Test
@@ -104,6 +106,7 @@ public class TestDivide extends TestFunction {
 			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("10/'test'", null, null);
 		OMExecutor.execute(omobj);
+		fail();
 	}
 
 }

@@ -75,7 +75,6 @@ public class TestGetFromSet extends TestFunction {
 		args.add(OMCreator.createOMI(2));
 		Object result = func.evaluate(args);
 		assertEquals(OMCreator.createOMA(OMSymbol.ARITH1_PLUS, plus), result);
-		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)

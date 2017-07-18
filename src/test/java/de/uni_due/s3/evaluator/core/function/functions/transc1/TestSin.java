@@ -1,6 +1,7 @@
 package de.uni_due.s3.evaluator.core.function.functions.transc1;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,6 +74,7 @@ public class TestSin extends TestFunction {
 			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("sin()", null, null);
 		OMExecutor.execute(omobj);
+		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
@@ -89,5 +91,6 @@ public class TestSin extends TestFunction {
 			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("sin('Test')", null, null);
 		OMExecutor.execute(omobj);
+		fail();
 	}
 }

@@ -1,6 +1,7 @@
 package de.uni_due.s3.evaluator.core.function.functions.arith1;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,17 +94,17 @@ public class TestMinus extends TestFunction {
 			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("10-'test'", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
-		assertEquals(OMCreator.createOMI(5), result.getOMI());
+		OMExecutor.execute(omobj);
+		fail();
 	}
-	
+
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void testMinusWithWrongArguments2() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("minus('test',17)", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
-		assertEquals(OMCreator.createOMI(-7), result.getOMI());
+		OMExecutor.execute(omobj);
+		fail();
 	}
 
 }

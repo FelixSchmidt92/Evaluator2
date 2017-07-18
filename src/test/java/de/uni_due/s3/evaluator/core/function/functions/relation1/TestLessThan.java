@@ -96,8 +96,8 @@ public class TestLessThan extends TestFunction {
 			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMSTR("test"));
-		Object result = func.evaluate(args);
-		assertEquals(OMSymbol.LOGIC1_TRUE, result);
+		func.evaluate(args);
+		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
@@ -107,8 +107,8 @@ public class TestLessThan extends TestFunction {
 		args.add(OMCreator.createOMSTR("test"));
 		args.add(OMCreator.createOMSTR("test"));
 		args.add(OMCreator.createOMSTR("test"));
-		Object result = func.evaluate(args);
-		assertEquals(OMSymbol.LOGIC1_TRUE, result);
+		func.evaluate(args);
+		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
@@ -117,8 +117,8 @@ public class TestLessThan extends TestFunction {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(null);
 		args.add(OMCreator.createOMSTR(null));
-		Object result = func.evaluate(args);
-		assertEquals(OMSymbol.LOGIC1_TRUE, result);
+		func.evaluate(args);
+		fail();
 	}
 
 	@Test

@@ -1,6 +1,7 @@
 package de.uni_due.s3.evaluator.core.function.functions.string_jack;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,6 +73,7 @@ public class TestEqualsIgnoreCase extends TestFunction {
 			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("equalsIgnoreCase('Test')", null, null);
 		OMExecutor.execute(omobj);
+		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
@@ -80,6 +82,7 @@ public class TestEqualsIgnoreCase extends TestFunction {
 			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("equalsIgnoreCase('Test', 'Test', 'Test')", null, null);
 		OMExecutor.execute(omobj);
+		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
@@ -88,5 +91,6 @@ public class TestEqualsIgnoreCase extends TestFunction {
 			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("equalsIgnoreCase('Test',2)", null, null);
 		OMExecutor.execute(omobj);
+		fail();
 	}
 }

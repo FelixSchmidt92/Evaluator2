@@ -1,6 +1,7 @@
 package de.uni_due.s3.evaluator.core.function.functions.string_jack;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +54,7 @@ public class TestConcat extends TestFunction {
 			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("concat('Test')", null, null);
 		OMExecutor.execute(omobj);
+		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
@@ -61,5 +63,6 @@ public class TestConcat extends TestFunction {
 			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("concat('Test',2)", null, null);
 		OMExecutor.execute(omobj);
+		fail();
 	}
 }

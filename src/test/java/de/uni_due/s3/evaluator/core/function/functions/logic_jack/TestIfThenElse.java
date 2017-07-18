@@ -120,8 +120,8 @@ public class TestIfThenElse extends TestFunction {
 		args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMSTR("test"));
 		args.add(OMCreator.createOMSTR("test"));
-		result = func.evaluate(args);
-		assertEquals(OMSymbol.LOGIC1_TRUE, result);
+		func.evaluate(args);
+		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
@@ -132,8 +132,8 @@ public class TestIfThenElse extends TestFunction {
 		args.add(OMCreator.createOMSTR("test"));
 		args.add(OMCreator.createOMSTR("test"));
 		args.add(OMCreator.createOMSTR("test"));
-		result = func.evaluate(args);
-		assertEquals(OMSymbol.LOGIC1_TRUE, result);
+		func.evaluate(args);
+		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
@@ -143,8 +143,8 @@ public class TestIfThenElse extends TestFunction {
 		args.add(null);
 		args.add(OMCreator.createOMSTR(null));
 		args.add(OMCreator.createOMSTR("test"));
-		result = func.evaluate(args);
-		assertEquals(OMSymbol.LOGIC1_TRUE, result);
+		func.evaluate(args);
+		fail();
 	}
 
 	@Test(expected = NoRepresentationAvailableException.class)
@@ -155,6 +155,7 @@ public class TestIfThenElse extends TestFunction {
 		args.add(OMCreator.createOMI(3));
 		args.add(OMCreator.createOMSTR("false"));
 		Sage.evaluateInCAS(func.getPartialSageSyntax(args));
+		fail();
 	}
 
 }

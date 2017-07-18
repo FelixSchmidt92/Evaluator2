@@ -53,6 +53,7 @@ public class TestBooleanNot extends TestFunction {
 			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		func.evaluate(args);
+		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
@@ -62,6 +63,7 @@ public class TestBooleanNot extends TestFunction {
 		args.add(OMSymbol.LOGIC1_FALSE);
 		args.add(OMSymbol.LOGIC1_FALSE);
 		func.evaluate(args);
+		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
@@ -70,6 +72,7 @@ public class TestBooleanNot extends TestFunction {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMSymbol.ARITH1_DIVIDE);
 		func.evaluate(args);
+		fail();
 	}
 
 	@Test

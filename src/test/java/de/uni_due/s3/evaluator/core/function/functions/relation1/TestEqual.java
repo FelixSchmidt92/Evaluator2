@@ -155,8 +155,8 @@ public class TestEqual extends TestFunction {
 			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("test"));
-		Object result = func.evaluate(args);
-		assertEquals(OMSymbol.LOGIC1_TRUE, result);
+		func.evaluate(args);
+		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
@@ -167,6 +167,7 @@ public class TestEqual extends TestFunction {
 		args.add(OMCreator.createOMSTR("test"));
 		args.add(OMCreator.createOMSTR("test"));
 		func.evaluate(args);
+		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
@@ -176,6 +177,7 @@ public class TestEqual extends TestFunction {
 		args.add(null);
 		args.add(OMCreator.createOMSTR(null));
 		func.evaluate(args);
+		fail();
 	}
 
 	@Test

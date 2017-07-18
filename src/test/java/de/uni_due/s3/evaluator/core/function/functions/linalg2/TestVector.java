@@ -1,6 +1,7 @@
 package de.uni_due.s3.evaluator.core.function.functions.linalg2;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,5 +92,6 @@ public class TestVector extends TestFunction {
 			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("vector()", null, null);
 		OMExecutor.execute(omobj);
+		fail();
 	}
 }

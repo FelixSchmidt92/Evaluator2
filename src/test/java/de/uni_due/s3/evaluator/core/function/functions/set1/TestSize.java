@@ -49,6 +49,7 @@ public class TestSize extends TestFunction {
 			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
 		args = new ArrayList<Object>(0);
 		func.evaluate(args);
+		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
@@ -57,8 +58,8 @@ public class TestSize extends TestFunction {
 		args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMSTR("test"));
 		args.add(OMCreator.createOMSTR("test"));
-		result = func.evaluate(args);
-		assertEquals(OMSymbol.LOGIC1_TRUE, result);
+		func.evaluate(args);
+		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
@@ -66,7 +67,8 @@ public class TestSize extends TestFunction {
 			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
 		args = new ArrayList<Object>(2);
 		args.add(null);
-		result = func.evaluate(args);
+		func.evaluate(args);
+		fail();
 	}
 
 	@Test

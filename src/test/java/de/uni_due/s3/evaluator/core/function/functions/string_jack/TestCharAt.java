@@ -1,6 +1,7 @@
 package de.uni_due.s3.evaluator.core.function.functions.string_jack;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +45,7 @@ public class TestCharAt extends TestFunction {
 		args.add(OMCreator.createOMSTR("Test"));
 		args.add(OMCreator.createOMF(0.0));
 		func.evaluate(args);
+		fail();
 	}
 
 	@Test
@@ -61,6 +63,7 @@ public class TestCharAt extends TestFunction {
 			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("charAt('Test')", null, null);
 		OMExecutor.execute(omobj);
+		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
@@ -69,6 +72,7 @@ public class TestCharAt extends TestFunction {
 			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("charAt('Test',2,'Test')", null, null);
 		OMExecutor.execute(omobj);
+		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
@@ -77,5 +81,6 @@ public class TestCharAt extends TestFunction {
 			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("charAt('Test','Te')", null, null);
 		OMExecutor.execute(omobj);
+		fail();
 	}
 }
