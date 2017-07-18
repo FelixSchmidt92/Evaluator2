@@ -65,6 +65,7 @@ import de.uni_due.s3.evaluator.core.function.functions.string_jack.CompareTo;
 import de.uni_due.s3.evaluator.core.function.functions.string_jack.CompareToIgnoreCase;
 import de.uni_due.s3.evaluator.core.function.functions.string_jack.Concat;
 import de.uni_due.s3.evaluator.core.function.functions.string_jack.EndsWith;
+import de.uni_due.s3.evaluator.core.function.functions.string_jack.Equals;
 import de.uni_due.s3.evaluator.core.function.functions.string_jack.EqualsIgnoreCase;
 import de.uni_due.s3.evaluator.core.function.functions.string_jack.IndexOf;
 import de.uni_due.s3.evaluator.core.function.functions.testterminal_jack.IsEmpty;
@@ -192,6 +193,7 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.STRINGJACK_COMPARETOIGNORECASE, new CompareToIgnoreCase());
 		functions.put(OMSymbol.STRINGJACK_CONCAT, new Concat());
 		functions.put(OMSymbol.STRINGJACK_ENDSWITH, new EndsWith());
+		functions.put(OMSymbol.STRINGJACK_EQUALS, new Equals());
 		functions.put(OMSymbol.STRINGJACK_EQUALSIGNORECASE, new EqualsIgnoreCase());
 		functions.put(OMSymbol.STRINGJACK_INDEXOF, new IndexOf());
 		// Evaluate

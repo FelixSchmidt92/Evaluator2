@@ -56,8 +56,6 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("greaterthan", OMSymbol.RELATION1_GT);
 		functionSymbolMap.put("greaterthanorequal", OMSymbol.RELATION1_GEQ);
 		functionSymbolMap.put("equal", OMSymbol.RELATION1_EQ);
-		// FIXME functions.put("equals", new Object[]{new Equal(), "relation1",
-		// "eq"}); //TEXT und ZAHLEN
 		functionSymbolMap.put("notequal", OMSymbol.RELATION1_NEQ);
 		functionSymbolMap.put("equalssemisem", OMSymbol.POLYNOMIALJACK_EQUALSEMISEM);
 		// Logic
@@ -111,6 +109,7 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("compareToIgnoreCase", OMSymbol.STRINGJACK_COMPARETOIGNORECASE);
 		functionSymbolMap.put("concat", OMSymbol.STRINGJACK_CONCAT);
 		functionSymbolMap.put("endsWith", OMSymbol.STRINGJACK_ENDSWITH);
+		functionSymbolMap.put("equals", OMSymbol.STRINGJACK_EQUALS);
 		functionSymbolMap.put("equalsIgnoreCase", OMSymbol.STRINGJACK_EQUALSIGNORECASE);
 		functionSymbolMap.put("indexOf", OMSymbol.STRINGJACK_INDEXOF);
 		// Evaluate

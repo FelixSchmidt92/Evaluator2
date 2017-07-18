@@ -9,6 +9,19 @@ import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeEx
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 
+/**
+ * Implements charAt operation for strings.
+ * 
+ * Returns the char value at the specified index. An index ranges from 0 to
+ * length() - 1. The first char value of the sequence is at index 0, the next at
+ * index 1, and so on, as for array indexing.
+ * 
+ * If the char value specified by the index is a surrogate, the surrogate value
+ * is returned.
+ * 
+ * @author spobel
+ *
+ */
 public class CharAt extends Function {
 
 	@Override
@@ -23,7 +36,7 @@ public class CharAt extends Function {
 			}
 			return OMCreator.createOMSTR(String.valueOf(string.charAt(pos)));
 		} catch (InputMismatchException e) {
-			throw new FunctionInvalidArgumentTypeException(this, "[0]String, [1]Integer");
+			throw new FunctionInvalidArgumentTypeException(this, "(0)String, (1)Integer");
 		}
 	}
 

@@ -10,14 +10,16 @@ import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeEx
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
 
 /**
- * Implements endsWith operation for strings.
+ * Implements equals operation for strings.
  * 
- * Tests if this string ends with the specified suffix.
+ * Compares this string to the specified object. The result is true if and only
+ * if the argument is not null and is a String object that represents the same
+ * sequence of characters as this object.
  * 
  * @author spobel
  *
  */
-public class EndsWith extends Function {
+public class Equals extends Function {
 
 	@Override
 	protected Object execute(List<Object> arguments)
@@ -26,7 +28,7 @@ public class EndsWith extends Function {
 			String string1 = NumberUtils.convertOMSTRToSring(arguments.get(0));
 			String string2 = NumberUtils.convertOMSTRToSring(arguments.get(1));
 
-			if (string1.endsWith(string2)) {
+			if (string1.equals(string2)) {
 				return OMSymbol.LOGIC1_TRUE;
 			} else {
 				return OMSymbol.LOGIC1_FALSE;

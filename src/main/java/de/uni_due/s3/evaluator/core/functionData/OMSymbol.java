@@ -93,6 +93,7 @@ public class OMSymbol {
 	public static final OMS STRINGJACK_COMPARETOIGNORECASE = OMCreator.createOMS("stringJACK", "compareToIgnoreCase");
 	public static final OMS STRINGJACK_CONCAT = OMCreator.createOMS("stringJACK", "concat");
 	public static final OMS STRINGJACK_ENDSWITH = OMCreator.createOMS("stringJACK", "endsWith");
+	public static final OMS STRINGJACK_EQUALS = OMCreator.createOMS("stringJACK", "equals");
 	public static final OMS STRINGJACK_EQUALSIGNORECASE = OMCreator.createOMS("stringJACK", "equalsIgnoreCase");
 	public static final OMS STRINGJACK_INDEXOF = OMCreator.createOMS("stringJACK", "indexOf");
 	
