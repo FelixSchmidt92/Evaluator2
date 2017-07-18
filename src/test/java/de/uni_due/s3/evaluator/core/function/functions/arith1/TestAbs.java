@@ -8,6 +8,7 @@ import java.util.List;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator.core.function.OMExecutor;
+import de.uni_due.s3.evaluator.core.function.functions.TestFunction;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.Abs;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasException;
@@ -25,7 +26,7 @@ import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
-public class TestAbs {
+public class TestAbs extends TestFunction {
 	private Abs func = new Abs();
 
 	@Test
@@ -72,7 +73,7 @@ public class TestAbs {
 		args.add(OMCreator.createOMI(5));
 		assertEquals("abs(5)", func.getPartialSageSyntax(args));
 	}
-	
+
 	@Test
 	public void testAbsSageSyntax2() throws FunctionInvalidNumberOfArgumentsException,
 			NoRepresentationAvailableException, CasException, FunctionNotImplementedException,

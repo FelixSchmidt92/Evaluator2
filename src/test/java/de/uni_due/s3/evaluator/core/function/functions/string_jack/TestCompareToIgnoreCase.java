@@ -12,6 +12,7 @@ import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.core.function.OMExecutor;
+import de.uni_due.s3.evaluator.core.function.functions.TestFunction;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
@@ -23,12 +24,12 @@ import de.uni_due.s3.evaluator.exceptions.parser.UndefinedFillInVariableExceptio
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
 
-public class TestCompareToIgnoreCase {
+public class TestCompareToIgnoreCase extends TestFunction {
 	private static Function func = new CompareToIgnoreCase();
 
 	@Test
-	public void testCompareToIgnoreCaseEqualStrings() throws FunctionException, CasEvaluationException, CasNotAvailableException,
-			NoRepresentationAvailableException, OpenMathException {
+	public void testCompareToIgnoreCaseEqualStrings() throws FunctionException, CasEvaluationException,
+			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("Test"));
 		args.add(OMCreator.createOMSTR("test"));
@@ -37,8 +38,8 @@ public class TestCompareToIgnoreCase {
 	}
 
 	@Test
-	public void testCompareToIgnoreCaseNotEqualStrings() throws FunctionException, CasEvaluationException, CasNotAvailableException,
-			NoRepresentationAvailableException, OpenMathException {
+	public void testCompareToIgnoreCaseNotEqualStrings() throws FunctionException, CasEvaluationException,
+			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("Testin"));
 		args.add(OMCreator.createOMSTR("TesTer"));
@@ -47,34 +48,34 @@ public class TestCompareToIgnoreCase {
 	}
 
 	@Test
-	public void testCompareToIgnoreCaseIntegration() throws FunctionException, OpenMathException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException {
+	public void testCompareToIgnoreCaseIntegration() throws FunctionException, OpenMathException,
+			CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException,
+			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("compareToIgnoreCase('Hallo', 'Test')", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals(OMCreator.createOMI(-12), result.getOMI());
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testCompareToIgnoreCaseWithLessThanMinParam() throws FunctionException, OpenMathException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException {
+	public void testCompareToIgnoreCaseWithLessThanMinParam() throws FunctionException, OpenMathException,
+			CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException,
+			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("compareToIgnoreCase('Test')", null, null);
 		OMExecutor.execute(omobj);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testCompareToIgnoreCaseWithMoreThanMaxParam() throws FunctionException, OpenMathException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException {
+	public void testCompareToIgnoreCaseWithMoreThanMaxParam() throws FunctionException, OpenMathException,
+			CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException,
+			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("compareToIgnoreCase('Test', 'Test', 'Test')", null, null);
 		OMExecutor.execute(omobj);
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testCompareToIgnoreCaseWithWrongArguments() throws FunctionException, OpenMathException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException {
+	public void testCompareToIgnoreCaseWithWrongArguments() throws FunctionException, OpenMathException,
+			CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException,
+			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("compareToIgnoreCase('Test',2)", null, null);
 		OMExecutor.execute(omobj);
 	}

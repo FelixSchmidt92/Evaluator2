@@ -12,6 +12,7 @@ import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.core.function.OMExecutor;
+import de.uni_due.s3.evaluator.core.function.functions.TestFunction;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
@@ -23,12 +24,12 @@ import de.uni_due.s3.evaluator.exceptions.parser.UndefinedFillInVariableExceptio
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
 
-public class TestConcat {
+public class TestConcat extends TestFunction {
 	private static Function func = new Concat();
 
 	@Test
-	public void testConcatEqualStrings() throws FunctionException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testConcatEqualStrings() throws FunctionException, CasEvaluationException, CasNotAvailableException,
+			NoRepresentationAvailableException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("to"));
 		args.add(OMCreator.createOMSTR("get"));
@@ -38,27 +39,26 @@ public class TestConcat {
 	}
 
 	@Test
-	public void testConcatCaseIntegration() throws FunctionException, OpenMathException,
-			CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
+	public void testConcatCaseIntegration() throws FunctionException, OpenMathException, CasEvaluationException,
+			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
+			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("concat('Hello', ' ', 'World', '!')", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals(OMCreator.createOMSTR("Hello World!"), result.getOMSTR());
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testConcatWithLessThanMinParam() throws FunctionException, OpenMathException,
-			CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
+	public void testConcatWithLessThanMinParam() throws FunctionException, OpenMathException, CasEvaluationException,
+			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
+			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("concat('Test')", null, null);
 		OMExecutor.execute(omobj);
 	}
 
-
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testConcatWithWrongArguments() throws FunctionException, OpenMathException,
-			CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
+	public void testConcatWithWrongArguments() throws FunctionException, OpenMathException, CasEvaluationException,
+			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
+			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("concat('Test',2)", null, null);
 		OMExecutor.execute(omobj);
 	}

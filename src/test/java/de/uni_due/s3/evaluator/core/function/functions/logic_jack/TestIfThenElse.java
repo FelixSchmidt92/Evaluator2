@@ -27,92 +27,97 @@ import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 import de.uni_due.s3.sage.Sage;
 
-public class TestIfThenElse extends TestFunction{
+public class TestIfThenElse extends TestFunction {
 
 	private final Function func = new IfThenElse();
-	
+
 	private List<Object> args;
 	private Object result;
-	
+
 	@Test
-	public void testIfThenElseConditionOMF() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
+	public void testIfThenElseConditionOMF() throws FunctionInvalidArgumentException, CasEvaluationException,
+			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
 		args = new ArrayList<Object>(3);
 		args.add(OMCreator.createOMF(3.0));
 		args.add(OMCreator.createOMSTR("true"));
-		args.add(OMCreator.createOMSTR("false"));		
+		args.add(OMCreator.createOMSTR("false"));
 		result = func.evaluate(args);
-		assertEquals(OMCreator.createOMSTR("true"),result);
-		
+		assertEquals(OMCreator.createOMSTR("true"), result);
+
 		args = new ArrayList<Object>(3);
 		args.add(OMCreator.createOMF(-1.0));
 		args.add(OMCreator.createOMSTR("true"));
-		args.add(OMCreator.createOMSTR("false"));		
+		args.add(OMCreator.createOMSTR("false"));
 		result = func.evaluate(args);
-		assertEquals(OMCreator.createOMSTR("false"),result);
+		assertEquals(OMCreator.createOMSTR("false"), result);
 	}
-	
+
 	@Test
-	public void testIfThenElseConditionOMI() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
+	public void testIfThenElseConditionOMI() throws FunctionInvalidArgumentException, CasEvaluationException,
+			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
 		args = new ArrayList<Object>(3);
 		args.add(OMCreator.createOMI(3));
 		args.add(OMCreator.createOMSTR("true"));
-		args.add(OMCreator.createOMSTR("false"));	
+		args.add(OMCreator.createOMSTR("false"));
 		result = func.evaluate(args);
-		assertEquals(OMCreator.createOMSTR("true"),result);
-		
+		assertEquals(OMCreator.createOMSTR("true"), result);
+
 		args = new ArrayList<Object>(3);
 		args.add(OMCreator.createOMI(-2));
 		args.add(OMCreator.createOMSTR("true"));
-		args.add(OMCreator.createOMSTR("false"));	
+		args.add(OMCreator.createOMSTR("false"));
 		result = func.evaluate(args);
-		assertEquals(OMCreator.createOMSTR("false"),result);
+		assertEquals(OMCreator.createOMSTR("false"), result);
 	}
-	
+
 	@Test
-	public void testIfThenElseConditionBoolean() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
+	public void testIfThenElseConditionBoolean() throws FunctionInvalidArgumentException, CasEvaluationException,
+			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
 		args = new ArrayList<Object>(3);
 		args.add(OMSymbol.LOGIC1_TRUE);
 		args.add(OMCreator.createOMSTR("true"));
-		args.add(OMCreator.createOMSTR("false"));	
+		args.add(OMCreator.createOMSTR("false"));
 		result = func.evaluate(args);
-		assertEquals(OMCreator.createOMSTR("true"),result);
-		
+		assertEquals(OMCreator.createOMSTR("true"), result);
+
 		args = new ArrayList<Object>(3);
 		args.add(OMSymbol.LOGIC1_FALSE);
 		args.add(OMCreator.createOMSTR("true"));
-		args.add(OMCreator.createOMSTR("false"));	
+		args.add(OMCreator.createOMSTR("false"));
 		result = func.evaluate(args);
-		assertEquals(OMCreator.createOMSTR("false"),result);
+		assertEquals(OMCreator.createOMSTR("false"), result);
 	}
-	
+
 	@Test
-	public void testIfThenElseAnyReturnType() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
+	public void testIfThenElseAnyReturnType() throws FunctionInvalidArgumentException, CasEvaluationException,
+			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
 		args = new ArrayList<Object>(3);
 		Object obj = new Object();
 		args.add(OMSymbol.LOGIC1_TRUE);
 		args.add(obj);
-		args.add(null);	
+		args.add(null);
 		result = func.evaluate(args);
-		assertEquals(obj,result);
-		
+		assertEquals(obj, result);
+
 	}
-	
+
 	@Test
 	public void testIfThenEleseIntegration() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("ifthenelse('5*3*9>=10','true','false')", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
-		assertEquals("true",result.getOMSTR().getContent());
-		
+		assertEquals("true", result.getOMSTR().getContent());
+
 		omobj = ExpressionParser.parse("ifthenelse('5*3*10==10','true','false')", null, null);
 		result = OMExecutor.execute(omobj);
-		assertEquals("false",result.getOMSTR().getContent());
+		assertEquals("false", result.getOMSTR().getContent());
 	}
-	
+
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testIfThenEleseWithLessThanMinParam() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
-		args = new ArrayList<Object>(2);	
+	public void testIfThenEleseWithLessThanMinParam() throws FunctionInvalidArgumentException, CasEvaluationException,
+			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+		args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMSTR("test"));
 		args.add(OMCreator.createOMSTR("test"));
 		result = func.evaluate(args);
@@ -120,8 +125,9 @@ public class TestIfThenElse extends TestFunction{
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testIfThenEleseWithMoreThanMaxParam() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
-		args = new ArrayList<Object>(2);	
+	public void testIfThenEleseWithMoreThanMaxParam() throws FunctionInvalidArgumentException, CasEvaluationException,
+			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+		args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMSTR("test"));
 		args.add(OMCreator.createOMSTR("test"));
 		args.add(OMCreator.createOMSTR("test"));
@@ -131,25 +137,24 @@ public class TestIfThenElse extends TestFunction{
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testIfThenEleseWithWrongArguments() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
-		args = new ArrayList<Object>(2);	
+	public void testIfThenEleseWithWrongArguments() throws FunctionInvalidArgumentException, CasEvaluationException,
+			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+		args = new ArrayList<Object>(2);
 		args.add(null);
 		args.add(OMCreator.createOMSTR(null));
 		args.add(OMCreator.createOMSTR("test"));
 		result = func.evaluate(args);
 		assertEquals(OMSymbol.LOGIC1_TRUE, result);
 	}
-	
-	
-	@Test(expected=NoRepresentationAvailableException.class)
-	public void testIfThenElseSageSyntax() throws CasEvaluationException, FunctionInvalidNumberOfArgumentsException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
+
+	@Test(expected = NoRepresentationAvailableException.class)
+	public void testIfThenElseSageSyntax() throws CasEvaluationException, FunctionInvalidNumberOfArgumentsException,
+			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
 		args = new ArrayList<Object>(3);
 		args.add(OMSymbol.LOGIC1_TRUE);
 		args.add(OMCreator.createOMI(3));
-		args.add(OMCreator.createOMSTR("false"));	
+		args.add(OMCreator.createOMSTR("false"));
 		Sage.evaluateInCAS(func.getPartialSageSyntax(args));
 	}
-	
-	
-	
+
 }

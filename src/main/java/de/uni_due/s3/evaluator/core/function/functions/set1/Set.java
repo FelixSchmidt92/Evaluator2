@@ -7,8 +7,7 @@ import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.core.functionData.OMSymbol;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
-import de.uni_due.s3.openmath.jaxb.OMA;
-import de.uni_due.s3.openmath.jaxb.OMS;
+import de.uni_due.s3.openmath.omutils.OMCreator;
 
 /**
  * Implements a list. Values can occur more than ones in this list. In a normal set values could only occur ones!.
@@ -21,14 +20,7 @@ public class Set extends Function {
 
 	@Override
 	protected Object execute(List<Object> arguments) {
-		OMA oma = new OMA();
-		OMS oms = OMSymbol.SET1_SET;
-		
-		List<Object> omel = oma.getOmel();
-		omel.add(oms);
-		omel.addAll(arguments);
-		
-		return oma;
+		return OMCreator.createOMA(OMSymbol.SET1_SET, arguments);
 	}
 
 	@Override

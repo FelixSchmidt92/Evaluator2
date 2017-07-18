@@ -32,7 +32,7 @@ public class CharAt extends Function {
 			int pos = NumberUtils.convertOMIToInteger(arguments.get(1));
 			if (string.length() <= pos || pos < 0) {
 				throw new FunctionInvalidArgumentException(this,
-						"Second Argument of charAt is invalid. Not in Range of String");
+						"Second Argument of charAt is invalid. Not in Range of String.");
 			}
 			return OMCreator.createOMSTR(String.valueOf(string.charAt(pos)));
 		} catch (InputMismatchException e) {
