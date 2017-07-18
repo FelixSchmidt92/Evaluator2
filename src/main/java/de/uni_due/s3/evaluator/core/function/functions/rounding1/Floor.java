@@ -7,9 +7,15 @@ import de.uni_due.s3.evaluator.core.function.NumberUtils;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
 
-public class Floor extends Function{
+/**
+ * Returns the largest (closest to positive infinity) double value that is less
+ * than or equal to the argument and is equal to a mathematical integer.
+ * 
+ * @author spobel
+ *
+ */
+public class Floor extends Function {
 
-	
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException {
 		try {
@@ -20,7 +26,7 @@ public class Floor extends Function{
 			throw new FunctionInvalidArgumentTypeException(this, "(0)Integer/Double/Float");
 		}
 	}
-	
+
 	@Override
 	protected int minArgs() {
 		return 1;
@@ -30,6 +36,5 @@ public class Floor extends Function{
 	protected int maxArgs() {
 		return 1;
 	}
-
 
 }

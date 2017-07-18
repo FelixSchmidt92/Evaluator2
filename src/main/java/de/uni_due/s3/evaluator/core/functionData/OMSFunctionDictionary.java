@@ -11,6 +11,8 @@ import de.uni_due.s3.evaluator.core.function.functions.arith1.Plus;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.Power;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.Times;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.UnaryMinus;
+import de.uni_due.s3.evaluator.core.function.functions.arith_jack.Max;
+import de.uni_due.s3.evaluator.core.function.functions.arith_jack.Min;
 import de.uni_due.s3.evaluator.core.function.functions.binary_jack.ConvertToBinary;
 import de.uni_due.s3.evaluator.core.function.functions.binary_jack.EqualsBinary;
 import de.uni_due.s3.evaluator.core.function.functions.cas_jack.EvaluateInR;
@@ -119,6 +121,9 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.ARITH1_GCD, new GCD());
 		functions.put(OMSymbol.ARITH1_UNARY_MINUS, new UnaryMinus());
 		functions.put(OMSymbol.ARITH1_POWER, new Power());
+		
+		functions.put(OMSymbol.ARITHJACK_MIN, new Min());
+		functions.put(OMSymbol.ARITHJACK_MAX, new Max());
 		// Integer
 		functions.put(OMSymbol.INTEGER1_REMAINDER, new Remainder());
 		// Rounding

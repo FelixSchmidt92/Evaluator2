@@ -14,7 +14,7 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 import de.uni_due.s3.sage.Sage;
 
 /**
- * Implements Sin function. Example tan(1) = 1.55740772465490, tan(0)
+ * Implements Tan function. Example tan(1) = 1.55740772465490, tan(0)
  * = 0
  * 
  * @author spobel

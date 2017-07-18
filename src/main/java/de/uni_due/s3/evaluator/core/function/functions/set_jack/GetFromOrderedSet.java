@@ -14,6 +14,12 @@ import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 
+/**
+ * Implements a get Function for Set (List).
+ * 
+ * @author spobel
+ *
+ */
 public class GetFromOrderedSet extends Function {
 
 	@Override

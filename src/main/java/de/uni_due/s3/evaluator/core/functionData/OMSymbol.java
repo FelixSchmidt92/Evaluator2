@@ -13,7 +13,10 @@ public class OMSymbol {
 	public static final OMS ARITH1_TIMES = OMCreator.createOMS("arith1", "times");
 	public static final OMS ARITH1_UNARY_MINUS = OMCreator.createOMS("arith1", "unary_minus");
 	public static final OMS ARITH1_POWER = OMCreator.createOMS("arith1", "power");
-
+	
+	public static final OMS ARITHJACK_MIN = OMCreator.createOMS("arithJACK", "min");
+	public static final OMS ARITHJACK_MAX = OMCreator.createOMS("arithJACK", "max");
+	
 	public static final OMS BINARYJACK_CONVERTTOBINARY = OMCreator.createOMS("binaryJACK", "convertToBinary");
 	public static final OMS BINARYJACK_EQUALSBINARY = OMCreator.createOMS("binaryJACK", "equalsBinary");
 

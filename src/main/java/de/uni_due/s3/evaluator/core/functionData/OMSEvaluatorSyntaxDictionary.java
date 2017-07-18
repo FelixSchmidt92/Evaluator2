@@ -36,7 +36,13 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("abs", OMSymbol.ARITH1_ABS);
 		functionSymbolMap.put("gcd", OMSymbol.ARITH1_GCD);
 		functionSymbolMap.put("pow", OMSymbol.ARITH1_POWER);
+		
+		functionSymbolMap.put("min", OMSymbol.ARITHJACK_MIN);
+		functionSymbolMap.put("max", OMSymbol.ARITHJACK_MAX);
+		
 		functionSymbolMap.put("remainder", OMSymbol.INTEGER1_REMAINDER);
+		
+		
 		// Integer
 		functionSymbolMap.put("IEEEremainder", OMSymbol.INTEGER1_REMAINDER);
 		// Rounding

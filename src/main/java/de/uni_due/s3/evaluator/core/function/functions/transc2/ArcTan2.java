@@ -12,7 +12,12 @@ import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailab
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 import de.uni_due.s3.sage.Sage;
-
+/**
+ * Implements ArcTan2 function. Example atan2(1,1) = 0.785398163397448
+ * 
+ * @author spobel
+ *
+ */
 public class ArcTan2 extends Function {
 
 	@Override

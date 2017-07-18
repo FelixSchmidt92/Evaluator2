@@ -12,6 +12,12 @@ import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeEx
 import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 
+/**
+ * Implements a get Function for Set (List). First Set (List) will be ordered.
+ * 
+ * @author spobel
+ *
+ */
 public class ChooseFromComplement extends Function {
 
 	@Override
