@@ -111,13 +111,18 @@ public class OMSymbol {
 	public static final OMS TESTTERMINALJACK_ISEMPTY = OMCreator.createOMS("testterminalJACK", "isEmpty");
 	public static final OMS TESTTERMINALJACK_ISPOLYNOMIAL = OMCreator.createOMS("polynomialJACK", "isPolynomial");
 
-	public static final OMS TRANSC1_SIN = OMCreator.createOMS("transc1", "sin");
-	public static final OMS TRANSC1_COS = OMCreator.createOMS("transc1", "cos");
-	public static final OMS TRANSC1_TAN = OMCreator.createOMS("transc1", "tan");
-	public static final OMS TRANSC1_ARCSIN = OMCreator.createOMS("transc1", "arcsin");
 	public static final OMS TRANSC1_ARCCOS = OMCreator.createOMS("transc1", "arccos");
+	public static final OMS TRANSC1_ARCSIN = OMCreator.createOMS("transc1", "arcsin");
 	public static final OMS TRANSC1_ARCTAN = OMCreator.createOMS("transc1", "arctan");
+	public static final OMS TRANSC1_COS = OMCreator.createOMS("transc1", "cos");
 	public static final OMS TRANSC1_EXP = OMCreator.createOMS("transc1", "exp");
+	public static final OMS TRANSC1_LOG = OMCreator.createOMS("transc1", "log");
+	public static final OMS TRANSC1_SIN = OMCreator.createOMS("transc1", "sin");
+	public static final OMS TRANSC1_TAN = OMCreator.createOMS("transc1", "tan");
+	
 	public static final OMS TRANSC2_ARCTAN2 = OMCreator.createOMS("transc2", "arctan");
+	
+	
+	
 
 }

@@ -80,6 +80,7 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("sin", OMSymbol.TRANSC1_SIN);
 		functionSymbolMap.put("cos", OMSymbol.TRANSC1_COS);
 		functionSymbolMap.put("tan", OMSymbol.TRANSC1_TAN);
+		functionSymbolMap.put("log", OMSymbol.TRANSC1_LOG);
 		functionSymbolMap.put("asin", OMSymbol.TRANSC1_ARCSIN);
 		functionSymbolMap.put("acos", OMSymbol.TRANSC1_ARCCOS);
 		functionSymbolMap.put("atan", OMSymbol.TRANSC1_ARCTAN);

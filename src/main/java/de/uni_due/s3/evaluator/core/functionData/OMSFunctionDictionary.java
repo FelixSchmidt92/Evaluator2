@@ -79,6 +79,7 @@ import de.uni_due.s3.evaluator.core.function.functions.transc1.ArcSin;
 import de.uni_due.s3.evaluator.core.function.functions.transc1.ArcTan;
 import de.uni_due.s3.evaluator.core.function.functions.transc1.Cos;
 import de.uni_due.s3.evaluator.core.function.functions.transc1.Exp;
+import de.uni_due.s3.evaluator.core.function.functions.transc1.Log;
 import de.uni_due.s3.evaluator.core.function.functions.transc1.Sin;
 import de.uni_due.s3.evaluator.core.function.functions.transc1.Tan;
 import de.uni_due.s3.evaluator.core.function.functions.transc2.ArcTan2;
@@ -165,6 +166,7 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.TRANSC1_ARCCOS, new ArcCos());
 		functions.put(OMSymbol.TRANSC1_ARCTAN, new ArcTan());
 		functions.put(OMSymbol.TRANSC1_EXP, new Exp());
+		functions.put(OMSymbol.TRANSC1_LOG, new Log());
 		functions.put(OMSymbol.TRANSC2_ARCTAN2, new ArcTan2());
 		// Polynome
 		functions.put(OMSymbol.POLYNOMIAL1_DEGREE, new Degree());
