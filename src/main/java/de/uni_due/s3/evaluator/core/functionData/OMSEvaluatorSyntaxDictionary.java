@@ -6,6 +6,16 @@ import java.util.Map;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedRuntimeException;
 import de.uni_due.s3.openmath.jaxb.OMS;
 
+/**
+ * This Class contains the Translation from Input of the User to the 
+ * corresponding OMS.
+ * 
+ * Include here the Name (String) and the OMSymbol of the new created Function.
+ * Don't forget to add it in OMSFunctionDictionary too! 
+ * 
+ * @author dlux, spobel, frichtscheid
+ *
+ */
 public class OMSEvaluatorSyntaxDictionary {
 
 	private Map<String, OMS> functionSymbolMap = new HashMap<String, OMS>();
@@ -17,13 +27,12 @@ public class OMSEvaluatorSyntaxDictionary {
 	}
 
 	/**
-	 * OMSEvaluatorSyntaxDictionary. Hier wird den Funktionen, die im Evaluator
-	 * angegeben werden können das zugehörige OMSymbol zugeordnet.
+	 * OMSEvaluatorSyntaxDictionary. Here are the Names and the corresponding Symbols listesd 
 	 * 
-	 * Schreibt man eine neue Funktion, muss diese hier eingefügt werden.
+	 * If another Function for this Evaluator is written you have to add it here and in
+	 * OMSFunctionDictionary
 	 * 
-	 * Außerdem muss eine neue Function auch in der FunctionFactory hinzugefügt
-	 * werden. OpenMathSymbole müssen in der Klasse OMSymbol ergänzt werden.
+	 * Also add the OMSymbol in OMSymbol, so referencing this new Function can be made easy!
 	 */
 	private OMSEvaluatorSyntaxDictionary() {
 		functionSymbolMap.put("plus", OMSymbol.ARITH1_PLUS);
