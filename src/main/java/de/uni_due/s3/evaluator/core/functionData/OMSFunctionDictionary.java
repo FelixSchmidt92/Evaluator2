@@ -105,14 +105,15 @@ public class OMSFunctionDictionary {
 	 * Here you can add (register) the Functions which are available for the
 	 * Evaluator in the HashMap.
 	 * 
-	 * The static only adds Functions to the HashMap. There is nothing else to
-	 * do here.
 	 * 
 	 * Explanation: The key of this HashMap (First Parameter) defines the
 	 * OMSymbol
 	 * 
 	 * The Parameter: The Object which implements this functionName (can also be
 	 * null)
+	 * 
+	 * If you did add a new OMSymbol in OMSymbols and a name (String) in OMSEvaluatorSyntaxDictionary
+	 * you can now refer here to the Key OMSSymbol to the corresponding Class of the Function
 	 */
 	private OMSFunctionDictionary() {
 

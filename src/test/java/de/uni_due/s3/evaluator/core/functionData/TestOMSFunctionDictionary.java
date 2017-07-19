@@ -23,7 +23,7 @@ import de.uni_due.s3.openmath.omutils.OMCreator;
 
 /**
  * This Test requires at least the 5 Symbols (in parameters specified) to work
- * correctly In Order to Test this Class
+ * correctly to Test this Class
  * 
  * @author dlux
  *

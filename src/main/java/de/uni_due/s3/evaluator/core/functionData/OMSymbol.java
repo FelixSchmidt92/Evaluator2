@@ -3,6 +3,11 @@ package de.uni_due.s3.evaluator.core.functionData;
 import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 
+/**
+ * This Class is a Dataholder for all the OMSymbols in this Evaluator. 
+ * 
+ * @author spobel
+ */
 public class OMSymbol {
 
 	public static final OMS ARITH1_ABS = OMCreator.createOMS("arith1", "abs");
