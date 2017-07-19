@@ -3,30 +3,27 @@ package de.uni_due.s3.evaluator.core.functionData;
 import java.util.HashMap;
 import java.util.Map;
 
-
 import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedRuntimeException;
 import de.uni_due.s3.openmath.jaxb.OMS;
 
 public class OMSEvaluatorSyntaxDictionary {
-	
+
 	private Map<String, OMS> functionSymbolMap = new HashMap<String, OMS>();
-	
+
 	private static OMSEvaluatorSyntaxDictionary omsesd = new OMSEvaluatorSyntaxDictionary();
-	
-	
-	public static OMSEvaluatorSyntaxDictionary getInstance(){
+
+	public static OMSEvaluatorSyntaxDictionary getInstance() {
 		return omsesd;
 	}
-	
-	
+
 	/**
-	 * OMSEvaluatorSyntaxDictionary. Hier wird den Funktionen, die im Evaluator angegeben
-	 * werden können das zugehörige OMSymbol zugeordnet.
+	 * OMSEvaluatorSyntaxDictionary. Hier wird den Funktionen, die im Evaluator
+	 * angegeben werden können das zugehörige OMSymbol zugeordnet.
 	 * 
 	 * Schreibt man eine neue Funktion, muss diese hier eingefügt werden.
 	 * 
-	 * Außerdem muss eine neue Function auch in der FunctionFactory hinzugefügt werden.
-	 * OpenMathSymbole müssen in der Klasse OMSymbol ergänzt werden.
+	 * Außerdem muss eine neue Function auch in der FunctionFactory hinzugefügt
+	 * werden. OpenMathSymbole müssen in der Klasse OMSymbol ergänzt werden.
 	 */
 	private OMSEvaluatorSyntaxDictionary() {
 		functionSymbolMap.put("plus", OMSymbol.ARITH1_PLUS);
@@ -36,13 +33,12 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("abs", OMSymbol.ARITH1_ABS);
 		functionSymbolMap.put("gcd", OMSymbol.ARITH1_GCD);
 		functionSymbolMap.put("pow", OMSymbol.ARITH1_POWER);
-		
+
 		functionSymbolMap.put("min", OMSymbol.ARITHJACK_MIN);
 		functionSymbolMap.put("max", OMSymbol.ARITHJACK_MAX);
-		
+
 		functionSymbolMap.put("remainder", OMSymbol.INTEGER1_REMAINDER);
-		
-		
+
 		// Integer
 		functionSymbolMap.put("IEEEremainder", OMSymbol.INTEGER1_REMAINDER);
 		// Rounding
@@ -67,7 +63,7 @@ public class OMSEvaluatorSyntaxDictionary {
 		// Logic
 		functionSymbolMap.put("booleanor", OMSymbol.LOGIC1_OR);
 		functionSymbolMap.put("booleanand", OMSymbol.LOGIC1_AND);
-		functionSymbolMap.put("booleannot",OMSymbol.LOGIC1_NOT);
+		functionSymbolMap.put("booleannot", OMSymbol.LOGIC1_NOT);
 		functionSymbolMap.put("ifthenelse", OMSymbol.LOGICJACK_IFTHENELSE);
 		// Trigonometrie
 		functionSymbolMap.put("sin", OMSymbol.TRANSC1_SIN);
@@ -118,6 +114,8 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("equals", OMSymbol.STRINGJACK_EQUALS);
 		functionSymbolMap.put("equalsIgnoreCase", OMSymbol.STRINGJACK_EQUALSIGNORECASE);
 		functionSymbolMap.put("indexOf", OMSymbol.STRINGJACK_INDEXOF);
+		functionSymbolMap.put("trim", OMSymbol.STRINGJACK_TRIM);
+
 		// Evaluate
 		functionSymbolMap.put("eval", OMSymbol.EVALJACK_EVAL);
 		// Complex
@@ -127,12 +125,12 @@ public class OMSEvaluatorSyntaxDictionary {
 		// TestTerminal
 		functionSymbolMap.put("isEmpty", OMSymbol.TESTTERMINALJACK_ISEMPTY);
 		functionSymbolMap.put("isPolynomial", OMSymbol.TESTTERMINALJACK_ISPOLYNOMIAL);
-		
+
 		functionSymbolMap.put("matrix", OMSymbol.LINALG2_MATRIX);
 		functionSymbolMap.put("matrixrow", OMSymbol.LINALG2_MATRIXROW);
 		functionSymbolMap.put("vector", OMSymbol.LINALG2_VECTOR);
 	}
-	
+
 	/**
 	 * This method returns the specific OMSymbol
 	 * 
@@ -142,7 +140,7 @@ public class OMSEvaluatorSyntaxDictionary {
 	 * @throws FunctionNotImplementedRuntimeException
 	 *             if Function is not found in HashMap
 	 */
-	public OMS getOMS(String name) throws FunctionNotImplementedRuntimeException{
+	public OMS getOMS(String name) throws FunctionNotImplementedRuntimeException {
 		if (functionSymbolMap.containsKey(name)) {
 			return functionSymbolMap.get(name);
 		} else {

@@ -13,10 +13,10 @@ public class OMSymbol {
 	public static final OMS ARITH1_TIMES = OMCreator.createOMS("arith1", "times");
 	public static final OMS ARITH1_UNARY_MINUS = OMCreator.createOMS("arith1", "unary_minus");
 	public static final OMS ARITH1_POWER = OMCreator.createOMS("arith1", "power");
-	
+
 	public static final OMS ARITHJACK_MIN = OMCreator.createOMS("arithJACK", "min");
 	public static final OMS ARITHJACK_MAX = OMCreator.createOMS("arithJACK", "max");
-	
+
 	public static final OMS BINARYJACK_CONVERTTOBINARY = OMCreator.createOMS("binaryJACK", "convertToBinary");
 	public static final OMS BINARYJACK_EQUALSBINARY = OMCreator.createOMS("binaryJACK", "equalsBinary");
 
@@ -99,10 +99,11 @@ public class OMSymbol {
 	public static final OMS STRINGJACK_EQUALS = OMCreator.createOMS("stringJACK", "equals");
 	public static final OMS STRINGJACK_EQUALSIGNORECASE = OMCreator.createOMS("stringJACK", "equalsIgnoreCase");
 	public static final OMS STRINGJACK_INDEXOF = OMCreator.createOMS("stringJACK", "indexOf");
-	
+	public static final OMS STRINGJACK_TRIM = OMCreator.createOMS("stringJACK", "trim");
+
 	public static final OMS TESTTERMINALJACK_ISEMPTY = OMCreator.createOMS("testterminalJACK", "isEmpty");
 	public static final OMS TESTTERMINALJACK_ISPOLYNOMIAL = OMCreator.createOMS("polynomialJACK", "isPolynomial");
-	
+
 	public static final OMS TRANSC1_SIN = OMCreator.createOMS("transc1", "sin");
 	public static final OMS TRANSC1_COS = OMCreator.createOMS("transc1", "cos");
 	public static final OMS TRANSC1_TAN = OMCreator.createOMS("transc1", "tan");

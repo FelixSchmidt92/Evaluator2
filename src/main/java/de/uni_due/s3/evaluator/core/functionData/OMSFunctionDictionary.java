@@ -70,6 +70,7 @@ import de.uni_due.s3.evaluator.core.function.functions.string_jack.EndsWith;
 import de.uni_due.s3.evaluator.core.function.functions.string_jack.Equals;
 import de.uni_due.s3.evaluator.core.function.functions.string_jack.EqualsIgnoreCase;
 import de.uni_due.s3.evaluator.core.function.functions.string_jack.IndexOf;
+import de.uni_due.s3.evaluator.core.function.functions.string_jack.Trim;
 import de.uni_due.s3.evaluator.core.function.functions.testterminal_jack.IsEmpty;
 import de.uni_due.s3.evaluator.core.function.functions.testterminal_jack.IsPolynomial;
 import de.uni_due.s3.evaluator.core.function.functions.transc1.ArcCos;
@@ -201,6 +202,7 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.STRINGJACK_EQUALS, new Equals());
 		functions.put(OMSymbol.STRINGJACK_EQUALSIGNORECASE, new EqualsIgnoreCase());
 		functions.put(OMSymbol.STRINGJACK_INDEXOF, new IndexOf());
+		functions.put(OMSymbol.STRINGJACK_TRIM, new Trim());
 		// Evaluate
 		functions.put(OMSymbol.EVALJACK_EVAL, new Eval());
 		// Complex
