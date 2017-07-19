@@ -13,7 +13,7 @@ import de.uni_due.s3.openmath.jaxb.OMV;
 /**
  * OMI OMF is not Empty, so they return always false
  * 
- * isEmpty returns true if one Oo all Elements in this argument is empty.
+ * isEmpty returns true if one or all Elements in this argument is empty.
  * It returns falls otherwise.
  * 
  * @author dlux
@@ -27,9 +27,16 @@ public class IsEmpty extends Function {
 		boolean isEmpty = false;
 		Object obj = arguments.get(0);
 		
+		//OMI OMF are Non-Empty
+		
+		//OMV/OMSTR
 		if(obj instanceof OMSTR){
 			isEmpty = ((OMSTR)obj).getContent().isEmpty();
 		}
+		if(obj instanceof OMV){
+			isEmpty = ((OMV)obj).getName().isEmpty();
+		}
+		
 		//Here are OMS defined which are empty
 		if(obj instanceof OMS){
 			if (((OMS)obj).equals(OMSymbol.SET1_EMPTYSET))
@@ -37,20 +44,21 @@ public class IsEmpty extends Function {
 			if (((OMS)obj).equals(OMSymbol.EDITOR1_INPUT_BOX))
 				isEmpty = true;
 		}
-		if(obj instanceof OMV){
-			isEmpty = ((OMV)obj).getName().isEmpty();
-		}
+
 		
 		if(obj instanceof OMA){
 			OMA oma = (OMA) obj;
 			
-			if (oma.getOmel().get(0).equals(OMSymbol.SET1_SET) && oma.getOmel().size() == 1){
-				System.out.println("dsa");
-				isEmpty = true;
-			}else{
-				return OMSymbol.LOGIC1_FALSE; // NonEmpty-Set return False directly!
+			//Special Case Set!
+			if ((oma.getOmel().get(0).equals(OMSymbol.SET1_SET)) && oma.getOmel().size() == 1){
+				return OMSymbol.LOGIC1_TRUE;
+			}
+			else if ((oma.getOmel().get(0).equals(OMSymbol.SET1_SET)) && oma.getOmel().size() > 1){
+				return OMSymbol.LOGIC1_FALSE;
 			}
 			
+			
+			//All other OMAs especially for Matrix and MatrixRow
 			for (int i = 0; i < oma.getOmel().size(); i++){
 				ArrayList<Object> newArgs = new ArrayList<>();
 				newArgs.add(oma.getOmel().get(i));
@@ -72,13 +80,11 @@ public class IsEmpty extends Function {
 
 	@Override
 	protected int minArgs() {
-		// TODO Auto-generated method stub
 		return 1;
 	}
 
 	@Override
 	protected int maxArgs() {
-		// TODO Auto-generated method stub
 		return 1;
 	}
 
