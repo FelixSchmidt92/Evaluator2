@@ -124,6 +124,8 @@ public class OMSymbol {
 	public static final OMS TRANSC1_TAN = OMCreator.createOMS("transc1", "tan");
 	
 	public static final OMS TRANSC2_ARCTAN2 = OMCreator.createOMS("transc2", "arctan");
+	public static final OMS SET1_EMPTYSET = OMCreator.createOMS("set1", "emptyset");
+	public static final OMS EDITOR1_INPUT_BOX = OMCreator.createOMS("set1", "emptyset");
 	
 	
 	

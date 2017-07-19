@@ -76,7 +76,7 @@ public class NumberUtils {
 		}
 	}
 	
-	public static String convertOMSTRToSring(Object obj) throws InputMismatchException {
+	public static String convertOMSTRToString(Object obj) throws InputMismatchException {
 		if (obj instanceof OMOBJ) {
 			try {
 				obj = OMConverter.toElement((OMOBJ) obj);

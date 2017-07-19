@@ -20,7 +20,7 @@ public class Length extends Function {
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException {
 		try {
-			String string = NumberUtils.convertOMSTRToSring(arguments.get(0));
+			String string = NumberUtils.convertOMSTRToString(arguments.get(0));
 			return OMCreator.createOMI(string.length());
 		} catch (InputMismatchException e) {
 			throw new FunctionInvalidArgumentTypeException(this, "(0)String");

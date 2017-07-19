@@ -30,8 +30,8 @@ public class IndexOf extends Function {
 	protected Object execute(List<Object> arguments)
 			throws FunctionInvalidArgumentException, FunctionInvalidArgumentTypeException {
 		try {
-			String string = NumberUtils.convertOMSTRToSring(arguments.get(0));
-			String muster = NumberUtils.convertOMSTRToSring(arguments.get(1));
+			String string = NumberUtils.convertOMSTRToString(arguments.get(0));
+			String muster = NumberUtils.convertOMSTRToString(arguments.get(1));
 			int pos = 0;
 			if (arguments.size() == 3) {
 				pos = NumberUtils.convertOMIToInteger(arguments.get(2));

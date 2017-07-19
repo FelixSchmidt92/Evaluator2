@@ -31,8 +31,8 @@ public class CompareToIgnoreCase extends Function {
 	protected Object execute(List<Object> arguments)
 			throws FunctionInvalidArgumentException, FunctionInvalidArgumentTypeException {
 		try {
-			String string1 = NumberUtils.convertOMSTRToSring(arguments.get(0));
-			String string2 = NumberUtils.convertOMSTRToSring(arguments.get(1));
+			String string1 = NumberUtils.convertOMSTRToString(arguments.get(0));
+			String string2 = NumberUtils.convertOMSTRToString(arguments.get(1));
 			return OMCreator.createOMI(string1.compareToIgnoreCase(string2));
 		} catch (InputMismatchException e) {
 			throw new FunctionInvalidArgumentTypeException(this, "(0)String, (1)String");

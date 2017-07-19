@@ -66,7 +66,7 @@ public class GetFromOrderedSet extends Function {
 			List<String> setForSort = new ArrayList<String>();
 			for (Object element : set) {
 				try {
-					setForSort.add(NumberUtils.convertOMSTRToSring(element));
+					setForSort.add(NumberUtils.convertOMSTRToString(element));
 				} catch (InputMismatchException e) {
 					throw new FunctionInvalidArgumentTypeException(this,
 							"Set elements have to be from either type String or Integer/Double/Float.");

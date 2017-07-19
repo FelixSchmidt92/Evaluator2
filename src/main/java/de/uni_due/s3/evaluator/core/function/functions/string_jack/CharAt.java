@@ -28,7 +28,7 @@ public class CharAt extends Function {
 	protected Object execute(List<Object> arguments)
 			throws FunctionInvalidArgumentException, FunctionInvalidArgumentTypeException {
 		try {
-			String string = NumberUtils.convertOMSTRToSring(arguments.get(0));
+			String string = NumberUtils.convertOMSTRToString(arguments.get(0));
 			int pos = NumberUtils.convertOMIToInteger(arguments.get(1));
 			if (string.length() <= pos || pos < 0) {
 				throw new FunctionInvalidArgumentException(this,

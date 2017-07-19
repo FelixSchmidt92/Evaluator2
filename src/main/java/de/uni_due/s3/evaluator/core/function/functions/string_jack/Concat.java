@@ -34,7 +34,7 @@ public class Concat extends Function {
 		String result = "";
 		try {
 			for (Object arg : arguments) {
-				result = result.concat(NumberUtils.convertOMSTRToSring(arg));
+				result = result.concat(NumberUtils.convertOMSTRToString(arg));
 			}
 			return OMCreator.createOMSTR(result);
 		} catch (InputMismatchException e) {
