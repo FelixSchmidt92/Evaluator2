@@ -58,6 +58,7 @@ import de.uni_due.s3.evaluator.core.function.functions.relation1.LessThanOrEqual
 import de.uni_due.s3.evaluator.core.function.functions.relation1.NotEqual;
 import de.uni_due.s3.evaluator.core.function.functions.rounding1.Ceiling;
 import de.uni_due.s3.evaluator.core.function.functions.rounding1.Floor;
+import de.uni_due.s3.evaluator.core.function.functions.rounding1.Round;
 import de.uni_due.s3.evaluator.core.function.functions.set1.Set;
 import de.uni_due.s3.evaluator.core.function.functions.set1.Size;
 import de.uni_due.s3.evaluator.core.function.functions.set_jack.ChooseFromComplement;
@@ -71,6 +72,8 @@ import de.uni_due.s3.evaluator.core.function.functions.string_jack.EndsWith;
 import de.uni_due.s3.evaluator.core.function.functions.string_jack.Equals;
 import de.uni_due.s3.evaluator.core.function.functions.string_jack.EqualsIgnoreCase;
 import de.uni_due.s3.evaluator.core.function.functions.string_jack.IndexOf;
+import de.uni_due.s3.evaluator.core.function.functions.string_jack.Length;
+import de.uni_due.s3.evaluator.core.function.functions.string_jack.StartsWith;
 import de.uni_due.s3.evaluator.core.function.functions.string_jack.Trim;
 import de.uni_due.s3.evaluator.core.function.functions.testterminal_jack.IsEmpty;
 import de.uni_due.s3.evaluator.core.function.functions.testterminal_jack.IsPolynomial;
@@ -135,6 +138,7 @@ public class OMSFunctionDictionary {
 		// Rounding
 		functions.put(OMSymbol.ROUNDING1_CEILING, new Ceiling());
 		functions.put(OMSymbol.ROUNDING1_FLOOR, new Floor());
+		functions.put(OMSymbol.ROUNDING1_ROUND, new Round());
 		// Binary
 		functions.put(OMSymbol.BINARYJACK_CONVERTTOBINARY, new ConvertToBinary());
 		functions.put(OMSymbol.BINARYJACK_EQUALSBINARY, new EqualsBinary());
@@ -208,6 +212,8 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.STRINGJACK_EQUALS, new Equals());
 		functions.put(OMSymbol.STRINGJACK_EQUALSIGNORECASE, new EqualsIgnoreCase());
 		functions.put(OMSymbol.STRINGJACK_INDEXOF, new IndexOf());
+		functions.put(OMSymbol.STRINGJACK_LENGTH, new Length());
+		functions.put(OMSymbol.STRINGJACK_STARTSWITH, new StartsWith());
 		functions.put(OMSymbol.STRINGJACK_TRIM, new Trim());
 		// Evaluate
 		functions.put(OMSymbol.EVALJACK_EVAL, new Eval());

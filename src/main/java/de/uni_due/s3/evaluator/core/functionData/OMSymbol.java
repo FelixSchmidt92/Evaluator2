@@ -91,7 +91,8 @@ public class OMSymbol {
 
 	public static final OMS ROUNDING1_CEILING = OMCreator.createOMS("rounding1", "ceiling");
 	public static final OMS ROUNDING1_FLOOR = OMCreator.createOMS("rounding1", "floor");
-
+	public static final OMS ROUNDING1_ROUND = OMCreator.createOMS("rounding1", "round");
+	
 	public static final OMS SET1_SET = OMCreator.createOMS("set1", "set");
 	public static final OMS SET1_SIZE = OMCreator.createOMS("set1", "size");
 	public static final OMS SETJACK_CHOOSEFROMCOMPLEMENT = OMCreator.createOMS("setJACK", "chooseFromComplement");
@@ -106,6 +107,8 @@ public class OMSymbol {
 	public static final OMS STRINGJACK_EQUALS = OMCreator.createOMS("stringJACK", "equals");
 	public static final OMS STRINGJACK_EQUALSIGNORECASE = OMCreator.createOMS("stringJACK", "equalsIgnoreCase");
 	public static final OMS STRINGJACK_INDEXOF = OMCreator.createOMS("stringJACK", "indexOf");
+	public static final OMS STRINGJACK_LENGTH = OMCreator.createOMS("stringJACK", "length");
+	public static final OMS STRINGJACK_STARTSWITH = OMCreator.createOMS("stringJACK", "startsWith");
 	public static final OMS STRINGJACK_TRIM = OMCreator.createOMS("stringJACK", "trim");
 
 	public static final OMS TESTTERMINALJACK_ISEMPTY = OMCreator.createOMS("testterminalJACK", "isEmpty");

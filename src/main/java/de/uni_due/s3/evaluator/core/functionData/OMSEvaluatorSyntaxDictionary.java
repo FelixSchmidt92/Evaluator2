@@ -55,6 +55,7 @@ public class OMSEvaluatorSyntaxDictionary {
 		// Rounding
 		functionSymbolMap.put("ceil", OMSymbol.ROUNDING1_CEILING);
 		functionSymbolMap.put("floor", OMSymbol.ROUNDING1_FLOOR);
+		functionSymbolMap.put("round", OMSymbol.ROUNDING1_ROUND);
 		// Binary
 		functionSymbolMap.put("convertToBinary", OMSymbol.BINARYJACK_CONVERTTOBINARY);
 		functionSymbolMap.put("equalsBinary", OMSymbol.BINARYJACK_EQUALSBINARY);
@@ -126,6 +127,8 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("equals", OMSymbol.STRINGJACK_EQUALS);
 		functionSymbolMap.put("equalsIgnoreCase", OMSymbol.STRINGJACK_EQUALSIGNORECASE);
 		functionSymbolMap.put("indexOf", OMSymbol.STRINGJACK_INDEXOF);
+		functionSymbolMap.put("length", OMSymbol.STRINGJACK_LENGTH);
+		functionSymbolMap.put("startsWith", OMSymbol.STRINGJACK_STARTSWITH);
 		functionSymbolMap.put("trim", OMSymbol.STRINGJACK_TRIM);
 
 		// Evaluate
