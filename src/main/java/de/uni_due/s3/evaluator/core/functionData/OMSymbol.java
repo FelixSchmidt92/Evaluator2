@@ -106,6 +106,7 @@ public class OMSymbol {
 	public static final OMS STRINGJACK_EQUALS = OMCreator.createOMS("stringJACK", "equals");
 	public static final OMS STRINGJACK_EQUALSIGNORECASE = OMCreator.createOMS("stringJACK", "equalsIgnoreCase");
 	public static final OMS STRINGJACK_INDEXOF = OMCreator.createOMS("stringJACK", "indexOf");
+	public static final OMS STRINGJACK_LASTINDEXOF = OMCreator.createOMS("stringJACK", "lastIndexOf");
 	public static final OMS STRINGJACK_LENGTH = OMCreator.createOMS("stringJACK", "length");
 	public static final OMS STRINGJACK_REPLACE = OMCreator.createOMS("stringJACK", "replace");
 	public static final OMS STRINGJACK_STARTSWITH = OMCreator.createOMS("stringJACK", "startsWith");

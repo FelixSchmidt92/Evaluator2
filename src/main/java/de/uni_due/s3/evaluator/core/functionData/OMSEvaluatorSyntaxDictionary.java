@@ -132,6 +132,7 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("equals", OMSymbol.STRINGJACK_EQUALS);
 		functionSymbolMap.put("equalsIgnoreCase", OMSymbol.STRINGJACK_EQUALSIGNORECASE);
 		functionSymbolMap.put("indexOf", OMSymbol.STRINGJACK_INDEXOF);
+		functionSymbolMap.put("lastIndexOf", OMSymbol.STRINGJACK_LASTINDEXOF);
 		functionSymbolMap.put("length", OMSymbol.STRINGJACK_LENGTH);
 		functionSymbolMap.put("startsWith", OMSymbol.STRINGJACK_STARTSWITH);
 		functionSymbolMap.put("replace", OMSymbol.STRINGJACK_REPLACE);
