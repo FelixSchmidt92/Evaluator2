@@ -90,6 +90,8 @@ import de.uni_due.s3.evaluator.core.function.functions.transc1.Log;
 import de.uni_due.s3.evaluator.core.function.functions.transc1.Sin;
 import de.uni_due.s3.evaluator.core.function.functions.transc1.Tan;
 import de.uni_due.s3.evaluator.core.function.functions.transc2.ArcTan2;
+import de.uni_due.s3.evaluator.core.function.functions.transc_jack.ToDegree;
+import de.uni_due.s3.evaluator.core.function.functions.transc_jack.ToRadian;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedRuntimeException;
 import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.omutils.OMCreator;
@@ -168,6 +170,8 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.LOGIC1_NOT, new BooleanNot());
 		functions.put(OMSymbol.LOGICJACK_IFTHENELSE, new IfThenElse());
 		// Trigonometrie
+		functions.put(OMSymbol.TRANSCJACK_TODEGREE, new ToDegree());
+		functions.put(OMSymbol.TRANSCJACK_TORADIAN, new ToRadian());
 		functions.put(OMSymbol.TRANSC1_SIN, new Sin());
 		functions.put(OMSymbol.TRANSC1_COS, new Cos());
 		functions.put(OMSymbol.TRANSC1_TAN, new Tan());

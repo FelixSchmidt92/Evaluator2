@@ -117,6 +117,9 @@ public class OMSymbol {
 	public static final OMS TESTTERMINALJACK_ISEMPTY = OMCreator.createOMS("testterminalJACK", "isEmpty");
 	public static final OMS TESTTERMINALJACK_ISPOLYNOMIAL = OMCreator.createOMS("polynomialJACK", "isPolynomial");
 
+	public static final OMS TRANSCJACK_TODEGREE = OMCreator.createOMS("transcjack", "toDegree");
+	public static final OMS TRANSCJACK_TORADIAN = OMCreator.createOMS("transcjack", "toRadian");
+	
 	public static final OMS TRANSC1_ARCCOS = OMCreator.createOMS("transc1", "arccos");
 	public static final OMS TRANSC1_ARCSIN = OMCreator.createOMS("transc1", "arcsin");
 	public static final OMS TRANSC1_ARCTAN = OMCreator.createOMS("transc1", "arctan");
@@ -127,6 +130,7 @@ public class OMSymbol {
 	public static final OMS TRANSC1_TAN = OMCreator.createOMS("transc1", "tan");
 
 	public static final OMS TRANSC2_ARCTAN2 = OMCreator.createOMS("transc2", "arctan");
+	
 	public static final OMS SET1_EMPTYSET = OMCreator.createOMS("set1", "emptyset");
 	public static final OMS EDITOR1_INPUT_BOX = OMCreator.createOMS("set1", "emptyset");
 

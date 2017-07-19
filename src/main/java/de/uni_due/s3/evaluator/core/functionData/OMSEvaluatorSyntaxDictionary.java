@@ -79,6 +79,10 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("booleannot", OMSymbol.LOGIC1_NOT);
 		functionSymbolMap.put("ifthenelse", OMSymbol.LOGICJACK_IFTHENELSE);
 		// Trigonometrie
+		functionSymbolMap.put("toDegrees", OMSymbol.TRANSCJACK_TODEGREE);//FIXME flag deprecated
+		functionSymbolMap.put("toRadians", OMSymbol.TRANSCJACK_TORADIAN);//FIXME flag deprecated
+		functionSymbolMap.put("toDegree", OMSymbol.TRANSCJACK_TODEGREE);
+		functionSymbolMap.put("toRadian", OMSymbol.TRANSCJACK_TORADIAN);
 		functionSymbolMap.put("sin", OMSymbol.TRANSC1_SIN);
 		functionSymbolMap.put("cos", OMSymbol.TRANSC1_COS);
 		functionSymbolMap.put("tan", OMSymbol.TRANSC1_TAN);
