@@ -4,7 +4,7 @@ import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 
 /**
- * This Class is a Dataholder for all the OMSymbols in this Evaluator. 
+ * This Class is a Dataholder for all the OMSymbols in this Evaluator.
  * 
  * @author spobel
  */
@@ -19,7 +19,6 @@ public class OMSymbol {
 	public static final OMS ARITH1_ROOT = OMCreator.createOMS("arith1", "root");
 	public static final OMS ARITH1_TIMES = OMCreator.createOMS("arith1", "times");
 	public static final OMS ARITH1_UNARY_MINUS = OMCreator.createOMS("arith1", "unary_minus");
-	
 
 	public static final OMS ARITHJACK_MIN = OMCreator.createOMS("arithJACK", "min");
 	public static final OMS ARITHJACK_MAX = OMCreator.createOMS("arithJACK", "max");
@@ -92,7 +91,7 @@ public class OMSymbol {
 	public static final OMS ROUNDING1_CEILING = OMCreator.createOMS("rounding1", "ceiling");
 	public static final OMS ROUNDING1_FLOOR = OMCreator.createOMS("rounding1", "floor");
 	public static final OMS ROUNDING1_ROUND = OMCreator.createOMS("rounding1", "round");
-	
+
 	public static final OMS SET1_SET = OMCreator.createOMS("set1", "set");
 	public static final OMS SET1_SIZE = OMCreator.createOMS("set1", "size");
 	public static final OMS SETJACK_CHOOSEFROMCOMPLEMENT = OMCreator.createOMS("setJACK", "chooseFromComplement");
@@ -108,8 +107,11 @@ public class OMSymbol {
 	public static final OMS STRINGJACK_EQUALSIGNORECASE = OMCreator.createOMS("stringJACK", "equalsIgnoreCase");
 	public static final OMS STRINGJACK_INDEXOF = OMCreator.createOMS("stringJACK", "indexOf");
 	public static final OMS STRINGJACK_LENGTH = OMCreator.createOMS("stringJACK", "length");
+	public static final OMS STRINGJACK_REPLACE = OMCreator.createOMS("stringJACK", "replace");
 	public static final OMS STRINGJACK_STARTSWITH = OMCreator.createOMS("stringJACK", "startsWith");
 	public static final OMS STRINGJACK_SUBSTRING = OMCreator.createOMS("stringJACK", "substring");
+	public static final OMS STRINGJACK_TOLOWERCASE = OMCreator.createOMS("stringJACK", "toLowerCase");
+	public static final OMS STRINGJACK_TOUPPERCASE = OMCreator.createOMS("stringJACK", "toUpperCase");
 	public static final OMS STRINGJACK_TRIM = OMCreator.createOMS("stringJACK", "trim");
 
 	public static final OMS TESTTERMINALJACK_ISEMPTY = OMCreator.createOMS("testterminalJACK", "isEmpty");
@@ -123,12 +125,9 @@ public class OMSymbol {
 	public static final OMS TRANSC1_LOG = OMCreator.createOMS("transc1", "log");
 	public static final OMS TRANSC1_SIN = OMCreator.createOMS("transc1", "sin");
 	public static final OMS TRANSC1_TAN = OMCreator.createOMS("transc1", "tan");
-	
+
 	public static final OMS TRANSC2_ARCTAN2 = OMCreator.createOMS("transc2", "arctan");
 	public static final OMS SET1_EMPTYSET = OMCreator.createOMS("set1", "emptyset");
 	public static final OMS EDITOR1_INPUT_BOX = OMCreator.createOMS("set1", "emptyset");
-	
-	
-	
 
 }

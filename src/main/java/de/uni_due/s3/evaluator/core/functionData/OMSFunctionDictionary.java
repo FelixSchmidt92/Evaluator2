@@ -73,8 +73,11 @@ import de.uni_due.s3.evaluator.core.function.functions.string_jack.Equals;
 import de.uni_due.s3.evaluator.core.function.functions.string_jack.EqualsIgnoreCase;
 import de.uni_due.s3.evaluator.core.function.functions.string_jack.IndexOf;
 import de.uni_due.s3.evaluator.core.function.functions.string_jack.Length;
+import de.uni_due.s3.evaluator.core.function.functions.string_jack.Replace;
 import de.uni_due.s3.evaluator.core.function.functions.string_jack.StartsWith;
 import de.uni_due.s3.evaluator.core.function.functions.string_jack.Substring;
+import de.uni_due.s3.evaluator.core.function.functions.string_jack.ToLowerCase;
+import de.uni_due.s3.evaluator.core.function.functions.string_jack.ToUpperCase;
 import de.uni_due.s3.evaluator.core.function.functions.string_jack.Trim;
 import de.uni_due.s3.evaluator.core.function.functions.testterminal_jack.IsEmpty;
 import de.uni_due.s3.evaluator.core.function.functions.testterminal_jack.IsPolynomial;
@@ -117,8 +120,9 @@ public class OMSFunctionDictionary {
 	 * The Parameter: The Object which implements this functionName (can also be
 	 * null)
 	 * 
-	 * If you did add a new OMSymbol in OMSymbols and a name (String) in OMSEvaluatorSyntaxDictionary
-	 * you can now refer here to the Key OMSSymbol to the corresponding Class of the Function
+	 * If you did add a new OMSymbol in OMSymbols and a name (String) in
+	 * OMSEvaluatorSyntaxDictionary you can now refer here to the Key OMSSymbol
+	 * to the corresponding Class of the Function
 	 */
 	private OMSFunctionDictionary() {
 
@@ -214,8 +218,11 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.STRINGJACK_EQUALSIGNORECASE, new EqualsIgnoreCase());
 		functions.put(OMSymbol.STRINGJACK_INDEXOF, new IndexOf());
 		functions.put(OMSymbol.STRINGJACK_LENGTH, new Length());
+		functions.put(OMSymbol.STRINGJACK_REPLACE, new Replace());
 		functions.put(OMSymbol.STRINGJACK_STARTSWITH, new StartsWith());
 		functions.put(OMSymbol.STRINGJACK_SUBSTRING, new Substring());
+		functions.put(OMSymbol.STRINGJACK_TOLOWERCASE, new ToLowerCase());
+		functions.put(OMSymbol.STRINGJACK_TOUPPERCASE, new ToUpperCase());
 		functions.put(OMSymbol.STRINGJACK_TRIM, new Trim());
 		// Evaluate
 		functions.put(OMSymbol.EVALJACK_EVAL, new Eval());

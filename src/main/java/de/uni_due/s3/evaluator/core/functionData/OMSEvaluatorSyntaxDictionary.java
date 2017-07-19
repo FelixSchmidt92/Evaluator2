@@ -44,6 +44,7 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("root", OMSymbol.ARITH1_ROOT);
 		functionSymbolMap.put("sqrt", OMSymbol.ARITH1_ROOT);
 		functionSymbolMap.put("pow", OMSymbol.ARITH1_POWER);
+		functionSymbolMap.put("unaryminus", OMSymbol.ARITH1_UNARY_MINUS);
 
 		functionSymbolMap.put("min", OMSymbol.ARITHJACK_MIN);
 		functionSymbolMap.put("max", OMSymbol.ARITHJACK_MAX);
@@ -129,7 +130,10 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("indexOf", OMSymbol.STRINGJACK_INDEXOF);
 		functionSymbolMap.put("length", OMSymbol.STRINGJACK_LENGTH);
 		functionSymbolMap.put("startsWith", OMSymbol.STRINGJACK_STARTSWITH);
+		functionSymbolMap.put("replace", OMSymbol.STRINGJACK_REPLACE);
 		functionSymbolMap.put("substring", OMSymbol.STRINGJACK_SUBSTRING);
+		functionSymbolMap.put("toLowerCase", OMSymbol.STRINGJACK_TOLOWERCASE);
+		functionSymbolMap.put("toUpperCase", OMSymbol.STRINGJACK_TOUPPERCASE);
 		functionSymbolMap.put("trim", OMSymbol.STRINGJACK_TRIM);
 
 		// Evaluate
@@ -145,9 +149,6 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("matrix", OMSymbol.LINALG2_MATRIX);
 		functionSymbolMap.put("matrixrow", OMSymbol.LINALG2_MATRIXROW);
 		functionSymbolMap.put("vector", OMSymbol.LINALG2_VECTOR);
-		
-		
-		functionSymbolMap.put("isEmpty", OMSymbol.TESTTERMINALJACK_ISEMPTY);
 	}
 
 	/**
