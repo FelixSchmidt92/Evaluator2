@@ -129,6 +129,7 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("indexOf", OMSymbol.STRINGJACK_INDEXOF);
 		functionSymbolMap.put("length", OMSymbol.STRINGJACK_LENGTH);
 		functionSymbolMap.put("startsWith", OMSymbol.STRINGJACK_STARTSWITH);
+		functionSymbolMap.put("substring", OMSymbol.STRINGJACK_SUBSTRING);
 		functionSymbolMap.put("trim", OMSymbol.STRINGJACK_TRIM);
 
 		// Evaluate
