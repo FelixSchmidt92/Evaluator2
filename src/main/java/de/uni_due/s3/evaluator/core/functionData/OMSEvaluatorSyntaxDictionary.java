@@ -32,6 +32,8 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("divide", OMSymbol.ARITH1_DIVIDE);
 		functionSymbolMap.put("abs", OMSymbol.ARITH1_ABS);
 		functionSymbolMap.put("gcd", OMSymbol.ARITH1_GCD);
+		functionSymbolMap.put("root", OMSymbol.ARITH1_ROOT);
+		functionSymbolMap.put("sqrt", OMSymbol.ARITH1_ROOT);
 		functionSymbolMap.put("pow", OMSymbol.ARITH1_POWER);
 
 		functionSymbolMap.put("min", OMSymbol.ARITHJACK_MIN);

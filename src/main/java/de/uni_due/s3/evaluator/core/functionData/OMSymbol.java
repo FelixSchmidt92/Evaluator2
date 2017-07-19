@@ -10,9 +10,11 @@ public class OMSymbol {
 	public static final OMS ARITH1_GCD = OMCreator.createOMS("arith1", "gcd");
 	public static final OMS ARITH1_MINUS = OMCreator.createOMS("arith1", "minus");
 	public static final OMS ARITH1_PLUS = OMCreator.createOMS("arith1", "plus");
+	public static final OMS ARITH1_POWER = OMCreator.createOMS("arith1", "power");
+	public static final OMS ARITH1_ROOT = OMCreator.createOMS("arith1", "root");
 	public static final OMS ARITH1_TIMES = OMCreator.createOMS("arith1", "times");
 	public static final OMS ARITH1_UNARY_MINUS = OMCreator.createOMS("arith1", "unary_minus");
-	public static final OMS ARITH1_POWER = OMCreator.createOMS("arith1", "power");
+	
 
 	public static final OMS ARITHJACK_MIN = OMCreator.createOMS("arithJACK", "min");
 	public static final OMS ARITHJACK_MAX = OMCreator.createOMS("arithJACK", "max");
