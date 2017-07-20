@@ -16,7 +16,7 @@ import de.uni_due.s3.openmath.omutils.OMCreator;
  * 	It returns a String which represents this Argument in Binary.
  * 
  * 	By Negative Double Values (OMF) 64 Bits are returned always. (See more at IEEE_754 double-Value)
- *  (By positive the leading Zeros are trimmed!)
+ *  (By positive the leading Zeros are trimmed!, but not shorter than 54 bits)
  * 
  *  By negative Integer-Values 32 Bits are returned always. (See more at two's complement integer) 
  *  (By positive the leading Zeros are trimmed!)

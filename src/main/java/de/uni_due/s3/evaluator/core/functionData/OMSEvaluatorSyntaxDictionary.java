@@ -65,6 +65,7 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("countNodes", OMSymbol.OPENMATHJACK_COUNTNODES);
 		functionSymbolMap.put("getDenominator", OMSymbol.OPENMATHJACK_GETDENOMINATOR);
 		functionSymbolMap.put("getNumerator", OMSymbol.OPENMATHJACK_GETNUMERATOR);
+		functionSymbolMap.put("random", OMSymbol.OPENMATHJACK_RANDOM);
 		// Relationen
 		functionSymbolMap.put("lessthan", OMSymbol.RELATION1_LT);
 		functionSymbolMap.put("lessthanorequal", OMSymbol.RELATION1_LEQ);
@@ -140,6 +141,7 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("toLowerCase", OMSymbol.STRINGJACK_TOLOWERCASE);
 		functionSymbolMap.put("toUpperCase", OMSymbol.STRINGJACK_TOUPPERCASE);
 		functionSymbolMap.put("trim", OMSymbol.STRINGJACK_TRIM);
+		functionSymbolMap.put("matches", OMSymbol.STRINGJACK_MATCHES);
 
 		// Evaluate
 		functionSymbolMap.put("eval", OMSymbol.EVALJACK_EVAL);
@@ -150,7 +152,9 @@ public class OMSEvaluatorSyntaxDictionary {
 		// TestTerminal
 		functionSymbolMap.put("isEmpty", OMSymbol.TESTTERMINALJACK_ISEMPTY);
 		functionSymbolMap.put("isPolynomial", OMSymbol.TESTTERMINALJACK_ISPOLYNOMIAL);
-
+		functionSymbolMap.put("isSet", OMSymbol.TESTTERMINALJACK_ISSET);
+		functionSymbolMap.put("isNumber", OMSymbol.TESTTERMINALJACK_ISNUMBER);
+		
 		functionSymbolMap.put("matrix", OMSymbol.LINALG2_MATRIX);
 		functionSymbolMap.put("matrixrow", OMSymbol.LINALG2_MATRIXROW);
 		functionSymbolMap.put("vector", OMSymbol.LINALG2_VECTOR);

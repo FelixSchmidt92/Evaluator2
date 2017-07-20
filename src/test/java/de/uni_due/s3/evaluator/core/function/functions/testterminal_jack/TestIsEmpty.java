@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator.core.function.Function;
+import de.uni_due.s3.evaluator.core.function.functions.TestFunction;
 import de.uni_due.s3.evaluator.core.functionData.OMSymbol;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
@@ -22,7 +23,7 @@ import de.uni_due.s3.openmath.jaxb.OMV;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
-public class TestIsEmpty{
+public class TestIsEmpty extends TestFunction{
 	
 	Function func = new IsEmpty();
 	

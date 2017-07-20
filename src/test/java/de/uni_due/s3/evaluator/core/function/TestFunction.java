@@ -10,6 +10,7 @@ import org.junit.Test;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoSageRepresentationAvailableException;
@@ -60,6 +61,12 @@ public class TestFunction {
 		ArrayList<Object> arguments = new ArrayList<>();
 		arguments.add(OMCreator.createOMI(15));
 		assertEquals("evaluated", myFunction.evaluate(arguments));
+	}
+	
+	@Test(expected = FunctionInvalidArgumentException.class)
+	public void testEvaluateWithNull() throws CasEvaluationException, FunctionException, CasNotAvailableException,
+			NoRepresentationAvailableException, OpenMathException {
+		myFunction.evaluate(null);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)

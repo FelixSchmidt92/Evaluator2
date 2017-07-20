@@ -68,6 +68,8 @@ public abstract class Function {
 	 */
 	public Object evaluate(List<Object> arguments) throws FunctionException, FunctionInvalidArgumentException,
 			CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+		if(arguments == null)
+			throw new FunctionInvalidArgumentException(this, "The List of arguments is of Type NULL");
 		argsBetweenMinMax(arguments); // Check
 		return execute(arguments);
 	}

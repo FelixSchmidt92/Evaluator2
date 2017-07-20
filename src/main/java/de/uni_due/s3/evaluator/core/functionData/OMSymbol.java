@@ -64,6 +64,7 @@ public class OMSymbol {
 	public static final OMS OPENMATHJACK_COUNTNODES = OMCreator.createOMS("openmathJACK", "countNodes");
 	public static final OMS OPENMATHJACK_GETDENOMINATOR = OMCreator.createOMS("openmathJflrACK", "getDenominator");
 	public static final OMS OPENMATHJACK_GETNUMERATOR = OMCreator.createOMS("openmathJACK", "getNumerator");
+	public static final OMS OPENMATHJACK_RANDOM = OMCreator.createOMS("openmathJACK", "random");
 
 	public static final OMS POLYNOMIAL1_DEGREE = OMCreator.createOMS("polynomial1", "degree");
 	public static final OMS POLYNOMIAL1_EXPAND = OMCreator.createOMS("polynomial1", "expand");
@@ -114,10 +115,13 @@ public class OMSymbol {
 	public static final OMS STRINGJACK_TOLOWERCASE = OMCreator.createOMS("stringJACK", "toLowerCase");
 	public static final OMS STRINGJACK_TOUPPERCASE = OMCreator.createOMS("stringJACK", "toUpperCase");
 	public static final OMS STRINGJACK_TRIM = OMCreator.createOMS("stringJACK", "trim");
-
+	public static final OMS STRINGJACK_MATCHES = OMCreator.createOMS("stringJACK", "matches");
+	
 	public static final OMS TESTTERMINALJACK_ISEMPTY = OMCreator.createOMS("testterminalJACK", "isEmpty");
-	public static final OMS TESTTERMINALJACK_ISPOLYNOMIAL = OMCreator.createOMS("polynomialJACK", "isPolynomial");
-
+	public static final OMS TESTTERMINALJACK_ISPOLYNOMIAL = OMCreator.createOMS("testterminalJACK", "isPolynomial");
+	public static final OMS TESTTERMINALJACK_ISSET = OMCreator.createOMS("testterminalJACK", "isSet");
+	public static final OMS TESTTERMINALJACK_ISNUMBER = OMCreator.createOMS("testterminalJACK", "isNumber");
+	
 	public static final OMS TRANSCJACK_TODEGREE = OMCreator.createOMS("transcjack", "toDegree");
 	public static final OMS TRANSCJACK_TORADIAN = OMCreator.createOMS("transcjack", "toRadian");
 	
@@ -133,6 +137,8 @@ public class OMSymbol {
 	public static final OMS TRANSC2_ARCTAN2 = OMCreator.createOMS("transc2", "arctan");
 	
 	public static final OMS SET1_EMPTYSET = OMCreator.createOMS("set1", "emptyset");
+	
 	public static final OMS EDITOR1_INPUT_BOX = OMCreator.createOMS("set1", "emptyset");
+	
 
 }

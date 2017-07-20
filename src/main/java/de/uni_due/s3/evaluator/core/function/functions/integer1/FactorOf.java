@@ -1,4 +1,4 @@
-package de.uni_due.s3.evaluator.core.function.functions.polynomial_jack;
+package de.uni_due.s3.evaluator.core.function.functions.integer1;
 
 import java.util.List;
 

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator.core.function.Function;
+import de.uni_due.s3.evaluator.core.function.functions.TestFunction;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
@@ -16,7 +17,7 @@ import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
-public class TestCountNodes {
+public class TestCountNodes extends TestFunction{
 
 	private final Function func = new CountNodes();
 

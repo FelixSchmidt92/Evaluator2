@@ -20,6 +20,7 @@ import de.uni_due.s3.evaluator.core.function.functions.cas_jack.EvaluateInR;
 import de.uni_due.s3.evaluator.core.function.functions.cas_jack.EvaluateInSage;
 import de.uni_due.s3.evaluator.core.function.functions.cas_jack.EvaluateInSymja;
 import de.uni_due.s3.evaluator.core.function.functions.eval_jack.Eval;
+import de.uni_due.s3.evaluator.core.function.functions.integer1.FactorOf;
 import de.uni_due.s3.evaluator.core.function.functions.integer1.Remainder;
 import de.uni_due.s3.evaluator.core.function.functions.linalg2.Matrix;
 import de.uni_due.s3.evaluator.core.function.functions.linalg2.MatrixRow;
@@ -36,6 +37,7 @@ import de.uni_due.s3.evaluator.core.function.functions.openmath_jack.CountBasicO
 import de.uni_due.s3.evaluator.core.function.functions.openmath_jack.CountNodes;
 import de.uni_due.s3.evaluator.core.function.functions.openmath_jack.GetDenominator;
 import de.uni_due.s3.evaluator.core.function.functions.openmath_jack.GetNumerator;
+import de.uni_due.s3.evaluator.core.function.functions.openmath_jack.Random;
 import de.uni_due.s3.evaluator.core.function.functions.polynomial1.Degree;
 import de.uni_due.s3.evaluator.core.function.functions.polynomial1.Expand;
 import de.uni_due.s3.evaluator.core.function.functions.polynomial_jack.DependsOn;
@@ -47,7 +49,6 @@ import de.uni_due.s3.evaluator.core.function.functions.polynomial_jack.EvalEq;
 import de.uni_due.s3.evaluator.core.function.functions.polynomial_jack.EvalPolynomial;
 import de.uni_due.s3.evaluator.core.function.functions.polynomial_jack.EvalPolynomialCplx;
 import de.uni_due.s3.evaluator.core.function.functions.polynomial_jack.EvalTerm2;
-import de.uni_due.s3.evaluator.core.function.functions.polynomial_jack.FactorOf;
 import de.uni_due.s3.evaluator.core.function.functions.polynomial_jack.Integrate;
 import de.uni_due.s3.evaluator.core.function.functions.polynomial_jack.NumberOfVariables;
 import de.uni_due.s3.evaluator.core.function.functions.relation1.Equal;
@@ -74,6 +75,7 @@ import de.uni_due.s3.evaluator.core.function.functions.string_jack.EqualsIgnoreC
 import de.uni_due.s3.evaluator.core.function.functions.string_jack.IndexOf;
 import de.uni_due.s3.evaluator.core.function.functions.string_jack.LastIndexOf;
 import de.uni_due.s3.evaluator.core.function.functions.string_jack.Length;
+import de.uni_due.s3.evaluator.core.function.functions.string_jack.Matches;
 import de.uni_due.s3.evaluator.core.function.functions.string_jack.Replace;
 import de.uni_due.s3.evaluator.core.function.functions.string_jack.StartsWith;
 import de.uni_due.s3.evaluator.core.function.functions.string_jack.Substring;
@@ -81,7 +83,9 @@ import de.uni_due.s3.evaluator.core.function.functions.string_jack.ToLowerCase;
 import de.uni_due.s3.evaluator.core.function.functions.string_jack.ToUpperCase;
 import de.uni_due.s3.evaluator.core.function.functions.string_jack.Trim;
 import de.uni_due.s3.evaluator.core.function.functions.testterminal_jack.IsEmpty;
+import de.uni_due.s3.evaluator.core.function.functions.testterminal_jack.IsNumber;
 import de.uni_due.s3.evaluator.core.function.functions.testterminal_jack.IsPolynomial;
+import de.uni_due.s3.evaluator.core.function.functions.testterminal_jack.IsSet;
 import de.uni_due.s3.evaluator.core.function.functions.transc1.ArcCos;
 import de.uni_due.s3.evaluator.core.function.functions.transc1.ArcSin;
 import de.uni_due.s3.evaluator.core.function.functions.transc1.ArcTan;
@@ -155,14 +159,13 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.OPENMATHJACK_COUNTNODES, new CountNodes());
 		functions.put(OMSymbol.OPENMATHJACK_GETDENOMINATOR, new GetDenominator());
 		functions.put(OMSymbol.OPENMATHJACK_GETNUMERATOR, new GetNumerator());
+		functions.put(OMSymbol.OPENMATHJACK_RANDOM, new Random());
 		// Relationen
 		functions.put(OMSymbol.RELATION1_LT, new LessThan());
 		functions.put(OMSymbol.RELATION1_LEQ, new LessThanOrEqual());
 		functions.put(OMSymbol.RELATION1_GT, new GreaterThan());
 		functions.put(OMSymbol.RELATION1_GEQ, new GreaterThanOrEqual());
 		functions.put(OMSymbol.RELATION1_EQ, new Equal());
-		// FIXME functions.put("equals", new Object[]{new Equal(), "relation1",
-		// "eq"}); //TEXT und ZAHLEN
 		functions.put(OMSymbol.RELATION1_NEQ, new NotEqual());
 		functions.put(OMSymbol.POLYNOMIALJACK_EQUALSEMISEM, new EqualsSemiSem());
 		// Logic
@@ -230,6 +233,7 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.STRINGJACK_TOLOWERCASE, new ToLowerCase());
 		functions.put(OMSymbol.STRINGJACK_TOUPPERCASE, new ToUpperCase());
 		functions.put(OMSymbol.STRINGJACK_TRIM, new Trim());
+		functions.put(OMSymbol.STRINGJACK_MATCHES, new Matches());
 		// Evaluate
 		functions.put(OMSymbol.EVALJACK_EVAL, new Eval());
 		// Complex
@@ -239,6 +243,8 @@ public class OMSFunctionDictionary {
 		// TestTerminal
 		functions.put(OMSymbol.TESTTERMINALJACK_ISEMPTY, new IsEmpty());
 		functions.put(OMSymbol.TESTTERMINALJACK_ISPOLYNOMIAL, new IsPolynomial());
+		functions.put(OMSymbol.TESTTERMINALJACK_ISSET, new IsSet());
+		functions.put(OMSymbol.TESTTERMINALJACK_ISNUMBER, new IsNumber());
 	}
 
 	/**
