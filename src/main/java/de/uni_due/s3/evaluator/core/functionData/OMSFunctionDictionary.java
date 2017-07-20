@@ -86,6 +86,7 @@ import de.uni_due.s3.evaluator.core.function.functions.testterminal_jack.IsEmpty
 import de.uni_due.s3.evaluator.core.function.functions.testterminal_jack.IsNumber;
 import de.uni_due.s3.evaluator.core.function.functions.testterminal_jack.IsPolynomial;
 import de.uni_due.s3.evaluator.core.function.functions.testterminal_jack.IsSet;
+import de.uni_due.s3.evaluator.core.function.functions.testterminal_jack.isFraction;
 import de.uni_due.s3.evaluator.core.function.functions.transc1.ArcCos;
 import de.uni_due.s3.evaluator.core.function.functions.transc1.ArcSin;
 import de.uni_due.s3.evaluator.core.function.functions.transc1.ArcTan;
@@ -245,6 +246,7 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.TESTTERMINALJACK_ISPOLYNOMIAL, new IsPolynomial());
 		functions.put(OMSymbol.TESTTERMINALJACK_ISSET, new IsSet());
 		functions.put(OMSymbol.TESTTERMINALJACK_ISNUMBER, new IsNumber());
+		functions.put(OMSymbol.TESTTERMINALJACK_ISFRACTION, new isFraction());
 	}
 
 	/**

@@ -154,6 +154,7 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("isPolynomial", OMSymbol.TESTTERMINALJACK_ISPOLYNOMIAL);
 		functionSymbolMap.put("isSet", OMSymbol.TESTTERMINALJACK_ISSET);
 		functionSymbolMap.put("isNumber", OMSymbol.TESTTERMINALJACK_ISNUMBER);
+		functionSymbolMap.put("isFraction", OMSymbol.TESTTERMINALJACK_ISFRACTION);
 		
 		functionSymbolMap.put("matrix", OMSymbol.LINALG2_MATRIX);
 		functionSymbolMap.put("matrixrow", OMSymbol.LINALG2_MATRIXROW);

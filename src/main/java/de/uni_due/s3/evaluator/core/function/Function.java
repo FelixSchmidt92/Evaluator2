@@ -66,7 +66,7 @@ public abstract class Function {
 	 * @throws FunctionInvalidNumberOfArgumentsException
 	 *             if number of Arguments is not between
 	 */
-	public Object evaluate(List<Object> arguments) throws FunctionException, FunctionInvalidArgumentException,
+	public final Object evaluate(List<Object> arguments) throws FunctionException, FunctionInvalidArgumentException,
 			CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
 		if(arguments == null)
 			throw new FunctionInvalidArgumentException(this, "The List of arguments is of Type NULL");
@@ -84,7 +84,7 @@ public abstract class Function {
 	 * @throws FunctionInvalidNumberOfArgumentsException
 	 *             if number of Arguments is not between
 	 */
-	public void argsBetweenMinMax(List<Object> arguments) throws FunctionInvalidNumberOfArgumentsException {
+	public final void argsBetweenMinMax(List<Object> arguments) throws FunctionInvalidNumberOfArgumentsException {
 		// Check max, if infinitely set max to Integer.MAX_VALUE
 		int max = maxArgs();
 		if (maxArgs() < 0) {
@@ -154,7 +154,7 @@ public abstract class Function {
 	 * @throws FunctionInvalidNumberOfArgumentsException
 	 * @throws CasException
 	 */
-	protected String getSageSyntax(Object omElement)
+	protected final String getSageSyntax(Object omElement)
 			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException {
 		return new OMToSageVisitor().visit(omElement);
 	}

@@ -58,6 +58,7 @@ public class OMSymbol {
 	public static final OMS NUMS1_I = OMCreator.createOMS("nums1", "i");
 	public static final OMS NUMS1_INFINITY = OMCreator.createOMS("nums1", "infinity");
 	public static final OMS NUMS1_PI = OMCreator.createOMS("nums1", "pi");
+	public static final OMS NUMS1_RATIONAL = OMCreator.createOMS("nums1", "rational");
 
 	public static final OMS OPENMATHJACK_COUNTBASICOPERATIONS = OMCreator.createOMS("openmathJACK",
 			"countBasicOperations");
@@ -121,6 +122,7 @@ public class OMSymbol {
 	public static final OMS TESTTERMINALJACK_ISPOLYNOMIAL = OMCreator.createOMS("testterminalJACK", "isPolynomial");
 	public static final OMS TESTTERMINALJACK_ISSET = OMCreator.createOMS("testterminalJACK", "isSet");
 	public static final OMS TESTTERMINALJACK_ISNUMBER = OMCreator.createOMS("testterminalJACK", "isNumber");
+	public static final OMS TESTTERMINALJACK_ISFRACTION = OMCreator.createOMS("testterminalJACK", "isFraction");
 	
 	public static final OMS TRANSCJACK_TODEGREE = OMCreator.createOMS("transcjack", "toDegree");
 	public static final OMS TRANSCJACK_TORADIAN = OMCreator.createOMS("transcjack", "toRadian");
