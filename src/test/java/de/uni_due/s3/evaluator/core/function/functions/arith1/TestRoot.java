@@ -49,7 +49,7 @@ public class TestRoot extends TestFunction {
 	public void testRootIntegration1() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
-		OMOBJ omobj = ExpressionParser.parse("sqrt(25)", null, null);
+		OMOBJ omobj = ExpressionParser.parse("root(25)", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals(OMCreator.createOMI(5), result.getOMI());
 	}
@@ -86,7 +86,7 @@ public class TestRoot extends TestFunction {
 	public void testAbsWithWrongArguments() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
-		OMOBJ omobj = ExpressionParser.parse("abs('test')", null, null);
+		OMOBJ omobj = ExpressionParser.parse("root('test')", null, null);
 		OMExecutor.execute(omobj);
 		fail();
 	}
