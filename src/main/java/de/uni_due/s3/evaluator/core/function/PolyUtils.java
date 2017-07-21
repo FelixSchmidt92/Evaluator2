@@ -18,7 +18,6 @@ public class PolyUtils {
 		Matcher m = variable.matcher(polynomail);
 		while(m.find()){
 			String var = m.group();
-			System.out.println(var);
 			if(var.length()==1)
 				result.add(var);					//if it is just one letter
 			else if(var.length()==2)
