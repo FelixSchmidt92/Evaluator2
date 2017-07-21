@@ -13,9 +13,17 @@ public class TestPolyUtils {
 	public void testPolyGetVariables(){
 		Set<String> res = new HashSet<String>();
 		res.add("a");
-		res.add("abc");
+		res.add("c");
 		res.add("b");
 		
-		assertEquals(res,PolyUtils.getVariables("a^2+(abc)^3+b"));
+		assertEquals(res,PolyUtils.getVariables("a^2+ c^3 + b"));
+	}
+	@Test
+	public void testPolyGetVariablesWithFunctionInPoly(){
+		Set<String> res = new HashSet<String>();
+		res.add("a");
+		res.add("c");
+		
+		assertEquals(res,PolyUtils.getVariables("a*sin(c)"));
 	}
 }
