@@ -12,6 +12,7 @@ import de.uni_due.s3.evaluator.core.function.functions.arith1.Power;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.Root;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.Times;
 import de.uni_due.s3.evaluator.core.function.functions.arith1.UnaryMinus;
+import de.uni_due.s3.evaluator.core.function.functions.arith_jack.IEEERemainder;
 import de.uni_due.s3.evaluator.core.function.functions.arith_jack.Max;
 import de.uni_due.s3.evaluator.core.function.functions.arith_jack.Min;
 import de.uni_due.s3.evaluator.core.function.functions.binary_jack.ConvertToBinary;
@@ -147,6 +148,8 @@ public class OMSFunctionDictionary {
 
 		functions.put(OMSymbol.ARITHJACK_MIN, new Min());
 		functions.put(OMSymbol.ARITHJACK_MAX, new Max());
+		functions.put(OMSymbol.ARITHJACK_IEEEREMAINDER, new IEEERemainder());
+		
 		// Integer
 		functions.put(OMSymbol.INTEGER1_REMAINDER, new Remainder());
 		// Rounding

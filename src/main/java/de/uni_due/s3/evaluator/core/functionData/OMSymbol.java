@@ -22,7 +22,8 @@ public class OMSymbol {
 
 	public static final OMS ARITHJACK_MIN = OMCreator.createOMS("arithJACK", "min");
 	public static final OMS ARITHJACK_MAX = OMCreator.createOMS("arithJACK", "max");
-
+	public static final OMS ARITHJACK_IEEEREMAINDER = OMCreator.createOMS("arithJACK", "ieeeremainder");
+	
 	public static final OMS BINARYJACK_CONVERTTOBINARY = OMCreator.createOMS("binaryJACK", "convertToBinary");
 	public static final OMS BINARYJACK_EQUALSBINARY = OMCreator.createOMS("binaryJACK", "equalsBinary");
 

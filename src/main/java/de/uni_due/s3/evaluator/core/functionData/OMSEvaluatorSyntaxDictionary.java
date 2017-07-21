@@ -48,11 +48,10 @@ public class OMSEvaluatorSyntaxDictionary {
 
 		functionSymbolMap.put("min", OMSymbol.ARITHJACK_MIN);
 		functionSymbolMap.put("max", OMSymbol.ARITHJACK_MAX);
-
-		functionSymbolMap.put("remainder", OMSymbol.INTEGER1_REMAINDER);
+		functionSymbolMap.put("ieeeremainder", OMSymbol.ARITHJACK_IEEEREMAINDER);
 
 		// Integer
-		functionSymbolMap.put("IEEEremainder", OMSymbol.INTEGER1_REMAINDER);
+		functionSymbolMap.put("remainder", OMSymbol.INTEGER1_REMAINDER);
 		// Rounding
 		functionSymbolMap.put("ceil", OMSymbol.ROUNDING1_CEILING);
 		functionSymbolMap.put("floor", OMSymbol.ROUNDING1_FLOOR);
