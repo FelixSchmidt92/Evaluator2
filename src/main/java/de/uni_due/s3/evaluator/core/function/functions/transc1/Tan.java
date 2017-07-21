@@ -49,7 +49,7 @@ public class Tan extends Function {
 
 	@Override
 	public String getPartialSageSyntax(List<Object> arguments)
-			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException {
+			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, FunctionInvalidArgumentTypeException {
 		return "tan(" + getSageSyntax(arguments.get(0)) + ")";
 	}
 }

@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import de.uni_due.s3.evaluator.core.functionData.OMSymbol;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMA;
@@ -100,7 +101,7 @@ public class TestOMToSageVisitor {
 	
 	/*The Class Plus has to be implemented in Functions*/
 	@Test
-	public void testVisitApplication() throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException{
+	public void testVisitApplication() throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, FunctionInvalidArgumentTypeException{
 		assertEquals(omiString + " + " + omfString, visitor.visit(oma));
 		assertEquals(omiString + " + " + omfString, visitor.visit(omobj));
 	}

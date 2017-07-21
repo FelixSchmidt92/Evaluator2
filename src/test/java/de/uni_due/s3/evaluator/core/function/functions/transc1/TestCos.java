@@ -59,7 +59,7 @@ public class TestCos extends TestFunction {
 
 	@Test
 	public void testCosSageSyntax()
-			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException {
+			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException, FunctionInvalidArgumentTypeException {
 		List<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMF(1.0));
 		assertEquals("cos(1)", func.getPartialSageSyntax(args));

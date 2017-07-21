@@ -54,7 +54,7 @@ public class TestGCD extends TestFunction {
 	@Test
 	public void testGcdSageSyntax() throws FunctionInvalidNumberOfArgumentsException,
 			NoRepresentationAvailableException, CasException, FunctionNotImplementedException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
+			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException, FunctionInvalidArgumentTypeException {
 		List<Object> args = new ArrayList<Object>(1);
 		args.add(OMCreator.createOMF(1.0));
 		args.add(OMCreator.createOMI(1));

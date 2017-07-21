@@ -20,6 +20,7 @@ import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 import de.uni_due.s3.evaluator.exceptions.cas.CasException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 
@@ -74,7 +75,7 @@ public class TestOMToCasVisitor {
 	}
 	
 	@Test
-	public void testVisitObject() throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, OpenMathException, CasException{
+	public void testVisitObject() throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, OpenMathException, CasException, FunctionInvalidArgumentTypeException{
 		OMI omi = OMCreator.createOMI(1);
 		OMF omf = OMCreator.createOMF(1.0);
 		OMV omv = OMCreator.createOMV("test");
@@ -96,7 +97,7 @@ public class TestOMToCasVisitor {
 	}
 	
 	@Test
-	public void testVisitOMOBJ() throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, OpenMathException, CasException{
+	public void testVisitOMOBJ() throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, OpenMathException, CasException, FunctionInvalidArgumentTypeException{
 		OMI omi = OMCreator.createOMI(1);
 		OMF omf = OMCreator.createOMF(1.0);
 		OMV omv = OMCreator.createOMV("test");
@@ -118,13 +119,13 @@ public class TestOMToCasVisitor {
 	}
 	
 	@Test(expected=NoRepresentationAvailableException.class)
-	public void testVisitObjectWithWrongObject() throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException{
+	public void testVisitObjectWithWrongObject() throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException, FunctionInvalidArgumentTypeException{
 		vis.visit(new Integer(10));
 		vis.visit(new OMATP());
 	}
 	
 	@Test(expected=NoRepresentationAvailableException.class)
-	public void testVisitOMOBJWithWrongChild() throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException{
+	public void testVisitOMOBJWithWrongChild() throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException, FunctionInvalidArgumentTypeException{
 		OMR omr = new OMR();
 		OMOBJ omobj = new OMOBJ();
 		omobj.setOMR(omr);

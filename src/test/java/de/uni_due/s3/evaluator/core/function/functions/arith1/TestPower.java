@@ -81,7 +81,7 @@ public class TestPower extends TestFunction {
 	@Test
 	public void testPowerSageSyntax() throws FunctionInvalidNumberOfArgumentsException,
 			NoRepresentationAvailableException, FunctionNotImplementedException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException {
+			UndefinedExerciseVariableException, ParserException, FunctionInvalidArgumentTypeException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(1.45));
 		args.add(OMCreator.createOMF(3));

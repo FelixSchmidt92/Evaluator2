@@ -48,7 +48,7 @@ public class Sin extends Function {
 
 	@Override
 	public String getPartialSageSyntax(List<Object> arguments)
-			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException {
+			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, FunctionInvalidArgumentTypeException {
 		return "sin(" + getSageSyntax(arguments.get(0)) + ")";
 	}
 

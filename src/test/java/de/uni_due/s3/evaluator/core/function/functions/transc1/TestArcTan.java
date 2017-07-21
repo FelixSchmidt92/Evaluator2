@@ -59,7 +59,7 @@ public class TestArcTan extends TestFunction {
 
 	@Test
 	public void testArcTanSageSyntax()
-			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException {
+			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException, FunctionInvalidArgumentTypeException {
 		List<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMF(1.0));
 		assertEquals("arctan(1)", func.getPartialSageSyntax(args));

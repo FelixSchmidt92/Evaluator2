@@ -149,7 +149,7 @@ public class TestIfThenElse extends TestFunction {
 
 	@Test(expected = NoRepresentationAvailableException.class)
 	public void testIfThenElseSageSyntax() throws CasEvaluationException, FunctionInvalidNumberOfArgumentsException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException, FunctionInvalidArgumentTypeException {
 		args = new ArrayList<Object>(3);
 		args.add(OMSymbol.LOGIC1_TRUE);
 		args.add(OMCreator.createOMI(3));

@@ -82,7 +82,7 @@ public class TestMinus extends TestFunction {
 	@Test
 	public void testMinusSageSyntax() throws FunctionInvalidNumberOfArgumentsException,
 			NoRepresentationAvailableException, CasException, FunctionNotImplementedException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
+			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException, FunctionInvalidArgumentTypeException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(1.0));
 		args.add(OMCreator.createOMI(1));

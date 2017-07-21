@@ -48,7 +48,7 @@ public class Cos extends Function {
 
 	@Override
 	public String getPartialSageSyntax(List<Object> arguments)
-			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException {
+			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, FunctionInvalidArgumentTypeException {
 		return "cos(" + getSageSyntax(arguments.get(0)) + ")";
 	}
 

@@ -90,6 +90,7 @@ public class Sage {
 					casResult += "\n" + resultLine;
 				}
 			}
+			System.out.println(casResult);
 			sageSocket.close();
 		} catch (IOException e) {
 			log.warn("SageServer Connection '" + randConn + "' is currently not working.");

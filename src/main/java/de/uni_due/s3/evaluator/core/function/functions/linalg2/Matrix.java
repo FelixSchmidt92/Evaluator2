@@ -40,7 +40,7 @@ public class Matrix extends Function {
 
 	@Override
 	public String getPartialSageSyntax(List<Object> arguments)
-			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException {
+			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, FunctionInvalidArgumentTypeException {
 		String sageExpression = "matrix([";
 
 		for (int i = 0; i < arguments.size(); i++) {

@@ -69,7 +69,7 @@ public class TestUnaryMinus extends TestFunction {
 
 	@Test
 	public void testUnaryMinusSageSyntax()
-			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException {
+			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException, FunctionInvalidArgumentTypeException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(1.0));
 		assertEquals("-1", func.getPartialSageSyntax(args));

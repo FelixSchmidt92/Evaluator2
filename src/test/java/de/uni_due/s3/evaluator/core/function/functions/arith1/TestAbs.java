@@ -70,7 +70,7 @@ public class TestAbs extends TestFunction {
 	@Test
 	public void testAbsSageSyntax1() throws FunctionInvalidNumberOfArgumentsException,
 			NoRepresentationAvailableException, CasException, FunctionNotImplementedException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
+			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException, FunctionInvalidArgumentTypeException {
 		List<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMI(5));
 		assertEquals("abs(5)", func.getPartialSageSyntax(args));
@@ -79,7 +79,7 @@ public class TestAbs extends TestFunction {
 	@Test
 	public void testAbsSageSyntax2() throws FunctionInvalidNumberOfArgumentsException,
 			NoRepresentationAvailableException, CasException, FunctionNotImplementedException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
+			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException, FunctionInvalidArgumentTypeException {
 		List<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMF(1.0));
 		assertEquals("abs(1)", func.getPartialSageSyntax(args));

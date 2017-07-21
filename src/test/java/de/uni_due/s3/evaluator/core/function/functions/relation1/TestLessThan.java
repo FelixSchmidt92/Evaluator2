@@ -132,7 +132,7 @@ public class TestLessThan extends TestFunction {
 
 	@Test
 	public void testLessThanSageSyntax()
-			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException {
+			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException, FunctionInvalidArgumentTypeException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(5));
 		args.add(OMCreator.createOMI(9));

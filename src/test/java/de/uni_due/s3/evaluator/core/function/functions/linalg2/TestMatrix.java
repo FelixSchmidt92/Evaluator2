@@ -75,7 +75,7 @@ public class TestMatrix extends TestFunction {
 
 	@Test
 	public void testMatrixSageSyntax()
-			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException {
+			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException, FunctionInvalidArgumentTypeException {
 		List<Object> matrix = new ArrayList<>();
 		List<Object> matrixrow1 = new ArrayList<>();
 		matrixrow1.add(OMCreator.createOMF(0.0));

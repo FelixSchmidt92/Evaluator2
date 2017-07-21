@@ -62,7 +62,7 @@ public class TestSin extends TestFunction {
 
 	@Test
 	public void testSinSageSyntax()
-			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException {
+			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException, FunctionInvalidArgumentTypeException {
 		List<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMF(1.0));
 		assertEquals("sin(1)", func.getPartialSageSyntax(args));

@@ -49,7 +49,7 @@ public class ArcTan extends Function {
 
 	@Override
 	public String getPartialSageSyntax(List<Object> arguments)
-			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException {
+			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, FunctionInvalidArgumentTypeException {
 		return "arctan(" + getSageSyntax(arguments.get(0)) + ")";
 	}
 

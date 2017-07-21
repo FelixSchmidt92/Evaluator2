@@ -49,7 +49,7 @@ public class ArcCos extends Function {
 
 	@Override
 	public String getPartialSageSyntax(List<Object> arguments)
-			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException {
+			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, FunctionInvalidArgumentTypeException {
 		return "arccos(" + getSageSyntax(arguments.get(0)) + ")";
 	}
 }

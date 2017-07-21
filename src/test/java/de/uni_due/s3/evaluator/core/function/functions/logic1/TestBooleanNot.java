@@ -95,7 +95,7 @@ public class TestBooleanNot extends TestFunction {
 
 	@Test
 	public void testBooleanNotSageSyntax()
-			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException {
+			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException, FunctionInvalidArgumentTypeException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMSymbol.LOGIC1_TRUE);
 		assertEquals("not(True)", func.getPartialSageSyntax(args));

@@ -59,7 +59,7 @@ public class TestArcCos extends TestFunction {
 
 	@Test
 	public void testArcCosSageSyntax()
-			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException {
+			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException, FunctionInvalidArgumentTypeException {
 		List<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMF(1.0));
 		assertEquals("arccos(1)", func.getPartialSageSyntax(args));
