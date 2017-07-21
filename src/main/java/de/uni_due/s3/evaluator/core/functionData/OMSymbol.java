@@ -69,6 +69,8 @@ public class OMSymbol {
 
 	public static final OMS POLYNOMIAL1_DEGREE = OMCreator.createOMS("polynomial1", "degree");
 	public static final OMS POLYNOMIAL1_EXPAND = OMCreator.createOMS("polynomial1", "expand");
+	public static final OMS POLY_DEGREE = OMCreator.createOMS("poly", "degree");
+	public static final OMS POLY_DEGREE_WRT = OMCreator.createOMS("poly", "degree_wrt");
 	public static final OMS POLYNOMIALJACK_DEPENDSON = OMCreator.createOMS("polynomialJACK", "dependsOn");
 	public static final OMS POLYNOMIALJACK_DERIVE = OMCreator.createOMS("polynomialJACK", "derive");
 	public static final OMS POLYNOMIALJACK_FACTOROF = OMCreator.createOMS("polynomialJACK", "factorOf");

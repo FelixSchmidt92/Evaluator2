@@ -94,7 +94,9 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("exp", OMSymbol.TRANSC1_EXP);
 		functionSymbolMap.put("atan2", OMSymbol.TRANSC2_ARCTAN2);
 		// Polynome
-		functionSymbolMap.put("deg", OMSymbol.POLYNOMIAL1_DEGREE);
+		//functionSymbolMap.put("deg", OMSymbol.POLYNOMIAL1_DEGREE);
+		functionSymbolMap.put("deg", OMSymbol.POLY_DEGREE_WRT);
+		functionSymbolMap.put("degh", OMSymbol.POLY_DEGREE); //FIXME: hier drüber sollte noch mal entschieden werden.
 		functionSymbolMap.put("dependsOn", OMSymbol.POLYNOMIALJACK_DEPENDSON);
 		functionSymbolMap.put("derive", OMSymbol.POLYNOMIALJACK_DERIVE);
 		functionSymbolMap.put("equalsExpr", OMSymbol.POLYNOMIALJACK_EQUALSEXPR);

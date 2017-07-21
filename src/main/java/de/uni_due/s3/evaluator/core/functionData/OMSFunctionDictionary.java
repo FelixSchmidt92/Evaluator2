@@ -38,6 +38,7 @@ import de.uni_due.s3.evaluator.core.function.functions.openmath_jack.CountNodes;
 import de.uni_due.s3.evaluator.core.function.functions.openmath_jack.GetDenominator;
 import de.uni_due.s3.evaluator.core.function.functions.openmath_jack.GetNumerator;
 import de.uni_due.s3.evaluator.core.function.functions.openmath_jack.Random;
+import de.uni_due.s3.evaluator.core.function.functions.poly.Degree_wrt;
 import de.uni_due.s3.evaluator.core.function.functions.polynomial1.Degree;
 import de.uni_due.s3.evaluator.core.function.functions.polynomial1.Expand;
 import de.uni_due.s3.evaluator.core.function.functions.polynomial_jack.DependsOn;
@@ -188,6 +189,8 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.TRANSC2_ARCTAN2, new ArcTan2());
 		// Polynome
 		functions.put(OMSymbol.POLYNOMIAL1_DEGREE, new Degree());
+		functions.put(OMSymbol.POLY_DEGREE, new de.uni_due.s3.evaluator.core.function.functions.poly.Degree());
+		functions.put(OMSymbol.POLY_DEGREE_WRT, new Degree_wrt());
 		functions.put(OMSymbol.POLYNOMIALJACK_DEPENDSON, new DependsOn());
 		functions.put(OMSymbol.POLYNOMIALJACK_DERIVE, new Derive());
 		functions.put(OMSymbol.POLYNOMIALJACK_EQUALSEXPR, new EqualsExpr());
