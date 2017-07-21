@@ -99,7 +99,7 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("dependsOn", OMSymbol.POLYNOMIALJACK_DEPENDSON);
 		functionSymbolMap.put("derive", OMSymbol.POLYNOMIALJACK_DERIVE);
 		functionSymbolMap.put("equalsExpr", OMSymbol.POLYNOMIALJACK_EQUALSEXPR);
-		functionSymbolMap.put("evaleq", OMSymbol.POLYNOMIALJACK_EVALEQ);
+		functionSymbolMap.put("evalEq", OMSymbol.POLYNOMIALJACK_EVALEQ);
 		functionSymbolMap.put("evalpolynomial", OMSymbol.POLYNOMIALJACK_EVALPOLYNOMIAL);
 		functionSymbolMap.put("evalPolynomialCplx", OMSymbol.POLYNOMIALJACK_EVALPOLYNOMIALCPLX);
 		functionSymbolMap.put("evalterm2", OMSymbol.POLYNOMIALJACK_EVALTERM2);

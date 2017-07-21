@@ -91,4 +91,25 @@ public class NumberUtils {
 			throw new InputMismatchException();
 		}
 	}
+	
+	public static String convertOMToString(Object obj) throws InputMismatchException {
+		if (obj instanceof OMOBJ) {
+			try {
+				obj = OMConverter.toElement((OMOBJ) obj);
+			} catch (OpenMathException e) {
+				throw new InputMismatchException();
+			}
+		}
+		
+		if (obj instanceof OMSTR) {
+			return ((OMSTR) obj).getContent();
+		}else if (obj instanceof OMI){
+			return ( (OMI)obj).getValue();
+		}else if (obj instanceof OMF){
+			return Double.toString(((OMF)obj).getDec());
+		}
+		else {
+			throw new InputMismatchException();
+		}
+	}
 }
