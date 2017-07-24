@@ -1,6 +1,6 @@
 package de.uni_due.s3.evaluator.core.function.integration.arith1;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
@@ -17,52 +17,52 @@ public class TestAbs extends TestIntegration {
 
 	@Test
 	public void testAbs1() throws EvaluatorException, OpenMathException {
-		assertTrue(1 == Evaluator.getNumberResult("abs(1)", exerciseVariableMap, fillInVariableMap));
+		assertEquals(1, Evaluator.getNumberResult("abs(1)", exerciseVariableMap, fillInVariableMap),0.0001);
 	}
 
 	@Test
 	public void testAbs2() throws EvaluatorException, OpenMathException {
-		assertTrue(1 == Evaluator.getNumberResult("abs('-1')", exerciseVariableMap, fillInVariableMap));
+		assertEquals(1, Evaluator.getNumberResult("abs('-1')", exerciseVariableMap, fillInVariableMap),0.0001);
 	}
 
 	@Test
 	public void testAbs3() throws EvaluatorException, OpenMathException {
-		assertTrue(0.5 == Evaluator.getNumberResult("abs(-0.5)", exerciseVariableMap, fillInVariableMap));
+		assertEquals(0.5, Evaluator.getNumberResult("abs(-0.5)", exerciseVariableMap, fillInVariableMap),0.0001);
 	}
 
 	@Test
 	public void testAbs4() throws EvaluatorException, OpenMathException {
-		assertTrue(0 == Evaluator.getNumberResult("abs(-0)", exerciseVariableMap, fillInVariableMap));
+		assertEquals(0, Evaluator.getNumberResult("abs(-0)", exerciseVariableMap, fillInVariableMap),0.0001);
 	}
 
 	@Test
 	public void testAbsWithInput1() throws EvaluatorException, OpenMathException {
-		assertTrue(1 == Evaluator.getNumberResult("abs('[pos=2]')", exerciseVariableMap, fillInVariableMap));
+		assertEquals(1, Evaluator.getNumberResult("abs('[pos=2]')", exerciseVariableMap, fillInVariableMap),0.0001);
 	}
 
 	@Test
 	public void testAbsWithInput2() throws EvaluatorException, OpenMathException {
-		assertTrue(0 == Evaluator.getNumberResult("abs('[pos=1]')", exerciseVariableMap, fillInVariableMap));
+		assertEquals(0, Evaluator.getNumberResult("abs('[pos=1]')", exerciseVariableMap, fillInVariableMap),0.0001);
 	}
 
 	@Test
 	public void testAbsWithVariables1() throws EvaluatorException, OpenMathException {
-		assertTrue(1 == Evaluator.getNumberResult("abs('[var=b]')", exerciseVariableMap, fillInVariableMap));
+		assertEquals(1, Evaluator.getNumberResult("abs('[var=b]')", exerciseVariableMap, fillInVariableMap),0.0001);
 	}
 
 	@Test
 	public void testAbsWithVariables2() throws EvaluatorException, OpenMathException {
-		assertTrue(0 == Evaluator.getNumberResult("abs('[var=a]')", exerciseVariableMap, fillInVariableMap));
+		assertEquals(0, Evaluator.getNumberResult("abs('[var=a]')", exerciseVariableMap, fillInVariableMap),0.0001);
 	}
 
 	@Test
 	public void testAbsWithExpressions1() throws EvaluatorException, OpenMathException {
-		assertTrue(5 == Evaluator.getNumberResult("abs(-abs(5))", exerciseVariableMap, fillInVariableMap));
+		assertEquals(5, Evaluator.getNumberResult("abs(-abs(5))", exerciseVariableMap, fillInVariableMap),0.0001);
 	}
 
 	@Test
 	public void testAbsWithExpressions2() throws EvaluatorException, OpenMathException {
-		assertTrue(5 == Evaluator.getNumberResult("abs(-abs(abs(-5)))", exerciseVariableMap, fillInVariableMap));
+		assertEquals(5, Evaluator.getNumberResult("abs(-abs(abs(-5)))", exerciseVariableMap, fillInVariableMap),0.0001);
 	}
 
 	@Test (expected = ParserException.class)
