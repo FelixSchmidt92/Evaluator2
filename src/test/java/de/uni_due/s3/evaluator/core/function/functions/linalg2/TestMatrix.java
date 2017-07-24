@@ -88,13 +88,12 @@ public class TestMatrix extends TestFunction {
 		assertEquals("matrix([[0,2],[1,3]])", func.getPartialSageSyntax(matrix));
 	}
 
-	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testMatrixWithLessThanMinParam() throws FunctionException, OpenMathException, CasEvaluationException,
+	@Test
+	public void testMatrixWithZeroParam() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("matrix()", null, null);
 		OMExecutor.execute(omobj);
-		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
