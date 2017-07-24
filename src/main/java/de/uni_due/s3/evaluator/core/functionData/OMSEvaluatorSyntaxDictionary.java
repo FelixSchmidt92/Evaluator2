@@ -116,6 +116,7 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("randomMatrixEigenvalue", OMSymbol.LINALGJACK_RANDOMMATRIXEIGENVALUE);
 		functionSymbolMap.put("randomMatrixRank", OMSymbol.LINALGJACK_RANDOMMATRIXRANK);
 		// List
+		functionSymbolMap.put("list", OMSymbol.LIST1_LIST);
 		functionSymbolMap.put("set", OMSymbol.SET1_SET);
 		functionSymbolMap.put("size", OMSymbol.SET1_SIZE);
 		functionSymbolMap.put("chooseFromComplement", OMSymbol.SETJACK_CHOOSEFROMCOMPLEMENT);

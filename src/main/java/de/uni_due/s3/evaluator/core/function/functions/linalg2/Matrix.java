@@ -30,7 +30,7 @@ public class Matrix extends Function {
 
 	@Override
 	protected int minArgs() {
-		return 1;
+		return 0;
 	}
 
 	@Override

@@ -30,6 +30,7 @@ import de.uni_due.s3.evaluator.core.function.functions.linalg_jack.EqualBasis;
 import de.uni_due.s3.evaluator.core.function.functions.linalg_jack.IsLinearlyIndependent;
 import de.uni_due.s3.evaluator.core.function.functions.linalg_jack.RandomMatrixEigenvalue;
 import de.uni_due.s3.evaluator.core.function.functions.linalg_jack.RandomMatrixRank;
+import de.uni_due.s3.evaluator.core.function.functions.list1.List;
 import de.uni_due.s3.evaluator.core.function.functions.logic1.BooleanAnd;
 import de.uni_due.s3.evaluator.core.function.functions.logic1.BooleanNot;
 import de.uni_due.s3.evaluator.core.function.functions.logic1.BooleanOr;
@@ -214,6 +215,7 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.LINALGJACK_RANDOMMATRIXEIGENVALUE, new RandomMatrixEigenvalue());
 		functions.put(OMSymbol.LINALGJACK_RANDOMMATRIXRANK, new RandomMatrixRank());
 		// List
+		functions.put(OMSymbol.LIST1_LIST, new List());
 		functions.put(OMSymbol.SET1_SET, new Set());
 		functions.put(OMSymbol.SET1_SIZE, new Size());
 		functions.put(OMSymbol.SETJACK_CHOOSEFROMCOMPLEMENT, new ChooseFromComplement());

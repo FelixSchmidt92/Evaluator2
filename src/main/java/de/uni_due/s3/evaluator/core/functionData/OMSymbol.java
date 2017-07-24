@@ -37,6 +37,8 @@ public class OMSymbol {
 
 	public static final OMS INTEGER1_REMAINDER = OMCreator.createOMS("integer1", "remainder");
 
+	public static final OMS LIST1_LIST = OMCreator.createOMS("list1", "list");
+	
 	public static final OMS LINALG2_VECTOR = OMCreator.createOMS("linalg2", "vector");
 	public static final OMS LINALG2_MATRIX = OMCreator.createOMS("linalg2", "matrix");
 	public static final OMS LINALG2_MATRIXROW = OMCreator.createOMS("linalg2", "matrixrow");
