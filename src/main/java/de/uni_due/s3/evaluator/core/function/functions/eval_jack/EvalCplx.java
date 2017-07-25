@@ -1,10 +1,10 @@
-package de.uni_due.s3.evaluator.core.function.functions.polynomial_jack;
+package de.uni_due.s3.evaluator.core.function.functions.eval_jack;
 
 import java.util.List;
 
 import de.uni_due.s3.evaluator.core.function.Function;
 
-public class EvalPolynomialCplx extends Function {
+public class EvalCplx extends Function {
 
 	@Override
 	protected Object execute(List<Object> arguments) {

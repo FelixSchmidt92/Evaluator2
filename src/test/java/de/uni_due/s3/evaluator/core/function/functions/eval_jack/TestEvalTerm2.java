@@ -1,4 +1,4 @@
-package de.uni_due.s3.evaluator.core.function.functions.polynomial_jack;
+package de.uni_due.s3.evaluator.core.function.functions.eval_jack;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -11,6 +11,7 @@ import org.junit.Test;
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.core.function.OMExecutor;
 import de.uni_due.s3.evaluator.core.function.functions.TestFunction;
+import de.uni_due.s3.evaluator.core.function.functions.eval_jack.EvalTerm2;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;

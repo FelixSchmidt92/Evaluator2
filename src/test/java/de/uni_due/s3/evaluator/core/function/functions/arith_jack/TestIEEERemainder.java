@@ -43,7 +43,7 @@ public class TestIEEERemainder {
 	public void testModulusIntegration1() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
-		OMOBJ omobj = ExpressionParser.parse("ieeeremainder(10,5)", null, null);
+		OMOBJ omobj = ExpressionParser.parse("IEEEremainder(10,5)", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals(OMCreator.createOMI(0), result.getOMI());
 	}
@@ -52,7 +52,7 @@ public class TestIEEERemainder {
 	public void testModulusIntegration2() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
-		OMOBJ omobj = ExpressionParser.parse("ieeeremainder(3,-2)", null, null);
+		OMOBJ omobj = ExpressionParser.parse("IEEEremainder(3,-2)", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals(OMCreator.createOMI(-1), result.getOMI());
 	}
@@ -61,7 +61,7 @@ public class TestIEEERemainder {
 	public void testMinusWithWrongArguments() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
-		OMOBJ omobj = ExpressionParser.parse("ieeeremainder('test','5')", null, null);
+		OMOBJ omobj = ExpressionParser.parse("IEEEremainder('test','5')", null, null);
 		OMExecutor.execute(omobj);
 		fail();
 	}

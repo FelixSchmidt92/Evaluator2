@@ -13,6 +13,7 @@ import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgume
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.omutils.OMCreator;
+import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 import de.uni_due.s3.sage.Sage;
 
@@ -33,28 +34,29 @@ public class IsLinearlyIndependent extends Function {
 			FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException,
 			FunctionInvalidArgumentException, CasEvaluationException, CasNotAvailableException, OpenMathException {
 		// Check if first argument is set
-		if (!(arguments.get(0) instanceof OMA)
-				|| (!((OMA) arguments.get(0)).getOmel().get(0).equals(OMSymbol.SET1_SET))) {
-			throw new FunctionInvalidArgumentTypeException(this, "(0)Set");
+		if (!(OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.SET1_SET)
+				|| OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.LIST1_LIST))) {
+			throw new FunctionInvalidArgumentTypeException(this, "(0)Set/List");
 		}
 
-		OMA oma = (OMA) arguments.get(0);
+		OMA set = (OMA) arguments.get(0);
+		List<Object> vectorList = set.getOmel();
+		vectorList.remove(0);
 
-		ArrayList<Object> omel = new ArrayList<>();
-		for (int i = 1; i < oma.getOmel().size(); i++) {
-			// check if first argument in set is vector
-			if (!(oma.getOmel().get(i) instanceof OMA)
-					|| (!((OMA) oma.getOmel().get(i)).getOmel().get(0).equals(OMSymbol.LINALG2_VECTOR))) {
+		for (Object vector : vectorList) {
+			if (!OMTypeChecker.isOMAWithSymbol(vector, OMSymbol.LINALG2_VECTOR)) {
 				throw new FunctionInvalidArgumentException(this, " This Function expects a Set with n-Vector");
 			}
-			omel.add(oma.getOmel().get(i));
 		}
 
 		// Create matrix
-		OMA matrix = OMCreator.createOMA(OMSymbol.LINALG2_MATRIX, omel);
+		OMA matrix = OMCreator.createOMA(OMSymbol.LINALG2_MATRIX, vectorList);
 
-		return Sage.evaluateInCAS(getSageSyntax(matrix) + ".rank() == " + getSageSyntax(matrix) + ".nrows() or "
-				+ getSageSyntax(matrix) + ".rank() == " + getSageSyntax(matrix) + ".ncols()");
+		List<Object> args = new ArrayList<>();
+		args.add(matrix);
+		String matrixSageSyntax = getSageSyntax(matrix);
+		return Sage.evaluateInCAS(matrixSageSyntax + ".rank() == " + matrixSageSyntax + ".nrows() or "
+				+ matrixSageSyntax + ".rank() == " + matrixSageSyntax + ".ncols()");
 	}
 
 	@Override

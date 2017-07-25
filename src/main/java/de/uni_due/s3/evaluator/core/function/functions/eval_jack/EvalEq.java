@@ -1,4 +1,4 @@
-package de.uni_due.s3.evaluator.core.function.functions.polynomial_jack;
+package de.uni_due.s3.evaluator.core.function.functions.eval_jack;
 
 import java.util.List;
 import java.util.Set;
@@ -44,13 +44,11 @@ public class EvalEq extends Function {
 
 	@Override
 	protected int minArgs() {
-		// TODO Auto-generated method stub
 		return 2;
 	}
 
 	@Override
 	protected int maxArgs() {
-		// TODO Auto-generated method stub
 		return 2;
 	}
 
@@ -78,6 +76,6 @@ public class EvalEq extends Function {
 		String f = "f="+((OMSTR)arguments.get(0)).getContent()+"; ";
 		String g = "g="+((OMSTR)arguments.get(1)).getContent()+"; ";
 		
-		return init+f+g+"f-g;";
+		return init+f+g+"f-g";
 	}
 }

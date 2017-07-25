@@ -1,4 +1,4 @@
-package de.uni_due.s3.evaluator.core.function.functions.polynomial_jack;
+package de.uni_due.s3.evaluator.core.function.functions.eval_jack;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -11,6 +11,7 @@ import org.junit.Test;
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.core.function.OMExecutor;
 import de.uni_due.s3.evaluator.core.function.functions.TestFunction;
+import de.uni_due.s3.evaluator.core.function.functions.eval_jack.EvalEq;
 import de.uni_due.s3.evaluator.core.functionData.OMSymbol;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
@@ -85,7 +86,7 @@ public class TestEvalEq extends TestFunction{
 			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("evalEq('1+x^3','x*x*x+1')", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
-		assertEquals(OMCreator.createOMSTR("2"), result.getOMSTR().getContent());
+		assertEquals(OMCreator.createOMSTR("2"), result.getOMSTR());
 	}
 
 	
@@ -94,6 +95,6 @@ public class TestEvalEq extends TestFunction{
 		ArrayList<Object> args = new ArrayList<Object>(1);
 		args.add(OMCreator.createOMSTR("x^2 - 5*x + 6"));
 		args.add(OMCreator.createOMSTR("(x-2)*(x-3)"));
-		assertEquals("R.<x>=RR[]; f=x^2 - 5*x + 6; g=(x-2)*(x-3); f-g;", func.getPartialSageSyntax(args));
+		assertEquals("R.<x>=RR[]; f=x^2 - 5*x + 6; g=(x-2)*(x-3); f-g", func.getPartialSageSyntax(args));
 	}
 }

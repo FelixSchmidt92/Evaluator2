@@ -84,7 +84,7 @@ public class TestVector extends TestFunction {
 		args.add(OMCreator.createOMI(2));
 		args.add(OMCreator.createOMI(3));
 		args.add(OMCreator.createOMI(1));
-		assertEquals("vector([2,3,1])", func.getPartialSageSyntax(args));
+		assertEquals("(2,3,1)", func.getPartialSageSyntax(args));
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)

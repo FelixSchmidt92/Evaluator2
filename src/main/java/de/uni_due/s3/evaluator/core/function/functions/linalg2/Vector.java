@@ -35,7 +35,7 @@ public class Vector extends Function {
 	@Override
 	public String getPartialSageSyntax(List<Object> arguments)
 			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, FunctionInvalidArgumentTypeException {
-		String sageExpression = "vector([";
+		String sageExpression = "(";
 
 		for (int i = 0; i < arguments.size(); i++) {
 			if (i == 0) {
@@ -45,7 +45,7 @@ public class Vector extends Function {
 			}
 		}
 
-		return sageExpression + "])";
+		return sageExpression + ")";
 	}
 
 }
