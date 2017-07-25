@@ -20,10 +20,8 @@ public class TestUnaryMinus extends TestIntegration {
 	public void beforeTest() {
 		try {
 			fillInVariableMap.put(1, OMConverter.toObject("<OMOBJ><OMI>3</OMI></OMOBJ>"));
-			fillInVariableMap.put(2, OMConverter.toObject("<OMOBJ><OMI>1</OMI></OMOBJ>"));
-			
+
 			exerciseVariableMap.put("a", OMConverter.toObject("<OMOBJ><OMI>3</OMI></OMOBJ>"));
-			exerciseVariableMap.put("b", OMConverter.toObject("<OMOBJ><OMI>1</OMI></OMOBJ>"));
 		} catch (JAXBException e) {
 			throw new RuntimeException("Erzeugung der OpenMath exercise Variablen für TestIntegration fehlgeschlagen", e);
 		}
