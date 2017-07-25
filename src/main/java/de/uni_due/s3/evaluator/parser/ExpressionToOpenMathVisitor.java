@@ -7,8 +7,8 @@ import java.util.regex.Pattern;
 
 import org.antlr.v4.runtime.tree.ParseTree;
 
-import de.uni_due.s3.evaluator.core.functionData.OMSEvaluatorSyntaxDictionary;
-import de.uni_due.s3.evaluator.core.functionData.OMSymbol;
+import de.uni_due.s3.evaluator.core.dictionaries.OMSEvaluatorSyntaxDictionary;
+import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedRuntimeException;
 import de.uni_due.s3.evaluator.exceptions.parserruntime.ParserRuntimeException;
 import de.uni_due.s3.evaluator.exceptions.parserruntime.UndefinedExerciseVariableRuntimeException;

@@ -2,9 +2,8 @@ package de.uni_due.s3.evaluator;
 
 import java.util.HashMap;
 
-import de.uni_due.s3.evaluator.core.function.OMUtils;
-import de.uni_due.s3.evaluator.core.function.OMExecutor;
-import de.uni_due.s3.evaluator.core.functionData.OMSymbol;
+import de.uni_due.s3.evaluator.core.OMUtils;
+import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator.exceptions.InvalidResultTypeException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
