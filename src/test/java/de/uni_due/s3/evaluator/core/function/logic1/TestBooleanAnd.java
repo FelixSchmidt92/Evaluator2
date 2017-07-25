@@ -25,6 +25,7 @@ import de.uni_due.s3.evaluator.exceptions.parser.UndefinedFillInVariableExceptio
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
+import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestBooleanAnd extends TestFunctionAbstract {
@@ -105,9 +106,9 @@ public class TestBooleanAnd extends TestFunctionAbstract {
 	public void testBooleanAndIntegration() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
-		OMOBJ omobj = ExpressionParser.parse("(1<2) && (2>1)", null, null);
+		OMOBJ omobj = ExpressionParser.parse("countNodes(1+2)", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
-		assertEquals(OMSymbol.LOGIC1_TRUE, result.getOMS());
+		assertEquals(OMCreator.createOMI(4), result.getOMI());
 	}
 
 	@Test

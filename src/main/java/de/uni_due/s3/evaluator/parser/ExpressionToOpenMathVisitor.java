@@ -13,8 +13,14 @@ import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedRuntime
 import de.uni_due.s3.evaluator.exceptions.parserruntime.ParserRuntimeException;
 import de.uni_due.s3.evaluator.exceptions.parserruntime.UndefinedExerciseVariableRuntimeException;
 import de.uni_due.s3.evaluator.exceptions.parserruntime.UndefinedFillInVariableRuntimeException;
-import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.BinaryContext;
-import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.BinaryOperatorForExpressionContext;
+import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.BinaryArithLineContext;
+import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.BinaryArithPointContext;
+import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.BinaryBooleanContext;
+import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.BinaryOperatorArithLineContext;
+import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.BinaryOperatorArithPointContext;
+import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.BinaryOperatorBooleanContext;
+import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.BinaryOperatorRelationalContext;
+import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.BinaryRelationalContext;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.ExerciseVarNameContext;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.ExpressionContext;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.FillInVarNameContext;
@@ -48,57 +54,64 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	private HashMap<String, OMOBJ> exerciseVariableMap;
 	private HashMap<Integer, OMOBJ> fillInVariableMap;
 
-	public ExpressionToOpenMathVisitor(HashMap<String, OMOBJ> exerciseVariableMap, HashMap<Integer, OMOBJ> fillInVariableMap) {
+	public ExpressionToOpenMathVisitor(HashMap<String, OMOBJ> exerciseVariableMap,
+			HashMap<Integer, OMOBJ> fillInVariableMap) {
 		this.exerciseVariableMap = exerciseVariableMap;
 		this.fillInVariableMap = fillInVariableMap;
 	}
 
 	/**
-	 * TODO FIXME dlux spobel frichtscheid mayeb get a TextExpression, TextWithVariable and 
-	 * 			  TextOnly visit methods with anltr?
+	 * TODO FIXME dlux spobel frichtscheid mayeb get a TextExpression,
+	 * TextWithVariable and TextOnly visit methods with anltr?
 	 */
 	@Override
 	public Object visitTextValue(TextValueContext ctx) {
 
-		
-		String val = ctx.getText().substring(1, ctx.getText().length()-1); //the input
-		
-		/*Return if the InputString is an Expression*/
-		try{
-			ParseTree tree = ExpressionParser.createParseTree(val); 
+		String val = ctx.getText().substring(1, ctx.getText().length() - 1); // the
+																				// input
+
+		/* Return if the InputString is an Expression */
+		try {
+			ParseTree tree = ExpressionParser.createParseTree(val);
 			return this.visit(tree);
-		}catch(ParserRuntimeException e){
+		} catch (ParserRuntimeException e) {
 			// do nothing continue Code below (In String is no Expression!)
 		}
-		
-		/*Return if the InputString is a Text with or without variables*/
+
+		/* Return if the InputString is a Text with or without variables */
 		ArrayList<Object> omel = new ArrayList<>();
 		Pattern varposPattern = Pattern.compile("\\[var=[a-zA-Z0-9äöü]+?\\]|\\[pos=[0-9]+?\\]");
-		Matcher varposMatcher = varposPattern.matcher(val); //PatternMatcher finds [pos=*] or [val=*]
+		Matcher varposMatcher = varposPattern.matcher(val); // PatternMatcher
+															// finds [pos=*] or
+															// [val=*]
 
-		
-		int stringPointer = 0; //Pointer to get string subsequences
-		while (varposMatcher.find()){
+		int stringPointer = 0; // Pointer to get string subsequences
+		while (varposMatcher.find()) {
 			OMSTR omstr = OMCreator.createOMSTR(val.substring(stringPointer, varposMatcher.start()));
 			stringPointer = varposMatcher.end();
-			
-			if(omstr.getContent().length() != 0){
-				omel.add(omstr);	// Add leading OMSTR of pos/val Variables
+
+			if (omstr.getContent().length() != 0) {
+				omel.add(omstr); // Add leading OMSTR of pos/val Variables
 			}
-			
+
 			boolean isVar = val.substring(varposMatcher.start(), varposMatcher.end()).contains("var");
-			String varposVal = val.substring(varposMatcher.start() + 5, varposMatcher.end() -1); //remove "[pos=" and "]" or "[var="
-			
-			/*extracting the pos OR var value*/
-			if (isVar){
+			String varposVal = val.substring(varposMatcher.start() + 5, varposMatcher.end() - 1); // remove
+																									// "[pos="
+																									// and
+																									// "]"
+																									// or
+																									// "[var="
+
+			/* extracting the pos OR var value */
+			if (isVar) {
 				OMOBJ omobjvar = exerciseVariableMap.get(varposVal);
 				try {
 					Object varObj = OMConverter.toElement(omobjvar);
 					omel.add(varObj);
 				} catch (OpenMathException e) {
-				throw new UndefinedExerciseVariableRuntimeException(varposVal);
+					throw new UndefinedExerciseVariableRuntimeException(varposVal);
 				}
-			}else{
+			} else {
 				OMOBJ omobjpos = fillInVariableMap.get(Integer.parseInt(varposVal));
 				try {
 					Object posObj = OMConverter.toElement(omobjpos);
@@ -108,17 +121,18 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 				}
 			}
 		}
-		if(stringPointer != 0 && stringPointer < val.length()){
+		if (stringPointer != 0 && stringPointer < val.length()) {
 			OMSTR omstr = OMCreator.createOMSTR(val.substring(stringPointer));
-			omel.add(omstr);	// Maybe add one OMSTR after pos/val Variables 
+			omel.add(omstr); // Maybe add one OMSTR after pos/val Variables
 		}
-		
-		if (omel.isEmpty()){
-			return OMCreator.createOMSTR(ctx.getText().substring(1, ctx.getText().length()-1));
-			//return OMSTR as usual (no pos or var Variables are found in String)
-		}else{
+
+		if (omel.isEmpty()) {
+			return OMCreator.createOMSTR(ctx.getText().substring(1, ctx.getText().length() - 1));
+			// return OMSTR as usual (no pos or var Variables are found in
+			// String)
+		} else {
 			return OMCreator.createOMA(OMCreator.createOMS("string_jack", "textValueWithVars"), omel);
-			//return jack-specific String with variables in String
+			// return jack-specific String with variables in String
 		}
 	}
 
@@ -129,7 +143,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	}
 
 	@Override
-	public OMA visitBinary(BinaryContext ctx) {
+	public Object visitBinaryArithLine(BinaryArithLineContext ctx) {
 		OMS oms;
 		switch (ctx.getChild(1).getText()) {
 		case "+":
@@ -138,6 +152,23 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 		case "-":
 			oms = OMSymbol.ARITH1_MINUS;
 			break;
+		default:
+			throw new FunctionNotImplementedRuntimeException(
+					"Binary Operator " + ctx.getChild(1) + " is not supported");
+		}
+
+		OMA oma = new OMA();
+		oma.getOmel().add(oms); // add OMS and children
+		oma.getOmel().add(visit(ctx.getChild(0))); // left side
+		oma.getOmel().add(visit(ctx.getChild(2))); // right side
+
+		return oma;
+	}
+
+	@Override
+	public Object visitBinaryArithPoint(BinaryArithPointContext ctx) {
+		OMS oms;
+		switch (ctx.getChild(1).getText()) {
 		case "*":
 			oms = OMSymbol.ARITH1_TIMES;
 			break;
@@ -147,6 +178,46 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 		case "%":
 			oms = OMSymbol.INTEGER1_REMAINDER;
 			break;
+		default:
+			throw new FunctionNotImplementedRuntimeException(
+					"Binary Operator " + ctx.getChild(1) + " is not supported");
+		}
+
+		OMA oma = new OMA();
+		oma.getOmel().add(oms); // add OMS and children
+		oma.getOmel().add(visit(ctx.getChild(0))); // left side
+		oma.getOmel().add(visit(ctx.getChild(2))); // right side
+
+		return oma;
+	}
+
+	@Override
+	public Object visitBinaryBoolean(BinaryBooleanContext ctx) {
+		OMS oms;
+		switch (ctx.getChild(1).getText()) {
+		case "&&":
+			oms = OMSymbol.LOGIC1_AND;
+			break;
+		case "||":
+			oms = OMSymbol.LOGIC1_OR;
+			break;
+		default:
+			throw new FunctionNotImplementedRuntimeException(
+					"Binary Operator " + ctx.getChild(1) + " is not supported");
+		}
+
+		OMA oma = new OMA();
+		oma.getOmel().add(oms); // add OMS and children
+		oma.getOmel().add(visit(ctx.getChild(0))); // left side
+		oma.getOmel().add(visit(ctx.getChild(2))); // right side
+
+		return oma;
+	}
+
+	@Override
+	public Object visitBinaryRelational(BinaryRelationalContext ctx) {
+		OMS oms;
+		switch (ctx.getChild(1).getText()) {
 		case "<":
 			oms = OMSymbol.RELATION1_LT;
 			break;
@@ -168,14 +239,9 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 		case "!=":
 			oms = OMSymbol.RELATION1_NEQ;
 			break;
-		case "&&":
-			oms = OMSymbol.LOGIC1_AND;
-			break;
-		case "||":
-			oms = OMSymbol.LOGIC1_OR;
-			break;
 		default:
-			throw new FunctionNotImplementedRuntimeException("Binary Operator " + ctx.getChild(1) + " is not supported");
+			throw new FunctionNotImplementedRuntimeException(
+					"Binary Operator " + ctx.getChild(1) + " is not supported");
 		}
 
 		OMA oma = new OMA();
@@ -249,10 +315,10 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 		case "!":
 			oms = OMSymbol.LOGIC1_NOT;
 			break;
-		default: 
+		default:
 			throw new FunctionNotImplementedRuntimeException("Unary Operator " + ctx.getChild(0) + " is not supported");
 		}
-		
+
 		OMA oma = new OMA();
 		oma.getOmel().add(oms);
 		oma.getOmel().add(visit(ctx.getChild(1)));
@@ -295,7 +361,25 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	}
 
 	@Override
-	public Object visitBinaryOperatorForExpression(BinaryOperatorForExpressionContext ctx) {
+	public Object visitBinaryOperatorArithLine(BinaryOperatorArithLineContext ctx) {
+		// @Note: Do Not change Implementation of this Method
+		return visitChildren(ctx);
+	}
+
+	@Override
+	public Object visitBinaryOperatorArithPoint(BinaryOperatorArithPointContext ctx) {
+		// @Note: Do Not change Implementation of this Method
+		return visitChildren(ctx);
+	}
+
+	@Override
+	public Object visitBinaryOperatorBoolean(BinaryOperatorBooleanContext ctx) {
+		// @Note: Do Not change Implementation of this Method
+		return visitChildren(ctx);
+	}
+
+	@Override
+	public Object visitBinaryOperatorRelational(BinaryOperatorRelationalContext ctx) {
 		// @Note: Do Not change Implementation of this Method
 		return visitChildren(ctx);
 	}

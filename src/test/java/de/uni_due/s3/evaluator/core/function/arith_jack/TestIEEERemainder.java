@@ -16,6 +16,7 @@ import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableException;
@@ -56,6 +57,24 @@ public class TestIEEERemainder {
 		OMOBJ omobj = ExpressionParser.parse("IEEEremainder(3,-2)", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals(OMCreator.createOMI(-1), result.getOMI());
+	}
+	
+	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
+	public void testMinusWithLessArguments() throws FunctionException, OpenMathException, CasEvaluationException,
+			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
+			UndefinedExerciseVariableException, ParserException {
+		OMOBJ omobj = ExpressionParser.parse("IEEEremainder('5')", null, null);
+		OMExecutor.execute(omobj);
+		fail();
+	}
+	
+	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
+	public void testMinusWithMoreArguments() throws FunctionException, OpenMathException, CasEvaluationException,
+			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
+			UndefinedExerciseVariableException, ParserException {
+		OMOBJ omobj = ExpressionParser.parse("IEEEremainder('2','5', 1)", null, null);
+		OMExecutor.execute(omobj);
+		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)

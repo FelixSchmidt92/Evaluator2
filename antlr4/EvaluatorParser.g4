@@ -9,7 +9,10 @@ expression
 	nestedFunction # nestedFunctionInExpression
 	| LeftParenthesis expression RightParenthesis # parenthesis
 	| unaryOperatorForExpression expression # unary
-	| expression binaryOperatorForExpression expression # binary
+	| expression binaryOperatorArithPoint expression # binaryArithPoint
+	| expression binaryOperatorArithLine expression # binaryArithLine
+	| expression binaryOperatorRelational expression # binaryRelational
+	| expression binaryOperatorBoolean expression # binaryBoolean
 	| set # setInExpression
 	| value = Integer # integerValue
 	| value = Float # floatValue
@@ -28,23 +31,44 @@ unaryOperatorForExpression
 	)
 ;
 
-binaryOperatorForExpression
+binaryOperatorBoolean
+:
+	operator =
+	(
+		BooleanAnd
+		| BooleanOr
+	)
+;
+
+binaryOperatorRelational
+:
+	operator =
+	(
+		Equal
+		| NotEqual
+		| LessThan
+		| LessThanOrEqual
+		| GreaterThan
+		| GreaterThanOrEqual
+	)
+;
+
+binaryOperatorArithLine
+:
+	operator =
+	(
+		Plus
+		| Minus
+	)
+;
+
+binaryOperatorArithPoint
 :
 	operator =
 	(
 		Multiplication
 		| Division
 		| Modulus
-		| Plus
-		| Minus
-		| LessThan
-		| LessThanOrEqual
-		| GreaterThan
-		| GreaterThanOrEqual
-		| Equal
-		| NotEqual
-		| BooleanAnd
-		| BooleanOr
 	)
 ;
 

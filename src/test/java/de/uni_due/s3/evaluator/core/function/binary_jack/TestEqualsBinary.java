@@ -23,6 +23,7 @@ import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
+//FIXME hier fehlt ein Integrationstest !
 @RunWith(Parameterized.class)
 public class TestEqualsBinary extends TestFunctionAbstract {
 

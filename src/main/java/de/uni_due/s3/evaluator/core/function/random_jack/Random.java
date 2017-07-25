@@ -1,4 +1,4 @@
-package de.uni_due.s3.evaluator.core.function.openmath_jack;
+package de.uni_due.s3.evaluator.core.function.random_jack;
 
 import java.util.List;
 

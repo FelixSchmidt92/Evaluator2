@@ -83,7 +83,6 @@ public class OMSymbol {
 	public static final OMS OPENMATHJACK_GETDENOMINATOR = OMCreator.createOMS("openmathJflrACK", "getDenominator");
 	public static final OMS OPENMATHJACK_GETNUMERATOR = OMCreator.createOMS("openmathJACK", "getNumerator");
 	public static final OMS OPENMATHJACK_ISFRACTION = OMCreator.createOMS("openmathJACK", "isFraction");
-	public static final OMS OPENMATHJACK_RANDOM = OMCreator.createOMS("openmathJACK", "random");
 
 	public static final OMS POLY_DEGREE = OMCreator.createOMS("poly", "degree");
 	public static final OMS POLY_DEGREE_WRT = OMCreator.createOMS("poly", "degree_wrt");
@@ -99,6 +98,8 @@ public class OMSymbol {
 
 	public static final OMS POLYNOMIAL1_DEGREE = OMCreator.createOMS("polynomial1", "degree");
 	public static final OMS POLYNOMIAL1_EXPAND = OMCreator.createOMS("polynomial1", "expand");
+	
+	public static final OMS RANDOMJACK_RANDOM = OMCreator.createOMS("randomJACK", "random");
 
 	public static final OMS RELATION1_EQ = OMCreator.createOMS("relation1", "eq");
 	public static final OMS RELATION1_GEQ = OMCreator.createOMS("relation1", "geq");

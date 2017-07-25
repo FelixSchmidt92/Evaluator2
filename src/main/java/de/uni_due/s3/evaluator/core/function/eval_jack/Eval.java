@@ -8,20 +8,17 @@ public class Eval extends Function {
 
 	@Override
 	protected Object execute(List<Object> arguments) {
-		// TODO Auto-generated method stub
-		return null;
+		return arguments.get(0);
 	}
 
 	@Override
 	protected int minArgs() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 1;
 	}
 
 	@Override
 	protected int maxArgs() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 1;
 	}
 
 }
