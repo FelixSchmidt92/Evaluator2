@@ -3,7 +3,7 @@ package de.uni_due.s3.evaluator.core.function.functions.string_jack;
 import java.util.List;
 
 import de.uni_due.s3.evaluator.core.function.Function;
-import de.uni_due.s3.evaluator.core.function.NumberUtils;
+import de.uni_due.s3.evaluator.core.function.OMUtils;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
@@ -28,11 +28,11 @@ public class Substring extends Function {
 	protected Object execute(List<Object> arguments)
 			throws FunctionInvalidArgumentTypeException, FunctionInvalidArgumentException {
 		try {
-			String string = NumberUtils.convertOMSTRToString(arguments.get(0));
-			int begin = NumberUtils.convertOMIToInteger(arguments.get(1));
+			String string = OMUtils.convertOMSTRToString(arguments.get(0));
+			int begin = OMUtils.convertOMIToInteger(arguments.get(1));
 			int end = string.length();
 			if (arguments.size() == 3) {
-				end = NumberUtils.convertOMIToInteger(arguments.get(2));
+				end = OMUtils.convertOMIToInteger(arguments.get(2));
 			}
 			return OMCreator.createOMSTR(string.substring(begin, end));
 		} catch (InputMismatchException e) {

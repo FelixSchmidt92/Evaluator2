@@ -3,7 +3,7 @@ package de.uni_due.s3.evaluator.core.function.functions.string_jack;
 import java.util.List;
 
 import de.uni_due.s3.evaluator.core.function.Function;
-import de.uni_due.s3.evaluator.core.function.NumberUtils;
+import de.uni_due.s3.evaluator.core.function.OMUtils;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
@@ -28,8 +28,8 @@ public class CharAt extends Function {
 	protected Object execute(List<Object> arguments)
 			throws FunctionInvalidArgumentException, FunctionInvalidArgumentTypeException {
 		try {
-			String string = NumberUtils.convertOMSTRToString(arguments.get(0));
-			int pos = NumberUtils.convertOMIToInteger(arguments.get(1));
+			String string = OMUtils.convertOMSTRToString(arguments.get(0));
+			int pos = OMUtils.convertOMIToInteger(arguments.get(1));
 			if (string.length() <= pos || pos < 0) {
 				throw new FunctionInvalidArgumentException(this,
 						"Second Argument of charAt is invalid. Not in Range of String.");

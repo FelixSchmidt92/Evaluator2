@@ -3,7 +3,7 @@ package de.uni_due.s3.evaluator.core.function.functions.string_jack;
 import java.util.List;
 
 import de.uni_due.s3.evaluator.core.function.Function;
-import de.uni_due.s3.evaluator.core.function.NumberUtils;
+import de.uni_due.s3.evaluator.core.function.OMUtils;
 import de.uni_due.s3.evaluator.core.functionData.OMSymbol;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
@@ -23,8 +23,8 @@ public class EndsWith extends Function {
 	protected Object execute(List<Object> arguments)
 			throws FunctionInvalidArgumentException, FunctionInvalidArgumentTypeException {
 		try {
-			String string1 = NumberUtils.convertOMSTRToString(arguments.get(0));
-			String string2 = NumberUtils.convertOMSTRToString(arguments.get(1));
+			String string1 = OMUtils.convertOMSTRToString(arguments.get(0));
+			String string2 = OMUtils.convertOMSTRToString(arguments.get(1));
 
 			if (string1.endsWith(string2)) {
 				return OMSymbol.LOGIC1_TRUE;

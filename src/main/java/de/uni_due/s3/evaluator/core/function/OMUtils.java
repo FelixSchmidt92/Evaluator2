@@ -8,7 +8,7 @@ import de.uni_due.s3.openmath.jaxb.OMSTR;
 import de.uni_due.s3.openmath.omutils.OMConverter;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
-public class NumberUtils {
+public class OMUtils {
 
 	/**
 	 * Diese Funktion nimmt ein Object obj entgegen, dieses muss vom Typen OMF

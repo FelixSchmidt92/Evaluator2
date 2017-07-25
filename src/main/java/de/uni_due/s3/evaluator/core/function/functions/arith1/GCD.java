@@ -4,7 +4,7 @@ import java.math.BigInteger;
 import java.util.List;
 
 import de.uni_due.s3.evaluator.core.function.Function;
-import de.uni_due.s3.evaluator.core.function.NumberUtils;
+import de.uni_due.s3.evaluator.core.function.OMUtils;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
@@ -26,9 +26,9 @@ public class GCD extends Function {
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException {
 		try {
-			BigInteger leftValue = BigInteger.valueOf(NumberUtils.convertOMIToInteger(arguments.get(0)));
-			BigInteger rightValue = BigInteger.valueOf(NumberUtils.convertOMIToInteger(arguments.get(1)));
-			return NumberUtils.convertDoubleToOMIOMF(leftValue.gcd(rightValue).doubleValue());
+			BigInteger leftValue = BigInteger.valueOf(OMUtils.convertOMIToInteger(arguments.get(0)));
+			BigInteger rightValue = BigInteger.valueOf(OMUtils.convertOMIToInteger(arguments.get(1)));
+			return OMUtils.convertDoubleToOMIOMF(leftValue.gcd(rightValue).doubleValue());
 		} catch (InputMismatchException e) {
 			throw new FunctionInvalidArgumentTypeException(this, "integer");
 		}

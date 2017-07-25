@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import de.uni_due.s3.evaluator.core.function.Function;
-import de.uni_due.s3.evaluator.core.function.NumberUtils;
+import de.uni_due.s3.evaluator.core.function.OMUtils;
 import de.uni_due.s3.evaluator.core.functionData.OMSymbol;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
@@ -32,7 +32,7 @@ public class GetFromOrderedSet extends Function {
 
 		int pos = 0;
 		try {
-			pos = NumberUtils.convertOMIToInteger(arguments.get(1));
+			pos = OMUtils.convertOMIToInteger(arguments.get(1));
 		} catch (InputMismatchException e) {
 			throw new FunctionInvalidArgumentTypeException(this, "(0)Set, (1)Integer");
 		}
@@ -53,20 +53,20 @@ public class GetFromOrderedSet extends Function {
 			List<Double> setForSort = new ArrayList<Double>();
 			for (Object element : set) {
 				try {
-					setForSort.add(NumberUtils.convertOMIOMFToDouble(element));
+					setForSort.add(OMUtils.convertOMIOMFToDouble(element));
 				} catch (InputMismatchException e) {
 					throw new FunctionInvalidArgumentTypeException(this,
 							"Set elements have to be from either type String or Integer/Double/Float.");
 				}
 			}
 			Collections.sort(setForSort);
-			return NumberUtils.convertDoubleToOMIOMF(setForSort.get(pos));
+			return OMUtils.convertDoubleToOMIOMF(setForSort.get(pos));
 			
 		} else if (OMTypeChecker.isOMSTR(set.get(0))) {
 			List<String> setForSort = new ArrayList<String>();
 			for (Object element : set) {
 				try {
-					setForSort.add(NumberUtils.convertOMSTRToString(element));
+					setForSort.add(OMUtils.convertOMSTRToString(element));
 				} catch (InputMismatchException e) {
 					throw new FunctionInvalidArgumentTypeException(this,
 							"Set elements have to be from either type String or Integer/Double/Float.");

@@ -7,7 +7,7 @@ package de.uni_due.s3.evaluator.core.function.functions.relation1;
 import java.util.List;
 
 import de.uni_due.s3.evaluator.core.function.Function;
-import de.uni_due.s3.evaluator.core.function.NumberUtils;
+import de.uni_due.s3.evaluator.core.function.OMUtils;
 import de.uni_due.s3.evaluator.core.functionData.OMSymbol;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
@@ -26,8 +26,8 @@ public class GreaterThanOrEqual extends Function {
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException {
 		try{
-			double first = NumberUtils.convertOMIOMFToDouble(arguments.get(0));
-			double second = NumberUtils.convertOMIOMFToDouble(arguments.get(1));
+			double first = OMUtils.convertOMIOMFToDouble(arguments.get(0));
+			double second = OMUtils.convertOMIOMFToDouble(arguments.get(1));
 			return (first>=second)? OMSymbol.LOGIC1_TRUE:OMSymbol.LOGIC1_FALSE ;
 		}catch(Exception e){
 			throw new FunctionInvalidArgumentTypeException(this,"integer, float, double");

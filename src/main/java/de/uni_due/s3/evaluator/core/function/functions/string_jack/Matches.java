@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.regex.PatternSyntaxException;
 
 import de.uni_due.s3.evaluator.core.function.Function;
-import de.uni_due.s3.evaluator.core.function.NumberUtils;
+import de.uni_due.s3.evaluator.core.function.OMUtils;
 import de.uni_due.s3.evaluator.core.functionData.OMSymbol;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
@@ -28,8 +28,8 @@ public class Matches extends Function {
 	protected Object execute(List<Object> arguments) throws FunctionException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
 		try {
-			String in = NumberUtils.convertOMSTRToString(arguments.get(0));
-			String regex = NumberUtils.convertOMSTRToString(arguments.get(1));
+			String in = OMUtils.convertOMSTRToString(arguments.get(0));
+			String regex = OMUtils.convertOMSTRToString(arguments.get(1));
 
 			if (in.matches(regex)) {// can throw PatternSyntaxException
 				return OMSymbol.LOGIC1_TRUE;

@@ -3,7 +3,7 @@ package de.uni_due.s3.evaluator.core.function.functions.linalg_jack;
 import java.util.List;
 
 import de.uni_due.s3.evaluator.core.function.Function;
-import de.uni_due.s3.evaluator.core.function.NumberUtils;
+import de.uni_due.s3.evaluator.core.function.OMUtils;
 import de.uni_due.s3.evaluator.core.functionData.OMSymbol;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
@@ -39,8 +39,8 @@ public class RandomMatrixEigenvalue extends Function {
 			NoRepresentationAvailableException, OpenMathException, FunctionInvalidArgumentException {
 
 		try {
-			String arg1 = NumberUtils.convertOMSTRToString(arguments.get(0));
-			int arg2 = NumberUtils.convertOMIToInteger(arguments.get(1));
+			String arg1 = OMUtils.convertOMSTRToString(arguments.get(0));
+			int arg2 = OMUtils.convertOMIToInteger(arguments.get(1));
 			OMA arg3 = (OMA) arguments.get(2);
 			OMA arg4 = (OMA) arguments.get(3);
 

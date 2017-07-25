@@ -3,7 +3,7 @@ package de.uni_due.s3.evaluator.core.function.functions.binary_jack;
 import java.util.List;
 
 import de.uni_due.s3.evaluator.core.function.Function;
-import de.uni_due.s3.evaluator.core.function.NumberUtils;
+import de.uni_due.s3.evaluator.core.function.OMUtils;
 import de.uni_due.s3.evaluator.core.functionData.OMSymbol;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
@@ -22,8 +22,8 @@ public class EqualsBinary extends Function {
 	protected Object execute(List<Object> arguments)
 			throws FunctionInvalidArgumentTypeException, FunctionInvalidArgumentException {
 		try {
-			String left = NumberUtils.convertOMSTRToString(arguments.get(0));
-			String right = NumberUtils.convertOMSTRToString(arguments.get(1));
+			String left = OMUtils.convertOMSTRToString(arguments.get(0));
+			String right = OMUtils.convertOMSTRToString(arguments.get(1));
 			// replace leading 0's
 			left = left.replaceFirst("^0+(?!$)", "");
 			right = right.replaceFirst("^0+(?!$)", "");

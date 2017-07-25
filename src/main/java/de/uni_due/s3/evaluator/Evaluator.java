@@ -2,7 +2,7 @@ package de.uni_due.s3.evaluator;
 
 import java.util.HashMap;
 
-import de.uni_due.s3.evaluator.core.function.NumberUtils;
+import de.uni_due.s3.evaluator.core.function.OMUtils;
 import de.uni_due.s3.evaluator.core.function.OMExecutor;
 import de.uni_due.s3.evaluator.core.functionData.OMSymbol;
 import de.uni_due.s3.evaluator.exceptions.InvalidResultTypeException;
@@ -43,7 +43,7 @@ public class Evaluator {
 			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
 		OMOBJ result = evaluate(expression, exerciseVariableMap, fillInVariableMap);
 		try {
-			return NumberUtils.convertOMIOMFToDouble(result);
+			return OMUtils.convertOMIOMFToDouble(result);
 		} catch (InputMismatchException e) {
 			throw new InvalidResultTypeException(
 					"Type of result of expression:" + expression + "has to be integer, double or float.");

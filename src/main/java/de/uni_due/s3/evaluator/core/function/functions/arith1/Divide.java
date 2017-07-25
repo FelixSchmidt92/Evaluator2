@@ -3,7 +3,7 @@ package de.uni_due.s3.evaluator.core.function.functions.arith1;
 import java.util.List;
 
 import de.uni_due.s3.evaluator.core.function.Function;
-import de.uni_due.s3.evaluator.core.function.NumberUtils;
+import de.uni_due.s3.evaluator.core.function.OMUtils;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
@@ -30,12 +30,12 @@ public class Divide extends Function {
 	protected Object execute(List<Object> arguments)
 			throws FunctionInvalidArgumentTypeException, OpenMathException, FunctionInvalidArgumentException {
 		try {
-			Double leftValue = NumberUtils.convertOMIOMFToDouble(arguments.get(0));
-			Double rightValue = NumberUtils.convertOMIOMFToDouble(arguments.get(1));
+			Double leftValue = OMUtils.convertOMIOMFToDouble(arguments.get(0));
+			Double rightValue = OMUtils.convertOMIOMFToDouble(arguments.get(1));
 			if (rightValue == 0.0) {
 				throw new FunctionInvalidArgumentException(this, "Second argument of Division / has to be unequal zero.");
 			}
-			return NumberUtils.convertDoubleToOMIOMF(leftValue / rightValue);
+			return OMUtils.convertDoubleToOMIOMF(leftValue / rightValue);
 		} catch (InputMismatchException e) {
 			throw new FunctionInvalidArgumentTypeException(this, "integer, float, double");
 		}

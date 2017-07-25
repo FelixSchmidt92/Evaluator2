@@ -3,7 +3,7 @@ package de.uni_due.s3.evaluator.core.function.functions.arith1;
 import java.util.List;
 
 import de.uni_due.s3.evaluator.core.function.Function;
-import de.uni_due.s3.evaluator.core.function.NumberUtils;
+import de.uni_due.s3.evaluator.core.function.OMUtils;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
@@ -29,9 +29,9 @@ public class Power extends Function {
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException, OpenMathException   {
 		try {
-			Double b = NumberUtils.convertOMIOMFToDouble(arguments.get(0));
-			Double e = NumberUtils.convertOMIOMFToDouble(arguments.get(1));
-			return NumberUtils.convertDoubleToOMIOMF(Math.pow(b, e));
+			Double b = OMUtils.convertOMIOMFToDouble(arguments.get(0));
+			Double e = OMUtils.convertOMIOMFToDouble(arguments.get(1));
+			return OMUtils.convertDoubleToOMIOMF(Math.pow(b, e));
 		} catch (InputMismatchException e) {
 			throw new FunctionInvalidArgumentTypeException(this, "integer, float, double");
 		}

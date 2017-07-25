@@ -3,7 +3,7 @@ package de.uni_due.s3.evaluator.core.function.functions.transc_jack;
 import java.util.List;
 
 import de.uni_due.s3.evaluator.core.function.Function;
-import de.uni_due.s3.evaluator.core.function.NumberUtils;
+import de.uni_due.s3.evaluator.core.function.OMUtils;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
@@ -28,8 +28,8 @@ public class ToDegree extends Function {
 			CasNotAvailableException, NoRepresentationAvailableException, CasEvaluationException,
 			FunctionInvalidArgumentTypeException, OpenMathException, InvalidResultTypeException {
 		try {
-			Double value = NumberUtils.convertOMIOMFToDouble(arguments.get(0));
-			return NumberUtils.convertDoubleToOMIOMF(Math.toDegrees(value));
+			Double value = OMUtils.convertOMIOMFToDouble(arguments.get(0));
+			return OMUtils.convertDoubleToOMIOMF(Math.toDegrees(value));
 		} catch (InputMismatchException e) {
 			throw new FunctionInvalidArgumentTypeException(this, "(0)Integer");
 		}

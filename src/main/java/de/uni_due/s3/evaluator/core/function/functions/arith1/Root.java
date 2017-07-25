@@ -3,7 +3,7 @@ package de.uni_due.s3.evaluator.core.function.functions.arith1;
 import java.util.List;
 
 import de.uni_due.s3.evaluator.core.function.Function;
-import de.uni_due.s3.evaluator.core.function.NumberUtils;
+import de.uni_due.s3.evaluator.core.function.OMUtils;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
@@ -21,18 +21,18 @@ public class Root extends Function {
 	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException, OpenMathException {
 		try {
 			if (arguments.size() == 1) {
-				Double argValue = NumberUtils.convertOMIOMFToDouble(arguments.get(0));
-				return NumberUtils.convertDoubleToOMIOMF(Math.sqrt(argValue));
+				Double argValue = OMUtils.convertOMIOMFToDouble(arguments.get(0));
+				return OMUtils.convertDoubleToOMIOMF(Math.sqrt(argValue));
 			} else {
-				Double argValue = NumberUtils.convertOMIOMFToDouble(arguments.get(0));
-				Double nth = NumberUtils.convertOMIOMFToDouble(arguments.get(1));
+				Double argValue = OMUtils.convertOMIOMFToDouble(arguments.get(0));
+				Double nth = OMUtils.convertOMIOMFToDouble(arguments.get(1));
 				if (argValue < 0) {
 					if (nth % 2 == 1) {
 						Double result = -1 * Math.pow(Math.E, Math.log(Math.abs(argValue)) / nth);
-						return NumberUtils.convertDoubleToOMIOMF(result);
+						return OMUtils.convertDoubleToOMIOMF(result);
 					}
 				}
-				return NumberUtils.convertDoubleToOMIOMF(Math.pow(Math.E, Math.log(Math.abs(argValue)) / nth));
+				return OMUtils.convertDoubleToOMIOMF(Math.pow(Math.E, Math.log(Math.abs(argValue)) / nth));
 			}
 		} catch (InputMismatchException e) {
 			throw new FunctionInvalidArgumentTypeException(this, "(0)Integer/Double/Float [(1)Integer]");

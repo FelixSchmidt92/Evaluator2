@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import de.uni_due.s3.evaluator.core.function.Function;
-import de.uni_due.s3.evaluator.core.function.NumberUtils;
+import de.uni_due.s3.evaluator.core.function.OMUtils;
 import de.uni_due.s3.evaluator.core.function.PolyUtils;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
@@ -67,8 +67,8 @@ public class EvalTerm2 extends Function {
 		try{
 		
 			String polynomial = ((OMSTR) arguments.get(0)).getContent();
-			String var1 = NumberUtils.convertOMToString(arguments.get(1));
-			String var2 = NumberUtils.convertOMToString(arguments.get(2));
+			String var1 = OMUtils.convertOMToString(arguments.get(1));
+			String var2 = OMUtils.convertOMToString(arguments.get(2));
 			
 			// get all variables from the polynomial and build the sageSyntax
 			Set<String> variables1 = PolyUtils.getVariables(polynomial);

@@ -3,7 +3,7 @@ package de.uni_due.s3.evaluator.core.function.functions.binary_jack;
 import java.util.List;
 
 import de.uni_due.s3.evaluator.core.function.Function;
-import de.uni_due.s3.evaluator.core.function.NumberUtils;
+import de.uni_due.s3.evaluator.core.function.OMUtils;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.openmath.jaxb.OMSTR;
@@ -29,7 +29,7 @@ public class ConvertToBinary extends Function {
 	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException {
 		Double value;
 		try {
-			value = NumberUtils.convertOMIOMFToDouble(arguments.get(0));
+			value = OMUtils.convertOMIOMFToDouble(arguments.get(0));
 		} catch (InputMismatchException e) {
 			throw new FunctionInvalidArgumentTypeException(this, "(0)Integer|(0)Float");
 		}

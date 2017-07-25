@@ -3,7 +3,7 @@ package de.uni_due.s3.evaluator.core.function.functions.arith_jack;
 import java.util.List;
 
 import de.uni_due.s3.evaluator.core.function.Function;
-import de.uni_due.s3.evaluator.core.function.NumberUtils;
+import de.uni_due.s3.evaluator.core.function.OMUtils;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.openmath.jaxb.OMI;
@@ -27,9 +27,9 @@ public class IEEERemainder extends Function{
 			OMI left = (OMI)arguments.get(0);
 			OMI right = (OMI)arguments.get(1);
 		
-			Double leftValue = NumberUtils.convertOMIOMFToDouble(left);
-			Double rightValue = NumberUtils.convertOMIOMFToDouble(right);
-			return NumberUtils.convertDoubleToOMIOMF(Math.IEEEremainder(leftValue, rightValue));
+			Double leftValue = OMUtils.convertOMIOMFToDouble(left);
+			Double rightValue = OMUtils.convertOMIOMFToDouble(right);
+			return OMUtils.convertDoubleToOMIOMF(Math.IEEEremainder(leftValue, rightValue));
 		} catch (InputMismatchException e) {
 			throw new FunctionInvalidArgumentTypeException(this,"integer");
 		}

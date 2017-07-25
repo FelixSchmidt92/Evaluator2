@@ -3,7 +3,7 @@ package de.uni_due.s3.evaluator.core.function.functions.string_jack;
 import java.util.List;
 
 import de.uni_due.s3.evaluator.core.function.Function;
-import de.uni_due.s3.evaluator.core.function.NumberUtils;
+import de.uni_due.s3.evaluator.core.function.OMUtils;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
@@ -32,9 +32,9 @@ public class Replace extends Function {
 	protected Object execute(List<Object> arguments)
 			throws FunctionInvalidArgumentTypeException, FunctionInvalidArgumentException {
 		try {
-			String string = NumberUtils.convertOMSTRToString(arguments.get(0));
-			String toReplace = NumberUtils.convertOMSTRToString(arguments.get(1));
-			String replaceWith = NumberUtils.convertOMSTRToString(arguments.get(2));
+			String string = OMUtils.convertOMSTRToString(arguments.get(0));
+			String toReplace = OMUtils.convertOMSTRToString(arguments.get(1));
+			String replaceWith = OMUtils.convertOMSTRToString(arguments.get(2));
 
 			if (toReplace.length() == 1 && replaceWith.length() == 1) {
 				return OMCreator.createOMSTR(string.replace(toReplace.charAt(0), replaceWith.charAt(0)));
