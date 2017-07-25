@@ -31,16 +31,6 @@ public class TestArcTan2 extends TestIntegration {
 	}
 	
 	@Test
-	public void testAtan2_4() throws EvaluatorException, OpenMathException {
-		assertEquals(0.7853981633974483, Evaluator.getNumberResult("atan2('.5','.5')", exerciseVariableMap, fillInVariableMap),0.0001);
-	}
-	
-	@Test
-	public void testAtan2_5() throws EvaluatorException, OpenMathException {
-		assertEquals(PI/2, Evaluator.getNumberResult("atan2('.5','0')", exerciseVariableMap, fillInVariableMap),0.0001);
-	}
-	
-	@Test
 	public void testAtan2AtDefinition1() throws EvaluatorException, OpenMathException {
 		assertEquals(PI, Evaluator.getNumberResult("atan2(0, -1)", exerciseVariableMap, fillInVariableMap),0.0001);
 	}

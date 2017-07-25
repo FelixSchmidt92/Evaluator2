@@ -95,17 +95,17 @@ public class TestLog extends TestIntegration {
 		assertEquals(Math.log(.1234), Evaluator.getNumberResult("log(0.1234)", exerciseVariableMap, fillInVariableMap),0.0001);
 	}
 	
-	@Test (expected=FunctionInvalidArgumentException.class)
+	@Test (expected=FunctionInvalidArgumentException.class) //NaN
 	public void testLogAtDefinition1() throws EvaluatorException, OpenMathException {
 		Evaluator.getNumberResult("log(-1)", exerciseVariableMap, fillInVariableMap);
 	}
 	
-	@Test (expected=FunctionInvalidArgumentException.class)
+	@Test (expected=FunctionInvalidArgumentException.class) //NaN
 	public void testLogAtDefinition2() throws EvaluatorException, OpenMathException {
 		Evaluator.getNumberResult("log(-0.1)", exerciseVariableMap, fillInVariableMap);
 	}
 	
-	@Test (expected=FunctionInvalidArgumentException.class)
+	@Test (expected=FunctionInvalidArgumentException.class) //NaN
 	public void testLogAtDefinition3() throws EvaluatorException, OpenMathException {
 		Evaluator.getNumberResult("log(0)", exerciseVariableMap, fillInVariableMap);
 	}
