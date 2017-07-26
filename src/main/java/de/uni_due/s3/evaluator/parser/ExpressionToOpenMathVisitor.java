@@ -52,8 +52,24 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 
 	public ExpressionToOpenMathVisitor(HashMap<String, OMOBJ> exerciseVariableMap,
 			HashMap<Integer, OMOBJ> fillInVariableMap) {
-		this.exerciseVariableMap = exerciseVariableMap;
-		this.fillInVariableMap = fillInVariableMap;
+		
+		if (exerciseVariableMap != null){
+			this.exerciseVariableMap = exerciseVariableMap;
+			OMOBJ pi = new OMOBJ();
+			pi.setOMS(OMSymbol.NUMS1_PI);
+			exerciseVariableMap.put("PI", pi);
+			OMOBJ e = new OMOBJ();
+			e.setOMS(OMSymbol.NUMS1_PI);
+			exerciseVariableMap.put("E", e);
+		} else {
+			exerciseVariableMap = new HashMap<>();
+		}
+		
+		if (fillInVariableMap != null) {
+			this.fillInVariableMap = fillInVariableMap;
+		} else {
+			fillInVariableMap = new HashMap<>();
+		}
 	}
 
 	@Override

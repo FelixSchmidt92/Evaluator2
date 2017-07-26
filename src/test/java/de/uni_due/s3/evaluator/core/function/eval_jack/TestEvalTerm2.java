@@ -51,7 +51,7 @@ public class TestEvalTerm2 extends TestFunctionAbstract{
 		args.add(arg1.getOMA());
 		args.add(OMCreator.createOMSTR("1"));
 		args.add(OMCreator.createOMSTR("2"));
-		Object result = func.evaluate(args);
+		func.evaluate(args);
 		fail();
 	}
 	

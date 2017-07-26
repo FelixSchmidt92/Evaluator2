@@ -4,6 +4,7 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator.core.OMUtils;
 import de.uni_due.s3.evaluator.core.function.Function;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
@@ -18,9 +19,14 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 public class Log extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException, OpenMathException {
+	protected Object execute(List<Object> arguments)
+			throws FunctionInvalidArgumentTypeException, OpenMathException, FunctionInvalidArgumentException {
 		try {
-			Double result = Math.log(OMUtils.convertOMIOMFToDouble(arguments.get(0)));
+			Double value = OMUtils.convertOMIOMFToDouble(arguments.get(0));
+			if (value <= 0) {
+				throw new FunctionInvalidArgumentException(this, "Function Log expects values greater than zero.");
+			}
+			Double result = Math.log(value);
 			return OMUtils.convertDoubleToOMIOMF(result);
 		} catch (InputMismatchException e) {
 			throw new FunctionInvalidArgumentTypeException(this, "integer, float, double");

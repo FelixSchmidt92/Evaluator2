@@ -28,23 +28,24 @@ public class TestArcCos extends TestIntegration {
 
 	@Test
 	public void testAcos3() throws EvaluatorException, OpenMathException {
-		assertEquals(PI / 2, Evaluator.getNumberResult("acos('0')", exerciseVariableMap, fillInVariableMap), 0.0);
+		assertEquals(PI / 2, Evaluator.getNumberResult("acos('0')", exerciseVariableMap, fillInVariableMap), 0.000001);
 	}
 
 	@Test
 	public void testAcos4() throws EvaluatorException, OpenMathException {
-		assertEquals(PI / 2, Evaluator.getNumberResult("acos('0')", exerciseVariableMap, fillInVariableMap), 0.0);
+		assertEquals(PI / 2, Evaluator.getNumberResult("acos('0')", exerciseVariableMap, fillInVariableMap), 0.000001);
 	}
 
 	@Test
 	public void testAcos5() throws EvaluatorException, OpenMathException {
-		assertEquals(0.7953988301841436, Evaluator.getNumberResult("acos(0.7)", exerciseVariableMap, fillInVariableMap),
+		assertEquals(0.795398830184144, Evaluator.getNumberResult("acos(0.7)", exerciseVariableMap, fillInVariableMap),
 				0.0);
 	}
 
 	@Test
 	public void testAcosWithInput1() throws EvaluatorException, OpenMathException {
-		assertEquals(PI / 2, Evaluator.getNumberResult("acos([pos=1])", exerciseVariableMap, fillInVariableMap), 0.0001);
+		assertEquals(PI / 2, Evaluator.getNumberResult("acos([pos=1])", exerciseVariableMap, fillInVariableMap),
+				0.0001);
 	}
 
 	@Test
@@ -59,7 +60,8 @@ public class TestArcCos extends TestIntegration {
 
 	@Test
 	public void testAcosWithVariables1() throws EvaluatorException, OpenMathException {
-		assertEquals(PI / 2, Evaluator.getNumberResult("acos([var=a])", exerciseVariableMap, fillInVariableMap), 0.0);
+		assertEquals(PI / 2, Evaluator.getNumberResult("acos([var=a])", exerciseVariableMap, fillInVariableMap),
+				0.000001);
 	}
 
 	@Test
@@ -74,16 +76,16 @@ public class TestArcCos extends TestIntegration {
 
 	@Test
 	public void testAcosWithExpressions1() throws EvaluatorException, OpenMathException {
-		assertEquals(0.861722668365135,
+		assertEquals(0.861722668365136,
 				Evaluator.getNumberResult("acos(acos(acos(0.7)))", exerciseVariableMap, fillInVariableMap), 0.0);
 	}
 
 	@Test
 	public void testAcosWithExpressions2() throws EvaluatorException, OpenMathException {
-		assertEquals(PI / 2, Evaluator.getNumberResult("acos(acos(1))", exerciseVariableMap, fillInVariableMap), 0.0);
+		assertEquals(PI / 2, Evaluator.getNumberResult("acos(acos(1))", exerciseVariableMap, fillInVariableMap), 0.0001);
 	}
 
-	@Test(expected = ParserException.class)
+	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void TestAcosWithONECharacter() throws EvaluatorException, OpenMathException {
 		Evaluator.getNumberResult("acos(a)", exerciseVariableMap, fillInVariableMap);
 		fail();

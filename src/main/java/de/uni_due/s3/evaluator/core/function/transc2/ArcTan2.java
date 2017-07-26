@@ -2,9 +2,11 @@ package de.uni_due.s3.evaluator.core.function.transc2;
 
 import java.util.List;
 
+import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.function.InvalidResultTypeException;
@@ -23,12 +25,17 @@ public class ArcTan2 extends Function {
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException,
 			CasEvaluationException, FunctionInvalidNumberOfArgumentsException, CasNotAvailableException,
-			NoRepresentationAvailableException, OpenMathException, InvalidResultTypeException {
+			NoRepresentationAvailableException, OpenMathException, InvalidResultTypeException, FunctionInvalidArgumentException {
 		if (!OMTypeChecker.isOMNumber(arguments.get(0))) {
 			throw new FunctionInvalidArgumentTypeException(this, "integer, float, double");
 		}
+		
 		Object result = Sage.evaluateInCAS(getPartialSageSyntax(arguments));
 
+		if (OMTypeChecker.isOMS(result) && result.equals(OMSymbol.NUMS1_NAN)) {
+			throw new FunctionInvalidArgumentException(this, "ArcTan2: both values cannot be zero at the same time.");
+		}
+		
 		if (!OMTypeChecker.isOMNumber(result)) {
 			throw new InvalidResultTypeException(this, "integer, float, double");
 		}
