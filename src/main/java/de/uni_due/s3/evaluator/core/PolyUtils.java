@@ -1,6 +1,5 @@
 package de.uni_due.s3.evaluator.core;
 
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
