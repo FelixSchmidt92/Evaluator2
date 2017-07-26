@@ -17,10 +17,7 @@ import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentExcept
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMA;
-import de.uni_due.s3.openmath.jaxb.OMF;
-import de.uni_due.s3.openmath.jaxb.OMI;
 import de.uni_due.s3.openmath.jaxb.OMSTR;
-import de.uni_due.s3.openmath.jaxb.OMV;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
@@ -61,40 +58,6 @@ public class TestMatches extends TestFunctionAbstract {
 		args.add(reg);
 		
 		assertEquals(OMSymbol.LOGIC1_TRUE, func.evaluate(args));
-	}
-	
-	
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testMatchesWithOMI() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
-		ArrayList<Object> args = new ArrayList<>();
-		OMI in = OMCreator.createOMI(1);
-		OMSTR reg = OMCreator.createOMSTR("\\d");
-		args.add(in);
-		args.add(reg);
-		
-		func.evaluate(args);
-	}
-	
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testMatchesWithOMF() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
-		ArrayList<Object> args = new ArrayList<>();
-		OMF in = OMCreator.createOMF(1.1);
-		OMSTR reg = OMCreator.createOMSTR("\\d");
-		args.add(in);
-		args.add(reg);
-		
-		func.evaluate(args);
-	}
-	
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testMatchesWithOMV() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
-		ArrayList<Object> args = new ArrayList<>();
-		OMV in = OMCreator.createOMV("x");
-		OMSTR reg = OMCreator.createOMSTR("\\d");
-		args.add(in);
-		args.add(reg);
-		
-		func.evaluate(args);
 	}
 	
 	@Test(expected = FunctionInvalidArgumentTypeException.class)

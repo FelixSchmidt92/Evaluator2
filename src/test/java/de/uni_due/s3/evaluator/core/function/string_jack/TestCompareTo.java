@@ -80,7 +80,7 @@ public class TestCompareTo extends TestFunctionAbstract {
 	public void testCompareToWithWrongArguments() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
-		OMOBJ omobj = ExpressionParser.parse("compareTo('Test',2)", null, null);
+		OMOBJ omobj = ExpressionParser.parse("compareTo('Test', vector(2))", null, null);
 		OMExecutor.execute(omobj);
 		fail();
 	}

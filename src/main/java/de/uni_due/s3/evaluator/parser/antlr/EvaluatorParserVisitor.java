@@ -12,6 +12,13 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  */
 public interface EvaluatorParserVisitor<T> extends ParseTreeVisitor<T> {
 	/**
+	 * Visit a parse tree produced by the {@code binaryCircumflex}
+	 * labeled alternative in {@link EvaluatorParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBinaryCircumflex(EvaluatorParser.BinaryCircumflexContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code binaryRelational}
 	 * labeled alternative in {@link EvaluatorParser#expression}.
 	 * @param ctx the parse tree
@@ -60,6 +67,13 @@ public interface EvaluatorParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitSetInExpression(EvaluatorParser.SetInExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code variable}
+	 * labeled alternative in {@link EvaluatorParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVariable(EvaluatorParser.VariableContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code exerciseVarName}
 	 * labeled alternative in {@link EvaluatorParser#expression}.
@@ -138,10 +152,4 @@ public interface EvaluatorParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitSet(EvaluatorParser.SetContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link EvaluatorParser#nestedFunction}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitNestedFunction(EvaluatorParser.NestedFunctionContext ctx);
 }

@@ -38,7 +38,7 @@ public class Trim extends Function {
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException {
 		try {
-			String string = OMUtils.convertOMSTRToString(arguments.get(0));
+			String string = OMUtils.convertOMToString(arguments.get(0));
 			return OMCreator.createOMSTR(string.trim());
 		} catch (InputMismatchException e) {
 			throw new FunctionInvalidArgumentTypeException(this, "(0)String");

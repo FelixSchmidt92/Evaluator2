@@ -78,7 +78,7 @@ public class TestToLowerCase extends TestFunctionAbstract {
 	public void testToLowerCaseWithWrongArguments() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
-		OMOBJ omobj = ExpressionParser.parse("toLowerCase(1)", null, null);
+		OMOBJ omobj = ExpressionParser.parse("toLowerCase(vector(1))", null, null);
 		OMExecutor.execute(omobj);
 		fail();
 	}

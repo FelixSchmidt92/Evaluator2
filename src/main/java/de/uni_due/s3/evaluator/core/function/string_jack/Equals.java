@@ -25,8 +25,8 @@ public class Equals extends Function {
 	protected Object execute(List<Object> arguments)
 			throws FunctionInvalidArgumentException, FunctionInvalidArgumentTypeException {
 		try {
-			String string1 = OMUtils.convertOMSTRToString(arguments.get(0));
-			String string2 = OMUtils.convertOMSTRToString(arguments.get(1));
+			String string1 = OMUtils.convertOMToString(arguments.get(0));
+			String string2 = OMUtils.convertOMToString(arguments.get(1));
 
 			if (string1.equals(string2)) {
 				return OMSymbol.LOGIC1_TRUE;

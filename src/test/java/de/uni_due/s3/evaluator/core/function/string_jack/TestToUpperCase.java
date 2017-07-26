@@ -78,7 +78,7 @@ public class TestToUpperCase extends TestFunctionAbstract {
 	public void testToUpperCaseWithWrongArguments() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
-		OMOBJ omobj = ExpressionParser.parse("toUpperCase(1)", null, null);
+		OMOBJ omobj = ExpressionParser.parse("toUpperCase(vector(1))", null, null);
 		OMExecutor.execute(omobj);
 		fail();
 	}

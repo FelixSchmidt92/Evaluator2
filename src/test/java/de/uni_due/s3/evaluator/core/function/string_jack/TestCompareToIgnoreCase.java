@@ -80,7 +80,7 @@ public class TestCompareToIgnoreCase extends TestFunctionAbstract {
 	public void testCompareToIgnoreCaseWithWrongArguments() throws FunctionException, OpenMathException,
 			CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException,
 			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
-		OMOBJ omobj = ExpressionParser.parse("compareToIgnoreCase('Test',2)", null, null);
+		OMOBJ omobj = ExpressionParser.parse("compareToIgnoreCase('Test', vector(2))", null, null);
 		OMExecutor.execute(omobj);
 		fail();
 	}

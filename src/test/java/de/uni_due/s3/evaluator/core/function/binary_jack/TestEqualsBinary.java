@@ -36,8 +36,8 @@ public class TestEqualsBinary extends TestFunctionAbstract {
 			{ "1010", "1010", OMSymbol.LOGIC1_TRUE, OMCreator.createOMF(1.1) }, // [0]
 			{ "1010", "001010", OMSymbol.LOGIC1_TRUE, OMCreator.createOMA(OMSymbol.SET1_SET, new ArrayList<>()) },
 			{ "001010", "1010", OMSymbol.LOGIC1_TRUE, OMCreator.createOMS("myCD", "myName") },
-			{ "1010", "101000", OMSymbol.LOGIC1_FALSE, OMCreator.createOMI(1) },
-			{ "-1010", "-0001010", OMSymbol.LOGIC1_TRUE, OMCreator.createOMI(1) },};
+			{ "1010", "101000", OMSymbol.LOGIC1_FALSE, OMCreator.createOMI(2) },
+			{ "-1010", "-0001010", OMSymbol.LOGIC1_TRUE, OMCreator.createOMI(50) },};
 
 	
 	public TestEqualsBinary(String left, String right, OMS expected, Object invalidType) {

@@ -78,7 +78,7 @@ public class TestTrim extends TestFunctionAbstract {
 	public void testTrimWithWrongArguments() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
-		OMOBJ omobj = ExpressionParser.parse("trim(3)", null, null);
+		OMOBJ omobj = ExpressionParser.parse("trim(vector(3))", null, null);
 		OMExecutor.execute(omobj);
 		fail();
 	}

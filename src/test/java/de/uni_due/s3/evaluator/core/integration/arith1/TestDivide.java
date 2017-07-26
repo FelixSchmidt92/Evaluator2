@@ -12,7 +12,6 @@ import de.uni_due.s3.evaluator.core.integration.TestIntegration;
 import de.uni_due.s3.evaluator.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
-import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedFillInVariableException;
 import de.uni_due.s3.openmath.omutils.OMConverter;
@@ -110,7 +109,7 @@ public class TestDivide extends TestIntegration {
 		assertEquals(.5, Evaluator.getNumberResult("((((1 / 2) / 1) / 1) / 1) / 1", exerciseVariableMap, fillInVariableMap),0.0001);
 	}
 
-	@Test(expected=ParserException.class)
+	@Test(expected=FunctionInvalidArgumentTypeException.class)
 	public void testDivisionWithWrongInputCharacter() throws EvaluatorException, OpenMathException {
 		Evaluator.getNumberResult("6 / a", exerciseVariableMap, fillInVariableMap);
 	}

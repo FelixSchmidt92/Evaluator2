@@ -6,13 +6,26 @@ options {
 
 expression
 :
-	nestedFunction # nestedFunctionInExpression
+	name = Variable # variable
+	|
+	(
+		name = FunctionName LeftParenthesis
+		(
+			arguments += expression
+			(
+				ArgumentSeparator arguments += expression
+			)*
+		)? RightParenthesis
+	) # nestedFunctionInExpression
 	| LeftParenthesis expression RightParenthesis # parenthesis
-	| unaryOperatorForExpression expression # unary
-	| expression binaryOperatorArithPoint expression # binaryArithPoint
-	| expression binaryOperatorArithLine expression # binaryArithLine
-	| expression binaryOperatorRelational expression # binaryRelational
-	| expression binaryOperatorBoolean expression # binaryBoolean
+	| operator = unaryOperatorForExpression expression # unary
+	| expression Circumflex expression # binaryCircumflex
+	| expression operator = binaryOperatorArithPoint expression #
+	binaryArithPoint
+	| expression operator = binaryOperatorArithLine expression # binaryArithLine
+	| expression operator = binaryOperatorRelational expression #
+	binaryRelational
+	| expression operator = binaryOperatorBoolean expression # binaryBoolean
 	| set # setInExpression
 	| value = Integer # integerValue
 	| value = Float # floatValue
@@ -81,15 +94,4 @@ set
 			SetArgumentSeparator arguments += expression
 		)*
 	)? SetClose
-;
-
-nestedFunction
-:
-	name = FunctionName LeftParenthesis
-	(
-		arguments += expression
-		(
-			ArgumentSeparator arguments += expression
-		)*
-	)? RightParenthesis
 ;

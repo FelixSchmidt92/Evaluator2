@@ -121,7 +121,7 @@ public class TestStartsWith extends TestFunctionAbstract {
 	public void testStartsWithWithWrongArguments() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
-		OMOBJ omobj = ExpressionParser.parse("startsWith('Test',2)", null, null);
+		OMOBJ omobj = ExpressionParser.parse("startsWith('Test', vector(2))", null, null);
 		OMExecutor.execute(omobj);
 		fail();
 	}

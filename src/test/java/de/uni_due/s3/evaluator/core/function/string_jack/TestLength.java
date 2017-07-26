@@ -78,7 +78,7 @@ public class TestLength extends TestFunctionAbstract {
 	public void testLengthWithWrongArguments() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
-		OMOBJ omobj = ExpressionParser.parse("length(2)", null, null);
+		OMOBJ omobj = ExpressionParser.parse("length(vector(2))", null, null);
 		OMExecutor.execute(omobj);
 		fail();
 	}

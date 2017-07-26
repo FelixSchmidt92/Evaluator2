@@ -39,7 +39,7 @@ public class RandomMatrixEigenvalue extends Function {
 			NoRepresentationAvailableException, OpenMathException, FunctionInvalidArgumentException {
 
 		try {
-			String arg1 = OMUtils.convertOMSTRToString(arguments.get(0));
+			String arg1 = OMUtils.convertOMToString(arguments.get(0));
 			int arg2 = OMUtils.convertOMIToInteger(arguments.get(1));
 			OMA arg3 = (OMA) arguments.get(2);
 			OMA arg4 = (OMA) arguments.get(3);

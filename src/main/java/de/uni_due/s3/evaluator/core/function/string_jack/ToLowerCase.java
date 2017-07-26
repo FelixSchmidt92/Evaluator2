@@ -23,7 +23,7 @@ public class ToLowerCase extends Function {
 	protected Object execute(List<Object> arguments)
 			throws FunctionInvalidArgumentException, FunctionInvalidArgumentTypeException {
 		try {
-			String string = OMUtils.convertOMSTRToString(arguments.get(0));
+			String string = OMUtils.convertOMToString(arguments.get(0));
 			return OMCreator.createOMSTR(string.toLowerCase());
 		} catch (InputMismatchException e) {
 			throw new FunctionInvalidArgumentTypeException(this, "(0)String");

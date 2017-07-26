@@ -28,7 +28,7 @@ public class Substring extends Function {
 	protected Object execute(List<Object> arguments)
 			throws FunctionInvalidArgumentTypeException, FunctionInvalidArgumentException {
 		try {
-			String string = OMUtils.convertOMSTRToString(arguments.get(0));
+			String string = OMUtils.convertOMToString(arguments.get(0));
 			int begin = OMUtils.convertOMIToInteger(arguments.get(1));
 			int end = string.length();
 			if (arguments.size() == 3) {

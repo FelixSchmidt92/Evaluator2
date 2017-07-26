@@ -56,28 +56,25 @@ public class GetFromOrderedSet extends Function {
 					setForSort.add(OMUtils.convertOMIOMFToDouble(element));
 				} catch (InputMismatchException e) {
 					throw new FunctionInvalidArgumentTypeException(this,
-							"Set elements have to be from either type String or Integer/Double/Float.");
+							"Set elements have to be from type String/Integer/Double/Float.");
 				}
 			}
 			Collections.sort(setForSort);
 			return OMUtils.convertDoubleToOMIOMF(setForSort.get(pos));
 			
-		} else if (OMTypeChecker.isOMSTR(set.get(0))) {
+		} else {
 			List<String> setForSort = new ArrayList<String>();
 			for (Object element : set) {
 				try {
-					setForSort.add(OMUtils.convertOMSTRToString(element));
+					setForSort.add(OMUtils.convertOMToString(element));
 				} catch (InputMismatchException e) {
 					throw new FunctionInvalidArgumentTypeException(this,
-							"Set elements have to be from either type String or Integer/Double/Float.");
+							"Set elements have to be from type String/Integer/Double/Float.");
 				}
 			}
 			Collections.sort(setForSort);
 			return OMCreator.createOMSTR(setForSort.get(pos));
 			
-		} else {
-			throw new FunctionInvalidArgumentTypeException(this,
-					"Set elements have to be from either type String or Integer/Double/Float.");
 		}
 	}
 

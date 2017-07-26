@@ -26,7 +26,7 @@ public class TestParserErrorStrategy {
 	private static String[] test = { "/ 2", "3 /", " * [var=a]", " / [pos=0]", " / 'abcd'", "((())", "((", "(()))",
 			"))", "a(", "(*)", // which reportNoViableAlternative should catch
 								// (or sync)
-			"w", "a", "bas", "a123", "b09", // which recoverInLine should catch
+			"rew", "au", "bas", "a123", "b09", // which recoverInLine should catch
 			"1a", "[var=a]bv", "'abs'abs", "test(123)a", "1z" // which sync
 																// should catch
 	};

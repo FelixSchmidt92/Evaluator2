@@ -1,13 +1,18 @@
 package de.uni_due.s3.evaluator.core;
 
+import java.util.List;
+
 import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
+import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OMF;
 import de.uni_due.s3.openmath.jaxb.OMI;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.jaxb.OMSTR;
+import de.uni_due.s3.openmath.jaxb.OMV;
 import de.uni_due.s3.openmath.omutils.OMConverter;
+import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class OMUtils {
@@ -98,30 +103,6 @@ public class OMUtils {
 	}
 
 	/**
-	 * Diese Funktion nimmt einen OMSTR entgegen und erzeugt hieraus ein String
-	 * 
-	 * @param obj
-	 *            OMSTR
-	 * @return String rep.
-	 * @throws InputMismatchException
-	 */
-	public static String convertOMSTRToString(Object obj) throws InputMismatchException {
-		if (obj instanceof OMOBJ) {
-			try {
-				obj = OMConverter.toElement((OMOBJ) obj);
-			} catch (OpenMathException e) {
-				throw new InputMismatchException();
-			}
-		}
-
-		if (obj instanceof OMSTR) {
-			return ((OMSTR) obj).getContent();
-		} else {
-			throw new InputMismatchException();
-		}
-	}
-
-	/**
 	 * Diese Funktion nimmt einen OMSTR, OMI, OMF entgegen und erzeugt hieraus
 	 * ein String
 	 * 
@@ -145,6 +126,17 @@ public class OMUtils {
 			return ((OMI) obj).getValue();
 		} else if (obj instanceof OMF) {
 			return Double.toString(((OMF) obj).getDec());
+		} else if (obj instanceof OMV) {
+			return ((OMV) obj).getName();
+		} else if (OMTypeChecker.isOMAWithSymbol(obj, null)) { // FIXME dlux
+																// OMSymbol.STRINGJACK_WITHVAR
+			List<Object> omel = ((OMA) obj).getOmel();
+			omel.remove(0);
+			String result = "";
+			for (Object part : omel) {
+				result = result + convertOMToString(part);
+			}
+			return result;
 		} else {
 			throw new InputMismatchException();
 		}

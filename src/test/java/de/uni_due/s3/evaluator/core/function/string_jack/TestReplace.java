@@ -86,7 +86,7 @@ public class TestReplace extends TestFunctionAbstract {
 	public void testReplaceWithWrongArguments() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
-		OMOBJ omobj = ExpressionParser.parse("replace('Hello', '1', 3)", null, null);
+		OMOBJ omobj = ExpressionParser.parse("replace('Hello', '1', vector(3))", null, null);
 		OMExecutor.execute(omobj);
 		fail();
 	}

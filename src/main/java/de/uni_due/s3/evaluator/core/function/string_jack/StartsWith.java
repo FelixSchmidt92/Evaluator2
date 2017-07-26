@@ -23,8 +23,8 @@ public class StartsWith extends Function {
 	protected Object execute(List<Object> arguments)
 			throws FunctionInvalidArgumentException, FunctionInvalidArgumentTypeException {
 		try {
-			String string1 = OMUtils.convertOMSTRToString(arguments.get(0));
-			String string2 = OMUtils.convertOMSTRToString(arguments.get(1));
+			String string1 = OMUtils.convertOMToString(arguments.get(0));
+			String string2 = OMUtils.convertOMToString(arguments.get(1));
 
 			int pos = 0;
 			

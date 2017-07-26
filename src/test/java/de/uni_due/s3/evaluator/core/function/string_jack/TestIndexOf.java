@@ -81,7 +81,7 @@ public class TestIndexOf extends TestFunctionAbstract {
 	public void testIndexOfWithWrongArguments() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
-		OMOBJ omobj = ExpressionParser.parse("indexOf('Test', 4)", null, null);
+		OMOBJ omobj = ExpressionParser.parse("indexOf('Test', vector(4))", null, null);
 		OMExecutor.execute(omobj);
 		fail();
 	}

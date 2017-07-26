@@ -28,8 +28,8 @@ public class Matches extends Function {
 	protected Object execute(List<Object> arguments) throws FunctionException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
 		try {
-			String in = OMUtils.convertOMSTRToString(arguments.get(0));
-			String regex = OMUtils.convertOMSTRToString(arguments.get(1));
+			String in = OMUtils.convertOMToString(arguments.get(0));
+			String regex = OMUtils.convertOMToString(arguments.get(1));
 
 			if (in.matches(regex)) {// can throw PatternSyntaxException
 				return OMSymbol.LOGIC1_TRUE;

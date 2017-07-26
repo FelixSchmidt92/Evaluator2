@@ -90,7 +90,7 @@ public class TestEquals extends TestFunctionAbstract {
 	public void testEqualsWithWrongArguments() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
-		OMOBJ omobj = ExpressionParser.parse("equals('Test',2)", null, null);
+		OMOBJ omobj = ExpressionParser.parse("equals('Test', vector(2))", null, null);
 		OMExecutor.execute(omobj);
 		fail();
 	}

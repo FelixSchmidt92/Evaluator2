@@ -81,7 +81,7 @@ public class TestEndsWith extends TestFunctionAbstract {
 	public void testEndsWithWithWrongArguments() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
-		OMOBJ omobj = ExpressionParser.parse("endsWith('Test',2)", null, null);
+		OMOBJ omobj = ExpressionParser.parse("endsWith('Test', vector(2))", null, null);
 		OMExecutor.execute(omobj);
 		fail();
 	}

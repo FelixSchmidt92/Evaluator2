@@ -62,7 +62,7 @@ public class TestConcat extends TestFunctionAbstract {
 	public void testConcatWithWrongArguments() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
-		OMOBJ omobj = ExpressionParser.parse("concat('Test',2)", null, null);
+		OMOBJ omobj = ExpressionParser.parse("concat('Test', vector(2))", null, null);
 		OMExecutor.execute(omobj);
 		fail();
 	}

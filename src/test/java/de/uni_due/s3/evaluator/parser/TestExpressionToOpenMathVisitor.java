@@ -8,6 +8,7 @@ import java.io.StringReader;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 import org.antlr.v4.runtime.CharStream;
@@ -18,6 +19,7 @@ import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
+import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedRuntimeException;
 import de.uni_due.s3.evaluator.exceptions.parserruntime.ParserRuntimeException;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorLexer;
@@ -93,11 +95,12 @@ public class TestExpressionToOpenMathVisitor{
 	@Test
 	public void testVisitIntegerValue(){
 		for (int i = 0; i < 1000; i++){
-			String val = gen.genRandomIntegerValue(50, null);
+			String val = gen.genRandomIntegerValue(9, null);
+			int t = Integer.parseInt(val);
 			
-			OMI omi = (OMI) visitor.visit(parse(String.valueOf(val)));
+			OMI omi = (OMI) visitor.visit(parse(val));
 			
-			assertEquals(String.valueOf(val), omi.getValue());
+			assertEquals(String.valueOf(t), omi.getValue());
 		}
 	}
 	
@@ -115,6 +118,25 @@ public class TestExpressionToOpenMathVisitor{
 			assertEquals(value, result);
 		}
 	}
+	
+	@Test
+	public void testVisitCircumflex(){
+		OMA result = (OMA) visitor.visit(parse("2^5"));
+		List<Object> plus = new ArrayList<>();
+		plus.add(OMCreator.createOMI(2));
+		plus.add(OMCreator.createOMI(5));
+		assertEquals(OMCreator.createOMA(OMSymbol.ARITH1_POWER, plus), result);
+	}
+	
+	@Test
+	public void testVisitVariable(){
+		OMA result = (OMA) visitor.visit(parse("3 + a"));
+		List<Object> plus = new ArrayList<>();
+		plus.add(OMCreator.createOMI(3));
+		plus.add(OMCreator.createOMV("a"));
+		assertEquals(OMCreator.createOMA(OMSymbol.ARITH1_PLUS, plus), result);
+	}
+	
 	
 	@Test
 	public void testVisitTextONLYValue(){

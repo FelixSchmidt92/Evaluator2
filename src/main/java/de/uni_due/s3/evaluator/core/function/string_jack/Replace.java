@@ -32,9 +32,9 @@ public class Replace extends Function {
 	protected Object execute(List<Object> arguments)
 			throws FunctionInvalidArgumentTypeException, FunctionInvalidArgumentException {
 		try {
-			String string = OMUtils.convertOMSTRToString(arguments.get(0));
-			String toReplace = OMUtils.convertOMSTRToString(arguments.get(1));
-			String replaceWith = OMUtils.convertOMSTRToString(arguments.get(2));
+			String string = OMUtils.convertOMToString(arguments.get(0));
+			String toReplace = OMUtils.convertOMToString(arguments.get(1));
+			String replaceWith = OMUtils.convertOMToString(arguments.get(2));
 
 			if (toReplace.length() == 1 && replaceWith.length() == 1) {
 				return OMCreator.createOMSTR(string.replace(toReplace.charAt(0), replaceWith.charAt(0)));

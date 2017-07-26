@@ -81,7 +81,7 @@ public class TestLastIndexOf extends TestFunctionAbstract {
 	public void testLastIndexOfWithWrongArguments() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
-		OMOBJ omobj = ExpressionParser.parse("lastIndexOf('Test', 4)", null, null);
+		OMOBJ omobj = ExpressionParser.parse("lastIndexOf('Test', vector(4))", null, null);
 		OMExecutor.execute(omobj);
 		fail();
 	}

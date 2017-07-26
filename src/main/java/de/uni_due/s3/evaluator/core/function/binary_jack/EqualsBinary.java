@@ -1,6 +1,7 @@
 package de.uni_due.s3.evaluator.core.function.binary_jack;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 import de.uni_due.s3.evaluator.core.OMUtils;
 import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
@@ -22,8 +23,10 @@ public class EqualsBinary extends Function {
 	protected Object execute(List<Object> arguments)
 			throws FunctionInvalidArgumentTypeException, FunctionInvalidArgumentException {
 		try {
-			String left = OMUtils.convertOMSTRToString(arguments.get(0));
-			String right = OMUtils.convertOMSTRToString(arguments.get(1));
+			String left = OMUtils.convertOMToString(arguments.get(0));
+			String right = OMUtils.convertOMToString(arguments.get(1));
+			if (!Pattern.matches("^-?[01]+", left) || !Pattern.matches("^-?[01]+", right))
+				throw new InputMismatchException();
 			// replace leading 0's
 			left = left.replaceFirst("^0+(?!$)", "");
 			right = right.replaceFirst("^0+(?!$)", "");
@@ -40,7 +43,7 @@ public class EqualsBinary extends Function {
 			}
 
 		} catch (InputMismatchException e) {
-			throw new FunctionInvalidArgumentTypeException(this, "(0)String, (1)String");
+			throw new FunctionInvalidArgumentTypeException(this, "(0)Binary, (1)Binary");
 		} catch (NumberFormatException e) {
 			throw new FunctionInvalidArgumentException(this,
 					"One of the Binary Strings is either to long or contains invalid signs.");

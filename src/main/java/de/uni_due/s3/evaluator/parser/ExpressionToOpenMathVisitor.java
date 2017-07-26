@@ -2,6 +2,7 @@ package de.uni_due.s3.evaluator.parser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,24 +17,19 @@ import de.uni_due.s3.evaluator.exceptions.parserruntime.UndefinedFillInVariableR
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.BinaryArithLineContext;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.BinaryArithPointContext;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.BinaryBooleanContext;
-import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.BinaryOperatorArithLineContext;
-import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.BinaryOperatorArithPointContext;
-import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.BinaryOperatorBooleanContext;
-import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.BinaryOperatorRelationalContext;
+import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.BinaryCircumflexContext;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.BinaryRelationalContext;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.ExerciseVarNameContext;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.ExpressionContext;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.FillInVarNameContext;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.FloatValueContext;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.IntegerValueContext;
-import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.NestedFunctionContext;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.NestedFunctionInExpressionContext;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.ParenthesisContext;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.SetContext;
-import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.SetInExpressionContext;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.TextValueContext;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.UnaryContext;
-import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.UnaryOperatorForExpressionContext;
+import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParser.VariableContext;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorParserBaseVisitor;
 import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OMF;
@@ -60,15 +56,195 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 		this.fillInVariableMap = fillInVariableMap;
 	}
 
-	/**
-	 * TODO FIXME dlux spobel frichtscheid mayeb get a TextExpression,
-	 * TextWithVariable and TextOnly visit methods with anltr?
-	 */
+	@Override
+	public Object visitBinaryArithLine(BinaryArithLineContext ctx) {
+		OMS oms;
+		switch (ctx.operator.getText()) {
+		case "+":
+			oms = OMSymbol.ARITH1_PLUS;
+			break;
+		case "-":
+			oms = OMSymbol.ARITH1_MINUS;
+			break;
+		default:
+			throw new FunctionNotImplementedRuntimeException(
+					"Binary Operator " + ctx.operator.getText() + " is not supported");
+		}
+		List<Object> omel = new ArrayList<>();
+		omel.add(visit(ctx.getChild(0))); // left side
+		omel.add(visit(ctx.getChild(2))); // right side
+		return OMCreator.createOMA(oms, omel);
+	}
+
+	@Override
+	public Object visitBinaryArithPoint(BinaryArithPointContext ctx) {
+		OMS oms;
+		switch (ctx.operator.getText()) {
+		case "*":
+			oms = OMSymbol.ARITH1_TIMES;
+			break;
+		case "/":
+			oms = OMSymbol.ARITH1_DIVIDE;
+			break;
+		case "%":
+			oms = OMSymbol.INTEGER1_REMAINDER;
+			break;
+		default:
+			throw new FunctionNotImplementedRuntimeException(
+					"Binary Operator " + ctx.operator.getText() + " is not supported");
+		}
+		List<Object> omel = new ArrayList<>();
+		omel.add(visit(ctx.getChild(0))); // left side
+		omel.add(visit(ctx.getChild(2))); // right side
+		return OMCreator.createOMA(oms, omel);
+	}
+
+	@Override
+	public Object visitBinaryBoolean(BinaryBooleanContext ctx) {
+		OMS oms;
+		switch (ctx.getChild(1).getText()) {
+		case "&&":
+			oms = OMSymbol.LOGIC1_AND;
+			break;
+		case "||":
+			oms = OMSymbol.LOGIC1_OR;
+			break;
+		default:
+			throw new FunctionNotImplementedRuntimeException("Binary Operator " + ctx.operator + " is not supported");
+		}
+		List<Object> omel = new ArrayList<>();
+		omel.add(visit(ctx.getChild(0))); // left side
+		omel.add(visit(ctx.getChild(2))); // right side
+		return OMCreator.createOMA(oms, omel);
+	}
+
+	@Override
+	public Object visitBinaryCircumflex(BinaryCircumflexContext ctx) {
+		List<Object> omel = new ArrayList<>();
+		omel.add(visit(ctx.getChild(0))); // left side
+		omel.add(visit(ctx.getChild(2))); // right side
+		return OMCreator.createOMA(OMSymbol.ARITH1_POWER, omel);
+	}
+
+	@Override
+	public Object visitBinaryRelational(BinaryRelationalContext ctx) {
+		OMS oms;
+		switch (ctx.operator.getText()) {
+		case "<":
+			oms = OMSymbol.RELATION1_LT;
+			break;
+		case "<=":
+			oms = OMSymbol.RELATION1_LEQ;
+			break;
+		case ">":
+			oms = OMSymbol.RELATION1_GT;
+			break;
+		case ">=":
+			oms = OMSymbol.RELATION1_GEQ;
+			break;
+		case "=":
+			oms = OMSymbol.RELATION1_EQ;
+			break;
+		case "==":
+			oms = OMSymbol.RELATION1_EQ;
+			break;
+		case "!=":
+			oms = OMSymbol.RELATION1_NEQ;
+			break;
+		default:
+			throw new FunctionNotImplementedRuntimeException(
+					"Binary Operator " + ctx.operator.getText() + " is not supported");
+		}
+		List<Object> omel = new ArrayList<>();
+		omel.add(visit(ctx.getChild(0))); // left side
+		omel.add(visit(ctx.getChild(2))); // right side
+		return OMCreator.createOMA(oms, omel);
+	}
+
+	@Override
+	public Object visitExerciseVarName(ExerciseVarNameContext ctx) {
+		String var = ctx.name.getText(); // eg. [var=a]
+		String varName = var.substring(var.indexOf('=') + 1, var.indexOf(']')); // eg.
+																				// a
+		if (exerciseVariableMap.containsKey(varName)) {
+			OMOBJ varOmobj = exerciseVariableMap.get(varName);
+			try {
+				return OMConverter.toElement(varOmobj); // removes the
+														// OMOBJ-tags
+			} catch (OpenMathException e) {
+				throw new ParserRuntimeException("Unable to convert OMOBJ ot Element:" + varOmobj.toString(), e);
+			}
+			// and returns the child of
+			// the OMOBJ-Object
+		} else {
+			throw new UndefinedExerciseVariableRuntimeException(varName);
+		}
+	}
+
+	@Override
+	public Object visitFillInVarName(FillInVarNameContext ctx) {
+		String var = ctx.name.getText(); // eg. [pos=1]
+		int varNumber = Integer.parseInt(var.substring(var.indexOf('=') + 1, var.indexOf(']'))); // eg.
+																									// 1
+		if (fillInVariableMap.containsKey(varNumber)) {
+			OMOBJ varOmobj = fillInVariableMap.get(varNumber);
+			try {
+				return OMConverter.toElement(varOmobj); // removes the
+														// OMOBJ-tags
+														// and returns the child
+														// of
+														// the OMOBJ-Object
+			} catch (OpenMathException e) {
+				throw new ParserRuntimeException("Unable to convert OMOBJ ot Element:" + varOmobj.toString(), e);
+			}
+
+		} else {
+			throw new UndefinedFillInVariableRuntimeException(varNumber);
+		}
+	}
+
+	@Override
+	public OMF visitFloatValue(FloatValueContext ctx) {
+		return OMCreator.createOMF(Double.parseDouble(ctx.value.getText()));
+	}
+
+	@Override
+	public OMI visitIntegerValue(IntegerValueContext ctx) {
+		return OMCreator.createOMI(Integer.parseInt(ctx.value.getText()));
+	}
+
+	@Override
+	public Object visitNestedFunctionInExpression(NestedFunctionInExpressionContext ctx) {
+		List<Object> omel = new ArrayList<>();
+		for (ExpressionContext childctx : ctx.arguments) {
+			omel.add(visit(childctx));
+		}
+		OMS oms = OMSEvaluatorSyntaxDictionary.getInstance().getOMS(ctx.name.getText());
+		return OMCreator.createOMA(oms, omel);
+	}
+
+	@Override
+	public Object visitParenthesis(ParenthesisContext ctx) {
+		// visit second child, because first is "(" and third is ")" (both of
+		// them return NULL-PointerException)
+		return visit(ctx.getChild(1));
+	}
+
+	@Override
+	public OMA visitSet(SetContext ctx) {
+		List<Object> omel = new ArrayList<>();
+		for (ExpressionContext childctx : ctx.arguments) {
+			omel.add(visit(childctx));
+		}
+		OMS oms = OMSEvaluatorSyntaxDictionary.getInstance().getOMS("set");
+		return OMCreator.createOMA(oms, omel);
+	}
+
 	@Override
 	public Object visitTextValue(TextValueContext ctx) {
 
-		String val = ctx.getText().substring(1, ctx.getText().length() - 1); // the
-																				// input
+		String val = ctx.value.getText().substring(1, ctx.value.getText().length() - 1); // the
+		// input
 
 		/* Return if the InputString is an Expression */
 		try {
@@ -96,10 +272,6 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 
 			boolean isVar = val.substring(varposMatcher.start(), varposMatcher.end()).contains("var");
 			String varposVal = val.substring(varposMatcher.start() + 5, varposMatcher.end() - 1); // remove
-																									// "[pos="
-																									// and
-																									// "]"
-																									// or
 																									// "[var="
 
 			/* extracting the pos OR var value */
@@ -137,176 +309,9 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	}
 
 	@Override
-	public Object visitSetInExpression(SetInExpressionContext ctx) {
-		// @Note: Do Not change Implementation of this Method
-		return visitChildren(ctx);
-	}
-
-	@Override
-	public Object visitBinaryArithLine(BinaryArithLineContext ctx) {
-		OMS oms;
-		switch (ctx.getChild(1).getText()) {
-		case "+":
-			oms = OMSymbol.ARITH1_PLUS;
-			break;
-		case "-":
-			oms = OMSymbol.ARITH1_MINUS;
-			break;
-		default:
-			throw new FunctionNotImplementedRuntimeException(
-					"Binary Operator " + ctx.getChild(1) + " is not supported");
-		}
-
-		OMA oma = new OMA();
-		oma.getOmel().add(oms); // add OMS and children
-		oma.getOmel().add(visit(ctx.getChild(0))); // left side
-		oma.getOmel().add(visit(ctx.getChild(2))); // right side
-
-		return oma;
-	}
-
-	@Override
-	public Object visitBinaryArithPoint(BinaryArithPointContext ctx) {
-		OMS oms;
-		switch (ctx.getChild(1).getText()) {
-		case "*":
-			oms = OMSymbol.ARITH1_TIMES;
-			break;
-		case "/":
-			oms = OMSymbol.ARITH1_DIVIDE;
-			break;
-		case "%":
-			oms = OMSymbol.INTEGER1_REMAINDER;
-			break;
-		default:
-			throw new FunctionNotImplementedRuntimeException(
-					"Binary Operator " + ctx.getChild(1) + " is not supported");
-		}
-
-		OMA oma = new OMA();
-		oma.getOmel().add(oms); // add OMS and children
-		oma.getOmel().add(visit(ctx.getChild(0))); // left side
-		oma.getOmel().add(visit(ctx.getChild(2))); // right side
-
-		return oma;
-	}
-
-	@Override
-	public Object visitBinaryBoolean(BinaryBooleanContext ctx) {
-		OMS oms;
-		switch (ctx.getChild(1).getText()) {
-		case "&&":
-			oms = OMSymbol.LOGIC1_AND;
-			break;
-		case "||":
-			oms = OMSymbol.LOGIC1_OR;
-			break;
-		default:
-			throw new FunctionNotImplementedRuntimeException(
-					"Binary Operator " + ctx.getChild(1) + " is not supported");
-		}
-
-		OMA oma = new OMA();
-		oma.getOmel().add(oms); // add OMS and children
-		oma.getOmel().add(visit(ctx.getChild(0))); // left side
-		oma.getOmel().add(visit(ctx.getChild(2))); // right side
-
-		return oma;
-	}
-
-	@Override
-	public Object visitBinaryRelational(BinaryRelationalContext ctx) {
-		OMS oms;
-		switch (ctx.getChild(1).getText()) {
-		case "<":
-			oms = OMSymbol.RELATION1_LT;
-			break;
-		case "<=":
-			oms = OMSymbol.RELATION1_LEQ;
-			break;
-		case ">":
-			oms = OMSymbol.RELATION1_GT;
-			break;
-		case ">=":
-			oms = OMSymbol.RELATION1_GEQ;
-			break;
-		case "=":
-			oms = OMSymbol.RELATION1_EQ;
-			break;
-		case "==":
-			oms = OMSymbol.RELATION1_EQ;
-			break;
-		case "!=":
-			oms = OMSymbol.RELATION1_NEQ;
-			break;
-		default:
-			throw new FunctionNotImplementedRuntimeException(
-					"Binary Operator " + ctx.getChild(1) + " is not supported");
-		}
-
-		OMA oma = new OMA();
-		oma.getOmel().add(oms); // add OMS and children
-		oma.getOmel().add(visit(ctx.getChild(0))); // left side
-		oma.getOmel().add(visit(ctx.getChild(2))); // right side
-
-		return oma;
-	}
-
-	@Override
-	public OMF visitFloatValue(FloatValueContext ctx) {
-		OMF omf = new OMF();
-		if (ctx.getText().startsWith("'")) { // delete ' at beginning and end if
-												// exists
-			omf.setDec(Double.parseDouble(ctx.getText().substring(1, ctx.getText().length() - 1)));
-		} else {
-			omf.setDec(Double.parseDouble(ctx.getText()));
-		}
-		return omf;
-	}
-
-	@Override
-	public Object visitExerciseVarName(ExerciseVarNameContext ctx) {
-		String var = ctx.getText(); // eg. [var=a]
-		String varName = var.substring(var.indexOf('=') + 1, var.indexOf(']')); // eg.
-																				// a
-		if (exerciseVariableMap.containsKey(varName)) {
-			OMOBJ varOmobj = exerciseVariableMap.get(varName);
-			try {
-				return OMConverter.toElement(varOmobj); // removes the
-														// OMOBJ-tags
-			} catch (OpenMathException e) {
-				throw new ParserRuntimeException("Unable to convert OMOBJ ot Element:" + varOmobj.toString(), e);
-			}
-			// and returns the child of
-			// the OMOBJ-Object
-		} else {
-			throw new UndefinedExerciseVariableRuntimeException(varName);
-		}
-	}
-
-	@Override
-	public OMI visitIntegerValue(IntegerValueContext ctx) {
-		OMI omi = new OMI();
-		if (ctx.getText().startsWith("'")) { // delete ' at beginning and end if
-												// exists
-			omi.setValue(ctx.getText().substring(1, ctx.getText().length() - 1));
-		} else {
-			omi.setValue(ctx.getText());
-		}
-		return omi;
-	}
-
-	@Override
-	public Object visitNestedFunctionInExpression(NestedFunctionInExpressionContext ctx) {
-		// @Note: Do Not change Implementation of this Method
-		return visitChildren(ctx);
-	}
-
-	@Override
 	public Object visitUnary(UnaryContext ctx) {
 		OMS oms = new OMS();
-
-		switch (ctx.getChild(0).getText()) {
+		switch (ctx.operator.getText()) {
 		case "+":
 			return visit(ctx.getChild(1));
 		case "-":
@@ -316,91 +321,16 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 			oms = OMSymbol.LOGIC1_NOT;
 			break;
 		default:
-			throw new FunctionNotImplementedRuntimeException("Unary Operator " + ctx.getChild(0) + " is not supported");
+			throw new FunctionNotImplementedRuntimeException(
+					"Unary Operator " + ctx.operator.getText() + " is not supported");
 		}
-
-		OMA oma = new OMA();
-		oma.getOmel().add(oms);
-		oma.getOmel().add(visit(ctx.getChild(1)));
-		return oma;
+		List<Object> omel = new ArrayList<>();
+		omel.add(visit(ctx.getChild(1)));
+		return OMCreator.createOMA(oms, omel);
 	}
 
 	@Override
-	public Object visitFillInVarName(FillInVarNameContext ctx) {
-		String var = ctx.getText(); // eg. [pos=1]
-		int varNumber = Integer.parseInt(var.substring(var.indexOf('=') + 1, var.indexOf(']'))); // eg.
-																									// 1
-		if (fillInVariableMap.containsKey(varNumber)) {
-			OMOBJ varOmobj = fillInVariableMap.get(varNumber);
-			try {
-				return OMConverter.toElement(varOmobj); // removes the
-														// OMOBJ-tags
-														// and returns the child
-														// of
-														// the OMOBJ-Object
-			} catch (OpenMathException e) {
-				throw new ParserRuntimeException("Unable to convert OMOBJ ot Element:" + varOmobj.toString(), e);
-			}
-
-		} else {
-			throw new UndefinedFillInVariableRuntimeException(varNumber);
-		}
-	}
-
-	@Override
-	public Object visitParenthesis(ParenthesisContext ctx) {
-		// visit second child, because first is "(" and third is ")" (both of
-		// them return NULL-PointerException)
-		return visit(ctx.getChild(1));
-	}
-
-	@Override
-	public Object visitUnaryOperatorForExpression(UnaryOperatorForExpressionContext ctx) {
-		// @Note: Do Not change Implementation of this Method
-		return visitChildren(ctx);
-	}
-
-	@Override
-	public Object visitBinaryOperatorArithLine(BinaryOperatorArithLineContext ctx) {
-		// @Note: Do Not change Implementation of this Method
-		return visitChildren(ctx);
-	}
-
-	@Override
-	public Object visitBinaryOperatorArithPoint(BinaryOperatorArithPointContext ctx) {
-		// @Note: Do Not change Implementation of this Method
-		return visitChildren(ctx);
-	}
-
-	@Override
-	public Object visitBinaryOperatorBoolean(BinaryOperatorBooleanContext ctx) {
-		// @Note: Do Not change Implementation of this Method
-		return visitChildren(ctx);
-	}
-
-	@Override
-	public Object visitBinaryOperatorRelational(BinaryOperatorRelationalContext ctx) {
-		// @Note: Do Not change Implementation of this Method
-		return visitChildren(ctx);
-	}
-
-	@Override
-	public OMA visitSet(SetContext ctx) {
-		OMA oma = new OMA();
-		oma.getOmel().add(OMSEvaluatorSyntaxDictionary.getInstance().getOMS("set"));
-		for (ExpressionContext childctx : ctx.arguments) {
-			oma.getOmel().add(visit(childctx));
-		}
-		return oma;
-	}
-
-	@Override
-	public Object visitNestedFunction(NestedFunctionContext ctx) {
-		OMA oma = new OMA();
-		oma.getOmel().add(OMSEvaluatorSyntaxDictionary.getInstance().getOMS(ctx.name.getText()));
-		for (ExpressionContext childctx : ctx.arguments) {
-			oma.getOmel().add(visit(childctx));
-		}
-		return oma;
+	public Object visitVariable(VariableContext ctx) {
+		return OMCreator.createOMV(ctx.name.getText());
 	}
 }

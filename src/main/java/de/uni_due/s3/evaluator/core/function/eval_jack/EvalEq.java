@@ -54,7 +54,7 @@ public class EvalEq extends Function {
 
 	/**
 	 * The result should be like this:
-	 * R.< Variablen >=RR[]; f= polynomial1; g= polynomial2; f-g;
+	 * R.< Variablen >=RR[]; f= polynomial1; g= polynomial2; f-g
 	 */
 	@Override
 	public String getPartialSageSyntax(List<Object> arguments)

@@ -82,7 +82,7 @@ public class TestArcSin extends TestIntegration {
 		assertEquals(0.2027440393165833, Evaluator.getNumberResult("asin(asin(0.2))", exerciseVariableMap, fillInVariableMap),0.0001);
 	}
 
-	@Test(expected=ParserException.class)
+	@Test(expected=FunctionInvalidArgumentTypeException.class)
 	public void testAsinWithONECharacter() throws EvaluatorException, OpenMathException {
 		Evaluator.getNumberResult("asin(a)", exerciseVariableMap, fillInVariableMap);
 	}
