@@ -96,10 +96,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 
 			boolean isVar = val.substring(varposMatcher.start(), varposMatcher.end()).contains("var");
 			String varposVal = val.substring(varposMatcher.start() + 5, varposMatcher.end() - 1); // remove
-																									// "[pos="
-																									// and
-																									// "]"
-																									// or
+																						// or
 																									// "[var="
 
 			/* extracting the pos OR var value */
@@ -131,7 +128,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 			// return OMSTR as usual (no pos or var Variables are found in
 			// String)
 		} else {
-			return OMCreator.createOMA(OMCreator.createOMS("string_jack", "textValueWithVars"), omel);
+			return OMCreator.createOMA(OMSymbol.STRINGJACK_TEXTVALUEWITHVARIABLES, omel);
 			// return jack-specific String with variables in String
 		}
 	}
