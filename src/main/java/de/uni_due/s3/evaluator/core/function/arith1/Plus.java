@@ -19,12 +19,13 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 public class Plus extends Function {
 
 	/**
-	 * @throws OpenMathException Expects two arguments of type OMI or
-	 * OMF @throws NoRepresentationAvailableException @throws
-	 * CasNotAvailableException @throws
-	 * FunctionInvalidNumberOfArgumentsException @throws
-	 * CasEvaluationException @throws
-	 * FunctionInvalidArgumentTypeException @throws
+	 * @throws OpenMathException
+	 *             Expects two arguments of type OMI or OMF @throws
+	 *             NoRepresentationAvailableException @throws
+	 *             CasNotAvailableException @throws
+	 *             FunctionInvalidNumberOfArgumentsException @throws
+	 *             CasEvaluationException @throws
+	 *             FunctionInvalidArgumentTypeException @throws
 	 */
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException, OpenMathException {
@@ -49,9 +50,9 @@ public class Plus extends Function {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments)
-			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, FunctionInvalidArgumentTypeException {
-		return "("+getSageSyntax(arguments.get(0)) + "+" + getSageSyntax(arguments.get(1))+")";
+	public String getPartialSageSyntax(List<Object> arguments) throws FunctionInvalidNumberOfArgumentsException,
+			NoRepresentationAvailableException, FunctionInvalidArgumentTypeException {
+		return "(" + getSageSyntax(arguments.get(0)) + "+" + getSageSyntax(arguments.get(1)) + ")";
 	}
 
 }
