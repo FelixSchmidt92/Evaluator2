@@ -3,6 +3,8 @@ package de.uni_due.s3.evaluator.core.function.polynomial_jack;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.JAXBException;
+
 import org.junit.Ignore;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -23,31 +25,51 @@ import de.uni_due.s3.evaluator.exceptions.parser.UndefinedFillInVariableExceptio
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
+import de.uni_due.s3.openmath.omutils.OMConverter;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
-@Ignore//FIXME
 public class TestDerive extends TestFunctionAbstract{
 
 	private Function func = new Derive();
 	private List<Object> args;
 	
 	@Test
-	public void testDeriveWithOneVariable() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
+	public void testDeriveWithOneVariable() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException, JAXBException{
 		args = new ArrayList<Object>(1);
-		args.add(OMCreator.createOMSTR("1+a^2"));
-		args.add(OMCreator.createOMSTR("a"));
+		OMOBJ arg1 = OMConverter.toObject("<OMOBJ><OMA><OMS cd=\"arith1\" name=\"plus\"/>"
+				+ "<OMA><OMS cd =\"arith1\" name=\"minus\"/>"
+				+ 	"<OMA><OMS cd=\"arith1\" name=\"power\" /><OMV name=\"x\"/><OMI>2</OMI></OMA>"
+				+   "<OMA><OMS cd=\"arith1\" name=\"times\" /><OMI>5</OMI><OMV name=\"x\"/></OMA>"
+				+ "</OMA>"
+				+ "<OMI>6</OMI>"
+				+ "</OMA></OMOBJ>");
+		args.add(arg1.getOMA());
+		args.add(OMCreator.createOMSTR("x"));
+		
+		OMOBJ expected = OMConverter.toObject("<OMOBJ><OMA><OMS cd=\"arith1\" name=\"minus\"/>"
+				+   "<OMA><OMS cd=\"arith1\" name=\"times\" /><OMI>2</OMI><OMV name=\"x\"/></OMA>"
+				+	"<OMI>-5</OMI>"
+				+ "</OMA></OMOBJ>");
 		Object result = func.evaluate(args);
-		assertEquals(OMCreator.createOMSTR("2*a"),result);
+		assertEquals(expected.getOMA(),result);
 	}
 	
 	@Test
-	public void testDDeriveWithTwoVariable() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
+	public void testDDeriveWithTwoVariable() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException, JAXBException{
 		args = new ArrayList<Object>(1);
-		args.add(OMCreator.createOMSTR("1+a^2-b^5"));
+		OMOBJ arg1 = OMConverter.toObject("<OMOBJ><OMA><OMS cd=\"arith1\" name=\"plus\"/>"
+				+ "<OMA><OMS cd =\"arith1\" name=\"minus\"/>"
+				+ 	"<OMA><OMS cd=\"arith1\" name=\"power\" /><OMV name=\"x\"/><OMI>2</OMI></OMA>"
+				+   "<OMA><OMS cd=\"arith1\" name=\"times\" /><OMI>5</OMI><OMV name=\"b\"/></OMA>"
+				+ "</OMA>"
+				+ "<OMI>6</OMI>"
+				+ "</OMA></OMOBJ>");
+		args.add(arg1.getOMA());
 		args.add(OMCreator.createOMSTR("b"));
+	
 		Object result = func.evaluate(args);
-		assertEquals(OMCreator.createOMSTR("-5*b^4"),result);
+		assertEquals(OMCreator.createOMI(-5),result);
 	}
 	
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
@@ -74,6 +96,7 @@ public class TestDerive extends TestFunctionAbstract{
 			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMSTR(null));
+		args.add(OMCreator.createOMSTR("test"));
 		func.evaluate(args);
 		fail();
 	}
@@ -89,10 +112,17 @@ public class TestDerive extends TestFunctionAbstract{
 
 	
 	@Test
-	public void testDeriveSageSyntax() throws FunctionInvalidNumberOfArgumentsException, FunctionInvalidArgumentTypeException, NoRepresentationAvailableException{
+	public void testDeriveSageSyntax() throws FunctionInvalidNumberOfArgumentsException, FunctionInvalidArgumentTypeException, NoRepresentationAvailableException, JAXBException{
 		ArrayList<Object> args = new ArrayList<Object>(1);
-		args.add(OMCreator.createOMSTR("1+a^2-b"));
+		OMOBJ arg1 = OMConverter.toObject("<OMOBJ><OMA><OMS cd=\"arith1\" name=\"plus\"/>"
+				+ "<OMA><OMS cd =\"arith1\" name=\"minus\"/>"
+				+ 	"<OMA><OMS cd=\"arith1\" name=\"power\" /><OMV name=\"x\"/><OMI>2</OMI></OMA>"
+				+   "<OMA><OMS cd=\"arith1\" name=\"times\" /><OMI>5</OMI><OMV name=\"a\"/></OMA>"
+				+ "</OMA>"
+				+ "<OMI>6</OMI>"
+				+ "</OMA></OMOBJ>");
+		args.add(arg1.getOMA());
 		args.add(OMCreator.createOMSTR("a"));
-		assertEquals("R.<a,b>=RR[]; f=1+a^2-b; f.derivative(a);", func.getPartialSageSyntax(args));
+		assertEquals("R.<x,a>=RR[]; f=((x^2-5*a)+6); f.derivative(a)", func.getPartialSageSyntax(args));
 	}
 }

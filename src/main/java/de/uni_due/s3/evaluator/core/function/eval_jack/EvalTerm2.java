@@ -14,20 +14,21 @@ import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgume
 import de.uni_due.s3.evaluator.exceptions.function.InvalidResultTypeException;
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
+import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OMSTR;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 import de.uni_due.s3.sage.Sage;
 
 /**
- * Inserts values for two different variables in a term and calculates the result.
+ * Inserts values for two different variables in a term and calculates the result (as stated in <a href="https://jack-community.org/wiki/index.php/EvalTermIn2Variables"> EvalTermIn2Variables</a>.
  * @author frichtscheid
  *
  */
 public class EvalTerm2 extends Function {
 
 	/**
-	 * Expects three arguments: (1) polynomial of type String, (2) and (3): value of type String or integer
+	 * Expects three arguments: (1) polynomial of type OMA, (2) and (3): value of type String or integer
 	 * @return OMI or OMF
 	 */
 	@Override
@@ -60,18 +61,18 @@ public class EvalTerm2 extends Function {
 	public String getPartialSageSyntax(List<Object> arguments)
 			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, FunctionInvalidArgumentTypeException {
 		//check if args have the correct type
-		if(!OMTypeChecker.isOMSTR(arguments.get(0)) || !(OMTypeChecker.isOMSTR(arguments.get(1))||OMTypeChecker.isOMFOrOMI(arguments.get(1)) )
+		if(!OMTypeChecker.isOMA(arguments.get(0)) || !(OMTypeChecker.isOMSTR(arguments.get(1))||OMTypeChecker.isOMFOrOMI(arguments.get(1)) )
 				|| !(OMTypeChecker.isOMSTR(arguments.get(2)) || OMTypeChecker.isOMFOrOMI(arguments.get(2))))
-			throw new FunctionInvalidArgumentTypeException(this,"String");
+			throw new FunctionInvalidArgumentTypeException(this,"(0) polynomial, (1) String, integer, float, double, (2) String, integer, float, double");
 
 		try{
 		
-			String polynomial = ((OMSTR) arguments.get(0)).getContent();
+			//String polynomial = getSageSyntax(arguments.get(0));
 			String var1 = OMUtils.convertOMToString(arguments.get(1));
 			String var2 = OMUtils.convertOMToString(arguments.get(2));
 			
 			// get all variables from the polynomial and build the sageSyntax
-			Set<String> variables1 = PolyUtils.getVariables(polynomial);
+			Set<String> variables1 = PolyUtils.getVariables((OMA)arguments.get(0));
 			String init = "R.<";
 			for(String v :variables1){
 				init+=v;
@@ -79,10 +80,10 @@ public class EvalTerm2 extends Function {
 			}
 			init = init.substring(0, init.length()-1);
 			init +=">=RR[]; ";
-			String f = "f="+((OMSTR)arguments.get(0)).getContent()+"; ";
-			return init+f+"f("+var1+","+var2+");";
+			String f = "f="+getSageSyntax(arguments.get(0))+"; ";
+			return init+f+"f("+var1+","+var2+")";
 		}catch(InputMismatchException ie){
-			throw new FunctionInvalidArgumentTypeException(this,"String");
+			throw new FunctionInvalidArgumentTypeException(this,"(0) polynomial, (1) String, integer, float, double, (2) String, integer, float, double");
 		}
 	}
 }

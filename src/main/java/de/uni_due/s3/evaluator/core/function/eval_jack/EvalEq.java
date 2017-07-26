@@ -18,25 +18,37 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 import de.uni_due.s3.sage.Sage;
 
 /**
- * Subtracts two given expression and return the result
+ * Subtracts two given expression and return the result as stated in <a href="https://jack-community.org/wiki/index.php/EvalEq">EvalEq</a>
  * Example : evalEq('x^2-1','x') => 'x^2-x-1
  * @author frichtscheid
  *
  */
 public class EvalEq extends Function {
 
+	/**
+	 * The arguments should be a OMA which shouldn't be evaluated. Otherwise we can't have a polynomial
+	 */
+	@Override
+	public boolean argumentsShouldBeEvaluated() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	/**
+	 * Expects two arguments, both of them of type OMA
+	 */
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionException, CasEvaluationException,
 	CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
 
 		//check if args have the correct type
-		if(!OMTypeChecker.isOMSTR(arguments.get(0)) || !OMTypeChecker.isOMSTR(arguments.get(1)))
-			throw new FunctionInvalidArgumentTypeException(this,"String");
+		if(!OMTypeChecker.isOMA(arguments.get(0)) || !OMTypeChecker.isOMA(arguments.get(1)))
+			throw new FunctionInvalidArgumentTypeException(this,"(0) polynomial, (1) polynomial");
 
 		Object result = Sage.evaluateInCAS(getPartialSageSyntax(arguments));
 		
-		if (!OMTypeChecker.isOMSTR(result)) {
-			throw new InvalidResultTypeException(this, "string");
+		if (!OMTypeChecker.isOMA(result)) {
+			throw new InvalidResultTypeException(this, "polynomial");
 		}
 		return result;
 
@@ -54,17 +66,17 @@ public class EvalEq extends Function {
 
 	/**
 	 * The result should be like this:
-	 * R.< Variablen >=RR[]; f= polynomial1; g= polynomial2; f-g;
+	 * R.'<' Variablen '>'=RR[]; f= polynomial1; g= polynomial2; f-g;
 	 */
 	@Override
 	public String getPartialSageSyntax(List<Object> arguments)
 			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, FunctionInvalidArgumentTypeException {
-		if(!OMTypeChecker.isOMSTR(arguments.get(0)) || !OMTypeChecker.isOMSTR(arguments.get(1)))
-			throw new FunctionInvalidArgumentTypeException(this,"String");
+		if(!OMTypeChecker.isOMA(arguments.get(0)) || !OMTypeChecker.isOMA(arguments.get(1)))
+			throw new FunctionInvalidArgumentTypeException(this,"(0) polynomial, (1) polynomial");
 
 		// get all variables from the polynomials and build the sageSyntax
-		Set<String> variables1 = PolyUtils.getVariables(((OMSTR) arguments.get(0)).getContent());
-		Set<String> variables2 = PolyUtils.getVariables(((OMSTR) arguments.get(1)).getContent());
+		Set<String> variables1 = PolyUtils.getVariables(getSageSyntax(arguments.get(0)));
+		Set<String> variables2 = PolyUtils.getVariables(getSageSyntax(arguments.get(1)));
 		variables1.addAll(variables2);
 		String init = "R.<";
 		for(String v :variables1){
@@ -73,8 +85,8 @@ public class EvalEq extends Function {
 		}
 		init = init.substring(0, init.length()-1);
 		init +=">=RR[]; ";
-		String f = "f="+((OMSTR)arguments.get(0)).getContent()+"; ";
-		String g = "g="+((OMSTR)arguments.get(1)).getContent()+"; ";
+		String f = "f="+getSageSyntax(arguments.get(0))+"; ";
+		String g = "g="+getSageSyntax(arguments.get(1))+"; ";
 		
 		return init+f+g+"f-g";
 	}

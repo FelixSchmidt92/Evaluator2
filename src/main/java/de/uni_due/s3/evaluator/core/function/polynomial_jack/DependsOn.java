@@ -7,6 +7,7 @@ import de.uni_due.s3.evaluator.core.PolyUtils;
 import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
+import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OMSTR;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 
@@ -20,18 +21,17 @@ import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 public class DependsOn extends Function {
 
 	/**
-	 * Expects two arguments of type String The first one is the polynomial, the
-	 * second one should contain the dependend variable
+	 * Expects two arguments.The first one is the polynomial (OMA), the
+	 * second one should contain the dependent variable (OMSTR)
 	 */
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException {
 
-		//FIXME hier sollte ein Ausdruck und kein String erwartet werden !
-		if (!OMTypeChecker.isOMSTR(arguments.get(0)) || !OMTypeChecker.isOMSTR(arguments.get(1))) {
-			throw new FunctionInvalidArgumentTypeException(this, "(0)String, (1)String");
+		if (!OMTypeChecker.isOMA(arguments.get(0)) || !OMTypeChecker.isOMSTR(arguments.get(1))) {
+			throw new FunctionInvalidArgumentTypeException(this, "(0)Polynomial, (1)String");
 		}
 		
-		Set<String> variables = PolyUtils.getVariables(((OMSTR) arguments.get(0)).getContent());
+		Set<String> variables = PolyUtils.getVariables((OMA) arguments.get(0));
 		String variable = ((OMSTR) arguments.get(1)).getContent();
 
 		return (variables.contains(variable)) ? OMSymbol.LOGIC1_TRUE : OMSymbol.LOGIC1_FALSE;

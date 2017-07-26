@@ -12,6 +12,7 @@ import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeEx
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.function.InvalidResultTypeException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
+import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OMSTR;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
@@ -27,7 +28,7 @@ import de.uni_due.s3.sage.Sage;
 public class EqualsExpr extends Function {
 
 	/**
-	 * Expects two polynomials of type string.
+	 * Expects two polynomials of type OMA.
 	 * @return OMS(logic_true or logic_false)
 	 */
 	@Override
@@ -35,7 +36,7 @@ public class EqualsExpr extends Function {
 	CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
 
 		//check if args have the correct type
-		if(!OMTypeChecker.isOMSTR(arguments.get(0)) || !OMTypeChecker.isOMSTR(arguments.get(1)))
+		if(!OMTypeChecker.isOMA(arguments.get(0)) || !OMTypeChecker.isOMA(arguments.get(1)))
 			throw new FunctionInvalidArgumentTypeException(this,"String");
 
 		Object result = Sage.evaluateInCAS(getPartialSageSyntax(arguments));
@@ -61,12 +62,12 @@ public class EqualsExpr extends Function {
 	@Override
 	public String getPartialSageSyntax(List<Object> arguments)
 			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, FunctionInvalidArgumentTypeException {
-		if(!OMTypeChecker.isOMSTR(arguments.get(0)) || !OMTypeChecker.isOMSTR(arguments.get(1)))
-			throw new FunctionInvalidArgumentTypeException(this,"String");
+		if(!OMTypeChecker.isOMA(arguments.get(0)) || !OMTypeChecker.isOMA(arguments.get(1)))
+			throw new FunctionInvalidArgumentTypeException(this,"(0)polynomial, (1)polynomial");
 
 		// get all variables from the polynomial and build the sageSyntax
-		Set<String> variables1 = PolyUtils.getVariables(((OMSTR) arguments.get(0)).getContent());
-		Set<String> variables2 = PolyUtils.getVariables(((OMSTR) arguments.get(1)).getContent());
+		Set<String> variables1 = PolyUtils.getVariables((OMA)arguments.get(0));
+		Set<String> variables2 = PolyUtils.getVariables((OMA)arguments.get(1));
 		variables1.addAll(variables2);
 		String init = "R.<";
 		for(String v :variables1){
@@ -75,9 +76,9 @@ public class EqualsExpr extends Function {
 		}
 		init = init.substring(0, init.length()-1);
 		init +=">=RR[]; ";
-		String f = "f="+((OMSTR)arguments.get(0)).getContent()+"; ";
-		String g = "g="+((OMSTR)arguments.get(1)).getContent()+"; ";
-		return init+f+g+"f==g;";
+		String f = "f="+getSageSyntax(arguments.get(0))+"; ";
+		String g = "g="+getSageSyntax(arguments.get(1))+"; ";
+		return init+f+g+"f==g";
 	}
 
 }
