@@ -97,4 +97,13 @@ public class TestRandomMatrixRank extends TestFunctionAbstract {
 
 		OMExecutor.execute(t);
 	}
+	
+	@Test
+	public void testRandomMatrixRankIntegration6Arguments() throws FunctionInvalidArgumentException,
+			CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException,
+			OpenMathException, UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
+		OMOBJ t = ExpressionParser.parse("randomMatrixRank('QQ', '2', '3', '2', '10')", null, null);
+
+		OMExecutor.execute(t);
+	}
 }

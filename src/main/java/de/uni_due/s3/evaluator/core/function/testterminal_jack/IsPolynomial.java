@@ -8,20 +8,18 @@ public class IsPolynomial extends Function {
 
 	@Override
 	protected Object execute(List<Object> arguments) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	protected int minArgs() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 2;
 	}
 
 	@Override
 	protected int maxArgs() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 2;
 	}
 
 }
