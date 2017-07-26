@@ -1,9 +1,9 @@
 package de.uni_due.s3.evaluator.core.function.linalg_jack;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 import de.uni_due.s3.evaluator.core.OMUtils;
-import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
@@ -12,13 +12,13 @@ import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeEx
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
-import de.uni_due.s3.openmath.jaxb.OMA;
+import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 import de.uni_due.s3.sage.Sage;
 
 /**
  * @param OMSTR
- *            Sage-Number-Field QQ, RR or ZZ 
+ *            Sage-Number-Field QQ, RR or ZZ
  * 
  * @param OMI
  *            Matrix size nxn
@@ -41,29 +41,28 @@ public class RandomMatrixEigenvalue extends Function {
 		try {
 			String arg1 = OMUtils.convertOMToString(arguments.get(0));
 			int arg2 = OMUtils.convertOMIToInteger(arguments.get(1));
-			OMA arg3 = (OMA) arguments.get(2);
-			OMA arg4 = (OMA) arguments.get(3);
+			String arg3 = OMUtils.convertOMToString(arguments.get(2));
+			String arg4 = OMUtils.convertOMToString(arguments.get(3));
 
-			// Check if arg3 and arg4 are vector or matrixRow
-			if (!((arg3.getOmel().get(0).equals(OMSymbol.LINALG2_MATRIXROW))
-					|| (arg3.getOmel().get(0).equals(OMSymbol.LINALG2_VECTOR)))
-					|| !((arg4.getOmel().get(0).equals(OMSymbol.LINALG2_MATRIXROW))
-					|| (arg4.getOmel().get(0).equals(OMSymbol.LINALG2_VECTOR)))) {
+			if (!OMTypeChecker.isOMSTR(arguments.get(0)) || !OMTypeChecker.isOMI(arguments.get(1))) {
 				throw new InputMismatchException();
 			}
-			
-			//check if arg1 is QQ RR ZZ
-			if(!((arg1.equals("RR")) || (arg1.equals("QQ")) ||(arg1.equals("ZZ")))) {
+			if (!Pattern.matches("\\[([0-9]+,)*[0-9]+\\]", arg3) || !Pattern.matches("\\[([0-9]+,)*[0-9]+\\]", arg4)) {
+				throw new InputMismatchException();
+			}
+
+			// check if arg1 is QQ RR ZZ
+			if (!((arg1.equals("RR")) || (arg1.equals("QQ")) || (arg1.equals("ZZ")))) {
 				throw new FunctionInvalidArgumentException(this, "The First Argument needs to be RR, QQ or ZZ");
 			}
 
 			return Sage.evaluateInCAS(
 					"sage.matrix.constructor.random_diagonalizable_matrix(sage.matrix.matrix_space.MatrixSpace(" + arg1
-							+ "," + arg2 + "," + arg2 + "), " + "eigenvalues=" + getSageSyntax(arg3) + ", dimensions="
-							+ getSageSyntax(arg4) + ")");
+							+ "," + arg2 + "," + arg2 + "), " + "eigenvalues=" + arg3 + ", dimensions=" + arg4 + ")");
 
 		} catch (InputMismatchException e) {
-			throw new FunctionInvalidArgumentTypeException(this, "(0)String, (1)Integer, (2)MatrixRow, (3)MatrixRow");
+			throw new FunctionInvalidArgumentTypeException(this,
+					"(0)String, (1)Integer, (2)SageSyntax[a,b,c], (3)SageSyntax[a,b,c]");
 		}
 	}
 
