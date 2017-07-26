@@ -128,8 +128,7 @@ public class OMUtils {
 			return Double.toString(((OMF) obj).getDec());
 		} else if (obj instanceof OMV) {
 			return ((OMV) obj).getName();
-		} else if (OMTypeChecker.isOMAWithSymbol(obj, null)) { // FIXME dlux
-																// OMSymbol.STRINGJACK_WITHVAR
+		} else if (OMTypeChecker.isOMAWithSymbol(obj, OMSymbol.STRINGJACK_TEXTVALUEWITHVARIABLES)) {
 			List<Object> omel = ((OMA) obj).getOmel();
 			omel.remove(0);
 			String result = "";

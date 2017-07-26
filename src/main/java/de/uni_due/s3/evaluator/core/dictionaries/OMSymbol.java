@@ -31,9 +31,8 @@ public class OMSymbol {
 	public static final OMS CASJACK_EVALUATEINSAGE = OMCreator.createOMS("casJACK", "evaluateInSage");
 	public static final OMS CASJACK_EVALUATEINSYMJA = OMCreator.createOMS("casJACK", "evaluateInSymja");
 
-	public static final OMS EDITOR1_INPUT_BOX = OMCreator.createOMS("set1", "emptyset"); // FIXME
-																							// wirklich
-																							// ?
+	public static final OMS EDITOR1_INPUT_BOX = OMCreator.createOMS("editor1", "input_box");
+	
 	public static final OMS EVALJACK_EVAL = OMCreator.createOMS("evalJACK", "eval");
 	public static final OMS EVALJACK_EVALCPLX = OMCreator.createOMS("evalJACK", "evalcplx");
 	public static final OMS EVALJACK_EVALEQ = OMCreator.createOMS("evalJACK", "evalEq");
@@ -64,13 +63,7 @@ public class OMSymbol {
 	public static final OMS LOGIC1_OR = OMCreator.createOMS("logic1", "or");
 	public static final OMS LOGIC1_TRUE = OMCreator.createOMS("logic1", "true");
 
-	public static final OMS NUMS1_NAN = OMCreator.createOMS("nums1", "NaN"); // FIXME
-																				// brauchen
-																				// wir
-																				// das
-																				// ?!
-																				// eher
-																				// exception
+	public static final OMS NUMS1_NAN = OMCreator.createOMS("nums1", "NaN");
 	public static final OMS NUMS1_E = OMCreator.createOMS("nums1", "e");
 	public static final OMS NUMS1_I = OMCreator.createOMS("nums1", "i");
 	public static final OMS NUMS1_INFINITY = OMCreator.createOMS("nums1", "infinity");

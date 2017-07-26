@@ -193,7 +193,7 @@ public class TestExpressionToOpenMathVisitor{
 			Object obj = visitor.visit(parse(getUnary + val));
 			
 			switch(getUnary){
-			case "+": //FIXME dlux what about e or pi or omega
+			case "+":
 				assertTrue(!(obj instanceof OMS)); //because it should just visit the next one
 				break;
 			case "-":

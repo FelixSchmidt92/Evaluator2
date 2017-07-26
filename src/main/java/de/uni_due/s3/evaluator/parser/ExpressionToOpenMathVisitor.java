@@ -256,10 +256,6 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 		return OMCreator.createOMA(oms, omel);
 	}
 
-	/**
-	 * TODO FIXME dlux spobel frichtscheid mayeb get a TextExpression,
-	 * TextWithVariable and TextOnly visit methods with anltr?
-	 */
 	@Override
 	public Object visitTextValue(TextValueContext ctx) {
 

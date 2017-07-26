@@ -75,7 +75,8 @@ public class TestExpressionParser {
 		fillInVariableMap.put(2, t2);
 		fillInVariableMap.put(3, t3);
 	}
-	@Ignore
+	
+	@Ignore //FIXME IGNORE
 	@Test/*TODO FIXME dlux what about PI or E or OMEGA?*/
 	public void testParseOMS() throws FunctionNotImplementedException, UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException{
 		OMOBJ omobj = ExpressionParser.parse(oms, null, null);

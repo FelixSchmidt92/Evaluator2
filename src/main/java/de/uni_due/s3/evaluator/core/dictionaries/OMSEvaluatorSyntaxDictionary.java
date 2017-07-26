@@ -92,11 +92,7 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("isFraction", OMSymbol.OPENMATHJACK_ISFRACTION);
 		
 		functionSymbolMap.put("deg", OMSymbol.POLY_DEGREE_WRT);
-		functionSymbolMap.put("degh", OMSymbol.POLY_DEGREE); // FIXME: hier
-																// drüber sollte
-																// noch mal
-																// entschieden
-																// werden.
+		functionSymbolMap.put("degh", OMSymbol.POLY_DEGREE); // FIXME frichtscheid
 
 		functionSymbolMap.put("equalssemisem", OMSymbol.POLYNOMIALJACK_EQUALSEMISEM);
 		functionSymbolMap.put("equalsExpr", OMSymbol.POLYNOMIALJACK_EQUALSEXPR);
