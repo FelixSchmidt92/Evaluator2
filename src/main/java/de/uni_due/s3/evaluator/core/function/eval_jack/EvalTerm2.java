@@ -37,7 +37,7 @@ public class EvalTerm2 extends Function {
 	
 		Object result = Sage.evaluateInCAS(getPartialSageSyntax(arguments));
 		
-		if (!OMTypeChecker.isOMFOrOMI(result)) {
+		if (!OMTypeChecker.isOMNumber(result)) {
 			throw new InvalidResultTypeException(this, "integer, float, double");
 		}
 		return result;
@@ -60,8 +60,8 @@ public class EvalTerm2 extends Function {
 	public String getPartialSageSyntax(List<Object> arguments)
 			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, FunctionInvalidArgumentTypeException {
 		//check if args have the correct type
-		if(!OMTypeChecker.isOMA(arguments.get(0)) || !(OMTypeChecker.isOMSTR(arguments.get(1))||OMTypeChecker.isOMFOrOMI(arguments.get(1)) )
-				|| !(OMTypeChecker.isOMSTR(arguments.get(2)) || OMTypeChecker.isOMFOrOMI(arguments.get(2))))
+		if(!OMTypeChecker.isOMA(arguments.get(0)) || !(OMTypeChecker.isOMSTR(arguments.get(1))||OMTypeChecker.isOMNumber(arguments.get(1)) )
+				|| !(OMTypeChecker.isOMSTR(arguments.get(2)) || OMTypeChecker.isOMNumber(arguments.get(2))))
 			throw new FunctionInvalidArgumentTypeException(this,"(0) polynomial, (1) String, integer, float, double, (2) String, integer, float, double");
 
 		try{

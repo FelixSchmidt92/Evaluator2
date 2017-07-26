@@ -49,7 +49,7 @@ public class GetFromOrderedSet extends Function {
 					"Second Argument of getFromOrderedSet is invalid. Not in Range of Set.");
 		}
 
-		if (OMTypeChecker.isOMFOrOMI(set.get(0))) {
+		if (OMTypeChecker.isOMNumber(set.get(0))) {
 			List<Double> setForSort = new ArrayList<Double>();
 			for (Object element : set) {
 				try {

@@ -33,7 +33,7 @@ public class EqualBasis extends Function {
 			FunctionInvalidArgumentTypeException, NoRepresentationAvailableException, CasEvaluationException,
 			CasNotAvailableException, OpenMathException, FunctionInvalidArgumentException, InvalidResultTypeException {
 
-		if (!OMTypeChecker.isOMFOrOMI(arguments.get(2))) {
+		if (!OMTypeChecker.isOMNumber(arguments.get(2))) {
 			throw new FunctionInvalidArgumentTypeException(this, "(0)Set of vectors (1)Set of vectors (2)Integer");
 		}
 

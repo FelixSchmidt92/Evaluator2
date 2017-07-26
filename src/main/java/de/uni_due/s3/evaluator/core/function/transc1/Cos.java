@@ -25,12 +25,12 @@ public class Cos extends Function {
 	protected Object execute(List<Object> arguments) throws InvalidResultTypeException,
 			FunctionInvalidArgumentTypeException, CasEvaluationException, FunctionInvalidNumberOfArgumentsException,
 			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
-		if (!OMTypeChecker.isOMFOrOMI(arguments.get(0))) {
+		if (!OMTypeChecker.isOMNumber(arguments.get(0))) {
 			throw new FunctionInvalidArgumentTypeException(this, "integer, float, double");
 		}
 		Object result = Sage.evaluateInCAS(getPartialSageSyntax(arguments));
 
-		if (!OMTypeChecker.isOMFOrOMI(result)) {
+		if (!OMTypeChecker.isOMNumber(result)) {
 			throw new InvalidResultTypeException(this, "integer, float, double");
 		}
 		return result;
