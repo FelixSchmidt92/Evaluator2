@@ -240,11 +240,15 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 		return OMCreator.createOMA(oms, omel);
 	}
 
+	/**
+	 * TODO FIXME dlux spobel frichtscheid mayeb get a TextExpression,
+	 * TextWithVariable and TextOnly visit methods with anltr?
+	 */
 	@Override
 	public Object visitTextValue(TextValueContext ctx) {
 
-		String val = ctx.value.getText().substring(1, ctx.value.getText().length() - 1); // the
-		// input
+		String val = ctx.getText().substring(1, ctx.getText().length() - 1); // the
+																				// input
 
 		/* Return if the InputString is an Expression */
 		try {
@@ -272,6 +276,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 
 			boolean isVar = val.substring(varposMatcher.start(), varposMatcher.end()).contains("var");
 			String varposVal = val.substring(varposMatcher.start() + 5, varposMatcher.end() - 1); // remove
+																						// or
 																									// "[var="
 
 			/* extracting the pos OR var value */
@@ -303,7 +308,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 			// return OMSTR as usual (no pos or var Variables are found in
 			// String)
 		} else {
-			return OMCreator.createOMA(OMCreator.createOMS("string_jack", "textValueWithVars"), omel);
+			return OMCreator.createOMA(OMSymbol.STRINGJACK_TEXTVALUEWITHVARIABLES, omel);
 			// return jack-specific String with variables in String
 		}
 	}

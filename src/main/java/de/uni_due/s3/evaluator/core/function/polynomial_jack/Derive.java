@@ -11,6 +11,7 @@ import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeEx
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.function.InvalidResultTypeException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
+import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OMSTR;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
@@ -26,9 +27,6 @@ public class Derive extends Function {
 
 	@Override
 	protected Object execute(List<Object> arguments) throws InvalidResultTypeException, CasEvaluationException, FunctionInvalidNumberOfArgumentsException, FunctionInvalidArgumentTypeException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
-		//check if args have the correct type
-		if(!OMTypeChecker.isOMSTR(arguments.get(0)) || !OMTypeChecker.isOMSTR(arguments.get(1)))
-			throw new FunctionInvalidArgumentTypeException(this,"String");
 
 		Object result = Sage.evaluateInCAS(getPartialSageSyntax(arguments));
 		if (!OMTypeChecker.isOMSTR(result)) {
@@ -53,11 +51,12 @@ public class Derive extends Function {
 	@Override
 	public String getPartialSageSyntax(List<Object> arguments)
 			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, FunctionInvalidArgumentTypeException {
-		if(!OMTypeChecker.isOMSTR(arguments.get(0)) || !OMTypeChecker.isOMSTR(arguments.get(1)))
-			throw new FunctionInvalidArgumentTypeException(this,"String");
+		//check if args have the correct type
+		if(!OMTypeChecker.isOMA(arguments.get(0)) || !OMTypeChecker.isOMSTR(arguments.get(1)))
+			throw new FunctionInvalidArgumentTypeException(this,"(0)polynomial, (1)String");
 		
 		// get all variables from the polynomial and build the sageSyntax
-		Set<String> variables = PolyUtils.getVariables(((OMSTR) arguments.get(0)).getContent());
+		Set<String> variables = PolyUtils.getVariables((OMA) arguments.get(0));
 		String init = "R.<";
 		for(String v :variables){
 			init+=v;
@@ -65,8 +64,12 @@ public class Derive extends Function {
 		}
 		init = init.substring(0, init.length()-1);
 		init +=">=RR[]; ";
-		String function = "f="+((OMSTR)arguments.get(0)).getContent()+";";
-		return init+function+" f.derivative("+((OMSTR)arguments.get(1)).getContent()+");";
+		String function = "f="+getSageSyntax(arguments.get(0))+";";
+		String derivate = getSageSyntax(arguments.get(1));
+		if(derivate.startsWith("'") && derivate.endsWith("'")){
+			derivate = derivate.substring(1, derivate.length()-1);
+		}
+		return init+function+" f.derivative("+derivate+")";
 	}
 
 }

@@ -170,7 +170,7 @@ public class TestExpressionToOpenMathVisitor{
 		omel.add(mid);
 		omel.add(OMConverter.toElement(fillInVariableMap.get(1)));
 		omel.add(pst);
-		OMA oma = OMCreator.createOMA(OMCreator.createOMS("string_jack", "textValueWithVars"), omel);
+		OMA oma = OMCreator.createOMA(OMCreator.createOMS("stringJACK", "textValueWithVariables"), omel);
 		
 		assertEquals(oma, obj);
 	}

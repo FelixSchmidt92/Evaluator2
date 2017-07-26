@@ -79,6 +79,7 @@ import de.uni_due.s3.evaluator.core.function.string_jack.Matches;
 import de.uni_due.s3.evaluator.core.function.string_jack.Replace;
 import de.uni_due.s3.evaluator.core.function.string_jack.StartsWith;
 import de.uni_due.s3.evaluator.core.function.string_jack.Substring;
+import de.uni_due.s3.evaluator.core.function.string_jack.TextValueWithVariables;
 import de.uni_due.s3.evaluator.core.function.string_jack.ToLowerCase;
 import de.uni_due.s3.evaluator.core.function.string_jack.ToUpperCase;
 import de.uni_due.s3.evaluator.core.function.string_jack.Trim;
@@ -238,6 +239,7 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.STRINGJACK_TOLOWERCASE, new ToLowerCase());
 		functions.put(OMSymbol.STRINGJACK_TOUPPERCASE, new ToUpperCase());
 		functions.put(OMSymbol.STRINGJACK_TRIM, new Trim());
+		functions.put(OMSymbol.STRINGJACK_TEXTVALUEWITHVARIABLES, new TextValueWithVariables());
 
 		functions.put(OMSymbol.TESTTERMINALJACK_ISEMPTY, new IsEmpty());
 		functions.put(OMSymbol.TESTTERMINALJACK_ISNUMBER, new IsNumber());
