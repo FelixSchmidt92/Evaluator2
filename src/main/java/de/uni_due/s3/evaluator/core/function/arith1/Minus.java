@@ -55,7 +55,7 @@ public class Minus extends Function {
 	@Override
 	public String getPartialSageSyntax(List<Object> arguments) throws FunctionInvalidNumberOfArgumentsException,
 			NoRepresentationAvailableException, FunctionInvalidArgumentTypeException {
-		return "(" + getSageSyntax(arguments.get(0)) + "-" + getSageSyntax(arguments.get(1)) + ")";
+		return "(" + getSageSyntax(arguments.get(0)) + " - " + getSageSyntax(arguments.get(1)) + ")";
 	}
 
 }

@@ -87,7 +87,7 @@ public class TestPlus extends TestFunctionAbstract {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(1.0));
 		args.add(OMCreator.createOMI(1));
-		assertEquals("1 + 1", func.getPartialSageSyntax(args));
+		assertEquals("(1 + 1)", func.getPartialSageSyntax(args));
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)

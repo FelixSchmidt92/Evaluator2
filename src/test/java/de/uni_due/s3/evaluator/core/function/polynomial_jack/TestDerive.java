@@ -122,6 +122,6 @@ public class TestDerive extends TestFunctionAbstract{
 				+ "</OMA></OMOBJ>");
 		args.add(arg1.getOMA());
 		args.add(OMCreator.createOMSTR("a"));
-		assertEquals("R.<x,a>=RR[]; f=((x^2-5*a)+6); f.derivative(a)", func.getPartialSageSyntax(args));
+		assertEquals("R.<x,a>=RR[]; f=((x^2 - 5 * a) + 6); f.derivative(a)", func.getPartialSageSyntax(args));
 	}
 }

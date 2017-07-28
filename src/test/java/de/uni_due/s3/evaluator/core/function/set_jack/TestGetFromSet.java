@@ -41,8 +41,8 @@ public class TestGetFromSet extends TestFunctionAbstract {
 		set.add(OMCreator.createOMI(20));
 		set.add(OMCreator.createOMF(3.123));
 		List<Object> args = new ArrayList<Object>();
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set));
 		args.add(OMCreator.createOMI(1));
+		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set));
 		Object result = func.evaluate(args);
 		assertEquals(OMCreator.createOMI(20), result);
 	}
@@ -55,8 +55,8 @@ public class TestGetFromSet extends TestFunctionAbstract {
 		set.add(OMCreator.createOMI(20));
 		set.add(OMCreator.createOMF(3.123));
 		List<Object> args = new ArrayList<Object>();
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set));
 		args.add(OMCreator.createOMI(0));
+		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set));
 		Object result = func.evaluate(args);
 		assertEquals(OMCreator.createOMSTR("Test"), result);
 	}
@@ -72,8 +72,8 @@ public class TestGetFromSet extends TestFunctionAbstract {
 		set.add(OMCreator.createOMI(20));
 		set.add(OMCreator.createOMA(OMSymbol.ARITH1_PLUS, plus));
 		List<Object> args = new ArrayList<Object>();
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set));
 		args.add(OMCreator.createOMI(2));
+		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set));
 		Object result = func.evaluate(args);
 		assertEquals(OMCreator.createOMA(OMSymbol.ARITH1_PLUS, plus), result);
 	}
@@ -105,8 +105,8 @@ public class TestGetFromSet extends TestFunctionAbstract {
 		set.add(OMCreator.createOMI(20));
 		set.add(OMCreator.createOMA(OMSymbol.ARITH1_PLUS, plus));
 		List<Object> args = new ArrayList<Object>();
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set));
 		args.add(OMCreator.createOMI(1));
+		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set));	
 		args.add(OMCreator.createOMI(1));
 		func.evaluate(args);
 		fail();
@@ -123,8 +123,8 @@ public class TestGetFromSet extends TestFunctionAbstract {
 		set.add(OMCreator.createOMI(20));
 		set.add(OMCreator.createOMA(OMSymbol.ARITH1_PLUS, plus));
 		List<Object> args = new ArrayList<Object>();
-		args.add(OMCreator.createOMI(1)); // wrong
 		args.add(OMCreator.createOMI(1));
+		args.add(OMCreator.createOMI(1)); // wrong
 		func.evaluate(args);
 		fail();
 	}
@@ -140,8 +140,8 @@ public class TestGetFromSet extends TestFunctionAbstract {
 		set.add(OMCreator.createOMI(20));
 		set.add(OMCreator.createOMA(OMSymbol.ARITH1_PLUS, plus));
 		List<Object> args = new ArrayList<Object>();
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set));
 		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set)); // wrong
+		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set));
 		func.evaluate(args);
 		fail();
 	}
@@ -150,7 +150,7 @@ public class TestGetFromSet extends TestFunctionAbstract {
 	public void testGetFromSetIntegration1() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
-		OMOBJ omobj = ExpressionParser.parse("getFromSet({1;2},0)", null, null);
+		OMOBJ omobj = ExpressionParser.parse("getFromSet(0,{1;2})", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals(OMCreator.createOMI(1), result.getOMI());
 	}
@@ -159,7 +159,7 @@ public class TestGetFromSet extends TestFunctionAbstract {
 	public void testGetFromSetIntegration2() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
-		OMOBJ omobj = ExpressionParser.parse("getFromSet({1;'Test'},1)", null, null);
+		OMOBJ omobj = ExpressionParser.parse("getFromSet(1, {1;'Test'})", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals(OMCreator.createOMSTR("Test"), result.getOMSTR());
 	}
@@ -168,7 +168,7 @@ public class TestGetFromSet extends TestFunctionAbstract {
 	public void testGetFromSetIntegration3() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
-		OMOBJ omobj = ExpressionParser.parse("getFromSet({1},2)", null, null);
+		OMOBJ omobj = ExpressionParser.parse("getFromSet(2, {1})", null, null);
 		OMExecutor.execute(omobj);
 		fail();
 	}
@@ -177,7 +177,7 @@ public class TestGetFromSet extends TestFunctionAbstract {
 	public void testGetFromSetIntegration4() throws NoRepresentationAvailableException, CasException,
 			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException, FunctionException,
 			CasNotAvailableException, OpenMathException {
-		OMOBJ omobj = ExpressionParser.parse("getFromSet({1; matrix(matrixrow(1,2));getFromSet({vector(1,2)},0)},1)",
+		OMOBJ omobj = ExpressionParser.parse("getFromSet(1, {1; matrix(matrixrow(1,2));getFromSet(0, {vector(1,2)})})",
 				null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		List<Object> matrix = new ArrayList<Object>();
@@ -193,7 +193,7 @@ public class TestGetFromSet extends TestFunctionAbstract {
 			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException, FunctionException,
 			CasNotAvailableException, OpenMathException {
 		OMOBJ omobj = ExpressionParser
-				.parse("getFromSet({1; matrix(matrixrow(1,2)); getFromSet({vector(1,2,7.1); 0}, 0)}, 2)", null, null);
+				.parse("getFromSet(2, {1; matrix(matrixrow(1,2)); getFromSet(0, {vector(1,2,7.1); 0})})", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(1));
@@ -206,8 +206,9 @@ public class TestGetFromSet extends TestFunctionAbstract {
 	public void testGetFromSetWithZeroArgs() throws NoRepresentationAvailableException, CasException,
 			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException, FunctionException,
 			CasNotAvailableException, OpenMathException {
-		OMOBJ omobj = ExpressionParser.parse("getFromSet({}, 0)", null, null);
+		OMOBJ omobj = ExpressionParser.parse("getFromSet(0, {})", null, null);
 		OMExecutor.execute(omobj);
+		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)

@@ -127,6 +127,6 @@ public class TestEvalTerm2 extends TestFunctionAbstract{
 		args.add(arg1.getOMA());
 		args.add(OMCreator.createOMSTR("1"));
 		args.add(OMCreator.createOMSTR("2"));
-		assertEquals("R.<x,a>=RR[]; f=((x^2-5*a)+6); f(1,2)", func.getPartialSageSyntax(args));
+		assertEquals("R.<x,a>=RR[]; f=((x^2 - 5 * a) + 6); f(1,2)", func.getPartialSageSyntax(args));
 	}
 }

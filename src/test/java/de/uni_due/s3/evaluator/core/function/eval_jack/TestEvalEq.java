@@ -152,6 +152,6 @@ public class TestEvalEq extends TestFunctionAbstract{
 				+ "</OMA></OMOBJ>");
 		args.add(arg1.getOMA());
 		args.add(arg2.getOMA());
-		assertEquals("R.<x>=RR[]; f=((x^2-5*x)+6); g=(x-2)*(x-3); f-g", func.getPartialSageSyntax(args));
+		assertEquals("R.<x>=RR[]; f=((x^2 - 5 * x) + 6); g=(x - 2) * (x - 3); f-g", func.getPartialSageSyntax(args));
 	}
 }

@@ -103,7 +103,7 @@ public class TestOMToSageVisitor {
 	/*The Class Plus has to be implemented in Functions*/
 	@Test
 	public void testVisitApplication() throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, FunctionInvalidArgumentTypeException{
-		assertEquals(omiString + " + " + omfString, visitor.visit(oma));
-		assertEquals(omiString + " + " + omfString, visitor.visit(omobj));
+		assertEquals("(" + omiString + " + " + omfString + ")", visitor.visit(oma));
+		assertEquals("(" + omiString + " + " + omfString + ")", visitor.visit(omobj));
 	}
 }

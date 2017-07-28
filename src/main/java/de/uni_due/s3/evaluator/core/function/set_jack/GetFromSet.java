@@ -21,12 +21,12 @@ public class GetFromSet extends Function {
 
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException, FunctionInvalidArgumentException {
-		if (!OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.SET1_SET)) {
-			throw new FunctionInvalidArgumentTypeException(this, "(0)Set, (1)Integer");
+		if (!OMTypeChecker.isOMAWithSymbol(arguments.get(1), OMSymbol.SET1_SET)) {
+			throw new FunctionInvalidArgumentTypeException(this, "(0)Integer, (1)Set");
 		}
 		try {
-			int pos = OMUtils.convertOMIToInteger(arguments.get(1));
-			List<Object> set = ((OMA) arguments.get(0)).getOmel();
+			int pos = OMUtils.convertOMIToInteger(arguments.get(0));
+			List<Object> set = ((OMA) arguments.get(1)).getOmel();
 			set.remove(0); //OMS entfernen
 			
 			if (set.size() == 0) {
@@ -40,7 +40,7 @@ public class GetFromSet extends Function {
 			
 			return set.get(pos); // 0te element ist die OMS_SET1_SET
 		} catch (InputMismatchException e) {
-			throw new FunctionInvalidArgumentTypeException(this, "(0)Set, (1)Integer");
+			throw new FunctionInvalidArgumentTypeException(this, "(0)Integer, (1)Set");
 		}
 	}
 
