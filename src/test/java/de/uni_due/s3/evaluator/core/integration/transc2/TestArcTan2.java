@@ -84,12 +84,14 @@ public class TestArcTan2 extends TestIntegration {
 		assertEquals(0,
 				Evaluator.getNumberResult("atan2(atan2(0, 0), atan2(0, 0))", exerciseVariableMap, fillInVariableMap),
 				0.0001);
+		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentException.class)
 	public void testAtan2WithExpression2() throws EvaluatorException, OpenMathException {
 		assertEquals(0, Evaluator.getNumberResult("atan2(atan2(0, 0), atan2(0, atan2(0, 0)))", exerciseVariableMap,
 				fillInVariableMap), 0.0001);
+		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
