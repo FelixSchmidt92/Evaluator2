@@ -28,8 +28,8 @@ public class LessThan extends Function {
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException {
 		try{
-			double first = OMUtils.convertOMIOMFToDouble(arguments.get(0));
-			double second = OMUtils.convertOMIOMFToDouble(arguments.get(1));
+			double first = OMUtils.convertOMToDouble(arguments.get(0));
+			double second = OMUtils.convertOMToDouble(arguments.get(1));
 			return (first<second)? OMSymbol.LOGIC1_TRUE:OMSymbol.LOGIC1_FALSE ;
 		}catch(Exception e){
 			throw new FunctionInvalidArgumentTypeException(this,"integer, float, double");

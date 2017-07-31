@@ -36,8 +36,8 @@ public class Remainder extends Function{
 			OMI left = (OMI)arguments.get(0);
 			OMI right = (OMI)arguments.get(1);
 		
-			Double leftValue = OMUtils.convertOMIOMFToDouble(left);
-			Double rightValue = OMUtils.convertOMIOMFToDouble(right);
+			Double leftValue = OMUtils.convertOMToDouble(left);
+			Double rightValue = OMUtils.convertOMToDouble(right);
 			return OMUtils.convertDoubleToOMIOMF(leftValue % rightValue);
 		} catch (InputMismatchException e) {
 			throw new FunctionInvalidArgumentTypeException(this,"integer");

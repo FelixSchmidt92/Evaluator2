@@ -19,7 +19,7 @@ public class Round extends Function {
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException {
 		try {
-			double value = OMUtils.convertOMIOMFToDouble(arguments.get(0));
+			double value = OMUtils.convertOMToDouble(arguments.get(0));
 			value = Math.round(value);
 			return OMUtils.convertDoubleToOMIOMF(value);
 		} catch (InputMismatchException e) {

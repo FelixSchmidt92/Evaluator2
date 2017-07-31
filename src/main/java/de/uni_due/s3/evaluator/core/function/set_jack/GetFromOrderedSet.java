@@ -53,7 +53,7 @@ public class GetFromOrderedSet extends Function {
 			List<Double> setForSort = new ArrayList<Double>();
 			for (Object element : set) {
 				try {
-					setForSort.add(OMUtils.convertOMIOMFToDouble(element));
+					setForSort.add(OMUtils.convertOMToDouble(element));
 				} catch (InputMismatchException e) {
 					throw new FunctionInvalidArgumentTypeException(this,
 							"Set elements have to be from type String/Integer/Double/Float.");

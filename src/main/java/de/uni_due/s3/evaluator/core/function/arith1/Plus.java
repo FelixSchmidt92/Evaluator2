@@ -31,8 +31,8 @@ public class Plus extends Function {
 	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException, OpenMathException {
 		// evaluate this method in sage
 		try {
-			Double leftValue = OMUtils.convertOMIOMFToDouble(arguments.get(0));
-			Double rightValue = OMUtils.convertOMIOMFToDouble(arguments.get(1));
+			Double leftValue = OMUtils.convertOMToDouble(arguments.get(0));
+			Double rightValue = OMUtils.convertOMToDouble(arguments.get(1));
 			return OMUtils.convertDoubleToOMIOMF(leftValue + rightValue);
 		} catch (InputMismatchException e) {
 			throw new FunctionInvalidArgumentTypeException(this, "integer, float, double");

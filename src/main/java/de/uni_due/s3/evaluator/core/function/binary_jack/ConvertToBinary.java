@@ -29,7 +29,7 @@ public class ConvertToBinary extends Function {
 	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException {
 		Double value;
 		try {
-			value = OMUtils.convertOMIOMFToDouble(arguments.get(0));
+			value = OMUtils.convertOMToDouble(arguments.get(0));
 		} catch (InputMismatchException e) {
 			throw new FunctionInvalidArgumentTypeException(this, "(0)Integer|(0)Float");
 		}

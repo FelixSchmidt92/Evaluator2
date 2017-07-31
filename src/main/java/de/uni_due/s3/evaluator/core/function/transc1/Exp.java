@@ -23,7 +23,7 @@ public class Exp extends Function {
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException, OpenMathException {
 		try {
-			Double result = Math.exp(OMUtils.convertOMIOMFToDouble(arguments.get(0)));
+			Double result = Math.exp(OMUtils.convertOMToDouble(arguments.get(0)));
 			return OMUtils.convertDoubleToOMIOMF(result);
 		} catch (InputMismatchException e) {
 			throw new FunctionInvalidArgumentTypeException(this, "integer, float, double");

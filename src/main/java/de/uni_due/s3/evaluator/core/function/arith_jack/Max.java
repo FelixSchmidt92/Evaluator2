@@ -21,8 +21,8 @@ public class Max extends Function {
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException {
 		try {
-			Double leftValue = OMUtils.convertOMIOMFToDouble(arguments.get(0));
-			Double rightValue = OMUtils.convertOMIOMFToDouble(arguments.get(1));
+			Double leftValue = OMUtils.convertOMToDouble(arguments.get(0));
+			Double rightValue = OMUtils.convertOMToDouble(arguments.get(1));
 			Double result = Math.max(leftValue, rightValue);
 			return OMUtils.convertDoubleToOMIOMF(result);
 		} catch (InputMismatchException np) {

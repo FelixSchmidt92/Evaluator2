@@ -42,7 +42,7 @@ public class Evaluator {
 			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
 		OMOBJ result = evaluate(expression, exerciseVariableMap, fillInVariableMap);
 		try {
-			return OMUtils.convertOMIOMFToDouble(result);
+			return OMUtils.convertOMToDouble(result);
 		} catch (InputMismatchException e) {
 			throw new InvalidResultTypeException(
 					"Type of result of expression:" + expression + "has to be integer, double or float.");

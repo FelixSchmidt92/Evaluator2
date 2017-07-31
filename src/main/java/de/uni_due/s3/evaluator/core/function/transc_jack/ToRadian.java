@@ -28,7 +28,7 @@ public class ToRadian extends Function {
 			CasNotAvailableException, NoRepresentationAvailableException, CasEvaluationException,
 			FunctionInvalidArgumentTypeException, OpenMathException, InvalidResultTypeException {
 		try {
-			Double value = OMUtils.convertOMIOMFToDouble(arguments.get(0));
+			Double value = OMUtils.convertOMToDouble(arguments.get(0));
 			return OMUtils.convertDoubleToOMIOMF(Math.toRadians(value));
 		} catch (InputMismatchException e) {
 			throw new FunctionInvalidArgumentTypeException(this, "(0)Integer");

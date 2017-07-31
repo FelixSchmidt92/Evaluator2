@@ -77,7 +77,6 @@ public class OMSymbol {
 	public static final OMS OPENMATHJACK_GETNUMERATOR = OMCreator.createOMS("openmathJACK", "getNumerator");
 	public static final OMS OPENMATHJACK_ISFRACTION = OMCreator.createOMS("openmathJACK", "isFraction");
 
-	public static final OMS POLY_DEGREE = OMCreator.createOMS("poly", "degree");
 	public static final OMS POLY_DEGREE_WRT = OMCreator.createOMS("poly", "degree_wrt");
 
 	public static final OMS POLYNOMIALJACK_DEPENDSON = OMCreator.createOMS("polynomialJACK", "dependsOn");

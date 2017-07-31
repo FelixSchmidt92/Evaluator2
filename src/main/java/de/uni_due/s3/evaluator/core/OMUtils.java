@@ -28,7 +28,7 @@ public class OMUtils {
 	 * @throws InputMismatchException
 	 *             wenn obj kein OMF, OMI oder NUMS1 Symbol ist
 	 */
-	public static Double convertOMIOMFToDouble(Object obj) throws InputMismatchException {
+	public static Double convertOMToDouble(Object obj) throws InputMismatchException {
 		// first if obj is OMOBJ get Element
 		if (obj instanceof OMOBJ) {
 			try {
@@ -67,6 +67,7 @@ public class OMUtils {
 	 * @return OMF oder OMI
 	 */
 	public static Object convertDoubleToOMIOMF(Double result) {
+		//FIXME E und PI INFINITY
 		if (((double) result.intValue()) == result.doubleValue()) {
 			OMI omiResult = new OMI();
 			omiResult.setValue(String.valueOf(result.intValue()));
@@ -94,7 +95,7 @@ public class OMUtils {
 				throw new InputMismatchException();
 			}
 		}
-
+		//FIXME sollen wir hier auch OMF und OMSTR ggf zu Integer wenn möglich ?! True False ?!
 		if (obj instanceof OMI) {
 			return Integer.parseInt(((OMI) obj).getValue());
 		} else {
@@ -128,6 +129,7 @@ public class OMUtils {
 			return Double.toString(((OMF) obj).getDec());
 		} else if (obj instanceof OMV) {
 			return ((OMV) obj).getName();
+	//FIXME gibt es noch mehr ?
 		} else if (OMTypeChecker.isOMAWithSymbol(obj, OMSymbol.STRINGJACK_TEXTVALUEWITHVARIABLES)) {
 			List<Object> omel = ((OMA) obj).getOmel();
 			omel.remove(0);

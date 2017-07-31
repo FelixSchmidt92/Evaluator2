@@ -21,11 +21,11 @@ public class Root extends Function {
 	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException, OpenMathException {
 		try {
 			if (arguments.size() == 1) {
-				Double argValue = OMUtils.convertOMIOMFToDouble(arguments.get(0));
+				Double argValue = OMUtils.convertOMToDouble(arguments.get(0));
 				return OMUtils.convertDoubleToOMIOMF(Math.sqrt(argValue));
 			} else {
-				Double argValue = OMUtils.convertOMIOMFToDouble(arguments.get(0));
-				Double nth = OMUtils.convertOMIOMFToDouble(arguments.get(1));
+				Double argValue = OMUtils.convertOMToDouble(arguments.get(0));
+				Double nth = OMUtils.convertOMToDouble(arguments.get(1));
 				if (argValue < 0) {
 					if (nth % 2 == 1) {
 						Double result = -1 * Math.pow(Math.E, Math.log(Math.abs(argValue)) / nth);

@@ -33,8 +33,8 @@ public class IEEERemainder extends Function {
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException, OpenMathException, FunctionInvalidArgumentException {
 		try {
-			Double leftValue = OMUtils.convertOMIOMFToDouble(arguments.get(0));
-			Double rightValue = OMUtils.convertOMIOMFToDouble(arguments.get(1));
+			Double leftValue = OMUtils.convertOMToDouble(arguments.get(0));
+			Double rightValue = OMUtils.convertOMToDouble(arguments.get(1));
 			if (rightValue == 0.0) {
 				throw new FunctionInvalidArgumentException(this, "Second argument for IEEERemainder has to be unequal 0.0 .");
 			}

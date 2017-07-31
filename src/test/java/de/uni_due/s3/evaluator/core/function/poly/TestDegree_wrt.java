@@ -7,6 +7,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import de.uni_due.s3.evaluator.OMExecutor;
+import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.core.function.TestFunctionAbstract;
 import de.uni_due.s3.evaluator.core.function.poly.Degree_wrt;
@@ -28,20 +29,25 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 public class TestDegree_wrt extends TestFunctionAbstract{
 
 	private Function func = new Degree_wrt();
-	private List<Object> args;
 	
 	@Test
 	public void testDegreeWrtWithOneVariable() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
-		args = new ArrayList<Object>(1);
-		args.add(OMCreator.createOMSTR("1+a^2"));
-		args.add(OMCreator.createOMSTR("a"));
+		List<Object> pow = new ArrayList<Object>();
+		pow.add(OMCreator.createOMV("a"));
+		pow.add(OMCreator.createOMI(2));
+		List<Object> plus = new ArrayList<Object>();
+		plus.add(OMCreator.createOMI(1));
+		plus.add(OMCreator.createOMA(OMSymbol.ARITH1_POWER, pow));
+		List<Object> args = new ArrayList<Object>();
+		args.add(OMCreator.createOMA(OMSymbol.ARITH1_PLUS, plus));
+		args.add(OMCreator.createOMV("a"));
 		Object result = func.evaluate(args);
 		assertEquals(OMCreator.createOMI(2),result);
 	}
 	
 	@Test
 	public void testDegreeWrtWithTwoVariable() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
-		args = new ArrayList<Object>(1);
+		List<Object> args = new ArrayList<Object>(1);
 		args.add(OMCreator.createOMSTR("1+a^2-b^5"));
 		args.add(OMCreator.createOMSTR("b"));
 		Object result = func.evaluate(args);
@@ -50,7 +56,7 @@ public class TestDegree_wrt extends TestFunctionAbstract{
 	
 	@Test
 	public void testDegreeWrtWithEmptyVariable() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException{
-		args = new ArrayList<Object>(1);
+		List<Object> args = new ArrayList<Object>(1);
 		args.add(OMCreator.createOMSTR("1+a^6-b^5"));
 		args.add(OMCreator.createOMSTR(""));
 		Object result = func.evaluate(args);

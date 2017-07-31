@@ -19,7 +19,7 @@ public class Ceiling extends Function {
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException {
 		try {
-			double value = OMUtils.convertOMIOMFToDouble(arguments.get(0));
+			double value = OMUtils.convertOMToDouble(arguments.get(0));
 			value = Math.ceil(value);
 			return OMUtils.convertDoubleToOMIOMF(value);
 		} catch (InputMismatchException e) {

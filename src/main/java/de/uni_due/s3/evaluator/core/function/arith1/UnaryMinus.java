@@ -27,7 +27,7 @@ public class UnaryMinus extends Function {
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException, OpenMathException {
 		try {
-			Double value = OMUtils.convertOMIOMFToDouble(arguments.get(0));
+			Double value = OMUtils.convertOMToDouble(arguments.get(0));
 			return OMUtils.convertDoubleToOMIOMF(value * -1);
 		} catch (InputMismatchException e) {
 			throw new FunctionInvalidArgumentTypeException(this, "integer, float, double");

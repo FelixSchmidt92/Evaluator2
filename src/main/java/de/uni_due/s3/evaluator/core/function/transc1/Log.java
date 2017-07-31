@@ -22,7 +22,7 @@ public class Log extends Function {
 	protected Object execute(List<Object> arguments)
 			throws FunctionInvalidArgumentTypeException, OpenMathException, FunctionInvalidArgumentException {
 		try {
-			Double value = OMUtils.convertOMIOMFToDouble(arguments.get(0));
+			Double value = OMUtils.convertOMToDouble(arguments.get(0));
 			if (value <= 0) {
 				throw new FunctionInvalidArgumentException(this, "Function Log expects values greater than zero.");
 			}

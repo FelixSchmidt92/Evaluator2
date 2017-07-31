@@ -29,8 +29,8 @@ public class Power extends Function {
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException, OpenMathException   {
 		try {
-			Double b = OMUtils.convertOMIOMFToDouble(arguments.get(0));
-			Double e = OMUtils.convertOMIOMFToDouble(arguments.get(1));
+			Double b = OMUtils.convertOMToDouble(arguments.get(0));
+			Double e = OMUtils.convertOMToDouble(arguments.get(1));
 			return OMUtils.convertDoubleToOMIOMF(Math.pow(b, e));
 		} catch (InputMismatchException e) {
 			throw new FunctionInvalidArgumentTypeException(this, "integer, float, double");

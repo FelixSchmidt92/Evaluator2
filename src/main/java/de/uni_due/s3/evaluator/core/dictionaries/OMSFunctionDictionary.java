@@ -189,7 +189,6 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.OPENMATHJACK_GETNUMERATOR, new GetNumerator());
 		functions.put(OMSymbol.OPENMATHJACK_ISFRACTION, new isFraction());
 
-		functions.put(OMSymbol.POLY_DEGREE, new de.uni_due.s3.evaluator.core.function.poly.Degree());
 		functions.put(OMSymbol.POLY_DEGREE_WRT, new Degree_wrt());
 
 		functions.put(OMSymbol.POLYNOMIALJACK_FACTOROF, new FactorOf());

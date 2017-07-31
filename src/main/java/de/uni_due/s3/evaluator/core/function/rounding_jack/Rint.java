@@ -25,7 +25,7 @@ public class Rint extends Function{
 	protected Object execute(List<Object> arguments) throws FunctionException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
 		try {
-			double arg = OMUtils.convertOMIOMFToDouble(arguments.get(0));
+			double arg = OMUtils.convertOMToDouble(arguments.get(0));
 			if(Double.isInfinite(arg) || Double.isNaN(arg)) {
 				return OMCreator.createOMF(Math.rint(arg));
 			}
