@@ -116,6 +116,8 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("ceil", OMSymbol.ROUNDING1_CEILING);
 		functionSymbolMap.put("floor", OMSymbol.ROUNDING1_FLOOR);
 		functionSymbolMap.put("round", OMSymbol.ROUNDING1_ROUND);
+		
+		functionSymbolMap.put("rint", OMSymbol.ROUNDING_JACK);
 
 		functionSymbolMap.put("chooseFromComplement", OMSymbol.SETJACK_CHOOSEFROMCOMPLEMENT);
 		functionSymbolMap.put("getFromOrderedSet", OMSymbol.SETJACK_GETFROMORDEREDSET);

@@ -104,6 +104,7 @@ public class OMSymbol {
 	public static final OMS ROUNDING1_CEILING = OMCreator.createOMS("rounding1", "ceiling");
 	public static final OMS ROUNDING1_FLOOR = OMCreator.createOMS("rounding1", "floor");
 	public static final OMS ROUNDING1_ROUND = OMCreator.createOMS("rounding1", "round");
+	public static final OMS ROUNDING_JACK = OMCreator.createOMS("roundinJACK", "rint");
 
 	public static final OMS SETJACK_CHOOSEFROMCOMPLEMENT = OMCreator.createOMS("setJACK", "chooseFromComplement");
 	public static final OMS SETJACK_GETFROMORDEREDSET = OMCreator.createOMS("setJACK", "getFromOrderedSet");

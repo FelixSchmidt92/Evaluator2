@@ -60,6 +60,7 @@ import de.uni_due.s3.evaluator.core.function.relation1.NotEqual;
 import de.uni_due.s3.evaluator.core.function.rounding1.Ceiling;
 import de.uni_due.s3.evaluator.core.function.rounding1.Floor;
 import de.uni_due.s3.evaluator.core.function.rounding1.Round;
+import de.uni_due.s3.evaluator.core.function.rounding_jack.Rint;
 import de.uni_due.s3.evaluator.core.function.set1.Set;
 import de.uni_due.s3.evaluator.core.function.set1.Size;
 import de.uni_due.s3.evaluator.core.function.set_jack.ChooseFromComplement;
@@ -214,6 +215,8 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.ROUNDING1_CEILING, new Ceiling());
 		functions.put(OMSymbol.ROUNDING1_FLOOR, new Floor());
 		functions.put(OMSymbol.ROUNDING1_ROUND, new Round());
+		
+		functions.put(OMSymbol.ROUNDING_JACK, new Rint());
 
 		functions.put(OMSymbol.SETJACK_CHOOSEFROMCOMPLEMENT, new ChooseFromComplement());
 		functions.put(OMSymbol.SETJACK_GETFROMORDEREDSET, new GetFromOrderedSet());

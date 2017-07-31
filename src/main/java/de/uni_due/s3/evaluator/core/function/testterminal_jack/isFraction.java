@@ -28,7 +28,7 @@ public class isFraction extends Function {
 	protected Object execute(List<Object> arguments) throws FunctionException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
 		if (!(arguments.get(0) instanceof OMA)) {
-			throw new FunctionInvalidArgumentTypeException(this, "(0)Application(Rational)");
+			throw new FunctionInvalidArgumentTypeException(this, "(0)Application(Fraction)");
 		}
 
 		
