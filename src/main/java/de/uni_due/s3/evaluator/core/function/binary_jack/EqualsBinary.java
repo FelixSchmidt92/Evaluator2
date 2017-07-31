@@ -23,30 +23,45 @@ public class EqualsBinary extends Function {
 	protected Object execute(List<Object> arguments)
 			throws FunctionInvalidArgumentTypeException, FunctionInvalidArgumentException {
 		try {
-			String left = OMUtils.convertOMToString(arguments.get(0));
-			String right = OMUtils.convertOMToString(arguments.get(1));
-			if (!Pattern.matches("^-?[01]+", left) || !Pattern.matches("^-?[01]+", right))
+			String left = OMUtils.convertOMToString(arguments.get(0)); // Normal Number
+			String right = OMUtils.convertOMToString(arguments.get(1)); // Binary Number
+
+
+			String leftBin = "";
+			if (left.contains(".") || left.contains(",")) {
+				leftBin = Long.toBinaryString(Double.doubleToRawLongBits(Double.parseDouble(left)));
+			} else {
+				// special Case if Integer is Negative, do not get the 2-Complement-Rep of
+				// Integer.
+				int t = Integer.parseInt(left);
+				if (t < 0) {
+					leftBin = "-" + Integer.toBinaryString(-1 * t);
+				} else {
+					leftBin = Integer.toBinaryString(t);
+				}
+			}
+			if (!Pattern.matches("^-?[01]+", leftBin) || !Pattern.matches("^-?[01]+", right))
 				throw new InputMismatchException();
 			// replace leading 0's
-			left = left.replaceFirst("^0+(?!$)", "");
+			leftBin = leftBin.replaceFirst("^0+(?!$)", "");
 			right = right.replaceFirst("^0+(?!$)", "");
 
 			// replace leading -0's with -
-			left = left.replaceFirst("^-0+(?!$)", "-");
+			leftBin = leftBin.replaceFirst("^-0+(?!$)", "-");
 			right = right.replaceFirst("^-0+(?!$)", "-");
-
-			long l = Long.decode(left);
-			long r = Long.decode(right);
-
+			
+			long l = Long.parseLong(leftBin, 2);
+			long r = Long.parseLong(right, 2);
+			
 			if (l == r) {
 				return OMSymbol.LOGIC1_TRUE;
 			}
 
 		} catch (InputMismatchException e) {
-			throw new FunctionInvalidArgumentTypeException(this, "(0)Binary, (1)Binary");
+			throw new FunctionInvalidArgumentTypeException(this, "(0)Number, (1)Binary");
 		} catch (NumberFormatException e) {
 			throw new FunctionInvalidArgumentException(this,
-					"One of the Binary Strings is either to long or contains invalid signs.");
+					"Either the Binary is to long or the Number has a wrong Format.");
 		}
 
 		return OMSymbol.LOGIC1_FALSE;
