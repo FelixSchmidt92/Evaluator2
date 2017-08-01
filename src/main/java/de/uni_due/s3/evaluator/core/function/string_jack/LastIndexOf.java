@@ -32,7 +32,7 @@ public class LastIndexOf extends Function {
 			if (arguments.size() == 3) {
 				pos = OMUtils.convertOMIToInteger(arguments.get(2));
 			}
-			if (string.length() <= pos || pos < 0) {
+			if (pos < 0) {
 				throw new FunctionInvalidArgumentException(this,
 						"Third Argument of lastIndexOf is invalid. Not in Range of first String");
 			}
