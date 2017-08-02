@@ -38,7 +38,7 @@ public class TestEqualsExpr extends TestFunctionAbstract{
 	
 	@Test
 	public void testEqualsExprWithCorrectPoly() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException, JAXBException{
-		args = new ArrayList<Object>(1);
+		args = new ArrayList<Object>();
 		OMOBJ arg1 = OMConverter.toObject("<OMOBJ><OMA><OMS cd=\"arith1\" name=\"plus\"/>"
 				+ "<OMA><OMS cd =\"arith1\" name=\"minus\"/>"
 				+ 	"<OMA><OMS cd=\"arith1\" name=\"power\" /><OMV name=\"x\"/><OMI>2</OMI></OMA>"
@@ -65,7 +65,7 @@ public class TestEqualsExpr extends TestFunctionAbstract{
 	
 	@Test
 	public void testEqualsExprWithDiffrentPoly() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException, JAXBException{
-		args = new ArrayList<Object>(1);
+		args = new ArrayList<Object>();
 		OMOBJ arg1 = OMConverter.toObject("<OMOBJ><OMA><OMS cd=\"arith1\" name=\"plus\"/>"
 				+ "<OMA><OMS cd =\"arith1\" name=\"minus\"/>"
 				+ 	"<OMA><OMS cd=\"arith1\" name=\"power\" /><OMV name=\"a\"/><OMI>2</OMI></OMA>"
@@ -109,16 +109,6 @@ public class TestEqualsExpr extends TestFunctionAbstract{
 		fail();
 	}
 
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testEqualsExprWithWrongArguments() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
-		ArrayList<Object> args = new ArrayList<Object>(2);
-		args.add(OMCreator.createOMSTR(null));
-		args.add(OMCreator.createOMI(1));
-		func.evaluate(args);
-		fail();
-	}
-
 	@Test
 	public void testEqualsExprIntegration() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
@@ -131,7 +121,7 @@ public class TestEqualsExpr extends TestFunctionAbstract{
 	
 	@Test
 	public void testEqualsExprSageSyntax() throws FunctionInvalidNumberOfArgumentsException, FunctionInvalidArgumentTypeException, NoRepresentationAvailableException, JAXBException{
-		ArrayList<Object> args = new ArrayList<Object>(1);
+		ArrayList<Object> args = new ArrayList<Object>();
 		OMOBJ arg1 = OMConverter.toObject("<OMOBJ><OMA><OMS cd=\"arith1\" name=\"plus\"/>"
 				+ "<OMA><OMS cd =\"arith1\" name=\"minus\"/>"
 				+ 	"<OMA><OMS cd=\"arith1\" name=\"power\" /><OMV name=\"x\"/><OMI>2</OMI></OMA>"
@@ -152,6 +142,6 @@ public class TestEqualsExpr extends TestFunctionAbstract{
 		args.add(arg1.getOMA());
 		args.add(arg2.getOMA());
 		
-		assertEquals("R.<x>=RR[]; f=((x^2 - 5 * x) + 6); g=(x - 2) * (x - 3); f==g", func.getPartialSageSyntax(args));
+		assertEquals("var('x');bool(((x^2 - 5 * x) + 6)==(x - 2) * (x - 3))", func.getPartialSageSyntax(args));
 	}
 }

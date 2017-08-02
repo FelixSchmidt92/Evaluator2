@@ -30,9 +30,6 @@ public class Sin extends Function {
 		}
 		Object result = Sage.evaluateInCAS(getPartialSageSyntax(arguments));
 
-		if (!OMTypeChecker.isOMNumber(result)) {
-			throw new InvalidResultTypeException(this, "integer, float, double");
-		}
 		return result;
 	}
 

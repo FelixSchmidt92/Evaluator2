@@ -6,6 +6,8 @@ import static org.junit.Assert.fail;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.JAXBException;
+
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator.OMExecutor;
@@ -24,6 +26,7 @@ import de.uni_due.s3.evaluator.exceptions.parser.UndefinedFillInVariableExceptio
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
+import de.uni_due.s3.openmath.omutils.OMConverter;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
@@ -42,11 +45,13 @@ public class TestArcSin extends TestFunctionAbstract {
 
 	@Test
 	public void testArcSinInteger() throws FunctionException, CasEvaluationException, CasNotAvailableException,
-			NoRepresentationAvailableException, OpenMathException {
+			NoRepresentationAvailableException, OpenMathException, JAXBException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(1));
 		Object result = func.evaluate(args);
-		assertEquals(OMCreator.createOMF(1.57079632679490), result);
+		assertEquals(OMConverter.toElement(OMConverter.toObject("<OMOBJ><OMA><OMS name=\"times\" cd=\"arith1\" />"
+				+ "<OMA><OMS name=\"rational\" cd=\"nums1\" /><OMI>1</OMI><OMI>2</OMI>"
+				+ "</OMA><OMS name=\"pi\" cd=\"nums1\" /></OMA></OMOBJ>")), result);
 	}
 
 	@Test
@@ -59,8 +64,8 @@ public class TestArcSin extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testArcSinSageSyntax()
-			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException, FunctionInvalidArgumentTypeException {
+	public void testArcSinSageSyntax() throws FunctionInvalidNumberOfArgumentsException,
+			NoRepresentationAvailableException, CasException, FunctionInvalidArgumentTypeException {
 		List<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMF(1.0));
 		assertEquals("arcsin(1)", func.getPartialSageSyntax(args));

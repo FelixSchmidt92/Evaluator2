@@ -35,10 +35,7 @@ public class ArcTan2 extends Function {
 		if (OMTypeChecker.isOMS(result) && result.equals(OMSymbol.NUMS1_NAN)) {
 			throw new FunctionInvalidArgumentException(this, "ArcTan2: both values cannot be zero at the same time.");
 		}
-		
-		if (!OMTypeChecker.isOMNumber(result)) {
-			throw new InvalidResultTypeException(this, "integer, float, double");
-		}
+
 		return result;
 	}
 

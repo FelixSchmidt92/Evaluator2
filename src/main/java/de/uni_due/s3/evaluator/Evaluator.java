@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 import de.uni_due.s3.evaluator.core.OMUtils;
 import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
-import de.uni_due.s3.evaluator.exceptions.InvalidResultTypeException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
@@ -38,13 +37,13 @@ public class Evaluator {
 
 	public static double getNumberResult(String expression, HashMap<String, OMOBJ> exerciseVariableMap,
 			HashMap<Integer, OMOBJ> fillInVariableMap) throws CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException, InvalidResultTypeException,
+			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException,
 			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
 		OMOBJ result = evaluate(expression, exerciseVariableMap, fillInVariableMap);
 		try {
 			return OMUtils.convertOMToDouble(result);
 		} catch (InputMismatchException e) {
-			throw new InvalidResultTypeException(
+			throw new FunctionException(
 					"Type of result of expression:" + expression + "has to be integer, double or float.");
 		}
 	}

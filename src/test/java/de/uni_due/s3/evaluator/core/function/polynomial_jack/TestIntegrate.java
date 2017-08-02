@@ -11,7 +11,6 @@ import static org.junit.Assert.*;
 import de.uni_due.s3.evaluator.OMExecutor;
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.core.function.TestFunctionAbstract;
-import de.uni_due.s3.evaluator.core.function.polynomial_jack.Derive;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
@@ -28,12 +27,12 @@ import de.uni_due.s3.openmath.omutils.OMConverter;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
-public class TestDerive extends TestFunctionAbstract {
+public class TestIntegrate extends TestFunctionAbstract {
 
-	private Function func = new Derive();
+	private Function func = new Integrate();
 
 	@Test
-	public void testDeriveWithOneVariable()
+	public void testIntegrateWithOneVariable()
 			throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
 			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException, JAXBException {
 		List<Object> args = new ArrayList<Object>();
@@ -52,7 +51,7 @@ public class TestDerive extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testDeriveWithTwoVariable()
+	public void testIntegrateWithTwoVariable()
 			throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
 			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException, JAXBException {
 		List<Object> args = new ArrayList<Object>();
@@ -63,21 +62,25 @@ public class TestDerive extends TestFunctionAbstract {
 		args.add(term.getOMA());
 		args.add(OMCreator.createOMV("x"));
 
-		OMOBJ expected = OMConverter.toObject(
-				"<OMOBJ><OMA>" + "<OMS cd=\"arith1\" name=\"plus\"/>" + "<OMA>" + "<OMS cd=\"arith1\" name=\"times\"/>"
-						+ "<OMI>2</OMI>" + "<OMV name=\"x\"/>" + "</OMA>" + "<OMI>-5</OMI>" + "</OMA></OMOBJ>");
+		OMOBJ expected = OMConverter
+				.toObject("<OMOBJ><OMA><OMS name=\"plus\" cd=\"arith1\"/><OMA><OMS name=\"times\" cd=\"arith1\"/>"
+						+ "<OMA><OMS name=\"rational\" cd=\"nums1\"/><OMI>1</OMI><OMI>3</OMI></OMA>"
+						+ "<OMA><OMS name=\"power\" cd=\"arith1\"/><OMV name=\"x\"/><OMI>3</OMI></OMA>"
+						+ "</OMA><OMA><OMS name=\"plus\" cd=\"arith1\"/><OMA><OMS name=\"times\" cd=\"arith1\"/>"
+						+ "<OMV name=\"x\"/><OMV name=\"v\"/></OMA><OMA><OMS name=\"times\" cd=\"arith1\"/><OMA>"
+						+ "<OMS name=\"rational\" cd=\"nums1\"/><OMI>-5</OMI><OMI>2</OMI></OMA>"
+						+ "<OMA><OMS name=\"power\" cd=\"arith1\"/><OMV name=\"x\"/><OMI>2</OMI></OMA></OMA></OMA></OMA></OMOBJ>");
 		Object result = func.evaluate(args);
 		assertEquals(expected.getOMA(), result);
 	}
 
 	@Test
-	public void testDeriveWithTwoVariable2()
+	public void testIntegrateWithTwoVariable2()
 			throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
 			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException, JAXBException {
 		List<Object> args = new ArrayList<Object>();
 		OMOBJ arg1 = OMConverter
-				.toObject("<OMOBJ><OMA><OMS cd=\"arith1\" name=\"plus\"/>" 
-		+ "<OMA><OMS cd =\"arith1\" name=\"minus\"/>"
+				.toObject("<OMOBJ><OMA><OMS cd=\"arith1\" name=\"plus\"/>" + "<OMA><OMS cd =\"arith1\" name=\"minus\"/>"
 						+ "<OMA><OMS cd=\"arith1\" name=\"power\" /><OMV name=\"x\"/><OMI>2</OMI></OMA>"
 						+ "<OMA><OMS cd=\"arith1\" name=\"times\" /><OMI>5</OMI><OMV name=\"b\"/></OMA>" + "</OMA>"
 						+ "<OMI>6</OMI>" + "</OMA></OMOBJ>");
@@ -89,7 +92,7 @@ public class TestDerive extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testDeriveWithLessThanMinParam() throws FunctionInvalidArgumentException, CasEvaluationException,
+	public void testIntegrateWithLessThanMinParam() throws FunctionInvalidArgumentException, CasEvaluationException,
 			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		func.evaluate(args);
@@ -97,7 +100,7 @@ public class TestDerive extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testDeriveWithMoreThanMaxParam() throws FunctionInvalidArgumentException, CasEvaluationException,
+	public void testIntegrateWithMoreThanMaxParam() throws FunctionInvalidArgumentException, CasEvaluationException,
 			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("test"));
@@ -108,7 +111,7 @@ public class TestDerive extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testDeriveWithWrongArguments() throws FunctionInvalidArgumentException, CasEvaluationException,
+	public void testIntegrateWithWrongArguments() throws FunctionInvalidArgumentException, CasEvaluationException,
 			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR(null));
@@ -118,17 +121,17 @@ public class TestDerive extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testDeriveIntegration() throws FunctionException, OpenMathException, CasEvaluationException,
+	public void testIntegrateIntegration() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
-		OMOBJ omobj = ExpressionParser.parse("derive('1+x^3','x')", null, null);
+		OMOBJ omobj = ExpressionParser.parse("integrate('1+x^3','x')", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		OMOBJ expected = ExpressionParser.parse("3*x^2", null, null);
 		assertEquals(expected, result);
 	}
 
 	@Test
-	public void testDeriveSageSyntax() throws FunctionInvalidNumberOfArgumentsException,
+	public void testIntegrateSageSyntax() throws FunctionInvalidNumberOfArgumentsException,
 			FunctionInvalidArgumentTypeException, NoRepresentationAvailableException, JAXBException {
 		List<Object> args = new ArrayList<Object>();
 		OMOBJ arg1 = OMConverter

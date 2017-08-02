@@ -3,17 +3,20 @@ package de.uni_due.s3.evaluator.core.function.arith1;
 import java.util.List;
 
 import de.uni_due.s3.evaluator.core.OMUtils;
+import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
+import de.uni_due.s3.openmath.omutils.OMCreator;
+import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * Implements openMath unary_minus for numbers Example: -3, -4.56
  * 
- * @author frichtscheid
+ * @author frichtscheid, spobel
  *
  */
 public class UnaryMinus extends Function {
@@ -22,7 +25,7 @@ public class UnaryMinus extends Function {
 	 * Expects one argument of type OMI or OMF
 	 * 
 	 * @return OMI or OMF
-	 * @throws OpenMathException 
+	 * @throws OpenMathException
 	 */
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException, OpenMathException {
@@ -30,6 +33,11 @@ public class UnaryMinus extends Function {
 			Double value = OMUtils.convertOMToDouble(arguments.get(0));
 			return OMUtils.convertDoubleToOMIOMF(value * -1);
 		} catch (InputMismatchException e) {
+			if (OMTypeChecker.isOMV(arguments.get(0)) || OMTypeChecker.isOMAWithSymbol(arguments.get(0),
+					OMSymbol.ARITH1_PLUS, OMSymbol.ARITH1_MINUS, OMSymbol.ARITH1_TIMES, OMSymbol.ARITH1_DIVIDE,
+					OMSymbol.ARITH1_POWER, OMSymbol.ARITH1_ROOT, OMSymbol.ARITH1_UNARY_MINUS)) {
+				return OMCreator.createOMA(OMSymbol.ARITH1_UNARY_MINUS, arguments);
+			}
 			throw new FunctionInvalidArgumentTypeException(this, "integer, float, double");
 		}
 	}
@@ -45,8 +53,8 @@ public class UnaryMinus extends Function {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments)
-			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, FunctionInvalidArgumentTypeException {
+	public String getPartialSageSyntax(List<Object> arguments) throws FunctionInvalidNumberOfArgumentsException,
+			NoRepresentationAvailableException, FunctionInvalidArgumentTypeException {
 		return "-" + getSageSyntax(arguments.get(0));
 	}
 

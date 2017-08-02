@@ -42,11 +42,11 @@ public class TestArcTan extends TestFunctionAbstract {
 
 	@Test
 	public void testArcTanInteger() throws FunctionException, CasEvaluationException, CasNotAvailableException,
-			NoRepresentationAvailableException, OpenMathException {
+			NoRepresentationAvailableException, OpenMathException, UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(1));
 		Object result = func.evaluate(args);
-		assertEquals(OMCreator.createOMF(0.785398163397448), result);
+		assertEquals(ExpressionParser.parse("1/4 * [var=PI]", null, null), result);
 	}
 
 	@Test

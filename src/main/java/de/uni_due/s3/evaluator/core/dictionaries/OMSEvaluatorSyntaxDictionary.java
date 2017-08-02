@@ -93,7 +93,7 @@ public class OMSEvaluatorSyntaxDictionary {
 		
 		functionSymbolMap.put("deg", OMSymbol.POLY_DEGREE_WRT);
 
-		functionSymbolMap.put("equalssemisem", OMSymbol.POLYNOMIALJACK_EQUALSEMISEM);
+		functionSymbolMap.put("equalsemisem", OMSymbol.RELATION1_EQ);
 		functionSymbolMap.put("equalsExpr", OMSymbol.POLYNOMIALJACK_EQUALSEXPR);
 		functionSymbolMap.put("dependsOn", OMSymbol.POLYNOMIALJACK_DEPENDSON);
 		functionSymbolMap.put("derive", OMSymbol.POLYNOMIALJACK_DERIVE);

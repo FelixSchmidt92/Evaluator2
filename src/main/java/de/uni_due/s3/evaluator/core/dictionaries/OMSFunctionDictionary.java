@@ -47,7 +47,6 @@ import de.uni_due.s3.evaluator.core.function.polynomial1.Expand;
 import de.uni_due.s3.evaluator.core.function.polynomial_jack.DependsOn;
 import de.uni_due.s3.evaluator.core.function.polynomial_jack.Derive;
 import de.uni_due.s3.evaluator.core.function.polynomial_jack.EqualsExpr;
-import de.uni_due.s3.evaluator.core.function.polynomial_jack.EqualsSemiSem;
 import de.uni_due.s3.evaluator.core.function.polynomial_jack.Integrate;
 import de.uni_due.s3.evaluator.core.function.polynomial_jack.NumberOfVariables;
 import de.uni_due.s3.evaluator.core.function.random_jack.Random;
@@ -194,7 +193,6 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.POLYNOMIALJACK_FACTOROF, new FactorOf());
 		functions.put(OMSymbol.POLYNOMIALJACK_INTEGRATE, new Integrate());
 		functions.put(OMSymbol.POLYNOMIALJACK_NUMBEROFVARIABLES, new NumberOfVariables());
-		functions.put(OMSymbol.POLYNOMIALJACK_EQUALSEMISEM, new EqualsSemiSem());
 		functions.put(OMSymbol.POLYNOMIALJACK_DEPENDSON, new DependsOn());
 		functions.put(OMSymbol.POLYNOMIALJACK_DERIVE, new Derive());
 		functions.put(OMSymbol.POLYNOMIALJACK_EQUALSEXPR, new EqualsExpr());

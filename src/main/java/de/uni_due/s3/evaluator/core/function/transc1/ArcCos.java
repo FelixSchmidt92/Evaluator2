@@ -30,10 +30,6 @@ public class ArcCos extends Function {
 			throw new FunctionInvalidArgumentTypeException(this, "integer, float, double");
 		}
 		Object result = Sage.evaluateInCAS(getPartialSageSyntax(arguments));
-
-		if (!OMTypeChecker.isOMNumber(result)) {
-			throw new InvalidResultTypeException(this, "integer, float, double");
-		}
 		return result;
 	}
 
