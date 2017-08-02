@@ -34,9 +34,8 @@ public class OMSymbol {
 	public static final OMS EDITOR1_INPUT_BOX = OMCreator.createOMS("editor1", "input_box");
 	
 	public static final OMS EVALJACK_EVAL = OMCreator.createOMS("evalJACK", "eval");
-	public static final OMS EVALJACK_EVALCPLX = OMCreator.createOMS("evalJACK", "evalcplx");
 	public static final OMS EVALJACK_EVALEQ = OMCreator.createOMS("evalJACK", "evalEq");
-	public static final OMS EVALJACK_EVALPOLYNOMIAL = OMCreator.createOMS("evalJACK", "evalPolynomial");
+	public static final OMS EVALJACK_EVALPOLYNOMIAL = OMCreator.createOMS("evalJACK", "evalpolynomial");
 	public static final OMS EVALJACK_EVALPOLYNOMIALCPLX = OMCreator.createOMS("evalJACK", "evalPolynomialCplx");
 	public static final OMS EVALJACK_EVALTERM2 = OMCreator.createOMS("evalJACK", "evalterm2");
 

@@ -42,10 +42,10 @@ public class PolyUtils {
 			result.append(var);
 			prefix = " ";
 		}
-		
+
 		if (vars.size() != 0) {
 			result.insert(0, "var('");
-			
+
 			result.append("');");
 		}
 		return result.toString();

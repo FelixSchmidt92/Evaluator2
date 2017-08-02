@@ -15,15 +15,12 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 import de.uni_due.s3.sage.Sage;
 
 /**
- * Inserts values for two different variables in a term and calculates the
- * result (as stated in
- * <a href="https://jack-community.org/wiki/index.php/EvalTermIn2Variables">
- * EvalTermIn2Variables</a>.
+ * Inserts values for variable x in a term and calculates the result
  * 
  * @author spobel
  *
  */
-public class EvalTerm2 extends Function {
+public class EvalPolynomial extends Function {
 
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionException, CasEvaluationException,
@@ -34,12 +31,12 @@ public class EvalTerm2 extends Function {
 
 	@Override
 	protected int minArgs() {
-		return 3;
+		return 2;
 	}
 
 	@Override
 	protected int maxArgs() {
-		return 3;
+		return 2;
 	}
 
 	@Override
@@ -49,24 +46,20 @@ public class EvalTerm2 extends Function {
 		try {
 			String term = getSageSyntax(arguments.get(0));
 			Double value1 = OMUtils.convertOMToDouble(arguments.get(1));
-			Double value2 = OMUtils.convertOMToDouble(arguments.get(2));
-			
-			String sageVar = PolyUtils.getSageSyntaxVariableRepresentation(term + "; a; b; x; y;");
-			
+
+			String sageVar = PolyUtils.getSageSyntaxVariableRepresentation(term + "; x;");
+
 			StringBuilder sb = new StringBuilder();
 			sb.append(sageVar);
-			sb.append("x = a =");
+			sb.append("x =");
 			sb.append(value1);
-			sb.append(";y = b =");
-			sb.append(value2);
 			sb.append(";(");
 			sb.append(term);
 			sb.append(")");
-			
+
 			return sb.toString();
 		} catch (InputMismatchException e) {
-			throw new FunctionInvalidArgumentTypeException(this,
-					"(0)Term, (1)Integer/Double/Float, (2)Integer/Double/Float");
+			throw new FunctionInvalidArgumentTypeException(this, "(0)Term, (1)Integer/Double/Float");
 		}
 	}
 }

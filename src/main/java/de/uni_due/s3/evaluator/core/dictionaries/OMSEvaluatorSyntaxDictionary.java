@@ -61,7 +61,7 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("evaluateInSymja", OMSymbol.CASJACK_EVALUATEINSYMJA);
 		
 		functionSymbolMap.put("eval", OMSymbol.EVALJACK_EVAL);
-		functionSymbolMap.put("evalcplx", OMSymbol.EVALJACK_EVALCPLX);
+		functionSymbolMap.put("evalcplx", OMSymbol.POLYNOMIAL1_EXPAND);
 		functionSymbolMap.put("evalEq", OMSymbol.EVALJACK_EVALEQ);
 		functionSymbolMap.put("evalpolynomial", OMSymbol.EVALJACK_EVALPOLYNOMIAL);
 		functionSymbolMap.put("evalPolynomialCplx", OMSymbol.EVALJACK_EVALPOLYNOMIALCPLX);
