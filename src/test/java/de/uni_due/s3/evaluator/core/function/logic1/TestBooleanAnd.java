@@ -112,8 +112,8 @@ public class TestBooleanAnd extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testBooleanAndSageSyntax()
-			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException, FunctionInvalidArgumentTypeException {
+	public void testBooleanAndSageSyntax() throws FunctionException, NoRepresentationAvailableException, CasException,
+			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMSymbol.LOGIC1_TRUE);
 		args.add(OMSymbol.LOGIC1_TRUE);

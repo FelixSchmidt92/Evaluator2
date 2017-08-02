@@ -8,6 +8,7 @@ import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
@@ -35,7 +36,7 @@ public class Minus extends Function {
 	 * @throws OpenMathException
 	 */
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException, OpenMathException {
+	protected Object execute(List<Object> arguments) throws FunctionException, OpenMathException {
 		try {
 			Double leftValue = OMUtils.convertOMToDouble(arguments.get(0));
 			Double rightValue = OMUtils.convertOMToDouble(arguments.get(1));
@@ -48,7 +49,13 @@ public class Minus extends Function {
 					|| OMTypeChecker.isOMAWithSymbol(arguments.get(1), OMSymbol.ARITH1_PLUS, OMSymbol.ARITH1_MINUS,
 							OMSymbol.ARITH1_TIMES, OMSymbol.ARITH1_DIVIDE, OMSymbol.ARITH1_POWER, OMSymbol.ARITH1_ROOT,
 							OMSymbol.ARITH1_UNARY_MINUS)) {
-				return OMCreator.createOMA(OMSymbol.ARITH1_MINUS, arguments); //In Termen für weitere Anwendung oder Darstellung
+				return OMCreator.createOMA(OMSymbol.ARITH1_MINUS, arguments); // In
+																				// Termen
+																				// für
+																				// weitere
+																				// Anwendung
+																				// oder
+																				// Darstellung
 			}
 			throw new FunctionInvalidArgumentTypeException(this, "integer, float, double");
 		}
@@ -65,8 +72,8 @@ public class Minus extends Function {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws FunctionInvalidNumberOfArgumentsException,
-			NoRepresentationAvailableException, FunctionInvalidArgumentTypeException {
+	public String getPartialSageSyntax(List<Object> arguments)
+			throws FunctionException, NoRepresentationAvailableException {
 		return "(" + getSageSyntax(arguments.get(0)) + " - " + getSageSyntax(arguments.get(1)) + ")";
 	}
 

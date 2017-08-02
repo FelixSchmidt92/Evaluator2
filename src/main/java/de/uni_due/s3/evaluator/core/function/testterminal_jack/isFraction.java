@@ -4,13 +4,9 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator.core.function.Function;
-import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
-import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
-import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMA;
-import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * This Function just checks if the given argument is an OMA containing the OMS
@@ -25,14 +21,12 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 public class isFraction extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	protected Object execute(List<Object> arguments) throws FunctionException {
 		if (!(arguments.get(0) instanceof OMA)) {
 			throw new FunctionInvalidArgumentTypeException(this, "(0)Application(Fraction)");
 		}
 
-		
-		//check for size, because it is unevaluated
+		// check for size, because it is unevaluated
 		OMA oma = (OMA) arguments.get(0);
 		if (oma.getOmel().size() == 3 && oma.getOmel().get(0).equals(OMSymbol.NUMS1_RATIONAL)) {
 			return OMSymbol.LOGIC1_TRUE;

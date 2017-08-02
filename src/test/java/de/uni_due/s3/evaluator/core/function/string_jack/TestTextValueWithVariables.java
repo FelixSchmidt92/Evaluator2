@@ -9,8 +9,7 @@ import org.junit.Test;
 import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.core.function.TestFunctionAbstract;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 
@@ -19,8 +18,7 @@ public class TestTextValueWithVariables extends TestFunctionAbstract {
 	Function func = new TextValueWithVariables();
 
 	@Test
-	public void testTextValueWithVariablesSageSyntax1() throws FunctionInvalidNumberOfArgumentsException,
-			FunctionInvalidArgumentTypeException, NoRepresentationAvailableException {
+	public void testTextValueWithVariablesSageSyntax1() throws NoRepresentationAvailableException, FunctionException {
 		ArrayList<Object> args = new ArrayList<>();
 
 		args.add(OMCreator.createOMSTR("SomeFunc("));
@@ -34,8 +32,7 @@ public class TestTextValueWithVariables extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testTextValueWithVariablesSageSyntax2() throws FunctionInvalidNumberOfArgumentsException,
-			FunctionInvalidArgumentTypeException, NoRepresentationAvailableException {
+	public void testTextValueWithVariablesSageSyntax2() throws NoRepresentationAvailableException, FunctionException {
 		ArrayList<Object> args = new ArrayList<>();
 
 		args.add(OMCreator.createOMSTR("SomeFunc("));
@@ -51,8 +48,7 @@ public class TestTextValueWithVariables extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testTextValueWithVariablesSageSyntax3() throws FunctionInvalidNumberOfArgumentsException,
-			FunctionInvalidArgumentTypeException, NoRepresentationAvailableException {
+	public void testTextValueWithVariablesSageSyntax3() throws NoRepresentationAvailableException, FunctionException {
 		ArrayList<Object> args = new ArrayList<>();
 
 		args.add(OMCreator.createOMSTR("["));

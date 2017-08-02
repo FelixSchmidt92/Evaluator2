@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator.OMExecutor;
+import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.core.function.TestFunctionAbstract;
 import de.uni_due.s3.evaluator.core.function.transc1.ArcTan;
@@ -42,11 +43,19 @@ public class TestArcTan extends TestFunctionAbstract {
 
 	@Test
 	public void testArcTanInteger() throws FunctionException, CasEvaluationException, CasNotAvailableException,
-			NoRepresentationAvailableException, OpenMathException, UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
+			NoRepresentationAvailableException, OpenMathException, UndefinedFillInVariableException,
+			UndefinedExerciseVariableException, ParserException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(1));
 		Object result = func.evaluate(args);
-		assertEquals(ExpressionParser.parse("1/4 * [var=PI]", null, null), result);
+		List<Object> args2 = new ArrayList<Object>();
+		args2.add(OMCreator.createOMI(1));
+		args2.add(OMCreator.createOMI(4));
+		List<Object> args3 = new ArrayList<Object>();
+		args3.add(OMCreator.createOMA(OMSymbol.NUMS1_RATIONAL, args2));
+		args3.add(OMSymbol.NUMS1_PI);
+
+		assertEquals(OMCreator.createOMA(OMSymbol.ARITH1_TIMES, args3), result);
 	}
 
 	@Test
@@ -59,8 +68,7 @@ public class TestArcTan extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testArcTanSageSyntax()
-			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException, FunctionInvalidArgumentTypeException {
+	public void testArcTanSageSyntax() throws NoRepresentationAvailableException, CasException, FunctionException {
 		List<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMF(1.0));
 		assertEquals("arctan(1)", func.getPartialSageSyntax(args));

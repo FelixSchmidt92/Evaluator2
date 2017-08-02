@@ -16,6 +16,7 @@ import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.core.function.TestFunctionAbstract;
 import de.uni_due.s3.evaluator.core.function.eval_jack.EvalTerm2;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
+import de.uni_due.s3.evaluator.exceptions.cas.CasException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
@@ -31,48 +32,48 @@ import de.uni_due.s3.openmath.omutils.OMConverter;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
-public class TestEvalTerm2 extends TestFunctionAbstract{
+public class TestEvalTerm2 extends TestFunctionAbstract {
 
 	private Function func = new EvalTerm2();
 	private List<Object> args;
-	
-	@Test(expected=CasEvaluationException.class)
-	public void testEvalTerm2WithOneVariable() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException, JAXBException{
+
+	@Test(expected = CasEvaluationException.class)
+	public void testEvalTerm2WithOneVariable()
+			throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
+			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException, JAXBException {
 		args = new ArrayList<Object>(1);
-		//x^2-5x+6
-		OMOBJ arg1 = OMConverter.toObject("<OMOBJ><OMA><OMS cd=\"arith1\" name=\"plus\"/>"
-				+ "<OMA><OMS cd =\"arith1\" name=\"minus\"/>"
-				+ 	"<OMA><OMS cd=\"arith1\" name=\"power\" /><OMV name=\"x\"/><OMI>2</OMI></OMA>"
-				+   "<OMA><OMS cd=\"arith1\" name=\"times\" /><OMI>5</OMI><OMV name=\"x\"/></OMA>"
-				+ "</OMA>"
-				+ "<OMI>6</OMI>"
-				+ "</OMA></OMOBJ>");
-		
+		// x^2-5x+6
+		OMOBJ arg1 = OMConverter
+				.toObject("<OMOBJ><OMA><OMS cd=\"arith1\" name=\"plus\"/>" + "<OMA><OMS cd =\"arith1\" name=\"minus\"/>"
+						+ "<OMA><OMS cd=\"arith1\" name=\"power\" /><OMV name=\"x\"/><OMI>2</OMI></OMA>"
+						+ "<OMA><OMS cd=\"arith1\" name=\"times\" /><OMI>5</OMI><OMV name=\"x\"/></OMA>" + "</OMA>"
+						+ "<OMI>6</OMI>" + "</OMA></OMOBJ>");
+
 		args.add(arg1.getOMA());
 		args.add(OMCreator.createOMSTR("1"));
 		args.add(OMCreator.createOMSTR("2"));
 		func.evaluate(args);
 		fail();
 	}
-	
+
 	@Test
-	public void testEvalTerm2WithTwoVariables() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException, JAXBException{
+	public void testEvalTerm2WithTwoVariables()
+			throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
+			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException, JAXBException {
 		args = new ArrayList<Object>(1);
-		//x^2-5a+6
-		OMOBJ arg1 = OMConverter.toObject("<OMOBJ><OMA><OMS cd=\"arith1\" name=\"plus\"/>"
-				+ "<OMA><OMS cd =\"arith1\" name=\"minus\"/>"
-				+ 	"<OMA><OMS cd=\"arith1\" name=\"power\" /><OMV name=\"x\"/><OMI>2</OMI></OMA>"
-				+   "<OMA><OMS cd=\"arith1\" name=\"times\" /><OMI>5</OMI><OMV name=\"a\"/></OMA>"
-				+ "</OMA>"
-				+ "<OMI>6</OMI>"
-				+ "</OMA></OMOBJ>");
+		// x^2-5a+6
+		OMOBJ arg1 = OMConverter
+				.toObject("<OMOBJ><OMA><OMS cd=\"arith1\" name=\"plus\"/>" + "<OMA><OMS cd =\"arith1\" name=\"minus\"/>"
+						+ "<OMA><OMS cd=\"arith1\" name=\"power\" /><OMV name=\"x\"/><OMI>2</OMI></OMA>"
+						+ "<OMA><OMS cd=\"arith1\" name=\"times\" /><OMI>5</OMI><OMV name=\"a\"/></OMA>" + "</OMA>"
+						+ "<OMI>6</OMI>" + "</OMA></OMOBJ>");
 		args.add(arg1.getOMA());
 		args.add(OMCreator.createOMSTR("1"));
 		args.add(OMCreator.createOMSTR("2"));
 		Object result = func.evaluate(args);
-		assertEquals(OMCreator.createOMI(-3),result);
+		assertEquals(OMCreator.createOMI(-3), result);
 	}
-	
+
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testEvalTerm2WithLessThanMinParam() throws FunctionInvalidArgumentException, CasEvaluationException,
 			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
@@ -97,7 +98,7 @@ public class TestEvalTerm2 extends TestFunctionAbstract{
 	public void testEvalTerm2WithWrongArguments() throws FunctionInvalidArgumentException, CasEvaluationException,
 			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<Object>(2);
-		args.add(OMCreator.createOMA(null,new LinkedList<Object>()));
+		args.add(OMCreator.createOMA(null, new LinkedList<Object>()));
 		args.add(OMCreator.createOMV("test"));
 		args.add(OMCreator.createOMV("test"));
 		func.evaluate(args);
@@ -113,17 +114,15 @@ public class TestEvalTerm2 extends TestFunctionAbstract{
 		assertEquals(OMCreator.createOMI(3), result.getOMI());
 	}
 
-	
 	@Test
-	public void testEvalTermSageSyntax() throws FunctionInvalidNumberOfArgumentsException, FunctionInvalidArgumentTypeException, NoRepresentationAvailableException, JAXBException{
+	public void testEvalTermSageSyntax() throws FunctionException, NoRepresentationAvailableException, CasException,
+			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException, JAXBException {
 		ArrayList<Object> args = new ArrayList<Object>(1);
-		OMOBJ arg1 = OMConverter.toObject("<OMOBJ><OMA><OMS cd=\"arith1\" name=\"plus\"/>"
-				+ "<OMA><OMS cd =\"arith1\" name=\"minus\"/>"
-				+ 	"<OMA><OMS cd=\"arith1\" name=\"power\" /><OMV name=\"x\"/><OMI>2</OMI></OMA>"
-				+   "<OMA><OMS cd=\"arith1\" name=\"times\" /><OMI>5</OMI><OMV name=\"a\"/></OMA>"
-				+ "</OMA>"
-				+ "<OMI>6</OMI>"
-				+ "</OMA></OMOBJ>");
+		OMOBJ arg1 = OMConverter
+				.toObject("<OMOBJ><OMA><OMS cd=\"arith1\" name=\"plus\"/>" + "<OMA><OMS cd =\"arith1\" name=\"minus\"/>"
+						+ "<OMA><OMS cd=\"arith1\" name=\"power\" /><OMV name=\"x\"/><OMI>2</OMI></OMA>"
+						+ "<OMA><OMS cd=\"arith1\" name=\"times\" /><OMI>5</OMI><OMV name=\"a\"/></OMA>" + "</OMA>"
+						+ "<OMI>6</OMI>" + "</OMA></OMOBJ>");
 		args.add(arg1.getOMA());
 		args.add(OMCreator.createOMSTR("1"));
 		args.add(OMCreator.createOMSTR("2"));

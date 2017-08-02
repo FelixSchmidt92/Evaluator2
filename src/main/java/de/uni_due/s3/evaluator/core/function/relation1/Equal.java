@@ -4,8 +4,8 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator.core.function.Function;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 
 /**
@@ -24,7 +24,7 @@ public class Equal extends Function {
 	 * 
 	 */
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException {
+	protected Object execute(List<Object> arguments) throws FunctionException {
 		try {
 			boolean result = arguments.get(0).equals(arguments.get(1));
 			return (result) ? OMSymbol.LOGIC1_TRUE : OMSymbol.LOGIC1_FALSE;
@@ -44,8 +44,8 @@ public class Equal extends Function {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws FunctionInvalidNumberOfArgumentsException,
-			NoRepresentationAvailableException, FunctionInvalidArgumentTypeException {
+	public String getPartialSageSyntax(List<Object> arguments)
+			throws FunctionException, NoRepresentationAvailableException {
 		return getSageSyntax(arguments.get(0)) + " == " + getSageSyntax(arguments.get(1));
 	}
 }

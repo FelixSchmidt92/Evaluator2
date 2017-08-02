@@ -91,13 +91,13 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("getNumerator", OMSymbol.OPENMATHJACK_GETNUMERATOR);
 		functionSymbolMap.put("isFraction", OMSymbol.OPENMATHJACK_ISFRACTION);
 		
+		functionSymbolMap.put("factorOf", OMSymbol.POLY_COEFFICIENT);
 		functionSymbolMap.put("deg", OMSymbol.POLY_DEGREE_WRT);
 
 		functionSymbolMap.put("equalsemisem", OMSymbol.RELATION1_EQ);
 		functionSymbolMap.put("equalsExpr", OMSymbol.POLYNOMIALJACK_EQUALSEXPR);
 		functionSymbolMap.put("dependsOn", OMSymbol.POLYNOMIALJACK_DEPENDSON);
 		functionSymbolMap.put("derive", OMSymbol.POLYNOMIALJACK_DERIVE);
-		functionSymbolMap.put("factorOf", OMSymbol.POLYNOMIALJACK_FACTOROF);
 		functionSymbolMap.put("integrate", OMSymbol.POLYNOMIALJACK_INTEGRATE);
 		functionSymbolMap.put("numberOfVariables", OMSymbol.POLYNOMIALJACK_NUMBEROFVARIABLES);
 		

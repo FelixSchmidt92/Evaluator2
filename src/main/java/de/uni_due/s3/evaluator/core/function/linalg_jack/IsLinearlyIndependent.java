@@ -7,9 +7,9 @@ import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.omutils.OMCreator;
@@ -30,9 +30,8 @@ import de.uni_due.s3.sage.Sage;
 public class IsLinearlyIndependent extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException,
-			FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException,
-			FunctionInvalidArgumentException, CasEvaluationException, CasNotAvailableException, OpenMathException {
+	protected Object execute(List<Object> arguments) throws FunctionException, NoRepresentationAvailableException,
+			CasEvaluationException, CasNotAvailableException, OpenMathException {
 		// Check if first argument is set
 		if (!(OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.SET1_SET)
 				|| OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.LIST1_LIST))) {

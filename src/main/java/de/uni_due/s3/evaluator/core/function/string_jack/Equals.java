@@ -5,7 +5,7 @@ import java.util.List;
 import de.uni_due.s3.evaluator.core.OMUtils;
 import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator.core.function.Function;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
 
@@ -22,8 +22,7 @@ import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
 public class Equals extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments)
-			throws FunctionInvalidArgumentException, FunctionInvalidArgumentTypeException {
+	protected Object execute(List<Object> arguments) throws FunctionException {
 		try {
 			String string1 = OMUtils.convertOMToString(arguments.get(0));
 			String string2 = OMUtils.convertOMToString(arguments.get(1));

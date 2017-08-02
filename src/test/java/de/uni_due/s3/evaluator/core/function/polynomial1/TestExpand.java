@@ -1,16 +1,16 @@
-package de.uni_due.s3.evaluator.core.function.poly;
+package de.uni_due.s3.evaluator.core.function.polynomial1;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.bind.JAXBException;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 import de.uni_due.s3.evaluator.OMExecutor;
-import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.core.function.TestFunctionAbstract;
-import de.uni_due.s3.evaluator.core.function.poly.Degree_wrt;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
@@ -23,56 +23,41 @@ import de.uni_due.s3.evaluator.exceptions.parser.UndefinedFillInVariableExceptio
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
+import de.uni_due.s3.openmath.omutils.OMConverter;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
-public class TestDegree_wrt extends TestFunctionAbstract {
+public class TestExpand extends TestFunctionAbstract {
 
-	private Function func = new Degree_wrt();
+	private Function func = new Expand();
 
 	@Test
 	public void testDegreeWrtWithOneVariable() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
-		List<Object> pow = new ArrayList<Object>();
-		pow.add(OMCreator.createOMV("a"));
-		pow.add(OMCreator.createOMI(2));
-		List<Object> plus = new ArrayList<Object>();
-		plus.add(OMCreator.createOMI(1));
-		plus.add(OMCreator.createOMA(OMSymbol.ARITH1_POWER, pow));
+			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException,
+			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
 		List<Object> args = new ArrayList<Object>();
-		args.add(OMCreator.createOMA(OMSymbol.ARITH1_PLUS, plus));
-		args.add(OMCreator.createOMV("a"));
+		args.add(ExpressionParser.parse("(2+x) * 2", null, null));
 		Object result = func.evaluate(args);
-		assertEquals(OMCreator.createOMI(2), result);
+		assertEquals(ExpressionParser.parse("2*x + 4", null, null).getOMA(), result);
 	}
 
 	@Test
 	public void testDegreeWrtWithTwoVariable() throws FunctionInvalidArgumentException, CasEvaluationException,
 			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
+			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException, JAXBException {
 		List<Object> args = new ArrayList<Object>(1);
-		args.add(ExpressionParser.parse("1+a^2-b^5", null, null));
-		args.add(OMCreator.createOMV("b"));
+		args.add(ExpressionParser.parse("(2 + x) * (x - 2)", null, null));
 		Object result = func.evaluate(args);
-		assertEquals(OMCreator.createOMI(5), result);
-	}
-
-	@Test
-	public void testDegreeWrtWithEmptyVariable() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
-		List<Object> args = new ArrayList<Object>(1);
-		args.add(ExpressionParser.parse("1+a^6-b^5", null, null));
-		args.add(OMCreator.createOMV("a"));
-		Object result = func.evaluate(args);
-		assertEquals(OMCreator.createOMI(6), result);
+		assertEquals(
+				OMConverter.toElement(OMConverter.toObject(
+						"<OMOBJ><OMA><OMS name=\"plus\" cd=\"arith1\"/><OMA><OMS name=\"power\" cd=\"arith1\"/><OMV name=\"x\"/><OMI>2</OMI></OMA><OMI>-4</OMI></OMA></OMOBJ>")),
+				result);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testDegreeWrtWithLessThanMinParam() throws FunctionInvalidArgumentException, CasEvaluationException,
 			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<Object>();
-		args.add(OMCreator.createOMSTR("test"));
 		func.evaluate(args);
 		fail();
 	}
@@ -83,18 +68,32 @@ public class TestDegree_wrt extends TestFunctionAbstract {
 		ArrayList<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("test"));
 		args.add(OMCreator.createOMSTR("test"));
-		args.add(OMCreator.createOMSTR("test"));
 		func.evaluate(args);
 		fail();
 	}
 
 	@Test
-	public void testDegreeWrtIntegration() throws FunctionException, OpenMathException, CasEvaluationException,
+	public void testDegreeWrtIntegration1() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException {
-		OMOBJ omobj = ExpressionParser.parse("deg('1+x^3','x')", null, null);
+			UndefinedExerciseVariableException, ParserException, JAXBException {
+		OMOBJ omobj = ExpressionParser.parse("expand((2 + x) * (x - 2))", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
-		assertEquals(OMCreator.createOMI(3), result.getOMI());
+		assertEquals(
+				OMConverter.toElement(OMConverter.toObject(
+						"<OMOBJ><OMA><OMS name=\"plus\" cd=\"arith1\"/><OMA><OMS name=\"power\" cd=\"arith1\"/><OMV name=\"x\"/><OMI>2</OMI></OMA><OMI>-4</OMI></OMA></OMOBJ>")),
+				result.getOMA());
+	}
+	
+	@Test
+	public void testDegreeWrtIntegration2() throws FunctionException, OpenMathException, CasEvaluationException,
+			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
+			UndefinedExerciseVariableException, ParserException, JAXBException {
+		OMOBJ omobj = ExpressionParser.parse("expand('(x - 2)*(2 + x)')", null, null);
+		OMOBJ result = OMExecutor.execute(omobj);
+		assertEquals(
+				OMConverter.toElement(OMConverter.toObject(
+						"<OMOBJ><OMA><OMS name=\"plus\" cd=\"arith1\"/><OMA><OMS name=\"power\" cd=\"arith1\"/><OMV name=\"x\"/><OMI>2</OMI></OMA><OMI>-4</OMI></OMA></OMOBJ>")),
+				result.getOMA());
 	}
 
 	@Test
@@ -103,6 +102,6 @@ public class TestDegree_wrt extends TestFunctionAbstract {
 		ArrayList<Object> args = new ArrayList<Object>();
 		args.add(ExpressionParser.parse("1+a^2-b", null, null));
 		args.add(OMCreator.createOMV("a"));
-		assertEquals("var('a b');f = ((1 + a^2) - b); f.degree(a)", func.getPartialSageSyntax(args));
+		assertEquals("var('a b');f = ((1 + a^2) - b); f.expand()", func.getPartialSageSyntax(args));
 	}
 }

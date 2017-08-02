@@ -16,8 +16,6 @@ import de.uni_due.s3.evaluator.core.function.integer1.Remainder;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedException;
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableException;
@@ -61,9 +59,8 @@ public class TestRemainder extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testModulusSageSyntax() throws FunctionInvalidNumberOfArgumentsException,
-			NoRepresentationAvailableException, CasException, FunctionNotImplementedException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException, FunctionInvalidArgumentTypeException {
+	public void testModulusSageSyntax() throws FunctionException, NoRepresentationAvailableException, CasException,
+			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
 		List<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMF(1.0));
 		args.add(OMCreator.createOMI(10));

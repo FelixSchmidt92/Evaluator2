@@ -4,6 +4,7 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator.core.OMUtils;
 import de.uni_due.s3.evaluator.core.function.Function;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
@@ -26,7 +27,7 @@ public class CharAt extends Function {
 
 	@Override
 	protected Object execute(List<Object> arguments)
-			throws FunctionInvalidArgumentException, FunctionInvalidArgumentTypeException {
+			throws FunctionException {
 		try {
 			String string = OMUtils.convertOMToString(arguments.get(0));
 			int pos = OMUtils.convertOMIToInteger(arguments.get(1));

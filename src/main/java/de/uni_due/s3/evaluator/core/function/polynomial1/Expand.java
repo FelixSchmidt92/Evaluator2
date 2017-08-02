@@ -2,26 +2,52 @@ package de.uni_due.s3.evaluator.core.function.polynomial1;
 
 import java.util.List;
 
+import de.uni_due.s3.evaluator.core.PolyUtils;
 import de.uni_due.s3.evaluator.core.function.Function;
+import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
+import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
+import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
+import de.uni_due.s3.sage.Sage;
 
+/**
+ * Function to expand a term. Example: (2+x)*(2-x) -> 4 - x^2
+ * 
+ * @author spobel
+ *
+ */
 public class Expand extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) {
-		// TODO Auto-generated method stub
-		return null;
+	protected Object execute(List<Object> arguments) throws CasEvaluationException, CasNotAvailableException,
+			FunctionException, NoRepresentationAvailableException, OpenMathException {
+		Object result = Sage.evaluateInCAS(getPartialSageSyntax(arguments));
+		return result;
 	}
 
 	@Override
 	protected int minArgs() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 1;
 	}
 
 	@Override
 	protected int maxArgs() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 1;
 	}
 
+	@Override
+	public String getPartialSageSyntax(List<Object> arguments)
+			throws FunctionException, NoRepresentationAvailableException {
+		String term = getSageSyntax(arguments.get(0));
+
+		String sageVar = PolyUtils.getSageSyntaxVariableRepresentation(term);
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(sageVar);
+		sb.append("f = ");
+		sb.append(term);
+		sb.append("; f.expand()");
+		return sb.toString();
+	}
 }

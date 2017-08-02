@@ -6,18 +6,23 @@ import de.uni_due.s3.evaluator.core.PolyUtils;
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 import de.uni_due.s3.sage.Sage;
 
+/**
+ * Function to integrate a term. (3*x^2, x) -> x^3
+ * 
+ * @author spobel
+ *
+ */
 public class Integrate extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws CasEvaluationException,
-			FunctionInvalidNumberOfArgumentsException, FunctionInvalidArgumentTypeException, CasNotAvailableException,
-			NoRepresentationAvailableException, OpenMathException {
+	protected Object execute(List<Object> arguments) throws FunctionException, CasEvaluationException,
+			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
 		Object result = Sage.evaluateInCAS(getPartialSageSyntax(arguments));
 		return result;
 	}
@@ -33,8 +38,8 @@ public class Integrate extends Function {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws FunctionInvalidNumberOfArgumentsException,
-			NoRepresentationAvailableException, FunctionInvalidArgumentTypeException {
+	public String getPartialSageSyntax(List<Object> arguments)
+			throws FunctionException, NoRepresentationAvailableException {
 		String term = getSageSyntax(arguments.get(0));
 		String var = getSageSyntax(arguments.get(1));
 

@@ -4,54 +4,52 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator.core.function.Function;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 
 /**
- * Implement openmath logic not.
- * Example: !true => false
+ * Implement openmath logic not. Example: !true => false
  * 
  * @author frichtscheid
  *
  */
-public class BooleanNot extends Function{
-	
+public class BooleanNot extends Function {
+
 	/**
-	 * Takes one boolean argument and returns the opposite value.
-	 * Expects one argument of type OMSymbol.LOGIC_TRUE or LOGIC_FALSE
+	 * Takes one boolean argument and returns the opposite value. Expects one
+	 * argument of type OMSymbol.LOGIC_TRUE or LOGIC_FALSE
 	 * 
 	 * @return true or false as OMS
-	 * @throws FunctionInvalidArgumentTypeException 
+	 * @throws FunctionInvalidArgumentTypeException
 	 */
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException {
+	protected Object execute(List<Object> arguments) throws FunctionException {
 		OMS arg1;
 		String omsCd = OMSymbol.LOGIC1_FALSE.getCd();
 		String omsTrue = OMSymbol.LOGIC1_TRUE.getName();
 		String omsFalse = OMSymbol.LOGIC1_FALSE.getName();
-		
-		//type check if argument are of type oms
-		if(OMTypeChecker.isOMS(arguments.get(0))){
+
+		// type check if argument are of type oms
+		if (OMTypeChecker.isOMS(arguments.get(0))) {
 			arg1 = (OMS) arguments.get(0);
 
-			
-			//syntax check if argument are logic booleans
-			if(arg1.getCd().equals(omsCd)){
-				if( arg1.getName().equals(omsTrue) || arg1.getName().equals(omsFalse)){
-					
-					//semantic check if argument is true
-					if(arg1.equals(OMSymbol.LOGIC1_TRUE))
+			// syntax check if argument are logic booleans
+			if (arg1.getCd().equals(omsCd)) {
+				if (arg1.getName().equals(omsTrue) || arg1.getName().equals(omsFalse)) {
+
+					// semantic check if argument is true
+					if (arg1.equals(OMSymbol.LOGIC1_TRUE))
 						return OMSymbol.LOGIC1_FALSE;
 					else
 						return OMSymbol.LOGIC1_TRUE;
 				}
 			}
-		}		
-		
-		throw new FunctionInvalidArgumentTypeException(this,"boolean");
+		}
+
+		throw new FunctionInvalidArgumentTypeException(this, "boolean");
 	}
 
 	@Override
@@ -66,8 +64,8 @@ public class BooleanNot extends Function{
 
 	@Override
 	public String getPartialSageSyntax(List<Object> arguments)
-			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, FunctionInvalidArgumentTypeException {
+			throws FunctionException, NoRepresentationAvailableException {
 
-		return "not("+getSageSyntax(arguments.get(0))+")";
+		return "not(" + getSageSyntax(arguments.get(0)) + ")";
 	}
 }

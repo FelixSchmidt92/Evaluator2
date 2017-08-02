@@ -6,14 +6,10 @@ import java.util.regex.PatternSyntaxException;
 import de.uni_due.s3.evaluator.core.OMUtils;
 import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator.core.function.Function;
-import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
-import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
-import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
-import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * This Class checks iff the first argument matches a Regex-Pattern from the
@@ -25,8 +21,7 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 public class Matches extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	protected Object execute(List<Object> arguments) throws FunctionException {
 		try {
 			String in = OMUtils.convertOMToString(arguments.get(0));
 			String regex = OMUtils.convertOMToString(arguments.get(1));

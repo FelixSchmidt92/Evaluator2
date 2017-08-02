@@ -49,9 +49,11 @@ public class TestArcSin extends TestFunctionAbstract {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(1));
 		Object result = func.evaluate(args);
-		assertEquals(OMConverter.toElement(OMConverter.toObject("<OMOBJ><OMA><OMS name=\"times\" cd=\"arith1\" />"
-				+ "<OMA><OMS name=\"rational\" cd=\"nums1\" /><OMI>1</OMI><OMI>2</OMI>"
-				+ "</OMA><OMS name=\"pi\" cd=\"nums1\" /></OMA></OMOBJ>")), result);
+		assertEquals(
+				OMConverter.toElement(OMConverter.toObject("<OMOBJ><OMA><OMS name=\"times\" cd=\"arith1\" />"
+						+ "<OMA><OMS name=\"rational\" cd=\"nums1\" /><OMI>1</OMI><OMI>2</OMI>"
+						+ "</OMA><OMS name=\"pi\" cd=\"nums1\" /></OMA></OMOBJ>")),
+				result);
 	}
 
 	@Test
@@ -64,8 +66,7 @@ public class TestArcSin extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testArcSinSageSyntax() throws FunctionInvalidNumberOfArgumentsException,
-			NoRepresentationAvailableException, CasException, FunctionInvalidArgumentTypeException {
+	public void testArcSinSageSyntax() throws NoRepresentationAvailableException, CasException, FunctionException {
 		List<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMF(1.0));
 		assertEquals("arcsin(1)", func.getPartialSageSyntax(args));

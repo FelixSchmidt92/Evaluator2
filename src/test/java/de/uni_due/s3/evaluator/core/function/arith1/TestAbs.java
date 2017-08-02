@@ -15,8 +15,6 @@ import de.uni_due.s3.evaluator.core.function.arith1.Abs;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedException;
 import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedFillInVariableException;
@@ -68,18 +66,16 @@ public class TestAbs extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testAbsSageSyntax1() throws FunctionInvalidNumberOfArgumentsException,
-			NoRepresentationAvailableException, CasException, FunctionNotImplementedException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException, FunctionInvalidArgumentTypeException {
+	public void testAbsSageSyntax1() throws FunctionException, NoRepresentationAvailableException, CasException,
+			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
 		List<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMI(5));
 		assertEquals("abs(5)", func.getPartialSageSyntax(args));
 	}
 
 	@Test
-	public void testAbsSageSyntax2() throws FunctionInvalidNumberOfArgumentsException,
-			NoRepresentationAvailableException, CasException, FunctionNotImplementedException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException, FunctionInvalidArgumentTypeException {
+	public void testAbsSageSyntax2() throws FunctionException, NoRepresentationAvailableException, CasException,
+			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
 		List<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMF(1.0));
 		assertEquals("abs(1)", func.getPartialSageSyntax(args));

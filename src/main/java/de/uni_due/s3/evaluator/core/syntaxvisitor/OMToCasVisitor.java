@@ -6,6 +6,8 @@ import java.util.List;
 import de.uni_due.s3.evaluator.core.dictionaries.OMSFunctionDictionary;
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.exceptions.cas.CasException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
@@ -51,14 +53,14 @@ public abstract class OMToCasVisitor {
 	 *         children!)
 	 * @throws NoRepresentationAvailableException
 	 * @throws FunctionInvalidNumberOfArgumentsException
-	 * @throws FunctionInvalidArgumentTypeException 
+	 * @throws FunctionInvalidArgumentTypeException
+	 * @throws FunctionInvalidArgumentException
 	 * @throws CasException
 	 */
-	public String visit(Object omElement)
-			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, FunctionInvalidArgumentTypeException {
+	public String visit(Object omElement) throws FunctionException, NoRepresentationAvailableException {
 		String result = "";
-		
-		if(omElement == null)
+
+		if (omElement == null)
 			throw new NoRepresentationAvailableException("No Representation available for a Null-Object");
 
 		switch (omElement.getClass().getSimpleName()) {
@@ -105,11 +107,11 @@ public abstract class OMToCasVisitor {
 	 * @return the String representation of this OMOBJ excluding OMOBJ!!
 	 * @throws NoRepresentationAvailableException
 	 * @throws FunctionInvalidNumberOfArgumentsException
-	 * @throws FunctionInvalidArgumentTypeException 
+	 * @throws FunctionInvalidArgumentTypeException
+	 * @throws FunctionInvalidArgumentException
 	 * @throws CasException
 	 */
-	private String visit(OMOBJ omobj)
-			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, FunctionInvalidArgumentTypeException {
+	private String visit(OMOBJ omobj) throws FunctionException, NoRepresentationAvailableException {
 		if (omobj != null) {
 			if (omobj.getOMF() != null) {
 				return visit(omobj.getOMF());
@@ -160,7 +162,7 @@ public abstract class OMToCasVisitor {
 	 * @param oms
 	 *            the element which is visited now
 	 * @return the String-Representation
-	 * @throws NoRepresentationAvailableException 
+	 * @throws NoRepresentationAvailableException
 	 */
 	protected abstract String visit(OMS oms) throws NoRepresentationAvailableException;
 
@@ -192,12 +194,12 @@ public abstract class OMToCasVisitor {
 	 * @return the String Representation of this oma and its childs
 	 * @throws FunctionInvalidNumberOfArgumentsException
 	 * @throws NoRepresentationAvailableException
-	 * @throws FunctionInvalidArgumentTypeException 
+	 * @throws FunctionInvalidArgumentTypeException
+	 * @throws FunctionInvalidArgumentException
 	 * @throws CasException
 	 */
-	private String visit(OMA oma) throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, FunctionInvalidArgumentTypeException {
+	private String visit(OMA oma) throws FunctionException, NoRepresentationAvailableException {
 
-		
 		List<Object> omel = new ArrayList<>();
 
 		for (int i = 1; i < oma.getOmel().size(); i++) {
@@ -228,12 +230,13 @@ public abstract class OMToCasVisitor {
 	 *            returns false
 	 * @return a String which is in CAS-Syntax
 	 * @throws FunctionInvalidNumberOfArgumentsException
-	 * @throws FunctionInvalidArgumentTypeException 
+	 * @throws FunctionInvalidArgumentTypeException
+	 * @throws FunctionInvalidArgumentException
 	 * @throws @throws
 	 *             OMOBJChildNotSupportedException
 	 * @throws OMObjectNotSupportedException
 	 */
 	protected abstract String getCASRepresentationForFunction(Function function, List<Object> omel)
-			throws NoRepresentationAvailableException, FunctionInvalidNumberOfArgumentsException, FunctionInvalidArgumentTypeException;
+			throws FunctionException, NoRepresentationAvailableException;
 
 }

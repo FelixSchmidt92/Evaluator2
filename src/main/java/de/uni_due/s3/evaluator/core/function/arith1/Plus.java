@@ -5,7 +5,7 @@ import java.util.List;
 import de.uni_due.s3.evaluator.core.OMUtils;
 import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator.core.function.Function;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
@@ -31,7 +31,7 @@ public class Plus extends Function {
 	 *             FunctionInvalidArgumentTypeException @throws
 	 */
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException, OpenMathException {
+	protected Object execute(List<Object> arguments) throws FunctionException, OpenMathException {
 		// evaluate this method in sage
 		try {
 			Double leftValue = OMUtils.convertOMToDouble(arguments.get(0));
@@ -62,8 +62,8 @@ public class Plus extends Function {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws FunctionInvalidNumberOfArgumentsException,
-			NoRepresentationAvailableException, FunctionInvalidArgumentTypeException {
+	public String getPartialSageSyntax(List<Object> arguments)
+			throws FunctionException, NoRepresentationAvailableException {
 		return "(" + getSageSyntax(arguments.get(0)) + " + " + getSageSyntax(arguments.get(1)) + ")";
 	}
 

@@ -6,6 +6,7 @@ import java.util.Set;
 import de.uni_due.s3.evaluator.core.PolyUtils;
 import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator.core.function.Function;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OMV;
@@ -25,7 +26,7 @@ public class DependsOn extends Function {
 	 * second one should contain the dependent variable (OMSTR)
 	 */
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException {
+	protected Object execute(List<Object> arguments) throws FunctionException {
 
 		if (!OMTypeChecker.isOMA(arguments.get(0)) || !OMTypeChecker.isOMV(arguments.get(1))) {
 			throw new FunctionInvalidArgumentTypeException(this, "(0)Term, (1)Char");

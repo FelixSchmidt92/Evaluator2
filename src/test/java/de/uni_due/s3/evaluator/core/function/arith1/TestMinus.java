@@ -17,8 +17,6 @@ import de.uni_due.s3.evaluator.core.function.arith1.Minus;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedException;
 import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedFillInVariableException;
@@ -80,9 +78,8 @@ public class TestMinus extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testMinusSageSyntax() throws FunctionInvalidNumberOfArgumentsException,
-			NoRepresentationAvailableException, CasException, FunctionNotImplementedException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException, FunctionInvalidArgumentTypeException {
+	public void testMinusSageSyntax() throws FunctionException, NoRepresentationAvailableException, CasException,
+			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(1.0));
 		args.add(OMCreator.createOMI(1));

@@ -36,16 +36,17 @@ public class TestIntegrate extends TestFunctionAbstract {
 			throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
 			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException, JAXBException {
 		List<Object> args = new ArrayList<Object>();
-		OMOBJ term = OMConverter.toObject("<OMOBJ><OMA>" + "<OMS cd=\"arith1\" name=\"plus\"/>" + "<OMA>"
-				+ "<OMS cd =\"arith1\" name=\"minus\"/>" + "<OMA>" + "<OMS cd=\"arith1\" name=\"power\" />"
-				+ "<OMV name=\"x\"/>" + "<OMI>2</OMI>" + "</OMA>" + "<OMA>" + "<OMS cd=\"arith1\" name=\"times\" />"
-				+ "<OMI>5</OMI>" + "<OMV name=\"x\"/>" + "</OMA>" + "</OMA>" + "<OMI>6</OMI>" + "</OMA></OMOBJ>");
+
+		OMOBJ term = OMConverter.toObject(
+				"<OMOBJ><OMA>" + "<OMS cd=\"arith1\" name=\"plus\"/>" + "<OMA>" + "<OMS cd=\"arith1\" name=\"times\"/>"
+						+ "<OMI>2</OMI>" + "<OMV name=\"x\"/>" + "</OMA>" + "<OMI>-5</OMI>" + "</OMA></OMOBJ>");
 		args.add(term.getOMA());
 		args.add(OMCreator.createOMV("x"));
 
-		OMOBJ expected = OMConverter.toObject(
-				"<OMOBJ><OMA>" + "<OMS cd=\"arith1\" name=\"plus\"/>" + "<OMA>" + "<OMS cd=\"arith1\" name=\"times\"/>"
-						+ "<OMI>2</OMI>" + "<OMV name=\"x\"/>" + "</OMA>" + "<OMI>-5</OMI>" + "</OMA></OMOBJ>");
+		OMOBJ expected = OMConverter.toObject("<OMOBJ><OMA>" + "<OMS cd =\"arith1\" name=\"plus\"/>" + "<OMA>"
+				+ "<OMS cd=\"arith1\" name=\"power\" />" + "<OMV name=\"x\"/>" + "<OMI>2</OMI>" + "</OMA>" + "<OMA>"
+				+ "<OMS cd=\"arith1\" name=\"times\" />" + "<OMI>-5</OMI>" + "<OMV name=\"x\"/>" + "</OMA>"
+				+ "</OMA></OMOBJ>");
 		Object result = func.evaluate(args);
 		assertEquals(expected.getOMA(), result);
 	}
@@ -55,21 +56,16 @@ public class TestIntegrate extends TestFunctionAbstract {
 			throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
 			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException, JAXBException {
 		List<Object> args = new ArrayList<Object>();
-		OMOBJ term = OMConverter.toObject("<OMOBJ><OMA>" + "<OMS cd=\"arith1\" name=\"plus\"/>" + "<OMA>"
-				+ "<OMS cd =\"arith1\" name=\"minus\"/>" + "<OMA>" + "<OMS cd=\"arith1\" name=\"power\" />"
-				+ "<OMV name=\"x\"/>" + "<OMI>2</OMI>" + "</OMA>" + "<OMA>" + "<OMS cd=\"arith1\" name=\"times\" />"
-				+ "<OMI>5</OMI>" + "<OMV name=\"x\"/>" + "</OMA>" + "</OMA>" + "<OMV name=\"v\"/>" + "</OMA></OMOBJ>");
+		OMOBJ term = OMConverter.toObject(
+				"<OMOBJ><OMA>" + "<OMS cd=\"arith1\" name=\"plus\"/>" + "<OMA>" + "<OMS cd=\"arith1\" name=\"times\"/>"
+						+ "<OMI>2</OMI>" + "<OMV name=\"x\"/>" + "</OMA>" + "<OMI>v</OMI>" + "</OMA></OMOBJ>");
 		args.add(term.getOMA());
 		args.add(OMCreator.createOMV("x"));
 
-		OMOBJ expected = OMConverter
-				.toObject("<OMOBJ><OMA><OMS name=\"plus\" cd=\"arith1\"/><OMA><OMS name=\"times\" cd=\"arith1\"/>"
-						+ "<OMA><OMS name=\"rational\" cd=\"nums1\"/><OMI>1</OMI><OMI>3</OMI></OMA>"
-						+ "<OMA><OMS name=\"power\" cd=\"arith1\"/><OMV name=\"x\"/><OMI>3</OMI></OMA>"
-						+ "</OMA><OMA><OMS name=\"plus\" cd=\"arith1\"/><OMA><OMS name=\"times\" cd=\"arith1\"/>"
-						+ "<OMV name=\"x\"/><OMV name=\"v\"/></OMA><OMA><OMS name=\"times\" cd=\"arith1\"/><OMA>"
-						+ "<OMS name=\"rational\" cd=\"nums1\"/><OMI>-5</OMI><OMI>2</OMI></OMA>"
-						+ "<OMA><OMS name=\"power\" cd=\"arith1\"/><OMV name=\"x\"/><OMI>2</OMI></OMA></OMA></OMA></OMA></OMOBJ>");
+		OMOBJ expected = OMConverter.toObject("<OMOBJ><OMA>" + "<OMS cd =\"arith1\" name=\"plus\"/>" + "<OMA>"
+				+ "<OMS cd=\"arith1\" name=\"times\" />" + "<OMV name=\"x\"/>" + "<OMV name=\"v\"/>" + "</OMA>"
+				+ "<OMA>" + "<OMS cd=\"arith1\" name=\"power\" />" + "<OMV name=\"x\"/>" + "<OMI>2</OMI>" + "</OMA>"
+				+ "</OMA></OMOBJ>");
 		Object result = func.evaluate(args);
 		assertEquals(expected.getOMA(), result);
 	}
@@ -79,16 +75,22 @@ public class TestIntegrate extends TestFunctionAbstract {
 			throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
 			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException, JAXBException {
 		List<Object> args = new ArrayList<Object>();
-		OMOBJ arg1 = OMConverter
-				.toObject("<OMOBJ><OMA><OMS cd=\"arith1\" name=\"plus\"/>" + "<OMA><OMS cd =\"arith1\" name=\"minus\"/>"
-						+ "<OMA><OMS cd=\"arith1\" name=\"power\" /><OMV name=\"x\"/><OMI>2</OMI></OMA>"
-						+ "<OMA><OMS cd=\"arith1\" name=\"times\" /><OMI>5</OMI><OMV name=\"b\"/></OMA>" + "</OMA>"
-						+ "<OMI>6</OMI>" + "</OMA></OMOBJ>");
+		OMOBJ arg1 = OMConverter.toObject("<OMOBJ>" + "<OMA><OMS cd =\"arith1\" name=\"minus\"/>"
+				+ "<OMA><OMS cd=\"arith1\" name=\"power\" /><OMV name=\"x\"/><OMI>2</OMI></OMA>"
+				+ "<OMA><OMS cd=\"arith1\" name=\"times\" /><OMI>2</OMI><OMV name=\"b\"/></OMA>" + "</OMA>"
+				+ "</OMOBJ>");
 		args.add(arg1.getOMA());
 		args.add(OMCreator.createOMV("b"));
 
+		OMOBJ expected = OMConverter
+				.toObject("<OMOBJ><OMA><OMS name=\"plus\" cd=\"arith1\"/>" + "<OMA><OMS name=\"times\" cd=\"arith1\"/>"
+						+ "<OMA><OMS name=\"power\" cd=\"arith1\"/><OMV name=\"x\"/><OMI>2</OMI></OMA>"
+						+ "<OMV name=\"b\"/></OMA>" + "<OMA><OMS name=\"times\" cd=\"arith1\"/><OMI>-1</OMI>"
+						+ "<OMA><OMS name=\"power\" cd=\"arith1\"/><OMV name=\"b\"/><OMI>2</OMI></OMA>"
+						+ "</OMA></OMA></OMOBJ>");
+
 		Object result = func.evaluate(args);
-		assertEquals(OMCreator.createOMI(-5), result);
+		assertEquals(expected.getOMA(), result);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
@@ -124,15 +126,14 @@ public class TestIntegrate extends TestFunctionAbstract {
 	public void testIntegrateIntegration() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
-		OMOBJ omobj = ExpressionParser.parse("integrate('1+x^3','x')", null, null);
+		OMOBJ omobj = ExpressionParser.parse("integrate('2*x','x')", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
-		OMOBJ expected = ExpressionParser.parse("3*x^2", null, null);
+		OMOBJ expected = ExpressionParser.parse("x^2", null, null);
 		assertEquals(expected, result);
 	}
 
 	@Test
-	public void testIntegrateSageSyntax() throws FunctionInvalidNumberOfArgumentsException,
-			FunctionInvalidArgumentTypeException, NoRepresentationAvailableException, JAXBException {
+	public void testIntegrateSageSyntax() throws NoRepresentationAvailableException, JAXBException, FunctionException {
 		List<Object> args = new ArrayList<Object>();
 		OMOBJ arg1 = OMConverter
 				.toObject("<OMOBJ><OMA><OMS cd=\"arith1\" name=\"plus\"/>" + "<OMA><OMS cd =\"arith1\" name=\"minus\"/>"
@@ -141,6 +142,6 @@ public class TestIntegrate extends TestFunctionAbstract {
 						+ "<OMI>6</OMI>" + "</OMA></OMOBJ>");
 		args.add(arg1.getOMA());
 		args.add(OMCreator.createOMV("a"));
-		assertEquals("var('a x');derivative(((x^2 - 5 * a) + 6), a)", func.getPartialSageSyntax(args));
+		assertEquals("var('a x');integral(((x^2 - 5 * a) + 6), a)", func.getPartialSageSyntax(args));
 	}
 }

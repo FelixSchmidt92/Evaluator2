@@ -7,6 +7,7 @@ import java.util.Random;
 
 import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator.core.function.Function;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.openmath.jaxb.OMA;
@@ -21,7 +22,7 @@ import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 public class ChooseFromComplement extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException, FunctionInvalidArgumentException {
+	protected Object execute(List<Object> arguments) throws FunctionException {
 		if (!OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.SET1_SET)) {
 			throw new FunctionInvalidArgumentTypeException(this, "(0)Set, (1)Set");
 		}
@@ -34,15 +35,15 @@ public class ChooseFromComplement extends Function {
 		List<Object> list1 = ((OMA) arguments.get(0)).getOmel();
 		list1.remove(0); // OMS entfernen
 		set.addAll(list1);
-		
+
 		List<Object> list2 = ((OMA) arguments.get(1)).getOmel();
 		list2.remove(0); // OMS entfernen
 		set.removeAll(list2);
-		
+
 		if (set.size() == 0) {
 			throw new FunctionInvalidArgumentException(this, "Set has to have at least one element.");
 		}
-		
+
 		List<Object> resultList = new ArrayList<>();
 		resultList.addAll(set);
 

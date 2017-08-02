@@ -13,6 +13,7 @@ import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.core.function.TestFunctionAbstract;
 import de.uni_due.s3.evaluator.core.function.polynomial_jack.Derive;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
+import de.uni_due.s3.evaluator.exceptions.cas.CasException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
@@ -128,8 +129,8 @@ public class TestDerive extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testDeriveSageSyntax() throws FunctionInvalidNumberOfArgumentsException,
-			FunctionInvalidArgumentTypeException, NoRepresentationAvailableException, JAXBException {
+	public void testDeriveSageSyntax() throws FunctionException, NoRepresentationAvailableException, CasException,
+	UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException, JAXBException {
 		List<Object> args = new ArrayList<Object>();
 		OMOBJ arg1 = OMConverter
 				.toObject("<OMOBJ><OMA><OMS cd=\"arith1\" name=\"plus\"/>" + "<OMA><OMS cd =\"arith1\" name=\"minus\"/>"

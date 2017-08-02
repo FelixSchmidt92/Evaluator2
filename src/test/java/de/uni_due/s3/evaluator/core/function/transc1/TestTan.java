@@ -59,8 +59,7 @@ public class TestTan extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testTanSageSyntax()
-			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException, FunctionInvalidArgumentTypeException {
+	public void testTanSageSyntax() throws NoRepresentationAvailableException, CasException, FunctionException {
 		List<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMF(1.0));
 		assertEquals("tan(1)", func.getPartialSageSyntax(args));

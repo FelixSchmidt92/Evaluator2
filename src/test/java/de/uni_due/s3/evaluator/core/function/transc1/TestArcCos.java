@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator.OMExecutor;
+import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.core.function.TestFunctionAbstract;
 import de.uni_due.s3.evaluator.core.function.transc1.ArcCos;
@@ -46,7 +47,14 @@ public class TestArcCos extends TestFunctionAbstract {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(0.0));
 		Object result = func.evaluate(args);
-		assertEquals(OMCreator.createOMF(1.57079632679490), result);
+		List<Object> args2 = new ArrayList<Object>();
+		args2.add(OMCreator.createOMI(1));
+		args2.add(OMCreator.createOMI(2));
+		List<Object> args3 = new ArrayList<Object>();
+		args3.add(OMCreator.createOMA(OMSymbol.NUMS1_RATIONAL, args2));
+		args3.add(OMSymbol.NUMS1_PI);
+
+		assertEquals(OMCreator.createOMA(OMSymbol.ARITH1_TIMES, args3), result);
 	}
 
 	@Test
@@ -59,8 +67,7 @@ public class TestArcCos extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testArcCosSageSyntax()
-			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException, FunctionInvalidArgumentTypeException {
+	public void testArcCosSageSyntax() throws NoRepresentationAvailableException, CasException, FunctionException {
 		List<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMF(1.0));
 		assertEquals("arccos(1)", func.getPartialSageSyntax(args));

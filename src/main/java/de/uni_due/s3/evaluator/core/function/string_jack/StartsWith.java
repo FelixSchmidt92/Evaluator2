@@ -5,6 +5,7 @@ import java.util.List;
 import de.uni_due.s3.evaluator.core.OMUtils;
 import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator.core.function.Function;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
@@ -20,22 +21,22 @@ import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
 public class StartsWith extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments)
-			throws FunctionInvalidArgumentException, FunctionInvalidArgumentTypeException {
+	protected Object execute(List<Object> arguments) throws FunctionException {
 		try {
 			String string1 = OMUtils.convertOMToString(arguments.get(0));
 			String string2 = OMUtils.convertOMToString(arguments.get(1));
 
 			int pos = 0;
-			
-			if (arguments.size()==3) {
+
+			if (arguments.size() == 3) {
 				pos = OMUtils.convertOMIToInteger(arguments.get(2));
 			}
-			
+
 			if (pos > string1.length()) {
-				throw new FunctionInvalidArgumentException(this, "Third argument (Integer) has to be in range of first argument (String).");
+				throw new FunctionInvalidArgumentException(this,
+						"Third argument (Integer) has to be in range of first argument (String).");
 			}
-			
+
 			if (string1.startsWith(string2, pos)) {
 				return OMSymbol.LOGIC1_TRUE;
 			} else {

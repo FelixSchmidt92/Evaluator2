@@ -5,7 +5,7 @@ import java.util.List;
 import de.uni_due.s3.evaluator.core.OMUtils;
 import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator.core.function.Function;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
@@ -30,8 +30,7 @@ public class Divide extends Function {
 	 * @throws FunctionInvalidArgumentException
 	 */
 	@Override
-	protected Object execute(List<Object> arguments)
-			throws FunctionInvalidArgumentTypeException, OpenMathException, FunctionInvalidArgumentException {
+	protected Object execute(List<Object> arguments) throws FunctionException, OpenMathException {
 		try {
 			Double leftValue = OMUtils.convertOMToDouble(arguments.get(0));
 			Double rightValue = OMUtils.convertOMToDouble(arguments.get(1));
@@ -65,8 +64,8 @@ public class Divide extends Function {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws FunctionInvalidNumberOfArgumentsException,
-			NoRepresentationAvailableException, FunctionInvalidArgumentTypeException {
+	public String getPartialSageSyntax(List<Object> arguments)
+			throws FunctionException, NoRepresentationAvailableException {
 		return getSageSyntax(arguments.get(0)) + " / " + getSageSyntax(arguments.get(1));
 	}
 

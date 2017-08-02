@@ -13,6 +13,7 @@ import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.core.function.TestFunctionAbstract;
 import de.uni_due.s3.evaluator.core.function.logic_jack.IfThenElse;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
+import de.uni_due.s3.evaluator.exceptions.cas.CasException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
@@ -149,8 +150,9 @@ public class TestIfThenElse extends TestFunctionAbstract {
 	}
 
 	@Test(expected = NoRepresentationAvailableException.class)
-	public void testIfThenElseSageSyntax() throws CasEvaluationException, FunctionInvalidNumberOfArgumentsException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException, FunctionInvalidArgumentTypeException {
+	public void testIfThenElseSageSyntax() throws FunctionException, NoRepresentationAvailableException, CasException,
+			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException,
+			CasNotAvailableException, OpenMathException {
 		args = new ArrayList<Object>(3);
 		args.add(OMSymbol.LOGIC1_TRUE);
 		args.add(OMCreator.createOMI(3));

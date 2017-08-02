@@ -10,7 +10,6 @@ import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.function.InvalidResultTypeException;
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
@@ -58,7 +57,7 @@ public class EvalTerm2 extends Function {
 	
 	@Override
 	public String getPartialSageSyntax(List<Object> arguments)
-			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, FunctionInvalidArgumentTypeException {
+			throws FunctionException, NoRepresentationAvailableException {
 		//check if args have the correct type
 		if(!OMTypeChecker.isOMA(arguments.get(0)) || !(OMTypeChecker.isOMSTR(arguments.get(1))||OMTypeChecker.isOMNumber(arguments.get(1)) )
 				|| !(OMTypeChecker.isOMSTR(arguments.get(2)) || OMTypeChecker.isOMNumber(arguments.get(2))))

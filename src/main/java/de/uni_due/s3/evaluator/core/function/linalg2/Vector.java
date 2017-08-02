@@ -6,9 +6,7 @@ import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
-import de.uni_due.s3.evaluator.exceptions.function.InvalidResultTypeException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
@@ -16,9 +14,8 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 public class Vector extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments)
-			throws CasEvaluationException, FunctionInvalidNumberOfArgumentsException, CasNotAvailableException,
-			NoRepresentationAvailableException, OpenMathException, InvalidResultTypeException {
+	protected Object execute(List<Object> arguments) throws CasEvaluationException, FunctionException,
+			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
 		return OMCreator.createOMA(OMSymbol.LINALG2_VECTOR, arguments);
 	}
 
@@ -34,7 +31,7 @@ public class Vector extends Function {
 
 	@Override
 	public String getPartialSageSyntax(List<Object> arguments)
-			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, FunctionInvalidArgumentTypeException {
+			throws FunctionException, NoRepresentationAvailableException {
 		String sageExpression = "(";
 
 		for (int i = 0; i < arguments.size(); i++) {
