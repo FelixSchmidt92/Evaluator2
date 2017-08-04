@@ -80,14 +80,15 @@ public class OMUtils {
 	}
 
 	/**
-	 * Diese Funktion nimmt einen OMI entgegen und erzeugt hieraus einen Integer
+	 * Diese Funktion nimmt einen OMI oder ein OMF entgegen und erzeugt hieraus einen Integer
+	 * Im Falle eines OMF wird deren die Nachkommastellen einfach ausgelassen.
 	 * 
 	 * @param obj
-	 *            OMI
+	 *            OMI or OMF
 	 * @return int
 	 * @throws InputMismatchException
 	 */
-	public static int convertOMIToInteger(Object obj) throws InputMismatchException {
+	public static int convertOMToInteger(Object obj) throws InputMismatchException {
 		if (obj instanceof OMOBJ) {
 			try {
 				obj = OMConverter.toElement((OMOBJ) obj);
@@ -95,9 +96,11 @@ public class OMUtils {
 				throw new InputMismatchException();
 			}
 		}
-		//FIXME sollen wir hier auch OMF und OMSTR ggf zu Integer wenn möglich ?! True False ?!
+		
 		if (obj instanceof OMI) {
 			return Integer.parseInt(((OMI) obj).getValue());
+		} else if (obj instanceof OMF){
+			return (int) (((OMF) obj).getDec().doubleValue());
 		} else {
 			throw new InputMismatchException();
 		}

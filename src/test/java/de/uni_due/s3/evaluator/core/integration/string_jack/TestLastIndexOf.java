@@ -59,7 +59,7 @@ public class TestLastIndexOf extends TestIntegration {
 
 	@Test
 	public void testLastIndexOfWithInput1() throws EvaluatorException, OpenMathException {	
-		assertEquals(3, Evaluator.getNumberResult("lastIndexOf('[pos=1]','S',7)", exerciseVariableMap, fillInVariableMap),0.0);
+		assertEquals(3, Evaluator.getNumberResult("lastIndexOf('[pos=7]','S',7)", exerciseVariableMap, fillInVariableMap),0.0);
 	}
 	
 	@Test

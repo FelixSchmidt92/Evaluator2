@@ -34,7 +34,7 @@ public class IndexOf extends Function {
 			String muster = OMUtils.convertOMToString(arguments.get(1));
 			int pos = 0;
 			if (arguments.size() == 3) {
-				pos = OMUtils.convertOMIToInteger(arguments.get(2));
+				pos = OMUtils.convertOMToInteger(arguments.get(2));
 			}
 			if (string.length() <= pos || pos < 0) {
 				throw new FunctionInvalidArgumentException(this,

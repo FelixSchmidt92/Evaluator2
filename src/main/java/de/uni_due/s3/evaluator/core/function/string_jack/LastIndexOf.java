@@ -31,7 +31,7 @@ public class LastIndexOf extends Function {
 			String muster = OMUtils.convertOMToString(arguments.get(1));
 			int pos = string.length()-1;
 			if (arguments.size() == 3) {
-				pos = OMUtils.convertOMIToInteger(arguments.get(2));
+				pos = OMUtils.convertOMToInteger(arguments.get(2));
 			}
 			if (pos < 0) {
 				throw new FunctionInvalidArgumentException(this,

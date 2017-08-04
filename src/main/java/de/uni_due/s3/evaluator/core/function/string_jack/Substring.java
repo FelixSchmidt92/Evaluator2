@@ -25,14 +25,21 @@ import de.uni_due.s3.openmath.omutils.OMCreator;
  */
 public class Substring extends Function {
 
+	/**
+	 * Expects two or three arguments. The first one has to be a 
+	 * string and the second the index at which to start. The third argument
+	 * is optional and represents the index at which to stop. If the last 
+	 * argument is not specified it will use the length of the first argument as index.
+	 * 
+	 */
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionException {
 		try {
 			String string = OMUtils.convertOMToString(arguments.get(0));
-			int begin = OMUtils.convertOMIToInteger(arguments.get(1));
+			int begin = OMUtils.convertOMToInteger(arguments.get(1));
 			int end = string.length();
 			if (arguments.size() == 3) {
-				end = OMUtils.convertOMIToInteger(arguments.get(2));
+				end =  OMUtils.convertOMToInteger(arguments.get(2));
 			}
 			return OMCreator.createOMSTR(string.substring(begin, end));
 		} catch (InputMismatchException e) {

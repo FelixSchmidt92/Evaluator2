@@ -29,7 +29,7 @@ public class StartsWith extends Function {
 			int pos = 0;
 
 			if (arguments.size() == 3) {
-				pos = OMUtils.convertOMIToInteger(arguments.get(2));
+				pos = OMUtils.convertOMToInteger(arguments.get(2));
 			}
 
 			if (pos > string1.length()) {

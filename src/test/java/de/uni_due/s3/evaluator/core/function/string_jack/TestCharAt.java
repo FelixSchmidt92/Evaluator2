@@ -39,14 +39,14 @@ public class TestCharAt extends TestFunctionAbstract {
 		assertEquals(OMCreator.createOMSTR("e"), result);
 	}
 
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
+	@Test
 	public void testCharAtFloat() throws FunctionException, CasEvaluationException, CasNotAvailableException,
 			NoRepresentationAvailableException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("Test"));
-		args.add(OMCreator.createOMF(0.0));
-		func.evaluate(args);
-		fail();
+		args.add(OMCreator.createOMF(1.0));
+		Object result = func.evaluate(args);
+		assertEquals(OMCreator.createOMSTR("e"),result);
 	}
 
 	@Test

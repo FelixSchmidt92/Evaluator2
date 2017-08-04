@@ -13,6 +13,7 @@ import de.uni_due.s3.evaluator.core.integration.TestIntegration;
 import de.uni_due.s3.evaluator.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator.exceptions.function.*;
 import de.uni_due.s3.evaluator.exceptions.parser.*;
+import de.uni_due.s3.openmath.jaxb.OMSTR;
 import de.uni_due.s3.openmath.omutils.OMConverter;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
@@ -119,16 +120,17 @@ public class TestSubstring extends TestIntegration {
 		fail();
 	}
 
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
+	@Test
 	public void testSubstringWithWrongInputSecondArgumentAsPointNumber() throws EvaluatorException, OpenMathException {
-		Evaluator.evaluate("substring('hello', 1.3, 2)", exerciseVariableMap, fillInVariableMap);
-		fail();
+		OMSTR result = Evaluator.evaluate("substring('hello', 1.3, 2)", exerciseVariableMap, fillInVariableMap).getOMSTR();
+		assertEquals("<OMSTR>e</OMSTR>",result.toString());
+
 	}
 
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
+	@Test
 	public void testSubstringWithWrongInputThirdArgumentAsPointNumber() throws EvaluatorException, OpenMathException {
-		Evaluator.evaluate("substring('hello', 3, 1.5)", exerciseVariableMap, fillInVariableMap);
-		fail();
+		OMSTR result = Evaluator.evaluate("substring('hello', 1, 2.9)", exerciseVariableMap, fillInVariableMap).getOMSTR();
+		assertEquals("<OMSTR>e</OMSTR>",result.toString());
 	}
 
 	@Test(expected = ParserException.class)

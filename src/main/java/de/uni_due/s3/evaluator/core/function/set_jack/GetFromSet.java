@@ -26,7 +26,7 @@ public class GetFromSet extends Function {
 			throw new FunctionInvalidArgumentTypeException(this, "(0)Integer, (1)Set");
 		}
 		try {
-			int pos = OMUtils.convertOMIToInteger(arguments.get(0));
+			int pos = OMUtils.convertOMToInteger(arguments.get(0));
 			List<Object> set = ((OMA) arguments.get(1)).getOmel();
 			set.remove(0); // OMS entfernen
 

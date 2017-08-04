@@ -29,6 +29,10 @@ import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
  */
 public class EqualsIgnoreCase extends Function {
 
+	/**
+	 * Expects two arguments of type String. If the arguments have a different type they
+	 * will be converted to strings if possible. If not an error will be thrown
+	 */
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionException {
 		try {

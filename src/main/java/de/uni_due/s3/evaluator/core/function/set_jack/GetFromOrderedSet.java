@@ -32,7 +32,7 @@ public class GetFromOrderedSet extends Function {
 
 		int pos = 0;
 		try {
-			pos = OMUtils.convertOMIToInteger(arguments.get(1));
+			pos = OMUtils.convertOMToInteger(arguments.get(1));
 		} catch (InputMismatchException e) {
 			throw new FunctionInvalidArgumentTypeException(this, "(0)Set, (1)Integer");
 		}

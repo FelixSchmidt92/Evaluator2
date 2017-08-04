@@ -26,8 +26,8 @@ public class GCD extends Function {
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionException {
 		try {
-			BigInteger leftValue = BigInteger.valueOf(OMUtils.convertOMIToInteger(arguments.get(0)));
-			BigInteger rightValue = BigInteger.valueOf(OMUtils.convertOMIToInteger(arguments.get(1)));
+			BigInteger leftValue = BigInteger.valueOf(OMUtils.convertOMToInteger(arguments.get(0)));
+			BigInteger rightValue = BigInteger.valueOf(OMUtils.convertOMToInteger(arguments.get(1)));
 			return OMUtils.convertDoubleToOMIOMF(leftValue.gcd(rightValue).doubleValue());
 		} catch (InputMismatchException e) {
 			throw new FunctionInvalidArgumentTypeException(this, "integer");

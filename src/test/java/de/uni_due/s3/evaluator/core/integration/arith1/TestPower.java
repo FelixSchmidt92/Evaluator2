@@ -6,6 +6,7 @@ import static org.junit.Assert.fail;
 import javax.xml.bind.JAXBException;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator.Evaluator;
@@ -14,6 +15,7 @@ import de.uni_due.s3.evaluator.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator.exceptions.function.*;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedFillInVariableException;
+import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.omutils.OMConverter;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
@@ -112,10 +114,11 @@ public class TestPower extends TestIntegration {
 		assertEquals(1, Evaluator.getNumberResult("pow(1.0, 1.3)", exerciseVariableMap, fillInVariableMap), 0.0);
 	}
 
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testPowWithWrongInputCharacter() throws EvaluatorException, OpenMathException {
-		Evaluator.getNumberResult("pow(a, a)", exerciseVariableMap, fillInVariableMap);
-		fail();
+
+	@Test
+	public void testPowWithInputCharacters() throws EvaluatorException, OpenMathException {
+		OMA oma = Evaluator.evaluate("pow(a, a)", exerciseVariableMap, fillInVariableMap).getOMA();
+		assertEquals("<OMA><OMS name=\"power\" cd=\"arith1\"/><OMV name=\"a\"/><OMV name=\"a\"/></OMA>", oma.toString());
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)

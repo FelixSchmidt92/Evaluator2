@@ -35,6 +35,24 @@ public class Evaluator {
 		return (result.getOMS() != null && result.getOMS().equals(OMSymbol.LOGIC1_TRUE));
 	}
 
+	/**
+	 * Evaluates an expression and returns the result as a number if possible.
+	 * 
+	 * @param expression
+	 * @param exerciseVariableMap
+	 * @param fillInVariableMap
+	 * @return a double value
+	 * @throws CasEvaluationException
+	 * @throws FunctionException	
+	 * 					If the expression doesn't return a number
+	 * @throws CasNotAvailableException 	
+	 * 					If the CAS is not available
+	 * @throws NoRepresentationAvailableException
+	 * @throws OpenMathException
+	 * @throws UndefinedFillInVariableException
+	 * @throws UndefinedExerciseVariableException
+	 * @throws ParserException
+	 */
 	public static double getNumberResult(String expression, HashMap<String, OMOBJ> exerciseVariableMap,
 			HashMap<Integer, OMOBJ> fillInVariableMap) throws CasEvaluationException, FunctionException,
 			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException,
@@ -44,7 +62,7 @@ public class Evaluator {
 			return OMUtils.convertOMToDouble(result);
 		} catch (InputMismatchException e) {
 			throw new FunctionException(
-					"Type of result of expression:" + expression + "has to be integer, double or float.");
+					"Result of expression:" + expression + "can't be converted to a number");
 		}
 	}
 

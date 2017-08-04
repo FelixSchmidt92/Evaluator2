@@ -14,6 +14,7 @@ import de.uni_due.s3.evaluator.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedFillInVariableException;
+import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.omutils.OMConverter;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
@@ -124,15 +125,22 @@ public class TestPlus extends TestIntegration {
 				0.0);
 	}
 
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testAdditionWithWrongInputCharacter() throws EvaluatorException, OpenMathException {
-		Evaluator.getNumberResult("6 + a", exerciseVariableMap, fillInVariableMap);
-		fail();
+	@Test
+	public void testAdditionWithInputCharacter() throws EvaluatorException, OpenMathException {
+		OMA result = Evaluator.evaluate("6 + a", exerciseVariableMap, fillInVariableMap).getOMA();
+		assertEquals("<OMA><OMS name=\"plus\" cd=\"arith1\"/><OMI>6</OMI><OMV name=\"a\"/></OMA>", result.toString());
 	}
 
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
+	@Test
+	public void testAdditionWithInputCharAsString() throws EvaluatorException, OpenMathException {
+		OMA result = Evaluator.evaluate("6 + 'a'", exerciseVariableMap, fillInVariableMap).getOMA();
+		assertEquals("<OMA><OMS name=\"plus\" cd=\"arith1\"/><OMI>6</OMI><OMV name=\"a\"/></OMA>", result.toString());
+	}
+	
+	@Test(expected=FunctionInvalidArgumentTypeException.class)
 	public void testAdditionWithWrongInputString() throws EvaluatorException, OpenMathException {
-		Evaluator.getNumberResult("6 + 'a'", exerciseVariableMap, fillInVariableMap);
+		OMA result = Evaluator.evaluate("6 + 'abcd'", exerciseVariableMap, fillInVariableMap).getOMA();
+		assertEquals("<OMA><OMS name=\"plus\" cd=\"arith1\"/><OMI>6</OMI><OMV name=\"a\"/></OMA>", result.toString());
 		fail();
 	}
 

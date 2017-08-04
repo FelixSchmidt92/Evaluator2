@@ -15,6 +15,7 @@ import de.uni_due.s3.evaluator.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator.exceptions.function.*;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedFillInVariableException;
+import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.omutils.OMConverter;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
@@ -137,15 +138,15 @@ public class TestTimes extends TestIntegration {
 				0.0);
 	}
 
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testMultiplicationWithWrongInputCharacter() throws EvaluatorException, OpenMathException {
-		Evaluator.getNumberResult("6 * a", exerciseVariableMap, fillInVariableMap);
-		fail();
+	@Test
+	public void testMultiplicationWithInputCharacter() throws EvaluatorException, OpenMathException {
+		OMA result = Evaluator.evaluate("6 * a", exerciseVariableMap, fillInVariableMap).getOMA();
+		assertEquals("<OMA><OMS name=\"times\" cd=\"arith1\"/><OMI>6</OMI><OMV name=\"a\"/></OMA>", result.toString());
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void testMultiplicationWithWrongInputString() throws EvaluatorException, OpenMathException {
-		Evaluator.getNumberResult("6 * 'a'", exerciseVariableMap, fillInVariableMap);
+		Evaluator.getNumberResult("6 * 'aabcd'", exerciseVariableMap, fillInVariableMap);
 		fail();
 	}
 
