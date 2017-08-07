@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import de.uni_due.s3.evaluator.core.OMUtils;
 import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
+import de.uni_due.s3.evaluator.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
@@ -104,6 +105,21 @@ public class Evaluator {
 	public static OMOBJ evaluate(OMOBJ omobj) throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException {
 		return OMExecutor.execute(omobj);
+	}
+
+	/**
+	 * TODO FIXME dlux, frichtscheid, spobel  sollen wir dese Funktion auch übernehmen vom Evaluator?? es schlagen hierdurch ca 20 TestFälle fehl!
+	 *  			toString() Visitor??
+	 * @param string
+	 * @param exerVar
+	 * @param fillIn
+	 * @return
+	 * @throws EvaluatorException 
+	 */
+	public static Object getResultAsEvaluatorString(String string, HashMap<String, OMOBJ> exerciseVariableMap,
+			HashMap<Integer, OMOBJ> fillInVariableMap) throws EvaluatorException {
+		// TODO Auto-generated method stub
+		throw new EvaluatorException("Function in Evaluator not Implemented");
 	}
 
 }

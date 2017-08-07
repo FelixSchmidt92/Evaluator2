@@ -69,8 +69,6 @@ public class IsEmpty extends Function {
 				}
 			}
 		}
-		
-		
 		if (isEmpty){
 			return OMSymbol.LOGIC1_TRUE;
 		}else{

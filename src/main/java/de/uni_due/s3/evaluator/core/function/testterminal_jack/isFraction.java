@@ -7,6 +7,8 @@ import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.openmath.jaxb.OMA;
+import de.uni_due.s3.openmath.jaxb.OMF;
+import de.uni_due.s3.openmath.jaxb.OMI;
 
 /**
  * This Function just checks if the given argument is an OMA containing the OMS
@@ -22,6 +24,10 @@ public class isFraction extends Function {
 
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionException {
+		if ((arguments.get(0) instanceof OMI) || (arguments.get(0) instanceof OMF)) {
+			return OMSymbol.LOGIC1_FALSE;
+		}
+		
 		if (!(arguments.get(0) instanceof OMA)) {
 			throw new FunctionInvalidArgumentTypeException(this, "(0)Application(Fraction)");
 		}
