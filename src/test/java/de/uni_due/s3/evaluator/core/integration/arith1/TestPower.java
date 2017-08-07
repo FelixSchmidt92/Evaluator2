@@ -6,7 +6,6 @@ import static org.junit.Assert.fail;
 import javax.xml.bind.JAXBException;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator.Evaluator;
