@@ -186,8 +186,8 @@ public class TestNotEqual extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testNotEqualsSageSyntax()
-			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException, FunctionInvalidArgumentTypeException {
+	public void testNotEqualsSageSyntax() throws FunctionException, NoRepresentationAvailableException, CasException,
+			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(10));
 		args.add(OMCreator.createOMI(1));

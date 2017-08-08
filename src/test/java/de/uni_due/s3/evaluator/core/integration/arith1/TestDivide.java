@@ -15,6 +15,7 @@ import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentExcept
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedFillInVariableException;
+import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.omutils.OMConverter;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
@@ -116,15 +117,15 @@ public class TestDivide extends TestIntegration {
 				0.0);
 	}
 
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testDivisionWithWrongInputCharacter() throws EvaluatorException, OpenMathException {
-		Evaluator.getNumberResult("6 / a", exerciseVariableMap, fillInVariableMap);
-		fail();
+	@Test
+	public void testDivisionWithInputCharacter() throws EvaluatorException, OpenMathException {
+		OMA result = Evaluator.evaluate("6 / a", exerciseVariableMap, fillInVariableMap).getOMA();
+		assertEquals("<OMA><OMS name=\"divide\" cd=\"arith1\"/><OMI>6</OMI><OMV name=\"a\"/></OMA>", result.toString());
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void testDivisionWithWrongInputString() throws EvaluatorException, OpenMathException {
-		Evaluator.getNumberResult("6 / 'a'", exerciseVariableMap, fillInVariableMap);
+		Evaluator.getNumberResult("6 / 'aabcd'", exerciseVariableMap, fillInVariableMap);
 		fail();
 	}
 

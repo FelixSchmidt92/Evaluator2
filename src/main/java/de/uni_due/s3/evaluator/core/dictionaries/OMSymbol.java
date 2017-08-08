@@ -34,9 +34,8 @@ public class OMSymbol {
 	public static final OMS EDITOR1_INPUT_BOX = OMCreator.createOMS("editor1", "input_box");
 	
 	public static final OMS EVALJACK_EVAL = OMCreator.createOMS("evalJACK", "eval");
-	public static final OMS EVALJACK_EVALCPLX = OMCreator.createOMS("evalJACK", "evalcplx");
 	public static final OMS EVALJACK_EVALEQ = OMCreator.createOMS("evalJACK", "evalEq");
-	public static final OMS EVALJACK_EVALPOLYNOMIAL = OMCreator.createOMS("evalJACK", "evalPolynomial");
+	public static final OMS EVALJACK_EVALPOLYNOMIAL = OMCreator.createOMS("evalJACK", "evalpolynomial");
 	public static final OMS EVALJACK_EVALPOLYNOMIALCPLX = OMCreator.createOMS("evalJACK", "evalPolynomialCplx");
 	public static final OMS EVALJACK_EVALTERM2 = OMCreator.createOMS("evalJACK", "evalterm2");
 
@@ -77,18 +76,16 @@ public class OMSymbol {
 	public static final OMS OPENMATHJACK_GETNUMERATOR = OMCreator.createOMS("openmathJACK", "getNumerator");
 	public static final OMS OPENMATHJACK_ISFRACTION = OMCreator.createOMS("openmathJACK", "isFraction");
 
+	public static final OMS POLY_COEFFICIENT = OMCreator.createOMS("poly", "coefficient");
 	public static final OMS POLY_DEGREE_WRT = OMCreator.createOMS("poly", "degree_wrt");
 
 	public static final OMS POLYNOMIALJACK_DEPENDSON = OMCreator.createOMS("polynomialJACK", "dependsOn");
 	public static final OMS POLYNOMIALJACK_DERIVE = OMCreator.createOMS("polynomialJACK", "derive");
-	public static final OMS POLYNOMIALJACK_FACTOROF = OMCreator.createOMS("polynomialJACK", "factorOf");
 	public static final OMS POLYNOMIALJACK_INTEGRATE = OMCreator.createOMS("polynomialJACK", "integrate");
 	public static final OMS POLYNOMIALJACK_NUMBEROFVARIABLES = OMCreator.createOMS("polynomialJACK",
 			"numberOfVariables");
-	public static final OMS POLYNOMIALJACK_EQUALSEMISEM = OMCreator.createOMS("polynomialJACK", "equalssemisem");
 	public static final OMS POLYNOMIALJACK_EQUALSEXPR = OMCreator.createOMS("polynomialJACK", "equalsExpr");
 
-	public static final OMS POLYNOMIAL1_DEGREE = OMCreator.createOMS("polynomial1", "degree");
 	public static final OMS POLYNOMIAL1_EXPAND = OMCreator.createOMS("polynomial1", "expand");
 	
 	public static final OMS RANDOMJACK_RANDOM = OMCreator.createOMS("randomJACK", "random");

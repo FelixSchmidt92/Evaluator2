@@ -16,10 +16,10 @@ import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.core.function.TestFunctionAbstract;
 import de.uni_due.s3.evaluator.core.function.polynomial_jack.EqualsExpr;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
+import de.uni_due.s3.evaluator.exceptions.cas.CasException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableException;
@@ -31,65 +31,53 @@ import de.uni_due.s3.openmath.omutils.OMConverter;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
-public class TestEqualsExpr extends TestFunctionAbstract{
+public class TestEqualsExpr extends TestFunctionAbstract {
 
 	private Function func = new EqualsExpr();
 	private List<Object> args;
-	
+
 	@Test
-	public void testEqualsExprWithCorrectPoly() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException, JAXBException{
-		args = new ArrayList<Object>(1);
-		OMOBJ arg1 = OMConverter.toObject("<OMOBJ><OMA><OMS cd=\"arith1\" name=\"plus\"/>"
-				+ "<OMA><OMS cd =\"arith1\" name=\"minus\"/>"
-				+ 	"<OMA><OMS cd=\"arith1\" name=\"power\" /><OMV name=\"x\"/><OMI>2</OMI></OMA>"
-				+   "<OMA><OMS cd=\"arith1\" name=\"times\" /><OMI>5</OMI><OMV name=\"x\"/></OMA>"
-				+ "</OMA>"
-				+ "<OMI>6</OMI>"
-				+ "</OMA></OMOBJ>");
-		OMOBJ arg2 = OMConverter.toObject("<OMOBJ><OMA><OMS cd=\"arith1\" name=\"times\"/>"
-				+ "<OMA><OMS cd =\"arith1\" name=\"minus\" />"
-				+ 	"<OMV name=\"x\"/>"
-				+   "<OMI>2</OMI>"
-				+ "</OMA>"
-				+ "<OMA><OMS cd =\"arith1\" name=\"minus\" />"
-				+ 	"<OMV name=\"x\"/>"
-				+   "<OMI>3</OMI>"
-				+ "</OMA>"
-				+ "</OMA></OMOBJ>");
+	public void testEqualsExprWithCorrectPoly()
+			throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
+			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException, JAXBException {
+		args = new ArrayList<Object>();
+		OMOBJ arg1 = OMConverter
+				.toObject("<OMOBJ><OMA><OMS cd=\"arith1\" name=\"plus\"/>" + "<OMA><OMS cd =\"arith1\" name=\"minus\"/>"
+						+ "<OMA><OMS cd=\"arith1\" name=\"power\" /><OMV name=\"x\"/><OMI>2</OMI></OMA>"
+						+ "<OMA><OMS cd=\"arith1\" name=\"times\" /><OMI>5</OMI><OMV name=\"x\"/></OMA>" + "</OMA>"
+						+ "<OMI>6</OMI>" + "</OMA></OMOBJ>");
+		OMOBJ arg2 = OMConverter.toObject(
+				"<OMOBJ><OMA><OMS cd=\"arith1\" name=\"times\"/>" + "<OMA><OMS cd =\"arith1\" name=\"minus\" />"
+						+ "<OMV name=\"x\"/>" + "<OMI>2</OMI>" + "</OMA>" + "<OMA><OMS cd =\"arith1\" name=\"minus\" />"
+						+ "<OMV name=\"x\"/>" + "<OMI>3</OMI>" + "</OMA>" + "</OMA></OMOBJ>");
 		args.add(arg1.getOMA());
 		args.add(arg2.getOMA());
-		
+
 		Object result = func.evaluate(args);
-		assertEquals(OMSymbol.LOGIC1_TRUE,result);
+		assertEquals(OMSymbol.LOGIC1_TRUE, result);
 	}
-	
+
 	@Test
-	public void testEqualsExprWithDiffrentPoly() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException, JAXBException{
-		args = new ArrayList<Object>(1);
-		OMOBJ arg1 = OMConverter.toObject("<OMOBJ><OMA><OMS cd=\"arith1\" name=\"plus\"/>"
-				+ "<OMA><OMS cd =\"arith1\" name=\"minus\"/>"
-				+ 	"<OMA><OMS cd=\"arith1\" name=\"power\" /><OMV name=\"a\"/><OMI>2</OMI></OMA>"
-				+   "<OMA><OMS cd=\"arith1\" name=\"times\" /><OMI>5</OMI><OMV name=\"a\"/></OMA>"
-				+ "</OMA>"
-				+ "<OMI>6</OMI>"
-				+ "</OMA></OMOBJ>");
-		OMOBJ arg2 = OMConverter.toObject("<OMOBJ><OMA><OMS cd=\"arith1\" name=\"times\"/>"
-				+ "<OMA><OMS cd =\"arith1\" name=\"minus\" />"
-				+ 	"<OMV name=\"x\"/>"
-				+   "<OMI>2</OMI>"
-				+ "</OMA>"
-				+ "<OMA><OMS cd =\"arith1\" name=\"minus\" />"
-				+ 	"<OMV name=\"x\"/>"
-				+   "<OMI>3</OMI>"
-				+ "</OMA>"
-				+ "</OMA></OMOBJ>");
+	public void testEqualsExprWithDiffrentPoly()
+			throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
+			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException, JAXBException {
+		args = new ArrayList<Object>();
+		OMOBJ arg1 = OMConverter
+				.toObject("<OMOBJ><OMA><OMS cd=\"arith1\" name=\"plus\"/>" + "<OMA><OMS cd =\"arith1\" name=\"minus\"/>"
+						+ "<OMA><OMS cd=\"arith1\" name=\"power\" /><OMV name=\"a\"/><OMI>2</OMI></OMA>"
+						+ "<OMA><OMS cd=\"arith1\" name=\"times\" /><OMI>5</OMI><OMV name=\"a\"/></OMA>" + "</OMA>"
+						+ "<OMI>6</OMI>" + "</OMA></OMOBJ>");
+		OMOBJ arg2 = OMConverter.toObject(
+				"<OMOBJ><OMA><OMS cd=\"arith1\" name=\"times\"/>" + "<OMA><OMS cd =\"arith1\" name=\"minus\" />"
+						+ "<OMV name=\"x\"/>" + "<OMI>2</OMI>" + "</OMA>" + "<OMA><OMS cd =\"arith1\" name=\"minus\" />"
+						+ "<OMV name=\"x\"/>" + "<OMI>3</OMI>" + "</OMA>" + "</OMA></OMOBJ>");
 		args.add(arg1.getOMA());
 		args.add(arg2.getOMA());
-		
+
 		Object result = func.evaluate(args);
-		assertEquals(OMSymbol.LOGIC1_FALSE,result);
+		assertEquals(OMSymbol.LOGIC1_FALSE, result);
 	}
-	
+
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testEqualsExpreWithLessThanMinParam() throws FunctionInvalidArgumentException, CasEvaluationException,
 			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
@@ -109,16 +97,6 @@ public class TestEqualsExpr extends TestFunctionAbstract{
 		fail();
 	}
 
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testEqualsExprWithWrongArguments() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
-		ArrayList<Object> args = new ArrayList<Object>(2);
-		args.add(OMCreator.createOMSTR(null));
-		args.add(OMCreator.createOMI(1));
-		func.evaluate(args);
-		fail();
-	}
-
 	@Test
 	public void testEqualsExprIntegration() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
@@ -128,30 +106,22 @@ public class TestEqualsExpr extends TestFunctionAbstract{
 		assertEquals(OMSymbol.LOGIC1_TRUE, result.getOMS());
 	}
 
-	
 	@Test
-	public void testEqualsExprSageSyntax() throws FunctionInvalidNumberOfArgumentsException, FunctionInvalidArgumentTypeException, NoRepresentationAvailableException, JAXBException{
-		ArrayList<Object> args = new ArrayList<Object>(1);
-		OMOBJ arg1 = OMConverter.toObject("<OMOBJ><OMA><OMS cd=\"arith1\" name=\"plus\"/>"
-				+ "<OMA><OMS cd =\"arith1\" name=\"minus\"/>"
-				+ 	"<OMA><OMS cd=\"arith1\" name=\"power\" /><OMV name=\"x\"/><OMI>2</OMI></OMA>"
-				+   "<OMA><OMS cd=\"arith1\" name=\"times\" /><OMI>5</OMI><OMV name=\"x\"/></OMA>"
-				+ "</OMA>"
-				+ "<OMI>6</OMI>"
-				+ "</OMA></OMOBJ>");
-		OMOBJ arg2 = OMConverter.toObject("<OMOBJ><OMA><OMS cd=\"arith1\" name=\"times\"/>"
-				+ "<OMA><OMS cd =\"arith1\" name=\"minus\" />"
-				+ 	"<OMV name=\"x\"/>"
-				+   "<OMI>2</OMI>"
-				+ "</OMA>"
-				+ "<OMA><OMS cd =\"arith1\" name=\"minus\" />"
-				+ 	"<OMV name=\"x\"/>"
-				+   "<OMI>3</OMI>"
-				+ "</OMA>"
-				+ "</OMA></OMOBJ>");
+	public void testEqualsExprSageSyntax() throws FunctionException, NoRepresentationAvailableException, CasException,
+			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException, JAXBException {
+		ArrayList<Object> args = new ArrayList<Object>();
+		OMOBJ arg1 = OMConverter
+				.toObject("<OMOBJ><OMA><OMS cd=\"arith1\" name=\"plus\"/>" + "<OMA><OMS cd =\"arith1\" name=\"minus\"/>"
+						+ "<OMA><OMS cd=\"arith1\" name=\"power\" /><OMV name=\"x\"/><OMI>2</OMI></OMA>"
+						+ "<OMA><OMS cd=\"arith1\" name=\"times\" /><OMI>5</OMI><OMV name=\"x\"/></OMA>" + "</OMA>"
+						+ "<OMI>6</OMI>" + "</OMA></OMOBJ>");
+		OMOBJ arg2 = OMConverter.toObject(
+				"<OMOBJ><OMA><OMS cd=\"arith1\" name=\"times\"/>" + "<OMA><OMS cd =\"arith1\" name=\"minus\" />"
+						+ "<OMV name=\"x\"/>" + "<OMI>2</OMI>" + "</OMA>" + "<OMA><OMS cd =\"arith1\" name=\"minus\" />"
+						+ "<OMV name=\"x\"/>" + "<OMI>3</OMI>" + "</OMA>" + "</OMA></OMOBJ>");
 		args.add(arg1.getOMA());
 		args.add(arg2.getOMA());
-		
-		assertEquals("R.<x>=RR[]; f=((x^2 - 5 * x) + 6); g=(x - 2) * (x - 3); f==g", func.getPartialSageSyntax(args));
+
+		assertEquals("var('x');bool(((x^2 - 5 * x) + 6)==(x - 2) * (x - 3))", func.getPartialSageSyntax(args));
 	}
 }

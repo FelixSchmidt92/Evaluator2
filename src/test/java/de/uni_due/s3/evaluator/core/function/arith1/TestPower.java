@@ -12,12 +12,11 @@ import de.uni_due.s3.evaluator.OMExecutor;
 import de.uni_due.s3.evaluator.core.function.TestFunctionAbstract;
 import de.uni_due.s3.evaluator.core.function.arith1.Power;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
+import de.uni_due.s3.evaluator.exceptions.cas.CasException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedException;
 import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedFillInVariableException;
@@ -80,9 +79,8 @@ public class TestPower extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testPowerSageSyntax() throws FunctionInvalidNumberOfArgumentsException,
-			NoRepresentationAvailableException, FunctionNotImplementedException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException, FunctionInvalidArgumentTypeException {
+	public void testPowerSageSyntax() throws FunctionException, NoRepresentationAvailableException, CasException,
+	UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(1.45));
 		args.add(OMCreator.createOMF(3));

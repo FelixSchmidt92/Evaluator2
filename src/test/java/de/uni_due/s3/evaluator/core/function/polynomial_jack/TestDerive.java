@@ -13,6 +13,7 @@ import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.core.function.TestFunctionAbstract;
 import de.uni_due.s3.evaluator.core.function.polynomial_jack.Derive;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
+import de.uni_due.s3.evaluator.exceptions.cas.CasException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
@@ -28,53 +29,70 @@ import de.uni_due.s3.openmath.omutils.OMConverter;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
-public class TestDerive extends TestFunctionAbstract{
+public class TestDerive extends TestFunctionAbstract {
 
 	private Function func = new Derive();
-	private List<Object> args;
-	
+
 	@Test
-	public void testDeriveWithOneVariable() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException, JAXBException{
-		args = new ArrayList<Object>(1);
-		OMOBJ arg1 = OMConverter.toObject("<OMOBJ><OMA><OMS cd=\"arith1\" name=\"plus\"/>"
-				+ "<OMA><OMS cd =\"arith1\" name=\"minus\"/>"
-				+ 	"<OMA><OMS cd=\"arith1\" name=\"power\" /><OMV name=\"x\"/><OMI>2</OMI></OMA>"
-				+   "<OMA><OMS cd=\"arith1\" name=\"times\" /><OMI>5</OMI><OMV name=\"x\"/></OMA>"
-				+ "</OMA>"
-				+ "<OMI>6</OMI>"
-				+ "</OMA></OMOBJ>");
-		args.add(arg1.getOMA());
-		args.add(OMCreator.createOMSTR("x"));
-		
-		OMOBJ expected = OMConverter.toObject("<OMOBJ><OMA><OMS cd=\"arith1\" name=\"minus\"/>"
-				+   "<OMA><OMS cd=\"arith1\" name=\"times\" /><OMI>2</OMI><OMV name=\"x\"/></OMA>"
-				+	"<OMI>-5</OMI>"
-				+ "</OMA></OMOBJ>");
+	public void testDeriveWithOneVariable()
+			throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
+			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException, JAXBException {
+		List<Object> args = new ArrayList<Object>();
+		OMOBJ term = OMConverter.toObject("<OMOBJ><OMA>" + "<OMS cd=\"arith1\" name=\"plus\"/>" + "<OMA>"
+				+ "<OMS cd =\"arith1\" name=\"minus\"/>" + "<OMA>" + "<OMS cd=\"arith1\" name=\"power\" />"
+				+ "<OMV name=\"x\"/>" + "<OMI>2</OMI>" + "</OMA>" + "<OMA>" + "<OMS cd=\"arith1\" name=\"times\" />"
+				+ "<OMI>5</OMI>" + "<OMV name=\"x\"/>" + "</OMA>" + "</OMA>" + "<OMI>6</OMI>" + "</OMA></OMOBJ>");
+		args.add(term.getOMA());
+		args.add(OMCreator.createOMV("x"));
+
+		OMOBJ expected = OMConverter.toObject(
+				"<OMOBJ><OMA>" + "<OMS cd=\"arith1\" name=\"plus\"/>" + "<OMA>" + "<OMS cd=\"arith1\" name=\"times\"/>"
+						+ "<OMI>2</OMI>" + "<OMV name=\"x\"/>" + "</OMA>" + "<OMI>-5</OMI>" + "</OMA></OMOBJ>");
 		Object result = func.evaluate(args);
-		assertEquals(expected.getOMA(),result);
+		assertEquals(expected.getOMA(), result);
 	}
-	
+
 	@Test
-	public void testDDeriveWithTwoVariable() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException, JAXBException{
-		args = new ArrayList<Object>(1);
-		OMOBJ arg1 = OMConverter.toObject("<OMOBJ><OMA><OMS cd=\"arith1\" name=\"plus\"/>"
-				+ "<OMA><OMS cd =\"arith1\" name=\"minus\"/>"
-				+ 	"<OMA><OMS cd=\"arith1\" name=\"power\" /><OMV name=\"x\"/><OMI>2</OMI></OMA>"
-				+   "<OMA><OMS cd=\"arith1\" name=\"times\" /><OMI>5</OMI><OMV name=\"b\"/></OMA>"
-				+ "</OMA>"
-				+ "<OMI>6</OMI>"
-				+ "</OMA></OMOBJ>");
-		args.add(arg1.getOMA());
-		args.add(OMCreator.createOMSTR("b"));
-	
+	public void testDeriveWithTwoVariable()
+			throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
+			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException, JAXBException {
+		List<Object> args = new ArrayList<Object>();
+		OMOBJ term = OMConverter.toObject("<OMOBJ><OMA>" + "<OMS cd=\"arith1\" name=\"plus\"/>" + "<OMA>"
+				+ "<OMS cd =\"arith1\" name=\"minus\"/>" + "<OMA>" + "<OMS cd=\"arith1\" name=\"power\" />"
+				+ "<OMV name=\"x\"/>" + "<OMI>2</OMI>" + "</OMA>" + "<OMA>" + "<OMS cd=\"arith1\" name=\"times\" />"
+				+ "<OMI>5</OMI>" + "<OMV name=\"x\"/>" + "</OMA>" + "</OMA>" + "<OMV name=\"v\"/>" + "</OMA></OMOBJ>");
+		args.add(term.getOMA());
+		args.add(OMCreator.createOMV("x"));
+
+		OMOBJ expected = OMConverter.toObject(
+				"<OMOBJ><OMA>" + "<OMS cd=\"arith1\" name=\"plus\"/>" + "<OMA>" + "<OMS cd=\"arith1\" name=\"times\"/>"
+						+ "<OMI>2</OMI>" + "<OMV name=\"x\"/>" + "</OMA>" + "<OMI>-5</OMI>" + "</OMA></OMOBJ>");
 		Object result = func.evaluate(args);
-		assertEquals(OMCreator.createOMI(-5),result);
+		assertEquals(expected.getOMA(), result);
 	}
-	
+
+	@Test
+	public void testDeriveWithTwoVariable2()
+			throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
+			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException, JAXBException {
+		List<Object> args = new ArrayList<Object>();
+		OMOBJ arg1 = OMConverter
+				.toObject("<OMOBJ><OMA><OMS cd=\"arith1\" name=\"plus\"/>" 
+		+ "<OMA><OMS cd =\"arith1\" name=\"minus\"/>"
+						+ "<OMA><OMS cd=\"arith1\" name=\"power\" /><OMV name=\"x\"/><OMI>2</OMI></OMA>"
+						+ "<OMA><OMS cd=\"arith1\" name=\"times\" /><OMI>5</OMI><OMV name=\"b\"/></OMA>" + "</OMA>"
+						+ "<OMI>6</OMI>" + "</OMA></OMOBJ>");
+		args.add(arg1.getOMA());
+		args.add(OMCreator.createOMV("b"));
+
+		Object result = func.evaluate(args);
+		assertEquals(OMCreator.createOMI(-5), result);
+	}
+
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testDeriveWithLessThanMinParam() throws FunctionInvalidArgumentException, CasEvaluationException,
 			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
-		ArrayList<Object> args = new ArrayList<Object>();
+		List<Object> args = new ArrayList<Object>();
 		func.evaluate(args);
 		fail();
 	}
@@ -82,7 +100,7 @@ public class TestDerive extends TestFunctionAbstract{
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testDeriveWithMoreThanMaxParam() throws FunctionInvalidArgumentException, CasEvaluationException,
 			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
-		ArrayList<Object> args = new ArrayList<Object>();
+		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("test"));
 		args.add(OMCreator.createOMSTR("test"));
 		args.add(OMCreator.createOMSTR("test"));
@@ -93,7 +111,7 @@ public class TestDerive extends TestFunctionAbstract{
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void testDeriveWithWrongArguments() throws FunctionInvalidArgumentException, CasEvaluationException,
 			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
-		ArrayList<Object> args = new ArrayList<Object>(2);
+		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR(null));
 		args.add(OMCreator.createOMSTR("test"));
 		func.evaluate(args);
@@ -106,22 +124,21 @@ public class TestDerive extends TestFunctionAbstract{
 			UndefinedExerciseVariableException, ParserException {
 		OMOBJ omobj = ExpressionParser.parse("derive('1+x^3','x')", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
-		assertEquals(OMCreator.createOMSTR("3*x^2"), result.getOMSTR());
+		OMOBJ expected = ExpressionParser.parse("3*x^2", null, null);
+		assertEquals(expected, result);
 	}
 
-	
 	@Test
-	public void testDeriveSageSyntax() throws FunctionInvalidNumberOfArgumentsException, FunctionInvalidArgumentTypeException, NoRepresentationAvailableException, JAXBException{
-		ArrayList<Object> args = new ArrayList<Object>(1);
-		OMOBJ arg1 = OMConverter.toObject("<OMOBJ><OMA><OMS cd=\"arith1\" name=\"plus\"/>"
-				+ "<OMA><OMS cd =\"arith1\" name=\"minus\"/>"
-				+ 	"<OMA><OMS cd=\"arith1\" name=\"power\" /><OMV name=\"x\"/><OMI>2</OMI></OMA>"
-				+   "<OMA><OMS cd=\"arith1\" name=\"times\" /><OMI>5</OMI><OMV name=\"a\"/></OMA>"
-				+ "</OMA>"
-				+ "<OMI>6</OMI>"
-				+ "</OMA></OMOBJ>");
+	public void testDeriveSageSyntax() throws FunctionException, NoRepresentationAvailableException, CasException,
+	UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException, JAXBException {
+		List<Object> args = new ArrayList<Object>();
+		OMOBJ arg1 = OMConverter
+				.toObject("<OMOBJ><OMA><OMS cd=\"arith1\" name=\"plus\"/>" + "<OMA><OMS cd =\"arith1\" name=\"minus\"/>"
+						+ "<OMA><OMS cd=\"arith1\" name=\"power\" /><OMV name=\"x\"/><OMI>2</OMI></OMA>"
+						+ "<OMA><OMS cd=\"arith1\" name=\"times\" /><OMI>5</OMI><OMV name=\"a\"/></OMA>" + "</OMA>"
+						+ "<OMI>6</OMI>" + "</OMA></OMOBJ>");
 		args.add(arg1.getOMA());
-		args.add(OMCreator.createOMSTR("a"));
-		assertEquals("R.<x,a>=RR[]; f=((x^2 - 5 * a) + 6); f.derivative(a)", func.getPartialSageSyntax(args));
+		args.add(OMCreator.createOMV("a"));
+		assertEquals("var('a x');derivative(((x^2 - 5 * a) + 6), a)", func.getPartialSageSyntax(args));
 	}
 }

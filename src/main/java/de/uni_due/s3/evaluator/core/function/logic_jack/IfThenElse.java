@@ -4,6 +4,7 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator.core.function.Function;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.openmath.jaxb.OMF;
 import de.uni_due.s3.openmath.jaxb.OMI;
@@ -26,7 +27,7 @@ public class IfThenElse extends Function {
 	 * @throws FunctionInvalidArgumentTypeException 
 	 */
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException {
+	protected Object execute(List<Object> arguments) throws FunctionException {
 		OMS condition;
 		Object firstArg = arguments.get(0);
 		Object trueValue = arguments.get(1);
@@ -51,13 +52,11 @@ public class IfThenElse extends Function {
 
 	@Override
 	protected int minArgs() {
-		// TODO Auto-generated method stub
 		return 3;
 	}
 
 	@Override
 	protected int maxArgs() {
-		// TODO Auto-generated method stub
 		return 3;
 	}
 }

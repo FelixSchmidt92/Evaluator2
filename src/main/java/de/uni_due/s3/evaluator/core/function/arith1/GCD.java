@@ -5,8 +5,8 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator.core.OMUtils;
 import de.uni_due.s3.evaluator.core.function.Function;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 
@@ -24,10 +24,10 @@ public class GCD extends Function {
 	 * @return OMI
 	 */
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException {
+	protected Object execute(List<Object> arguments) throws FunctionException {
 		try {
-			BigInteger leftValue = BigInteger.valueOf(OMUtils.convertOMIToInteger(arguments.get(0)));
-			BigInteger rightValue = BigInteger.valueOf(OMUtils.convertOMIToInteger(arguments.get(1)));
+			BigInteger leftValue = BigInteger.valueOf(OMUtils.convertOMToInteger(arguments.get(0)));
+			BigInteger rightValue = BigInteger.valueOf(OMUtils.convertOMToInteger(arguments.get(1)));
 			return OMUtils.convertDoubleToOMIOMF(leftValue.gcd(rightValue).doubleValue());
 		} catch (InputMismatchException e) {
 			throw new FunctionInvalidArgumentTypeException(this, "integer");
@@ -46,7 +46,7 @@ public class GCD extends Function {
 
 	@Override
 	public String getPartialSageSyntax(List<Object> arguments)
-			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, FunctionInvalidArgumentTypeException {
+			throws FunctionException, NoRepresentationAvailableException {
 		return "gcd(" + getSageSyntax(arguments.get(0)) + "," + getSageSyntax(arguments.get(1)) + ")";
 	}
 

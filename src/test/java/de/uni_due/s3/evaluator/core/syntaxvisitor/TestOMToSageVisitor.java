@@ -12,8 +12,7 @@ import org.junit.runners.Parameterized;
 
 import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator.core.syntaxvisitor.OMToSageVisitor;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OMF;
@@ -26,7 +25,7 @@ import de.uni_due.s3.openmath.omutils.OMCreator;
 
 @RunWith(Parameterized.class)
 public class TestOMToSageVisitor {
-	
+
 	private OMOBJ omobj;
 	private OMA oma;
 	private OMI omi;
@@ -34,24 +33,22 @@ public class TestOMToSageVisitor {
 	private OMV omv;
 	private OMS oms;
 	private OMSTR omstr;
-	
+
 	private static OMToSageVisitor visitor = new OMToSageVisitor();
-	
-	static Object[][] parameters = {
-			{ "12", "2.12", "x", "String", OMSymbol.LOGIC1_TRUE, "True"}, // [0]
-			{ "42", "1.234", "y", "Another", OMSymbol.LOGIC1_FALSE, "False"}, 
-			{ "12345", "0.123", "z", "This", OMSymbol.NUMS1_PI, "pi"},
-			{ "0", "0.0012", "abc", "Test", OMSymbol.NUMS1_E, "e"}, 
-			{ "-1", "12345.1", "def", "", OMSymbol.NUMS1_NAN, "NaN"}, 
-			{ "9", "1.1", "ghi", "a", OMSymbol.NUMS1_I, "I"}, //[5]
-			{ "100", "5.5", "n", "äöü", OMSymbol.NUMS1_INFINITY, "Infinity"}, 
+
+	static Object[][] parameters = { { "12", "2.12", "x", "String", OMSymbol.LOGIC1_TRUE, "True" }, // [0]
+			{ "42", "1.234", "y", "Another", OMSymbol.LOGIC1_FALSE, "False" },
+			{ "12345", "0.123", "z", "This", OMSymbol.NUMS1_PI, "pi" },
+			{ "0", "0.0012", "abc", "Test", OMSymbol.NUMS1_E, "e" },
+			{ "-1", "12345.1", "def", "", OMSymbol.NUMS1_NAN, "NaN" },
+			{ "9", "1.1", "ghi", "a", OMSymbol.NUMS1_I, "I" }, // [5]
+			{ "100", "5.5", "n", "äöü", OMSymbol.NUMS1_INFINITY, "Infinity" },
 
 	};
 
 	private String omiString, omfString, omvString, omstrString, omsTerminalString;
 	private OMS omsTerminal;
-	
-	
+
 	@Parameterized.Parameters
 	public static Collection<Object[]> test() {
 		ArrayList<Object[]> list = new ArrayList<Object[]>();
@@ -61,8 +58,8 @@ public class TestOMToSageVisitor {
 		return list;
 	}
 
-	
-	public TestOMToSageVisitor(String omiString, String omfString, String omvString, String omstrString, OMS omsTerminal, String omsTerminalString) {
+	public TestOMToSageVisitor(String omiString, String omfString, String omvString, String omstrString,
+			OMS omsTerminal, String omsTerminalString) {
 		this.omiString = omiString;
 		this.omfString = omfString;
 		this.omvString = omvString;
@@ -70,39 +67,37 @@ public class TestOMToSageVisitor {
 		this.omsTerminal = omsTerminal;
 		this.omsTerminalString = omsTerminalString;
 	}
-	
-	
+
 	@Before
-	public void init(){
+	public void init() {
 		ArrayList<Object> omel = new ArrayList<>();
 		oms = OMSymbol.ARITH1_PLUS;
 		omi = OMCreator.createOMI(Integer.parseInt(omiString));
 		omf = OMCreator.createOMF(Double.parseDouble(omfString));
 		omel.add(omi);
 		omel.add(omf);
-		
-		omv =OMCreator.createOMV(omvString);
+
+		omv = OMCreator.createOMV(omvString);
 		omstr = OMCreator.createOMSTR(omstrString);
-		
+
 		oma = OMCreator.createOMA(oms, omel);
-		
+
 		omobj = new OMOBJ();
 		omobj.setOMA(oma);
 	}
-	
-	
+
 	@Test
-	public void testVisitTerminals() throws NoRepresentationAvailableException{
+	public void testVisitTerminals() throws NoRepresentationAvailableException {
 		assertEquals(omiString, visitor.visit(omi));
 		assertEquals(omfString, visitor.visit(omf));
 		assertEquals(omvString, visitor.visit(omv));
 		assertEquals("'" + omstrString + "'", visitor.visit(omstr));
 		assertEquals(omsTerminalString, visitor.visit(omsTerminal));
 	}
-	
-	/*The Class Plus has to be implemented in Functions*/
+
+	/* The Class Plus has to be implemented in Functions */
 	@Test
-	public void testVisitApplication() throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, FunctionInvalidArgumentTypeException{
+	public void testVisitApplication() throws NoRepresentationAvailableException, FunctionException {
 		assertEquals("(" + omiString + " + " + omfString + ")", visitor.visit(oma));
 		assertEquals("(" + omiString + " + " + omfString + ")", visitor.visit(omobj));
 	}

@@ -61,7 +61,7 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("evaluateInSymja", OMSymbol.CASJACK_EVALUATEINSYMJA);
 		
 		functionSymbolMap.put("eval", OMSymbol.EVALJACK_EVAL);
-		functionSymbolMap.put("evalcplx", OMSymbol.EVALJACK_EVALCPLX);
+		functionSymbolMap.put("evalcplx", OMSymbol.POLYNOMIAL1_EXPAND);
 		functionSymbolMap.put("evalEq", OMSymbol.EVALJACK_EVALEQ);
 		functionSymbolMap.put("evalpolynomial", OMSymbol.EVALJACK_EVALPOLYNOMIAL);
 		functionSymbolMap.put("evalPolynomialCplx", OMSymbol.EVALJACK_EVALPOLYNOMIALCPLX);
@@ -91,13 +91,13 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("getNumerator", OMSymbol.OPENMATHJACK_GETNUMERATOR);
 		functionSymbolMap.put("isFraction", OMSymbol.OPENMATHJACK_ISFRACTION);
 		
+		functionSymbolMap.put("factorOf", OMSymbol.POLY_COEFFICIENT);
 		functionSymbolMap.put("deg", OMSymbol.POLY_DEGREE_WRT);
 
-		functionSymbolMap.put("equalssemisem", OMSymbol.POLYNOMIALJACK_EQUALSEMISEM);
+		functionSymbolMap.put("equalsemisem", OMSymbol.RELATION1_EQ);
 		functionSymbolMap.put("equalsExpr", OMSymbol.POLYNOMIALJACK_EQUALSEXPR);
 		functionSymbolMap.put("dependsOn", OMSymbol.POLYNOMIALJACK_DEPENDSON);
 		functionSymbolMap.put("derive", OMSymbol.POLYNOMIALJACK_DERIVE);
-		functionSymbolMap.put("factorOf", OMSymbol.POLYNOMIALJACK_FACTOROF);
 		functionSymbolMap.put("integrate", OMSymbol.POLYNOMIALJACK_INTEGRATE);
 		functionSymbolMap.put("numberOfVariables", OMSymbol.POLYNOMIALJACK_NUMBEROFVARIABLES);
 		

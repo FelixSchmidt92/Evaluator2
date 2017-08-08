@@ -7,6 +7,7 @@ import java.util.List;
 import de.uni_due.s3.evaluator.core.OMUtils;
 import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator.core.function.Function;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
@@ -23,8 +24,7 @@ import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 public class GetFromOrderedSet extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments)
-			throws FunctionInvalidArgumentTypeException, FunctionInvalidArgumentException {
+	protected Object execute(List<Object> arguments) throws FunctionException {
 
 		if (!OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.SET1_SET)) {
 			throw new FunctionInvalidArgumentTypeException(this, "(0)Set, (1)Integer");
@@ -32,7 +32,7 @@ public class GetFromOrderedSet extends Function {
 
 		int pos = 0;
 		try {
-			pos = OMUtils.convertOMIToInteger(arguments.get(1));
+			pos = OMUtils.convertOMToInteger(arguments.get(1));
 		} catch (InputMismatchException e) {
 			throw new FunctionInvalidArgumentTypeException(this, "(0)Set, (1)Integer");
 		}
@@ -61,7 +61,7 @@ public class GetFromOrderedSet extends Function {
 			}
 			Collections.sort(setForSort);
 			return OMUtils.convertDoubleToOMIOMF(setForSort.get(pos));
-			
+
 		} else {
 			List<String> setForSort = new ArrayList<String>();
 			for (Object element : set) {
@@ -74,7 +74,7 @@ public class GetFromOrderedSet extends Function {
 			}
 			Collections.sort(setForSort);
 			return OMCreator.createOMSTR(setForSort.get(pos));
-			
+
 		}
 	}
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator.core.OMUtils;
 import de.uni_due.s3.evaluator.core.function.Function;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
@@ -27,14 +28,13 @@ import de.uni_due.s3.openmath.omutils.OMCreator;
 public class IndexOf extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments)
-			throws FunctionInvalidArgumentException, FunctionInvalidArgumentTypeException {
+	protected Object execute(List<Object> arguments) throws FunctionException {
 		try {
 			String string = OMUtils.convertOMToString(arguments.get(0));
 			String muster = OMUtils.convertOMToString(arguments.get(1));
 			int pos = 0;
 			if (arguments.size() == 3) {
-				pos = OMUtils.convertOMIToInteger(arguments.get(2));
+				pos = OMUtils.convertOMToInteger(arguments.get(2));
 			}
 			if (string.length() <= pos || pos < 0) {
 				throw new FunctionInvalidArgumentException(this,

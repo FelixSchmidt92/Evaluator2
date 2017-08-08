@@ -21,8 +21,7 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.core.syntaxvisitor.OMToCasVisitor;
 import de.uni_due.s3.evaluator.exceptions.cas.CasException;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 
 public class TestOMToCasVisitor {
@@ -65,68 +64,71 @@ public class TestOMToCasVisitor {
 			return "function";
 		}
 
-		
 	}
-	
+
 	private ImplVisitor vis;
-	
+
 	@Before
-	public void init(){
+	public void init() {
 		vis = new ImplVisitor();
 	}
-	
+
 	@Test
-	public void testVisitObject() throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, OpenMathException, CasException, FunctionInvalidArgumentTypeException{
+	public void testVisitObject()
+			throws NoRepresentationAvailableException, OpenMathException, CasException, FunctionException {
 		OMI omi = OMCreator.createOMI(1);
 		OMF omf = OMCreator.createOMF(1.0);
 		OMV omv = OMCreator.createOMV("test");
 		OMSTR omstr = OMCreator.createOMSTR("str");
-		OMS oms = OMCreator.createOMS("arith1", "plus"); //OMSEvaluatorSyntaxDictionary.getInstance().getOMS("plus");
+		OMS oms = OMCreator.createOMS("arith1", "plus"); // OMSEvaluatorSyntaxDictionary.getInstance().getOMS("plus");
 		List<Object> args = new ArrayList<Object>();
 		args.add(omi);
 		args.add(omi);
 		OMA oma = OMCreator.createOMA(oms, args);
 		OMOBJ omobj = OMCreator.createOMOBJ(omi);
-		
-		Assert.assertEquals("omi",vis.visit(omobj));
-		Assert.assertEquals("omi",vis.visit(omi));
-		Assert.assertEquals("oms",vis.visit(oms));
-		Assert.assertEquals("omf",vis.visit(omf));
-		Assert.assertEquals("omv",vis.visit(omv));
-		Assert.assertEquals("omstr",vis.visit(omstr));		
-		Assert.assertEquals("function",vis.visit(oma));
+
+		Assert.assertEquals("omi", vis.visit(omobj));
+		Assert.assertEquals("omi", vis.visit(omi));
+		Assert.assertEquals("oms", vis.visit(oms));
+		Assert.assertEquals("omf", vis.visit(omf));
+		Assert.assertEquals("omv", vis.visit(omv));
+		Assert.assertEquals("omstr", vis.visit(omstr));
+		Assert.assertEquals("function", vis.visit(oma));
 	}
-	
+
 	@Test
-	public void testVisitOMOBJ() throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, OpenMathException, CasException, FunctionInvalidArgumentTypeException{
+	public void testVisitOMOBJ()
+			throws NoRepresentationAvailableException, OpenMathException, CasException, FunctionException {
 		OMI omi = OMCreator.createOMI(1);
 		OMF omf = OMCreator.createOMF(1.0);
 		OMV omv = OMCreator.createOMV("test");
 		OMSTR omstr = OMCreator.createOMSTR("str");
-		OMS oms = OMCreator.createOMS("arith1", "plus"); //OMSEvaluatorSyntaxDictionary.getInstance().getOMS("plus");
+		OMS oms = OMCreator.createOMS("arith1", "plus"); // OMSEvaluatorSyntaxDictionary.getInstance().getOMS("plus");
 		List<Object> args = new ArrayList<Object>();
 		args.add(omi);
 		args.add(omi);
 		OMA oma = OMCreator.createOMA(oms, args);
 		OMOBJ omobj = OMCreator.createOMOBJ(omi);
-		
-		Assert.assertEquals("omi",vis.visit(omobj));
+
+		Assert.assertEquals("omi", vis.visit(omobj));
 		Assert.assertEquals("omi", vis.visit(OMCreator.createOMOBJ(omi)));
 		Assert.assertEquals("omf", vis.visit(OMCreator.createOMOBJ(omf)));
 		Assert.assertEquals("oms", vis.visit(OMCreator.createOMOBJ(oms)));
 		Assert.assertEquals("omv", vis.visit(OMCreator.createOMOBJ(omv)));
 		Assert.assertEquals("omstr", vis.visit(OMCreator.createOMOBJ(omstr)));
-		Assert.assertEquals("function",vis.visit(oma));
+		Assert.assertEquals("function", vis.visit(oma));
 	}
-	
-	@Test(expected=NoRepresentationAvailableException.class)
-	public void testVisitObjectWithWrongObject() throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException, FunctionInvalidArgumentTypeException{
+
+	@Test(expected = NoRepresentationAvailableException.class)
+	public void testVisitObjectWithWrongObject()
+			throws NoRepresentationAvailableException, CasException, FunctionException {
 		vis.visit(new Integer(10));
 		vis.visit(new OMATP());
 	}
-	
-	@Test(expected=NoRepresentationAvailableException.class)
-	public void testVisitOMOBJWithWrongChild() throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException, FunctionInvalidArgumentTypeException{
+
+	@Test(expected = NoRepresentationAvailableException.class)
+	public void testVisitOMOBJWithWrongChild()
+			throws NoRepresentationAvailableException, CasException, FunctionException {
 		OMR omr = new OMR();
 		OMOBJ omobj = new OMOBJ();
 		omobj.setOMR(omr);

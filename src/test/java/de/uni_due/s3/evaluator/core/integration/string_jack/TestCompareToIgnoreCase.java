@@ -67,7 +67,8 @@ public class TestCompareToIgnoreCase extends TestIntegration {
 		assertTrue(0 > Evaluator.getNumberResult("compareToIgnoreCase('JACK','paluno')",
 				compareToIgnoreCaseExerciseVariableMap, compareToIgnoreCaseFillInVariableMap));
 	}
-
+	
+	//FIXME Polynome in strings umwandeln (generelle Möglichkeit)
 	@Test
 	public void testCompareToIgnoreCase6() throws EvaluatorException, OpenMathException {
 		assertNotEquals(0, Evaluator.getNumberResult("compareToIgnoreCase('2x+2y','2*(x+y)')",

@@ -22,8 +22,9 @@ import de.uni_due.s3.evaluator.core.function.cas_jack.EvaluateInSage;
 import de.uni_due.s3.evaluator.core.function.cas_jack.EvaluateInSymja;
 import de.uni_due.s3.evaluator.core.function.eval_jack.Eval;
 import de.uni_due.s3.evaluator.core.function.eval_jack.EvalEq;
+import de.uni_due.s3.evaluator.core.function.eval_jack.EvalPolynomial;
+import de.uni_due.s3.evaluator.core.function.eval_jack.EvalPolynomialCplx;
 import de.uni_due.s3.evaluator.core.function.eval_jack.EvalTerm2;
-import de.uni_due.s3.evaluator.core.function.integer1.FactorOf;
 import de.uni_due.s3.evaluator.core.function.integer1.Remainder;
 import de.uni_due.s3.evaluator.core.function.linalg2.Matrix;
 import de.uni_due.s3.evaluator.core.function.linalg2.MatrixRow;
@@ -41,13 +42,12 @@ import de.uni_due.s3.evaluator.core.function.openmath_jack.CountBasicOperations;
 import de.uni_due.s3.evaluator.core.function.openmath_jack.CountNodes;
 import de.uni_due.s3.evaluator.core.function.openmath_jack.GetDenominator;
 import de.uni_due.s3.evaluator.core.function.openmath_jack.GetNumerator;
+import de.uni_due.s3.evaluator.core.function.poly.Coefficient;
 import de.uni_due.s3.evaluator.core.function.poly.Degree_wrt;
-import de.uni_due.s3.evaluator.core.function.polynomial1.Degree;
 import de.uni_due.s3.evaluator.core.function.polynomial1.Expand;
 import de.uni_due.s3.evaluator.core.function.polynomial_jack.DependsOn;
 import de.uni_due.s3.evaluator.core.function.polynomial_jack.Derive;
 import de.uni_due.s3.evaluator.core.function.polynomial_jack.EqualsExpr;
-import de.uni_due.s3.evaluator.core.function.polynomial_jack.EqualsSemiSem;
 import de.uni_due.s3.evaluator.core.function.polynomial_jack.Integrate;
 import de.uni_due.s3.evaluator.core.function.polynomial_jack.NumberOfVariables;
 import de.uni_due.s3.evaluator.core.function.random_jack.Random;
@@ -158,10 +158,9 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.CASJACK_EVALUATEINSYMJA, new EvaluateInSymja());
 
 		functions.put(OMSymbol.EVALJACK_EVAL, new Eval());
-//		functions.put(OMSymbol.EVALJACK_EVALCPLX, new EvalCplx());
 		functions.put(OMSymbol.EVALJACK_EVALEQ, new EvalEq());
-//		functions.put(OMSymbol.EVALJACK_EVALPOLYNOMIAL, new EvalPolynomial());
-//		functions.put(OMSymbol.EVALJACK_EVALPOLYNOMIALCPLX, new EvalPolynomialCplx());
+		functions.put(OMSymbol.EVALJACK_EVALPOLYNOMIAL, new EvalPolynomial());
+		functions.put(OMSymbol.EVALJACK_EVALPOLYNOMIALCPLX, new EvalPolynomialCplx());
 		functions.put(OMSymbol.EVALJACK_EVALTERM2, new EvalTerm2());
 
 		functions.put(OMSymbol.INTEGER1_REMAINDER, new Remainder());
@@ -189,17 +188,15 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.OPENMATHJACK_GETNUMERATOR, new GetNumerator());
 		functions.put(OMSymbol.OPENMATHJACK_ISFRACTION, new isFraction());
 
+		functions.put(OMSymbol.POLY_COEFFICIENT, new Coefficient());
 		functions.put(OMSymbol.POLY_DEGREE_WRT, new Degree_wrt());
 
-		functions.put(OMSymbol.POLYNOMIALJACK_FACTOROF, new FactorOf());
 		functions.put(OMSymbol.POLYNOMIALJACK_INTEGRATE, new Integrate());
 		functions.put(OMSymbol.POLYNOMIALJACK_NUMBEROFVARIABLES, new NumberOfVariables());
-		functions.put(OMSymbol.POLYNOMIALJACK_EQUALSEMISEM, new EqualsSemiSem());
 		functions.put(OMSymbol.POLYNOMIALJACK_DEPENDSON, new DependsOn());
 		functions.put(OMSymbol.POLYNOMIALJACK_DERIVE, new Derive());
 		functions.put(OMSymbol.POLYNOMIALJACK_EQUALSEXPR, new EqualsExpr());
 
-		functions.put(OMSymbol.POLYNOMIAL1_DEGREE, new Degree());
 		functions.put(OMSymbol.POLYNOMIAL1_EXPAND, new Expand());
 		
 		functions.put(OMSymbol.RANDOMJACK_RANDOM, new Random());

@@ -40,7 +40,7 @@ public class RandomMatrixEigenvalue extends Function {
 
 		try {
 			String arg1 = OMUtils.convertOMToString(arguments.get(0));
-			int arg2 = OMUtils.convertOMIToInteger(arguments.get(1));
+			int arg2 = OMUtils.convertOMToInteger(arguments.get(1));
 			String arg3 = OMUtils.convertOMToString(arguments.get(2));
 			String arg4 = OMUtils.convertOMToString(arguments.get(3));
 

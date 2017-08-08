@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator.OMExecutor;
+import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.core.function.TestFunctionAbstract;
 import de.uni_due.s3.evaluator.core.function.transc2.ArcTan2;
@@ -33,22 +34,40 @@ public class TestArcTan2 extends TestFunctionAbstract {
 
 	@Test
 	public void testArcTan2Float() throws FunctionException, CasEvaluationException, CasNotAvailableException,
-			NoRepresentationAvailableException, OpenMathException {
+			NoRepresentationAvailableException, OpenMathException, UndefinedFillInVariableException,
+			UndefinedExerciseVariableException, ParserException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(1.0));
 		args.add(OMCreator.createOMF(1.0));
 		Object result = func.evaluate(args);
-		assertEquals(OMCreator.createOMF(0.785398163397448), result);
+
+		List<Object> args2 = new ArrayList<Object>();
+		args2.add(OMCreator.createOMI(1));
+		args2.add(OMCreator.createOMI(4));
+		List<Object> args3 = new ArrayList<Object>();
+		args3.add(OMCreator.createOMA(OMSymbol.NUMS1_RATIONAL, args2));
+		args3.add(OMSymbol.NUMS1_PI);
+
+		assertEquals(OMCreator.createOMA(OMSymbol.ARITH1_TIMES, args3), result);
 	}
 
 	@Test
 	public void testArcTan2Integer() throws FunctionException, CasEvaluationException, CasNotAvailableException,
-			NoRepresentationAvailableException, OpenMathException {
+			NoRepresentationAvailableException, OpenMathException, UndefinedFillInVariableException,
+			UndefinedExerciseVariableException, ParserException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(1));
 		args.add(OMCreator.createOMI(0));
 		Object result = func.evaluate(args);
-		assertEquals(OMCreator.createOMF(1.57079632679490), result);
+		
+		List<Object> args2 = new ArrayList<Object>();
+		args2.add(OMCreator.createOMI(1));
+		args2.add(OMCreator.createOMI(2));
+		List<Object> args3 = new ArrayList<Object>();
+		args3.add(OMCreator.createOMA(OMSymbol.NUMS1_RATIONAL, args2));
+		args3.add(OMSymbol.NUMS1_PI);
+
+		assertEquals(OMCreator.createOMA(OMSymbol.ARITH1_TIMES, args3), result);
 	}
 
 	@Test
@@ -61,8 +80,7 @@ public class TestArcTan2 extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testArcTan2SageSyntax()
-			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException, FunctionInvalidArgumentTypeException {
+	public void testArcTan2SageSyntax() throws NoRepresentationAvailableException, CasException, FunctionException {
 		List<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMF(1.0));
 		args.add(OMCreator.createOMF(1.1));

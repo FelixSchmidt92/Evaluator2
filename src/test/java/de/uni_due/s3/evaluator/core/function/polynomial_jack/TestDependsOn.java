@@ -46,7 +46,7 @@ public class TestDependsOn extends TestFunctionAbstract{
 				+ "<OMI>6</OMI>"
 				+ "</OMA></OMOBJ>");
 		args.add(arg1.getOMA());
-		args.add(OMCreator.createOMSTR("a"));
+		args.add(OMCreator.createOMV("a"));
 		Object result = func.evaluate(args);
 		assertEquals(OMSymbol.LOGIC1_TRUE, result);
 	}
@@ -65,7 +65,7 @@ public class TestDependsOn extends TestFunctionAbstract{
 				+ "<OMI>6</OMI>"
 				+ "</OMA></OMOBJ>");
 		args.add(arg1.getOMA());
-		args.add(OMCreator.createOMSTR("c"));
+		args.add(OMCreator.createOMV("c"));
 		Object result = func.evaluate(args);
 		assertEquals(OMSymbol.LOGIC1_TRUE, result);
 	}
@@ -82,7 +82,7 @@ public class TestDependsOn extends TestFunctionAbstract{
 				+ "<OMI>6</OMI>"
 				+ "</OMA></OMOBJ>");
 		args.add(arg1.getOMA());
-		args.add(OMCreator.createOMSTR("c"));
+		args.add(OMCreator.createOMV("c"));
 		Object result = func.evaluate(args);
 		assertEquals(OMSymbol.LOGIC1_FALSE, result);
 	}
@@ -111,7 +111,7 @@ public class TestDependsOn extends TestFunctionAbstract{
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void testDependsOnWithWrongArguments() throws FunctionInvalidArgumentException, CasEvaluationException,
 			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
-		ArrayList<Object> args = new ArrayList<Object>(2);
+		ArrayList<Object> args = new ArrayList<Object>();
 		args.add(null);
 		args.add(OMCreator.createOMI(10));
 		func.evaluate(args);

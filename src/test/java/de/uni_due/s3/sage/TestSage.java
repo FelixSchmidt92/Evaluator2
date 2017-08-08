@@ -28,9 +28,4 @@ public class TestSage {
 	public void testException1() throws CasEvaluationException, CasNotAvailableException, OpenMathException {
 		Sage.evaluateInCAS("");
 	}
-
-	@Test(expected = CasException.class)
-	public void testException2() throws CasEvaluationException, CasNotAvailableException, OpenMathException {
-		Sage.evaluateInCAS("a+b");
-	}
 }

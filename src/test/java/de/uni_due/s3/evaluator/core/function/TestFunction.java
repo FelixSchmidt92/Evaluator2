@@ -12,7 +12,6 @@ import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoSageRepresentationAvailableException;
@@ -64,7 +63,7 @@ public class TestFunction {
 		arguments.add(OMCreator.createOMI(15));
 		assertEquals("evaluated", myFunction.evaluate(arguments));
 	}
-	
+
 	@Test(expected = FunctionInvalidArgumentException.class)
 	public void testEvaluateWithNull() throws CasEvaluationException, FunctionException, CasNotAvailableException,
 			NoRepresentationAvailableException, OpenMathException {
@@ -106,14 +105,12 @@ public class TestFunction {
 	}
 
 	@Test(expected = NoSageRepresentationAvailableException.class)
-	public void testGetPartialSageSyntax()
-			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, FunctionInvalidArgumentTypeException {
+	public void testGetPartialSageSyntax() throws NoRepresentationAvailableException, FunctionException {
 		myFunction.getPartialSageSyntax(null);
 	}
 
 	@Test(expected = NoRepresentationAvailableException.class)
-	public void testGetSageSyntax()
-			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, FunctionInvalidArgumentTypeException {
+	public void testGetSageSyntax() throws NoRepresentationAvailableException, FunctionException {
 		myFunction.getSageSyntax(null);
 	}
 }

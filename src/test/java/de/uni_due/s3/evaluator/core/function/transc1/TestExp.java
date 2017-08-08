@@ -59,8 +59,7 @@ public class TestExp extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testExpSageSyntax()
-			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, CasException, FunctionInvalidArgumentTypeException {
+	public void testExpSageSyntax() throws NoRepresentationAvailableException, CasException, FunctionException {
 		List<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMF(1.0));
 		assertEquals("exp(1)", func.getPartialSageSyntax(args));

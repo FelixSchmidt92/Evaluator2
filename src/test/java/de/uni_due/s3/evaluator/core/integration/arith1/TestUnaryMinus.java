@@ -76,6 +76,6 @@ public class TestUnaryMinus extends TestIntegration {
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void testUnaryMinusWithWrongInputCharacter() throws EvaluatorException, OpenMathException {
-		assertEquals(-5, Evaluator.getNumberResult("-'a'", exerciseVariableMap, fillInVariableMap), 0.0);
+		assertEquals(-5, Evaluator.getNumberResult("-'aabc'", exerciseVariableMap, fillInVariableMap), 0.0);
 	}
 }

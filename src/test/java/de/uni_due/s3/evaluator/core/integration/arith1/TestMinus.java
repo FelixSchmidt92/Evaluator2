@@ -12,7 +12,7 @@ import org.junit.Test;
 import de.uni_due.s3.evaluator.Evaluator;
 import de.uni_due.s3.evaluator.core.integration.TestIntegration;
 import de.uni_due.s3.evaluator.exceptions.EvaluatorException;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedFillInVariableException;
 import de.uni_due.s3.openmath.omutils.OMConverter;
@@ -159,13 +159,13 @@ public class TestMinus extends TestIntegration {
 				0.0);
 	}
 
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
+	@Test(expected = FunctionException.class)
 	public void testSubstractionWithWrongInputCharacter() throws EvaluatorException, OpenMathException {
 		Evaluator.getNumberResult("6 - a", exerciseVariableMap, fillInVariableMap);
 		fail();
 	}
 
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
+	@Test(expected = FunctionException.class)
 	public void testSubstractionWithWrongInputString() throws EvaluatorException, OpenMathException {
 		Evaluator.getNumberResult("6 - 'a'", exerciseVariableMap, fillInVariableMap);
 		fail();

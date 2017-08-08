@@ -4,6 +4,7 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator.core.function.Function;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
@@ -17,7 +18,7 @@ import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 public class GetDenominator extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException {
+	protected Object execute(List<Object> arguments) throws FunctionException {
 		if (!OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.ARITH1_DIVIDE)) {
 			throw new FunctionInvalidArgumentTypeException(this, "(0)Division");
 		}

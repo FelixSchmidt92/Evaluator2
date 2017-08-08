@@ -5,9 +5,8 @@ import java.util.List;
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
-import de.uni_due.s3.evaluator.exceptions.function.InvalidResultTypeException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
@@ -23,17 +22,13 @@ import de.uni_due.s3.sage.Sage;
 public class ArcSin extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException,
-			CasEvaluationException, FunctionInvalidNumberOfArgumentsException, CasNotAvailableException,
-			NoRepresentationAvailableException, OpenMathException, InvalidResultTypeException {
+	protected Object execute(List<Object> arguments) throws FunctionException, CasEvaluationException,
+			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
 		if (!OMTypeChecker.isOMNumber(arguments.get(0))) {
 			throw new FunctionInvalidArgumentTypeException(this, "integer, float, double");
 		}
 		Object result = Sage.evaluateInCAS(getPartialSageSyntax(arguments));
 
-		if (!OMTypeChecker.isOMNumber(result)) {
-			throw new InvalidResultTypeException(this, "integer, float, double");
-		}
 		return result;
 	}
 
@@ -49,7 +44,7 @@ public class ArcSin extends Function {
 
 	@Override
 	public String getPartialSageSyntax(List<Object> arguments)
-			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, FunctionInvalidArgumentTypeException {
+			throws FunctionException, NoRepresentationAvailableException {
 		return "arcsin(" + getSageSyntax(arguments.get(0)) + ")";
 	}
 

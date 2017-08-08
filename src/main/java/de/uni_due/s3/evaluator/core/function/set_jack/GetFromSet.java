@@ -5,6 +5,7 @@ import java.util.List;
 import de.uni_due.s3.evaluator.core.OMUtils;
 import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator.core.function.Function;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
@@ -20,24 +21,24 @@ import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 public class GetFromSet extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException, FunctionInvalidArgumentException {
+	protected Object execute(List<Object> arguments) throws FunctionException {
 		if (!OMTypeChecker.isOMAWithSymbol(arguments.get(1), OMSymbol.SET1_SET)) {
 			throw new FunctionInvalidArgumentTypeException(this, "(0)Integer, (1)Set");
 		}
 		try {
-			int pos = OMUtils.convertOMIToInteger(arguments.get(0));
+			int pos = OMUtils.convertOMToInteger(arguments.get(0));
 			List<Object> set = ((OMA) arguments.get(1)).getOmel();
-			set.remove(0); //OMS entfernen
-			
+			set.remove(0); // OMS entfernen
+
 			if (set.size() == 0) {
 				throw new FunctionInvalidArgumentException(this, "Set has to have at least one element.");
 			}
-			
+
 			if (set.size() <= pos) {
 				throw new FunctionInvalidArgumentException(this,
 						"Second Argument of getFromSet is invalid. Not in Range of Set.");
 			}
-			
+
 			return set.get(pos); // 0te element ist die OMS_SET1_SET
 		} catch (InputMismatchException e) {
 			throw new FunctionInvalidArgumentTypeException(this, "(0)Integer, (1)Set");

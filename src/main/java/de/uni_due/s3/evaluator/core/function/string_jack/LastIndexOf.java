@@ -4,6 +4,7 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator.core.OMUtils;
 import de.uni_due.s3.evaluator.core.function.Function;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
@@ -24,13 +25,13 @@ public class LastIndexOf extends Function {
 
 	@Override
 	protected Object execute(List<Object> arguments)
-			throws FunctionInvalidArgumentException, FunctionInvalidArgumentTypeException {
+			throws FunctionException {
 		try {
 			String string = OMUtils.convertOMToString(arguments.get(0));
 			String muster = OMUtils.convertOMToString(arguments.get(1));
 			int pos = string.length()-1;
 			if (arguments.size() == 3) {
-				pos = OMUtils.convertOMIToInteger(arguments.get(2));
+				pos = OMUtils.convertOMToInteger(arguments.get(2));
 			}
 			if (pos < 0) {
 				throw new FunctionInvalidArgumentException(this,

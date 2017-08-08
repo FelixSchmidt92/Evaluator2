@@ -221,12 +221,22 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 
 	@Override
 	public OMF visitFloatValue(FloatValueContext ctx) {
-		return OMCreator.createOMF(Double.parseDouble(ctx.value.getText()));
+		try {
+			return OMCreator.createOMF(Double.parseDouble(ctx.value.getText()));
+		}catch(NumberFormatException e){
+			//fails converting to Double by : "123456789123456789.124212" -> in short by real high or low Numbers
+			throw new ParserRuntimeException("Could not Convert Number to Double. Number is to long", e);
+		}
 	}
 
 	@Override
 	public OMI visitIntegerValue(IntegerValueContext ctx) {
-		return OMCreator.createOMI(Integer.parseInt(ctx.value.getText()));
+		try {
+			return OMCreator.createOMI(Integer.parseInt(ctx.value.getText()));
+		}catch(NumberFormatException e){
+			//fails converting to Integer by : "123456789123456789" -> in short by real high or low Numbers
+			throw new ParserRuntimeException("Could not Convert Number to Integer. Number is to long", e);
+		}
 	}
 
 	@Override

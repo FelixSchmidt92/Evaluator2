@@ -4,6 +4,7 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator.core.function.Function;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OMI;
@@ -24,7 +25,7 @@ public class Size extends Function {
 	 * @throws FunctionInvalidArgumentTypeException
 	 */
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException {
+	protected Object execute(List<Object> arguments) throws FunctionException {
 
 		if (OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.SET1_SET)) {
 			OMA set = (OMA) arguments.get(0);

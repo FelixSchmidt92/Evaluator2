@@ -83,20 +83,21 @@ public class TestEqualsIgnoreCase extends TestIntegration {
 		assertTrue(Evaluator.getBooleanResult("equalsIgnoreCase('hallo','[var=h]')", exerciseVariableMap, fillInVariableMap));
 	}
 	
+	//FIXME: Im alten Evaluator ist das möglich! Allerdings wird einfachg gesagt, dass es richtig sei, auch wenn es nicht ist
 	@Test 
 	public void testEqualsIgnoreCaseWithExpressions() throws EvaluatorException, OpenMathException {
 		assertTrue(Evaluator.getBooleanResult("equalsIgnoreCase('equalsIgnorCase('1', '1')','equalsIgnorCase('2', '2')')", exerciseVariableMap, fillInVariableMap));
 	}
 	
+	@Test 
+	public void testEqualsIgnoreCaseWithWrongInputRational() throws EvaluatorException, OpenMathException {
+		assertTrue(Evaluator.getBooleanResult("equalsIgnoreCase(1, 1)", exerciseVariableMap, fillInVariableMap));
+		
+	}
+	
 	@Test (expected=ParserException.class)
 	public void testEqualsIgnoreCaseWithWrongCharacter() throws EvaluatorException, OpenMathException {
 		Evaluator.getBooleanResult("equalsIgnoreCase(ab, ab)", exerciseVariableMap, fillInVariableMap);
-	}
-	
-	@Test (expected=FunctionInvalidArgumentTypeException.class)
-	public void testEqualsIgnoreCaseWithWrongInputRational() throws EvaluatorException, OpenMathException {
-		Evaluator.getBooleanResult("equalsIgnoreCase(1, 1)", exerciseVariableMap, fillInVariableMap);
-		fail();
 	}
 	
 	@Test (expected=FunctionInvalidNumberOfArgumentsException.class)

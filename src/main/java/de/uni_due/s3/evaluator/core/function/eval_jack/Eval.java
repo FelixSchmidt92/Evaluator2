@@ -4,6 +4,12 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator.core.function.Function;
 
+/**
+ * Function does normal evaluation. This Function has to be deprecated.
+ * 
+ * @author spobel
+ *
+ */
 public class Eval extends Function {
 
 	@Override

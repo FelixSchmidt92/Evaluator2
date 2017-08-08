@@ -45,7 +45,7 @@ public abstract class Function {
 	 * @throws NoRepresentationAvailableException
 	 * @throws CasNotAvailableException
 	 * @throws CasEvaluationException
-	 * @throws OpenMathException 
+	 * @throws OpenMathException
 	 * @throws FunctionInvalidArgumentException
 	 */
 	abstract protected Object execute(List<Object> arguments) throws FunctionException, CasEvaluationException,
@@ -64,13 +64,13 @@ public abstract class Function {
 	 * @throws NoRepresentationAvailableException
 	 * @throws CasNotAvailableException
 	 * @throws CasEvaluationException
-	 * @throws OpenMathException 
+	 * @throws OpenMathException
 	 * @throws FunctionInvalidNumberOfArgumentsException
 	 *             if number of Arguments is not between
 	 */
-	public final Object evaluate(List<Object> arguments) throws FunctionException, FunctionInvalidArgumentException,
-			CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
-		if(arguments == null)
+	public final Object evaluate(List<Object> arguments) throws FunctionException, CasEvaluationException,
+			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+		if (arguments == null)
 			throw new FunctionInvalidArgumentException(this, "The List of arguments is of Type NULL");
 		argsBetweenMinMax(arguments); // Check
 		return execute(arguments);
@@ -78,8 +78,8 @@ public abstract class Function {
 
 	/**
 	 * This Method just tests if the length of the Arguments is in between
-	 * minArgs and maxArgs. If not then a FunctionInvalidNumberOfArgumentsException is
-	 * thrown.
+	 * minArgs and maxArgs. If not then a
+	 * FunctionInvalidNumberOfArgumentsException is thrown.
 	 * 
 	 * @param arguments
 	 *            the List of arguments
@@ -95,7 +95,7 @@ public abstract class Function {
 
 		if (!(minArgs() <= arguments.size() && max >= arguments.size())) {
 			// Arguments.size is not between minArgs and maxArgs so throw Error
-			throw new FunctionInvalidNumberOfArgumentsException(this, minArgs(), maxArgs(), arguments.size());
+			throw new FunctionInvalidNumberOfArgumentsException(this, minArgs(), maxArgs(), arguments.size(), "");
 		}
 	}
 
@@ -154,11 +154,11 @@ public abstract class Function {
 	 * @return a String representation of this argument in Sage
 	 * @throws NoRepresentationAvailableException
 	 * @throws FunctionInvalidNumberOfArgumentsException
-	 * @throws FunctionInvalidArgumentTypeException 
+	 * @throws FunctionInvalidArgumentTypeException
 	 * @throws CasException
 	 */
 	protected final String getSageSyntax(Object omElement)
-			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, FunctionInvalidArgumentTypeException {
+			throws FunctionException, NoRepresentationAvailableException {
 		return new OMToSageVisitor().visit(omElement);
 	}
 
@@ -175,11 +175,12 @@ public abstract class Function {
 	 * @return A String Representation of this Function AND all innerFunction
 	 * @throws NoRepresentationAvailableException
 	 * @throws FunctionInvalidNumberOfArgumentsException
-	 * @throws FunctionInvalidArgumentTypeException 
+	 * @throws FunctionInvalidArgumentTypeException
+	 * @throws FunctionInvalidArgumentException
 	 * @throws CasException
 	 */
 	public String getPartialSageSyntax(List<Object> arguments)
-			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException, FunctionInvalidArgumentTypeException {
+			throws FunctionException, NoRepresentationAvailableException {
 		throw new NoSageRepresentationAvailableException(
 				"There is no sage representation for function " + this.getClass() + " implemented");
 	}
