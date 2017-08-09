@@ -62,17 +62,17 @@ public class TestGetFromSet extends TestIntegration{
 	
 	@Test
 	public void testGetFromSet3() throws CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException, OpenMathException{
-		assertEquals(42, Evaluator.getNumberResult("getFromSet('3', '{a;12;lalilu;42;-1}')", exerVar, fillIn), 0);
+		assertEquals(42, Evaluator.getNumberResult("getFromSet('3', {a;12;'lalilu';42;-1})", exerVar, fillIn), 0);
 	}
 	
 	@Test
 	public void testGetFromSet4() throws CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException, OpenMathException{
-		assertEquals(true, Evaluator.getBooleanResult(" '}' ==getFromSet('1', '{2;};3}')", exerVar, fillIn));
+		assertEquals(true, Evaluator.getBooleanResult(" '}' ==getFromSet('1', {2;'}';3})", exerVar, fillIn));
 	}
 	
 	@Test
 	public void testGetFromSet5() throws CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException, OpenMathException{
-		assertEquals(3, Evaluator.getNumberResult("getFromSet('2', '{2;};3}')", exerVar, fillIn), 0);
+		assertEquals(3, Evaluator.getNumberResult("getFromSet('2', {2;'}';3})", exerVar, fillIn), 0);
 	}
 	
 	@Test
@@ -87,12 +87,14 @@ public class TestGetFromSet extends TestIntegration{
 	
 	@Test
 	public void testGetFromSet8() throws CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException, OpenMathException{
-		assertEquals(42, Evaluator.getNumberResult("getFromSet('3', '{a;12;lalilu;42;-1}')", exerVar, fillIn), 0);
+		assertEquals(42, Evaluator.getNumberResult("getFromSet('3', {a;12;'lalilu';42;-1})", exerVar, fillIn), 0);
 	}
 	
 	@Test
-	public void testGetFromSet9() throws EvaluatorException{
-		assertEquals("'1,3,2,7'", (Evaluator.getResultAsEvaluatorString("getFromSet('0', '{1,3,2,7}')", exerVar, fillIn)));
+	public void testGetFromSet9() throws CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException, OpenMathException{
+		OMOBJ expected = new OMOBJ();
+		expected.setOMSTR(OMCreator.createOMSTR("1,3,2,7"));
+		assertEquals(expected, (Evaluator.evaluate("getFromSet('0', {'1,3,2,7'})", exerVar, fillIn)));
 	}
 	
 	@Test
@@ -137,7 +139,7 @@ public class TestGetFromSet extends TestIntegration{
 	
 	@Test
 	public void testGetFromSetWithPointNumber3() throws CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException, OpenMathException{
-		assertEquals(true, Evaluator.getBooleanResult("'e.a' == getFromSet('2', '{a;b;e.a}')", exerVar, fillIn));
+		assertEquals(true, Evaluator.getBooleanResult("'e.a' == getFromSet('2', {a;b;'e.a'})", exerVar, fillIn));
 	}
 	
 	@Test 

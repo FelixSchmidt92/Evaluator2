@@ -107,20 +107,4 @@ public class Evaluator {
 			CasNotAvailableException, NoRepresentationAvailableException {
 		return OMExecutor.execute(omobj);
 	}
-
-	/**
-	 * TODO FIXME dlux, frichtscheid, spobel  sollen wir dese Funktion auch übernehmen vom Evaluator?? es schlagen hierdurch ca 20 TestFälle fehl!
-	 *  			toString() Visitor??
-	 * @param string
-	 * @param exerVar
-	 * @param fillIn
-	 * @return
-	 * @throws EvaluatorException 
-	 */
-	public static Object getResultAsEvaluatorString(String string, HashMap<String, OMOBJ> exerciseVariableMap,
-			HashMap<Integer, OMOBJ> fillInVariableMap) throws EvaluatorException {
-		// TODO Auto-generated method stub
-		throw new EvaluatorException("Function in Evaluator not Implemented");
-	}
-
 }
