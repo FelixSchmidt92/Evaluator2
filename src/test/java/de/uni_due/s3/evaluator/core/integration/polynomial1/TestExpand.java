@@ -57,13 +57,13 @@ public class TestExpand extends TestIntegration {
 	@Test
 	public void testExpandWithInput() throws EvaluatorException, OpenMathException {
 		assertEquals(ExpressionParser.parse("'x+5*y'", null, null),
-				Evaluator.evaluate("expand('[pos=1]x+[pos=2]y')", expandExerciseVariableMap, expandFillInVariableMap));
+				Evaluator.evaluate("expand('[pos=1]*x+[pos=2]*y')", expandExerciseVariableMap, expandFillInVariableMap));
 	}
 
 	@Test
 	public void testExpandWithVariables() throws EvaluatorException, OpenMathException {
 		assertEquals(ExpressionParser.parse("'x+5*y'", null, null),
-				Evaluator.evaluate("expand('[var=a]x+[var=b]y')", expandExerciseVariableMap, expandFillInVariableMap));
+				Evaluator.evaluate("expand('[var=a]*x+[var=b]*y')", expandExerciseVariableMap, expandFillInVariableMap));
 	}
 
 	@Test
