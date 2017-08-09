@@ -125,28 +125,24 @@ public class TestGreaterThan extends TestIntegration {
 		assertTrue(!Evaluator.getBooleanResult("2>[pos=1]", greaterThanExerciseVariableMap, greaterThanFillInVariableMap));
 	}
 
-	@Test (expected = FunctionInvalidArgumentTypeException.class)
+	@Test 
 	public void testGreaterThanWithEncapsulation1() throws EvaluatorException, OpenMathException {
 		assertTrue(Evaluator.getBooleanResult("1 > (1 > 2)", greaterThanExerciseVariableMap, greaterThanFillInVariableMap));
-		fail();
 	}
 	
-	@Test (expected = FunctionInvalidArgumentTypeException.class)
+	@Test
 	public void testGreaterThanWithEncapsulation2() throws EvaluatorException, OpenMathException {
 		assertTrue(!Evaluator.getBooleanResult("1 > (1 > (1 > 2))", greaterThanExerciseVariableMap, greaterThanFillInVariableMap));
-		fail();
 	}
 	
-	@Test (expected = FunctionInvalidArgumentTypeException.class)
+	@Test
 	public void testGreaterThanWithEncapsulation3() throws EvaluatorException, OpenMathException {
 		assertTrue(!Evaluator.getBooleanResult("1 > (1 > (1 > (1 > (1 > 2))))", greaterThanExerciseVariableMap, greaterThanFillInVariableMap));
-		fail();
 	}
 	
-	@Test (expected = FunctionInvalidArgumentTypeException.class)
+	@Test 
 	public void testGreaterThanWithEncapsulation4() throws EvaluatorException, OpenMathException {
 		assertTrue(Evaluator.getBooleanResult("((((1 > 1) > 1) > 1) > 1) > -1", greaterThanExerciseVariableMap, greaterThanFillInVariableMap));
-		fail();
 	}
 	
 	@Test(expected=ParserException.class)

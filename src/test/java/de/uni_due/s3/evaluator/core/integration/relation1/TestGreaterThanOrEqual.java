@@ -1,6 +1,7 @@
 package de.uni_due.s3.evaluator.core.integration.relation1;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
 
 import java.util.HashMap;
@@ -145,25 +146,22 @@ public class TestGreaterThanOrEqual extends TestIntegration {
 		assertTrue(!Evaluator.getBooleanResult("[pos=2]>=[pos=1]", greaterThanOrEqualExerciseVariableMap, greaterThanOrEqualFillInVariableMap));
 	}
 
-	@Test (expected = FunctionInvalidArgumentTypeException.class)
+	@Test
 	public void testGreaterThanOrEqualWithEncapsulation1() throws EvaluatorException, OpenMathException {
 		assertTrue(Evaluator.getBooleanResult("1 >= (1 >= 2)", greaterThanOrEqualExerciseVariableMap, greaterThanOrEqualFillInVariableMap));
-		fail();
 	}
 	
-	@Test (expected = FunctionInvalidArgumentTypeException.class)
+	@Test 
 	public void testGreaterThanOrEqualWithEncapsulation2() throws EvaluatorException, OpenMathException {
-		assertTrue(!Evaluator.getBooleanResult("0 >= (0 >= (0 >= 1))", greaterThanOrEqualExerciseVariableMap, greaterThanOrEqualFillInVariableMap));
-		fail();
+		assertFalse(Evaluator.getBooleanResult("0 >= (0 >= (0 >= 1))", greaterThanOrEqualExerciseVariableMap, greaterThanOrEqualFillInVariableMap));
 	}
 	
-	@Test (expected = FunctionInvalidArgumentTypeException.class)
+	@Test 
 	public void testGreaterThanOrEqualWithEncapsulation3() throws EvaluatorException, OpenMathException {
-		assertTrue(!Evaluator.getBooleanResult("0 >= (0 >= (0 >= (0 >= (0 >= 1))))", greaterThanOrEqualExerciseVariableMap, greaterThanOrEqualFillInVariableMap));
-		fail();
+		assertFalse(Evaluator.getBooleanResult("0 >= (0 >= (0 >= (0 >= (0 >= 1))))", greaterThanOrEqualExerciseVariableMap, greaterThanOrEqualFillInVariableMap));
 	}
 	
-	@Test (expected = FunctionInvalidArgumentTypeException.class)
+	@Test
 	public void testGreaterThanOrEqualWithEncapsulation4() throws EvaluatorException, OpenMathException {
 		assertTrue(Evaluator.getBooleanResult("((((1 >= 1) >= 1) >= 1) >= 1) >= 1", greaterThanOrEqualExerciseVariableMap, greaterThanOrEqualFillInVariableMap));
 	
