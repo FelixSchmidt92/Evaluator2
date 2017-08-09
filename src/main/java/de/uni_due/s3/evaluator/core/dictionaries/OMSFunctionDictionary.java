@@ -181,6 +181,8 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.LINALG2_VECTOR, new Vector());
 
 		functions.put(OMSymbol.LIST1_LIST, new List());
+		
+		functions.put(OMSymbol.NUMS1_RATIONAL, new Divide());
 
 		functions.put(OMSymbol.OPENMATHJACK_COUNTBASICOPERATIONS, new CountBasicOperations());
 		functions.put(OMSymbol.OPENMATHJACK_COUNTNODES, new CountNodes());

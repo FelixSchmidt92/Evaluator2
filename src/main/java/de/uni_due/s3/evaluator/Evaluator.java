@@ -59,6 +59,7 @@ public class Evaluator {
 			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException,
 			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
 		OMOBJ result = evaluate(expression, exerciseVariableMap, fillInVariableMap);
+		result = evaluate(result);
 		try {
 			return OMUtils.convertOMToDouble(result);
 		} catch (InputMismatchException e) {

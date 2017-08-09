@@ -28,25 +28,25 @@ public class TestEvalTerm2 extends TestIntegration {
 
 	@Test
 	public void testEvalTermIn2Variables2() throws EvaluatorException, OpenMathException {
-		assertEquals(7, Evaluator.getNumberResult("evalterm2('3x+2y','1','2')", exerciseVariableMap, fillInVariableMap),
+		assertEquals(7, Evaluator.getNumberResult("evalterm2('3*x+2*y','1','2')", exerciseVariableMap, fillInVariableMap),
 				0.0);
 	}
 
 	@Test
 	public void testEvalTermIn2Variables3() throws EvaluatorException, OpenMathException {
 		assertNotEquals(7,
-				Evaluator.getNumberResult("evalterm2('3x+2y','2','1')", exerciseVariableMap, fillInVariableMap), 0.0);
+				Evaluator.getNumberResult("evalterm2('3*x+2*y','2','1')", exerciseVariableMap, fillInVariableMap), 0.0);
 	}
 
 	@Test
 	public void testEvalTermIn2Variables4() throws EvaluatorException, OpenMathException {
 		assertEquals(1,
-				Evaluator.getNumberResult("evalterm2('2a+6b-3','2','0')", exerciseVariableMap, fillInVariableMap), 0.0);
+				Evaluator.getNumberResult("evalterm2('2*a+6*b-3','2','0')", exerciseVariableMap, fillInVariableMap), 0.0);
 	}
 
 	@Test
 	public void testEvalTermIn2VariablesWithInput1() throws EvaluatorException, OpenMathException {
-		assertEquals(30, Evaluator.getNumberResult("evalterm2('6x+27y+3','[pos=1]','[pos=2]')", exerciseVariableMap,
+		assertEquals(30, Evaluator.getNumberResult("evalterm2('6*x+27*y+3','[pos=1]','[pos=2]')", exerciseVariableMap,
 				fillInVariableMap), 0.0);
 	}
 
@@ -55,16 +55,17 @@ public class TestEvalTerm2 extends TestIntegration {
 		assertEquals(3, Evaluator.getNumberResult("evalterm2('2*a+6*b-3','[pos=1]','[pos=2]')", exerciseVariableMap,
 				fillInVariableMap), 0.0);
 	}
+	
 
 	@Test
 	public void testEvalTermIn2VariablesWithVariables1() throws EvaluatorException, OpenMathException {
-		assertEquals(7, Evaluator.getNumberResult("evalterm2('[var=a]x+[var=b]y','2','1')", exerciseVariableMap,
+		assertEquals(1, Evaluator.getNumberResult("evalterm2('[var=a]*x+[var=b]*y','2','1')", exerciseVariableMap,
 				fillInVariableMap), 0.0);
 	}
 
 	@Test
 	public void testEvalTermIn2VariablesWithVariables2() throws EvaluatorException, OpenMathException {
-		assertEquals(5, Evaluator.getNumberResult("evalterm2('[var=a]x+[var=b]y','0','1')", exerciseVariableMap,
+		assertEquals(1, Evaluator.getNumberResult("evalterm2('[var=a]*x+[var=b]*y','0','1')", exerciseVariableMap,
 				fillInVariableMap), 0.0);
 	}
 
