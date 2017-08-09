@@ -67,13 +67,12 @@ public class TestBooleanNot extends TestFunctionAbstract {
 		fail();
 	}
 
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
+	@Test
 	public void testBooleanNotWithWrongArguments() throws FunctionInvalidArgumentException, CasEvaluationException,
 			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMSymbol.ARITH1_DIVIDE);
 		func.evaluate(args);
-		fail();
 	}
 
 	@Test

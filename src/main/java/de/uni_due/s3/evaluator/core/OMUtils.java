@@ -104,7 +104,11 @@ public class OMUtils {
 		if (obj instanceof OMI) {
 			return Integer.parseInt(((OMI) obj).getValue());
 		} else if (obj instanceof OMF){
-			return (int) (((OMF) obj).getDec().doubleValue());
+			double val = ((OMF) obj).getDec().doubleValue();
+			if(val % 2 == 0)
+				return (int) val;
+			else 
+				throw new InputMismatchException();
 			
 		}else if (obj.equals(OMSymbol.LOGIC1_FALSE)){
 			return 0;
