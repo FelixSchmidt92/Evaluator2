@@ -9,7 +9,6 @@ import java.util.HashMap;
 
 import de.uni_due.s3.evaluator.Evaluator;
 import de.uni_due.s3.evaluator.core.integration.TestIntegration;
-import de.uni_due.s3.evaluator.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;

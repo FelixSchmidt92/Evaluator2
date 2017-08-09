@@ -38,19 +38,19 @@ public class TestDependsOn extends TestIntegration {
 
 	@Test
 	public void testDependsOn1() throws EvaluatorException, OpenMathException {
-		assertTrue(Evaluator.getBooleanResult("dependsOn('2x+3m-n+2b','m')", dependsOnExerciseVariableMap,
+		assertTrue(Evaluator.getBooleanResult("dependsOn('2*x+3*m-n+2*b','m')", dependsOnExerciseVariableMap,
 				dependsOnFillInVariableMap));
 	}
 
 	@Test
 	public void testDependsOn2() throws EvaluatorException, OpenMathException {
-		assertTrue(!Evaluator.getBooleanResult("dependsOn('2x+3a-x+2b','y')", dependsOnExerciseVariableMap,
+		assertTrue(!Evaluator.getBooleanResult("dependsOn('2*x+3*a-x+2*b','y')", dependsOnExerciseVariableMap,
 				dependsOnFillInVariableMap));
 	}
 
 	@Test
 	public void testDependsOn3() throws EvaluatorException, OpenMathException {
-		assertTrue(Evaluator.getBooleanResult("dependsOn(2x+3m-n+2b, m)", dependsOnExerciseVariableMap,
+		assertTrue(Evaluator.getBooleanResult("dependsOn(2*x+3*m-n+2*b, m)", dependsOnExerciseVariableMap,
 				dependsOnFillInVariableMap));
 	}
 
@@ -62,13 +62,13 @@ public class TestDependsOn extends TestIntegration {
 
 	@Test
 	public void testDependsOn5() throws EvaluatorException, OpenMathException {
-		assertTrue(!Evaluator.getBooleanResult("dependsOn(0, 0)", dependsOnExerciseVariableMap,
+		assertTrue(!Evaluator.getBooleanResult("dependsOn(0, a)", dependsOnExerciseVariableMap,
 				dependsOnFillInVariableMap));
 	}
 
 	@Test
 	public void testDependsOnWithInput1() throws EvaluatorException, OpenMathException {
-		assertTrue(!Evaluator.getBooleanResult("dependsOn('2x+3a-x+2b','[pos=2]')", dependsOnExerciseVariableMap,
+		assertTrue(!Evaluator.getBooleanResult("dependsOn('2*x+3*a-x+2*b','[pos=2]')", dependsOnExerciseVariableMap,
 				dependsOnFillInVariableMap));
 	}
 
@@ -80,19 +80,19 @@ public class TestDependsOn extends TestIntegration {
 
 	@Test
 	public void testDependsOnWithVariables1() throws EvaluatorException, OpenMathException {
-		assertTrue(Evaluator.getBooleanResult("dependsOn('2*[var=a]+3a-[var=a]+2b','x')", dependsOnExerciseVariableMap,
+		assertTrue(Evaluator.getBooleanResult("dependsOn('2*[var=a]+3*a-[var=a]+2*b','x')", dependsOnExerciseVariableMap,
 				dependsOnFillInVariableMap));
 	}
 
 	@Test
 	public void testDependsOnWithVariables2() throws EvaluatorException, OpenMathException {
-		assertTrue(Evaluator.getBooleanResult("dependsOn('2[var=b]+3a-x+2b','y')", dependsOnExerciseVariableMap,
+		assertTrue(Evaluator.getBooleanResult("dependsOn('2*[var=b]+3*a-x+2*b','y')", dependsOnExerciseVariableMap,
 				dependsOnFillInVariableMap));
 	}
 
 	@Test
 	public void testDependsOnWithVariables3() throws EvaluatorException, OpenMathException {
-		assertTrue(!Evaluator.getBooleanResult("dependsOn('2a+a+4','[var=a]')", dependsOnExerciseVariableMap,
+		assertTrue(!Evaluator.getBooleanResult("dependsOn('2*a+a+4','[var=a]')", dependsOnExerciseVariableMap,
 				dependsOnFillInVariableMap));
 	}
 

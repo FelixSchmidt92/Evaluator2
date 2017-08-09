@@ -86,7 +86,7 @@ public class TestEqualsIgnoreCase extends TestIntegration {
 	//FIXME: Im alten Evaluator ist das möglich! Allerdings wird einfachg gesagt, dass es richtig sei, auch wenn es nicht ist
 	@Test 
 	public void testEqualsIgnoreCaseWithExpressions() throws EvaluatorException, OpenMathException {
-		assertTrue(Evaluator.getBooleanResult("equalsIgnoreCase('equalsIgnorCase('1', '1')','equalsIgnorCase('2', '2')')", exerciseVariableMap, fillInVariableMap));
+		assertTrue(Evaluator.getBooleanResult("equalsIgnoreCase(equalsIgnoreCase('1', '1'),equalsIgnoreCase('2', '2'))", exerciseVariableMap, fillInVariableMap));
 	}
 	
 	@Test 
