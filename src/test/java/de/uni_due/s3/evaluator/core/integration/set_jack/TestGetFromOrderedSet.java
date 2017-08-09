@@ -47,6 +47,7 @@ public class TestGetFromOrderedSet extends TestIntegration{
 	
 	@Test
 	public void testGetFromOrderedSet1() throws CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException, OpenMathException{
+		System.out.println(Evaluator.getNumberResult("getFromOrderedSet('1', '{2;3;5;6}')", exerVar, fillIn));
 		assertTrue(3 == Evaluator.getNumberResult("getFromOrderedSet('1', '{2;3;5;6}')", exerVar, fillIn)); 
 	}
 	

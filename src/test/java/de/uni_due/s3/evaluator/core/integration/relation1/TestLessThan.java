@@ -134,37 +134,32 @@ public class TestLessThan extends TestIntegration {
 				!Evaluator.getBooleanResult("[pos=1]<[pos=2]", lessThanExerciseVariableMap, lessThanFillInVariableMap));
 	}
 
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
+	@Test
 	public void testLessThanWithEncapsulation1() throws EvaluatorException, OpenMathException {
 		assertTrue(!Evaluator.getBooleanResult("1 < (1 < 2)", lessThanExerciseVariableMap, lessThanFillInVariableMap));
-		fail();
 	}
 
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
+	@Test
 	public void testLessThanWithEncapsulation2() throws EvaluatorException, OpenMathException {
 		assertTrue(Evaluator.getBooleanResult("0 < (0 < (0 < 1))", lessThanExerciseVariableMap,
 				lessThanFillInVariableMap));
-		fail();
 	}
 
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
+	@Test
 	public void testLessThanWithEncapsulation3() throws EvaluatorException, OpenMathException {
 		assertTrue(Evaluator.getBooleanResult("0 < (0 < (0 < (0 < (0 < 1))))", lessThanExerciseVariableMap,
 				lessThanFillInVariableMap));
-		fail();
 	}
 
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
+	@Test
 	public void testLessThanWithEncapsulation4() throws EvaluatorException, OpenMathException {
 		assertTrue(!Evaluator.getBooleanResult("((((1 < 1) < 1) < 1) < 1) < 1", lessThanExerciseVariableMap,
 				lessThanFillInVariableMap));
-		fail();
 	}
 
 	@Test(expected = ParserException.class)
 	public void testLessThanWithWrongInputCharacter() throws EvaluatorException, OpenMathException {
 		Evaluator.getBooleanResult("6 < ab", lessThanExerciseVariableMap, lessThanFillInVariableMap);
-		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
