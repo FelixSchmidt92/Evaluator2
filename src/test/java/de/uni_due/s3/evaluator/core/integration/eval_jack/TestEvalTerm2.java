@@ -20,8 +20,6 @@ public class TestEvalTerm2 extends TestIntegration {
 
 	@Test
 	public void testEvalTermIn2Variables1() throws EvaluatorException, OpenMathException {
-		System.out
-				.println(Evaluator.getNumberResult("evalterm2('x+y','1','2')", exerciseVariableMap, fillInVariableMap));
 		assertEquals(3, Evaluator.getNumberResult("evalterm2('x+y','1','2')", exerciseVariableMap, fillInVariableMap),
 				0.0);
 	}

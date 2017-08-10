@@ -6,7 +6,7 @@ import static org.junit.Assert.fail;
 
 import java.util.HashMap;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator.Evaluator;
@@ -22,11 +22,11 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestEqual extends TestIntegration {
 
-	HashMap<Integer, OMOBJ> equalFillInVariableMap = new HashMap<>();
-	HashMap<String, OMOBJ> equalExerciseVariableMap = new HashMap<>();
+	static HashMap<Integer, OMOBJ> equalFillInVariableMap = new HashMap<>();
+	static HashMap<String, OMOBJ> equalExerciseVariableMap = new HashMap<>();
 
-	@Before
-	public void beforeTest() throws FunctionNotImplementedException, UndefinedFillInVariableException,
+	@BeforeClass
+	public static void beforeTest() throws FunctionNotImplementedException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
 		equalFillInVariableMap.put(1, ExpressionParser.parse("7", null, null));
 		equalFillInVariableMap.put(2, ExpressionParser.parse("2", null, null));

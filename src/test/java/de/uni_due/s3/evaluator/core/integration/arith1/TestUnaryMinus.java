@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import javax.xml.bind.JAXBException;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator.Evaluator;
@@ -16,8 +16,8 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestUnaryMinus extends TestIntegration {
 
-	@Before
-	public void beforeTest() {
+	@BeforeClass
+	public static void beforeTest() {
 		try {
 			fillInVariableMap.put(1, OMConverter.toObject("<OMOBJ><OMI>3</OMI></OMOBJ>"));
 

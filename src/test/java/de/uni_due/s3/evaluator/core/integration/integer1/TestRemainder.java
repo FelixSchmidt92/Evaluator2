@@ -25,11 +25,11 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestRemainder extends TestIntegration {
 
-	HashMap<Integer, OMOBJ> remainderFillInVariableMap = new HashMap<>();
-	HashMap<String, OMOBJ> remainderExerciseVariableMap = new HashMap<>();
+	static HashMap<Integer, OMOBJ> remainderFillInVariableMap = new HashMap<>();
+	static HashMap<String, OMOBJ> remainderExerciseVariableMap = new HashMap<>();
 	
 	@BeforeClass
-	public void beforeTest() {
+	public static void beforeTest() {
 		try {
 			remainderFillInVariableMap.put(1, OMConverter.toObject("<OMOBJ><OMI>3</OMI></OMOBJ>"));
 			remainderFillInVariableMap.put(2, OMConverter.toObject("<OMOBJ><OMI>10</OMI></OMOBJ>"));

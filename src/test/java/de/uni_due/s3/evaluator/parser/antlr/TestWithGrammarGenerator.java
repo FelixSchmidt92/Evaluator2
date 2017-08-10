@@ -114,16 +114,16 @@ public class TestWithGrammarGenerator {
 		}
 	}
 	
-	@Test  //Test with FillIn, Exercise, Number and String
+	@Test  //Test with FillIn, Exercise, Number and String. Only 100 Times, its Time-Comsuming
 	public void testGrammarGeneratorAtBinaryOperatorChainWithFunctionsRandom(){ 
-		for (int i =0; i < 1000; i++){ 
+		for (int i =0; i < 100; i++){ 
 			createParser(gen.genRandomBinaryOperatorChainWithFunctionArguments(new Random().nextInt(50), 50, null)).expression();
 		}
 	}
 	
-	@Test  //Test with FillIn, Exercise, Number and String
+	@Test  //Test with FillIn, Exercise, Number and String. Only 100 Times, its Time-Comsuming
 	public void testGrammarGeneratorAtFunctionInFunctionRecursivelyRandom(){ 
-		for (int i =0; i < 1000; i++){ 
+		for (int i =0; i < 100; i++){ 
 			int t = 1 + new Random().nextInt(5);
 			createParser(gen.genRandomFunctionRecursion(t, 1 + new Random().nextInt(5), t)).expression();
 		}

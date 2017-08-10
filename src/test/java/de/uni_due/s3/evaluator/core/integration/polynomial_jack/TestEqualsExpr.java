@@ -5,7 +5,7 @@ import static org.junit.Assert.fail;
 
 import java.util.HashMap;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator.Evaluator;
@@ -22,11 +22,11 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestEqualsExpr extends TestIntegration {
 
-	HashMap<Integer, OMOBJ> equalsExprFillInVariableMap = new HashMap<>();
-	HashMap<String, OMOBJ> equalsExprExerciseVariableMap = new HashMap<>();
+	static HashMap<Integer, OMOBJ> equalsExprFillInVariableMap = new HashMap<>();
+	static HashMap<String, OMOBJ> equalsExprExerciseVariableMap = new HashMap<>();
 
-	@Before
-	public void beforeTest() throws FunctionNotImplementedException, UndefinedFillInVariableException,
+	@BeforeClass
+	public static void beforeTest() throws FunctionNotImplementedException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
 		equalsExprFillInVariableMap.put(1, ExpressionParser.parse("0", null, null));
 		equalsExprFillInVariableMap.put(2, ExpressionParser.parse("x^2", null, null));

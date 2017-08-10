@@ -6,7 +6,7 @@ import static org.junit.Assert.fail;
 
 import java.util.HashMap;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator.Evaluator;
@@ -23,11 +23,11 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestGreaterThanOrEqual extends TestIntegration {
 
-	HashMap<Integer, OMOBJ> greaterThanOrEqualFillInVariableMap = new HashMap<>();
-	HashMap<String, OMOBJ> greaterThanOrEqualExerciseVariableMap = new HashMap<>();
+	static HashMap<Integer, OMOBJ> greaterThanOrEqualFillInVariableMap = new HashMap<>();
+	static HashMap<String, OMOBJ> greaterThanOrEqualExerciseVariableMap = new HashMap<>();
 
-	@Before
-	public void beforeTest() throws FunctionNotImplementedException, UndefinedFillInVariableException,
+	@BeforeClass
+	public static void beforeTest() throws FunctionNotImplementedException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
 		greaterThanOrEqualFillInVariableMap.put(1, ExpressionParser.parse("3", null, null));
 		greaterThanOrEqualFillInVariableMap.put(2, ExpressionParser.parse("1", null, null));

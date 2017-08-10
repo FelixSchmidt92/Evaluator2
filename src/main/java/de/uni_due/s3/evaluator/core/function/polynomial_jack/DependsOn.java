@@ -31,7 +31,6 @@ public class DependsOn extends Function {
 	protected Object execute(List<Object> arguments) throws FunctionException {
 		//Special Case if Only 1 Element is Polynom!
 		if (arguments.get(0) instanceof OMV && arguments.get(1) instanceof OMV) {
-			System.out.println(arguments.get(0).equals(arguments.get(1)));
 			if (arguments.get(0).equals(arguments.get(1))) {
 				return OMSymbol.LOGIC1_TRUE;
 			}

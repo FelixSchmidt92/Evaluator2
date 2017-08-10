@@ -9,7 +9,7 @@ import static org.junit.Assert.assertTrue;
 
 import javax.xml.bind.JAXBException;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator.Evaluator;
@@ -22,11 +22,11 @@ import de.uni_due.s3.openmath.omutils.OMConverter;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestCompareTo extends TestIntegration {
-	HashMap<Integer, OMOBJ> compareToFillInVariableMap = new HashMap<>();
-	HashMap<String, OMOBJ> compareToExerciseVariableMap = new HashMap<>();
+	static HashMap<Integer, OMOBJ> compareToFillInVariableMap = new HashMap<>();
+	static HashMap<String, OMOBJ> compareToExerciseVariableMap = new HashMap<>();
 
-	@Before
-	public void beforeTest() {
+	@BeforeClass
+	public static void beforeTest() {
 		try {
 			compareToFillInVariableMap.put(1, OMConverter.toObject("<OMOBJ><OMSTR>test</OMSTR></OMOBJ>"));
 

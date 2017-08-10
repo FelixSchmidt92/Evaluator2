@@ -5,7 +5,7 @@ import static org.junit.Assert.fail;
 
 import java.util.HashMap;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator.Evaluator;
@@ -21,11 +21,11 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestNotEqual extends TestIntegration {
 
-	HashMap<Integer, OMOBJ> notEqualFillInVariableMap = new HashMap<>();
-	HashMap<String, OMOBJ> notEqualExerciseVariableMap = new HashMap<>();
+	static HashMap<Integer, OMOBJ> notEqualFillInVariableMap = new HashMap<>();
+	static HashMap<String, OMOBJ> notEqualExerciseVariableMap = new HashMap<>();
 
-	@Before
-	public void beforeTest() throws FunctionNotImplementedException, UndefinedFillInVariableException,
+	@BeforeClass
+	public static void beforeTest() throws FunctionNotImplementedException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
 		notEqualFillInVariableMap.put(1, ExpressionParser.parse("3", null, null));
 		notEqualFillInVariableMap.put(2, ExpressionParser.parse("10", null, null));

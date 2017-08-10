@@ -5,7 +5,7 @@ import static org.junit.Assert.fail;
 
 import java.util.HashMap;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator.Evaluator;
@@ -23,11 +23,11 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestExpand extends TestIntegration {
 
-	HashMap<Integer, OMOBJ> expandFillInVariableMap = new HashMap<>();
-	HashMap<String, OMOBJ> expandExerciseVariableMap = new HashMap<>();
+	static HashMap<Integer, OMOBJ> expandFillInVariableMap = new HashMap<>();
+	static HashMap<String, OMOBJ> expandExerciseVariableMap = new HashMap<>();
 
-	@Before
-	public void beforeTest() throws FunctionNotImplementedException, UndefinedFillInVariableException,
+	@BeforeClass
+	public static void beforeTest() throws FunctionNotImplementedException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
 		expandFillInVariableMap.put(1, ExpressionParser.parse("1", null, null));
 		expandFillInVariableMap.put(2, ExpressionParser.parse("5", null, null));

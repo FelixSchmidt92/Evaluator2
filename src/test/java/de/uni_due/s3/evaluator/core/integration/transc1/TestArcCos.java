@@ -26,10 +26,8 @@ public class TestArcCos extends TestIntegration {
 		assertEquals(PI, Evaluator.getNumberResult("acos('-1')", exerciseVariableMap, fillInVariableMap), 0.0);
 	}
 
-	//FIXME: Es wird keine Zahl zurück gegeben, sondern etwas wie 1/2 * PI
 	@Test
 	public void testAcos3() throws EvaluatorException, OpenMathException {
-		System.out.println(Evaluator.evaluate("acos('0')",null,null));
 		assertEquals(PI / 2, Evaluator.getNumberResult("acos('0')", exerciseVariableMap, fillInVariableMap), 0.000001);
 	}
 

@@ -6,7 +6,7 @@ import static org.junit.Assert.fail;
 
 import java.util.HashMap;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator.Evaluator;
@@ -25,11 +25,11 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestGetDenominator extends TestIntegration {
 
-	HashMap<Integer, OMOBJ> getDenominatorFillInVariableMap = new HashMap<>();
-	HashMap<String, OMOBJ> getDenominatorExerciseVariableMap = new HashMap<>();
+	static HashMap<Integer, OMOBJ> getDenominatorFillInVariableMap = new HashMap<>();
+	static HashMap<String, OMOBJ> getDenominatorExerciseVariableMap = new HashMap<>();
 
-	@Before
-	public void beforeTest() throws FunctionNotImplementedException, UndefinedFillInVariableException,
+	@BeforeClass
+	public static void beforeTest() throws FunctionNotImplementedException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
 		getDenominatorFillInVariableMap.put(1, ExpressionParser.parse("0", null, null));
 		getDenominatorFillInVariableMap.put(2, ExpressionParser.parse("20/3", null, null));

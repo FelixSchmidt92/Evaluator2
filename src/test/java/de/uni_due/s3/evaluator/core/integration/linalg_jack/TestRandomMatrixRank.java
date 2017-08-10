@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import javax.xml.bind.JAXBException;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator.Evaluator;
@@ -22,11 +22,11 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestRandomMatrixRank extends TestIntegration {
 
-	HashMap<Integer, OMOBJ> randomMatrixRankFillInVariableMap = new HashMap<>();
-	HashMap<String, OMOBJ> randomMatrixRankExerciseVariableMap = new HashMap<>();
+	static HashMap<Integer, OMOBJ> randomMatrixRankFillInVariableMap = new HashMap<>();
+	static HashMap<String, OMOBJ> randomMatrixRankExerciseVariableMap = new HashMap<>();
 
-	@Before
-	public void beforeTest() {
+	@BeforeClass
+	public static void beforeTest() {
 		try {
 			randomMatrixRankFillInVariableMap.put(1, OMConverter.toObject("<OMOBJ><OMI>3</OMI></OMOBJ>"));
 
