@@ -1,6 +1,5 @@
 package de.uni_due.s3.evaluator.core.integration.relation1;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -33,6 +32,11 @@ public class TestEqual extends TestIntegration {
 
 		equalExerciseVariableMap.put("a", ExpressionParser.parse("7", null, null));
 		equalExerciseVariableMap.put("b", ExpressionParser.parse("2", null, null));
+	}
+	
+	@Test
+	public void testEqual0() throws EvaluatorException, OpenMathException {
+		assertTrue(Evaluator.getBooleanResult("1 == 1.0", equalExerciseVariableMap, equalFillInVariableMap));
 	}
 	
 	@Test
@@ -112,7 +116,7 @@ public class TestEqual extends TestIntegration {
 	
 	@Test
 	public void testEqualWithEncapsulation4() throws EvaluatorException, OpenMathException {
-		assertFalse(Evaluator.getBooleanResult("1 == (1 == (1 == (1 == (1 == 1))))", equalExerciseVariableMap, equalFillInVariableMap));
+		assertTrue(Evaluator.getBooleanResult("1 == (1 == (1 == (1 == (1 == 1))))", equalExerciseVariableMap, equalFillInVariableMap));
 	}
 
 	@Test
@@ -122,7 +126,7 @@ public class TestEqual extends TestIntegration {
 	
 	@Test
 	public void testEqualWithEncapsulation6() throws EvaluatorException, OpenMathException {
-		assertFalse(Evaluator.getBooleanResult("((((1 == 1) == 1) == 1) == 1) == 1", equalExerciseVariableMap, equalFillInVariableMap));
+		assertTrue(Evaluator.getBooleanResult("((((1 == 1) == 1) == 1) == 1) == 1", equalExerciseVariableMap, equalFillInVariableMap));
 	}
 
 	@Test(expected=ParserException.class)

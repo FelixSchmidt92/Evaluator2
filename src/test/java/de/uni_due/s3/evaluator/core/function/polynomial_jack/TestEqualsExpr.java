@@ -122,6 +122,6 @@ public class TestEqualsExpr extends TestFunctionAbstract {
 		args.add(arg1.getOMA());
 		args.add(arg2.getOMA());
 
-		assertEquals("var('x');bool(((x^2 - 5 * x) + 6)==(x - 2) * (x - 3))", func.getPartialSageSyntax(args));
+		assertEquals("var('x');bool((((x)^(2) - 5 * x) + 6)==(x - 2) * (x - 3))", func.getPartialSageSyntax(args));
 	}
 }

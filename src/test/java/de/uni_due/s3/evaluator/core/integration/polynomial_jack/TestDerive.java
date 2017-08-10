@@ -72,11 +72,11 @@ public class TestDerive extends TestIntegration {
 				Evaluator.evaluate("derive('x^2+x+3','x')", deriveExerciseVariableMap, deriveFillInVariableMap));
 	}
 
-	@Test //FIXME TestError, Function only returns y^2
+	@Test
 	public void testDerive7() throws EvaluatorException, OpenMathException {
-		OMOBJ expected = ExpressionParser.parse("2*x*y^2", null, null);
-		assertEquals(expected,
-				Evaluator.evaluate("derive('(x*y)^2','x')", deriveExerciseVariableMap, deriveFillInVariableMap));
+		OMOBJ expected = ExpressionParser.parse("2*(y^2*x)", null, null);
+		assertEquals(expected.getOMA(),
+				Evaluator.evaluate("derive('(x*y)^2','x')", deriveExerciseVariableMap, deriveFillInVariableMap).getOMA());
 	}
 
 	@Test

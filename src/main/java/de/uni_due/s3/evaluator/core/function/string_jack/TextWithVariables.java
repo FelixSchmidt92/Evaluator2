@@ -23,11 +23,16 @@ import de.uni_due.s3.openmath.omutils.OMCreator;
  * @author dlux
  *
  */
-public class TextValueWithVariables extends Function {
+public class TextWithVariables extends Function {
 
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionException {
-		return OMCreator.createOMA(OMSymbol.STRINGJACK_TEXTVALUEWITHVARIABLES, arguments);
+		return OMCreator.createOMA(OMSymbol.STRINGJACK_TEXTWITHVARIABLES, arguments);
+	}
+
+	@Override
+	protected boolean keepOriginalTextValue() {
+		return true;
 	}
 
 	@Override

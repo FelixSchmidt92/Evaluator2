@@ -8,9 +8,11 @@ import java.util.regex.Pattern;
 
 import org.antlr.v4.runtime.tree.ParseTree;
 
+import de.uni_due.s3.evaluator.core.OMUtils;
 import de.uni_due.s3.evaluator.core.dictionaries.OMSEvaluatorSyntaxDictionary;
 import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedRuntimeException;
+import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.evaluator.exceptions.parserruntime.ParserRuntimeException;
 import de.uni_due.s3.evaluator.exceptions.parserruntime.UndefinedExerciseVariableRuntimeException;
 import de.uni_due.s3.evaluator.exceptions.parserruntime.UndefinedFillInVariableRuntimeException;
@@ -49,24 +51,25 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	 */
 	private HashMap<String, OMOBJ> exerciseVariableMap;
 	private HashMap<Integer, OMOBJ> fillInVariableMap;
+	final private static Pattern VARPOS = Pattern.compile("\\[var=[a-zA-Z0-9äöü]+?\\]|\\[pos=[0-9]+?\\]");
 
 	public ExpressionToOpenMathVisitor(HashMap<String, OMOBJ> exerciseVariableMap,
 			HashMap<Integer, OMOBJ> fillInVariableMap) {
-		
-		if (exerciseVariableMap != null){
+
+		if (exerciseVariableMap != null) {
 			this.exerciseVariableMap = exerciseVariableMap;
-			
+
 			OMOBJ pi = new OMOBJ();
 			pi.setOMS(OMSymbol.NUMS1_PI);
 			exerciseVariableMap.put("PI", pi);
-			
+
 			OMOBJ e = new OMOBJ();
 			e.setOMS(OMSymbol.NUMS1_E);
 			exerciseVariableMap.put("E", e);
 		} else {
 			exerciseVariableMap = new HashMap<>();
 		}
-		
+
 		if (fillInVariableMap != null) {
 			this.fillInVariableMap = fillInVariableMap;
 		} else {
@@ -225,8 +228,9 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	public OMF visitFloatValue(FloatValueContext ctx) {
 		try {
 			return OMCreator.createOMF(Double.parseDouble(ctx.value.getText()));
-		}catch(NumberFormatException e){
-			//fails converting to Double by : "123456789123456789.124212" -> in short by real high or low Numbers
+		} catch (NumberFormatException e) {
+			// fails converting to Double by : "123456789123456789.124212" -> in
+			// short by real high or low Numbers
 			throw new ParserRuntimeException("Could not Convert Number to Double. Number is to long", e);
 		}
 	}
@@ -235,8 +239,9 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	public OMI visitIntegerValue(IntegerValueContext ctx) {
 		try {
 			return OMCreator.createOMI(Integer.parseInt(ctx.value.getText()));
-		}catch(NumberFormatException e){
-			//fails converting to Integer by : "123456789123456789" -> in short by real high or low Numbers
+		} catch (NumberFormatException e) {
+			// fails converting to Integer by : "123456789123456789" -> in short
+			// by real high or low Numbers
 			throw new ParserRuntimeException("Could not Convert Number to Integer. Number is to long", e);
 		}
 	}
@@ -268,40 +273,75 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 		return OMCreator.createOMA(oms, omel);
 	}
 
+	private String substituteVariables(String text) {
+		StringBuilder sb = new StringBuilder();
+		Matcher varposMatcher = VARPOS.matcher(text);
+		/* Pointer to get string subsequences */
+		int stringPointer = 0;
+		while (varposMatcher.find()) {
+			sb.append(text.substring(stringPointer, varposMatcher.start()));
+			stringPointer = varposMatcher.end();
+			boolean isVar = text.substring(varposMatcher.start(), varposMatcher.end()).contains("var");
+			String varposVal = text.substring(varposMatcher.start() + 5, varposMatcher.end() - 1);
+			if (isVar) {
+				OMOBJ var = exerciseVariableMap.get(varposVal);
+				if (var == null)
+					throw new UndefinedExerciseVariableRuntimeException(varposVal);
+				try {
+					sb.append(OMUtils.convertOMToString(var));
+				} catch (InputMismatchException e) {
+				}
+			} else {
+				OMOBJ var = fillInVariableMap.get(Integer.parseInt(varposVal));
+				if (var == null)
+					throw new UndefinedFillInVariableRuntimeException(Integer.parseInt(varposVal));
+				try {
+					sb.append(OMUtils.convertOMToString(var));
+				} catch (InputMismatchException e) {
+				}
+			}
+		}
+		sb.append(text.substring(stringPointer));
+		return sb.toString();
+	}
+
 	@Override
 	public Object visitTextValue(TextValueContext ctx) {
-
-		String val = ctx.getText().substring(1, ctx.getText().length() - 1); // the
+		String text = ctx.getText().substring(1, ctx.getText().length() - 1); // the
 																				// input
 
 		/* Return if the InputString is an Expression */
 		try {
-			ParseTree tree = ExpressionParser.createParseTree(val);
-			return this.visit(tree);
+			ParseTree tree = ExpressionParser.createParseTree(text);
+			ArrayList<Object> omstrAndExpression = new ArrayList<>();
+
+			omstrAndExpression.add(OMCreator.createOMSTR(substituteVariables(text)));
+			omstrAndExpression.add(this.visit(tree));
+			return OMCreator.createOMA(OMSymbol.STRINGJACK_TEXTWITHEXPRESSION, omstrAndExpression);
 		} catch (ParserRuntimeException e) {
 			// do nothing continue Code below (In String is no Expression!)
 		}
 
 		/* Return if the InputString is a Text with or without variables */
 		ArrayList<Object> omel = new ArrayList<>();
-		Pattern varposPattern = Pattern.compile("\\[var=[a-zA-Z0-9äöü]+?\\]|\\[pos=[0-9]+?\\]");
-		Matcher varposMatcher = varposPattern.matcher(val); // PatternMatcher
-															// finds [pos=*] or
-															// [val=*]
+
+		Matcher varposMatcher = VARPOS.matcher(text); // PatternMatcher
+														// finds [pos=*] or
+														// [val=*]
 
 		int stringPointer = 0; // Pointer to get string subsequences
 		while (varposMatcher.find()) {
-			OMSTR omstr = OMCreator.createOMSTR(val.substring(stringPointer, varposMatcher.start()));
+			OMSTR omstr = OMCreator.createOMSTR(text.substring(stringPointer, varposMatcher.start()));
 			stringPointer = varposMatcher.end();
 
 			if (omstr.getContent().length() != 0) {
 				omel.add(omstr); // Add leading OMSTR of pos/val Variables
 			}
 
-			boolean isVar = val.substring(varposMatcher.start(), varposMatcher.end()).contains("var");
-			String varposVal = val.substring(varposMatcher.start() + 5, varposMatcher.end() - 1); // remove
-																						// or
-																									// "[var="
+			boolean isVar = text.substring(varposMatcher.start(), varposMatcher.end()).contains("var");
+			String varposVal = text.substring(varposMatcher.start() + 5, varposMatcher.end() - 1); // remove
+			// or
+			// "[var="
 
 			/* extracting the pos OR var value */
 			if (isVar) {
@@ -322,8 +362,8 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 				}
 			}
 		}
-		if (stringPointer != 0 && stringPointer < val.length()) {
-			OMSTR omstr = OMCreator.createOMSTR(val.substring(stringPointer));
+		if (stringPointer != 0 && stringPointer < text.length()) {
+			OMSTR omstr = OMCreator.createOMSTR(text.substring(stringPointer));
 			omel.add(omstr); // Maybe add one OMSTR after pos/val Variables
 		}
 
@@ -332,7 +372,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 			// return OMSTR as usual (no pos or var Variables are found in
 			// String)
 		} else {
-			return OMCreator.createOMA(OMSymbol.STRINGJACK_TEXTVALUEWITHVARIABLES, omel);
+			return OMCreator.createOMA(OMSymbol.STRINGJACK_TEXTWITHVARIABLES, omel);
 			// return jack-specific String with variables in String
 		}
 	}

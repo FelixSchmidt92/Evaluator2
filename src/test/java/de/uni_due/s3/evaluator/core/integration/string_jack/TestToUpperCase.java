@@ -33,81 +33,97 @@ public class TestToUpperCase extends TestIntegration {
 		}
 	}
 
-	@Test public void testToLowerCase1() throws EvaluatorException, OpenMathException {
-		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("abcdefghijklmnopqrstuvwxyz")), Evaluator.evaluate("toLowerCase('ABCDEFGHIJKLMNOPQRSTUVWXYZ')", exerciseVariableMap, fillInVariableMap));
+	@Test
+	public void testToLowerCase1() throws EvaluatorException, OpenMathException {
+		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("abcdefghijklmnopqrstuvwxyz")), Evaluator
+				.evaluate("toLowerCase('ABCDEFGHIJKLMNOPQRSTUVWXYZ')", exerciseVariableMap, fillInVariableMap));
 	}
-	
-	@Test public void testToLowerCase2() throws EvaluatorException, OpenMathException {
-		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("1234567890.!\"§$%&/()=?")), Evaluator.evaluate("toLowerCase('1234567890.!\"§$%&/()=?')", exerciseVariableMap, fillInVariableMap));
+
+	@Test
+	public void testToLowerCase2() throws EvaluatorException, OpenMathException {
+		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("1234567890.!\"§$%&/()=?")),
+				Evaluator.evaluate("toLowerCase('1234567890.!\"§$%&/()=?')", exerciseVariableMap, fillInVariableMap));
 	}
-	
-	@Test public void testToLowerCase3() throws EvaluatorException, OpenMathException {
-		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("abcdefghijklmnopqrstuvwxyz")), Evaluator.evaluate("toLowerCase('abcdefghijklmnopqrstuvwxyz')", exerciseVariableMap, fillInVariableMap));
+
+	@Test
+	public void testToLowerCase3() throws EvaluatorException, OpenMathException {
+		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("abcdefghijklmnopqrstuvwxyz")), Evaluator
+				.evaluate("toLowerCase('abcdefghijklmnopqrstuvwxyz')", exerciseVariableMap, fillInVariableMap));
 	}
-	
-	@Test public void testToLowerCase4() throws EvaluatorException, OpenMathException {
-		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("")), Evaluator.evaluate("toLowerCase('')", exerciseVariableMap, fillInVariableMap));
+
+	@Test
+	public void testToLowerCase4() throws EvaluatorException, OpenMathException {
+		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("")),
+				Evaluator.evaluate("toLowerCase('')", exerciseVariableMap, fillInVariableMap));
 	}
-	
-	@Test public void testToLowerCase5() throws EvaluatorException, OpenMathException {
-		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR(" ")), Evaluator.evaluate("toLowerCase(' ')", exerciseVariableMap, fillInVariableMap));
+
+	@Test
+	public void testToLowerCase5() throws EvaluatorException, OpenMathException {
+		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR(" ")),
+				Evaluator.evaluate("toLowerCase(' ')", exerciseVariableMap, fillInVariableMap));
 	}
-	
+
 	@Test
 	public void testToLowerCaseWithInput1() throws EvaluatorException, OpenMathException {
-		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("hello")), Evaluator.evaluate("toLowerCase('[pos=7]')", exerciseVariableMap, fillInVariableMap));
+		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("hello")),
+				Evaluator.evaluate("toLowerCase('[pos=7]')", exerciseVariableMap, fillInVariableMap));
 	}
-	
+
 	@Test
 	public void testToLowerCaseWithInput2() throws EvaluatorException, OpenMathException {
-		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("hello3")), Evaluator.evaluate("toLowerCase('[pos=8]')", exerciseVariableMap, fillInVariableMap));
+		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("hello3")),
+				Evaluator.evaluate("toLowerCase('[pos=8]')", exerciseVariableMap, fillInVariableMap));
 	}
-	
+
 	@Test
 	public void TestToLowerCaseWithVariables1() throws EvaluatorException, OpenMathException {
-		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("hello")), Evaluator.evaluate("toLowerCase('[var=g]')", exerciseVariableMap, fillInVariableMap));
+		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("hello")),
+				Evaluator.evaluate("toLowerCase('[var=g]')", exerciseVariableMap, fillInVariableMap));
 	}
-	
+
 	@Test
 	public void TestToLowerCaseWithVariables2() throws EvaluatorException, OpenMathException {
-		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("hello3")), Evaluator.evaluate("toLowerCase('[var=h]')", exerciseVariableMap, fillInVariableMap));
+		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("hello3")),
+				Evaluator.evaluate("toLowerCase('[var=h]')", exerciseVariableMap, fillInVariableMap));
 	}
-	
+
 	@Test
 	public void testToLowerCaseWithExpressions1() throws EvaluatorException, OpenMathException {
-		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("a")), Evaluator.evaluate("toLowerCase(toLowerCase('A'))", exerciseVariableMap, fillInVariableMap));
+		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("a")),
+				Evaluator.evaluate("toLowerCase(toLowerCase('A'))", exerciseVariableMap, fillInVariableMap));
 	}
-	
+
 	@Test
 	public void testToLowerCaseWithExpressions2() throws EvaluatorException, OpenMathException {
-		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("a")), Evaluator.evaluate("toLowerCase(toLowerCase(toLowerCase('A')))", exerciseVariableMap, fillInVariableMap));
+		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("a")), Evaluator
+				.evaluate("toLowerCase(toLowerCase(toLowerCase('A')))", exerciseVariableMap, fillInVariableMap));
 	}
-	
-	@Test(expected=ParserException.class)
+
+	@Test(expected = ParserException.class)
 	public void testToLowerCaseWithWrongInputCharacter() throws EvaluatorException, OpenMathException {
 		Evaluator.evaluate("toLowerCase(ab)", exerciseVariableMap, fillInVariableMap);
 		fail();
 	}
-	
-	@Test(expected=FunctionInvalidNumberOfArgumentsException.class)
+
+	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testToLowerCaseWithTwoArguments() throws EvaluatorException, OpenMathException {
 		Evaluator.evaluate("toLowerCase('A', 'B')", exerciseVariableMap, fillInVariableMap);
 		fail();
 	}
-	
-	@Test(expected=FunctionInvalidNumberOfArgumentsException.class)
+
+	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testToLowerCaseWithThreeArguments() throws EvaluatorException, OpenMathException {
 		Evaluator.evaluate("toLowerCase('A', 'B', 'C')", exerciseVariableMap, fillInVariableMap);
 		fail();
 	}
-	
-	@Test(expected=UndefinedExerciseVariableException.class)
+
+	@Test(expected = UndefinedExerciseVariableException.class)
 	public void testToLowerCaseWithMissingExerciseVariable() throws EvaluatorException, OpenMathException {
 		Evaluator.evaluate("toLowerCase('[var=j]')", exerciseVariableMap, fillInVariableMap);
 		fail();
 	}
-	
-	@Test(expected=UndefinedFillInVariableException.class)
+
+	@Test(expected = UndefinedFillInVariableException.class)
 	public void testToLowerCaseWithMissingInput() throws EvaluatorException, OpenMathException {
 		Evaluator.evaluate("toLowerCase('[pos=42]')", exerciseVariableMap, fillInVariableMap);
 		fail();

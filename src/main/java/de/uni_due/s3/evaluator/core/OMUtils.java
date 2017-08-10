@@ -50,13 +50,15 @@ public class OMUtils {
 				return Math.PI;
 			} else if (symbol.equals(OMSymbol.NUMS1_INFINITY)) {
 				return Double.POSITIVE_INFINITY;
-			} else if (obj.equals(OMSymbol.LOGIC1_FALSE)){
+			} else if (obj.equals(OMSymbol.LOGIC1_FALSE)) {
 				return 0.0;
-			} else if (obj.equals(OMSymbol.LOGIC1_TRUE)){
+			} else if (obj.equals(OMSymbol.LOGIC1_TRUE)) {
 				return 1.0;
-			}else {
+			} else {
 				throw new InputMismatchException();
 			}
+		} else if (OMTypeChecker.isOMAWithSymbol(obj, OMSymbol.STRINGJACK_TEXTWITHEXPRESSION)) {
+			return convertOMToDouble(((OMA) obj).getOmel().get(2));
 		} else {
 			throw new InputMismatchException();
 		}
@@ -83,8 +85,9 @@ public class OMUtils {
 	}
 
 	/**
-	 * Diese Funktion nimmt einen OMI oder ein OMF entgegen und erzeugt hieraus einen Integer
-	 * Im Falle eines OMF wird deren die Nachkommastellen einfach ausgelassen.
+	 * Diese Funktion nimmt einen OMI oder ein OMF entgegen und erzeugt hieraus
+	 * einen Integer Im Falle eines OMF wird deren die Nachkommastellen einfach
+	 * ausgelassen.
 	 * 
 	 * @param obj
 	 *            OMI or OMF
@@ -99,21 +102,23 @@ public class OMUtils {
 				throw new InputMismatchException();
 			}
 		}
-		
+
 		if (obj instanceof OMI) {
 			return Integer.parseInt(((OMI) obj).getValue());
-		} else if (obj instanceof OMF){
+		} else if (obj instanceof OMF) {
 			double val = ((OMF) obj).getDec().doubleValue();
-			if(val % 1 == 0)
+			if (val % 1 == 0)
 				return (int) val;
-			else 
+			else
 				throw new InputMismatchException();
-			
-		}else if (obj.equals(OMSymbol.LOGIC1_FALSE)){
+
+		} else if (obj.equals(OMSymbol.LOGIC1_FALSE)) {
 			return 0;
-		} else if (obj.equals(OMSymbol.LOGIC1_TRUE)){
+		} else if (obj.equals(OMSymbol.LOGIC1_TRUE)) {
 			return 1;
-		}else {
+		} else if (OMTypeChecker.isOMAWithSymbol(obj, OMSymbol.STRINGJACK_TEXTWITHEXPRESSION)) {
+			return convertOMToInteger(((OMA) obj).getOmel().get(2));
+		} else {
 			throw new InputMismatchException();
 		}
 	}
@@ -144,11 +149,13 @@ public class OMUtils {
 			return Double.toString(((OMF) obj).getDec());
 		} else if (obj instanceof OMV) {
 			return ((OMV) obj).getName();
-		} else if (obj.equals(OMSymbol.LOGIC1_FALSE)){
+		} else if (obj.equals(OMSymbol.LOGIC1_FALSE)) {
 			return "0";
-		} else if (obj.equals(OMSymbol.LOGIC1_TRUE)){
+		} else if (obj.equals(OMSymbol.LOGIC1_TRUE)) {
 			return "1";
-		} else if (OMTypeChecker.isOMAWithSymbol(obj, OMSymbol.STRINGJACK_TEXTVALUEWITHVARIABLES)) {
+		} else if (OMTypeChecker.isOMAWithSymbol(obj, OMSymbol.STRINGJACK_TEXTWITHEXPRESSION)) {
+			return convertOMToString(((OMA)obj).getOmel().get(1));
+		} else if (OMTypeChecker.isOMAWithSymbol(obj, OMSymbol.STRINGJACK_TEXTWITHVARIABLES)) {
 			List<Object> omel = ((OMA) obj).getOmel();
 			omel.remove(0);
 			String result = "";
@@ -160,8 +167,8 @@ public class OMUtils {
 			throw new InputMismatchException();
 		}
 	}
-	
-	public static boolean convertOMToBoolean(Object obj) throws InputMismatchException{
+
+	public static boolean convertOMToBoolean(Object obj) throws InputMismatchException {
 		if (obj instanceof OMOBJ) {
 			try {
 				obj = OMConverter.toElement((OMOBJ) obj);
@@ -169,70 +176,73 @@ public class OMUtils {
 				throw new InputMismatchException();
 			}
 		}
-		
-		if (obj instanceof OMS){
-			if(obj.equals(OMSymbol.LOGIC1_TRUE) || obj.equals(OMSymbol.NUMS1_PI) || obj.equals(OMSymbol.NUMS1_E) || obj.equals(OMSymbol.NUMS1_INFINITY)) {
+
+		if (obj instanceof OMS) {
+			if (obj.equals(OMSymbol.LOGIC1_TRUE) || obj.equals(OMSymbol.NUMS1_PI) || obj.equals(OMSymbol.NUMS1_E)
+					|| obj.equals(OMSymbol.NUMS1_INFINITY)) {
 				return true;
-			}else{
+			} else {
 				return false;
 			}
-		}else if (obj instanceof OMI){
-			if(Integer.parseInt(((OMI)obj).getValue())>0 ){
+		} else if (obj instanceof OMI) {
+			if (Integer.parseInt(((OMI) obj).getValue()) > 0) {
 				return true;
-			}else{
+			} else {
 				return false;
 			}
-		}else if (obj instanceof OMF){
-			if( ((OMF) obj).getDec()>0){
+		} else if (obj instanceof OMF) {
+			if (((OMF) obj).getDec() > 0) {
 				return true;
-			}else {
+			} else {
 				return false;
 			}
-		}else if (obj instanceof OMSTR){
-			if( ((OMSTR) obj).getContent().equals("true")){
+		} else if (obj instanceof OMSTR) {
+			if (((OMSTR) obj).getContent().equals("true")) {
 				return true;
-			}else {
+			} else {
 				return false;
 			}
-		}else {
+		} else if (OMTypeChecker.isOMAWithSymbol(obj, OMSymbol.STRINGJACK_TEXTWITHEXPRESSION)) {
+			return convertOMToBoolean(((OMA)obj).getOmel().get(2));
+		} else {
 			throw new InputMismatchException();
 		}
 	}
-	
-	public static OMS convertToLogicBoolean(Object obj) throws InputMismatchException{
-		
-		if (obj instanceof Integer){
-			if((Integer)obj >0 ){
+
+	public static OMS convertToLogicBoolean(Object obj) throws InputMismatchException {
+
+		if (obj instanceof Integer) {
+			if ((Integer) obj > 0) {
 				return OMSymbol.LOGIC1_TRUE;
-			}else{
+			} else {
 				return OMSymbol.LOGIC1_FALSE;
 			}
-		}else if (obj instanceof Double){
-			if( ((Double) obj) >0){
+		} else if (obj instanceof Double) {
+			if (((Double) obj) > 0) {
 				return OMSymbol.LOGIC1_TRUE;
-			}else {
+			} else {
 				return OMSymbol.LOGIC1_FALSE;
 			}
-			
-		}else if (obj instanceof Double){
-			if( ((Double) obj) >0){
+
+		} else if (obj instanceof Double) {
+			if (((Double) obj) > 0) {
 				return OMSymbol.LOGIC1_TRUE;
-			}else {
+			} else {
 				return OMSymbol.LOGIC1_FALSE;
 			}
-		}else if (obj instanceof Float){
-			if( ((Float) obj) >0){
+		} else if (obj instanceof Float) {
+			if (((Float) obj) > 0) {
 				return OMSymbol.LOGIC1_TRUE;
-			}else {
+			} else {
 				return OMSymbol.LOGIC1_FALSE;
 			}
-		}else if (obj instanceof Boolean){
-			if( ((Boolean) obj) == true){
+		} else if (obj instanceof Boolean) {
+			if (((Boolean) obj) == true) {
 				return OMSymbol.LOGIC1_TRUE;
-			}else {
+			} else {
 				return OMSymbol.LOGIC1_FALSE;
 			}
-		}else {
+		} else {
 			throw new InputMismatchException();
 		}
 	}

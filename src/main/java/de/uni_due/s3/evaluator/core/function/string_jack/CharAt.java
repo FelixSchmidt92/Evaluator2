@@ -26,8 +26,7 @@ import de.uni_due.s3.openmath.omutils.OMCreator;
 public class CharAt extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments)
-			throws FunctionException {
+	protected Object execute(List<Object> arguments) throws FunctionException {
 		try {
 			String string = OMUtils.convertOMToString(arguments.get(0));
 			int pos = OMUtils.convertOMToInteger(arguments.get(1));
@@ -40,6 +39,11 @@ public class CharAt extends Function {
 		} catch (InputMismatchException e) {
 			throw new FunctionInvalidArgumentTypeException(this, "(0)String, (1)Integer");
 		}
+	}
+
+	@Override
+	protected boolean keepOriginalTextValue() {
+		return true;
 	}
 
 	@Override

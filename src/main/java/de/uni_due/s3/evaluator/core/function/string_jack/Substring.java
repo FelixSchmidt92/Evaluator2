@@ -26,10 +26,10 @@ import de.uni_due.s3.openmath.omutils.OMCreator;
 public class Substring extends Function {
 
 	/**
-	 * Expects two or three arguments. The first one has to be a 
-	 * string and the second the index at which to start. The third argument
-	 * is optional and represents the index at which to stop. If the last 
-	 * argument is not specified it will use the length of the first argument as index.
+	 * Expects two or three arguments. The first one has to be a string and the
+	 * second the index at which to start. The third argument is optional and
+	 * represents the index at which to stop. If the last argument is not
+	 * specified it will use the length of the first argument as index.
 	 * 
 	 */
 	@Override
@@ -39,7 +39,7 @@ public class Substring extends Function {
 			int begin = OMUtils.convertOMToInteger(arguments.get(1));
 			int end = string.length();
 			if (arguments.size() == 3) {
-				end =  OMUtils.convertOMToInteger(arguments.get(2));
+				end = OMUtils.convertOMToInteger(arguments.get(2));
 			}
 			return OMCreator.createOMSTR(string.substring(begin, end));
 		} catch (InputMismatchException e) {
@@ -48,6 +48,11 @@ public class Substring extends Function {
 			throw new FunctionInvalidArgumentException(this,
 					"Second and Third argument has to be in range of (String) first argument.");
 		}
+	}
+
+	@Override
+	protected boolean keepOriginalTextValue() {
+		return true;
 	}
 
 	@Override

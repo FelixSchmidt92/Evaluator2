@@ -24,12 +24,11 @@ import de.uni_due.s3.openmath.omutils.OMCreator;
 public class LastIndexOf extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments)
-			throws FunctionException {
+	protected Object execute(List<Object> arguments) throws FunctionException {
 		try {
 			String string = OMUtils.convertOMToString(arguments.get(0));
 			String muster = OMUtils.convertOMToString(arguments.get(1));
-			int pos = string.length()-1;
+			int pos = string.length() - 1;
 			if (arguments.size() == 3) {
 				pos = OMUtils.convertOMToInteger(arguments.get(2));
 			}
@@ -41,6 +40,11 @@ public class LastIndexOf extends Function {
 		} catch (InputMismatchException e) {
 			throw new FunctionInvalidArgumentTypeException(this, "(0)String, (1)String, [(2)Integer]");
 		}
+	}
+
+	@Override
+	protected boolean keepOriginalTextValue() {
+		return true;
 	}
 
 	@Override

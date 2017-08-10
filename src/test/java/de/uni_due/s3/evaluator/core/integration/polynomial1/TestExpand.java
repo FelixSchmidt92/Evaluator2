@@ -38,37 +38,37 @@ public class TestExpand extends TestIntegration {
 
 	@Test
 	public void testExpand1() throws EvaluatorException, OpenMathException {
-		assertEquals(ExpressionParser.parse("'2*a+2*b'", null, null),
+		assertEquals(ExpressionParser.parse("2*a+2*b", null, null),
 				Evaluator.evaluate("expand('2*(a+b)')", expandExerciseVariableMap, expandFillInVariableMap));
 	}
 
 	@Test
 	public void testExpand2() throws EvaluatorException, OpenMathException {
-		assertEquals(ExpressionParser.parse("'3*a'", null, null),
+		assertEquals(ExpressionParser.parse("3*a", null, null),
 				Evaluator.evaluate("expand('2*a+a')", expandExerciseVariableMap, expandFillInVariableMap));
 	}
 
 	@Test
 	public void testExpand3() throws EvaluatorException, OpenMathException {
-		assertEquals(ExpressionParser.parse("'2*a+c'", null, null),
+		assertEquals(ExpressionParser.parse("2*a+c", null, null),
 				Evaluator.evaluate("expand('2*a+c')", expandExerciseVariableMap, expandFillInVariableMap));
 	}
 
 	@Test
 	public void testExpandWithInput() throws EvaluatorException, OpenMathException {
-		assertEquals(ExpressionParser.parse("'x+5*y'", null, null),
+		assertEquals(ExpressionParser.parse("x+5*y", null, null),
 				Evaluator.evaluate("expand('[pos=1]*x+[pos=2]*y')", expandExerciseVariableMap, expandFillInVariableMap));
 	}
 
 	@Test
 	public void testExpandWithVariables() throws EvaluatorException, OpenMathException {
-		assertEquals(ExpressionParser.parse("'x+5*y'", null, null),
+		assertEquals(ExpressionParser.parse("x+5*y", null, null),
 				Evaluator.evaluate("expand('[var=a]*x+[var=b]*y')", expandExerciseVariableMap, expandFillInVariableMap));
 	}
 
 	@Test
 	public void testExpandWithONECharacter() throws EvaluatorException, OpenMathException {
-		assertEquals(ExpressionParser.parse("'a'", null, null),
+		assertEquals(ExpressionParser.parse("a", null, null),
 				Evaluator.evaluate("expand(a)", expandExerciseVariableMap, expandFillInVariableMap));
 	}
 

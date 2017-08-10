@@ -1,5 +1,6 @@
 package de.uni_due.s3.evaluator.core.integration.relation1;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -123,7 +124,7 @@ public class TestNotEqual extends TestIntegration {
 	
 	@Test
 	public void testNotEqualWithEncapsulation1() throws EvaluatorException, OpenMathException {
-		assertTrue(Evaluator.getBooleanResult("1 != (1 != 0)", notEqualExerciseVariableMap, notEqualFillInVariableMap));
+		assertFalse(Evaluator.getBooleanResult("1 != (1 != 0)", notEqualExerciseVariableMap, notEqualFillInVariableMap));
 	}
 	
 	@Test
@@ -138,7 +139,7 @@ public class TestNotEqual extends TestIntegration {
 	
 	@Test
 	public void testNotEqualWithEncapsulation4() throws EvaluatorException, OpenMathException {
-		assertTrue(Evaluator.getBooleanResult("1 != (1 != (1 != (1 != (1 != 1))))", notEqualExerciseVariableMap, notEqualFillInVariableMap));
+		assertFalse(Evaluator.getBooleanResult("1 != (1 != (1 != (1 != (1 != 1))))", notEqualExerciseVariableMap, notEqualFillInVariableMap));
 	}
 	
 	@Test
@@ -148,7 +149,7 @@ public class TestNotEqual extends TestIntegration {
 	
 	@Test
 	public void testNotEqualWithEncapsulation6() throws EvaluatorException, OpenMathException {
-		assertTrue(Evaluator.getBooleanResult("((((1 != 1) != 1) != 1) != 1) != 1", notEqualExerciseVariableMap, notEqualFillInVariableMap));
+		assertFalse(Evaluator.getBooleanResult("((((1 != 1) != 1) != 1) != 1) != 1", notEqualExerciseVariableMap, notEqualFillInVariableMap));
 	}
 	
 	@Test(expected=ParserException.class)

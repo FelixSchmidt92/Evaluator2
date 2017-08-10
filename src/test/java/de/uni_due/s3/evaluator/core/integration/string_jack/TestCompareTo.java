@@ -67,9 +67,8 @@ public class TestCompareTo extends TestIntegration {
 				compareToFillInVariableMap));
 	}
 
-	@Test(expected = FunctionInvalidArgumentTypeException.class) //Korrekt das ein Fehler geworfen wird, da compareTo nur Strings checkt!
+	@Test
 	public void testCompareTo6() throws EvaluatorException, OpenMathException {
-		
 		assertNotEquals(0, Evaluator.getNumberResult("compareTo('2*x+2*y','2*(x+y)')", compareToExerciseVariableMap,
 				compareToFillInVariableMap), 0.0);
 	}
