@@ -11,7 +11,6 @@ public class FunctionInvalidArgumentTypeException extends FunctionException {
 
 	public FunctionInvalidArgumentTypeException(String message) {
 		super(message);
-		// TODO Auto-generated constructor stub
 	}
 	
 	public FunctionInvalidArgumentTypeException(Function function, String types) {

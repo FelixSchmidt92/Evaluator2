@@ -55,11 +55,13 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 		
 		if (exerciseVariableMap != null){
 			this.exerciseVariableMap = exerciseVariableMap;
+			
 			OMOBJ pi = new OMOBJ();
 			pi.setOMS(OMSymbol.NUMS1_PI);
 			exerciseVariableMap.put("PI", pi);
+			
 			OMOBJ e = new OMOBJ();
-			e.setOMS(OMSymbol.NUMS1_PI);
+			e.setOMS(OMSymbol.NUMS1_E);
 			exerciseVariableMap.put("E", e);
 		} else {
 			exerciseVariableMap = new HashMap<>();

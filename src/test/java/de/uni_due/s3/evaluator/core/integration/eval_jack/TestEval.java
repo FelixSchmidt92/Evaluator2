@@ -84,7 +84,7 @@ public class TestEval extends TestIntegration {
 		assertEquals(1, Evaluator.getNumberResult("eval(eval(1))", exerciseVariableMap, fillInVariableMap), 0.0);
 	}
 
-	@Test
+	@Test //FIXME TODO gibt das Ergebnis einfach so zurück
 	public void testEvalWithFunction1() throws EvaluatorException, OpenMathException {
 		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("5*x")),
 				Evaluator.evaluate("eval('2*x+3*x')", exerciseVariableMap, fillInVariableMap));

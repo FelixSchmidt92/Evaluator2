@@ -84,7 +84,7 @@ public class TestGetDenominator extends TestIntegration {
 				0.0);
 	}
 
-	@Test(expected = FunctionInvalidArgumentException.class) //TODO FIXME Baum kann aufgebaut werden und die 0 kann auch rausgenommen werden? Akeptieren oder nicht? Gilt auch für GetNumerator
+	@Test(expected = FunctionInvalidArgumentException.class) 
 	public void testGetDenominatorAtDefinitionZero() throws EvaluatorException, OpenMathException {
 		Evaluator.getNumberResult("getDenominator(3/0)", getDenominatorExerciseVariableMap, getDenominatorFillInVariableMap); // Result of 3/0 is
 																									// undefined

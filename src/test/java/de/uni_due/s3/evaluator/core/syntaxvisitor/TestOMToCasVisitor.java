@@ -30,37 +30,31 @@ public class TestOMToCasVisitor {
 
 		@Override
 		protected String visit(OMF omf) {
-			// TODO Auto-generated method stub
 			return "omf";
 		}
 
 		@Override
 		protected String visit(OMI omi) {
-			// TODO Auto-generated method stub
 			return "omi";
 		}
 
 		@Override
 		protected String visit(OMS oms) {
-			// TODO Auto-generated method stub
 			return "oms";
 		}
 
 		@Override
 		protected String visit(OMSTR omstr) {
-			// TODO Auto-generated method stub
 			return "omstr";
 		}
 
 		@Override
 		protected String visit(OMV omv) {
-			// TODO Auto-generated method stub
 			return "omv";
 		}
 
 		@Override
 		protected String getCASRepresentationForFunction(Function function, List<Object> omel) {
-			// TODO Auto-generated method stub
 			return "function";
 		}
 

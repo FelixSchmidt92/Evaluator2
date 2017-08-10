@@ -35,20 +35,17 @@ public class GreaterThanOrEqual extends Function {
 
 	@Override
 	protected int minArgs() {
-		// TODO Auto-generated method stub
 		return 2;
 	}
 
 	@Override
 	protected int maxArgs() {
-		// TODO Auto-generated method stub
 		return 2;
 	}
 
 	@Override
 	public String getPartialSageSyntax(List<Object> arguments)
 			throws FunctionException, NoRepresentationAvailableException {
-		// TODO Auto-generated method stub
 		return getSageSyntax(arguments.get(0)) + " >= " + getSageSyntax(arguments.get(1));
 	}
 

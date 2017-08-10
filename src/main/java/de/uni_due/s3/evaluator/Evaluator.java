@@ -17,7 +17,8 @@ import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
- * TODO
+ * This is the Evaluator. With This Class you can evaluate and get a result form
+ * the Evaluator. 
  * 
  * @author dlux,frichtscheid,spobel
  *
@@ -43,10 +44,10 @@ public class Evaluator {
 	 * @param fillInVariableMap
 	 * @return a double value
 	 * @throws CasEvaluationException
-	 * @throws FunctionException	
-	 * 					If the expression doesn't return a number
-	 * @throws CasNotAvailableException 	
-	 * 					If the CAS is not available
+	 * @throws FunctionException
+	 *             If the expression doesn't return a number
+	 * @throws CasNotAvailableException
+	 *             If the CAS is not available
 	 * @throws NoRepresentationAvailableException
 	 * @throws OpenMathException
 	 * @throws UndefinedFillInVariableException
@@ -62,8 +63,7 @@ public class Evaluator {
 		try {
 			return OMUtils.convertOMToDouble(result);
 		} catch (InputMismatchException e) {
-			throw new FunctionException(
-					"Result of expression:" + expression + "can't be converted to a number");
+			throw new FunctionException("Result of expression:" + expression + "can't be converted to a number");
 		}
 	}
 

@@ -71,7 +71,6 @@ public class OMUtils {
 	 * @return OMF oder OMI
 	 */
 	public static Object convertDoubleToOMIOMF(Double result) {
-		//FIXME E und PI INFINITY
 		if (((double) result.intValue()) == result.doubleValue()) {
 			OMI omiResult = new OMI();
 			omiResult.setValue(String.valueOf(result.intValue()));

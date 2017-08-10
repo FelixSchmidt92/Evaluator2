@@ -87,5 +87,4 @@ public class TestIsEmpty extends TestIntegration{
 	public void testIsEmptyWithMissingInput() throws CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException, OpenMathException{
 		Evaluator.getBooleanResult("isEmpty('[pos=42]')", exerVar, fillIn);
 	}
-	
 }

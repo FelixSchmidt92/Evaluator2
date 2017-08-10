@@ -39,7 +39,7 @@ public class TestEqualsExpr extends TestIntegration {
 
 	@Test
 	public void testEqualsExpr1() throws EvaluatorException, OpenMathException {
-		assertTrue(Evaluator.getBooleanResult("equalsExpr('x^2-5x+6','(x-2)(x-3)')", equalsExprExerciseVariableMap,
+		assertTrue(Evaluator.getBooleanResult("equalsExpr('x^2-5*x+6','(x-2)*(x-3)')", equalsExprExerciseVariableMap,
 				equalsExprFillInVariableMap));
 	}
 
@@ -51,7 +51,7 @@ public class TestEqualsExpr extends TestIntegration {
 
 	@Test
 	public void testEqualsExpr3() throws EvaluatorException, OpenMathException {
-		assertTrue(Evaluator.getBooleanResult("equalsExpr('1/2x^2+3x-5','0.5x^2+3x-5')", equalsExprExerciseVariableMap,
+		assertTrue(Evaluator.getBooleanResult("equalsExpr('1/2*x^2+3*x-5','0.5*x^2+3*x-5')", equalsExprExerciseVariableMap,
 				equalsExprFillInVariableMap));
 	}
 
@@ -69,7 +69,7 @@ public class TestEqualsExpr extends TestIntegration {
 
 	@Test
 	public void testEqualsExpr6() throws EvaluatorException, OpenMathException {
-		assertTrue(Evaluator.getBooleanResult("equalsExpr('(x^2)/2','0.5x^2')", equalsExprExerciseVariableMap,
+		assertTrue(Evaluator.getBooleanResult("equalsExpr('(x^2)/2','0.5*x^2')", equalsExprExerciseVariableMap,
 				equalsExprFillInVariableMap));
 	}
 
@@ -93,7 +93,7 @@ public class TestEqualsExpr extends TestIntegration {
 
 	@Test
 	public void testEqualsExprWithVariables1() throws EvaluatorException, OpenMathException {
-		assertTrue(Evaluator.getBooleanResult("equalsExpr('[var=b]x^2+[var=c]x+[var=a]','x^2+5x')",
+		assertTrue(Evaluator.getBooleanResult("equalsExpr('[var=b]*x^2+[var=c]*x+[var=a]','x^2+5*x')",
 				equalsExprExerciseVariableMap, equalsExprFillInVariableMap));
 	}
 

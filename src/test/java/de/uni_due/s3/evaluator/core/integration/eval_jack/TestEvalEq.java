@@ -39,7 +39,7 @@ public class TestEvalEq extends TestIntegration {
 					+ "</OMA>"
 					+ "<OMI>-1</OMI>"
 				+ "</OMA>"
-			+ "</OMA></OMOBJ>");
+			+ "</OMA></OMOBJ>"); //returns x^2+(-1*x)+-1
 		assertEquals(expected,
 				Evaluator.evaluate("evalEq('x^2', 'x+1')", exerciseVariableMap, fillInVariableMap));
 	}
