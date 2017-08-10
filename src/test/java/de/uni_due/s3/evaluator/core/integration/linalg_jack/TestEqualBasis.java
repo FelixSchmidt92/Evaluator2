@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 import javax.xml.bind.JAXBException;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator.Evaluator;
@@ -27,7 +27,7 @@ public class TestEqualBasis extends TestIntegration {
 	HashMap<Integer, OMOBJ> equalBasisFillInVariableMap = new HashMap<>();
 	HashMap<String, OMOBJ> equalBasisExerciseVariableMap = new HashMap<>();
 	
-	@Before 
+	@BeforeClass
 	public void beforeTest() {
 		try {
 			//set(vector(1,2,3),vector(3,3,3))

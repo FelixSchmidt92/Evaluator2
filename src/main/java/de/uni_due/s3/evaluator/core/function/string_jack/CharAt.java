@@ -31,6 +31,7 @@ public class CharAt extends Function {
 		try {
 			String string = OMUtils.convertOMToString(arguments.get(0));
 			int pos = OMUtils.convertOMToInteger(arguments.get(1));
+
 			if (string.length() <= pos || pos < 0) {
 				throw new FunctionInvalidArgumentException(this,
 						"Second Argument of charAt is invalid. Not in Range of String.");

@@ -1,5 +1,6 @@
 package de.uni_due.s3.evaluator.core.integration.set_jack;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.HashMap;
@@ -47,7 +48,6 @@ public class TestGetFromOrderedSet extends TestIntegration{
 	
 	@Test
 	public void testGetFromOrderedSet1() throws CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException, OpenMathException{
-		System.out.println(Evaluator.getNumberResult("getFromOrderedSet('1', '{2;3;5;6}')", exerVar, fillIn));
 		assertTrue(3 == Evaluator.getNumberResult("getFromOrderedSet('1', '{2;3;5;6}')", exerVar, fillIn)); 
 	}
 	
@@ -116,9 +116,9 @@ public class TestGetFromOrderedSet extends TestIntegration{
 		assertTrue(4 == Evaluator.getNumberResult("getFromOrderedSet('1', '{2;4;5}')", exerVar, fillIn));
 	}
 	
-	@Test(expected=FunctionInvalidArgumentTypeException.class)
+	@Test//(expected=FunctionInvalidArgumentTypeException.class) Now works, single chars are recognized as Variables
 	public void testGetFromOrderedSetWithWrongInputCharacters() throws CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException, OpenMathException{
-		Evaluator.getNumberResult("getFromOrderedSet('1', '{a;b;c;d}')", exerVar, fillIn);
+		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("b")), Evaluator.evaluate("getFromOrderedSet('1', '{a;b;c;d}')", exerVar, fillIn));
 	}
 	
 	@Test(expected=FunctionInvalidArgumentTypeException.class)

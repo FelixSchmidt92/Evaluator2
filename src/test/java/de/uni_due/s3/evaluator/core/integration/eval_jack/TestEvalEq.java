@@ -13,6 +13,7 @@ import de.uni_due.s3.evaluator.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedFillInVariableException;
+import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMConverter;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
@@ -20,9 +21,27 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 public class TestEvalEq extends TestIntegration {
 
 	@Test
-	public void testEvalEq1() throws EvaluatorException, OpenMathException {
-		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("-1-x+x^2")),
-				Evaluator.evaluate("evalEq('x^2', 'x+1')", exerciseVariableMap, fillInVariableMap).getOMA());
+	public void testEvalEq1() throws EvaluatorException, OpenMathException, JAXBException {
+		OMOBJ expected = OMConverter.toObject(
+			"<OMOBJ><OMA>"
+				+ "<OMS name=\"plus\" cd=\"arith1\"/>"
+				+ "<OMA>"
+					+ "<OMS name=\"power\" cd=\"arith1\"/>"
+					+ "<OMV name=\"x\"/>"
+					+ "<OMI>2</OMI>"
+				+ "</OMA>"
+				+ "<OMA>"
+					+ "<OMS name=\"plus\" cd=\"arith1\"/>"
+					+ "<OMA>"
+						+ "<OMS name=\"times\" cd=\"arith1\"/>"
+						+ "<OMI>-1</OMI>"
+						+ "<OMV name=\"x\"/>"
+					+ "</OMA>"
+					+ "<OMI>-1</OMI>"
+				+ "</OMA>"
+			+ "</OMA></OMOBJ>");
+		assertEquals(expected,
+				Evaluator.evaluate("evalEq('x^2', 'x+1')", exerciseVariableMap, fillInVariableMap));
 	}
 
 	@Test
@@ -33,11 +52,13 @@ public class TestEvalEq extends TestIntegration {
 
 	@Test
 	public void testEvalEq3() throws EvaluatorException, OpenMathException, JAXBException {
+		System.out.println(Evaluator.evaluate("evalEq('5', '5')", exerciseVariableMap, fillInVariableMap).getOMA());
 		assertEquals(OMConverter.toObject("<OMOBJ><OMA><OMS cd=\"arith1\" name=\"minus\"/>" 
 				+ "<OMI>5</OMI>"
 				+ "<OMI>5</OMI>" 
 				+ "</OMA></OMOBJ>"),
 				Evaluator.evaluate("evalEq('5', '5')", exerciseVariableMap, fillInVariableMap));
+		
 	}
 
 	@Test
@@ -49,7 +70,7 @@ public class TestEvalEq extends TestIntegration {
 	@Test
 	public void testEvalEqWithInput2() throws EvaluatorException, OpenMathException {
 		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("-3+3*x")),
-				Evaluator.evaluate("evalEq('3x-2','[pos=2]')", exerciseVariableMap, fillInVariableMap));
+				Evaluator.evaluate("evalEq('3*x-2','[pos=2]')", exerciseVariableMap, fillInVariableMap));
 	}
 
 	@Test
@@ -61,7 +82,7 @@ public class TestEvalEq extends TestIntegration {
 	@Test
 	public void testEvalEqWithVariables2() throws EvaluatorException, OpenMathException {
 		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("-3+3*x")),
-				Evaluator.evaluate("evalEq('3x-2','[var=b]')", exerciseVariableMap, fillInVariableMap));
+				Evaluator.evaluate("evalEq('3*x-2','[var=b]')", exerciseVariableMap, fillInVariableMap));
 	}
 
 	@Test

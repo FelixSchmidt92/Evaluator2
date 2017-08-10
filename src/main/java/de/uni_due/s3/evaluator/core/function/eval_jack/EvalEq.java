@@ -7,6 +7,7 @@ import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 import de.uni_due.s3.sage.Sage;
@@ -42,6 +43,10 @@ public class EvalEq extends Function {
 			throws FunctionException, NoRepresentationAvailableException {
 		String term1 = getSageSyntax(arguments.get(0));
 		String term2 = getSageSyntax(arguments.get(1));
+		if(term1.length() == 2 || term2.length() == 2) {
+			//Case term1 or term2 is -->   ''
+			throw new FunctionInvalidArgumentException(this, "Input for this Function cannot be empty!");
+		}
 
 		String sageVar = PolyUtils.getSageSyntaxVariableRepresentation(term1 + term2);
 

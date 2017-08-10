@@ -19,9 +19,11 @@ public class GetDenominator extends Function {
 
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionException {
-		if (!OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.ARITH1_DIVIDE)) {
+		if (!OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.ARITH1_DIVIDE) && 
+				!OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.NUMS1_RATIONAL)) {
 			throw new FunctionInvalidArgumentTypeException(this, "(0)Division");
 		}
+		
 		return ((OMA) arguments.get(0)).getOmel().get(2);
 	}
 

@@ -3,12 +3,14 @@ package de.uni_due.s3.evaluator.core.integration.polynomial_jack;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator.Evaluator;
+import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator.core.integration.TestIntegration;
 import de.uni_due.s3.evaluator.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
@@ -19,6 +21,7 @@ import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableExcept
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedFillInVariableException;
 import de.uni_due.s3.evaluator.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
+import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestIntegrate extends TestIntegration {
@@ -74,7 +77,22 @@ public class TestIntegrate extends TestIntegration {
 
 	@Test
 	public void testIntegrateWithONECharacter() throws EvaluatorException, OpenMathException {
-		assertEquals(ExpressionParser.parse("(a^2)/2", null, null), Evaluator.evaluate(
+		ArrayList<Object> rational = new ArrayList<>();
+		rational.add(OMCreator.createOMI(1));
+		rational.add(OMCreator.createOMI(2));
+		
+		ArrayList<Object> power = new ArrayList<>();
+		power.add(OMCreator.createOMV("a"));
+		power.add(OMCreator.createOMI(2));
+		
+		ArrayList<Object> expected = new ArrayList<>();
+		expected.add(OMCreator.createOMA(OMSymbol.NUMS1_RATIONAL, rational));
+		expected.add(OMCreator.createOMA(OMSymbol.ARITH1_POWER, power));
+		
+		OMOBJ expect = OMCreator.createOMOBJ(OMCreator.createOMA(OMSymbol.ARITH1_TIMES, expected));
+		//Creating OMOBJ (1/2)*(a^2)  --> This is also a correct answer!
+		
+		assertEquals(expect, Evaluator.evaluate(
 				"integrate(a, a)", integrateExerciseVariableMap, integrateFillInVariableMap));
 	}
 

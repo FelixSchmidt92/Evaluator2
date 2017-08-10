@@ -105,7 +105,7 @@ public class OMUtils {
 			return Integer.parseInt(((OMI) obj).getValue());
 		} else if (obj instanceof OMF){
 			double val = ((OMF) obj).getDec().doubleValue();
-			if(val % 2 == 0)
+			if(val % 1 == 0)
 				return (int) val;
 			else 
 				throw new InputMismatchException();
@@ -146,9 +146,9 @@ public class OMUtils {
 		} else if (obj instanceof OMV) {
 			return ((OMV) obj).getName();
 		} else if (obj.equals(OMSymbol.LOGIC1_FALSE)){
-			return "false";
+			return "0";
 		} else if (obj.equals(OMSymbol.LOGIC1_TRUE)){
-			return "true";
+			return "1";
 		} else if (OMTypeChecker.isOMAWithSymbol(obj, OMSymbol.STRINGJACK_TEXTVALUEWITHVARIABLES)) {
 			List<Object> omel = ((OMA) obj).getOmel();
 			omel.remove(0);

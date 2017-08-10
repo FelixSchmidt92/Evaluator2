@@ -120,14 +120,14 @@ public class TestSubstring extends TestIntegration {
 		fail();
 	}
 
-	@Test
+	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void testSubstringWithWrongInputSecondArgumentAsPointNumber() throws EvaluatorException, OpenMathException {
 		OMSTR result = Evaluator.evaluate("substring('hello', 1.3, 2)", exerciseVariableMap, fillInVariableMap).getOMSTR();
 		assertEquals("<OMSTR>e</OMSTR>",result.toString());
 
 	}
 
-	@Test
+	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void testSubstringWithWrongInputThirdArgumentAsPointNumber() throws EvaluatorException, OpenMathException {
 		OMSTR result = Evaluator.evaluate("substring('hello', 1, 2.9)", exerciseVariableMap, fillInVariableMap).getOMSTR();
 		assertEquals("<OMSTR>e</OMSTR>",result.toString());

@@ -95,7 +95,7 @@ public class TestEquals extends TestIntegration {
 	
 	@Test 
 	public void testEqualsWithExpressions() throws EvaluatorException, OpenMathException {
-		assertTrue(Evaluator.getBooleanResult("equals('equals('a','a')', 'equals('b','b')')", exerciseVariableMap, fillInVariableMap));
+		assertTrue(Evaluator.getBooleanResult("equals(equals('a','a'), equals('b','b'))", exerciseVariableMap, fillInVariableMap));
 	}
 	
 	@Test (expected=ParserException.class)

@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 import javax.xml.bind.JAXBException;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator.Evaluator;
@@ -28,7 +28,7 @@ public class TestRemainder extends TestIntegration {
 	HashMap<Integer, OMOBJ> remainderFillInVariableMap = new HashMap<>();
 	HashMap<String, OMOBJ> remainderExerciseVariableMap = new HashMap<>();
 	
-	@Before 
+	@BeforeClass
 	public void beforeTest() {
 		try {
 			remainderFillInVariableMap.put(1, OMConverter.toObject("<OMOBJ><OMI>3</OMI></OMOBJ>"));

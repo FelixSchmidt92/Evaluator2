@@ -9,10 +9,10 @@ import org.junit.Test;
 import de.uni_due.s3.evaluator.Evaluator;
 import de.uni_due.s3.evaluator.core.integration.TestIntegration;
 import de.uni_due.s3.evaluator.exceptions.EvaluatorException;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedFillInVariableException;
+import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
@@ -28,7 +28,7 @@ public class TestEval extends TestIntegration {
 		assertEquals(2.2, Evaluator.getNumberResult("eval('1.2+1')", exerciseVariableMap, fillInVariableMap), 0.0);
 	}
 
-	@Test
+	@Test//FIXME TODO anstelle von |x|  eine neue Funktion anbieten "arith1" "abs" ??
 	public void testEval3() throws EvaluatorException, OpenMathException {
 		assertEquals(5, Evaluator.getNumberResult("eval(|-5|)", exerciseVariableMap, fillInVariableMap), 0.0);
 	}
@@ -86,25 +86,25 @@ public class TestEval extends TestIntegration {
 
 	@Test
 	public void testEvalWithFunction1() throws EvaluatorException, OpenMathException {
-		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("5x")),
-				Evaluator.evaluate("eval('2x+3x')", exerciseVariableMap, fillInVariableMap));
+		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("5*x")),
+				Evaluator.evaluate("eval('2*x+3*x')", exerciseVariableMap, fillInVariableMap));
 	}
 
 	@Test
 	public void testEvalWithFunction2() throws EvaluatorException, OpenMathException {
-		assertNotEquals(1, Evaluator.getNumberResult("eval('2x=2')", exerciseVariableMap, fillInVariableMap),0.0);
+		assertNotEquals(1, Evaluator.getNumberResult("eval('2*x=2')", exerciseVariableMap, fillInVariableMap),0.0);
 	}
 
-	@Test(expected = FunctionInvalidArgumentException.class)
+	@Test
 	public void testEvalWithWrongInputEmptyStringArgument() throws EvaluatorException, OpenMathException {
-		Evaluator.getNumberResult("eval('')", exerciseVariableMap, fillInVariableMap);
-		fail();
+		Evaluator.evaluate("eval('')", exerciseVariableMap, fillInVariableMap);
 	}
 
-	@Test(expected = FunctionInvalidArgumentException.class)
+	@Test
 	public void testEvalWithWrongInputCharacter() throws EvaluatorException, OpenMathException {
-		Evaluator.getNumberResult("eval('a')", exerciseVariableMap, fillInVariableMap);
-		fail();
+		OMOBJ expected = new OMOBJ();
+		expected.setOMV(OMCreator.createOMV("a"));
+		assertEquals(expected, Evaluator.evaluate("eval('a')", exerciseVariableMap, fillInVariableMap));
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)

@@ -37,7 +37,7 @@ public class TestRandomMatrixEigenvalue extends TestIntegration {
 	@Test
 	public void testRandomMatrixEigenValue1() throws EvaluatorException, OpenMathException {
 		assertEquals(ExpressionParser.parse("matrix(matrixrow(1,0,0), matrixrow(0,1,0), matrixrow(0,0,1))", null, null),
-				Evaluator.evaluate("randomMatrixEigenvalue('QQ', 'hjk', '[1,1,1]', '[1,1,1]')",
+				Evaluator.evaluate("randomMatrixEigenvalue('QQ', '3', '[1,1,1]', '[1,1,1]')",
 						randomMatrixEigenvalueExerciseVariableMap, randomMatrixEigenvalueFillInVariableMap));
 	}
 
