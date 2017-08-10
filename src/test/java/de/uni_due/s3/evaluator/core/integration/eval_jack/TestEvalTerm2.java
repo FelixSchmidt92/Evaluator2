@@ -71,7 +71,7 @@ public class TestEvalTerm2 extends TestIntegration {
 	}
 
 	@Test
-	public void testEvalTermIn2VariablesWithCharacterAsSecondAndThirdArgument()
+	public void testEvalTermIn2VariablesWithCharacterAsSecondAndThirdArgument1()
 			throws EvaluatorException, OpenMathException {
 		ArrayList<Object> omel = new ArrayList<>();
 		omel.add(OMCreator.createOMI(2));
@@ -80,6 +80,16 @@ public class TestEvalTerm2 extends TestIntegration {
 				Evaluator.evaluate("evalterm2('a+b','b', 'a')", exerciseVariableMap, fillInVariableMap));
 	}
 
+	@Test
+	public void testEvalTermIn2VariablesWithCharacterAsSecondAndThirdArgument2()
+			throws EvaluatorException, OpenMathException {
+		ArrayList<Object> omel = new ArrayList<>();
+		omel.add(OMCreator.createOMI(2));
+		omel.add(OMCreator.createOMV("c"));
+		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMA(OMSymbol.ARITH1_TIMES, omel)),
+				Evaluator.evaluate("evalterm2('a+b','c', 'a')", exerciseVariableMap, fillInVariableMap));
+	}
+	
 	@Test
 	public void testEvalTermIn2VariablesWithONECharacter() throws EvaluatorException, OpenMathException {
 		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMV("a")),
