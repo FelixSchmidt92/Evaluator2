@@ -139,6 +139,6 @@ public class TestEvalTerm2 extends TestFunctionAbstract {
 		args.add(arg1.getOMA());
 		args.add(OMCreator.createOMI(1));
 		args.add(OMCreator.createOMI(2));
-		assertEquals("var('a b x y');x = a =1.0;y = b =2.0;(((x^2 - 5 * a) + 6))", func.getPartialSageSyntax(args));
+		assertEquals("var('a b x y');x = a =1;y = b =2;(((x^2 - 5 * a) + 6))", func.getPartialSageSyntax(args));
 	}
 }

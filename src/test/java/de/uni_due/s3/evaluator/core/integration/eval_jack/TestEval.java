@@ -28,9 +28,9 @@ public class TestEval extends TestIntegration {
 		assertEquals(2.2, Evaluator.getNumberResult("eval('1.2+1')", exerciseVariableMap, fillInVariableMap), 0.0);
 	}
 
-	@Test//FIXME TODO anstelle von |x|  eine neue Funktion anbieten "arith1" "abs" ??
+	@Test
 	public void testEval3() throws EvaluatorException, OpenMathException {
-		assertEquals(5, Evaluator.getNumberResult("eval(|-5|)", exerciseVariableMap, fillInVariableMap), 0.0);
+		assertEquals(5, Evaluator.getNumberResult("eval(abs(-5))", exerciseVariableMap, fillInVariableMap), 0.0);
 	}
 
 	@Test

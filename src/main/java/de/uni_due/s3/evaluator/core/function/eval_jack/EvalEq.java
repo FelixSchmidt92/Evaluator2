@@ -43,7 +43,7 @@ public class EvalEq extends Function {
 			throws FunctionException, NoRepresentationAvailableException {
 		String term1 = getSageSyntax(arguments.get(0));
 		String term2 = getSageSyntax(arguments.get(1));
-		if(term1.length() == 2 || term2.length() == 2) {
+		if((term1.length() == 2 && term1.startsWith("'")) || (term2.length() == 2 && term2.startsWith("'"))) {
 			//Case term1 or term2 is -->   ''
 			throw new FunctionInvalidArgumentException(this, "Input for this Function cannot be empty!");
 		}
@@ -52,12 +52,11 @@ public class EvalEq extends Function {
 
 		StringBuilder sb = new StringBuilder();
 		sb.append(sageVar);
-		sb.append("((");
+		sb.append("expand(("); //Expand: shorts Expression
 		sb.append(term1);
 		sb.append(") - (");
 		sb.append(term2);
-		sb.append(")).expand()");//Ausmultiplizieren
-
+		sb.append("))");
 		return sb.toString();
 	}
 }
