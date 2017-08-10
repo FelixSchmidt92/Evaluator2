@@ -117,7 +117,7 @@ public class TestReplace extends TestIntegration {
 	}
 
 	@Test
-	public void tesReplaceWithThirdArgumentEmpty() throws EvaluatorException, OpenMathException {
+	public void testReplaceWithThirdArgumentEmpty() throws EvaluatorException, OpenMathException {
 		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("a")),
 				Evaluator.evaluate("replace('a ', ' ', '')", exerciseVariableMap, fillInVariableMap));
 	}

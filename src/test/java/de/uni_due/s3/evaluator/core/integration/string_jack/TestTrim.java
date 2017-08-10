@@ -22,94 +22,90 @@ public class TestTrim extends TestIntegration {
 	@Before
 	public void beforeTest() {
 		try {
-			fillInVariableMap.put(7, OMConverter.toObject("<OMOBJ><OMSTR>HELLO</OMSTR></OMOBJ>"));
-			fillInVariableMap.put(8, OMConverter.toObject("<OMOBJ><OMSTR>HELLO3</OMSTR></OMOBJ>"));
+			fillInVariableMap.put(7, OMConverter.toObject("<OMOBJ><OMSTR>hello</OMSTR></OMOBJ>"));
 
-			exerciseVariableMap.put("g", OMConverter.toObject("<OMOBJ><OMSTR>HELLO</OMSTR></OMOBJ>"));
-			exerciseVariableMap.put("h", OMConverter.toObject("<OMOBJ><OMSTR>HELLO3</OMSTR></OMOBJ>"));
+			exerciseVariableMap.put("g", OMConverter.toObject("<OMOBJ><OMSTR>hello</OMSTR></OMOBJ>"));
 		} catch (JAXBException e) {
 			throw new RuntimeException("Erzeugung der OpenMath exercise Variablen für TestIntegration fehlgeschlagen",
 					e);
 		}
 	}
 
-	@Test public void testToLowerCase1() throws EvaluatorException, OpenMathException {
-		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("abcdefghijklmnopqrstuvwxyz")), Evaluator.evaluate("toLowerCase('ABCDEFGHIJKLMNOPQRSTUVWXYZ')", exerciseVariableMap, fillInVariableMap));
-	}
-	
-	@Test public void testToLowerCase2() throws EvaluatorException, OpenMathException {
-		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("1234567890.!\"§$%&/()=?")), Evaluator.evaluate("toLowerCase('1234567890.!\"§$%&/()=?')", exerciseVariableMap, fillInVariableMap));
-	}
-	
-	@Test public void testToLowerCase3() throws EvaluatorException, OpenMathException {
-		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("abcdefghijklmnopqrstuvwxyz")), Evaluator.evaluate("toLowerCase('abcdefghijklmnopqrstuvwxyz')", exerciseVariableMap, fillInVariableMap));
-	}
-	
-	@Test public void testToLowerCase4() throws EvaluatorException, OpenMathException {
-		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("")), Evaluator.evaluate("toLowerCase('')", exerciseVariableMap, fillInVariableMap));
-	}
-	
-	@Test public void testToLowerCase5() throws EvaluatorException, OpenMathException {
-		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR(" ")), Evaluator.evaluate("toLowerCase(' ')", exerciseVariableMap, fillInVariableMap));
-	}
-	
 	@Test
-	public void testToLowerCaseWithInput1() throws EvaluatorException, OpenMathException {
-		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("hello")), Evaluator.evaluate("toLowerCase('[pos=7]')", exerciseVariableMap, fillInVariableMap));
+	public void testTrim1() throws EvaluatorException, OpenMathException {
+		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("hello")),
+				Evaluator.evaluate("trim(' hello')", exerciseVariableMap, fillInVariableMap));
 	}
-	
+
 	@Test
-	public void testToLowerCaseWithInput2() throws EvaluatorException, OpenMathException {
-		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("hello3")), Evaluator.evaluate("toLowerCase('[pos=8]')", exerciseVariableMap, fillInVariableMap));
+	public void testTrim2() throws EvaluatorException, OpenMathException {
+		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("hello")),
+				Evaluator.evaluate("trim('hello ')", exerciseVariableMap, fillInVariableMap));
 	}
-	
+
 	@Test
-	public void TestToLowerCaseWithVariables1() throws EvaluatorException, OpenMathException {
-		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("hello")), Evaluator.evaluate("toLowerCase('[var=g]')", exerciseVariableMap, fillInVariableMap));
+	public void testTrim3() throws EvaluatorException, OpenMathException {
+		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("hello")),
+				Evaluator.evaluate("trim(' hello ')", exerciseVariableMap, fillInVariableMap));
 	}
-	
+
 	@Test
-	public void TestToLowerCaseWithVariables2() throws EvaluatorException, OpenMathException {
-		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("hello3")), Evaluator.evaluate("toLowerCase('[var=h]')", exerciseVariableMap, fillInVariableMap));
+	public void testTrim4() throws EvaluatorException, OpenMathException {
+		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("hel lo")),
+				Evaluator.evaluate("trim(' hel lo ')", exerciseVariableMap, fillInVariableMap));
 	}
-	
+
 	@Test
-	public void testToLowerCaseWithExpressions1() throws EvaluatorException, OpenMathException {
-		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("a")), Evaluator.evaluate("toLowerCase(toLowerCase('A'))", exerciseVariableMap, fillInVariableMap));
+	public void testTrimWithExpression1() throws EvaluatorException, OpenMathException {
+		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("w o r k")),
+				Evaluator.evaluate("trim(trim(' w o r k '))", exerciseVariableMap, fillInVariableMap));
 	}
-	
+
 	@Test
-	public void testToLowerCaseWithExpressions2() throws EvaluatorException, OpenMathException {
-		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("a")), Evaluator.evaluate("toLowerCase(toLowerCase(toLowerCase('A')))", exerciseVariableMap, fillInVariableMap));
+	public void testTrimWithExpression2() throws EvaluatorException, OpenMathException {
+		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("w o r k")),
+				Evaluator.evaluate("trim(trim(trim(' w o r k ')))", exerciseVariableMap, fillInVariableMap));
 	}
-	
-	@Test(expected=ParserException.class)
-	public void testToLowerCaseWithWrongInputCharacter() throws EvaluatorException, OpenMathException {
-		Evaluator.evaluate("toLowerCase(ab)", exerciseVariableMap, fillInVariableMap);
+
+	@Test
+	public void testTrimWithInput() throws EvaluatorException, OpenMathException {
+		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("hello")),
+				Evaluator.evaluate("trim(' [pos=7] ')", exerciseVariableMap, fillInVariableMap));
+	}
+
+	@Test
+	public void testTrimWithVariables() throws EvaluatorException, OpenMathException {
+		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("hello")),
+				Evaluator.evaluate("trim(' [var=g] ')", exerciseVariableMap, fillInVariableMap));
+	}
+
+	@Test(expected = ParserException.class)
+	public void testTrimWithWrongInputCharacter() throws EvaluatorException, OpenMathException {
+		Evaluator.evaluate("trim(ab)", exerciseVariableMap, fillInVariableMap);
 		fail();
 	}
-	
-	@Test(expected=FunctionInvalidNumberOfArgumentsException.class)
-	public void testToLowerCaseWithTwoArguments() throws EvaluatorException, OpenMathException {
-		Evaluator.evaluate("toLowerCase('A', 'B')", exerciseVariableMap, fillInVariableMap);
+
+	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
+	public void testTrimWithTwoArguments() throws EvaluatorException, OpenMathException {
+		Evaluator.evaluate("trim(' a', 'a ')", exerciseVariableMap, fillInVariableMap);
 		fail();
 	}
-	
-	@Test(expected=FunctionInvalidNumberOfArgumentsException.class)
-	public void testToLowerCaseWithThreeArguments() throws EvaluatorException, OpenMathException {
-		Evaluator.evaluate("toLowerCase('A', 'B', 'C')", exerciseVariableMap, fillInVariableMap);
+
+	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
+	public void testTrimWithThreeArguments() throws EvaluatorException, OpenMathException {
+		Evaluator.evaluate("trim(' a', 'a ', ' a ')", exerciseVariableMap, fillInVariableMap);
 		fail();
 	}
-	
-	@Test(expected=UndefinedExerciseVariableException.class)
-	public void testToLowerCaseWithMissingExerciseVariable() throws EvaluatorException, OpenMathException {
-		Evaluator.evaluate("toLowerCase('[var=j]')", exerciseVariableMap, fillInVariableMap);
+
+	@Test(expected = UndefinedExerciseVariableException.class)
+	public void testTrimWithMissingExerciseVariable() throws EvaluatorException, OpenMathException {
+		Evaluator.evaluate("trim('[var=j]')", exerciseVariableMap, fillInVariableMap);
 		fail();
 	}
-	
-	@Test(expected=UndefinedFillInVariableException.class)
-	public void testToLowerCaseWithMissingInput() throws EvaluatorException, OpenMathException {
-		Evaluator.evaluate("toLowerCase('[pos=42]')", exerciseVariableMap, fillInVariableMap);
+
+	@Test(expected = UndefinedFillInVariableException.class)
+	public void testTrimWithMissingInput() throws EvaluatorException, OpenMathException {
+		Evaluator.evaluate("trim('[pos=42]')", exerciseVariableMap, fillInVariableMap);
 		fail();
 	}
 }
