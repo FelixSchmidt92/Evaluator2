@@ -11,7 +11,6 @@ public class UndefinedExerciseVariableException extends EvaluatorException {
 
 	public UndefinedExerciseVariableException(String message) {
 		super(message);
-		// TODO Auto-generated constructor stub
 	}
 
 }

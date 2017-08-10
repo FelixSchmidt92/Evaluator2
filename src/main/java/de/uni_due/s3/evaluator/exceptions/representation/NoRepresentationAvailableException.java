@@ -11,7 +11,6 @@ public class NoRepresentationAvailableException extends EvaluatorException{
 
 	public NoRepresentationAvailableException(String message) {
 		super(message);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

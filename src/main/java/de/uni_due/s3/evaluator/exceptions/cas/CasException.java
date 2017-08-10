@@ -13,7 +13,6 @@ public abstract class CasException extends EvaluatorException {
 
 	public CasException(String message) {
 		super("CasException:" + message);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

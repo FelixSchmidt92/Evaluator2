@@ -7,16 +7,17 @@ import java.util.Collection;
 import java.util.HashMap;
 
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
+import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedException;
 import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedFillInVariableException;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
+import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 
 
@@ -26,24 +27,26 @@ public class TestExpressionParser {
 	private static HashMap<String, OMOBJ> exerciseVariableMap;
 	private static HashMap<Integer, OMOBJ> fillInVariableMap;
 	
-	private String oms, omi, omstr, omf, oma, pos, var, treeSring;
-	private static String[][] input = {
-				{"e","1","'String'","1.0","plus(1,2)", "[pos=1]", "[var=a]", "'First' + 'Second'"},
-				{"pi","15","'Another'","1.0","1+2", "[pos=2]", "[var=b]", "'plus(4,3,1,23,1.1)'"},
-				{"omega","22","'abc123'","2.222", "1+2", "[pos=3]", "[var=c]", "plus(plus(plus(plus(plus(1, 'test')))))"},
+	private String omsStr, omi, omstr, omf, oma, pos, var, treeSring;
+	private OMS oms;
+	private static Object[][] input = {
+				{"[var=E]", OMSymbol.NUMS1_E, "1","'String'","1.0","plus(1,2)", "[pos=1]", "[var=a]", "'First' + 'Second'"},
+				{"[var=PI]", OMSymbol.NUMS1_PI, "15","'Another'","1.0","1+2", "[pos=2]", "[var=b]", "'plus(4,3,1,23,1.1)'"},
+				{"[var=PI]", OMSymbol.NUMS1_PI, "22","'abc123'","2.222", "1+2", "[pos=3]", "[var=c]", "plus(plus(plus(plus(plus(1, 'test')))))"},
 	};
 	
 	@Parameterized.Parameters
-	public static Collection<String[]> test() {
-		ArrayList<String[]> list = new ArrayList<String[]>();
-		for (String[] in : input) {
+	public static Collection<Object[]> test() {
+		ArrayList<Object[]> list = new ArrayList<Object[]>();
+		for (Object[] in : input) {
 			list.add(in);
 		}
 		return list;
 	}
 	
 	
-	public TestExpressionParser(String oms, String omi, String omstr, String omf, String oma, String pos, String var, String treeString) {
+	public TestExpressionParser(String omsStr, OMS oms, String omi, String omstr, String omf, String oma, String pos, String var, String treeString) {
+		this.omsStr = omsStr;
 		this.oms = oms;
 		this.omi = omi;
 		this.omstr = omstr;
@@ -75,13 +78,13 @@ public class TestExpressionParser {
 		fillInVariableMap.put(2, t2);
 		fillInVariableMap.put(3, t3);
 	}
-	@Ignore
-	@Test/*TODO FIXME dlux what about PI or E or OMEGA?*/
+	
+	@Test
 	public void testParseOMS() throws FunctionNotImplementedException, UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException{
-		OMOBJ omobj = ExpressionParser.parse(oms, null, null);
+		OMOBJ omobj = ExpressionParser.parse(omsStr, exerciseVariableMap, fillInVariableMap);
 		OMOBJ expected = new OMOBJ();
-		expected.setOMS(OMCreator.createOMS("", ""));
-		assertEquals(expected, omobj);
+		expected.setOMS(oms);
+		assertEquals(expected.getOMS(), omobj.getOMS());
 	}
 	
 	@Test

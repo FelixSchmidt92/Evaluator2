@@ -57,7 +57,7 @@ public class GrammarGenerator {
 	 */
 	public String genRandomFunctionRecursionWithBinaryTerms(int length, int depth, int initLength){
 		if (depth == 0){
-			return "(" + genRandomBinaryOperationWithDepthOne(3, null) + ")";
+			return "(" + genRandomBinaryOperationWithOutExAndPosWithDepthOne(3, null) + ")";
 		}else{
 			return genRandomFunctionName(3, null) + "(" + genArgsRecursionBinary(length, depth, initLength) + ")";
 		}
@@ -90,7 +90,7 @@ public class GrammarGenerator {
 	 */
 	public String genRandomFunctionRecursion(int length, int depth, int initLength){
 		if (depth == 0){
-			return genRandomUnaryTerminal(3, null);
+			return genRandomTerminalWithOutEXandFILLVariable(3, null);
 		}else{
 			return genRandomFunctionName(3, null) + "(" + genArgsRecursion(length, depth, initLength) + ")";
 		}
@@ -168,6 +168,20 @@ public class GrammarGenerator {
 		return genRandomUnaryTerminal(length, null) + " "
 			   + binaryOperators[new Random().nextInt(binaryOperators.length)] + " "
 			   + genRandomUnaryTerminal(length, null);
+	}
+	
+	
+	/**
+	 * Generates a random Binary Operation like '+[var=a] / -44.123'
+	 * 
+	 * @param builder null
+	 * @param length the RANDOM length of the Terminals (but not randomly 0)
+	 * @return returns a String, which represents a Binary Operation
+	 */
+	public String genRandomBinaryOperationWithOutExAndPosWithDepthOne(int length, String builder){
+		return genRandomTerminalWithOutEXandFILLVariable(length, null) + " "
+			   + binaryOperators[new Random().nextInt(binaryOperators.length)] + " "
+			   + genRandomTerminalWithOutEXandFILLVariable(length, null);
 	}
 	
 	

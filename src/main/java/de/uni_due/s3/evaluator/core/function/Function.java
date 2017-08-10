@@ -2,14 +2,19 @@ package de.uni_due.s3.evaluator.core.function;
 
 import java.util.List;
 
+import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
+import de.uni_due.s3.evaluator.core.syntaxvisitor.OMToSageVisitor;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoSageRepresentationAvailableException;
+import de.uni_due.s3.openmath.jaxb.OMA;
+import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
@@ -43,7 +48,7 @@ public abstract class Function {
 	 * @throws NoRepresentationAvailableException
 	 * @throws CasNotAvailableException
 	 * @throws CasEvaluationException
-	 * @throws OpenMathException 
+	 * @throws OpenMathException
 	 * @throws FunctionInvalidArgumentException
 	 */
 	abstract protected Object execute(List<Object> arguments) throws FunctionException, CasEvaluationException,
@@ -62,27 +67,36 @@ public abstract class Function {
 	 * @throws NoRepresentationAvailableException
 	 * @throws CasNotAvailableException
 	 * @throws CasEvaluationException
-	 * @throws OpenMathException 
+	 * @throws OpenMathException
 	 * @throws FunctionInvalidNumberOfArgumentsException
 	 *             if number of Arguments is not between
 	 */
-	public Object evaluate(List<Object> arguments) throws FunctionException, FunctionInvalidArgumentException,
-			CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public final Object evaluate(List<Object> arguments) throws FunctionException, CasEvaluationException,
+			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+		if (arguments == null)
+			throw new FunctionInvalidArgumentException(this, "The List of arguments is of Type NULL");
 		argsBetweenMinMax(arguments); // Check
+		if (!keepOriginalTextValue()) {
+			for (int i = 0; i < arguments.size(); i++) {
+				if (OMTypeChecker.isOMAWithSymbol(arguments.get(i), OMSymbol.STRINGJACK_TEXTWITHEXPRESSION)) {
+					arguments.set(i, ((OMA) arguments.get(i)).getOmel().get(2));
+				}
+			}
+		}
 		return execute(arguments);
 	}
 
 	/**
 	 * This Method just tests if the length of the Arguments is in between
-	 * minArgs and maxArgs. If not then a FunctionInvalidNumberOfArgumentsException is
-	 * thrown.
+	 * minArgs and maxArgs. If not then a
+	 * FunctionInvalidNumberOfArgumentsException is thrown.
 	 * 
 	 * @param arguments
 	 *            the List of arguments
 	 * @throws FunctionInvalidNumberOfArgumentsException
 	 *             if number of Arguments is not between
 	 */
-	public void argsBetweenMinMax(List<Object> arguments) throws FunctionInvalidNumberOfArgumentsException {
+	public final void argsBetweenMinMax(List<Object> arguments) throws FunctionInvalidNumberOfArgumentsException {
 		// Check max, if infinitely set max to Integer.MAX_VALUE
 		int max = maxArgs();
 		if (maxArgs() < 0) {
@@ -91,8 +105,12 @@ public abstract class Function {
 
 		if (!(minArgs() <= arguments.size() && max >= arguments.size())) {
 			// Arguments.size is not between minArgs and maxArgs so throw Error
-			throw new FunctionInvalidNumberOfArgumentsException(this, minArgs(), maxArgs(), arguments.size());
+			throw new FunctionInvalidNumberOfArgumentsException(this, minArgs(), maxArgs(), arguments.size(), "");
 		}
+	}
+
+	protected boolean keepOriginalTextValue() {
+		return false;
 	}
 
 	/**
@@ -150,10 +168,11 @@ public abstract class Function {
 	 * @return a String representation of this argument in Sage
 	 * @throws NoRepresentationAvailableException
 	 * @throws FunctionInvalidNumberOfArgumentsException
+	 * @throws FunctionInvalidArgumentTypeException
 	 * @throws CasException
 	 */
-	protected String getSageSyntax(Object omElement)
-			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException {
+	protected final String getSageSyntax(Object omElement)
+			throws FunctionException, NoRepresentationAvailableException {
 		return new OMToSageVisitor().visit(omElement);
 	}
 
@@ -170,10 +189,12 @@ public abstract class Function {
 	 * @return A String Representation of this Function AND all innerFunction
 	 * @throws NoRepresentationAvailableException
 	 * @throws FunctionInvalidNumberOfArgumentsException
+	 * @throws FunctionInvalidArgumentTypeException
+	 * @throws FunctionInvalidArgumentException
 	 * @throws CasException
 	 */
 	public String getPartialSageSyntax(List<Object> arguments)
-			throws FunctionInvalidNumberOfArgumentsException, NoRepresentationAvailableException {
+			throws FunctionException, NoRepresentationAvailableException {
 		throw new NoSageRepresentationAvailableException(
 				"There is no sage representation for function " + this.getClass() + " implemented");
 	}

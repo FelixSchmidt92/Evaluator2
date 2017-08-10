@@ -2,10 +2,8 @@ package de.uni_due.s3.evaluator;
 
 import java.util.HashMap;
 
-import de.uni_due.s3.evaluator.core.function.NumberUtils;
-import de.uni_due.s3.evaluator.core.function.OMExecutor;
-import de.uni_due.s3.evaluator.core.functionData.OMSymbol;
-import de.uni_due.s3.evaluator.exceptions.InvalidResultTypeException;
+import de.uni_due.s3.evaluator.core.OMUtils;
+import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
@@ -19,7 +17,8 @@ import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
- * TODO
+ * This is the Evaluator. With This Class you can evaluate and get a result form
+ * the Evaluator. 
  * 
  * @author dlux,frichtscheid,spobel
  *
@@ -37,16 +36,34 @@ public class Evaluator {
 		return (result.getOMS() != null && result.getOMS().equals(OMSymbol.LOGIC1_TRUE));
 	}
 
+	/**
+	 * Evaluates an expression and returns the result as a number if possible.
+	 * 
+	 * @param expression
+	 * @param exerciseVariableMap
+	 * @param fillInVariableMap
+	 * @return a double value
+	 * @throws CasEvaluationException
+	 * @throws FunctionException
+	 *             If the expression doesn't return a number
+	 * @throws CasNotAvailableException
+	 *             If the CAS is not available
+	 * @throws NoRepresentationAvailableException
+	 * @throws OpenMathException
+	 * @throws UndefinedFillInVariableException
+	 * @throws UndefinedExerciseVariableException
+	 * @throws ParserException
+	 */
 	public static double getNumberResult(String expression, HashMap<String, OMOBJ> exerciseVariableMap,
 			HashMap<Integer, OMOBJ> fillInVariableMap) throws CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException, InvalidResultTypeException,
+			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException,
 			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
 		OMOBJ result = evaluate(expression, exerciseVariableMap, fillInVariableMap);
+		result = evaluate(result);
 		try {
-			return NumberUtils.convertOMIOMFToDouble(result);
+			return OMUtils.convertOMToDouble(result);
 		} catch (InputMismatchException e) {
-			throw new InvalidResultTypeException(
-					"Type of result of expression:" + expression + "has to be integer, double or float.");
+			throw new FunctionException("Result of expression:" + expression + "can't be converted to a number");
 		}
 	}
 
@@ -89,5 +106,4 @@ public class Evaluator {
 			CasNotAvailableException, NoRepresentationAvailableException {
 		return OMExecutor.execute(omobj);
 	}
-
 }

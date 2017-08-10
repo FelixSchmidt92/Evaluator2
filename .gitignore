@@ -2,7 +2,9 @@
 .project
 .classpath
 target/**
+target/*
 /target/
+*.jar
 /bin/
 /lib/
 lib/**

@@ -90,6 +90,7 @@ public class Sage {
 					casResult += "\n" + resultLine;
 				}
 			}
+//			System.out.println(casResult);
 			sageSocket.close();
 		} catch (IOException e) {
 			log.warn("SageServer Connection '" + randConn + "' is currently not working.");
@@ -102,18 +103,16 @@ public class Sage {
 			// restart evaluation without not working SageServer Connections
 			return evaluateInCAS(sageExpression);
 		}
+		if (casResult.contains("<OME>")) {
+			throw new CasEvaluationException(casResult);
+		}
+		
 		OMOBJ omobjResult = null;
 		try {
 			omobjResult = OMConverter.toObject(casResult);
 		} catch (JAXBException e) {
 			// log.error("Sage produced an JAXBException in OMConverter.", e);
 		}
-//		if (((OMOBJ) omobjResult).getOME() != null) {
-//			OME ome = ((OME) omobjResult);
-//			throw new CasEvaluationException("Sage command: '" + sageExpression
-//					+ "' could not be evaluated in Sage CAS. Error Message:" + ome.getOMSOrOMVOrOMI().get(0));
-//		}
-		//TODO: error handling
 		return OMConverter.toElement(omobjResult);
 	}
 

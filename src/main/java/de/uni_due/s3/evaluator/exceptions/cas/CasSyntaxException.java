@@ -9,7 +9,6 @@ public class CasSyntaxException extends CasException{
 
 	public CasSyntaxException(String message) {
 		super(message);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

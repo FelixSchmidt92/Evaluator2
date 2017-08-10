@@ -7,7 +7,7 @@ import de.uni_due.s3.openmath.jaxb.OMS;
  * 
  * @author frichtscheid
  *
- */ /* TODO FIXME dlux RuntimeException?? */
+ */
 public class FunctionNotImplementedRuntimeException extends RuntimeException {
 
 	/**

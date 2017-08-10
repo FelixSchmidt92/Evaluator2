@@ -11,7 +11,6 @@ public class UndefinedFillInVariableRuntimeException extends RuntimeException {
 
 	public UndefinedFillInVariableRuntimeException(int number) {
 		super("There is no FillIn variable at position " + number);
-		// TODO Auto-generated constructor stub
 	}
 
 	private static final long serialVersionUID = 1L;

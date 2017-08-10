@@ -8,6 +8,7 @@ import java.io.StringReader;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 import org.antlr.v4.runtime.CharStream;
@@ -18,6 +19,7 @@ import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
+import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionNotImplementedRuntimeException;
 import de.uni_due.s3.evaluator.exceptions.parserruntime.ParserRuntimeException;
 import de.uni_due.s3.evaluator.parser.antlr.EvaluatorLexer;
@@ -93,11 +95,12 @@ public class TestExpressionToOpenMathVisitor{
 	@Test
 	public void testVisitIntegerValue(){
 		for (int i = 0; i < 1000; i++){
-			String val = gen.genRandomIntegerValue(50, null);
+			String val = gen.genRandomIntegerValue(9, null);
+			int t = Integer.parseInt(val);
 			
-			OMI omi = (OMI) visitor.visit(parse(String.valueOf(val)));
+			OMI omi = (OMI) visitor.visit(parse(val));
 			
-			assertEquals(String.valueOf(val), omi.getValue());
+			assertEquals(String.valueOf(t), omi.getValue());
 		}
 	}
 	
@@ -117,6 +120,25 @@ public class TestExpressionToOpenMathVisitor{
 	}
 	
 	@Test
+	public void testVisitCircumflex(){
+		OMA result = (OMA) visitor.visit(parse("2^5"));
+		List<Object> plus = new ArrayList<>();
+		plus.add(OMCreator.createOMI(2));
+		plus.add(OMCreator.createOMI(5));
+		assertEquals(OMCreator.createOMA(OMSymbol.ARITH1_POWER, plus), result);
+	}
+	
+	@Test
+	public void testVisitVariable(){
+		OMA result = (OMA) visitor.visit(parse("3 + a"));
+		List<Object> plus = new ArrayList<>();
+		plus.add(OMCreator.createOMI(3));
+		plus.add(OMCreator.createOMV("a"));
+		assertEquals(OMCreator.createOMA(OMSymbol.ARITH1_PLUS, plus), result);
+	}
+	
+	
+	@Test
 	public void testVisitTextONLYValue(){
 		for (int i = 0; i < 10000; i++){
 			String value = gen.genRandomUTF8StringValue(50, null);
@@ -128,8 +150,6 @@ public class TestExpressionToOpenMathVisitor{
 	}
 	
 	/**
-	 * TODO dlux Errors are thrown by Random UTF-8 Strings in pre, mid and pst Also marked in
-	 * 		ExpressionToOpenMathVisitor for another solution
 	 * @throws OpenMathException if Maps contains something wrong, which is defined here
 	 */
 	@Test
@@ -148,7 +168,7 @@ public class TestExpressionToOpenMathVisitor{
 		omel.add(mid);
 		omel.add(OMConverter.toElement(fillInVariableMap.get(1)));
 		omel.add(pst);
-		OMA oma = OMCreator.createOMA(OMCreator.createOMS("string_jack", "textValueWithVars"), omel);
+		OMA oma = OMCreator.createOMA(OMCreator.createOMS("stringJACK", "textWithVariables"), omel);
 		
 		assertEquals(oma, obj);
 	}
@@ -171,7 +191,7 @@ public class TestExpressionToOpenMathVisitor{
 			Object obj = visitor.visit(parse(getUnary + val));
 			
 			switch(getUnary){
-			case "+": //FIXME dlux what about e or pi or omega
+			case "+":
 				assertTrue(!(obj instanceof OMS)); //because it should just visit the next one
 				break;
 			case "-":
