@@ -43,16 +43,31 @@ import de.uni_due.s3.openmath.omutils.OMConverter;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
+/**
+ * Is used by the {@link antlr.EvaluatorParser parser} to convert 
+ * a user's expression to an openmath structure. Each method represents a grammatical rule @see /antlr4/EvaluatorParser.g4.
+ * 
+ * @author frichtscheid,dlux,spobel
+ *
+ */
 public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Object> {
 
 	/**
-	 * These variables are defined by the evaluator-class and are used to
-	 * integrate the variables into the OM-tree
+	 * These variables are defined by the {@link de.uni-due.s3.evaluator2.Evaluator evaluator} and are forwarded 
+	 * to this visitor, so that they can be integrated into the openmath-structure
 	 */
 	private HashMap<String, OMOBJ> exerciseVariableMap;
 	private HashMap<Integer, OMOBJ> fillInVariableMap;
 	final private static Pattern VARPOS = Pattern.compile("\\[var=[a-zA-Z0-9äöü]+?\\]|\\[pos=[0-9]+?\\]");
 
+	/**
+	 * Initialise the exercise- and fillinVariableMaps if they were not specified
+	 * and add constants like PI and E to it. Every other constant that would be needed
+	 * can be declared here.
+	 * 
+	 * @param exerciseVariableMap	Map with exerciseVariables
+	 * @param fillInVariableMap		Map with fillInVariables
+	 */
 	public ExpressionToOpenMathVisitor(HashMap<String, OMOBJ> exerciseVariableMap,
 			HashMap<Integer, OMOBJ> fillInVariableMap) {
 
@@ -77,6 +92,11 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 		}
 	}
 
+	/**
+	 * Implements the grammatical rule "ArithLine" for + and - operations.
+	 * This rule will be used on expressions like 3+2, 4-1 ...
+	 * @return OMA with the operation and two operands
+	 */
 	@Override
 	public Object visitBinaryArithLine(BinaryArithLineContext ctx) {
 		OMS oms;
@@ -97,6 +117,11 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 		return OMCreator.createOMA(oms, omel);
 	}
 
+	/**
+	 * Implements the grammatical rule "ArithPoint" for *, / and % operations.
+	 * This rule will be used on expressions like 3*2, 4/1 ...
+	 * @return OMA with the operation and two operands
+	 */
 	@Override
 	public Object visitBinaryArithPoint(BinaryArithPointContext ctx) {
 		OMS oms;
@@ -120,6 +145,11 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 		return OMCreator.createOMA(oms, omel);
 	}
 
+	/**
+	 * Implements the grammatical rule "Boolean" for logic operations like && or ||
+	 * 
+	 * @return OMA with the operation and two operands
+	 */
 	@Override
 	public Object visitBinaryBoolean(BinaryBooleanContext ctx) {
 		OMS oms;
@@ -139,6 +169,11 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 		return OMCreator.createOMA(oms, omel);
 	}
 
+	/**
+	 * Implements the grammatical rule Circumflex for ^-operations.
+	 * This rule will be used on expressions like 3^3, 9^2 ...
+	 * @return OMA with the operation and two operands
+	 */
 	@Override
 	public Object visitBinaryCircumflex(BinaryCircumflexContext ctx) {
 		List<Object> omel = new ArrayList<>();
@@ -147,6 +182,11 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 		return OMCreator.createOMA(OMSymbol.ARITH1_POWER, omel);
 	}
 
+	/**
+	 * Implements the grammatical rule "Relational" for <,<=,>,>=,=,==,!= operations.
+	 * This rule will be used on expressions like 5>3 3==3 ...
+	 * @return OMA with the operation and two operands
+	 */
 	@Override
 	public Object visitBinaryRelational(BinaryRelationalContext ctx) {
 		OMS oms;
@@ -182,48 +222,65 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 		return OMCreator.createOMA(oms, omel);
 	}
 
+	/**
+	 * Implements the grammatical rule "ExerciseVarName".
+	 * Each exerciseVariable like [var=a] will be replaced by its corresponding openmath content
+	 * which will then integrated into the om-structure.
+	 * 
+	 * @return OM-Object depends on the content of the variable. Colud be a OMI, OMF, OMA ...
+	 */
 	@Override
 	public Object visitExerciseVarName(ExerciseVarNameContext ctx) {
 		String var = ctx.name.getText(); // eg. [var=a]
-		String varName = var.substring(var.indexOf('=') + 1, var.indexOf(']')); // eg.
-																				// a
+		String varName = var.substring(var.indexOf('=') + 1, var.indexOf(']')); // eg. a
+														
+		// removes the OMOBJ-tags from the variable and returns its child
 		if (exerciseVariableMap.containsKey(varName)) {
 			OMOBJ varOmobj = exerciseVariableMap.get(varName);
 			try {
-				return OMConverter.toElement(varOmobj); // removes the
-														// OMOBJ-tags
+				return OMConverter.toElement(varOmobj); 
 			} catch (OpenMathException e) {
 				throw new ParserRuntimeException("Unable to convert OMOBJ ot Element:" + varOmobj.toString(), e);
 			}
-			// and returns the child of
-			// the OMOBJ-Object
+			
 		} else {
 			throw new UndefinedExerciseVariableRuntimeException(varName);
 		}
 	}
 
+	/**
+	 * Implements the grammatical rule "FillInVarName".
+	 * Each fillInVariable like [pos=1] will be replaced by its corresponding openmath content
+	 * which will then integrated into the om-structure.
+	 * 
+	 * @return OM-Object depends on the content of the variable. Colud be a OMI, OMF, OMA ...
+	 */
 	@Override
 	public Object visitFillInVarName(FillInVarNameContext ctx) {
 		String var = ctx.name.getText(); // eg. [pos=1]
-		int varNumber = Integer.parseInt(var.substring(var.indexOf('=') + 1, var.indexOf(']'))); // eg.
-																									// 1
+		int varNumber = Integer.parseInt(var.substring(var.indexOf('=') + 1, var.indexOf(']'))); // eg. 1
+		
+		// removes the OMOBJ-tags from the variable and returns its child
 		if (fillInVariableMap.containsKey(varNumber)) {
 			OMOBJ varOmobj = fillInVariableMap.get(varNumber);
 			try {
-				return OMConverter.toElement(varOmobj); // removes the
-														// OMOBJ-tags
-														// and returns the child
-														// of
-														// the OMOBJ-Object
+				return OMConverter.toElement(varOmobj); 
 			} catch (OpenMathException e) {
 				throw new ParserRuntimeException("Unable to convert OMOBJ ot Element:" + varOmobj.toString(), e);
 			}
-
 		} else {
 			throw new UndefinedFillInVariableRuntimeException(varNumber);
 		}
 	}
 
+	/**
+	 * Implements the grammatical rule "FloatValue".
+	 * Converts the number of an expression like "123123.3030" into a double value.
+	 * 
+	 * @throws NumberFormatException if the value is grater than the maximum double value
+	 * 
+	 * @return OMF 
+	 */
 	@Override
 	public OMF visitFloatValue(FloatValueContext ctx) {
 		try {
@@ -235,6 +292,14 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 		}
 	}
 
+	/**
+	 * Implements the grammatical rule "IntegerValue".
+	 * Converts the number of an expression like "123123" into a integer value.
+	 * 
+	 * @throws NumberFormatException if the value is grater than the maximum integer value
+	 * 
+	 * @return OMI 
+	 */
 	@Override
 	public OMI visitIntegerValue(IntegerValueContext ctx) {
 		try {
@@ -246,6 +311,16 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 		}
 	}
 
+	/**
+	 * Implements the grammatical rule "NestedFunctionInExpression" which will be used if 
+	 * a function was detected in the user's expression.
+	 * It converts all arguments into openmath and looks in {@link de.unu-due.s3.evaluator2.core.dictionaries.OMSEvaluatorSyntaxDictionary OMSEvaluatorSyntaxDictionary}
+	 * for the specified function.
+	 * 
+	 * @throws NumberFormatException if the value is grater than the maximum integer value
+	 * 
+	 * @return OMA with the function and its arguments 
+	 */
 	@Override
 	public Object visitNestedFunctionInExpression(NestedFunctionInExpressionContext ctx) {
 		List<Object> omel = new ArrayList<>();
@@ -256,6 +331,13 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 		return OMCreator.createOMA(oms, omel);
 	}
 
+	/**
+	 * Implements the grammatical rule "Parenthesis"
+	 * Parenthesis are not explicitly represented in openmath because they are represented by the openmath tree-structure.
+	 * So it just visits the child in between the parenthesis
+	 * 
+	 * @return OM-Object depends on the expression in the parentheses
+	 */
 	@Override
 	public Object visitParenthesis(ParenthesisContext ctx) {
 		// visit second child, because first is "(" and third is ")" (both of
@@ -263,6 +345,12 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 		return visit(ctx.getChild(1));
 	}
 
+	/**
+	 * Implements the grammatical rule "Set" which converts a set in 
+	 * the user's expression to a OMA which represents this set
+	 * 
+	 * @return OMA with Set symbol and the content
+	 */
 	@Override
 	public OMA visitSet(SetContext ctx) {
 		List<Object> omel = new ArrayList<>();
@@ -273,6 +361,13 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 		return OMCreator.createOMA(oms, omel);
 	}
 
+	/**
+	 * Searches for [var=] and [pos=] statements and replaces 
+	 * these with the content of the variable, only if the content can be parsed to a string
+	 * 
+	 * @param text String in which the variables should be substituted
+	 * @return String with substituted variables 
+	 */
 	private String substituteVariables(String text) {
 		StringBuilder sb = new StringBuilder();
 		Matcher varposMatcher = VARPOS.matcher(text);
@@ -305,6 +400,17 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 		return sb.toString();
 	}
 
+	/**
+	 * Implements the grammatical rule "TextValue" and is used on every string in the user's expression.
+	 * (1) First it tries to convert the string to any other element by parsing it again. A '2*3' 
+	 * would result in a 2*3 (OMA not a OMSTR). If this was successful a OMA will be returned 
+	 * with the original string and the result of the parsed string.
+	 * (2) If (1) was not successful there will be an OMA created and all content of exercise and fillIn 
+	 * variables together with their string snippet will be appended to the OMA. If there is no variable
+	 * in the string, a plain OMSTR which contains the string, will be returned
+	 * 
+	 * @return OMA or OMSTR
+	 */
 	@Override
 	public Object visitTextValue(TextValueContext ctx) {
 		String text = ctx.getText().substring(1, ctx.getText().length() - 1); // the
@@ -377,6 +483,12 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 		}
 	}
 
+	/**
+	 * Implements the grammatical rule "Unary" for unary operations like - and !
+	 * Creates a OMA with the corresponding OMS and its argument
+	 * 
+	 * @return OMA
+	 */
 	@Override
 	public Object visitUnary(UnaryContext ctx) {
 		OMS oms = new OMS();
@@ -398,6 +510,12 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 		return OMCreator.createOMA(oms, omel);
 	}
 
+	/**
+	 * Implements the grammatical rule "Variable".
+	 * Creates a OMV with the name of the variable
+	 * 
+	 * @return OMV
+	 */
 	@Override
 	public Object visitVariable(VariableContext ctx) {
 		return OMCreator.createOMV(ctx.name.getText());
