@@ -2,6 +2,7 @@ package de.uni_due.s3.evaluator.core.integration.logic1;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
@@ -104,7 +105,7 @@ public class TestBooleanOr extends TestIntegration {
 	
 	@Test
 	public void testBooleanOrWithDifferentNumbers3() throws EvaluatorException, OpenMathException {
-		assertTrue(Evaluator.getBooleanResult("-1 || 0", exerciseVariableMap, fillInVariableMap));
+		assertFalse(Evaluator.getBooleanResult("-1 || 0", exerciseVariableMap, fillInVariableMap));
 	}
 	
 	@Test

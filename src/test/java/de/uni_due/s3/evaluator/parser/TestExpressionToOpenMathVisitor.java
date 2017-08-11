@@ -150,8 +150,6 @@ public class TestExpressionToOpenMathVisitor{
 	}
 	
 	/**
-	 * TODO dlux Errors are thrown by Random UTF-8 Strings in pre, mid and pst Also marked in
-	 * 		ExpressionToOpenMathVisitor for another solution
 	 * @throws OpenMathException if Maps contains something wrong, which is defined here
 	 */
 	@Test
@@ -170,7 +168,7 @@ public class TestExpressionToOpenMathVisitor{
 		omel.add(mid);
 		omel.add(OMConverter.toElement(fillInVariableMap.get(1)));
 		omel.add(pst);
-		OMA oma = OMCreator.createOMA(OMCreator.createOMS("stringJACK", "textValueWithVariables"), omel);
+		OMA oma = OMCreator.createOMA(OMCreator.createOMS("stringJACK", "textWithVariables"), omel);
 		
 		assertEquals(oma, obj);
 	}

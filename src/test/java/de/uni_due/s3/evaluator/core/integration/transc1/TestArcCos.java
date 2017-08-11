@@ -44,7 +44,6 @@ public class TestArcCos extends TestIntegration {
 
 	@Test
 	public void testAcosWithInput1() throws EvaluatorException, OpenMathException {
-		System.out.println(Evaluator.evaluate("acos([pos=1])",exerciseVariableMap,fillInVariableMap));
 		assertEquals(PI / 2, Evaluator.getNumberResult("acos([pos=1])", exerciseVariableMap, fillInVariableMap),
 				0.0001);
 	}

@@ -7,6 +7,7 @@ import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 import de.uni_due.s3.sage.Sage;
@@ -40,6 +41,8 @@ public class Expand extends Function {
 	public String getPartialSageSyntax(List<Object> arguments)
 			throws FunctionException, NoRepresentationAvailableException {
 		String term = getSageSyntax(arguments.get(0));
+		if(term.equals("''"))
+			throw new FunctionInvalidArgumentException(this, "(0) String(not empty)");
 
 		String sageVar = PolyUtils.getSageSyntaxVariableRepresentation(term);
 

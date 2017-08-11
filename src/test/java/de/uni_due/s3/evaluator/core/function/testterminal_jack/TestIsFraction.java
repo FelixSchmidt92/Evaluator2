@@ -59,20 +59,20 @@ public class TestIsFraction extends TestFunctionAbstract{
 		assertEquals(OMSymbol.LOGIC1_TRUE, func.evaluate(args));
 	}
 	
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
+	@Test
 	public void testIsFractionWithOMI() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMI(2));
 
-		assertEquals(OMSymbol.LOGIC1_TRUE, func.evaluate(args));
+		assertEquals(OMSymbol.LOGIC1_FALSE, func.evaluate(args));
 	}
 	
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
+	@Test
 	public void testIsFractionWithOMF() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMF(2.1));
 
-		assertEquals(OMSymbol.LOGIC1_TRUE, func.evaluate(args));
+		assertEquals(OMSymbol.LOGIC1_FALSE, func.evaluate(args));
 	}
 	
 	@Test(expected = FunctionInvalidArgumentTypeException.class)

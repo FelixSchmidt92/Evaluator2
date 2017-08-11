@@ -7,7 +7,6 @@ public class NoSageRepresentationAvailableException extends NoRepresentationAvai
 
 	public NoSageRepresentationAvailableException(String message) {
 		super(message);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

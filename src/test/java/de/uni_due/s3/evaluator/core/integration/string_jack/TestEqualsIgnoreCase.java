@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 import javax.xml.bind.JAXBException;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator.Evaluator;
@@ -19,8 +19,8 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestEqualsIgnoreCase extends TestIntegration {
 
-	@Before
-	public void beforeTest() {
+	@BeforeClass
+	public static void beforeTest() {
 		try {
 			fillInVariableMap.put(7, OMConverter.toObject("<OMOBJ><OMSTR>hallo</OMSTR></OMOBJ>"));
 			fillInVariableMap.put(8, OMConverter.toObject("<OMOBJ><OMSTR>Hallo</OMSTR></OMOBJ>"));
@@ -83,10 +83,9 @@ public class TestEqualsIgnoreCase extends TestIntegration {
 		assertTrue(Evaluator.getBooleanResult("equalsIgnoreCase('hallo','[var=h]')", exerciseVariableMap, fillInVariableMap));
 	}
 	
-	//FIXME: Im alten Evaluator ist das möglich! Allerdings wird einfachg gesagt, dass es richtig sei, auch wenn es nicht ist
 	@Test 
 	public void testEqualsIgnoreCaseWithExpressions() throws EvaluatorException, OpenMathException {
-		assertTrue(Evaluator.getBooleanResult("equalsIgnoreCase('equalsIgnorCase('1', '1')','equalsIgnorCase('2', '2')')", exerciseVariableMap, fillInVariableMap));
+		assertTrue(Evaluator.getBooleanResult("equalsIgnoreCase(equalsIgnoreCase('1', '1'),equalsIgnoreCase('2', '2'))", exerciseVariableMap, fillInVariableMap));
 	}
 	
 	@Test 

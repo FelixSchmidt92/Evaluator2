@@ -2,6 +2,7 @@ package de.uni_due.s3.evaluator.core.integration.logic1;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
@@ -49,7 +50,7 @@ public class TestBooleanAnd extends TestIntegration {
 
 	@Test
 	public void testBooleanAndWithVariables2() throws EvaluatorException, OpenMathException {
-		assertTrue(!Evaluator.getBooleanResult("0 && [pos=2]", exerciseVariableMap, fillInVariableMap));
+		assertFalse(Evaluator.getBooleanResult("0 && [pos=2]", exerciseVariableMap, fillInVariableMap));
 	}
 
 	@Test
@@ -59,12 +60,12 @@ public class TestBooleanAnd extends TestIntegration {
 
 	@Test
 	public void testBooleanAndWithInput2() throws EvaluatorException, OpenMathException {
-		assertTrue(!Evaluator.getBooleanResult("0 && [var=a]", exerciseVariableMap, fillInVariableMap));
+		assertFalse(Evaluator.getBooleanResult("0 && [var=a]", exerciseVariableMap, fillInVariableMap));
 	}
 
 	@Test
 	public void testBooleanAndWithEncapsulation1() throws EvaluatorException, OpenMathException {
-		assertTrue(!Evaluator.getBooleanResult("1 && (1 && 0)", exerciseVariableMap, fillInVariableMap));
+		assertFalse(Evaluator.getBooleanResult("1 && (1 && 0)", exerciseVariableMap, fillInVariableMap));
 	}
 
 	@Test
@@ -74,7 +75,7 @@ public class TestBooleanAnd extends TestIntegration {
 
 	@Test
 	public void testBooleanAndWithEncapsulation3() throws EvaluatorException, OpenMathException {
-		assertTrue(!Evaluator.getBooleanResult("1 && (1 && (1 && (1 &&(1 && 0))))", exerciseVariableMap,
+		assertFalse(Evaluator.getBooleanResult("1 && (1 && (1 && (1 &&(1 && 0))))", exerciseVariableMap,
 				fillInVariableMap));
 	}
 
@@ -86,7 +87,7 @@ public class TestBooleanAnd extends TestIntegration {
 
 	@Test
 	public void testBooleanAndWithEncapsulation5() throws EvaluatorException, OpenMathException {
-		assertTrue(!Evaluator.getBooleanResult("((((0 && 1) && 1) && 1) && 1) && 1", exerciseVariableMap,
+		assertFalse(Evaluator.getBooleanResult("((((0 && 1) && 1) && 1) && 1) && 1", exerciseVariableMap,
 				fillInVariableMap));
 	}
 
@@ -103,12 +104,12 @@ public class TestBooleanAnd extends TestIntegration {
 
 	@Test
 	public void testBooleanAndWithDifferentNumbers2() throws EvaluatorException, OpenMathException {
-		assertTrue(Evaluator.getBooleanResult("-1 && 2", exerciseVariableMap, fillInVariableMap));
+		assertFalse(Evaluator.getBooleanResult("-1 && 2", exerciseVariableMap, fillInVariableMap));
 	}
 
 	@Test
 	public void testBooleanAndWithDifferentNumbers3() throws EvaluatorException, OpenMathException {
-		assertTrue(!Evaluator.getBooleanResult("-1 && 0", exerciseVariableMap, fillInVariableMap));
+		assertFalse(Evaluator.getBooleanResult("-1 && 0", exerciseVariableMap, fillInVariableMap));
 	}
 
 	@Test

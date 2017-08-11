@@ -5,7 +5,7 @@ import static org.junit.Assert.fail;
 
 import javax.xml.bind.JAXBException;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator.Evaluator;
@@ -18,8 +18,8 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestLog extends TestIntegration {
 
-	@Before
-	public void beforeTest() throws OpenMathException {
+	@BeforeClass
+	public static void beforeTest() throws OpenMathException {
 		try {
 			fillInVariableMap.put(1, OMConverter.toObject("<OMOBJ><OMI>5</OMI></OMOBJ>"));
 			fillInVariableMap.put(2, OMConverter.toObject("<OMOBJ><OMF dec=\"13.7465\"/></OMOBJ>"));

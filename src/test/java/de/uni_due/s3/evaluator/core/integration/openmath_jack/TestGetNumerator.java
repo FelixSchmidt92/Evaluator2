@@ -6,7 +6,7 @@ import static org.junit.Assert.assertNotEquals;
 
 import java.util.HashMap;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator.Evaluator;
@@ -25,11 +25,11 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestGetNumerator extends TestIntegration {
 
-	HashMap<Integer, OMOBJ> getNumeratorFillInVariableMap = new HashMap<>();
-	HashMap<String, OMOBJ> getNumeratorExerciseVariableMap = new HashMap<>();
+	static HashMap<Integer, OMOBJ> getNumeratorFillInVariableMap = new HashMap<>();
+	static HashMap<String, OMOBJ> getNumeratorExerciseVariableMap = new HashMap<>();
 
-	@Before
-	public void beforeTest() throws FunctionNotImplementedException, UndefinedFillInVariableException,
+	@BeforeClass
+	public static void beforeTest() throws FunctionNotImplementedException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
 		getNumeratorFillInVariableMap.put(1, ExpressionParser.parse("0", null, null));
 		getNumeratorFillInVariableMap.put(2, ExpressionParser.parse("20/3", null, null));

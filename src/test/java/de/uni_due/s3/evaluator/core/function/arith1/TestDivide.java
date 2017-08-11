@@ -87,6 +87,24 @@ public class TestDivide extends TestFunctionAbstract {
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals(OMCreator.createOMF(-0.25), result.getOMF());
 	}
+	
+	@Test(expected=FunctionInvalidArgumentException.class)
+	public void testDivideIntegrationWithWrongParam() throws FunctionException, OpenMathException, CasEvaluationException,
+			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
+			UndefinedExerciseVariableException, ParserException {
+		OMOBJ omobj = ExpressionParser.parse("10/0", null, null);
+		OMExecutor.execute(omobj);
+		fail();
+	}
+	
+	@Test(expected=FunctionInvalidArgumentException.class)
+	public void testDivideIntegrationWithWrongParam2() throws FunctionException, OpenMathException, CasEvaluationException,
+			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
+			UndefinedExerciseVariableException, ParserException {
+		OMOBJ omobj = ExpressionParser.parse("10/(1-1.0)", null, null);
+		OMExecutor.execute(omobj);
+		fail();
+	}
 
 	@Test
 	public void testDivideSageSyntax() throws FunctionException, NoRepresentationAvailableException, CasException,

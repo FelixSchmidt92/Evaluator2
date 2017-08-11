@@ -5,7 +5,7 @@ import static org.junit.Assert.fail;
 
 import java.util.HashMap;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator.Evaluator;
@@ -22,11 +22,11 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestNumberOfVariables extends TestIntegration {
 
-	HashMap<Integer, OMOBJ> numberOfVariablesFillInVariableMap = new HashMap<>();
-	HashMap<String, OMOBJ> numberOfVariablesExerciseVariableMap = new HashMap<>();
+	static HashMap<Integer, OMOBJ> numberOfVariablesFillInVariableMap = new HashMap<>();
+	static HashMap<String, OMOBJ> numberOfVariablesExerciseVariableMap = new HashMap<>();
 
-	@Before
-	public void beforeTest() throws FunctionNotImplementedException, UndefinedFillInVariableException,
+	@BeforeClass
+	public static void beforeTest() throws FunctionNotImplementedException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
 		numberOfVariablesFillInVariableMap.put(1, ExpressionParser.parse("0", null, null));
 		numberOfVariablesFillInVariableMap.put(2, ExpressionParser.parse("3", null, null));
@@ -62,25 +62,25 @@ public class TestNumberOfVariables extends TestIntegration {
 
 	@Test
 	public void testNumberOfVariablesWithInput1() throws EvaluatorException, OpenMathException {
-		assertEquals(3, Evaluator.getNumberResult("numberOfVariables('2x+3a-x+2b')",
+		assertEquals(3, Evaluator.getNumberResult("numberOfVariables('2*x+3*a-x+2*b')",
 				numberOfVariablesExerciseVariableMap, numberOfVariablesFillInVariableMap), 0.0);
 	}
 
 	@Test
 	public void testNumberOfVariablesWithInput2() throws EvaluatorException, OpenMathException {
-		assertEquals(3, Evaluator.getNumberResult("numberOfVariables('2[pos=5]+3a-[pos=5]+2b')",
+		assertEquals(3, Evaluator.getNumberResult("numberOfVariables('2*[pos=3]+3*a-[pos=3]+2*b')",
 				numberOfVariablesExerciseVariableMap, numberOfVariablesFillInVariableMap), 0.0);
 	}
 
 	@Test
 	public void testNumberOfVariablesWithInput3() throws EvaluatorException, OpenMathException {
-		assertEquals(3, Evaluator.getNumberResult("numberOfVariables('2[pos=5]+3a-[pos=5]+2b')",
+		assertEquals(3, Evaluator.getNumberResult("numberOfVariables('2*[pos=3]+3*a-[pos=3]+2*b')",
 				numberOfVariablesExerciseVariableMap, numberOfVariablesFillInVariableMap), 0.0);
 	}
 
 	@Test
 	public void testNumberOfVariablesWithInput4() throws EvaluatorException, OpenMathException {
-		assertEquals(2, Evaluator.getNumberResult("numberOfVariables('2[pos=5]+3[pos=5]-[pos=5]+2b')",
+		assertEquals(2, Evaluator.getNumberResult("numberOfVariables('2*[pos=3]+3*[pos=3]-[pos=3]+2*b')",
 				numberOfVariablesExerciseVariableMap, numberOfVariablesFillInVariableMap), 0.0);
 	}
 

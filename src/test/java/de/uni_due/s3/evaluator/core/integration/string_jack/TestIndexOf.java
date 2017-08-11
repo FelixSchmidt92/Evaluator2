@@ -5,7 +5,7 @@ import static org.junit.Assert.fail;
 
 import javax.xml.bind.JAXBException;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator.Evaluator;
@@ -14,12 +14,13 @@ import de.uni_due.s3.evaluator.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator.exceptions.function.*;
 import de.uni_due.s3.evaluator.exceptions.parser.*;
 import de.uni_due.s3.openmath.omutils.OMConverter;
+import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestIndexOf extends TestIntegration {
 
-	@Before
-	public void beforeTest() {
+	@BeforeClass
+	public static void beforeTest() {
 		try {
 			fillInVariableMap.put(7, OMConverter.toObject("<OMOBJ><OMSTR>str</OMSTR></OMOBJ>"));
 			fillInVariableMap.put(8, OMConverter.toObject("<OMOBJ><OMSTR>anotherstring</OMSTR></OMOBJ>"));
@@ -90,34 +91,32 @@ public class TestIndexOf extends TestIntegration {
 		assertEquals(7, Evaluator.getNumberResult("indexOf('[var=h]','[var=g]', [var=i])", exerciseVariableMap, fillInVariableMap),0.0);
 	}
 
-	@Test(expected=FunctionInvalidArgumentTypeException.class)
-	public void testIndexOfWithWrongInputPointNumber() throws EvaluatorException, OpenMathException {
-		Evaluator.getNumberResult("indexOf('abcd5', 5.1, 1)", exerciseVariableMap, fillInVariableMap);
-		fail();
+	@Test
+	public void testIndexOfWithArgumentAsInputPointNumber() throws EvaluatorException, OpenMathException {
+		assertEquals(OMCreator.createOMI(-1),Evaluator.evaluate("indexOf('abcdr5', 5.1, 1)", exerciseVariableMap, fillInVariableMap).getOMI());		
 	}
 	
-	@Test(expected=FunctionInvalidArgumentTypeException.class)
+	@Test
 	public void testIndexOfWithWrongInputCharacter() throws EvaluatorException, OpenMathException {
-		Evaluator.getNumberResult("indexOf('abcd5', a, 1)", exerciseVariableMap, fillInVariableMap);
-		fail();
+		assertEquals(-1, Evaluator.getNumberResult("indexOf('abcd5', a, 1)", exerciseVariableMap, fillInVariableMap),0.0);
+		
 	}
 	
-	@Test(expected=FunctionInvalidArgumentTypeException.class)
+	@Test
 	public void testIndexOfWithTwoRationalAndOneTextArguments() throws EvaluatorException, OpenMathException {
-		Evaluator.getNumberResult("indexOf('abcd5', 5, 1)", exerciseVariableMap, fillInVariableMap);
-		fail();
+		assertEquals(4, Evaluator.getNumberResult("indexOf('abcd5', 5, 1)", exerciseVariableMap, fillInVariableMap),0.0);
+		
 	}
 	
-	@Test(expected=FunctionInvalidArgumentTypeException.class)
+	@Test
 	public void testIndexOfWithThreeRationalArguments() throws EvaluatorException, OpenMathException {
-		Evaluator.getNumberResult("indexOf(5, 5, 0)", exerciseVariableMap, fillInVariableMap);
-		fail();
+		assertEquals(0,Evaluator.getNumberResult("indexOf(5, 5, 0)", exerciseVariableMap, fillInVariableMap),0.0);
+		
 	}
 	
-	@Test(expected=FunctionInvalidArgumentTypeException.class)
+	@Test
 	public void testIndexOfWithThreeTextArguments() throws EvaluatorException, OpenMathException {
-		Evaluator.getNumberResult("indexOf('str', 'str', '0')", exerciseVariableMap, fillInVariableMap);
-		fail();
+		assertEquals(3.0 , Evaluator.getNumberResult("indexOf('abcstr', 'str', '0')", exerciseVariableMap, fillInVariableMap),0.0);
 	}
 	
 	@Test(expected=FunctionInvalidNumberOfArgumentsException.class)
@@ -126,10 +125,10 @@ public class TestIndexOf extends TestIntegration {
 		fail();
 	}
 	
-	@Test(expected=FunctionInvalidNumberOfArgumentsException.class)
+	@Test
 	public void testIndexOfWithTwoArguments() throws EvaluatorException, OpenMathException {
-		Evaluator.getNumberResult("indexOf('string', 1)", exerciseVariableMap, fillInVariableMap);
-		fail();
+		assertEquals(OMCreator.createOMI(-1),Evaluator.evaluate("indexOf('string', 1)", exerciseVariableMap, fillInVariableMap).getOMI());
+
 	}
 	
 	@Test(expected=UndefinedExerciseVariableException.class)

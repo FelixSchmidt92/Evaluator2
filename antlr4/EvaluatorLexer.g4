@@ -1,5 +1,8 @@
 lexer grammar EvaluatorLexer;
 
+@lexer::header {package de.uni_due.s3.evaluator.parser.antlr;
+}
+
 LeftParenthesis: '(';
 RightParenthesis: ')';
 SetOpen: '{';

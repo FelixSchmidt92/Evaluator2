@@ -5,7 +5,7 @@ import static org.junit.Assert.fail;
 
 import java.util.HashMap;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator.Evaluator;
@@ -23,11 +23,11 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestExpand extends TestIntegration {
 
-	HashMap<Integer, OMOBJ> expandFillInVariableMap = new HashMap<>();
-	HashMap<String, OMOBJ> expandExerciseVariableMap = new HashMap<>();
+	static HashMap<Integer, OMOBJ> expandFillInVariableMap = new HashMap<>();
+	static HashMap<String, OMOBJ> expandExerciseVariableMap = new HashMap<>();
 
-	@Before
-	public void beforeTest() throws FunctionNotImplementedException, UndefinedFillInVariableException,
+	@BeforeClass
+	public static void beforeTest() throws FunctionNotImplementedException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
 		expandFillInVariableMap.put(1, ExpressionParser.parse("1", null, null));
 		expandFillInVariableMap.put(2, ExpressionParser.parse("5", null, null));
@@ -38,37 +38,37 @@ public class TestExpand extends TestIntegration {
 
 	@Test
 	public void testExpand1() throws EvaluatorException, OpenMathException {
-		assertEquals(ExpressionParser.parse("'2*a+2*b'", null, null),
+		assertEquals(ExpressionParser.parse("2*a+2*b", null, null),
 				Evaluator.evaluate("expand('2*(a+b)')", expandExerciseVariableMap, expandFillInVariableMap));
 	}
 
 	@Test
 	public void testExpand2() throws EvaluatorException, OpenMathException {
-		assertEquals(ExpressionParser.parse("'3*a'", null, null),
+		assertEquals(ExpressionParser.parse("3*a", null, null),
 				Evaluator.evaluate("expand('2*a+a')", expandExerciseVariableMap, expandFillInVariableMap));
 	}
 
 	@Test
 	public void testExpand3() throws EvaluatorException, OpenMathException {
-		assertEquals(ExpressionParser.parse("'2*a+c'", null, null),
+		assertEquals(ExpressionParser.parse("2*a+c", null, null),
 				Evaluator.evaluate("expand('2*a+c')", expandExerciseVariableMap, expandFillInVariableMap));
 	}
 
 	@Test
 	public void testExpandWithInput() throws EvaluatorException, OpenMathException {
-		assertEquals(ExpressionParser.parse("'x+5*y'", null, null),
-				Evaluator.evaluate("expand('[pos=1]x+[pos=2]y')", expandExerciseVariableMap, expandFillInVariableMap));
+		assertEquals(ExpressionParser.parse("x+5*y", null, null),
+				Evaluator.evaluate("expand('[pos=1]*x+[pos=2]*y')", expandExerciseVariableMap, expandFillInVariableMap));
 	}
 
 	@Test
 	public void testExpandWithVariables() throws EvaluatorException, OpenMathException {
-		assertEquals(ExpressionParser.parse("'x+5*y'", null, null),
-				Evaluator.evaluate("expand('[var=a]x+[var=b]y')", expandExerciseVariableMap, expandFillInVariableMap));
+		assertEquals(ExpressionParser.parse("x+5*y", null, null),
+				Evaluator.evaluate("expand('[var=a]*x+[var=b]*y')", expandExerciseVariableMap, expandFillInVariableMap));
 	}
 
 	@Test
 	public void testExpandWithONECharacter() throws EvaluatorException, OpenMathException {
-		assertEquals(ExpressionParser.parse("'a'", null, null),
+		assertEquals(ExpressionParser.parse("a", null, null),
 				Evaluator.evaluate("expand(a)", expandExerciseVariableMap, expandFillInVariableMap));
 	}
 

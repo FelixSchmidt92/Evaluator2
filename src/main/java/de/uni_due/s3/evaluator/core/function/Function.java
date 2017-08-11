@@ -2,6 +2,7 @@ package de.uni_due.s3.evaluator.core.function;
 
 import java.util.List;
 
+import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator.core.syntaxvisitor.OMToSageVisitor;
 import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasException;
@@ -12,6 +13,8 @@ import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentExcept
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoSageRepresentationAvailableException;
+import de.uni_due.s3.openmath.jaxb.OMA;
+import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
@@ -73,6 +76,13 @@ public abstract class Function {
 		if (arguments == null)
 			throw new FunctionInvalidArgumentException(this, "The List of arguments is of Type NULL");
 		argsBetweenMinMax(arguments); // Check
+		if (!keepOriginalTextValue()) {
+			for (int i = 0; i < arguments.size(); i++) {
+				if (OMTypeChecker.isOMAWithSymbol(arguments.get(i), OMSymbol.STRINGJACK_TEXTWITHEXPRESSION)) {
+					arguments.set(i, ((OMA) arguments.get(i)).getOmel().get(2));
+				}
+			}
+		}
 		return execute(arguments);
 	}
 
@@ -97,6 +107,10 @@ public abstract class Function {
 			// Arguments.size is not between minArgs and maxArgs so throw Error
 			throw new FunctionInvalidNumberOfArgumentsException(this, minArgs(), maxArgs(), arguments.size(), "");
 		}
+	}
+
+	protected boolean keepOriginalTextValue() {
+		return false;
 	}
 
 	/**

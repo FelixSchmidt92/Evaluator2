@@ -5,7 +5,7 @@ import static org.junit.Assert.fail;
 
 import java.util.HashMap;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator.Evaluator;
@@ -23,11 +23,11 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestDerive extends TestIntegration {
 
-	HashMap<Integer, OMOBJ> deriveFillInVariableMap = new HashMap<>();
-	HashMap<String, OMOBJ> deriveExerciseVariableMap = new HashMap<>();
+	static HashMap<Integer, OMOBJ> deriveFillInVariableMap = new HashMap<>();
+	static HashMap<String, OMOBJ> deriveExerciseVariableMap = new HashMap<>();
 
-	@Before
-	public void beforeTest() throws FunctionNotImplementedException, UndefinedFillInVariableException,
+	@BeforeClass
+	public static void beforeTest() throws FunctionNotImplementedException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
 		deriveFillInVariableMap.put(1, ExpressionParser.parse("x", null, null));
 		deriveFillInVariableMap.put(2, ExpressionParser.parse("0.5", null, null));
@@ -74,8 +74,9 @@ public class TestDerive extends TestIntegration {
 
 	@Test
 	public void testDerive7() throws EvaluatorException, OpenMathException {
-		assertEquals(ExpressionParser.parse("y^2*2*x", null, null),
-				Evaluator.evaluate("derive('(x*y)^2','x')", deriveExerciseVariableMap, deriveFillInVariableMap));
+		OMOBJ expected = ExpressionParser.parse("2*(y^2*x)", null, null);
+		assertEquals(expected.getOMA(),
+				Evaluator.evaluate("derive('(x*y)^2','x')", deriveExerciseVariableMap, deriveFillInVariableMap).getOMA());
 	}
 
 	@Test

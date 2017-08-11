@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 import javax.xml.bind.JAXBException;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator.Evaluator;
@@ -19,8 +19,8 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestEndsWith extends TestIntegration {
 
-	@Before
-	public void beforeTest() {
+	@BeforeClass
+	public static void beforeTest() {
 		try {
 			fillInVariableMap.put(7, OMConverter.toObject("<OMOBJ><OMSTR>testinput</OMSTR></OMOBJ>"));
 
@@ -103,7 +103,7 @@ public class TestEndsWith extends TestIntegration {
 	
 	@Test 
 	public void testEndsWithWithExpressions() throws EvaluatorException, OpenMathException {
-		assertTrue(Evaluator.getBooleanResult("endsWith('endsWith('1', '1')', 'endsWith('2', '2')')", exerciseVariableMap, fillInVariableMap));
+		assertTrue(Evaluator.getBooleanResult("endsWith(endsWith('1', '1'), endsWith('2', '2'))", exerciseVariableMap, fillInVariableMap));
 	}
 	
 	@Test(expected=ParserException.class)

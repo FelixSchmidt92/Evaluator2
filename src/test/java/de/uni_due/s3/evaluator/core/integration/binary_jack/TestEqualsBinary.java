@@ -5,7 +5,7 @@ import static org.junit.Assert.assertFalse;
 
 import javax.xml.bind.JAXBException;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator.Evaluator;
@@ -18,8 +18,8 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestEqualsBinary extends TestIntegration {
 
-	@Before
-	public void beforeTest() {
+	@BeforeClass
+	public static void beforeTest() {
 		try {
 			fillInVariableMap.put(3, OMConverter.toObject("<OMOBJ><OMI>7</OMI></OMOBJ>"));
 
@@ -69,11 +69,9 @@ public class TestEqualsBinary extends TestIntegration {
 				Evaluator.getBooleanResult("equalsBinary('[var=c]','0111')", exerciseVariableMap, fillInVariableMap));
 	}
 
-	@Test // TODO FIXME spobel frichtscheid dlux, Bei uns werden keine 0' und 1'
-			// zurückgegeben für wahr und falsch sondern OMS, da wird sowas nicht mehr
-			// funktionieren
+	@Test
 	public void testEqualsBinaryWithExpressions() throws EvaluatorException, OpenMathException {
-		assertTrue((Evaluator.getBooleanResult("equalsBinary('equalsBinary('3','11')', 'equalsBinary('2','10')')",
+		assertTrue((Evaluator.getBooleanResult("equalsBinary(equalsBinary('3','11'), equalsBinary('2','10'))",
 				exerciseVariableMap, fillInVariableMap)));
 	}
 
@@ -82,7 +80,7 @@ public class TestEqualsBinary extends TestIntegration {
 		Evaluator.getBooleanResult("equalsBinary('2','15')", exerciseVariableMap, fillInVariableMap);
 	}
 
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
+	@Test//(expected = FunctionInvalidArgumentTypeException.class) //Now PointNumbers are supported
 	public void testEqualsBinaryWithWrongInputPointNumberAsFirstArgument()
 			throws EvaluatorException, OpenMathException {
 		Evaluator.getBooleanResult("equalsBinary('2.6','11')", exerciseVariableMap, fillInVariableMap);
@@ -93,9 +91,9 @@ public class TestEqualsBinary extends TestIntegration {
 		Evaluator.getBooleanResult("equalsBinary('','')", exerciseVariableMap, fillInVariableMap);
 	}
 
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
+	@Test//(expected = FunctionInvalidArgumentTypeException.class) Now works without String Input
 	public void testEqualsBinaryWithTwoRationalArguments() throws EvaluatorException, OpenMathException {
-		Evaluator.getBooleanResult("equalsBinary(7, 111)", exerciseVariableMap, fillInVariableMap);
+		assertTrue(Evaluator.getBooleanResult("equalsBinary(7, 111)", exerciseVariableMap, fillInVariableMap));
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)

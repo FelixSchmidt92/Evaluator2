@@ -2,13 +2,13 @@ package de.uni_due.s3.evaluator.core.function.logic1;
 
 import java.util.List;
 
+import de.uni_due.s3.evaluator.core.OMUtils;
 import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMS;
-import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 
 /**
  * Implement openmath logic not. Example: !true => false
@@ -27,29 +27,12 @@ public class BooleanNot extends Function {
 	 */
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionException {
-		OMS arg1;
-		String omsCd = OMSymbol.LOGIC1_FALSE.getCd();
-		String omsTrue = OMSymbol.LOGIC1_TRUE.getName();
-		String omsFalse = OMSymbol.LOGIC1_FALSE.getName();
-
-		// type check if argument are of type oms
-		if (OMTypeChecker.isOMS(arguments.get(0))) {
-			arg1 = (OMS) arguments.get(0);
-
-			// syntax check if argument are logic booleans
-			if (arg1.getCd().equals(omsCd)) {
-				if (arg1.getName().equals(omsTrue) || arg1.getName().equals(omsFalse)) {
-
-					// semantic check if argument is true
-					if (arg1.equals(OMSymbol.LOGIC1_TRUE))
-						return OMSymbol.LOGIC1_FALSE;
-					else
-						return OMSymbol.LOGIC1_TRUE;
-				}
-			}
+		try{
+			OMS arg1 = OMUtils.convertToLogicBoolean(OMUtils.convertOMToBoolean(arguments.get(0)));
+			return (arg1.equals(OMSymbol.LOGIC1_TRUE))?OMSymbol.LOGIC1_FALSE:OMSymbol.LOGIC1_TRUE;
+		}catch(Exception e){
+			throw new FunctionInvalidArgumentTypeException(this, "boolean, int or float");
 		}
-
-		throw new FunctionInvalidArgumentTypeException(this, "boolean");
 	}
 
 	@Override

@@ -108,12 +108,12 @@ public class TestToDegrees extends TestIntegration {
 	
 	@Test
 	public void testToDegreesWithPointNumbers1() throws CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException, OpenMathException{
-		assertEquals(180/(PI*.2) , Evaluator.getNumberResult("toDegrees(0.2)", exerVar, fillIn), 0);	
+		assertEquals(.2*180/(PI) , Evaluator.getNumberResult("toDegrees(0.2)", exerVar, fillIn), 0);	
 	}
 	
 	@Test
 	public void testToDegreesWithPointNumbers2() throws CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException, OpenMathException{
-		assertEquals(180/(-PI*.1) , Evaluator.getNumberResult("toDegrees(-0.1)", exerVar, fillIn), 0);	
+		assertEquals(.1*180/(-PI) , Evaluator.getNumberResult("toDegrees(-0.1)", exerVar, fillIn), 0);	
 	}
 	
 	@Test

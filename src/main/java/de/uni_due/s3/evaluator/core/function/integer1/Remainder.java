@@ -5,6 +5,7 @@ import java.util.List;
 import de.uni_due.s3.evaluator.core.OMUtils;
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
+import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
@@ -32,7 +33,13 @@ public class Remainder extends Function {
 		if (!(OMTypeChecker.isOMI(arguments.get(0)) && OMTypeChecker.isOMI(arguments.get(1))))
 			throw new FunctionInvalidArgumentTypeException(this, "integer");
 
+
+			
 		try {
+			if(OMUtils.convertOMToInteger(arguments.get(1)) == 0) {
+				throw new FunctionInvalidArgumentException(this, "The Second Argument cannot be 0");
+			}
+				
 			OMI left = (OMI) arguments.get(0);
 			OMI right = (OMI) arguments.get(1);
 
@@ -46,13 +53,11 @@ public class Remainder extends Function {
 
 	@Override
 	protected int minArgs() {
-		// TODO Auto-generated method stub
 		return 2;
 	}
 
 	@Override
 	protected int maxArgs() {
-		// TODO Auto-generated method stub
 		return 2;
 	}
 

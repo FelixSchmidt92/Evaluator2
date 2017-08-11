@@ -17,7 +17,6 @@ import de.uni_due.s3.evaluator.exceptions.cas.CasException;
 import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentException;
-import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator.exceptions.parser.ParserException;
 import de.uni_due.s3.evaluator.exceptions.parser.UndefinedExerciseVariableException;
@@ -37,7 +36,7 @@ public class TestEqual extends TestFunctionAbstract {
 			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(10));
-		args.add(OMCreator.createOMI(10));
+		args.add(OMCreator.createOMF(10.0));
 		Object result = func.evaluate(args);
 		assertEquals(OMSymbol.LOGIC1_TRUE, result);
 	}
@@ -167,16 +166,6 @@ public class TestEqual extends TestFunctionAbstract {
 		args.add(OMCreator.createOMSTR("test"));
 		args.add(OMCreator.createOMSTR("test"));
 		args.add(OMCreator.createOMSTR("test"));
-		func.evaluate(args);
-		fail();
-	}
-
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testEqualsWithWrongArguments() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
-		ArrayList<Object> args = new ArrayList<Object>(2);
-		args.add(null);
-		args.add(OMCreator.createOMSTR(null));
 		func.evaluate(args);
 		fail();
 	}

@@ -1,12 +1,11 @@
 package de.uni_due.s3.evaluator.core.integration.relation1;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.HashMap;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator.Evaluator;
@@ -22,17 +21,22 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestEqual extends TestIntegration {
 
-	HashMap<Integer, OMOBJ> equalFillInVariableMap = new HashMap<>();
-	HashMap<String, OMOBJ> equalExerciseVariableMap = new HashMap<>();
+	static HashMap<Integer, OMOBJ> equalFillInVariableMap = new HashMap<>();
+	static HashMap<String, OMOBJ> equalExerciseVariableMap = new HashMap<>();
 
-	@Before
-	public void beforeTest() throws FunctionNotImplementedException, UndefinedFillInVariableException,
+	@BeforeClass
+	public static void beforeTest() throws FunctionNotImplementedException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
 		equalFillInVariableMap.put(1, ExpressionParser.parse("7", null, null));
 		equalFillInVariableMap.put(2, ExpressionParser.parse("2", null, null));
 
 		equalExerciseVariableMap.put("a", ExpressionParser.parse("7", null, null));
 		equalExerciseVariableMap.put("b", ExpressionParser.parse("2", null, null));
+	}
+	
+	@Test
+	public void testEqual0() throws EvaluatorException, OpenMathException {
+		assertTrue(Evaluator.getBooleanResult("1 == 1.0", equalExerciseVariableMap, equalFillInVariableMap));
 	}
 	
 	@Test
@@ -112,7 +116,7 @@ public class TestEqual extends TestIntegration {
 	
 	@Test
 	public void testEqualWithEncapsulation4() throws EvaluatorException, OpenMathException {
-		assertFalse(Evaluator.getBooleanResult("1 == (1 == (1 == (1 == (1 == 1))))", equalExerciseVariableMap, equalFillInVariableMap));
+		assertTrue(Evaluator.getBooleanResult("1 == (1 == (1 == (1 == (1 == 1))))", equalExerciseVariableMap, equalFillInVariableMap));
 	}
 
 	@Test
@@ -122,7 +126,7 @@ public class TestEqual extends TestIntegration {
 	
 	@Test
 	public void testEqualWithEncapsulation6() throws EvaluatorException, OpenMathException {
-		assertFalse(Evaluator.getBooleanResult("((((1 == 1) == 1) == 1) == 1) == 1", equalExerciseVariableMap, equalFillInVariableMap));
+		assertTrue(Evaluator.getBooleanResult("((((1 == 1) == 1) == 1) == 1) == 1", equalExerciseVariableMap, equalFillInVariableMap));
 	}
 
 	@Test(expected=ParserException.class)

@@ -1,11 +1,12 @@
 package de.uni_due.s3.evaluator.core.integration.relation1;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
 
 import java.util.HashMap;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator.Evaluator;
@@ -22,11 +23,11 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestGreaterThanOrEqual extends TestIntegration {
 
-	HashMap<Integer, OMOBJ> greaterThanOrEqualFillInVariableMap = new HashMap<>();
-	HashMap<String, OMOBJ> greaterThanOrEqualExerciseVariableMap = new HashMap<>();
+	static HashMap<Integer, OMOBJ> greaterThanOrEqualFillInVariableMap = new HashMap<>();
+	static HashMap<String, OMOBJ> greaterThanOrEqualExerciseVariableMap = new HashMap<>();
 
-	@Before
-	public void beforeTest() throws FunctionNotImplementedException, UndefinedFillInVariableException,
+	@BeforeClass
+	public static void beforeTest() throws FunctionNotImplementedException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
 		greaterThanOrEqualFillInVariableMap.put(1, ExpressionParser.parse("3", null, null));
 		greaterThanOrEqualFillInVariableMap.put(2, ExpressionParser.parse("1", null, null));
@@ -145,25 +146,22 @@ public class TestGreaterThanOrEqual extends TestIntegration {
 		assertTrue(!Evaluator.getBooleanResult("[pos=2]>=[pos=1]", greaterThanOrEqualExerciseVariableMap, greaterThanOrEqualFillInVariableMap));
 	}
 
-	@Test (expected = FunctionInvalidArgumentTypeException.class)
+	@Test
 	public void testGreaterThanOrEqualWithEncapsulation1() throws EvaluatorException, OpenMathException {
 		assertTrue(Evaluator.getBooleanResult("1 >= (1 >= 2)", greaterThanOrEqualExerciseVariableMap, greaterThanOrEqualFillInVariableMap));
-		fail();
 	}
 	
-	@Test (expected = FunctionInvalidArgumentTypeException.class)
+	@Test 
 	public void testGreaterThanOrEqualWithEncapsulation2() throws EvaluatorException, OpenMathException {
-		assertTrue(!Evaluator.getBooleanResult("0 >= (0 >= (0 >= 1))", greaterThanOrEqualExerciseVariableMap, greaterThanOrEqualFillInVariableMap));
-		fail();
+		assertFalse(Evaluator.getBooleanResult("0 >= (0 >= (0 >= 1))", greaterThanOrEqualExerciseVariableMap, greaterThanOrEqualFillInVariableMap));
 	}
 	
-	@Test (expected = FunctionInvalidArgumentTypeException.class)
+	@Test 
 	public void testGreaterThanOrEqualWithEncapsulation3() throws EvaluatorException, OpenMathException {
-		assertTrue(!Evaluator.getBooleanResult("0 >= (0 >= (0 >= (0 >= (0 >= 1))))", greaterThanOrEqualExerciseVariableMap, greaterThanOrEqualFillInVariableMap));
-		fail();
+		assertFalse(Evaluator.getBooleanResult("0 >= (0 >= (0 >= (0 >= (0 >= 1))))", greaterThanOrEqualExerciseVariableMap, greaterThanOrEqualFillInVariableMap));
 	}
 	
-	@Test (expected = FunctionInvalidArgumentTypeException.class)
+	@Test
 	public void testGreaterThanOrEqualWithEncapsulation4() throws EvaluatorException, OpenMathException {
 		assertTrue(Evaluator.getBooleanResult("((((1 >= 1) >= 1) >= 1) >= 1) >= 1", greaterThanOrEqualExerciseVariableMap, greaterThanOrEqualFillInVariableMap));
 	

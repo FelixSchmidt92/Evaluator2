@@ -1,6 +1,6 @@
+// Generated from EvaluatorParser.g4 by ANTLR 4.7
 package de.uni_due.s3.evaluator.parser.antlr;
 
-// Generated from EvaluatorParser.g4 by ANTLR 4.7
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;

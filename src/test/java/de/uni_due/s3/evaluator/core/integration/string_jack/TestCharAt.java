@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 
 import javax.xml.bind.JAXBException;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator.Evaluator;
@@ -21,11 +21,11 @@ import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestCharAt extends TestIntegration {
-	HashMap<Integer, OMOBJ> charAtFillInVariableMap = new HashMap<>();
-	HashMap<String, OMOBJ> charAtExerciseVariableMap = new HashMap<>();
+	static HashMap<Integer, OMOBJ> charAtFillInVariableMap = new HashMap<>();
+	static HashMap<String, OMOBJ> charAtExerciseVariableMap = new HashMap<>();
 
-	@Before
-	public void beforeTest() {
+	@BeforeClass
+	public static void beforeTest() {
 		try {
 			charAtFillInVariableMap.put(1, OMConverter.toObject("<OMOBJ><OMSTR>W</OMSTR></OMOBJ>"));
 
@@ -96,7 +96,7 @@ public class TestCharAt extends TestIntegration {
 				Evaluator.evaluate("charAt(charAt('abc', 1), 0)", charAtExerciseVariableMap, charAtFillInVariableMap));
 	}
 
-	@Test 
+	@Test(expected = FunctionInvalidArgumentTypeException.class) //Throws Error, because carAt returns a String! This should not work
 	public void testCharAtWithExpressions2() throws EvaluatorException, OpenMathException {
 		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("a")),
 				Evaluator.evaluate("charAt('abc', charAt('00', 0))", charAtExerciseVariableMap, charAtFillInVariableMap));

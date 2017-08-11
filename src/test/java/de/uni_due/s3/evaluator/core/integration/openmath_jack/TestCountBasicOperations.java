@@ -86,19 +86,18 @@ public class TestCountBasicOperations extends TestIntegration {
 		fail();
 	}
 
-	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
+	@Test//(expected = FunctionInvalidNumberOfArgumentsException.class) //This test works now, because 5 is seen as Expression! with 0 Basic Operators
 	public void testCountBasicOperationsWithWrongInputOneRational() throws EvaluatorException, OpenMathException {
-		Evaluator.getNumberResult("countBasicOperations(5)", exerciseVariableMap, fillInVariableMap);
-		fail();
+		assertEquals(0, Evaluator.getNumberResult("countBasicOperations(5)", exerciseVariableMap, fillInVariableMap), 0);
 	}
 
-	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
+	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void testCountBasicOperationsWithTwoRationalArguments() throws EvaluatorException, OpenMathException {
 		Evaluator.getNumberResult("countBasicOperations(2, 2)", exerciseVariableMap, fillInVariableMap);
 		fail();
 	}
 
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
+	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testCountBasicOperationsThreeArguments() throws EvaluatorException, OpenMathException {
 		Evaluator.getNumberResult("countBasicOperations('a', 'a', 'a')", exerciseVariableMap, fillInVariableMap);
 		fail();

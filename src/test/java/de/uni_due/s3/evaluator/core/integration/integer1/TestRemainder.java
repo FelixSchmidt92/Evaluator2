@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 import javax.xml.bind.JAXBException;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator.Evaluator;
@@ -25,11 +25,11 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestRemainder extends TestIntegration {
 
-	HashMap<Integer, OMOBJ> remainderFillInVariableMap = new HashMap<>();
-	HashMap<String, OMOBJ> remainderExerciseVariableMap = new HashMap<>();
+	static HashMap<Integer, OMOBJ> remainderFillInVariableMap = new HashMap<>();
+	static HashMap<String, OMOBJ> remainderExerciseVariableMap = new HashMap<>();
 	
-	@Before 
-	public void beforeTest() {
+	@BeforeClass
+	public static void beforeTest() {
 		try {
 			remainderFillInVariableMap.put(1, OMConverter.toObject("<OMOBJ><OMI>3</OMI></OMOBJ>"));
 			remainderFillInVariableMap.put(2, OMConverter.toObject("<OMOBJ><OMI>10</OMI></OMOBJ>"));
@@ -67,13 +67,14 @@ public class TestRemainder extends TestIntegration {
 		assertEquals(6, Evaluator.getNumberResult("6%7", remainderExerciseVariableMap, remainderFillInVariableMap), 0.0);
 	}
 	
-	@Test
+	@Test(expected=FunctionInvalidArgumentTypeException.class) //Float Numbers so Error occurs
 	public void testModulus6() throws EvaluatorException, OpenMathException {
 		assertEquals(2, Evaluator.getNumberResult("12.0%2.5", remainderExerciseVariableMap, remainderFillInVariableMap), 0.0);
 	}
 	
 	@Test (expected=FunctionInvalidArgumentException.class)
 	public void testModulus7() throws EvaluatorException, OpenMathException {
+		System.out.println(Evaluator.evaluate("4%0", exerciseVariableMap, fillInVariableMap).getOMI());
 		Evaluator.evaluate("4%0", exerciseVariableMap, fillInVariableMap);
 		fail();
 	}
@@ -113,7 +114,7 @@ public class TestRemainder extends TestIntegration {
 		assertEquals(-2, Evaluator.getNumberResult("-2 % 5", remainderExerciseVariableMap, remainderFillInVariableMap), 0.0);
 	}
 	
-	@Test
+	@Test(expected=FunctionInvalidArgumentTypeException.class)// FloatNumber, so Error occurs
 	public void testModulusWithNegativeNumbers2() throws EvaluatorException, OpenMathException {
 		assertEquals(-2.3, Evaluator.getNumberResult("-2.3 % 5", remainderExerciseVariableMap, remainderFillInVariableMap), 0.0);
 	}

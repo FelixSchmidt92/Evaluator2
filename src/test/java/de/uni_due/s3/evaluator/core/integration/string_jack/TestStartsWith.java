@@ -5,7 +5,7 @@ import static org.junit.Assert.fail;
 
 import javax.xml.bind.JAXBException;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator.Evaluator;
@@ -18,8 +18,8 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestStartsWith extends TestIntegration {
 
-	@Before
-	public void beforeTest() {
+	@BeforeClass
+	public static void beforeTest() {
 		try {
 			fillInVariableMap.put(7, OMConverter.toObject("<OMOBJ><OMSTR>ll</OMSTR></OMOBJ>"));
 			fillInVariableMap.put(8, OMConverter.toObject("<OMOBJ><OMI>0</OMI></OMOBJ>"));
@@ -34,80 +34,99 @@ public class TestStartsWith extends TestIntegration {
 		}
 	}
 
-	@Test public void testStartsWith1() throws EvaluatorException, OpenMathException {
-		assertTrue(Evaluator.getBooleanResult("startsWith('hello','he',0)", exerciseVariableMap, fillInVariableMap));	
+	@Test
+	public void testStartsWith1() throws EvaluatorException, OpenMathException {
+		assertTrue(Evaluator.getBooleanResult("startsWith('hello','he',0)", exerciseVariableMap, fillInVariableMap));
 	}
-	
-	@Test public void testStartsWith2() throws EvaluatorException, OpenMathException {
+
+	@Test
+	public void testStartsWith2() throws EvaluatorException, OpenMathException {
 		assertTrue(Evaluator.getBooleanResult("startsWith('hello','ll',2)", exerciseVariableMap, fillInVariableMap));
 	}
-	
-	@Test public void testStartsWith3() throws EvaluatorException, OpenMathException {
+
+	@Test
+	public void testStartsWith3() throws EvaluatorException, OpenMathException {
 		assertTrue(Evaluator.getBooleanResult("startsWith('hello','o',4)", exerciseVariableMap, fillInVariableMap));
 	}
-	
-	@Test public void testStartsWith4() throws EvaluatorException, OpenMathException {
+
+	@Test
+	public void testStartsWith4() throws EvaluatorException, OpenMathException {
 		assertTrue(!Evaluator.getBooleanResult("startsWith('hello','ll',0)", exerciseVariableMap, fillInVariableMap));
 	}
-	
-	@Test public void testStartsWith5() throws EvaluatorException, OpenMathException {
+
+	@Test
+	public void testStartsWith5() throws EvaluatorException, OpenMathException {
 		assertTrue(Evaluator.getBooleanResult("startsWith('','',0)", exerciseVariableMap, fillInVariableMap));
 	}
-	
-	@Test public void testStartsWith6() throws EvaluatorException, OpenMathException {
+
+	@Test
+	public void testStartsWith6() throws EvaluatorException, OpenMathException {
 		assertTrue(!Evaluator.getBooleanResult("startsWith('',' ',0)", exerciseVariableMap, fillInVariableMap));
 	}
-	
-	@Test public void testStartsWithInput1() throws EvaluatorException, OpenMathException {
-		assertTrue(Evaluator.getBooleanResult("startsWith('hello','he',[pos=8])", exerciseVariableMap, fillInVariableMap));
+
+	@Test
+	public void testStartsWithInput1() throws EvaluatorException, OpenMathException {
+		assertTrue(
+				Evaluator.getBooleanResult("startsWith('hello','he',[pos=8])", exerciseVariableMap, fillInVariableMap));
 	}
-	
-	@Test public void testStartsWithInput2() throws EvaluatorException, OpenMathException {
-		assertTrue(Evaluator.getBooleanResult("startsWith('hello','[pos=7]',2)", exerciseVariableMap, fillInVariableMap));
+
+	@Test
+	public void testStartsWithInput2() throws EvaluatorException, OpenMathException {
+		assertTrue(
+				Evaluator.getBooleanResult("startsWith('hello','[pos=7]',2)", exerciseVariableMap, fillInVariableMap));
 	}
-	
-	@Test public void testStartsWithInput3() throws EvaluatorException, OpenMathException {
+
+	@Test
+	public void testStartsWithInput3() throws EvaluatorException, OpenMathException {
 		assertTrue(Evaluator.getBooleanResult("startsWith('[pos=9]','o',4)", exerciseVariableMap, fillInVariableMap));
 	}
-	
-	@Test public void testStartsWithVariables1() throws EvaluatorException, OpenMathException {
-		assertTrue(Evaluator.getBooleanResult("startsWith('hello','he',[var=g])", exerciseVariableMap, fillInVariableMap));
+
+	@Test
+	public void testStartsWithVariables1() throws EvaluatorException, OpenMathException {
+		assertTrue(
+				Evaluator.getBooleanResult("startsWith('hello','he',[var=g])", exerciseVariableMap, fillInVariableMap));
 	}
-	
-	@Test public void testStartsWithVariables2() throws EvaluatorException, OpenMathException {
-		assertTrue(Evaluator.getBooleanResult("startsWith('hello','[var=ll]',2)", exerciseVariableMap, fillInVariableMap));
+
+	@Test
+	public void testStartsWithVariables2() throws EvaluatorException, OpenMathException {
+		assertTrue(
+				Evaluator.getBooleanResult("startsWith('hello','[var=ll]',2)", exerciseVariableMap, fillInVariableMap));
 	}
-	
-	@Test public void testStartsWithVariables3() throws EvaluatorException, OpenMathException {
-		assertTrue(Evaluator.getBooleanResult("startsWith('[var=hello]','o',4)", exerciseVariableMap, fillInVariableMap));
+
+	@Test
+	public void testStartsWithVariables3() throws EvaluatorException, OpenMathException {
+		assertTrue(
+				Evaluator.getBooleanResult("startsWith('[var=hello]','o',4)", exerciseVariableMap, fillInVariableMap));
 	}
-	
-	@Test(expected=ParserException.class)
+
+	@Test(expected = ParserException.class)
 	public void testStartsWithWithWrongInputCharacter() throws EvaluatorException, OpenMathException {
 		Evaluator.getBooleanResult("startsWith(ab)", exerciseVariableMap, fillInVariableMap);
 		fail();
 	}
-	
-	@Test(expected=FunctionInvalidNumberOfArgumentsException.class)
+
+	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testStartsWithWithOneArgument() throws EvaluatorException, OpenMathException {
 		Evaluator.getBooleanResult("startsWith('hello')", exerciseVariableMap, fillInVariableMap);
 		fail();
 	}
-	
+
 	@Test
 	public void testStartsWithWithTwoArguments() throws EvaluatorException, OpenMathException {
 		Evaluator.getBooleanResult("startsWith('hello', 'he')", exerciseVariableMap, fillInVariableMap);
 	}
-	
-	@Test(expected=UndefinedExerciseVariableException.class)
+
+	@Test(expected = UndefinedExerciseVariableException.class)
 	public void testStartsWithWithMissingExerciseVariable() throws EvaluatorException, OpenMathException {
-		Evaluator.getBooleanResult("startsWith('[var=j]', '[var=j]', '[var=j]')", exerciseVariableMap, fillInVariableMap);
+		Evaluator.getBooleanResult("startsWith('[var=j]', '[var=j]', '[var=j]')", exerciseVariableMap,
+				fillInVariableMap);
 		fail();
 	}
-	
-	@Test(expected=UndefinedFillInVariableException.class)
+
+	@Test(expected = UndefinedFillInVariableException.class)
 	public void testStartsWithWithMissingInput() throws EvaluatorException, OpenMathException {
-		Evaluator.getBooleanResult("startsWith('[pos=42]', '[pos=42]', '[pos=42]')", exerciseVariableMap, fillInVariableMap);
+		Evaluator.getBooleanResult("startsWith('[pos=42]', '[pos=42]', '[pos=42]')", exerciseVariableMap,
+				fillInVariableMap);
 		fail();
 	}
 }

@@ -41,8 +41,9 @@ public class TestGetFromOrderedSet extends TestFunctionAbstract {
 		set.add(OMCreator.createOMI(20));
 		set.add(OMCreator.createOMF(3.123));
 		List<Object> args = new ArrayList<Object>();
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set));
 		args.add(OMCreator.createOMI(1));
+		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set));
+
 		Object result = func.evaluate(args);
 		assertEquals(OMCreator.createOMF(3.123), result);
 	}
@@ -55,8 +56,9 @@ public class TestGetFromOrderedSet extends TestFunctionAbstract {
 		set.add(OMCreator.createOMSTR("Hallo"));
 		set.add(OMCreator.createOMSTR("Hello"));
 		List<Object> args = new ArrayList<Object>();
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set));
 		args.add(OMCreator.createOMI(0));
+		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set));
+
 		Object result = func.evaluate(args);
 		assertEquals(OMCreator.createOMSTR("Hallo"), result);
 	}
@@ -69,8 +71,9 @@ public class TestGetFromOrderedSet extends TestFunctionAbstract {
 		set.add(OMCreator.createOMI(20));
 		set.add(OMCreator.createOMF(3.243));
 		List<Object> args = new ArrayList<Object>();
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set));
 		args.add(OMCreator.createOMI(2));
+		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set));
+
 		Object result = func.evaluate(args);
 		assertEquals(OMCreator.createOMI(20), result);
 	}
@@ -133,7 +136,7 @@ public class TestGetFromOrderedSet extends TestFunctionAbstract {
 	public void testGetFromOrderedSetIntegration1() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
-		OMOBJ omobj = ExpressionParser.parse("getFromOrderedSet({1;2},0)", null, null);
+		OMOBJ omobj = ExpressionParser.parse("getFromOrderedSet(0, {1;2})", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals(OMCreator.createOMI(1), result.getOMI());
 	}
@@ -151,7 +154,7 @@ public class TestGetFromOrderedSet extends TestFunctionAbstract {
 	public void testGetFromOrderedSetIntegrationWithOutOfBounds() throws FunctionException, OpenMathException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
-		OMOBJ omobj = ExpressionParser.parse("getFromOrderedSet({1},2)", null, null);
+		OMOBJ omobj = ExpressionParser.parse("getFromOrderedSet(2, {1})", null, null);
 		OMExecutor.execute(omobj);
 	}
 
@@ -169,7 +172,7 @@ public class TestGetFromOrderedSet extends TestFunctionAbstract {
 	public void testGetFromOrderedSetWithZeroArgs() throws NoRepresentationAvailableException, CasException,
 			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException, FunctionException,
 			CasNotAvailableException, OpenMathException {
-		OMOBJ omobj = ExpressionParser.parse("getFromOrderedSet({}, 0)", null, null);
+		OMOBJ omobj = ExpressionParser.parse("getFromOrderedSet(0, {})", null, null);
 		OMExecutor.execute(omobj);
 		fail();
 	}

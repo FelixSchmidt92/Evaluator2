@@ -54,7 +54,7 @@ public class TestCountNodes extends TestIntegration {
 	
 	@Test 
 	public void testCountNodesWithExpressions() throws EvaluatorException, OpenMathException {
-		assertEquals(1, Evaluator.getNumberResult("countNodes('countNodes(2+2)')", exerciseVariableMap, fillInVariableMap), 0.0);
+		assertEquals(6, Evaluator.getNumberResult("countNodes('countNodes(2+2)')", exerciseVariableMap, fillInVariableMap), 0.0);
 	}
 	
 	@Test (expected=ParserException.class)

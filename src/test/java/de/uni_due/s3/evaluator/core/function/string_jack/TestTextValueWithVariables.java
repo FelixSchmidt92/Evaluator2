@@ -15,7 +15,7 @@ import de.uni_due.s3.openmath.omutils.OMCreator;
 
 public class TestTextValueWithVariables extends TestFunctionAbstract {
 
-	Function func = new TextValueWithVariables();
+	Function func = new TextWithVariables();
 
 	@Test
 	public void testTextValueWithVariablesSageSyntax1() throws NoRepresentationAvailableException, FunctionException {

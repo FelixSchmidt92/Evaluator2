@@ -61,7 +61,7 @@ public class IsPolynomial extends Function {
 					status = visitArgs(oma.getOmel().get(i), current);
 				} else if (oma.getOmel().get(i).equals(current)) {
 					// current OM* equals argument check if OMA'S OMS is Polynom
-					status = checkPolynomFunction(oms);
+					status = checkPolynomFunction(oms, i, oma.getOmel().get(i));
 				}
 
 				// If status set to false in one of these checks above false will be returned.
@@ -90,14 +90,15 @@ public class IsPolynomial extends Function {
 	 * @return true if Times, Divide ... false otherwise (like sqrt(x) or something
 	 *         else)s
 	 */
-	private boolean checkPolynomFunction(OMS oms) {
+	private boolean checkPolynomFunction(OMS oms, int i, Object current) {
 		if (oms.equals(OMSymbol.ARITH1_DIVIDE))
 			return true;
 		if (oms.equals(OMSymbol.ARITH1_MINUS))
 			return true;
 		if (oms.equals(OMSymbol.ARITH1_PLUS))
 			return true;
-		if (oms.equals(OMSymbol.ARITH1_POWER))
+		if (oms.equals(OMSymbol.ARITH1_POWER) && (i == 1 || !(current instanceof OMV)))
+			//iff second arg is OMV then false!
 			return true;
 		if (oms.equals(OMSymbol.ARITH1_UNARY_MINUS))
 			return true;

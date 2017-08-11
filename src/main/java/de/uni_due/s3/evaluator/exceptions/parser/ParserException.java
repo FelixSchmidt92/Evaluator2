@@ -11,7 +11,6 @@ public class ParserException extends EvaluatorException {
 
 	public ParserException(String message) {
 		super(message);
-		// TODO Auto-generated constructor stub
 	}
 
 }

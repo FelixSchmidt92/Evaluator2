@@ -5,7 +5,7 @@ import static org.junit.Assert.fail;
 
 import java.util.HashMap;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator.Evaluator;
@@ -22,11 +22,11 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestLessThanOrEqual extends TestIntegration {
 
-	HashMap<Integer, OMOBJ> lessThanOrEqualFillInVariableMap = new HashMap<>();
-	HashMap<String, OMOBJ> lessThanOrEqualExerciseVariableMap = new HashMap<>();
+	static HashMap<Integer, OMOBJ> lessThanOrEqualFillInVariableMap = new HashMap<>();
+	static HashMap<String, OMOBJ> lessThanOrEqualExerciseVariableMap = new HashMap<>();
 
-	@Before
-	public void beforeTest() throws FunctionNotImplementedException, UndefinedFillInVariableException,
+	@BeforeClass
+	public static void beforeTest() throws FunctionNotImplementedException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException {
 		lessThanOrEqualFillInVariableMap.put(1, ExpressionParser.parse("3", null, null));
 		lessThanOrEqualFillInVariableMap.put(2, ExpressionParser.parse("1", null, null));
@@ -157,28 +157,24 @@ public class TestLessThanOrEqual extends TestIntegration {
 		assertTrue(!Evaluator.getBooleanResult("[pos=1]<=[pos=2]", lessThanOrEqualExerciseVariableMap, lessThanOrEqualFillInVariableMap));
 	}
 	
-	@Test(expected=FunctionInvalidArgumentTypeException.class)
+	@Test
 	public void testLessThanOrEqualWithEncapsulation1() throws EvaluatorException, OpenMathException {
 		assertTrue(Evaluator.getBooleanResult("1 <= (1 <= 2)", lessThanOrEqualExerciseVariableMap, lessThanOrEqualFillInVariableMap));
-		fail();
 	}
 	
-	@Test(expected=FunctionInvalidArgumentTypeException.class)
+	@Test
 	public void testLessThanOrEqualWithEncapsulation2() throws EvaluatorException, OpenMathException {
 		assertTrue(Evaluator.getBooleanResult("1 <= (1 <= (0 <= 1))", lessThanOrEqualExerciseVariableMap, lessThanOrEqualFillInVariableMap));
-		fail();
 	}
 	
-	@Test(expected=FunctionInvalidArgumentTypeException.class)
+	@Test
 	public void testLessThanOrEqualWithEncapsulation3() throws EvaluatorException, OpenMathException {
 		assertTrue(Evaluator.getBooleanResult("0 <= (0 <= (0 <= (0 <= (0 <= 1))))", lessThanOrEqualExerciseVariableMap, lessThanOrEqualFillInVariableMap));
-		fail();
 	}
 	
-	@Test(expected=FunctionInvalidArgumentTypeException.class)
+	@Test
 	public void testLessThanOrEqualWithEncapsulation4() throws EvaluatorException, OpenMathException {
 		assertTrue(Evaluator.getBooleanResult("((((1 <= 1) <= 1) <= 1) <= 1) <= 1", lessThanOrEqualExerciseVariableMap, lessThanOrEqualFillInVariableMap));
-		fail();
 	}
 	
 	@Test(expected=ParserException.class)

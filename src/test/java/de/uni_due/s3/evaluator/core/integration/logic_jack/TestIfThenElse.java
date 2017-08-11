@@ -5,7 +5,7 @@ import static org.junit.Assert.fail;
 
 import javax.xml.bind.JAXBException;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator.Evaluator;
@@ -21,8 +21,8 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestIfThenElse extends TestIntegration {
 
-	@Before
-	public void beforeTest() {
+	@BeforeClass
+	public static void beforeTest() {
 		try {
 			fillInVariableMap.put(7, OMConverter.toObject("<OMOBJ><OMSTR>test</OMSTR></OMOBJ>"));
 
@@ -89,13 +89,13 @@ public class TestIfThenElse extends TestIntegration {
 
 	@Test
 	public void testIfthenelseWithExpressions1() throws EvaluatorException, OpenMathException {
-		assertEquals(ExpressionParser.parse("'a'", null, null),
+		assertEquals(ExpressionParser.parse("a", null, null),
 				Evaluator.evaluate("ifthenelse('5*2 +5 == 5*3', 'a', 'b')", exerciseVariableMap, fillInVariableMap));
 	}
 
 	@Test
 	public void testIfthenelseWithExpressions2() throws EvaluatorException, OpenMathException {
-		assertEquals(ExpressionParser.parse("'b'", null, null), Evaluator
+		assertEquals(ExpressionParser.parse("b", null, null), Evaluator
 				.evaluate("ifthenelse(ifthenelse(0, '1', '0'), 'a', 'b')", exerciseVariableMap, fillInVariableMap));
 	}
 

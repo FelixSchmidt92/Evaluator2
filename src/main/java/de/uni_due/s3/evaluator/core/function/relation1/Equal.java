@@ -2,10 +2,12 @@ package de.uni_due.s3.evaluator.core.function.relation1;
 
 import java.util.List;
 
+import de.uni_due.s3.evaluator.core.OMUtils;
 import de.uni_due.s3.evaluator.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator.core.function.Function;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator.exceptions.function.FunctionInvalidArgumentTypeException;
+import de.uni_due.s3.evaluator.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.evaluator.exceptions.representation.NoRepresentationAvailableException;
 
 /**
@@ -26,10 +28,14 @@ public class Equal extends Function {
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionException {
 		try {
-			boolean result = arguments.get(0).equals(arguments.get(1));
-			return (result) ? OMSymbol.LOGIC1_TRUE : OMSymbol.LOGIC1_FALSE;
-		} catch (NullPointerException np) {
-			throw new FunctionInvalidArgumentTypeException(this, "everything except null");
+			double first = OMUtils.convertOMToDouble(arguments.get(0));
+			double second = OMUtils.convertOMToDouble(arguments.get(1));
+			return (first == second) ? OMSymbol.LOGIC1_TRUE : OMSymbol.LOGIC1_FALSE;
+		} catch (InputMismatchException np) {
+			if (arguments.get(0).equals(arguments.get(1)))
+				return OMSymbol.LOGIC1_TRUE;
+			else
+				return OMSymbol.LOGIC1_FALSE;
 		}
 	}
 

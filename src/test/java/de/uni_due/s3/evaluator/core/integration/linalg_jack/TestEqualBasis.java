@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 import javax.xml.bind.JAXBException;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator.Evaluator;
@@ -24,11 +24,11 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestEqualBasis extends TestIntegration {
 
-	HashMap<Integer, OMOBJ> equalBasisFillInVariableMap = new HashMap<>();
-	HashMap<String, OMOBJ> equalBasisExerciseVariableMap = new HashMap<>();
+	static HashMap<Integer, OMOBJ> equalBasisFillInVariableMap = new HashMap<>();
+	static HashMap<String, OMOBJ> equalBasisExerciseVariableMap = new HashMap<>();
 	
-	@Before 
-	public void beforeTest() {
+	@BeforeClass
+	public static void beforeTest() {
 		try {
 			//set(vector(1,2,3),vector(3,3,3))
 			equalBasisFillInVariableMap.put(1, OMConverter.toObject("<OMOBJ><OMA><OMS cd='list1' name='list'/><OMA><OMS cd='linalg2' name='vector'/><OMI>1</OMI><OMI>2</OMI><OMI>3</OMI></OMA><OMA><OMS cd='linalg2' name='vector'/><OMI>3</OMI><OMI>3</OMI><OMI>3</OMI></OMA></OMA></OMOBJ>"));

@@ -3,7 +3,7 @@ package de.uni_due.s3.evaluator.core.integration.transc1;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator.Evaluator;
@@ -17,8 +17,8 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestSin extends TestIntegration {
 
-	@Before
-	public void beforeTest() throws OpenMathException {
+	@BeforeClass
+	public static void beforeTest() throws OpenMathException {
 		fillInVariableMap.put(2, OMCreator.createOMOBJ(OMSymbol.NUMS1_PI));
 	}
 

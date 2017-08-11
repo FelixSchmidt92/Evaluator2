@@ -1,6 +1,6 @@
+// Generated from EvaluatorLexer.g4 by ANTLR 4.7
 package de.uni_due.s3.evaluator.parser.antlr;
 
-// Generated from EvaluatorLexer.g4 by ANTLR 4.7
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;

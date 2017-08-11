@@ -24,17 +24,17 @@ public class TestFactorOf extends TestIntegration {
 	
 	@Test
 	public void testFactorOf2() throws EvaluatorException, OpenMathException {
-		assertEquals(0, Evaluator.getNumberResult("factorOf('2x+x-3x','x','1')", exerciseVariableMap, fillInVariableMap), 0.0);
+		assertEquals(0, Evaluator.getNumberResult("factorOf('2*x+x-3*x','x','1')", exerciseVariableMap, fillInVariableMap), 0.0);
 	}
 	
 	@Test
 	public void testFactorOf3() throws EvaluatorException, OpenMathException {
-		assertEquals(2, Evaluator.getNumberResult("factorOf('2y^2+3*y','y','2')", exerciseVariableMap, fillInVariableMap), 0.0);
+		assertEquals(2, Evaluator.getNumberResult("factorOf('2*y^2+3*y','y','2')", exerciseVariableMap, fillInVariableMap), 0.0);
 	}
 	
 	@Test
 	public void testFactorOf4() throws EvaluatorException, OpenMathException {
-		assertEquals(0, Evaluator.getNumberResult("factorOf('5y^2+3*y','y','0')", exerciseVariableMap, fillInVariableMap), 0.0);
+		assertEquals(0, Evaluator.getNumberResult("factorOf('5*y^2+3*y','y','0')", exerciseVariableMap, fillInVariableMap), 0.0);
 	}
 	
 	@Test
@@ -44,7 +44,7 @@ public class TestFactorOf extends TestIntegration {
 	
 	@Test
 	public void testFactorOfWithInput2() throws EvaluatorException, OpenMathException {
-		assertEquals(0, Evaluator.getNumberResult("factorOf('2y^2+[pos=1]*y','y','1')", exerciseVariableMap, fillInVariableMap), 0.0);
+		assertEquals(0, Evaluator.getNumberResult("factorOf('2*y^2+[pos=1]*y','y','1')", exerciseVariableMap, fillInVariableMap), 0.0);
 	}
 	
 	@Test
@@ -54,7 +54,7 @@ public class TestFactorOf extends TestIntegration {
 	
 	@Test
 	public void testFactorOfWithVariables2() throws EvaluatorException, OpenMathException {
-		assertEquals(0, Evaluator.getNumberResult("factorOf('2y^2+[var=a]*y','y','1')", exerciseVariableMap, fillInVariableMap), 0.0);
+		assertEquals(0, Evaluator.getNumberResult("factorOf('2*y^2+[var=a]*y','y','1')", exerciseVariableMap, fillInVariableMap), 0.0);
 	}
 	
 	@Test
@@ -64,7 +64,7 @@ public class TestFactorOf extends TestIntegration {
 	
 	@Test
 	public void testFactorOfWithPointNumbers2() throws EvaluatorException, OpenMathException {
-		assertEquals(-8.1, Evaluator.getNumberResult("factorOf('2y^2+(-8.1)*y','y','1')", exerciseVariableMap, fillInVariableMap), 0.0);
+		assertEquals(-8.1, Evaluator.getNumberResult("factorOf('2*y^2+(-8.1)*y','y','1')", exerciseVariableMap, fillInVariableMap), 0.0);
 	}
 	
 	@Test(expected=ParserException.class)

@@ -9,7 +9,7 @@ import static org.junit.Assert.assertTrue;
 
 import javax.xml.bind.JAXBException;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator.Evaluator;
@@ -22,11 +22,11 @@ import de.uni_due.s3.openmath.omutils.OMConverter;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestCompareToIgnoreCase extends TestIntegration {
-	HashMap<Integer, OMOBJ> compareToIgnoreCaseFillInVariableMap = new HashMap<>();
-	HashMap<String, OMOBJ> compareToIgnoreCaseExerciseVariableMap = new HashMap<>();
+	static HashMap<Integer, OMOBJ> compareToIgnoreCaseFillInVariableMap = new HashMap<>();
+	static HashMap<String, OMOBJ> compareToIgnoreCaseExerciseVariableMap = new HashMap<>();
 
-	@Before
-	public void beforeTest() {
+	@BeforeClass
+	public static void beforeTest() {
 		try {
 			compareToIgnoreCaseFillInVariableMap.put(1, OMConverter.toObject("<OMOBJ><OMSTR>hallo</OMSTR></OMOBJ>"));
 
@@ -66,13 +66,6 @@ public class TestCompareToIgnoreCase extends TestIntegration {
 	public void testCompareToIgnoreCase5() throws EvaluatorException, OpenMathException {
 		assertTrue(0 > Evaluator.getNumberResult("compareToIgnoreCase('JACK','paluno')",
 				compareToIgnoreCaseExerciseVariableMap, compareToIgnoreCaseFillInVariableMap));
-	}
-	
-	//FIXME Polynome in strings umwandeln (generelle Möglichkeit)
-	@Test
-	public void testCompareToIgnoreCase6() throws EvaluatorException, OpenMathException {
-		assertNotEquals(0, Evaluator.getNumberResult("compareToIgnoreCase('2x+2y','2*(x+y)')",
-				compareToIgnoreCaseExerciseVariableMap, compareToIgnoreCaseFillInVariableMap), 0.0);
 	}
 
 	@Test
