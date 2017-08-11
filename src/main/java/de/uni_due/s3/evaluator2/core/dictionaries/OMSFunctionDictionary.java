@@ -66,6 +66,7 @@ import de.uni_due.s3.evaluator2.core.function.set1.Size;
 import de.uni_due.s3.evaluator2.core.function.set_jack.ChooseFromComplement;
 import de.uni_due.s3.evaluator2.core.function.set_jack.GetFromOrderedSet;
 import de.uni_due.s3.evaluator2.core.function.set_jack.GetFromSet;
+import de.uni_due.s3.evaluator2.core.function.set_jack.GetRandomFromSet;
 import de.uni_due.s3.evaluator2.core.function.string_jack.CharAt;
 import de.uni_due.s3.evaluator2.core.function.string_jack.CompareTo;
 import de.uni_due.s3.evaluator2.core.function.string_jack.CompareToIgnoreCase;
@@ -222,6 +223,7 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.SETJACK_CHOOSEFROMCOMPLEMENT, new ChooseFromComplement());
 		functions.put(OMSymbol.SETJACK_GETFROMORDEREDSET, new GetFromOrderedSet());
 		functions.put(OMSymbol.SETJACK_GETFROMSET, new GetFromSet());
+		functions.put(OMSymbol.SETJACK_GETRANDOMFROMSET, new GetRandomFromSet());
 
 		functions.put(OMSymbol.SET1_SET, new Set());
 		functions.put(OMSymbol.SET1_SIZE, new Size());

@@ -106,7 +106,8 @@ public class OMSymbol {
 	public static final OMS SETJACK_CHOOSEFROMCOMPLEMENT = OMCreator.createOMS("setJACK", "chooseFromComplement");
 	public static final OMS SETJACK_GETFROMORDEREDSET = OMCreator.createOMS("setJACK", "getFromOrderedSet");
 	public static final OMS SETJACK_GETFROMSET = OMCreator.createOMS("setJACK", "getFromSet");
-
+	public static final OMS SETJACK_GETRANDOMFROMSET = OMCreator.createOMS("setJACK", "getRandomFromSet");
+	
 	public static final OMS SET1_EMPTYSET = OMCreator.createOMS("set1", "emptyset");
 	public static final OMS SET1_SET = OMCreator.createOMS("set1", "set");
 	public static final OMS SET1_SIZE = OMCreator.createOMS("set1", "size");

@@ -122,7 +122,8 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("chooseFromComplement", OMSymbol.SETJACK_CHOOSEFROMCOMPLEMENT);
 		functionSymbolMap.put("getFromOrderedSet", OMSymbol.SETJACK_GETFROMORDEREDSET);
 		functionSymbolMap.put("getFromSet", OMSymbol.SETJACK_GETFROMSET);
-
+		functionSymbolMap.put("getRandomFromSet", OMSymbol.SETJACK_GETRANDOMFROMSET);
+		
 		functionSymbolMap.put("set", OMSymbol.SET1_SET);
 		functionSymbolMap.put("size", OMSymbol.SET1_SIZE);
 
