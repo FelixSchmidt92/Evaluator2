@@ -1,5 +1,8 @@
 parser grammar EvaluatorParser;
 
+@header{package de.uni_due.s3.evaluator.parser.antlr;
+}
+
 options {
 	tokenVocab = EvaluatorLexer;
 }
