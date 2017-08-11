@@ -6,9 +6,9 @@ import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import de.uni_due.s3.evaluator.exceptions.cas.CasEvaluationException;
-import de.uni_due.s3.evaluator.exceptions.cas.CasException;
-import de.uni_due.s3.evaluator.exceptions.cas.CasNotAvailableException;
+import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
+import de.uni_due.s3.evaluator2.exceptions.cas.CasException;
+import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestSage {
