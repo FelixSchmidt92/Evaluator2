@@ -66,25 +66,25 @@ public class TestToUpperCase extends TestIntegration {
 	@Test
 	public void testToUpperCaseWithInput1() throws EvaluatorException, OpenMathException {
 		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("HELLO")),
-				Evaluator.evaluate("toUpperCase('[pos=1]')", exerciseVariableMap, fillInVariableMap));
+				Evaluator.evaluate("toUpperCase('[pos=7]')", exerciseVariableMap, fillInVariableMap));
 	}
 
 	@Test
 	public void testToUpperCaseWithInput2() throws EvaluatorException, OpenMathException {
 		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("HELLO3")),
-				Evaluator.evaluate("toUpperCase('[pos=2]')", exerciseVariableMap, fillInVariableMap));
+				Evaluator.evaluate("toUpperCase('[pos=8]')", exerciseVariableMap, fillInVariableMap));
 	}
 
 	@Test
 	public void TestToUpperCaseWithVariables1() throws EvaluatorException, OpenMathException {
 		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("HELLO")),
-				Evaluator.evaluate("toUpperCase('[var=a]')", exerciseVariableMap, fillInVariableMap));
+				Evaluator.evaluate("toUpperCase('[var=g]')", exerciseVariableMap, fillInVariableMap));
 	}
 
 	@Test
 	public void TestToUpperCaseWithVariables2() throws EvaluatorException, OpenMathException {
 		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("HELLO3")),
-				Evaluator.evaluate("toUpperCase('[var=b]')", exerciseVariableMap, fillInVariableMap));
+				Evaluator.evaluate("toUpperCase('[var=h]')", exerciseVariableMap, fillInVariableMap));
 	}
 
 	@Test
