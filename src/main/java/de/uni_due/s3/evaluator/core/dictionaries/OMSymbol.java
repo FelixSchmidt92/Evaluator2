@@ -89,6 +89,7 @@ public class OMSymbol {
 	public static final OMS POLYNOMIAL1_EXPAND = OMCreator.createOMS("polynomial1", "expand");
 	
 	public static final OMS RANDOMJACK_RANDOM = OMCreator.createOMS("randomJACK", "random");
+	public static final OMS RANDOMJACK_RANDOMBETWEEN = OMCreator.createOMS("randomJACK", "randomBetween");
 
 	public static final OMS RELATION1_EQ = OMCreator.createOMS("relation1", "eq");
 	public static final OMS RELATION1_GEQ = OMCreator.createOMS("relation1", "geq");

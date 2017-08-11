@@ -51,6 +51,7 @@ import de.uni_due.s3.evaluator.core.function.polynomial_jack.EqualsExpr;
 import de.uni_due.s3.evaluator.core.function.polynomial_jack.Integrate;
 import de.uni_due.s3.evaluator.core.function.polynomial_jack.NumberOfVariables;
 import de.uni_due.s3.evaluator.core.function.random_jack.Random;
+import de.uni_due.s3.evaluator.core.function.random_jack.RandomBetween;
 import de.uni_due.s3.evaluator.core.function.relation1.Equal;
 import de.uni_due.s3.evaluator.core.function.relation1.GreaterThan;
 import de.uni_due.s3.evaluator.core.function.relation1.GreaterThanOrEqual;
@@ -203,6 +204,7 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.POLYNOMIAL1_EXPAND, new Expand());
 		
 		functions.put(OMSymbol.RANDOMJACK_RANDOM, new Random());
+		functions.put(OMSymbol.RANDOMJACK_RANDOMBETWEEN, new RandomBetween());
 
 		functions.put(OMSymbol.RELATION1_EQ, new Equal());
 		functions.put(OMSymbol.RELATION1_GEQ, new GreaterThanOrEqual());

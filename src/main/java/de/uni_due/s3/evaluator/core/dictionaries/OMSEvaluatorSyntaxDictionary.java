@@ -104,6 +104,7 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("expand", OMSymbol.POLYNOMIAL1_EXPAND);
 		
 		functionSymbolMap.put("random", OMSymbol.RANDOMJACK_RANDOM);
+		functionSymbolMap.put("randombetween", OMSymbol.RANDOMJACK_RANDOMBETWEEN);
 
 		functionSymbolMap.put("equal", OMSymbol.RELATION1_EQ);
 		functionSymbolMap.put("greaterthanorequal", OMSymbol.RELATION1_GEQ);
