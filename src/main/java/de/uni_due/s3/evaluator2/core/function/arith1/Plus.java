@@ -3,12 +3,14 @@ package de.uni_due.s3.evaluator2.core.function.arith1;
 import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.OMUtils;
+import de.uni_due.s3.evaluator2.core.dictionaries.OMSPriority;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
-import de.uni_due.s3.evaluator2.core.function.Function;
+import de.uni_due.s3.evaluator2.core.function.BinaryFunction;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.openmath.InputMismatchException;
+import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
@@ -19,8 +21,12 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
  * @author frichtscheid, spobel
  *
  */
-public class Plus extends Function {
+public class Plus extends BinaryFunction {
 
+	public Plus(){
+		super(OMSPriority.getPriority(OMSymbol.ARITH1_PLUS));
+	}
+	
 	/**
 	 * @throws OpenMathException
 	 *             Expects two arguments of type OMI or OMF @throws
@@ -64,6 +70,13 @@ public class Plus extends Function {
 	@Override
 	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
 		return "(" + getSageSyntax(arguments.get(0)) + " + " + getSageSyntax(arguments.get(1)) + ")";
+	}
+	
+	@Override
+	public String getPartialLatexSyntax(List<Object> arguments)
+			throws FunctionException, NoRepresentationAvailableException {
+		// TODO Auto-generated method stub
+		return arguments.get(0) + "+" + arguments.get(1);
 	}
 
 }

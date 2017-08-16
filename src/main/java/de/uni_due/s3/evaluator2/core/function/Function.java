@@ -3,6 +3,7 @@ package de.uni_due.s3.evaluator2.core.function;
 import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
+import de.uni_due.s3.evaluator2.core.syntaxvisitor.OMToLatexVisitor;
 import de.uni_due.s3.evaluator2.core.syntaxvisitor.OMToSageVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
@@ -174,6 +175,11 @@ public abstract class Function {
 			throws EvaluatorException {
 		return new OMToSageVisitor().visit(omElement);
 	}
+	
+	protected final String getLatexSyntax(Object omElement)
+			throws EvaluatorException {
+		return new OMToLatexVisitor().visit(omElement);
+	}
 
 	/**
 	 * Define here how the Syntax should look like in Sage for this specific
@@ -206,4 +212,9 @@ public abstract class Function {
 	/****************** Translator Section **********************/
 	/**********************************************************/
 
+	public String getPartialLatexSyntax(List<Object> arguments)
+			throws FunctionException, NoRepresentationAvailableException {
+		throw new NoRepresentationAvailableException(
+				"There is no latex representation for function " + this.getClass() + " implemented");
+	}
 }

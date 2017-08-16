@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import de.uni_due.s3.evaluator2.core.OMUtils;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
+import de.uni_due.s3.evaluator2.core.syntaxvisitor.OMToLatexVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
@@ -99,5 +100,15 @@ public class Evaluator {
 	 */
 	public static OMOBJ evaluate(OMOBJ omobj) throws EvaluatorException, OpenMathException {
 		return OMExecutor.execute(omobj);
+	}
+	
+	/**
+	 * Converts a OpenMath-Object into latex
+	 * @param omobj
+	 * @return
+	 * @throws EvaluatorException
+	 */
+	public static String getLatex(OMOBJ omobj) throws EvaluatorException {
+		return new OMToLatexVisitor().visit(omobj);
 	}
 }
