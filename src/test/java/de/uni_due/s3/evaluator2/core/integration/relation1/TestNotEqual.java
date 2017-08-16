@@ -13,6 +13,8 @@ import de.uni_due.s3.evaluator2.Evaluator;
 import de.uni_due.s3.evaluator2.core.integration.TestIntegration;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedException;
+import de.uni_due.s3.evaluator2.exceptions.parser.ErroneousExerciseVariableException;
+import de.uni_due.s3.evaluator2.exceptions.parser.ErroneousFillInVariableException;
 import de.uni_due.s3.evaluator2.exceptions.parser.ParserException;
 import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedExerciseVariableException;
 import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedFillInVariableException;
@@ -27,7 +29,7 @@ public class TestNotEqual extends TestIntegration {
 
 	@BeforeClass
 	public static void beforeTest() throws FunctionNotImplementedException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException {
+			UndefinedExerciseVariableException, ParserException, ErroneousFillInVariableException, ErroneousExerciseVariableException {
 		notEqualFillInVariableMap.put(1, ExpressionParser.parse("3", null, null));
 		notEqualFillInVariableMap.put(2, ExpressionParser.parse("10", null, null));
 		notEqualFillInVariableMap.put(3, ExpressionParser.parse("3.5", null, null));

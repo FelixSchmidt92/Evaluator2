@@ -16,6 +16,8 @@ import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentExcep
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedException;
+import de.uni_due.s3.evaluator2.exceptions.parser.ErroneousExerciseVariableException;
+import de.uni_due.s3.evaluator2.exceptions.parser.ErroneousFillInVariableException;
 import de.uni_due.s3.evaluator2.exceptions.parser.ParserException;
 import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedExerciseVariableException;
 import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedFillInVariableException;
@@ -30,7 +32,7 @@ public class TestGetDenominator extends TestIntegration {
 
 	@BeforeClass
 	public static void beforeTest() throws FunctionNotImplementedException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException {
+			UndefinedExerciseVariableException, ParserException, ErroneousFillInVariableException, ErroneousExerciseVariableException {
 		getDenominatorFillInVariableMap.put(1, ExpressionParser.parse("0", null, null));
 		getDenominatorFillInVariableMap.put(2, ExpressionParser.parse("20/3", null, null));
 		getDenominatorFillInVariableMap.put(3, ExpressionParser.parse("10.3", null, null));

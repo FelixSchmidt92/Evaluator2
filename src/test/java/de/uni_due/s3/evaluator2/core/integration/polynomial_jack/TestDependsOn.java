@@ -14,6 +14,8 @@ import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedException;
+import de.uni_due.s3.evaluator2.exceptions.parser.ErroneousExerciseVariableException;
+import de.uni_due.s3.evaluator2.exceptions.parser.ErroneousFillInVariableException;
 import de.uni_due.s3.evaluator2.exceptions.parser.ParserException;
 import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedExerciseVariableException;
 import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedFillInVariableException;
@@ -28,7 +30,8 @@ public class TestDependsOn extends TestIntegration {
 
 	@BeforeClass
 	public static void beforeTest() throws FunctionNotImplementedException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException {
+			UndefinedExerciseVariableException, ParserException, ErroneousFillInVariableException,
+			ErroneousExerciseVariableException {
 		dependsOnFillInVariableMap.put(1, ExpressionParser.parse("x", null, null));
 		dependsOnFillInVariableMap.put(2, ExpressionParser.parse("y", null, null));
 
@@ -80,8 +83,8 @@ public class TestDependsOn extends TestIntegration {
 
 	@Test
 	public void testDependsOnWithVariables1() throws EvaluatorException, OpenMathException {
-		assertTrue(Evaluator.getBooleanResult("dependsOn('2*[var=a]+3*a-[var=a]+2*b','x')", dependsOnExerciseVariableMap,
-				dependsOnFillInVariableMap));
+		assertTrue(Evaluator.getBooleanResult("dependsOn('2*[var=a]+3*a-[var=a]+2*b','x')",
+				dependsOnExerciseVariableMap, dependsOnFillInVariableMap));
 	}
 
 	@Test

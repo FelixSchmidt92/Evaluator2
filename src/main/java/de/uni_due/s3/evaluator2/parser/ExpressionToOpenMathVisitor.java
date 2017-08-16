@@ -13,6 +13,8 @@ import de.uni_due.s3.evaluator2.core.dictionaries.OMSEvaluatorSyntaxDictionary;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedRuntimeException;
 import de.uni_due.s3.evaluator2.exceptions.openmath.InputMismatchException;
+import de.uni_due.s3.evaluator2.exceptions.parserruntime.ErroneousExerciseVariableRuntimeException;
+import de.uni_due.s3.evaluator2.exceptions.parserruntime.ErroneousFillInVariableRuntimeException;
 import de.uni_due.s3.evaluator2.exceptions.parserruntime.ParserRuntimeException;
 import de.uni_due.s3.evaluator2.exceptions.parserruntime.UndefinedExerciseVariableRuntimeException;
 import de.uni_due.s3.evaluator2.exceptions.parserruntime.UndefinedFillInVariableRuntimeException;
@@ -240,7 +242,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 			try {
 				return OMConverter.toElement(varOmobj); 
 			} catch (OpenMathException e) {
-				throw new ParserRuntimeException("Unable to convert OMOBJ ot Element:" + varOmobj.toString(), e);
+				throw new ErroneousExerciseVariableRuntimeException(varName);
 			}
 			
 		} else {
@@ -266,7 +268,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 			try {
 				return OMConverter.toElement(varOmobj); 
 			} catch (OpenMathException e) {
-				throw new ParserRuntimeException("Unable to convert OMOBJ ot Element:" + varOmobj.toString(), e);
+				throw new ErroneousFillInVariableRuntimeException(varNumber);
 			}
 		} else {
 			throw new UndefinedFillInVariableRuntimeException(varNumber);

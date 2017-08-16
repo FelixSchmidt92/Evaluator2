@@ -14,6 +14,8 @@ import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedException;
+import de.uni_due.s3.evaluator2.exceptions.parser.ErroneousExerciseVariableException;
+import de.uni_due.s3.evaluator2.exceptions.parser.ErroneousFillInVariableException;
 import de.uni_due.s3.evaluator2.exceptions.parser.ParserException;
 import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedExerciseVariableException;
 import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedFillInVariableException;
@@ -28,7 +30,8 @@ public class TestRandomMatrixEigenvalue extends TestIntegration {
 
 	@BeforeClass
 	public static void beforeTest() throws FunctionNotImplementedException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException {
+			UndefinedExerciseVariableException, ParserException, ErroneousFillInVariableException,
+			ErroneousExerciseVariableException {
 		randomMatrixEigenvalueFillInVariableMap.put(1, ExpressionParser.parse("'[1,1,1]'", null, null));
 
 		randomMatrixEigenvalueExerciseVariableMap.put("a", ExpressionParser.parse("'[1,1,1]'", null, null));

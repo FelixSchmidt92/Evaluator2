@@ -1,8 +1,8 @@
 package de.uni_due.s3.evaluator2.core.integration.openmath_jack;
 
-import static org.junit.Assert.fail;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.fail;
 
 import java.util.HashMap;
 
@@ -16,6 +16,8 @@ import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentExcep
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedException;
+import de.uni_due.s3.evaluator2.exceptions.parser.ErroneousExerciseVariableException;
+import de.uni_due.s3.evaluator2.exceptions.parser.ErroneousFillInVariableException;
 import de.uni_due.s3.evaluator2.exceptions.parser.ParserException;
 import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedExerciseVariableException;
 import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedFillInVariableException;
@@ -30,7 +32,8 @@ public class TestGetNumerator extends TestIntegration {
 
 	@BeforeClass
 	public static void beforeTest() throws FunctionNotImplementedException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException {
+			UndefinedExerciseVariableException, ParserException, ErroneousFillInVariableException,
+			ErroneousExerciseVariableException {
 		getNumeratorFillInVariableMap.put(1, ExpressionParser.parse("0", null, null));
 		getNumeratorFillInVariableMap.put(2, ExpressionParser.parse("20/3", null, null));
 		getNumeratorFillInVariableMap.put(3, ExpressionParser.parse("10.3", null, null));
@@ -82,7 +85,9 @@ public class TestGetNumerator extends TestIntegration {
 
 	@Test(expected = FunctionInvalidArgumentException.class)
 	public void testGetNumeratorAtDefinitionZero() throws EvaluatorException, OpenMathException {
-		Evaluator.getNumberResult("getNumerator(3/0)", getNumeratorExerciseVariableMap, getNumeratorFillInVariableMap); // Result																													// undefined
+		Evaluator.getNumberResult("getNumerator(3/0)", getNumeratorExerciseVariableMap, getNumeratorFillInVariableMap); // Result
+																														// //
+																														// undefined
 	}
 
 	@Test

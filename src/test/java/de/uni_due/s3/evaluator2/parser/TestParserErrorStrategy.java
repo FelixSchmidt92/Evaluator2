@@ -8,10 +8,11 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedException;
+import de.uni_due.s3.evaluator2.exceptions.parser.ErroneousExerciseVariableException;
+import de.uni_due.s3.evaluator2.exceptions.parser.ErroneousFillInVariableException;
 import de.uni_due.s3.evaluator2.exceptions.parser.ParserException;
 import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedExerciseVariableException;
 import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedFillInVariableException;
-import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 
 /**
  * This class tests the ParserErrorStrategy.
@@ -47,7 +48,8 @@ public class TestParserErrorStrategy {
 
 	@Test(expected = ParserException.class)
 	public void testSyncANDRecoverInlineANDReportNoViableAlternative() throws FunctionNotImplementedException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
+			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException,
+			ErroneousFillInVariableException, ErroneousExerciseVariableException {
 		ExpressionParser.parse(parameter, null, null);
 	}
 }
