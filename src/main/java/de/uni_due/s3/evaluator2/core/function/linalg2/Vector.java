@@ -4,6 +4,7 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
@@ -30,8 +31,7 @@ public class Vector extends Function {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments)
-			throws FunctionException, NoRepresentationAvailableException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
 		String sageExpression = "(";
 
 		for (int i = 0; i < arguments.size(); i++) {

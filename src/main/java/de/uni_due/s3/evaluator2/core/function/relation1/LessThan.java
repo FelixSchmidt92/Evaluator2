@@ -5,9 +5,9 @@ import java.util.List;
 import de.uni_due.s3.evaluator2.core.OMUtils;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 
 /**
  * Implements openmath arithmetic relation lt. Example:
@@ -47,8 +47,7 @@ public class LessThan extends Function {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments)
-			throws FunctionException, NoRepresentationAvailableException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
 		return getSageSyntax(arguments.get(0)) + " < " + getSageSyntax(arguments.get(1));
 	}
 

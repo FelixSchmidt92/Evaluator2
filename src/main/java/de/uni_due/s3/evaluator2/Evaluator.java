@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import de.uni_due.s3.evaluator2.core.OMUtils;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
@@ -29,9 +30,7 @@ public class Evaluator {
 	}
 
 	public static boolean getBooleanResult(String expression, HashMap<String, OMOBJ> exerciseVariableMap,
-			HashMap<Integer, OMOBJ> fillInVariableMap) throws CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
+			HashMap<Integer, OMOBJ> fillInVariableMap) throws EvaluatorException, OpenMathException {
 		OMOBJ result = evaluate(expression, exerciseVariableMap, fillInVariableMap);
 		return (result.getOMS() != null && result.getOMS().equals(OMSymbol.LOGIC1_TRUE));
 	}
@@ -55,9 +54,7 @@ public class Evaluator {
 	 * @throws ParserException
 	 */
 	public static double getNumberResult(String expression, HashMap<String, OMOBJ> exerciseVariableMap,
-			HashMap<Integer, OMOBJ> fillInVariableMap) throws CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
+			HashMap<Integer, OMOBJ> fillInVariableMap) throws EvaluatorException, OpenMathException {
 		OMOBJ result = evaluate(expression, exerciseVariableMap, fillInVariableMap);
 		result = evaluate(result);
 		try {
@@ -83,9 +80,7 @@ public class Evaluator {
 	 * @throws UndefinedFillInVariableException
 	 */
 	public static OMOBJ evaluate(String expression, HashMap<String, OMOBJ> exerciseVariableMap,
-			HashMap<Integer, OMOBJ> fillInVariableMap) throws FunctionException, OpenMathException,
-			CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
+			HashMap<Integer, OMOBJ> fillInVariableMap) throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse(expression, exerciseVariableMap, fillInVariableMap);
 		return OMExecutor.execute(omobj);
 	}
@@ -102,8 +97,7 @@ public class Evaluator {
 	 * @throws CasNotAvailableException
 	 * @throws CasEvaluationException
 	 */
-	public static OMOBJ evaluate(OMOBJ omobj) throws FunctionException, OpenMathException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException {
+	public static OMOBJ evaluate(OMOBJ omobj) throws EvaluatorException, OpenMathException {
 		return OMExecutor.execute(omobj);
 	}
 }

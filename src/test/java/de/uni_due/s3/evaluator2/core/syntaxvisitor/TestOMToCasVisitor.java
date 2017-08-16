@@ -8,9 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator2.core.function.Function;
-import de.uni_due.s3.evaluator2.core.syntaxvisitor.OMToCasVisitor;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OMATP;
@@ -68,8 +66,7 @@ public class TestOMToCasVisitor {
 	}
 
 	@Test
-	public void testVisitObject()
-			throws NoRepresentationAvailableException, OpenMathException, CasException, FunctionException {
+	public void testVisitObject() throws OpenMathException, EvaluatorException {
 		OMI omi = OMCreator.createOMI(1);
 		OMF omf = OMCreator.createOMF(1.0);
 		OMV omv = OMCreator.createOMV("test");
@@ -91,8 +88,7 @@ public class TestOMToCasVisitor {
 	}
 
 	@Test
-	public void testVisitOMOBJ()
-			throws NoRepresentationAvailableException, OpenMathException, CasException, FunctionException {
+	public void testVisitOMOBJ() throws OpenMathException, EvaluatorException {
 		OMI omi = OMCreator.createOMI(1);
 		OMF omf = OMCreator.createOMF(1.0);
 		OMV omv = OMCreator.createOMV("test");
@@ -114,15 +110,13 @@ public class TestOMToCasVisitor {
 	}
 
 	@Test(expected = NoRepresentationAvailableException.class)
-	public void testVisitObjectWithWrongObject()
-			throws NoRepresentationAvailableException, CasException, FunctionException {
+	public void testVisitObjectWithWrongObject() throws EvaluatorException {
 		vis.visit(new Integer(10));
 		vis.visit(new OMATP());
 	}
 
 	@Test(expected = NoRepresentationAvailableException.class)
-	public void testVisitOMOBJWithWrongChild()
-			throws NoRepresentationAvailableException, CasException, FunctionException {
+	public void testVisitOMOBJWithWrongChild() throws EvaluatorException {
 		OMR omr = new OMR();
 		OMOBJ omobj = new OMOBJ();
 		omobj.setOMR(omr);

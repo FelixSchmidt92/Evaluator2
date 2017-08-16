@@ -13,16 +13,8 @@ import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
-import de.uni_due.s3.evaluator2.core.function.linalg2.Vector;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasException;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
-import de.uni_due.s3.evaluator2.exceptions.parser.ParserException;
-import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedExerciseVariableException;
-import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedFillInVariableException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMCreator;
@@ -32,8 +24,7 @@ public class TestVector extends TestFunctionAbstract {
 	private static Function func = new Vector();
 
 	@Test
-	public void testVectorInteger() throws FunctionException, CasEvaluationException, CasNotAvailableException,
-			NoRepresentationAvailableException, OpenMathException {
+	public void testVectorInteger() throws OpenMathException, EvaluatorException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(1));
 		args.add(OMCreator.createOMI(2));
@@ -44,8 +35,7 @@ public class TestVector extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testVectorFloat() throws FunctionException, CasEvaluationException, CasNotAvailableException,
-			NoRepresentationAvailableException, OpenMathException {
+	public void testVectorFloat() throws OpenMathException, EvaluatorException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(0.0));
 		Object result = func.evaluate(args);
@@ -53,9 +43,7 @@ public class TestVector extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testVectorIntegration() throws FunctionException, OpenMathException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException {
+	public void testVectorIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("vector(1,2,3)", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		List<Object> args = new ArrayList<Object>();
@@ -66,9 +54,7 @@ public class TestVector extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testVectorEvaluation() throws FunctionException, OpenMathException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException {
+	public void testVectorEvaluation() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = Evaluator.evaluate("vector(1,2,3)", null, null);
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(1));
@@ -78,8 +64,7 @@ public class TestVector extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testVectorSageSyntax() throws FunctionException, NoRepresentationAvailableException, CasException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
+	public void testVectorSageSyntax() throws EvaluatorException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(2));
 		args.add(OMCreator.createOMI(3));
@@ -88,9 +73,7 @@ public class TestVector extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testVectorWithLessThanMinParam() throws FunctionException, OpenMathException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException {
+	public void testVectorWithLessThanMinParam() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("vector()", null, null);
 		OMExecutor.execute(omobj);
 		fail();

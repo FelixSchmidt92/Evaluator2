@@ -10,15 +10,7 @@ import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
-import de.uni_due.s3.evaluator2.core.function.linalg_jack.RandomMatrixRank;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
-import de.uni_due.s3.evaluator2.exceptions.parser.ParserException;
-import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedExerciseVariableException;
-import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedFillInVariableException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
@@ -30,9 +22,7 @@ public class TestRandomMatrixRank extends TestFunctionAbstract {
 	Function func = new RandomMatrixRank();
 
 	@Test
-	public void testRandomMatrixRankWithZerosAsArgument()
-			throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testRandomMatrixRankWithZerosAsArgument() throws OpenMathException, EvaluatorException {
 		ArrayList<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMSTR("QQ"));
 		args.add(OMCreator.createOMI(0));
@@ -47,9 +37,7 @@ public class TestRandomMatrixRank extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testRandomMatrixRankWithOnesAsArgument()
-			throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testRandomMatrixRankWithOnesAsArgument() throws OpenMathException, EvaluatorException {
 		ArrayList<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMSTR("QQ"));
 		args.add(OMCreator.createOMI(1));
@@ -68,8 +56,7 @@ public class TestRandomMatrixRank extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testRandomMatrixRank() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testRandomMatrixRank() throws OpenMathException, EvaluatorException {
 		ArrayList<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMSTR("ZZ"));
 		args.add(OMCreator.createOMI(10));
@@ -81,27 +68,21 @@ public class TestRandomMatrixRank extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testRandomMatrixRankIntegration4Arguments() throws FunctionInvalidArgumentException,
-			CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException,
-			OpenMathException, UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
+	public void testRandomMatrixRankIntegration4Arguments() throws OpenMathException, EvaluatorException {
 		OMOBJ t = ExpressionParser.parse("randomMatrixRank('QQ', 2, 3, 2)", null, null);
 
 		OMExecutor.execute(t);
 	}
 
 	@Test
-	public void testRandomMatrixRankIntegration5Arguments() throws FunctionInvalidArgumentException,
-			CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException,
-			OpenMathException, UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
+	public void testRandomMatrixRankIntegration5Arguments() throws OpenMathException, EvaluatorException {
 		OMOBJ t = ExpressionParser.parse("randomMatrixRank('QQ', 2, 3, 2, 10)", null, null);
 
 		OMExecutor.execute(t);
 	}
-	
+
 	@Test
-	public void testRandomMatrixRankIntegration6Arguments() throws FunctionInvalidArgumentException,
-			CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException,
-			OpenMathException, UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
+	public void testRandomMatrixRankIntegration6Arguments() throws OpenMathException, EvaluatorException {
 		OMOBJ t = ExpressionParser.parse("randomMatrixRank('QQ', '2', '3', '2', '10')", null, null);
 
 		OMExecutor.execute(t);

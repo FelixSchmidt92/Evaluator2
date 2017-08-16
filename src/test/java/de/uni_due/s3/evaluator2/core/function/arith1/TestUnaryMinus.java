@@ -11,16 +11,8 @@ import org.junit.Test;
 import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
-import de.uni_due.s3.evaluator2.core.function.arith1.UnaryMinus;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasException;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
-import de.uni_due.s3.evaluator2.exceptions.parser.ParserException;
-import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedExerciseVariableException;
-import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedFillInVariableException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMCreator;
@@ -31,8 +23,7 @@ public class TestUnaryMinus extends TestFunctionAbstract {
 	private Function func = new UnaryMinus();
 
 	@Test
-	public void testUnaryMinusInteger() throws FunctionException, CasEvaluationException, CasNotAvailableException,
-			NoRepresentationAvailableException, OpenMathException {
+	public void testUnaryMinusInteger() throws OpenMathException, EvaluatorException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(3));
 		Object result = func.evaluate(args);
@@ -40,8 +31,7 @@ public class TestUnaryMinus extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testUnaryMinusFloat() throws FunctionException, CasEvaluationException, CasNotAvailableException,
-			NoRepresentationAvailableException, OpenMathException {
+	public void testUnaryMinusFloat() throws OpenMathException, EvaluatorException {
 
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMF(2.5));
@@ -50,35 +40,28 @@ public class TestUnaryMinus extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testUnaryMinusIntegration1() throws FunctionException, OpenMathException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException {
+	public void testUnaryMinusIntegration1() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("-1075", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals(OMCreator.createOMI(-1075), result.getOMI());
 	}
 
 	@Test
-	public void testUnaryMinusIntegration2() throws FunctionException, OpenMathException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException {
+	public void testUnaryMinusIntegration2() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("-2075.32", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals(OMCreator.createOMF(-2075.32), result.getOMF());
 	}
 
 	@Test
-	public void testUnaryMinusSageSyntax() throws FunctionException, NoRepresentationAvailableException, CasException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
+	public void testUnaryMinusSageSyntax() throws EvaluatorException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(1.0));
 		assertEquals("-1", func.getPartialSageSyntax(args));
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testUnaryMinusWithWrongArguments() throws FunctionException, OpenMathException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException {
+	public void testUnaryMinusWithWrongArguments() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("-'test'", null, null);
 		OMExecutor.execute(omobj);
 		fail();

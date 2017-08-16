@@ -5,10 +5,10 @@ import java.util.List;
 import de.uni_due.s3.evaluator2.core.OMUtils;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.openmath.InputMismatchException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 
 /**
  * Implements openmath relation neq. Example 10 != 5 => true
@@ -16,8 +16,8 @@ import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvaila
 public class NotEqual extends Function {
 
 	/**
-	 * Tests if two given objects are not equal by using the object-equal
-	 * method. Expects 2 arguments of any type
+	 * Tests if two given objects are not equal by using the object-equal method.
+	 * Expects 2 arguments of any type
 	 * 
 	 * @throws FunctionInvalidArgumentTypeException
 	 * 
@@ -47,8 +47,7 @@ public class NotEqual extends Function {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments)
-			throws FunctionException, NoRepresentationAvailableException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
 		return getSageSyntax(arguments.get(0)) + " != " + getSageSyntax(arguments.get(1));
 	}
 

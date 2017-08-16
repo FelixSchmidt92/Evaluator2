@@ -1,27 +1,19 @@
 package de.uni_due.s3.evaluator2.core.function.relation1;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
-import de.uni_due.s3.evaluator2.core.function.relation1.NotEqual;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasException;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
-import de.uni_due.s3.evaluator2.exceptions.parser.ParserException;
-import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedExerciseVariableException;
-import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedFillInVariableException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMCreator;
@@ -32,8 +24,7 @@ public class TestNotEqual extends TestFunctionAbstract {
 	private final Function func = new NotEqual();
 
 	@Test
-	public void testNotEqualsOMI1() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testNotEqualsOMI1() throws OpenMathException, EvaluatorException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(10));
 		args.add(OMCreator.createOMI(10));
@@ -42,8 +33,7 @@ public class TestNotEqual extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testNotEqualsOMI2() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testNotEqualsOMI2() throws OpenMathException, EvaluatorException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(120976));
 		args.add(OMCreator.createOMI(12));
@@ -52,8 +42,7 @@ public class TestNotEqual extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testNotEqualsOMF1() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testNotEqualsOMF1() throws OpenMathException, EvaluatorException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMF(0.546363));
 		args.add(OMCreator.createOMF(0.546363));
@@ -62,8 +51,7 @@ public class TestNotEqual extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testNotEqualsOMF2() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testNotEqualsOMF2() throws OpenMathException, EvaluatorException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMF(12.3045));
 		args.add(OMCreator.createOMF(12.3044));
@@ -72,8 +60,7 @@ public class TestNotEqual extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testNotEqualsOMS1() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testNotEqualsOMS1() throws OpenMathException, EvaluatorException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMSymbol.ARITH1_PLUS);
 		args.add(OMSymbol.ARITH1_PLUS);
@@ -82,8 +69,7 @@ public class TestNotEqual extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testNotEqualsOMS2() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testNotEqualsOMS2() throws OpenMathException, EvaluatorException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMSymbol.RELATION1_EQ);
 		args.add(OMSymbol.ARITH1_PLUS);
@@ -92,8 +78,7 @@ public class TestNotEqual extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testNotEqualsOMA1() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testNotEqualsOMA1() throws OpenMathException, EvaluatorException {
 		ArrayList<Object> arguments = new ArrayList<Object>(3);
 		arguments.add(OMCreator.createOMI(10));
 		arguments.add(OMCreator.createOMI(-10));
@@ -106,8 +91,7 @@ public class TestNotEqual extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testNotEqualsOMA2() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testNotEqualsOMA2() throws OpenMathException, EvaluatorException {
 		ArrayList<Object> arguments = new ArrayList<Object>(3);
 		ArrayList<Object> arguments2 = new ArrayList<Object>(3);
 
@@ -126,8 +110,7 @@ public class TestNotEqual extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testNotEqualsOMSTR1() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testNotEqualsOMSTR1() throws OpenMathException, EvaluatorException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMSTR("test"));
 		args.add(OMCreator.createOMSTR("test"));
@@ -136,8 +119,7 @@ public class TestNotEqual extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testNotEqualsOMSTR2() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testNotEqualsOMSTR2() throws OpenMathException, EvaluatorException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMSTR("test"));
 		args.add(OMCreator.createOMSTR("tes t"));
@@ -146,8 +128,7 @@ public class TestNotEqual extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testNotEqualsWithLessThanMinParam() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testNotEqualsWithLessThanMinParam() throws OpenMathException, EvaluatorException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMSTR("test"));
 		func.evaluate(args);
@@ -155,8 +136,7 @@ public class TestNotEqual extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testEqualsWithMoreThanMaxParam() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testEqualsWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMSTR("test"));
 		args.add(OMCreator.createOMSTR("test"));
@@ -166,17 +146,14 @@ public class TestNotEqual extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testNotEqualsIntegration() throws FunctionException, OpenMathException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException {
+	public void testNotEqualsIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("notequal(10,3)", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals(OMSymbol.LOGIC1_TRUE, result.getOMS());
 	}
 
 	@Test
-	public void testNotEqualsSageSyntax() throws FunctionException, NoRepresentationAvailableException, CasException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
+	public void testNotEqualsSageSyntax() throws EvaluatorException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(10));
 		args.add(OMCreator.createOMI(1));

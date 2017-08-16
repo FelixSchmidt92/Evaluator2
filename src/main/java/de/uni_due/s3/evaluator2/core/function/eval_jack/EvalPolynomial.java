@@ -5,12 +5,9 @@ import java.util.List;
 import de.uni_due.s3.evaluator2.core.OMUtils;
 import de.uni_due.s3.evaluator2.core.PolyUtils;
 import de.uni_due.s3.evaluator2.core.function.Function;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.openmath.InputMismatchException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 import de.uni_due.s3.sage.Sage;
 
@@ -23,8 +20,7 @@ import de.uni_due.s3.sage.Sage;
 public class EvalPolynomial extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		Object result = Sage.evaluateInCAS(getPartialSageSyntax(arguments));
 		return result;
 	}
@@ -40,8 +36,7 @@ public class EvalPolynomial extends Function {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments)
-			throws FunctionException, NoRepresentationAvailableException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
 
 		try {
 			String term = getSageSyntax(arguments.get(0));

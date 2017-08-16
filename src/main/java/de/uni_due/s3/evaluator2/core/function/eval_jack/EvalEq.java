@@ -4,11 +4,8 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.PolyUtils;
 import de.uni_due.s3.evaluator2.core.function.Function;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 import de.uni_due.s3.sage.Sage;
 
@@ -23,8 +20,7 @@ import de.uni_due.s3.sage.Sage;
 public class EvalEq extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return Sage.evaluateInCAS(getPartialSageSyntax(arguments));
 	}
 
@@ -39,12 +35,11 @@ public class EvalEq extends Function {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments)
-			throws FunctionException, NoRepresentationAvailableException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
 		String term1 = getSageSyntax(arguments.get(0));
 		String term2 = getSageSyntax(arguments.get(1));
-		if((term1.length() == 2 && term1.startsWith("'")) || (term2.length() == 2 && term2.startsWith("'"))) {
-			//Case term1 or term2 is -->   ''
+		if ((term1.length() == 2 && term1.startsWith("'")) || (term2.length() == 2 && term2.startsWith("'"))) {
+			// Case term1 or term2 is --> ''
 			throw new FunctionInvalidArgumentException(this, "Input for this Function cannot be empty!");
 		}
 
@@ -52,7 +47,7 @@ public class EvalEq extends Function {
 
 		StringBuilder sb = new StringBuilder();
 		sb.append(sageVar);
-		sb.append("expand(("); //Expand: shorts Expression
+		sb.append("expand(("); // Expand: shorts Expression
 		sb.append(term1);
 		sb.append(") - (");
 		sb.append(term2);

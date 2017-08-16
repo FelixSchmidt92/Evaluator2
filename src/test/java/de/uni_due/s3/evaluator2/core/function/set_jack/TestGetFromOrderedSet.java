@@ -12,18 +12,10 @@ import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
-import de.uni_due.s3.evaluator2.core.function.set_jack.GetFromOrderedSet;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasException;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
-import de.uni_due.s3.evaluator2.exceptions.parser.ParserException;
-import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedExerciseVariableException;
-import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedFillInVariableException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMCreator;
@@ -34,8 +26,7 @@ public class TestGetFromOrderedSet extends TestFunctionAbstract {
 	private static Function func = new GetFromOrderedSet();
 
 	@Test
-	public void testGetFromOrderedSet1() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testGetFromOrderedSet1() throws OpenMathException, EvaluatorException {
 		List<Object> set = new ArrayList<Object>();
 		set.add(OMCreator.createOMI(1));
 		set.add(OMCreator.createOMI(20));
@@ -49,8 +40,7 @@ public class TestGetFromOrderedSet extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testGetFromOrderedSet2() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testGetFromOrderedSet2() throws OpenMathException, EvaluatorException {
 		List<Object> set = new ArrayList<Object>();
 		set.add(OMCreator.createOMSTR("Test"));
 		set.add(OMCreator.createOMSTR("Hallo"));
@@ -64,8 +54,7 @@ public class TestGetFromOrderedSet extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testGetFromOrderedSet3() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testGetFromOrderedSet3() throws OpenMathException, EvaluatorException {
 		List<Object> set = new ArrayList<Object>();
 		set.add(OMCreator.createOMF(3.343));
 		set.add(OMCreator.createOMI(20));
@@ -79,9 +68,7 @@ public class TestGetFromOrderedSet extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testGetFromOrderedSetWithLessThanMinParam()
-			throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testGetFromOrderedSetWithLessThanMinParam() throws OpenMathException, EvaluatorException {
 		List<Object> set = new ArrayList<Object>();
 		set.add(OMCreator.createOMSTR("Test"));
 		set.add(OMCreator.createOMI(20));
@@ -92,8 +79,7 @@ public class TestGetFromOrderedSet extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testGetFromOrderedSetWithMoreThanMaxParam() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testGetFromOrderedSetWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
 		List<Object> set = new ArrayList<Object>();
 		set.add(OMCreator.createOMSTR("Test"));
 		set.add(OMCreator.createOMI(20));
@@ -106,8 +92,7 @@ public class TestGetFromOrderedSet extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testGetFromOrderedSetWithWrongArguments1() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testGetFromOrderedSetWithWrongArguments1() throws OpenMathException, EvaluatorException {
 		List<Object> set = new ArrayList<Object>();
 		set.add(OMCreator.createOMSTR("Test"));
 		set.add(OMCreator.createOMI(20));
@@ -119,9 +104,7 @@ public class TestGetFromOrderedSet extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testGetFromOrderedSetWithWrongArguments2()
-			throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testGetFromOrderedSetWithWrongArguments2() throws OpenMathException, EvaluatorException {
 		List<Object> set = new ArrayList<Object>();
 		set.add(OMCreator.createOMSTR("Test"));
 		set.add(OMCreator.createOMI(20));
@@ -133,63 +116,48 @@ public class TestGetFromOrderedSet extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testGetFromOrderedSetIntegration1() throws FunctionException, OpenMathException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException {
+	public void testGetFromOrderedSetIntegration1() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("getFromOrderedSet(0, {1;2})", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals(OMCreator.createOMI(1), result.getOMI());
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testGetFromOrderedSetIntegrationWrongArgsInSet() throws FunctionException, OpenMathException,
-			CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
+	public void testGetFromOrderedSetIntegrationWrongArgsInSet() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("getFromOrderedSet({1;'Test'},1)", null, null);
 		OMExecutor.execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentException.class)
-	public void testGetFromOrderedSetIntegrationWithOutOfBounds() throws FunctionException, OpenMathException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException {
+	public void testGetFromOrderedSetIntegrationWithOutOfBounds() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("getFromOrderedSet(2, {1})", null, null);
 		OMExecutor.execute(omobj);
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testGetFromOrderedSetIntegration() throws NoRepresentationAvailableException, CasException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException, FunctionException,
-			CasNotAvailableException, OpenMathException {
-		OMOBJ omobj = ExpressionParser.parse("getFromOrderedSet({matrix(matrixrow(1,2)); vector(1,2)},1)",
-				null, null);
+	public void testGetFromOrderedSetIntegration() throws OpenMathException, EvaluatorException {
+		OMOBJ omobj = ExpressionParser.parse("getFromOrderedSet({matrix(matrixrow(1,2)); vector(1,2)},1)", null, null);
 		OMExecutor.execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentException.class)
-	public void testGetFromOrderedSetWithZeroArgs() throws NoRepresentationAvailableException, CasException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException, FunctionException,
-			CasNotAvailableException, OpenMathException {
+	public void testGetFromOrderedSetWithZeroArgs() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("getFromOrderedSet(0, {})", null, null);
 		OMExecutor.execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testGetFromOrderedSetWithLessArgs() throws NoRepresentationAvailableException, CasException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException, FunctionException,
-			CasNotAvailableException, OpenMathException {
+	public void testGetFromOrderedSetWithLessArgs() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("getFromOrderedSet({})", null, null);
 		OMExecutor.execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testGetFromOrderedSetWithMoreArgs() throws NoRepresentationAvailableException, CasException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException, FunctionException,
-			CasNotAvailableException, OpenMathException {
+	public void testGetFromOrderedSetWithMoreArgs() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("getFromOrderedSet({}, 0, 4)", null, null);
 		OMExecutor.execute(omobj);
 		fail();

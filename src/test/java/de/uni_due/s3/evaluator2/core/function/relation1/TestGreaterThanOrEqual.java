@@ -1,28 +1,20 @@
 package de.uni_due.s3.evaluator2.core.function.relation1;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
-import de.uni_due.s3.evaluator2.core.function.relation1.GreaterThanOrEqual;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasException;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
-import de.uni_due.s3.evaluator2.exceptions.parser.ParserException;
-import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedExerciseVariableException;
-import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedFillInVariableException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMCreator;
@@ -33,8 +25,7 @@ public class TestGreaterThanOrEqual extends TestFunctionAbstract {
 	private final Function func = new GreaterThanOrEqual();
 
 	@Test
-	public void testGreaterThanOrEqualOMI1() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testGreaterThanOrEqualOMI1() throws OpenMathException, EvaluatorException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(10));
 		args.add(OMCreator.createOMI(1));
@@ -43,8 +34,7 @@ public class TestGreaterThanOrEqual extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testGreaterThanOrEqualOMI2() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testGreaterThanOrEqualOMI2() throws OpenMathException, EvaluatorException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(109345));
 		args.add(OMCreator.createOMI(109345));
@@ -53,8 +43,7 @@ public class TestGreaterThanOrEqual extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testGreaterThanOrEqualOMF1() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testGreaterThanOrEqualOMF1() throws OpenMathException, EvaluatorException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMF(0.546363));
 		args.add(OMCreator.createOMF(0.546362));
@@ -63,8 +52,7 @@ public class TestGreaterThanOrEqual extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testGreaterThanOrEqualOMF2() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testGreaterThanOrEqualOMF2() throws OpenMathException, EvaluatorException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMF(12.3045));
 		args.add(OMCreator.createOMF(12.3045));
@@ -73,8 +61,7 @@ public class TestGreaterThanOrEqual extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testGreaterThanOrEqualOMFAndOMI1() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testGreaterThanOrEqualOMFAndOMI1() throws OpenMathException, EvaluatorException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMF(0.546363));
 		args.add(OMCreator.createOMI(-3));
@@ -83,8 +70,7 @@ public class TestGreaterThanOrEqual extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testGreaterThanOrEqualOMFAndOMI2() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testGreaterThanOrEqualOMFAndOMI2() throws OpenMathException, EvaluatorException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(20));
 		args.add(OMCreator.createOMF(20.00f));
@@ -93,9 +79,7 @@ public class TestGreaterThanOrEqual extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testGreaterThanOrEqualWithLessThanMinParam()
-			throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testGreaterThanOrEqualWithLessThanMinParam() throws OpenMathException, EvaluatorException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMSTR("test"));
 		func.evaluate(args);
@@ -103,9 +87,7 @@ public class TestGreaterThanOrEqual extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testGreaterThanOrEqualWithMoreThanMaxParam()
-			throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testGreaterThanOrEqualWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMSTR("test"));
 		args.add(OMCreator.createOMSTR("test"));
@@ -115,9 +97,7 @@ public class TestGreaterThanOrEqual extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testGreaterThanOrEqualWithWrongArguments()
-			throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testGreaterThanOrEqualWithWrongArguments() throws OpenMathException, EvaluatorException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(null);
 		args.add(OMCreator.createOMSTR(null));
@@ -126,17 +106,14 @@ public class TestGreaterThanOrEqual extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testGreaterThanOrEqualIntegration() throws FunctionException, OpenMathException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException {
+	public void testGreaterThanOrEqualIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("10 >= 5", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals(OMSymbol.LOGIC1_TRUE, result.getOMS());
 	}
 
 	@Test
-	public void testGreaterThanSageSyntax() throws FunctionException, NoRepresentationAvailableException, CasException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
+	public void testGreaterThanSageSyntax() throws EvaluatorException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(10));
 		args.add(OMCreator.createOMI(9));

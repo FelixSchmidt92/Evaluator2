@@ -11,8 +11,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
-import de.uni_due.s3.evaluator2.core.syntaxvisitor.OMToSageVisitor;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OMF;
@@ -97,7 +96,7 @@ public class TestOMToSageVisitor {
 
 	/* The Class Plus has to be implemented in Functions */
 	@Test
-	public void testVisitApplication() throws NoRepresentationAvailableException, FunctionException {
+	public void testVisitApplication() throws EvaluatorException {
 		assertEquals("(" + omiString + " + " + omfString + ")", visitor.visit(oma));
 		assertEquals("(" + omiString + " + " + omfString + ")", visitor.visit(omobj));
 	}

@@ -10,15 +10,7 @@ import org.junit.Test;
 import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
-import de.uni_due.s3.evaluator2.core.function.rounding_jack.Rint;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
-import de.uni_due.s3.evaluator2.exceptions.parser.ParserException;
-import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedExerciseVariableException;
-import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedFillInVariableException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMCreator;
@@ -29,8 +21,7 @@ public class TestRint extends TestFunctionAbstract {
 	Function func = new Rint();
 
 	@Test
-	public void testRintInfintiy() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testRintInfintiy() throws OpenMathException, EvaluatorException {
 		ArrayList<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMF(Double.POSITIVE_INFINITY));
 
@@ -38,8 +29,7 @@ public class TestRint extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testRintNaN() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testRintNaN() throws OpenMathException, EvaluatorException {
 		ArrayList<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMF(Double.NaN));
 
@@ -47,8 +37,7 @@ public class TestRint extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testRintZero() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testRintZero() throws OpenMathException, EvaluatorException {
 		ArrayList<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMF(0));
 
@@ -56,8 +45,7 @@ public class TestRint extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testRintRandomDoubles() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testRintRandomDoubles() throws OpenMathException, EvaluatorException {
 		ArrayList<Object> args;
 		for (int i = 0; i < 1000; i++) {
 			double t = new Random().nextDouble() * new Random().nextInt(100); // generate a double between 0 and 100
@@ -69,22 +57,22 @@ public class TestRint extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testRintCaseIntegrationNumber() throws UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testRintCaseIntegrationNumber() throws OpenMathException, EvaluatorException {
 		OMOBJ tree = ExpressionParser.parse("rint(22.2)", null, null);
 		OMOBJ expected = new OMOBJ();
 		expected.setOMI(OMCreator.createOMI(22));
-		OMOBJ actual = OMExecutor.execute(tree); 
-				
+		OMOBJ actual = OMExecutor.execute(tree);
+
 		assertEquals(expected, actual);
 	}
-	
+
 	@Test
-	public void testRintCaseIntegrationText() throws UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException, CasEvaluationException, FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testRintCaseIntegrationText() throws OpenMathException, EvaluatorException {
 		OMOBJ tree = ExpressionParser.parse("rint('22.2')", null, null);
 		OMOBJ expected = new OMOBJ();
 		expected.setOMI(OMCreator.createOMI(22));
-		OMOBJ actual = OMExecutor.execute(tree); 
-				
+		OMOBJ actual = OMExecutor.execute(tree);
+
 		assertEquals(expected, actual);
 	}
 }

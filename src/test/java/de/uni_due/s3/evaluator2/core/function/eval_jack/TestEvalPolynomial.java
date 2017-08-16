@@ -1,6 +1,6 @@
 package de.uni_due.s3.evaluator2.core.function.eval_jack;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
@@ -13,17 +13,8 @@ import org.junit.Test;
 import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
-import de.uni_due.s3.evaluator2.core.function.eval_jack.EvalPolynomial;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasException;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
-import de.uni_due.s3.evaluator2.exceptions.parser.ParserException;
-import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedExerciseVariableException;
-import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedFillInVariableException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMConverter;
@@ -35,9 +26,7 @@ public class TestEvalPolynomial extends TestFunctionAbstract {
 	private Function func = new EvalPolynomial();
 
 	@Test
-	public void testEvalPolynomialWithTwoVariables1()
-			throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException, JAXBException {
+	public void testEvalPolynomialWithTwoVariables1() throws OpenMathException, JAXBException, EvaluatorException {
 		List<Object> args = new ArrayList<Object>();
 		// x^2-5x+6
 		OMOBJ arg1 = OMConverter
@@ -53,9 +42,7 @@ public class TestEvalPolynomial extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testEvalPolynomialWithTwoVariables2()
-			throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException, JAXBException {
+	public void testEvalPolynomialWithTwoVariables2() throws OpenMathException, JAXBException, EvaluatorException {
 		List<Object> args = new ArrayList<Object>();
 		// x^2-5a+6
 		OMOBJ arg1 = OMConverter
@@ -66,21 +53,20 @@ public class TestEvalPolynomial extends TestFunctionAbstract {
 		args.add(arg1.getOMA());
 		args.add(OMCreator.createOMI(5));
 		Object result = func.evaluate(args);
-		assertEquals(OMConverter.toElement(OMConverter
-				.toObject("<OMOBJ><OMA><OMS name=\"plus\" cd=\"arith1\"/><OMA><OMS name=\"times\" cd=\"arith1\"/><OMI>-5</OMI><OMV name=\"a\"/></OMA><OMI>31</OMI></OMA></OMOBJ>")), result);
+		assertEquals(OMConverter.toElement(OMConverter.toObject(
+				"<OMOBJ><OMA><OMS name=\"plus\" cd=\"arith1\"/><OMA><OMS name=\"times\" cd=\"arith1\"/><OMI>-5</OMI><OMV name=\"a\"/></OMA><OMI>31</OMI></OMA></OMOBJ>")),
+				result);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testEvalPolynomialWithLessThanMinParam() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testEvalPolynomialWithLessThanMinParam() throws OpenMathException, EvaluatorException {
 		ArrayList<Object> args = new ArrayList<Object>();
 		func.evaluate(args);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testEvalPolynomialWithMoreThanMaxParam() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testEvalPolynomialWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
 		ArrayList<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("test"));
 		args.add(OMCreator.createOMSTR("test"));
@@ -91,26 +77,21 @@ public class TestEvalPolynomial extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testEvalTerm2Integration1() throws FunctionException, OpenMathException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException {
+	public void testEvalTerm2Integration1() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("evalpolynomial('x+x','1')", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals(OMCreator.createOMI(2), result.getOMI());
 	}
-	
+
 	@Test
-	public void testEvalPolynomialIntegration2() throws FunctionException, OpenMathException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException {
+	public void testEvalPolynomialIntegration2() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("evalpolynomial('x+2*x',-4)", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals(OMCreator.createOMI(-12), result.getOMI());
 	}
 
 	@Test
-	public void testEvalPolynomialSageSyntax() throws FunctionException, NoRepresentationAvailableException, CasException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException, JAXBException {
+	public void testEvalPolynomialSageSyntax() throws JAXBException, EvaluatorException {
 		ArrayList<Object> args = new ArrayList<Object>();
 		OMOBJ arg1 = OMConverter
 				.toObject("<OMOBJ><OMA><OMS cd=\"arith1\" name=\"plus\"/>" + "<OMA><OMS cd =\"arith1\" name=\"minus\"/>"

@@ -13,18 +13,10 @@ import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
-import de.uni_due.s3.evaluator2.core.function.set_jack.ChooseFromComplement;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasException;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
-import de.uni_due.s3.evaluator2.exceptions.parser.ParserException;
-import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedExerciseVariableException;
-import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedFillInVariableException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMCreator;
@@ -35,8 +27,7 @@ public class TestChooseFromComplement extends TestFunctionAbstract {
 	private static Function func = new ChooseFromComplement();
 
 	@Test
-	public void testChooseFromComplement1() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testChooseFromComplement1() throws OpenMathException, EvaluatorException {
 		List<Object> set1 = new ArrayList<Object>();
 		set1.add(OMCreator.createOMI(1));
 		set1.add(OMCreator.createOMI(20));
@@ -54,8 +45,7 @@ public class TestChooseFromComplement extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testChooseFromComplement2() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testChooseFromComplement2() throws OpenMathException, EvaluatorException {
 		List<Object> set1 = new ArrayList<Object>();
 		set1.add(OMCreator.createOMI(1));
 		set1.add(OMCreator.createOMI(20));
@@ -72,11 +62,8 @@ public class TestChooseFromComplement extends TestFunctionAbstract {
 				|| result.equals(OMCreator.createOMF(3.123)));
 	}
 
-
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testChooseFromComplementWithLessThanMinParam()
-			throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testChooseFromComplementWithLessThanMinParam() throws OpenMathException, EvaluatorException {
 		List<Object> set = new ArrayList<Object>();
 		set.add(OMCreator.createOMSTR("Test"));
 		set.add(OMCreator.createOMI(20));
@@ -87,9 +74,7 @@ public class TestChooseFromComplement extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testChooseFromComplementWithMoreThanMaxParam()
-			throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testChooseFromComplementWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
 		List<Object> set = new ArrayList<Object>();
 		set.add(OMCreator.createOMSTR("Test"));
 		set.add(OMCreator.createOMI(20));
@@ -102,9 +87,7 @@ public class TestChooseFromComplement extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidArgumentException.class)
-	public void testChooseFromComplementWithWrongArguments1()
-			throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testChooseFromComplementWithWrongArguments1() throws OpenMathException, EvaluatorException {
 		List<Object> set = new ArrayList<Object>();
 		set.add(OMCreator.createOMSTR("Test"));
 		set.add(OMCreator.createOMI(20));
@@ -116,28 +99,24 @@ public class TestChooseFromComplement extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testChooseFromComplementIntegration1() throws FunctionException, OpenMathException,
-			CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
+	public void testChooseFromComplementIntegration1() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("chooseFromComplement({1;2;3;4},{1;2;3})", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals(OMCreator.createOMI(4), result.getOMI());
 	}
-	
+
 	@Test
-	public void testChooseFromComplementIntegration2() throws FunctionException, OpenMathException,
-			CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
-		OMOBJ omobj = ExpressionParser.parse("chooseFromComplement({1;'test';vector(1,2,3);4},{1;'test';vector(1,2,3)})", null, null);
+	public void testChooseFromComplementIntegration2() throws OpenMathException, EvaluatorException {
+		OMOBJ omobj = ExpressionParser
+				.parse("chooseFromComplement({1;'test';vector(1,2,3);4},{1;'test';vector(1,2,3)})", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals(OMCreator.createOMI(4), result.getOMI());
 	}
-	
+
 	@Test
-	public void testChooseFromComplementIntegration3() throws FunctionException, OpenMathException,
-			CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
-		OMOBJ omobj = ExpressionParser.parse("chooseFromComplement({1;'test';vector(1,2,3);4},{1;'test';4})", null, null);
+	public void testChooseFromComplementIntegration3() throws OpenMathException, EvaluatorException {
+		OMOBJ omobj = ExpressionParser.parse("chooseFromComplement({1;'test';vector(1,2,3);4},{1;'test';4})", null,
+				null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		List<Object> vector = new ArrayList<>();
 		vector.add(OMCreator.createOMI(1));
@@ -147,36 +126,28 @@ public class TestChooseFromComplement extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testChooseFromComplementIntegrationWrongArgsInSet() throws FunctionException, OpenMathException,
-			CasEvaluationException, CasNotAvailableException, NoRepresentationAvailableException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
+	public void testChooseFromComplementIntegrationWrongArgsInSet() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("chooseFromComplement({1;'Test'},1)", null, null);
 		OMExecutor.execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentException.class)
-	public void testChooseFromComplementWithZeroArgs() throws NoRepresentationAvailableException, CasException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException, FunctionException,
-			CasNotAvailableException, OpenMathException {
+	public void testChooseFromComplementWithZeroArgs() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("chooseFromComplement({}, {2;3})", null, null);
 		OMExecutor.execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testGetFromOrderedSetWithLessArgs() throws NoRepresentationAvailableException, CasException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException, FunctionException,
-			CasNotAvailableException, OpenMathException {
+	public void testGetFromOrderedSetWithLessArgs() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("getFromOrderedSet({})", null, null);
 		OMExecutor.execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testChooseFromComplementWithMoreArgs() throws NoRepresentationAvailableException, CasException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException, FunctionException,
-			CasNotAvailableException, OpenMathException {
+	public void testChooseFromComplementWithMoreArgs() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("getFromOrderedSet({}, {}, 1)", null, null);
 		OMExecutor.execute(omobj);
 		fail();

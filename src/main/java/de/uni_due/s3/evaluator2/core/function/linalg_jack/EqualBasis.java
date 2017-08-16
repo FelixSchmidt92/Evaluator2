@@ -4,13 +4,10 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.InvalidResultTypeException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
@@ -29,8 +26,7 @@ import de.uni_due.s3.sage.Sage;
 public class EqualBasis extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionException, NoRepresentationAvailableException,
-			CasEvaluationException, CasNotAvailableException, OpenMathException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 
 		if (!OMTypeChecker.isOMNumber(arguments.get(2))) {
 			throw new FunctionInvalidArgumentTypeException(this, "(0)Set of vectors (1)Set of vectors (2)Integer");
@@ -80,8 +76,7 @@ public class EqualBasis extends Function {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments)
-			throws FunctionException, NoRepresentationAvailableException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
 		return "V=QQ^" + getSageSyntax(arguments.get(2)) + ";U=V.span(" + getSageSyntax(arguments.get(0))
 				+ ");W=V.span(" + getSageSyntax(arguments.get(1)) + ");U==W";
 	}

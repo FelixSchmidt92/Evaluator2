@@ -12,10 +12,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import de.uni_due.s3.evaluator2.OMExecutor;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.openmath.jaxb.OMB;
 import de.uni_due.s3.openmath.jaxb.OMBIND;
 import de.uni_due.s3.openmath.jaxb.OME;
@@ -79,8 +76,7 @@ public class TestOMExecuter {
 	
 
 	@Test
-	public void visitorTestOMOBJ() throws JAXBException, FunctionException, OpenMathException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException {
+	public void visitorTestOMOBJ() throws JAXBException, OpenMathException, EvaluatorException {
 		// test OMI, OMF, OMS, OMSTR, OMV
 		OMOBJ current = (OMOBJ) OMConverter.toObject(terminalStringToObject);
 		OMOBJ curResult = OMExecutor.execute(current);
@@ -90,8 +86,7 @@ public class TestOMExecuter {
 
 	
 	@Test
-	public void visitorTestOMA() throws JAXBException, FunctionException, OpenMathException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException {
+	public void visitorTestOMA() throws JAXBException, OpenMathException, EvaluatorException {
 		OMOBJ current = OMConverter.toObject(omaStringToObject);
 		OMOBJ curResult = OMExecutor.execute(current);
 		OMOBJ expected = OMConverter.toObject(resultStringToObject);
@@ -100,8 +95,7 @@ public class TestOMExecuter {
 	
 	
 	@Test(expected = OMOBJChildNotSupportedException.class)
-	public void testNotImplementedOMobject() throws FunctionException, OpenMathException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException {
+	public void testNotImplementedOMobject() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = new OMOBJ();
 		
 		if (foreignChild instanceof OMB)

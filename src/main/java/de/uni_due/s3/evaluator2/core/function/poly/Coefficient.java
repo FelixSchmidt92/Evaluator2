@@ -5,12 +5,9 @@ import java.util.List;
 import de.uni_due.s3.evaluator2.core.OMUtils;
 import de.uni_due.s3.evaluator2.core.PolyUtils;
 import de.uni_due.s3.evaluator2.core.function.Function;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.openmath.InputMismatchException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 import de.uni_due.s3.sage.Sage;
 
@@ -24,13 +21,12 @@ import de.uni_due.s3.sage.Sage;
 public class Coefficient extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		try {
-			if(OMUtils.convertOMToString(arguments.get(1)).equals("") || OMUtils.convertOMToString(arguments.get(2)).equals("")) {
+			if (OMUtils.convertOMToString(arguments.get(1)).equals("")
+					|| OMUtils.convertOMToString(arguments.get(2)).equals("")) {
 				throw new FunctionInvalidArgumentTypeException("(0)Expression, (1)Variable, (2)Integer");
 			}
-			
 
 		} catch (InputMismatchException e) {
 			throw new FunctionInvalidArgumentTypeException("(0)Expression, (1)Variable, (2)Integer");
@@ -49,8 +45,7 @@ public class Coefficient extends Function {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments)
-			throws FunctionException, NoRepresentationAvailableException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
 		String polynom = getSageSyntax(arguments.get(0));
 		String var = getSageSyntax(arguments.get(1));
 		String n = getSageSyntax(arguments.get(2));

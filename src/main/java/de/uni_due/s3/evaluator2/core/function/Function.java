@@ -4,6 +4,7 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.syntaxvisitor.OMToSageVisitor;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
@@ -51,8 +52,7 @@ public abstract class Function {
 	 * @throws OpenMathException
 	 * @throws FunctionInvalidArgumentException
 	 */
-	abstract protected Object execute(List<Object> arguments) throws FunctionException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException;
+	abstract protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException;
 
 	/**
 	 * First: Check If maxArgs can be infinitely. Second:Check if arguments
@@ -71,8 +71,7 @@ public abstract class Function {
 	 * @throws FunctionInvalidNumberOfArgumentsException
 	 *             if number of Arguments is not between
 	 */
-	public final Object evaluate(List<Object> arguments) throws FunctionException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public final Object evaluate(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		if (arguments == null)
 			throw new FunctionInvalidArgumentException(this, "The List of arguments is of Type NULL");
 		argsBetweenMinMax(arguments); // Check
@@ -172,7 +171,7 @@ public abstract class Function {
 	 * @throws CasException
 	 */
 	protected final String getSageSyntax(Object omElement)
-			throws FunctionException, NoRepresentationAvailableException {
+			throws EvaluatorException {
 		return new OMToSageVisitor().visit(omElement);
 	}
 
@@ -194,7 +193,7 @@ public abstract class Function {
 	 * @throws CasException
 	 */
 	public String getPartialSageSyntax(List<Object> arguments)
-			throws FunctionException, NoRepresentationAvailableException {
+			throws EvaluatorException {
 		throw new NoSageRepresentationAvailableException(
 				"There is no sage representation for function " + this.getClass() + " implemented");
 	}

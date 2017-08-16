@@ -12,13 +12,8 @@ import org.junit.runners.Parameterized;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
-import de.uni_due.s3.evaluator2.core.function.binary_jack.EqualsBinary;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
@@ -32,16 +27,14 @@ public class TestEqualsBinary extends TestFunctionAbstract {
 	OMS expected;
 	Object invalidType;
 
-	public static Object[][] arguments = { 
-			{ "10", "1010", OMSymbol.LOGIC1_TRUE, OMCreator.createOMF(1.1) }, // [0]
+	public static Object[][] arguments = { { "10", "1010", OMSymbol.LOGIC1_TRUE, OMCreator.createOMF(1.1) }, // [0]
 			{ "10", "001010", OMSymbol.LOGIC1_TRUE, OMCreator.createOMA(OMSymbol.SET1_SET, new ArrayList<>()) },
 			{ "11", "1011", OMSymbol.LOGIC1_TRUE, OMCreator.createOMS("myCD", "myName") },
 			{ "10", "101000", OMSymbol.LOGIC1_FALSE, OMCreator.createOMI(2) },
 			{ "-10", "-0001010", OMSymbol.LOGIC1_TRUE, OMCreator.createOMI(50) },
 			{ "-7", "-000111", OMSymbol.LOGIC1_TRUE, OMCreator.createOMF(0.1) },// [5]
-			};
+	};
 
-	
 	public TestEqualsBinary(String left, String right, OMS expected, Object invalidType) {
 		this.left = left;
 		this.right = right;
@@ -59,8 +52,7 @@ public class TestEqualsBinary extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testEqualsBinary() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testEqualsBinary() throws OpenMathException, EvaluatorException {
 		ArrayList<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMSTR(left));
 		args.add(OMCreator.createOMSTR(right));
@@ -69,8 +61,7 @@ public class TestEqualsBinary extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testEqualsBinaryWithInvalidType() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testEqualsBinaryWithInvalidType() throws OpenMathException, EvaluatorException {
 		ArrayList<Object> args = new ArrayList<>();
 		args.add(invalidType);
 		args.add(invalidType);

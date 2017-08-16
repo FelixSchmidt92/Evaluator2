@@ -4,11 +4,8 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.PolyUtils;
 import de.uni_due.s3.evaluator2.core.function.Function;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 import de.uni_due.s3.sage.Sage;
 
@@ -21,8 +18,7 @@ import de.uni_due.s3.sage.Sage;
 public class Expand extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws CasEvaluationException, CasNotAvailableException,
-			FunctionException, NoRepresentationAvailableException, OpenMathException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		Object result = Sage.evaluateInCAS(getPartialSageSyntax(arguments));
 		return result;
 	}
@@ -38,10 +34,9 @@ public class Expand extends Function {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments)
-			throws FunctionException, NoRepresentationAvailableException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
 		String term = getSageSyntax(arguments.get(0));
-		if(term.equals("''"))
+		if (term.equals("''"))
 			throw new FunctionInvalidArgumentException(this, "(0) String(not empty)");
 
 		String sageVar = PolyUtils.getSageSyntaxVariableRepresentation(term);

@@ -5,8 +5,8 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSFunctionDictionary;
 import de.uni_due.s3.evaluator2.core.function.Function;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
@@ -57,7 +57,7 @@ public abstract class OMToCasVisitor {
 	 * @throws FunctionInvalidArgumentException
 	 * @throws CasException
 	 */
-	public String visit(Object omElement) throws FunctionException, NoRepresentationAvailableException {
+	public String visit(Object omElement) throws EvaluatorException {
 		String result = "";
 
 		if (omElement == null)
@@ -111,7 +111,7 @@ public abstract class OMToCasVisitor {
 	 * @throws FunctionInvalidArgumentException
 	 * @throws CasException
 	 */
-	private String visit(OMOBJ omobj) throws FunctionException, NoRepresentationAvailableException {
+	private String visit(OMOBJ omobj) throws EvaluatorException {
 		if (omobj != null) {
 			if (omobj.getOMF() != null) {
 				return visit(omobj.getOMF());
@@ -164,7 +164,7 @@ public abstract class OMToCasVisitor {
 	 * @return the String-Representation
 	 * @throws NoRepresentationAvailableException
 	 */
-	protected abstract String visit(OMS oms) throws NoRepresentationAvailableException;
+	protected abstract String visit(OMS oms) throws EvaluatorException;
 
 	/**
 	 * Implement here the String-Representation of this OMSTR-Element
@@ -198,7 +198,7 @@ public abstract class OMToCasVisitor {
 	 * @throws FunctionInvalidArgumentException
 	 * @throws CasException
 	 */
-	private String visit(OMA oma) throws FunctionException, NoRepresentationAvailableException {
+	private String visit(OMA oma) throws EvaluatorException {
 
 		List<Object> omel = new ArrayList<>();
 
@@ -237,6 +237,6 @@ public abstract class OMToCasVisitor {
 	 * @throws OMObjectNotSupportedException
 	 */
 	protected abstract String getCASRepresentationForFunction(Function function, List<Object> omel)
-			throws FunctionException, NoRepresentationAvailableException;
+			throws EvaluatorException;
 
 }

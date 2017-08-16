@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import de.uni_due.s3.evaluator2.core.function.Function;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
@@ -51,35 +51,30 @@ public class TestFunction {
 	}
 
 	@Test
-	public void testExecute() throws CasEvaluationException, FunctionException, CasNotAvailableException,
-			NoRepresentationAvailableException, OpenMathException {
+	public void testExecute() throws OpenMathException, EvaluatorException {
 		assertEquals("evaluated", myFunction.execute(null));
 	}
 
 	@Test
-	public void testEvaluate() throws CasEvaluationException, FunctionException, CasNotAvailableException,
-			NoRepresentationAvailableException, OpenMathException {
+	public void testEvaluate() throws OpenMathException, EvaluatorException {
 		ArrayList<Object> arguments = new ArrayList<>();
 		arguments.add(OMCreator.createOMI(15));
 		assertEquals("evaluated", myFunction.evaluate(arguments));
 	}
 
 	@Test(expected = FunctionInvalidArgumentException.class)
-	public void testEvaluateWithNull() throws CasEvaluationException, FunctionException, CasNotAvailableException,
-			NoRepresentationAvailableException, OpenMathException {
+	public void testEvaluateWithNull() throws OpenMathException, EvaluatorException {
 		myFunction.evaluate(null);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testEvaluateWithWrongAmountOfArguments0() throws CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testEvaluateWithWrongAmountOfArguments0() throws OpenMathException, EvaluatorException {
 		ArrayList<Object> arguments = new ArrayList<>();
 		myFunction.evaluate(arguments);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testEvaluateWithWrongAmountOfArguments4() throws CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testEvaluateWithWrongAmountOfArguments4() throws OpenMathException, EvaluatorException {
 		ArrayList<Object> arguments = new ArrayList<>();
 		arguments.add("1");
 		arguments.add("2");
@@ -105,12 +100,12 @@ public class TestFunction {
 	}
 
 	@Test(expected = NoSageRepresentationAvailableException.class)
-	public void testGetPartialSageSyntax() throws NoRepresentationAvailableException, FunctionException {
+	public void testGetPartialSageSyntax() throws EvaluatorException {
 		myFunction.getPartialSageSyntax(null);
 	}
 
 	@Test(expected = NoRepresentationAvailableException.class)
-	public void testGetSageSyntax() throws NoRepresentationAvailableException, FunctionException {
+	public void testGetSageSyntax() throws EvaluatorException {
 		myFunction.getSageSyntax(null);
 	}
 }

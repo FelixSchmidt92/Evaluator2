@@ -1,24 +1,17 @@
 package de.uni_due.s3.evaluator2.core.function.set1;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
-import de.uni_due.s3.evaluator2.core.function.set1.Set;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
-import de.uni_due.s3.evaluator2.exceptions.parser.ParserException;
-import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedExerciseVariableException;
-import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedFillInVariableException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
@@ -32,8 +25,7 @@ public class TestSet extends TestFunctionAbstract {
 	private Object result;
 
 	@Test
-	public void testSetWithOMI() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testSetWithOMI() throws OpenMathException, EvaluatorException {
 		args = new ArrayList<Object>(3);
 		args.add(OMCreator.createOMI(10));
 		args.add(OMCreator.createOMI(20));
@@ -43,8 +35,7 @@ public class TestSet extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testSetWithOMF() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testSetWithOMF() throws OpenMathException, EvaluatorException {
 		args = new ArrayList<Object>(3);
 		args.add(OMCreator.createOMF(10.0));
 		args.add(OMCreator.createOMF(20.3));
@@ -54,8 +45,7 @@ public class TestSet extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testSetWithOMA() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testSetWithOMA() throws OpenMathException, EvaluatorException {
 		args = new ArrayList<Object>(3);
 		args.add(OMCreator.createOMF(10.0));
 		args.add(OMCreator.createOMF(20.3));
@@ -70,9 +60,7 @@ public class TestSet extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testSetIntegration() throws FunctionException, OpenMathException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException {
+	public void testSetIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("{1;2;3}", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		List<Object> value = result.getOMA().getOmel();
@@ -80,20 +68,16 @@ public class TestSet extends TestFunctionAbstract {
 		assertEquals(OMCreator.createOMI(2), value.get(2));
 		assertEquals(OMCreator.createOMI(3), value.get(3));
 	}
-	
+
 	@Test
-	public void testSetIntegrationWithZero() throws FunctionException, OpenMathException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException {
+	public void testSetIntegrationWithZero() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("{}", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals(OMCreator.createOMA(OMSymbol.SET1_SET, new ArrayList<Object>()), result.getOMA());
 	}
 
 	@Test
-	public void testSetIntegrationAsFunction() throws FunctionException, OpenMathException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException {
+	public void testSetIntegrationAsFunction() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("set(1,2,3)", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		List<Object> value = result.getOMA().getOmel();

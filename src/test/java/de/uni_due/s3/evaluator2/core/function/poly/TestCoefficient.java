@@ -1,26 +1,19 @@
 package de.uni_due.s3.evaluator2.core.function.poly;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
-import de.uni_due.s3.evaluator2.core.function.poly.Coefficient;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasException;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
-import de.uni_due.s3.evaluator2.exceptions.parser.ParserException;
-import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedExerciseVariableException;
-import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedFillInVariableException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMCreator;
@@ -31,8 +24,7 @@ public class TestCoefficient extends TestFunctionAbstract {
 	private Function func = new Coefficient();
 
 	@Test
-	public void testCoefficientWithOneVariable1() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testCoefficientWithOneVariable1() throws OpenMathException, EvaluatorException {
 		List<Object> pow = new ArrayList<Object>();
 		pow.add(OMCreator.createOMV("a"));
 		pow.add(OMCreator.createOMI(2));
@@ -48,8 +40,7 @@ public class TestCoefficient extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testCoefficientWithOneVariable2() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testCoefficientWithOneVariable2() throws OpenMathException, EvaluatorException {
 		List<Object> pow = new ArrayList<Object>();
 		pow.add(OMCreator.createOMV("a"));
 		pow.add(OMCreator.createOMI(2));
@@ -65,8 +56,7 @@ public class TestCoefficient extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testCoefficientWithTwoVariable1() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testCoefficientWithTwoVariable1() throws OpenMathException, EvaluatorException {
 		List<Object> pow = new ArrayList<Object>();
 		pow.add(OMCreator.createOMV("a"));
 		pow.add(OMCreator.createOMI(2));
@@ -82,8 +72,7 @@ public class TestCoefficient extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testCoefficientWithTwoVariable2() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testCoefficientWithTwoVariable2() throws OpenMathException, EvaluatorException {
 		List<Object> pow = new ArrayList<Object>();
 		pow.add(OMCreator.createOMV("a"));
 		pow.add(OMCreator.createOMI(2));
@@ -99,8 +88,7 @@ public class TestCoefficient extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testCoefficientWithLessThanMinParam() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testCoefficientWithLessThanMinParam() throws OpenMathException, EvaluatorException {
 		ArrayList<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("test"));
 		func.evaluate(args);
@@ -108,17 +96,14 @@ public class TestCoefficient extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testCoefficientIntegration() throws FunctionException, OpenMathException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException {
+	public void testCoefficientIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("factorOf('1+2*x^3','x','3')", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals(OMCreator.createOMI(2), result.getOMI());
 	}
 
 	@Test
-	public void testCoefficientSageSyntax() throws FunctionException, NoRepresentationAvailableException, CasException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
+	public void testCoefficientSageSyntax() throws EvaluatorException {
 		ArrayList<Object> args = new ArrayList<Object>();
 		args.add(ExpressionParser.parse("1+a^2-b", null, null));
 		args.add(OMCreator.createOMV("a"));

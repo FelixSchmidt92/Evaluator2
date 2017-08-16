@@ -4,8 +4,8 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 
 /**
@@ -26,7 +26,7 @@ public class TextWithExpression extends Function {
 	protected Object execute(List<Object> arguments) throws FunctionException {
 		return OMCreator.createOMA(OMSymbol.STRINGJACK_TEXTWITHEXPRESSION, arguments);
 	}
-	
+
 	@Override
 	protected boolean keepOriginalTextValue() {
 		return true;
@@ -43,8 +43,7 @@ public class TextWithExpression extends Function {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments)
-			throws FunctionException, NoRepresentationAvailableException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
 		return getSageSyntax(arguments.get(1));
 	}
 

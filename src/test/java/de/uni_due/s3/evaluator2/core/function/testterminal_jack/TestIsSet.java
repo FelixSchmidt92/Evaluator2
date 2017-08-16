@@ -9,12 +9,7 @@ import org.junit.Test;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
-import de.uni_due.s3.evaluator2.core.function.testterminal_jack.IsSet;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OMF;
 import de.uni_due.s3.openmath.jaxb.OMI;
@@ -29,8 +24,7 @@ public class TestIsSet extends TestFunctionAbstract {
 	Function func = new IsSet();
 
 	@Test
-	public void testIsSetWithOtherTerminals() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testIsSetWithOtherTerminals() throws OpenMathException, EvaluatorException {
 		ArrayList<Object> args = new ArrayList<>();
 
 		OMI omi = OMCreator.createOMI(2);
@@ -59,8 +53,7 @@ public class TestIsSet extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testIsSetWithFullSet() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testIsSetWithFullSet() throws OpenMathException, EvaluatorException {
 		ArrayList<Object> omel = new ArrayList<>();
 
 		OMI omi = OMCreator.createOMI(2);
@@ -76,8 +69,7 @@ public class TestIsSet extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testIsSetWithEmptySet() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testIsSetWithEmptySet() throws OpenMathException, EvaluatorException {
 		ArrayList<Object> args = new ArrayList<>();
 
 		OMA oma = OMCreator.createOMA(OMSymbol.SET1_SET, new ArrayList<>());
@@ -88,8 +80,7 @@ public class TestIsSet extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testIsSetWithOMA() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testIsSetWithOMA() throws OpenMathException, EvaluatorException {
 		ArrayList<Object> args = new ArrayList<>();
 
 		OMA oma = OMCreator.createOMA(OMSymbol.LINALG2_MATRIXROW, new ArrayList<>());

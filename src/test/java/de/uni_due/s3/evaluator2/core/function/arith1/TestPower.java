@@ -10,17 +10,8 @@ import org.junit.Test;
 
 import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
-import de.uni_due.s3.evaluator2.core.function.arith1.Power;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasException;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
-import de.uni_due.s3.evaluator2.exceptions.parser.ParserException;
-import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedExerciseVariableException;
-import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedFillInVariableException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMCreator;
@@ -31,8 +22,7 @@ public class TestPower extends TestFunctionAbstract {
 	private Power func = new Power();
 
 	@Test
-	public void testPowerWithInteger() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testPowerWithInteger() throws OpenMathException, EvaluatorException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(2));
 		args.add(OMCreator.createOMI(3));
@@ -41,8 +31,7 @@ public class TestPower extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testPowerWithFloat() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testPowerWithFloat() throws OpenMathException, EvaluatorException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMF(2.4));
 		args.add(OMCreator.createOMF(3.9));
@@ -51,8 +40,7 @@ public class TestPower extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testPowerWithMixedArgs() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testPowerWithMixedArgs() throws OpenMathException, EvaluatorException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(2));
 		args.add(OMCreator.createOMF(3.5));
@@ -61,26 +49,21 @@ public class TestPower extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testPowerIntegration() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
+	public void testPowerIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("pow(2,3)", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals(OMCreator.createOMI(8), result.getOMI());
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testPowerWithInvalidArgumentType() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
+	public void testPowerWithInvalidArgumentType() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("pow(5,'Test')", null, null);
 		OMExecutor.execute(omobj);
 		fail();
 	}
 
 	@Test
-	public void testPowerSageSyntax() throws FunctionException, NoRepresentationAvailableException, CasException,
-	UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
+	public void testPowerSageSyntax() throws EvaluatorException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(1.45));
 		args.add(OMCreator.createOMF(3));

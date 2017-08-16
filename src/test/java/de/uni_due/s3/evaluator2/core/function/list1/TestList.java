@@ -10,14 +10,7 @@ import org.junit.Test;
 import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
-import de.uni_due.s3.evaluator2.exceptions.parser.ParserException;
-import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedExerciseVariableException;
-import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedFillInVariableException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
@@ -25,14 +18,13 @@ import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestList {
-	
+
 	private Function func = new de.uni_due.s3.evaluator2.core.function.list1.List();
 	private List<Object> args;
 	private Object result;
 
 	@Test
-	public void testListWithOMI() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testListWithOMI() throws OpenMathException, EvaluatorException {
 		args = new ArrayList<Object>(3);
 		args.add(OMCreator.createOMI(10));
 		args.add(OMCreator.createOMI(20));
@@ -42,8 +34,7 @@ public class TestList {
 	}
 
 	@Test
-	public void testListWithOMF() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testListWithOMF() throws OpenMathException, EvaluatorException {
 		args = new ArrayList<Object>(3);
 		args.add(OMCreator.createOMF(10.0));
 		args.add(OMCreator.createOMF(20.3));
@@ -53,8 +44,7 @@ public class TestList {
 	}
 
 	@Test
-	public void testListWithOMA() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testListWithOMA() throws OpenMathException, EvaluatorException {
 		args = new ArrayList<Object>(3);
 		args.add(OMCreator.createOMF(10.0));
 		args.add(OMCreator.createOMF(20.3));
@@ -68,11 +58,8 @@ public class TestList {
 		assertEquals(OMCreator.createOMA(OMSymbol.LIST1_LIST, arguments), result);
 	}
 
-
 	@Test
-	public void testListIntegration() throws FunctionException, OpenMathException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException {
+	public void testListIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("list(1,2,3)", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		List<Object> value = result.getOMA().getOmel();

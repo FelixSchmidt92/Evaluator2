@@ -4,10 +4,7 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.PolyUtils;
 import de.uni_due.s3.evaluator2.core.function.Function;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 import de.uni_due.s3.sage.Sage;
 
@@ -22,13 +19,12 @@ import de.uni_due.s3.sage.Sage;
 public class Degree_wrt extends Function {
 
 	/**
-	 * Expects two arguments of type string. The first one is the polynomial,
-	 * the second one the dependend variable If the second argument will be an
-	 * empty string, the degree function returns the highest exponent
+	 * Expects two arguments of type string. The first one is the polynomial, the
+	 * second one the dependend variable If the second argument will be an empty
+	 * string, the degree function returns the highest exponent
 	 */
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return Sage.evaluateInCAS(getPartialSageSyntax(arguments));
 	}
 
@@ -43,8 +39,7 @@ public class Degree_wrt extends Function {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments)
-			throws FunctionException, NoRepresentationAvailableException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
 		String polynom = getSageSyntax(arguments.get(0));
 		String var = getSageSyntax(arguments.get(1));
 

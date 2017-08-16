@@ -5,9 +5,8 @@ import java.util.List;
 import de.uni_due.s3.evaluator2.core.OMUtils;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMS;
 
 /**
@@ -26,13 +25,14 @@ public class BooleanAnd extends Function {
 	 * @throws FunctionInvalidArgumentTypeException
 	 */
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionException {
-		
-		try{
+	protected Object execute(List<Object> arguments) throws EvaluatorException {
+
+		try {
 			OMS arg1 = OMUtils.convertToLogicBoolean(OMUtils.convertOMToBoolean(arguments.get(0)));
 			OMS arg2 = OMUtils.convertToLogicBoolean(OMUtils.convertOMToBoolean(arguments.get(1)));
-			return (arg1.equals(OMSymbol.LOGIC1_TRUE) && arg2.equals(OMSymbol.LOGIC1_TRUE))?OMSymbol.LOGIC1_TRUE:OMSymbol.LOGIC1_FALSE;
-		}catch(Exception e){
+			return (arg1.equals(OMSymbol.LOGIC1_TRUE) && arg2.equals(OMSymbol.LOGIC1_TRUE)) ? OMSymbol.LOGIC1_TRUE
+					: OMSymbol.LOGIC1_FALSE;
+		} catch (Exception e) {
 			throw new FunctionInvalidArgumentTypeException(this, "boolean, int or float");
 		}
 	}
@@ -48,8 +48,7 @@ public class BooleanAnd extends Function {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments)
-			throws FunctionException, NoRepresentationAvailableException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
 
 		return getSageSyntax(arguments.get(0)) + " & " + getSageSyntax(arguments.get(1));
 	}

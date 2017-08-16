@@ -11,16 +11,8 @@ import org.junit.Test;
 import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
-import de.uni_due.s3.evaluator2.core.function.random_jack.Random;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
-import de.uni_due.s3.evaluator2.exceptions.parser.ParserException;
-import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedExerciseVariableException;
-import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedFillInVariableException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMF;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
@@ -39,8 +31,7 @@ public class TestRandom extends TestFunctionAbstract {
 	Function func = new Random();
 
 	@Test
-	public void testRandom() throws FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testRandom() throws OpenMathException, EvaluatorException {
 
 		for (int i = 0; i < 10000; i++) {
 			OMF omf = (OMF) func.evaluate(new ArrayList<>());
@@ -50,8 +41,7 @@ public class TestRandom extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testRandomStatistically() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testRandomStatistically() throws OpenMathException, EvaluatorException {
 		HashMap<Double, Integer> statistics = new HashMap<>(); // <'Random
 																// Number',
 																// 'Occurrences'>
@@ -79,9 +69,7 @@ public class TestRandom extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testRandomCaseIntegrationEmptyArguments() throws UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testRandomCaseIntegrationEmptyArguments() throws OpenMathException, EvaluatorException {
 		OMOBJ p = ExpressionParser.parse("random()", null, null); // Test for
 																	// Empty
 																	// Arguments!
@@ -89,9 +77,7 @@ public class TestRandom extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testRandomIntegerationWithMoreArguments() throws UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testRandomIntegerationWithMoreArguments() throws OpenMathException, EvaluatorException {
 		OMOBJ p = ExpressionParser.parse("random(2)", null, null); // Test for
 																	// Empty
 																	// Arguments!

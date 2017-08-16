@@ -4,7 +4,7 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMF;
 import de.uni_due.s3.openmath.jaxb.OMI;
@@ -64,7 +64,7 @@ public class OMToSageVisitor extends OMToCasVisitor {
 
 	@Override
 	protected String getCASRepresentationForFunction(Function function, List<Object> omel)
-			throws FunctionException, NoRepresentationAvailableException {
+			throws EvaluatorException {
 		return function.getPartialSageSyntax(omel);
 	}
 

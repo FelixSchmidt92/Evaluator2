@@ -11,17 +11,9 @@ import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
-import de.uni_due.s3.evaluator2.core.function.linalg_jack.EqualBasis;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
-import de.uni_due.s3.evaluator2.exceptions.parser.ParserException;
-import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedExerciseVariableException;
-import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedFillInVariableException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMCreator;
@@ -32,9 +24,7 @@ public class TestEqualBasis extends TestFunctionAbstract {
 	Function func = new EqualBasis();
 
 	@Test
-	public void testEqualBasis1() throws UndefinedFillInVariableException, UndefinedExerciseVariableException,
-			ParserException, FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testEqualBasis1() throws OpenMathException, EvaluatorException {
 		ArrayList<Object> vector1 = new ArrayList<>();
 		vector1.add(OMCreator.createOMI(1));
 		vector1.add(OMCreator.createOMI(0));
@@ -63,9 +53,7 @@ public class TestEqualBasis extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testEqualBasis2() throws UndefinedFillInVariableException, UndefinedExerciseVariableException,
-			ParserException, FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testEqualBasis2() throws OpenMathException, EvaluatorException {
 		ArrayList<Object> vector1 = new ArrayList<>();
 		vector1.add(OMCreator.createOMI(1));
 		vector1.add(OMCreator.createOMI(0));
@@ -94,10 +82,7 @@ public class TestEqualBasis extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testEqualBasisIntegration1()
-			throws UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException,
-			FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException,
-			NoRepresentationAvailableException, OpenMathException {
+	public void testEqualBasisIntegration1() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse(
 				"equalBasis(set(vector(1,2,3), vector(3,2,1)), set(vector(1,2,3), vector(3,2,1)), 3)", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
@@ -105,10 +90,7 @@ public class TestEqualBasis extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testEqualBasisIntegration2()
-			throws UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException,
-			FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException,
-			NoRepresentationAvailableException, OpenMathException {
+	public void testEqualBasisIntegration2() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser
 				.parse("equalBasis(set(vector(1,0), vector(0,1)), set(vector(1,0), vector(1,0)), 2)", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
@@ -116,10 +98,7 @@ public class TestEqualBasis extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testEqualBasisWithWrongInput()
-			throws UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException,
-			FunctionInvalidArgumentException, CasEvaluationException, FunctionException, CasNotAvailableException,
-			NoRepresentationAvailableException, OpenMathException {
+	public void testEqualBasisWithWrongInput() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser
 				.parse("equalBasis(set(vector(1,0), vector(0,1)), set(vector(1,0), vector(1,0)), 'Hello')", null, null);
 		OMExecutor.execute(omobj);
@@ -127,9 +106,7 @@ public class TestEqualBasis extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testEqualBasisWithLess() throws UndefinedFillInVariableException, UndefinedExerciseVariableException,
-			ParserException, FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testEqualBasisWithLess() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("equalBasis(set(vector(1,0), vector(0,1)), set(vector(1,0), vector(1,0)))",
 				null, null);
 		OMExecutor.execute(omobj);
@@ -137,9 +114,7 @@ public class TestEqualBasis extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testEqualBasisWithMore() throws UndefinedFillInVariableException, UndefinedExerciseVariableException,
-			ParserException, FunctionInvalidArgumentException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testEqualBasisWithMore() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser
 				.parse("equalBasis(set(vector(1,0), vector(0,1)), set(vector(1,0), vector(1,0)), 1, 2)", null, null);
 		OMExecutor.execute(omobj);

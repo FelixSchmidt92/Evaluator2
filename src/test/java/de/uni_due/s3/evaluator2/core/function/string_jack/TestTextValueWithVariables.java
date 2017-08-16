@@ -9,9 +9,7 @@ import org.junit.Test;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
-import de.uni_due.s3.evaluator2.core.function.string_jack.TextWithVariables;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 
 public class TestTextValueWithVariables extends TestFunctionAbstract {
@@ -19,7 +17,7 @@ public class TestTextValueWithVariables extends TestFunctionAbstract {
 	Function func = new TextWithVariables();
 
 	@Test
-	public void testTextValueWithVariablesSageSyntax1() throws NoRepresentationAvailableException, FunctionException {
+	public void testTextValueWithVariablesSageSyntax1() throws EvaluatorException {
 		ArrayList<Object> args = new ArrayList<>();
 
 		args.add(OMCreator.createOMSTR("SomeFunc("));
@@ -33,7 +31,7 @@ public class TestTextValueWithVariables extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testTextValueWithVariablesSageSyntax2() throws NoRepresentationAvailableException, FunctionException {
+	public void testTextValueWithVariablesSageSyntax2() throws EvaluatorException {
 		ArrayList<Object> args = new ArrayList<>();
 
 		args.add(OMCreator.createOMSTR("SomeFunc("));
@@ -49,7 +47,7 @@ public class TestTextValueWithVariables extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testTextValueWithVariablesSageSyntax3() throws NoRepresentationAvailableException, FunctionException {
+	public void testTextValueWithVariablesSageSyntax3() throws EvaluatorException {
 		ArrayList<Object> args = new ArrayList<>();
 
 		args.add(OMCreator.createOMSTR("["));

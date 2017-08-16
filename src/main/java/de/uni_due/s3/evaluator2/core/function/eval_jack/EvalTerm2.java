@@ -4,11 +4,8 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.PolyUtils;
 import de.uni_due.s3.evaluator2.core.function.Function;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 import de.uni_due.s3.sage.Sage;
 
@@ -24,8 +21,7 @@ import de.uni_due.s3.sage.Sage;
 public class EvalTerm2 extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		Object result = Sage.evaluateInCAS(getPartialSageSyntax(arguments));
 		return result;
 	}
@@ -41,20 +37,19 @@ public class EvalTerm2 extends Function {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments)
-			throws FunctionException, NoRepresentationAvailableException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
 
 		String term = getSageSyntax(arguments.get(0));
 		String value1 = getSageSyntax(arguments.get(1));
 		String value2 = getSageSyntax(arguments.get(2));
-		
+
 		if ((value1.length() == 2 && value1.startsWith("'")) || (value2.length() == 2 && value2.startsWith("'"))) {
-			//Case value1 or value 2 is only --> ''
+			// Case value1 or value 2 is only --> ''
 			throw new FunctionInvalidArgumentException(this, "Arguments for this Function cannot be empty!");
 		}
-		
+
 		String sageVar = PolyUtils.getSageSyntaxVariableRepresentation(term + "; a; b; x; y;");
-		
+
 		StringBuilder sb = new StringBuilder();
 		sb.append(sageVar);
 		sb.append("x = a =");
@@ -64,7 +59,7 @@ public class EvalTerm2 extends Function {
 		sb.append(";(");
 		sb.append(term);
 		sb.append(")");
-		
+
 		return sb.toString();
 	}
 }

@@ -10,15 +10,7 @@ import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
-import de.uni_due.s3.evaluator2.core.function.openmath_jack.GetNumerator;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
-import de.uni_due.s3.evaluator2.exceptions.parser.ParserException;
-import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedExerciseVariableException;
-import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedFillInVariableException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMCreator;
@@ -29,8 +21,7 @@ public class TestGetNumerator extends TestFunctionAbstract {
 	Function func = new GetNumerator();
 
 	@Test
-	public void testGetDenominator1() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testGetDenominator1() throws OpenMathException, EvaluatorException {
 		ArrayList<Object> args = new ArrayList<>();
 		ArrayList<Object> omel = new ArrayList<>();
 		omel.add(OMCreator.createOMI(10));
@@ -43,8 +34,7 @@ public class TestGetNumerator extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testGetDenominator2() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testGetDenominator2() throws OpenMathException, EvaluatorException {
 		ArrayList<Object> args = new ArrayList<>();
 		ArrayList<Object> omel = new ArrayList<>();
 		omel.add(OMCreator.createOMF(1.1));
@@ -57,9 +47,7 @@ public class TestGetNumerator extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void TestGetNumeratorCaseIntegration() throws UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void TestGetNumeratorCaseIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ t = ExpressionParser.parse("getNumerator(2/3)", null, null);
 		OMOBJ actual = OMExecutor.execute(t);
 
@@ -67,9 +55,7 @@ public class TestGetNumerator extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void TestGetNumeratorCaseIntegrationWithFloat() throws UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void TestGetNumeratorCaseIntegrationWithFloat() throws OpenMathException, EvaluatorException {
 		OMOBJ t = ExpressionParser.parse("getNumerator(2.2/3)", null, null);
 		OMOBJ actual = OMExecutor.execute(t);
 

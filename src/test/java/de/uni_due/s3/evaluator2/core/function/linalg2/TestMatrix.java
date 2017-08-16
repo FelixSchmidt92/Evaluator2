@@ -12,16 +12,8 @@ import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
-import de.uni_due.s3.evaluator2.core.function.linalg2.Matrix;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasException;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
-import de.uni_due.s3.evaluator2.exceptions.parser.ParserException;
-import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedExerciseVariableException;
-import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedFillInVariableException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMCreator;
@@ -32,8 +24,7 @@ public class TestMatrix extends TestFunctionAbstract {
 	private static Function func = new Matrix();
 
 	@Test
-	public void testMatrixInteger() throws FunctionException, CasEvaluationException, CasNotAvailableException,
-			NoRepresentationAvailableException, OpenMathException {
+	public void testMatrixInteger() throws OpenMathException, EvaluatorException {
 		List<Object> matrix = new ArrayList<Object>();
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(1));
@@ -45,8 +36,7 @@ public class TestMatrix extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testMatrixFloat() throws FunctionException, CasEvaluationException, CasNotAvailableException,
-			NoRepresentationAvailableException, OpenMathException {
+	public void testMatrixFloat() throws OpenMathException, EvaluatorException {
 		List<Object> matrix = new ArrayList<Object>();
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(0.0));
@@ -56,9 +46,7 @@ public class TestMatrix extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testMatrixIntegration() throws FunctionException, OpenMathException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException {
+	public void testMatrixIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("matrix(matrixrow(1,3),matrixrow(0.0,4))", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		List<Object> matrix = new ArrayList<Object>();
@@ -74,8 +62,7 @@ public class TestMatrix extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testMatrixSageSyntax() throws FunctionException, NoRepresentationAvailableException, CasException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
+	public void testMatrixSageSyntax() throws EvaluatorException {
 		List<Object> matrix = new ArrayList<>();
 		List<Object> matrixrow1 = new ArrayList<>();
 		matrixrow1.add(OMCreator.createOMF(0.0));
@@ -89,17 +76,13 @@ public class TestMatrix extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testMatrixWithZeroParam() throws FunctionException, OpenMathException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException {
+	public void testMatrixWithZeroParam() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("matrix()", null, null);
 		OMExecutor.execute(omobj);
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testMatrixWithWrongArguments() throws FunctionException, OpenMathException, CasEvaluationException,
-			CasNotAvailableException, NoRepresentationAvailableException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException {
+	public void testMatrixWithWrongArguments() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("matrix('Test')", null, null);
 		OMExecutor.execute(omobj);
 		fail();

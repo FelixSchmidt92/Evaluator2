@@ -10,17 +10,9 @@ import org.junit.Test;
 import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
-import de.uni_due.s3.evaluator2.core.function.binary_jack.ConvertToBinary;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
-import de.uni_due.s3.evaluator2.exceptions.parser.ParserException;
-import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedExerciseVariableException;
-import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedFillInVariableException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OMF;
@@ -36,8 +28,7 @@ public class TestConvertToBinary extends TestFunctionAbstract {
 	Function func = new ConvertToBinary();
 
 	@Test
-	public void TestConvertToBinaryOMI() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void TestConvertToBinaryOMI() throws OpenMathException, EvaluatorException {
 		ArrayList<Object> args = new ArrayList<>();
 		OMI omi = OMCreator.createOMI(3);
 
@@ -47,8 +38,7 @@ public class TestConvertToBinary extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void TestConvertToBinaryNegativeOMI() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void TestConvertToBinaryNegativeOMI() throws OpenMathException, EvaluatorException {
 		ArrayList<Object> args = new ArrayList<>();
 		OMI omi = OMCreator.createOMI(-3);
 
@@ -58,8 +48,7 @@ public class TestConvertToBinary extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void TestConvertToBinaryOMF() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void TestConvertToBinaryOMF() throws OpenMathException, EvaluatorException {
 		ArrayList<Object> args = new ArrayList<>();
 		OMF omf = OMCreator.createOMF(1.2);
 
@@ -69,8 +58,7 @@ public class TestConvertToBinary extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void TestConvertToBinaryNegativeOMF() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void TestConvertToBinaryNegativeOMF() throws OpenMathException, EvaluatorException {
 		ArrayList<Object> args = new ArrayList<>();
 		OMF omf = OMCreator.createOMF(-1.2);
 
@@ -80,8 +68,7 @@ public class TestConvertToBinary extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void TestConvertToBinaryOMSTR() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void TestConvertToBinaryOMSTR() throws OpenMathException, EvaluatorException {
 		ArrayList<Object> args = new ArrayList<>();
 		OMSTR omstr = OMCreator.createOMSTR("String");
 
@@ -90,8 +77,7 @@ public class TestConvertToBinary extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void TestConvertToBinaryOMA() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void TestConvertToBinaryOMA() throws OpenMathException, EvaluatorException {
 		ArrayList<Object> args = new ArrayList<>();
 		OMA oma = OMCreator.createOMA(OMCreator.createOMS("", ""), new ArrayList<>());
 
@@ -100,35 +86,28 @@ public class TestConvertToBinary extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void TestConvertToBinaryIntegration() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
+	public void TestConvertToBinaryIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("convertToBinary(3)", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals(OMCreator.createOMSTR("11"), result.getOMSTR());
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void TestConvertToBinaryWithMoreArgs() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
+	public void TestConvertToBinaryWithMoreArgs() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("convertToBinary(3, 2)", null, null);
 		OMExecutor.execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void TestConvertToBinaryWithLesssArgs() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException,
-			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException {
+	public void TestConvertToBinaryWithLesssArgs() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("convertToBinary()", null, null);
 		OMExecutor.execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void TestConvertToBinaryOMV() throws FunctionInvalidArgumentException, CasEvaluationException,
-			FunctionException, CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void TestConvertToBinaryOMV() throws OpenMathException, EvaluatorException {
 		ArrayList<Object> args = new ArrayList<>();
 		OMV omv = OMCreator.createOMV("StringX");
 

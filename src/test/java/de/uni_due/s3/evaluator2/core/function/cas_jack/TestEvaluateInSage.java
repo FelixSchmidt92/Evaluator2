@@ -9,14 +9,7 @@ import org.junit.Test;
 import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
-import de.uni_due.s3.evaluator2.core.function.cas_jack.EvaluateInSage;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
-import de.uni_due.s3.evaluator2.exceptions.parser.ParserException;
-import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedExerciseVariableException;
-import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedFillInVariableException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMCreator;
@@ -26,9 +19,7 @@ public class TestEvaluateInSage extends TestFunctionAbstract {
 	Function func = new EvaluateInSage();
 
 	@Test
-	public void testEvaluateInSageIntegration1() throws UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testEvaluateInSageIntegration1() throws OpenMathException, EvaluatorException {
 		HashMap<String, OMOBJ> exer = new HashMap<>();
 		HashMap<Integer, OMOBJ> fill = new HashMap<>();
 		OMOBJ t1 = new OMOBJ();
@@ -40,11 +31,9 @@ public class TestEvaluateInSage extends TestFunctionAbstract {
 
 		assertEquals(OMCreator.createOMI(0), actual.getOMI());
 	}
-	
+
 	@Test
-	public void testEvaluateInSageIntegration2() throws UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testEvaluateInSageIntegration2() throws OpenMathException, EvaluatorException {
 		HashMap<String, OMOBJ> exer = new HashMap<>();
 		HashMap<Integer, OMOBJ> fill = new HashMap<>();
 		OMOBJ t1 = new OMOBJ();
@@ -56,11 +45,9 @@ public class TestEvaluateInSage extends TestFunctionAbstract {
 
 		assertEquals(OMCreator.createOMI(55), actual.getOMI());
 	}
-	
+
 	@Test
-	public void testEvaluateInSageIntegration3() throws UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testEvaluateInSageIntegration3() throws OpenMathException, EvaluatorException {
 		HashMap<String, OMOBJ> exer = new HashMap<>();
 		HashMap<Integer, OMOBJ> fill = new HashMap<>();
 		OMOBJ t1 = new OMOBJ();
@@ -72,11 +59,9 @@ public class TestEvaluateInSage extends TestFunctionAbstract {
 
 		assertEquals(OMCreator.createOMI(110), actual.getOMI());
 	}
-	
+
 	@Test
-	public void testEvaluateInSageIntegration4() throws UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException, CasEvaluationException, FunctionException,
-			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
+	public void testEvaluateInSageIntegration4() throws OpenMathException, EvaluatorException {
 		HashMap<String, OMOBJ> exer = new HashMap<>();
 		HashMap<Integer, OMOBJ> fill = new HashMap<>();
 		OMOBJ t1 = new OMOBJ();
