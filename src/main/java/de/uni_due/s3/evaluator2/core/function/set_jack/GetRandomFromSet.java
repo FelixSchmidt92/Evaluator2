@@ -22,8 +22,8 @@ public class GetRandomFromSet extends Function {
 
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionException {
-		if (!OMTypeChecker.isOMAWithSymbol(arguments.get(1), OMSymbol.SET1_SET)) {
-			throw new FunctionInvalidArgumentTypeException(this, "(0)Integer, (1)Set");
+		if (!OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.SET1_SET)) {
+			throw new FunctionInvalidArgumentTypeException(this, "(0)Set");
 		}
 		List<Object> set = ((OMA) arguments.get(0)).getOmel();
 		set.remove(0); // 0te element ist die OMS_SET1_SET
