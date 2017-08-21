@@ -72,7 +72,10 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("equalBasis", OMSymbol.LINALGJACK_EQUALBASIS);
 		functionSymbolMap.put("isLinearlyIndependent", OMSymbol.LINALGJACK_ISLINEARLYINDEPENDENT);
 		functionSymbolMap.put("randomMatrixEigenvalue", OMSymbol.LINALGJACK_RANDOMMATRIXEIGENVALUE);
+		functionSymbolMap.put("randomDiagonalizableMatrix", OMSymbol.LINALGJACK_RANDOMMATRIXEIGENVALUE);
 		functionSymbolMap.put("randomMatrixRank", OMSymbol.LINALGJACK_RANDOMMATRIXRANK);
+		functionSymbolMap.put("randomEchelonizableMatrix", OMSymbol.LINALGJACK_RANDOMMATRIXRANK);
+		
 
 		functionSymbolMap.put("matrix", OMSymbol.LINALG2_MATRIX);
 		functionSymbolMap.put("matrixrow", OMSymbol.LINALG2_MATRIXROW);
