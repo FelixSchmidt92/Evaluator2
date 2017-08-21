@@ -2,7 +2,7 @@ package de.uni_due.s3.evaluator2.core.function;
 
 import org.junit.BeforeClass;
 
-import de.uni_due.s3.sage.TestSage;
+import de.uni_due.s3.evaluator2.sage.TestSage;
 
 public abstract class TestFunctionAbstract {
 	

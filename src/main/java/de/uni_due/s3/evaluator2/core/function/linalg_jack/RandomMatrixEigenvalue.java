@@ -12,9 +12,9 @@ import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeE
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator2.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
+import de.uni_due.s3.evaluator2.sage.Sage;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
-import de.uni_due.s3.sage.Sage;
 
 /**
  * @param OMSTR

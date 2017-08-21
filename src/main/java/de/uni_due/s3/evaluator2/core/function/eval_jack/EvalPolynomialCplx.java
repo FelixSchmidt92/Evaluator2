@@ -8,8 +8,8 @@ import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
+import de.uni_due.s3.evaluator2.sage.Sage;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
-import de.uni_due.s3.sage.Sage;
 
 /**
  * Inserts (2)replacement for (1)target in a (0)term and calculates the result

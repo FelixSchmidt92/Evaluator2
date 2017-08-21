@@ -6,8 +6,8 @@ import de.uni_due.s3.evaluator2.core.PolyUtils;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
+import de.uni_due.s3.evaluator2.sage.Sage;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
-import de.uni_due.s3.sage.Sage;
 
 /**
  * Function to integrate a term. (3*x^2, x) -> x^3

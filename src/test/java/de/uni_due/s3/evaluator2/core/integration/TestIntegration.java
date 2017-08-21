@@ -7,9 +7,9 @@ import javax.xml.bind.JAXBException;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 
+import de.uni_due.s3.evaluator2.sage.TestSage;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMConverter;
-import de.uni_due.s3.sage.TestSage;
 
 public abstract class TestIntegration {
 

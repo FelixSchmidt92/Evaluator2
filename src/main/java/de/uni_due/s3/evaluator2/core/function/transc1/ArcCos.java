@@ -6,8 +6,8 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
+import de.uni_due.s3.evaluator2.sage.Sage;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
-import de.uni_due.s3.sage.Sage;
 
 /**
  * Implements ArcCos function. Example acos(1) = 0, acos(0) = 2 * pi =

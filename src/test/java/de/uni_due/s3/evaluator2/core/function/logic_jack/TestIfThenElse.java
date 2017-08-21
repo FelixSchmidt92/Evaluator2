@@ -17,10 +17,10 @@ import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeE
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
+import de.uni_due.s3.evaluator2.sage.Sage;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
-import de.uni_due.s3.sage.Sage;
 
 public class TestIfThenElse extends TestFunctionAbstract {
 

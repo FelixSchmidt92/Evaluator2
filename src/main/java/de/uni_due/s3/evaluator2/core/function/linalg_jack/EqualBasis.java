@@ -8,11 +8,11 @@ import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.InvalidResultTypeException;
+import de.uni_due.s3.evaluator2.sage.Sage;
 import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
-import de.uni_due.s3.sage.Sage;
 
 /**
  * This function Checks if the Two given Sets of Vectors have the same Basis.

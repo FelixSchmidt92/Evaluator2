@@ -1,4 +1,4 @@
-package de.uni_due.s3.sage;
+package de.uni_due.s3.evaluator2.sage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +9,8 @@ import org.junit.Test;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
+import de.uni_due.s3.evaluator2.sage.Sage;
+import de.uni_due.s3.evaluator2.sage.SageConnection;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestSage {
@@ -19,8 +21,8 @@ public class TestSage {
 	}
 
 	public static void initSage() {
-		List<String> aSageConnectionsList = new ArrayList<>();
-		aSageConnectionsList.add("192.168.68.176:8989");
+		List<SageConnection> aSageConnectionsList = new ArrayList<>();
+		aSageConnectionsList.add(new SageConnection("192.168.68.176", 8989));
 		Sage.init(aSageConnectionsList);
 	}
 

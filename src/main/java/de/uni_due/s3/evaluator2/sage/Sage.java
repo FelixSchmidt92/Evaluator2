@@ -1,4 +1,4 @@
-package de.uni_due.s3.sage;
+package de.uni_due.s3.evaluator2.sage;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -14,8 +14,6 @@ import java.util.TimerTask;
 
 import javax.xml.bind.JAXBException;
 
-import org.apache.log4j.Logger;
-
 import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
@@ -30,21 +28,19 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
  */
 public class Sage {
 
-	private static final Logger log = Logger.getLogger(Sage.class);
-	private static boolean reviveFlag = false;
-	private static boolean initFlag = false;
-
 	/**
 	 * Keeps Sage Server Connections.
 	 */
-	private static List<String> sageConnectionsList = new ArrayList<String>();
+	private static List<SageConnection> sageConnectionsList = new ArrayList<>();
+	private static boolean initFlag = false;
 
 	/**
-	 * Keeps Sage Server Connections that are currently not working.
+	 * Keeps Not Working Sage Server Connections.
 	 */
-	private static List<String> sageErrorConnectionsList = new ArrayList<String>();
+	private static List<SageConnection> sageErrorConnectionsList = new ArrayList<>();
+	private static boolean reviveFlag = false;
 
-	public static void init(List<String> aSageConnectionsList) {
+	public static void init(List<SageConnection> aSageConnectionsList) {
 		initFlag = true;
 		sageConnectionsList = aSageConnectionsList;
 	}
@@ -57,27 +53,22 @@ public class Sage {
 	 * @throws CasEvaluationException
 	 *             if command is not evaluatable in Sage
 	 * @throws CasNotAvailableException
-	 * @throws OpenMathException 
+	 * @throws OpenMathException
 	 * @throws NoCASConnectionsException
 	 *             if there is no working SageServer connection anymore.
 	 */
-	public static Object evaluateInCAS(String sageExpression) throws CasEvaluationException, CasNotAvailableException, OpenMathException {
-		if (sageExpression == "") { // Python erkennt eine Leere Message nicht
-									// als Connection
-			sageExpression = " ";
-		}
-		if (!initFlag) {
+	public static Object evaluateInCAS(String sageExpression)
+			throws CasEvaluationException, CasNotAvailableException, OpenMathException {
+		// prevents empty Message (Python cannot handle empty Message)
+		sageExpression = (sageExpression == "") ? " " : sageExpression;
+		if (!initFlag)
 			throw new CasNotAvailableException("Sage Server Connection has to be initialized.");
-		}
+
 		String casResult = "";
 		// get one Connection to a SageServer
-		String randConn = getRandomFromConnectionList();
-		int pos = randConn.indexOf(':');
-		String hostName = randConn.substring(0, pos);
-		int portNumber = Integer.parseInt(randConn.substring(pos + 1));
+		SageConnection con = getRandomFromConnectionList();
 
-		try {
-			Socket sageSocket = new Socket(hostName, portNumber);
+		try (Socket sageSocket = new Socket(con.getIp(), con.getPort())) {
 			BufferedWriter toServer = new BufferedWriter(new OutputStreamWriter(sageSocket.getOutputStream()));
 			BufferedReader fromServer = new BufferedReader(new InputStreamReader(sageSocket.getInputStream()));
 			toServer.write(sageExpression);
@@ -90,12 +81,9 @@ public class Sage {
 					casResult += "\n" + resultLine;
 				}
 			}
-//			System.out.println(casResult);
-			sageSocket.close();
 		} catch (IOException e) {
-			log.warn("SageServer Connection '" + randConn + "' is currently not working.");
-			sageConnectionsList.remove(randConn);
-			sageErrorConnectionsList.add(randConn);
+			sageConnectionsList.remove(con);
+			sageErrorConnectionsList.add(con);
 			if (!reviveFlag) {
 				reviveFlag = true;
 				reviveCASConnection();
@@ -106,7 +94,7 @@ public class Sage {
 		if (casResult.contains("<OME>")) {
 			throw new CasEvaluationException(casResult);
 		}
-		
+
 		OMOBJ omobjResult = null;
 		try {
 			omobjResult = OMConverter.toObject(casResult);
@@ -124,8 +112,8 @@ public class Sage {
 	 * @throws NoCASConnectionsException
 	 *             if sageConnectionList is empty
 	 */
-	private static String getRandomFromConnectionList() throws CasNotAvailableException {
-		if (sageConnectionsList.size() == 0) {
+	private static SageConnection getRandomFromConnectionList() throws CasNotAvailableException {
+		if (sageConnectionsList.isEmpty()) {
 			throw new CasNotAvailableException("All SageServers are not working.");
 		} else {
 			Random rand = new Random();
@@ -142,8 +130,8 @@ public class Sage {
 	 * @return IP:PORT e.g.: 192.168.68.176:8888
 	 * @return null if no error SageServer address exists.
 	 */
-	private static String getRandomFromErrorConnectionList() {
-		if (sageErrorConnectionsList.size() == 0) {
+	private static SageConnection getRandomFromErrorConnectionList() {
+		if (sageErrorConnectionsList.isEmpty()) {
 			return null;
 		} else {
 			Random rand = new Random();
@@ -164,21 +152,17 @@ public class Sage {
 			@Override
 			public void run() {
 
-				String casConn = getRandomFromErrorConnectionList();
+				SageConnection con = getRandomFromErrorConnectionList();
 
-				if (casConn == null) {
+				if (con == null) {
 					reviveFlag = false;
 					t.cancel();
 					t.purge();
 				} else {
 					boolean casConnectionIsWorking = true;
 
-					int pos = casConn.indexOf(':');
-					String hostName = casConn.substring(0, pos);
-					int portNumber = Integer.parseInt(casConn.substring(pos + 1));
-
-					try {
-						Socket sageSocket = new Socket(hostName, portNumber);
+					try (Socket sageSocket = new Socket(con.getIp(), con.getPort());) {
+						
 						BufferedWriter toServer = new BufferedWriter(
 								new OutputStreamWriter(sageSocket.getOutputStream()));
 						BufferedReader fromServer = new BufferedReader(
@@ -191,15 +175,13 @@ public class Sage {
 								casConnectionIsWorking = true;
 							}
 						}
-						sageSocket.close();
 					} catch (Exception e) {
 						casConnectionIsWorking = false;
 					}
 
 					if (casConnectionIsWorking) {
-						sageErrorConnectionsList.remove(casConn);
-						sageConnectionsList.add(casConn);
-						log.warn("SageServer Connection '" + casConn + "' is revived.");
+						sageErrorConnectionsList.remove(con);
+						sageConnectionsList.add(con);
 					}
 				}
 			}

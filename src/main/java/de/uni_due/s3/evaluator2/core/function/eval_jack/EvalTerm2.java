@@ -6,8 +6,8 @@ import de.uni_due.s3.evaluator2.core.PolyUtils;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
+import de.uni_due.s3.evaluator2.sage.Sage;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
-import de.uni_due.s3.sage.Sage;
 
 /**
  * Inserts values for two different variables in a term and calculates the
@@ -48,7 +48,7 @@ public class EvalTerm2 extends Function {
 			throw new FunctionInvalidArgumentException(this, "Arguments for this Function cannot be empty!");
 		}
 
-		String sageVar = PolyUtils.getSageSyntaxVariableRepresentation(term + "; a; b; x; y;");
+		String sageVar = PolyUtils.getSageSyntaxVariableRepresentation(term + " " + value1 + " " + value2 + "; a; b; x; y;");
 
 		StringBuilder sb = new StringBuilder();
 		sb.append(sageVar);

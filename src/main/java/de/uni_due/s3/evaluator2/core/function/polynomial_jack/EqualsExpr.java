@@ -5,8 +5,8 @@ import java.util.List;
 import de.uni_due.s3.evaluator2.core.PolyUtils;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
+import de.uni_due.s3.evaluator2.sage.Sage;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
-import de.uni_due.s3.sage.Sage;
 
 /**
  * Tests if two expressions are the same. Example: x^2 - 5*x + 6 == (x-2)(x-3)
