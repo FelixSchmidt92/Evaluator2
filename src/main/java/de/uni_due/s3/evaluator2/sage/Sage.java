@@ -31,18 +31,18 @@ public class Sage {
 	/**
 	 * Keeps Sage Server Connections.
 	 */
-	private static List<SageConnection> sageConnectionsList = new ArrayList<>();
+	private static List<SageConnection> sageConnectionList = new ArrayList<>();
 	private static boolean initFlag = false;
 
 	/**
 	 * Keeps Not Working Sage Server Connections.
 	 */
-	private static List<SageConnection> sageErrorConnectionsList = new ArrayList<>();
+	private static List<SageConnection> sageErrorConnectionList = new ArrayList<>();
 	private static boolean reviveFlag = false;
 
-	public static void init(List<SageConnection> aSageConnectionsList) {
+	public static void init(List<SageConnection> aSageConnectionList) {
 		initFlag = true;
-		sageConnectionsList = aSageConnectionsList;
+		sageConnectionList = aSageConnectionList;
 	}
 
 	/**
@@ -82,8 +82,8 @@ public class Sage {
 				}
 			}
 		} catch (IOException e) {
-			sageConnectionsList.remove(con);
-			sageErrorConnectionsList.add(con);
+			sageConnectionList.remove(con);
+			sageErrorConnectionList.add(con);
 			if (!reviveFlag) {
 				reviveFlag = true;
 				reviveCASConnection();
@@ -113,14 +113,14 @@ public class Sage {
 	 *             if sageConnectionList is empty
 	 */
 	private static SageConnection getRandomFromConnectionList() throws CasNotAvailableException {
-		if (sageConnectionsList.isEmpty()) {
+		if (sageConnectionList.isEmpty()) {
 			throw new CasNotAvailableException("All SageServers are not working.");
 		} else {
 			Random rand = new Random();
 			int min = 0;
-			int max = sageConnectionsList.size() - 1;
+			int max = sageConnectionList.size() - 1;
 			int randomNum = rand.nextInt((max - min) + 1) + min;
-			return sageConnectionsList.get(randomNum);
+			return sageConnectionList.get(randomNum);
 		}
 	}
 
@@ -131,14 +131,14 @@ public class Sage {
 	 * @return null if no error SageServer address exists.
 	 */
 	private static SageConnection getRandomFromErrorConnectionList() {
-		if (sageErrorConnectionsList.isEmpty()) {
+		if (sageErrorConnectionList.isEmpty()) {
 			return null;
 		} else {
 			Random rand = new Random();
 			int min = 0;
-			int max = sageErrorConnectionsList.size() - 1;
+			int max = sageErrorConnectionList.size() - 1;
 			int randomNum = rand.nextInt((max - min) + 1) + min;
-			return sageErrorConnectionsList.get(randomNum);
+			return sageErrorConnectionList.get(randomNum);
 		}
 	}
 
@@ -180,8 +180,8 @@ public class Sage {
 					}
 
 					if (casConnectionIsWorking) {
-						sageErrorConnectionsList.remove(con);
-						sageConnectionsList.add(con);
+						sageErrorConnectionList.remove(con);
+						sageConnectionList.add(con);
 					}
 				}
 			}
