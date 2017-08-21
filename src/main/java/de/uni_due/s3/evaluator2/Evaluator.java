@@ -105,10 +105,10 @@ public class Evaluator {
 	/**
 	 * Converts a OpenMath-Object into latex
 	 * @param omobj
-	 * @return
+	 * @return latex
 	 * @throws EvaluatorException
 	 */
-	public static String getLatex(OMOBJ omobj) throws EvaluatorException {
+	public static String getLaTeX(OMOBJ omobj) throws EvaluatorException {
 		return new OMToLatexVisitor().visit(omobj);
 	}
 }
