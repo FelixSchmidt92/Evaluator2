@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Test;
@@ -12,6 +13,7 @@ import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
+import de.uni_due.s3.evaluator2.core.syntaxvisitor.OMToLatexVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
@@ -76,6 +78,13 @@ public class TestLessThan extends TestFunctionAbstract {
 		args.add(OMCreator.createOMF(12.3046));
 		Object result = func.evaluate(args);
 		assertEquals(OMSymbol.LOGIC1_TRUE, result);
+	}
+	
+	@Test
+	public void testLessThanLatexSyntax() throws EvaluatorException, OpenMathException {
+		OMOBJ obj = ExpressionParser.parse("1 < 3", new HashMap<>(), new HashMap<>());
+		String latex = new OMToLatexVisitor().visit(obj);
+		assertEquals("1<3", latex);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)

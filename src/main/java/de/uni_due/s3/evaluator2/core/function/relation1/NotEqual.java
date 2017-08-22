@@ -9,6 +9,7 @@ import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.openmath.InputMismatchException;
+import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 
 /**
  * Implements openmath relation neq. Example 10 != 5 => true
@@ -49,6 +50,12 @@ public class NotEqual extends Function {
 	@Override
 	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
 		return getSageSyntax(arguments.get(0)) + " != " + getSageSyntax(arguments.get(1));
+	}
+	
+	@Override
+	public String getPartialLatexSyntax(List<String> arguments)
+			throws FunctionException, NoRepresentationAvailableException {
+		return arguments.get(0) + "\\neq" +arguments.get(1);
 	}
 
 }
