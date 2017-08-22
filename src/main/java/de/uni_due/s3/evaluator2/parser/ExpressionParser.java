@@ -88,7 +88,6 @@ public class ExpressionParser {
 		} catch (FunctionNotImplementedRuntimeException e) {
 			throw new FunctionNotImplementedException(e.getMessage());
 		}
-
 	}
 
 	/**

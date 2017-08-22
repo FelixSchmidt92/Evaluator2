@@ -18,7 +18,6 @@ import de.uni_due.s3.evaluator2.exceptions.parserruntime.ErroneousFillInVariable
 import de.uni_due.s3.evaluator2.exceptions.parserruntime.ParserRuntimeException;
 import de.uni_due.s3.evaluator2.exceptions.parserruntime.UndefinedExerciseVariableRuntimeException;
 import de.uni_due.s3.evaluator2.exceptions.parserruntime.UndefinedFillInVariableRuntimeException;
-import de.uni_due.s3.evaluator2.parser.antlr.EvaluatorParserBaseVisitor;
 import de.uni_due.s3.evaluator2.parser.antlr.EvaluatorParser.BinaryArithLineContext;
 import de.uni_due.s3.evaluator2.parser.antlr.EvaluatorParser.BinaryArithPointContext;
 import de.uni_due.s3.evaluator2.parser.antlr.EvaluatorParser.BinaryBooleanContext;
@@ -35,6 +34,7 @@ import de.uni_due.s3.evaluator2.parser.antlr.EvaluatorParser.SetContext;
 import de.uni_due.s3.evaluator2.parser.antlr.EvaluatorParser.TextValueContext;
 import de.uni_due.s3.evaluator2.parser.antlr.EvaluatorParser.UnaryContext;
 import de.uni_due.s3.evaluator2.parser.antlr.EvaluatorParser.VariableContext;
+import de.uni_due.s3.evaluator2.parser.antlr.EvaluatorParserBaseVisitor;
 import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OMF;
 import de.uni_due.s3.openmath.jaxb.OMI;
@@ -426,7 +426,17 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 			omstrAndExpression.add(OMCreator.createOMSTR(substituteVariables(text)));
 			omstrAndExpression.add(this.visit(tree));
 			return OMCreator.createOMA(OMSymbol.STRINGJACK_TEXTWITHEXPRESSION, omstrAndExpression);
+		} catch (ErroneousFillInVariableRuntimeException e) {
+			// do nothing continue Code below (In String is no Expression!)
+		} catch (ErroneousExerciseVariableRuntimeException e) {
+			// do nothing continue Code below (In String is no Expression!)
+		} catch (UndefinedFillInVariableRuntimeException e) {
+			// do nothing continue Code below (In String is no Expression!)
+		} catch (UndefinedExerciseVariableRuntimeException e) {
+			// do nothing continue Code below (In String is no Expression!)
 		} catch (ParserRuntimeException e) {
+			// do nothing continue Code below (In String is no Expression!)
+		} catch (FunctionNotImplementedRuntimeException e) {
 			// do nothing continue Code below (In String is no Expression!)
 		}
 
