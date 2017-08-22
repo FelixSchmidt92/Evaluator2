@@ -10,7 +10,6 @@ import org.junit.Test;
 import de.uni_due.s3.evaluator2.Evaluator;
 import de.uni_due.s3.evaluator2.core.integration.TestIntegration;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator2.exceptions.parser.ParserException;
@@ -60,11 +59,6 @@ public class TestRandomMatrixRank extends TestIntegration {
 	@Test
 	public void testRandomMatrixEigenValueWithVariables() throws EvaluatorException, OpenMathException {
 		Evaluator.evaluate("randomMatrixRank('QQ', '[var=a]', '2', '2')", randomMatrixRankExerciseVariableMap, randomMatrixRankFillInVariableMap);
-	}
-
-	@Test(expected = FunctionInvalidArgumentException.class)
-	public void testRandomMatrixEigenValueWithWrongBaseRing() throws EvaluatorException, OpenMathException {
-		Evaluator.evaluate("randomMatrixRank('RR', '3', '2', '2')", randomMatrixRankExerciseVariableMap, randomMatrixRankFillInVariableMap);
 	}
 
 	@Test(expected = ParserException.class)
