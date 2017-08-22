@@ -44,5 +44,16 @@ public class List extends Function {
 
 		return set + "]";
 	}
+	
+	@Override
+	public String getPartialLatexSyntax(java.util.List<String> arguments)
+			throws FunctionException, NoRepresentationAvailableException {
+		String args ="";
+		for(String arg:arguments) {
+			args += arg+",";
+		}
+		args = args.substring(0, args.length()-1);
+		return "\\left\\{"+args+"\\right\\}";
+	}
 
 }

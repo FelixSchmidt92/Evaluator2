@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import de.uni_due.s3.evaluator2.Evaluator;
 import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
@@ -66,5 +67,13 @@ public class TestList {
 		assertEquals(OMCreator.createOMI(1), value.get(1));
 		assertEquals(OMCreator.createOMI(2), value.get(2));
 		assertEquals(OMCreator.createOMI(3), value.get(3));
+	}
+	
+	@Test
+	public void testListLatexSyntax() throws EvaluatorException, OpenMathException {
+		OMOBJ result = Evaluator.evaluate("list(1,2,3)", null,null);
+		String latex = Evaluator.getLaTeX(result);
+		assertEquals("\\left\\{1,2,3\\right\\}",latex);
+		
 	}
 }
