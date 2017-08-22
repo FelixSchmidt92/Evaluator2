@@ -4,13 +4,16 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Test;
 
+import de.uni_due.s3.evaluator2.Evaluator;
 import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
+import de.uni_due.s3.evaluator2.core.syntaxvisitor.OMToLatexVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
@@ -63,6 +66,13 @@ public class TestAbs extends TestFunctionAbstract {
 		List<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMF(1.0));
 		assertEquals("abs(1)", func.getPartialSageSyntax(args));
+	}
+	
+	@Test
+	public void testAbsLatexSyntax() throws EvaluatorException, OpenMathException {
+		OMOBJ obj = ExpressionParser.parse("abs(5)", new HashMap<>(), new HashMap<>());
+		String latex = new OMToLatexVisitor().visit(obj);
+		assertEquals("\\left|5\\right|", latex);
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)

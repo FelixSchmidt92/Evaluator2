@@ -93,11 +93,11 @@ public class TestMatrix extends TestFunctionAbstract {
 	
 	@Test
 	public void testMatrixLatexSyntax() throws OpenMathException, EvaluatorException {
-		OMOBJ obj = Evaluator.evaluate("matrix(matrixrow(1,2,3),matrixrow(4,5,6))", new HashMap<>(), new HashMap<>());
+		OMOBJ obj = Evaluator.evaluate("matrix(matrixrow(1,2,3),matrixrow(4,5))", new HashMap<>(), new HashMap<>());
 		String latex = new OMToLatexVisitor().visit(obj);
-		assertEquals("\\left(\\begin{array}{rr}"
+		assertEquals("\\left(\\begin{array}{ll}"
 				+ "\\begin{array}{rrr}1 & 2 & 3\\end{array}\\\\"
-				+ "\\begin{array}{rrr}4 & 5 & 6\\end{array}\\\\"
+				+ "\\begin{array}{rr}4 & 5\\end{array}\\\\"
 				+ "\\end{array}\\right)" 
 				, latex);
 	}

@@ -9,6 +9,7 @@ import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.openmath.InputMismatchException;
+import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
@@ -55,6 +56,13 @@ public class UnaryMinus extends Function {
 	@Override
 	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
 		return "-" + getSageSyntax(arguments.get(0));
+	}
+	
+	@Override
+	public String getPartialLatexSyntax(List<String> arguments)
+			throws FunctionException, NoRepresentationAvailableException {
+		
+		return "-"+arguments.get(0);
 	}
 
 }

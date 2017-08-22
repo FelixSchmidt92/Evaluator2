@@ -9,6 +9,7 @@ import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.openmath.InputMismatchException;
+import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
@@ -77,6 +78,18 @@ public class Root extends Function {
 			return "sqrt(" + getSageSyntax(arguments.get(0)) + ")";
 		} else {
 			return "(" + getSageSyntax(arguments.get(0)) + ").nth_root(" + getSageSyntax(arguments.get(1)) + ")";
+		}
+	}
+	
+	@Override
+	public String getPartialLatexSyntax(List<String> arguments)
+			throws FunctionException, NoRepresentationAvailableException {
+		
+		if(arguments.size() == 1) {
+			return "\\sqrt{" + arguments.get(0) + "}";
+		} else {
+			return "\\sqrt[" + arguments.get(1) + "]{"
+				+ arguments.get(0) + "}";
 		}
 	}
 }

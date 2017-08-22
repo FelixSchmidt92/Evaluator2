@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Test;
@@ -11,6 +12,7 @@ import org.junit.Test;
 import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
+import de.uni_due.s3.evaluator2.core.syntaxvisitor.OMToLatexVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
@@ -58,6 +60,13 @@ public class TestUnaryMinus extends TestFunctionAbstract {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(1.0));
 		assertEquals("-1", func.getPartialSageSyntax(args));
+	}
+	
+	@Test
+	public void testUnaryMinusLatexSyntax() throws EvaluatorException, OpenMathException {
+		OMOBJ obj = ExpressionParser.parse("-3", new HashMap<>(), new HashMap<>());
+		String latex = new OMToLatexVisitor().visit(obj);
+		assertEquals("-3", latex);
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
