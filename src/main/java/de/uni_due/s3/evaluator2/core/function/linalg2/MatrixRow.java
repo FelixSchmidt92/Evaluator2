@@ -44,5 +44,22 @@ public class MatrixRow extends Function {
 
 		return sageExpression + "]";
 	}
+	
+	@Override
+	public String getPartialLatexSyntax(List<String> arguments)
+			throws FunctionException, NoRepresentationAvailableException {
+		String begin = "\\begin{array}{";
+		String args = "";
+		
+		for(int i = 0; i<arguments.size();i++) {
+			args += arguments.get(i)+" & ";
+			begin += "r";
+		}
+		begin += "}";
+		args = args.substring(0, args.length()-3); //remove last &
+		
+		
+		return begin + args + "\\end{array}";
+	}
 
 }

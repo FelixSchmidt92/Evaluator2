@@ -32,6 +32,7 @@ public class TestOMToLatexVisitor {
 		assertEquals("\\left(a-b\\right) \\cdot 2", latex);
 	}
 	
+	
 	@Test
 	public void testOMToLatexVisitorWithPolynomial() throws OpenMathException, EvaluatorException {
 		OMOBJ obj = Evaluator.evaluate("3*x^(a-b)*2", new HashMap<>(), new HashMap<>());

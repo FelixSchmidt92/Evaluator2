@@ -44,5 +44,22 @@ public class Vector extends Function {
 
 		return sageExpression + ")";
 	}
+	
+	@Override
+	public String getPartialLatexSyntax(List<String> arguments)
+			throws FunctionException, NoRepresentationAvailableException {
+		
+		String begin = "\\left(\\begin{array}{";
+		String args = "";
+		
+		for(int i = 0; i<arguments.size();i++) {
+			begin += "r";
+			args += arguments.get(i)+"\\\\";
+		}
+		begin += "}";
+		
+		
+		return begin + args + "\\end{array}\\right)";
+	}
 
 }

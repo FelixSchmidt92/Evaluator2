@@ -175,11 +175,6 @@ public abstract class Function {
 			throws EvaluatorException {
 		return new OMToSageVisitor().visit(omElement);
 	}
-	
-	protected final String getLatexSyntax(Object omElement)
-			throws EvaluatorException {
-		return new OMToLatexVisitor().visit(omElement);
-	}
 
 	/**
 	 * Define here how the Syntax should look like in Sage for this specific
@@ -208,11 +203,25 @@ public abstract class Function {
 	 * Add here more Translators from OMOBJ to CAS
 	 */
 
-	/**********************************************************/
-	/****************** Translator Section **********************/
-	/**********************************************************/
-
-	public String getPartialLatexSyntax(List<Object> arguments)
+	/**
+	 * This function can be called if you want to have the latex syntax of the given element
+	 * @param omElement	OM-Object of which you want the latex syntax
+	 * @return latex-string
+	 * @throws EvaluatorException
+	 */
+	protected final String getLatexSyntax(Object omElement)
+			throws EvaluatorException {
+		return new OMToLatexVisitor().visit(omElement);
+	}
+	
+	/** This function has to be overwritten if the function has a specific representation in latex (like some BinaryFunction)
+	 * 
+	 * @param arguments
+	 * @return
+	 * @throws FunctionException
+	 * @throws NoRepresentationAvailableException
+	 */
+	public String getPartialLatexSyntax(List<String> arguments)
 			throws FunctionException, NoRepresentationAvailableException {
 		throw new NoRepresentationAvailableException(
 				"There is no latex representation for function " + this.getClass() + " implemented");

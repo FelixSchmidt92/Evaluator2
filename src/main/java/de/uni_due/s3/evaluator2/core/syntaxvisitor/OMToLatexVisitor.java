@@ -1,6 +1,7 @@
 package de.uni_due.s3.evaluator2.core.syntaxvisitor;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSFunctionDictionary;
@@ -74,9 +75,11 @@ public class OMToLatexVisitor extends OMToCasVisitor{
 
 	/**
 	 * Differentiate between a normal Function and a BinaryFunction. If the function is a
-	 * BinaryFunction we have to parenthesis the arguments for this function if the arguments
-	 * contain another binary operator. In this case the children will be converted into strings
-	 * and will be handed over to the getPartialSyntax-Method.
+	 * BinaryFunction and the arguments contain another binary operator we have to but 
+	 * the arguments in brackets for this function. In this case the children will be 
+	 * converted into string and will be handed over to the getPartialSyntax-Method.
+	 * 
+	 * In every getPartialLatexSyntax() in BinaryFunction it is not needed to call getLatexSyntax() on the arguments.  
 	 * TODO: weiter kommentieren
 	 */
 	@Override
@@ -84,7 +87,7 @@ public class OMToLatexVisitor extends OMToCasVisitor{
 			throws EvaluatorException {
 		
 		if(function instanceof BinaryFunction) {
-			List<Object> children = new ArrayList<Object>(2);
+			List<String> children = new ArrayList<String>(2);
 			BinaryFunction parent = (BinaryFunction) function;
 			
 			children.add(getLatexSyntaxFromChild(omel.get(0), parent));
@@ -92,12 +95,16 @@ public class OMToLatexVisitor extends OMToCasVisitor{
 			return function.getPartialLatexSyntax(children);
 			
 		}else {
-			return function.getPartialLatexSyntax(omel);
+			List<String> children = new LinkedList<String>();
+			for(Object child : omel) {
+				children.add(visit(child));
+			}
+			return function.getPartialLatexSyntax(children);
 		}
 	}
 	
 	/**
-	 * Wraps parentheses on the child if needed 
+	 * Put child in brackets if needed and calls the getPartialLatexSyntax() for this children. 
 	 * ( if the priority of the child-operator is greater than the priority of the parent)
 	 * 
 	 * @param obj
@@ -106,15 +113,17 @@ public class OMToLatexVisitor extends OMToCasVisitor{
 	 * @throws EvaluatorException
 	 */
 	private String getLatexSyntaxFromChild(Object obj,BinaryFunction parent) throws EvaluatorException {
+		//if the child is an OMA check their priority
 		if(obj instanceof OMA) {
 			OMA child = (OMA)obj;
-			List<Object> childOmel = new ArrayList<Object>(child.getOmel().size()-1);
-			for(int i=1;i<child.getOmel().size();i++) {
-				childOmel.add(visit(child.getOmel().get(i)));
-			}
+			List<String> childOmel = new ArrayList<String>(child.getOmel().size()-1);
 			OMS childOMS = (OMS) child.getOmel().get(0);
 			Function childFunc = OMSFunctionDictionary.getInstance().getFunction(childOMS);
 			
+			for(int i=1;i<child.getOmel().size();i++) {
+				childOmel.add(visit(child.getOmel().get(i)));
+			}
+						
 			if(childFunc instanceof BinaryFunction) {
 				if(((BinaryFunction) childFunc).priority.compareTo(parent.priority)>0){
 					return"\\left("+childFunc.getPartialLatexSyntax(childOmel)+"\\right)";
