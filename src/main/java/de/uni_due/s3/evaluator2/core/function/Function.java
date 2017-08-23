@@ -74,11 +74,6 @@ public abstract class Function {
 		if (arguments == null)
 			throw new FunctionInvalidArgumentException(this, "The List of arguments is of Type NULL");
 		argsBetweenMinMax(arguments); // Check
-//		for (int i = 0; i < arguments.size(); i++) {
-//			if (OMTypeChecker.isOMAWithSymbol(arguments.get(i), OMSymbol.STRINGJACK_TEXTWITHEXPRESSION)) {
-//				arguments.set(i, ((OMA) arguments.get(i)).getOmel().get(2));
-//			}
-//		}
 		return execute(arguments);
 	}
 
@@ -224,7 +219,7 @@ public abstract class Function {
 	 * Call this Function, if you need your argument in String Syntax.
 	 * 
 	 * In getPartialStringSyntax: Call this Function on every argument, to get the
-	 * Sage-Syntax of this argument
+	 * String-Syntax of this argument
 	 * 
 	 * @param omElement
 	 *            the argument, which should be represented in String
