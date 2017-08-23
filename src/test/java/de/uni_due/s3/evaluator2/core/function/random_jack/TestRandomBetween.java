@@ -53,7 +53,7 @@ public class TestRandomBetween extends TestFunctionAbstract {
 
 	@Test
 	public void testRandomBetweenIntegration() throws OpenMathException, EvaluatorException {
-		OMOBJ p = ExpressionParser.parse("randombetween(3,10)", null, null);
+		OMOBJ p = ExpressionParser.parse("randomBetween(3,10)", null, null);
 
 		double result = OMExecutor.execute(p).getOMF().getDec();
 		assertTrue(3 <= result && result < 10);
@@ -61,14 +61,14 @@ public class TestRandomBetween extends TestFunctionAbstract {
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testRandomBetweenIntegerationTooFewArguments() throws OpenMathException, EvaluatorException {
-		OMOBJ p = ExpressionParser.parse("randombetween()", null, null);
+		OMOBJ p = ExpressionParser.parse("randomBetween()", null, null);
 		OMExecutor.execute(p);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void testRandomBetweenIntegerationWithWrongArguments() throws OpenMathException, EvaluatorException {
-		OMOBJ p = ExpressionParser.parse("randombetween('','')", null, null);
+		OMOBJ p = ExpressionParser.parse("randomBetween('','')", null, null);
 		OMExecutor.execute(p);
 		fail();
 	}
