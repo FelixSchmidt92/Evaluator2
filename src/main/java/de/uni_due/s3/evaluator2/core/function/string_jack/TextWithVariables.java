@@ -31,11 +31,6 @@ public class TextWithVariables extends Function {
 	}
 
 	@Override
-	protected boolean keepOriginalTextValue() {
-		return true;
-	}
-
-	@Override
 	protected int minArgs() {
 		return 1;
 	}
@@ -70,4 +65,14 @@ public class TextWithVariables extends Function {
 		return temp;
 	}
 
+	
+	@Override
+	public String getPartialLatexSyntax(List<String> arguments) throws EvaluatorException{
+		String temp = "";
+
+		for (String obj : arguments) {
+			temp += obj;
+		}
+		return temp;
+	}
 }

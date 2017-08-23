@@ -3,6 +3,8 @@ package de.uni_due.s3.evaluator2.core;
 import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
+import de.uni_due.s3.evaluator2.core.syntaxvisitor.OMToStringVisitor;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OMF;
@@ -57,8 +59,6 @@ public class OMUtils {
 			} else {
 				throw new InputMismatchException();
 			}
-		} else if (OMTypeChecker.isOMAWithSymbol(obj, OMSymbol.STRINGJACK_TEXTWITHEXPRESSION)) {
-			return convertOMToDouble(((OMA) obj).getOmel().get(2));
 		} else {
 			throw new InputMismatchException();
 		}
@@ -116,8 +116,6 @@ public class OMUtils {
 			return 0;
 		} else if (obj.equals(OMSymbol.LOGIC1_TRUE)) {
 			return 1;
-		} else if (OMTypeChecker.isOMAWithSymbol(obj, OMSymbol.STRINGJACK_TEXTWITHEXPRESSION)) {
-			return convertOMToInteger(((OMA) obj).getOmel().get(2));
 		} else {
 			throw new InputMismatchException();
 		}
@@ -153,8 +151,6 @@ public class OMUtils {
 			return "0";
 		} else if (obj.equals(OMSymbol.LOGIC1_TRUE)) {
 			return "1";
-		} else if (OMTypeChecker.isOMAWithSymbol(obj, OMSymbol.STRINGJACK_TEXTWITHEXPRESSION)) {
-			return convertOMToString(((OMA)obj).getOmel().get(1));
 		} else if (OMTypeChecker.isOMAWithSymbol(obj, OMSymbol.STRINGJACK_TEXTWITHVARIABLES)) {
 			List<Object> omel = ((OMA) obj).getOmel();
 			omel.remove(0);
@@ -163,7 +159,14 @@ public class OMUtils {
 				result = result + convertOMToString(part);
 			}
 			return result;
-		} else {
+		} else if (obj instanceof OMA) {
+			//CASE: normal OMA, try to get String Syntax via visitor
+			try {
+				return new OMToStringVisitor().visit(obj);
+			} catch (EvaluatorException e) {
+				throw new InputMismatchException();
+			}
+		}else{
 			throw new InputMismatchException();
 		}
 	}
@@ -202,8 +205,6 @@ public class OMUtils {
 			} else {
 				return false;
 			}
-		} else if (OMTypeChecker.isOMAWithSymbol(obj, OMSymbol.STRINGJACK_TEXTWITHEXPRESSION)) {
-			return convertOMToBoolean(((OMA)obj).getOmel().get(2));
 		} else {
 			throw new InputMismatchException();
 		}

@@ -19,6 +19,8 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
  */
 public class Abs extends Function {
 
+
+
 	/**
 	 * Expects one argument of type OMI or OMF
 	 * 
@@ -56,6 +58,11 @@ public class Abs extends Function {
 			throws FunctionException, NoRepresentationAvailableException {
 		
 		return "\\left|" + arguments.get(0) + "\\right|";
+	}
+	
+	@Override
+	public String getPartialStringSyntax(List<Object> arguments) throws EvaluatorException {
+		return "|"+ getStringSyntax(arguments.get(0)) + "|";
 	}
 
 }

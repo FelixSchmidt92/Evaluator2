@@ -73,7 +73,7 @@ public class TestEndsWith extends TestIntegration {
 	
 	@Test 
 	public void testEndsWithWithInput1() throws EvaluatorException, OpenMathException {
-		assertTrue(Evaluator.getBooleanResult("endsWith('[pos=7] ',' ')", exerciseVariableMap, fillInVariableMap));
+		assertTrue(Evaluator.getBooleanResult("endsWith('[pos=7] ','')", exerciseVariableMap, fillInVariableMap));
 	}
 	
 	@Test 
@@ -88,7 +88,7 @@ public class TestEndsWith extends TestIntegration {
 	
 	@Test 
 	public void testEndsWithWithVariables1() throws EvaluatorException, OpenMathException {
-		assertTrue(Evaluator.getBooleanResult("endsWith('[var=g] ',' ')", exerciseVariableMap, fillInVariableMap));
+		assertTrue(Evaluator.getBooleanResult("endsWith('[var=g] ','')", exerciseVariableMap, fillInVariableMap));
 	}
 	
 	@Test 

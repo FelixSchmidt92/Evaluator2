@@ -30,11 +30,6 @@ public class ToLowerCase extends Function {
 	}
 
 	@Override
-	protected boolean keepOriginalTextValue() {
-		return true;
-	}
-
-	@Override
 	protected int minArgs() {
 		return 1;
 	}

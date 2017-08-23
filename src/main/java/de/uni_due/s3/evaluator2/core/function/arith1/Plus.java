@@ -78,5 +78,10 @@ public class Plus extends BinaryFunction {
 	
 		return arguments.get(0) + "+" + arguments.get(1);
 	}
+	
+	@Override
+	public String getPartialStringSyntax(List<Object> arguments) throws EvaluatorException {
+		return getStringSyntax(arguments.get(0)) + "+" + getStringSyntax(arguments.get(1));
+	}
 
 }

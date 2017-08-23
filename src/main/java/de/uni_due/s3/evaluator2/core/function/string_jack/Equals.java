@@ -27,6 +27,7 @@ public class Equals extends Function {
 			String string1 = OMUtils.convertOMToString(arguments.get(0));
 			String string2 = OMUtils.convertOMToString(arguments.get(1));
 
+			
 			if (string1.equals(string2)) {
 				return OMSymbol.LOGIC1_TRUE;
 			} else {
@@ -37,11 +38,6 @@ public class Equals extends Function {
 		}
 	}
 
-	@Override
-	protected boolean keepOriginalTextValue() {
-		return true;
-	}
-	
 	@Override
 	protected int minArgs() {
 		return 2;

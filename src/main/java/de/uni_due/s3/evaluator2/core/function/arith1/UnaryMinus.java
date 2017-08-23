@@ -64,5 +64,10 @@ public class UnaryMinus extends Function {
 		
 		return "-"+arguments.get(0);
 	}
+	
+	@Override
+	public String getPartialStringSyntax(List<Object> arguments) throws EvaluatorException {
+		return "-" + getStringSyntax(arguments.get(0));
+	}
 
 }

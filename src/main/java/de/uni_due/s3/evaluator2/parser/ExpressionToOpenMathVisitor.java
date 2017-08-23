@@ -8,11 +8,9 @@ import java.util.regex.Pattern;
 
 import org.antlr.v4.runtime.tree.ParseTree;
 
-import de.uni_due.s3.evaluator2.core.OMUtils;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSEvaluatorSyntaxDictionary;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedRuntimeException;
-import de.uni_due.s3.evaluator2.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.evaluator2.exceptions.parserruntime.ErroneousExerciseVariableRuntimeException;
 import de.uni_due.s3.evaluator2.exceptions.parserruntime.ErroneousFillInVariableRuntimeException;
 import de.uni_due.s3.evaluator2.exceptions.parserruntime.ParserRuntimeException;
@@ -364,45 +362,6 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	}
 
 	/**
-	 * Searches for [var=] and [pos=] statements and replaces 
-	 * these with the content of the variable, only if the content can be parsed to a string
-	 * 
-	 * @param text String in which the variables should be substituted
-	 * @return String with substituted variables 
-	 */
-	private String substituteVariables(String text) {
-		StringBuilder sb = new StringBuilder();
-		Matcher varposMatcher = VARPOS.matcher(text);
-		/* Pointer to get string subsequences */
-		int stringPointer = 0;
-		while (varposMatcher.find()) {
-			sb.append(text.substring(stringPointer, varposMatcher.start()));
-			stringPointer = varposMatcher.end();
-			boolean isVar = text.substring(varposMatcher.start(), varposMatcher.end()).contains("var");
-			String varposVal = text.substring(varposMatcher.start() + 5, varposMatcher.end() - 1);
-			if (isVar) {
-				OMOBJ var = exerciseVariableMap.get(varposVal);
-				if (var == null)
-					throw new UndefinedExerciseVariableRuntimeException(varposVal);
-				try {
-					sb.append(OMUtils.convertOMToString(var));
-				} catch (InputMismatchException e) {
-				}
-			} else {
-				OMOBJ var = fillInVariableMap.get(Integer.parseInt(varposVal));
-				if (var == null)
-					throw new UndefinedFillInVariableRuntimeException(Integer.parseInt(varposVal));
-				try {
-					sb.append(OMUtils.convertOMToString(var));
-				} catch (InputMismatchException e) {
-				}
-			}
-		}
-		sb.append(text.substring(stringPointer));
-		return sb.toString();
-	}
-
-	/**
 	 * Implements the grammatical rule "TextValue" and is used on every string in the user's expression.
 	 * (1) First it tries to convert the string to any other element by parsing it again. A '2*3' 
 	 * would result in a 2*3 (OMA not a OMSTR). If this was successful a OMA will be returned 
@@ -422,10 +381,9 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 		try {
 			ParseTree tree = ExpressionParser.createParseTree(text);
 			ArrayList<Object> omstrAndExpression = new ArrayList<>();
-
-			omstrAndExpression.add(OMCreator.createOMSTR(substituteVariables(text)));
 			omstrAndExpression.add(this.visit(tree));
-			return OMCreator.createOMA(OMSymbol.STRINGJACK_TEXTWITHEXPRESSION, omstrAndExpression);
+			return this.visit(tree);
+			
 		} catch (ErroneousFillInVariableRuntimeException e) {
 			// do nothing continue Code below (In String is no Expression!)
 		} catch (ErroneousExerciseVariableRuntimeException e) {

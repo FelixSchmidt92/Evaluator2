@@ -70,7 +70,7 @@ public class TestEquals extends TestIntegration {
 	
 	@Test 
 	public void testEquals8() throws EvaluatorException, OpenMathException {
-		assertFalse(Evaluator.getBooleanResult("equals('3+5','8')", exerciseVariableMap, fillInVariableMap));
+		assertTrue(Evaluator.getBooleanResult("equals('3+5','8')", exerciseVariableMap, fillInVariableMap));
 	}
 	
 	@Test 

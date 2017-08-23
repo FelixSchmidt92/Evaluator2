@@ -65,7 +65,7 @@ public class OMToLatexVisitor extends OMToCasVisitor{
 
 	@Override
 	protected String visit(OMSTR omstr) {
-		return "'" + omstr.getContent() + "'";
+		return  omstr.getContent();
 	}
 
 	@Override

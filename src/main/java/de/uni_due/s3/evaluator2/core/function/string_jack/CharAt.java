@@ -41,10 +41,6 @@ public class CharAt extends Function {
 		}
 	}
 
-	@Override
-	protected boolean keepOriginalTextValue() {
-		return true;
-	}
 
 	@Override
 	protected int minArgs() {

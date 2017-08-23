@@ -26,16 +26,23 @@ public class RandomBetween extends Function{
 	 * 	(1) integer or float
 	 *  (2) integer or float
 	 *  
-	 * If the second argument is not given, it will be set to Integer.maxvalue
+	 * If the thrid argument is not given, it will return random float-Numbers
 	 */
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionException, CasEvaluationException,
 			CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
 		try {
+			
+			
 			double min = OMUtils.convertOMToDouble(arguments.get(0));
 			double max = OMUtils.convertOMToDouble(arguments.get(1));
 			
-			return OMCreator.createOMF(	min+(Math.random()*(max-min)));
+			
+			if (arguments.size() == 3 && OMUtils.convertOMToString(arguments.get(2)).equals("NN")) {
+				return OMCreator.createOMI(	(int) Math.round(min+(Math.random()*(max-min))));
+			}else {
+				return OMCreator.createOMF(	min+(Math.random()*(max-min)));
+			}
 		}catch(InputMismatchException ie) {
 			throw new FunctionInvalidArgumentTypeException(this, "(1) integer, float, double,  (2) integer, float, double");
 		}
@@ -49,7 +56,7 @@ public class RandomBetween extends Function{
 
 	@Override
 	protected int maxArgs() {
-		return 2;
+		return 3;
 	}
 
 }

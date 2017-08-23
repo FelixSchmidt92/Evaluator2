@@ -2,9 +2,9 @@ package de.uni_due.s3.evaluator2.core.function;
 
 import java.util.List;
 
-import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.syntaxvisitor.OMToLatexVisitor;
 import de.uni_due.s3.evaluator2.core.syntaxvisitor.OMToSageVisitor;
+import de.uni_due.s3.evaluator2.core.syntaxvisitor.OMToStringVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasException;
@@ -15,8 +15,6 @@ import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeE
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoSageRepresentationAvailableException;
-import de.uni_due.s3.openmath.jaxb.OMA;
-import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
@@ -76,13 +74,11 @@ public abstract class Function {
 		if (arguments == null)
 			throw new FunctionInvalidArgumentException(this, "The List of arguments is of Type NULL");
 		argsBetweenMinMax(arguments); // Check
-		if (!keepOriginalTextValue()) {
-			for (int i = 0; i < arguments.size(); i++) {
-				if (OMTypeChecker.isOMAWithSymbol(arguments.get(i), OMSymbol.STRINGJACK_TEXTWITHEXPRESSION)) {
-					arguments.set(i, ((OMA) arguments.get(i)).getOmel().get(2));
-				}
-			}
-		}
+//		for (int i = 0; i < arguments.size(); i++) {
+//			if (OMTypeChecker.isOMAWithSymbol(arguments.get(i), OMSymbol.STRINGJACK_TEXTWITHEXPRESSION)) {
+//				arguments.set(i, ((OMA) arguments.get(i)).getOmel().get(2));
+//			}
+//		}
 		return execute(arguments);
 	}
 
@@ -107,10 +103,6 @@ public abstract class Function {
 			// Arguments.size is not between minArgs and maxArgs so throw Error
 			throw new FunctionInvalidNumberOfArgumentsException(this, minArgs(), maxArgs(), arguments.size(), "");
 		}
-	}
-
-	protected boolean keepOriginalTextValue() {
-		return false;
 	}
 
 	/**
@@ -222,8 +214,52 @@ public abstract class Function {
 	 * @throws NoRepresentationAvailableException
 	 */
 	public String getPartialLatexSyntax(List<String> arguments)
-			throws FunctionException, NoRepresentationAvailableException {
+			throws EvaluatorException, FunctionException, NoRepresentationAvailableException {
 		throw new NoRepresentationAvailableException(
 				"There is no latex representation for function " + this.getClass() + " implemented");
 	}
+	
+	
+	/**
+	 * Call this Function, if you need your argument in String Syntax.
+	 * 
+	 * In getPartialStringSyntax: Call this Function on every argument, to get the
+	 * Sage-Syntax of this argument
+	 * 
+	 * @param omElement
+	 *            the argument, which should be represented in String
+	 * @return a String representation of this argument in String
+	 * @throws NoRepresentationAvailableException
+	 * @throws FunctionInvalidNumberOfArgumentsException
+	 * @throws FunctionInvalidArgumentTypeException
+	 * @throws CasException
+	 */
+	protected final String getStringSyntax(Object omElement)
+			throws EvaluatorException {
+		return new OMToStringVisitor().visit(omElement);
+	}
+
+	/**
+	 * Define here how the Syntax should look like in String for this specific
+	 * Function All Arguments that are passed here can be recursively called
+	 * again with getStringSyntax(omElement). So only deal here with the
+	 * Representation of this Function and call (usually) the arguments in
+	 * getSageSyntax(omElement) For Examples: see Plus, Minus or Set
+	 * 
+	 * @param arguments
+	 *            A List of Arguments for this Function. Note: The arguments are
+	 *            not evaluated!
+	 * @return A String Representation of this Function AND all innerFunction
+	 * @throws NoRepresentationAvailableException
+	 * @throws FunctionInvalidNumberOfArgumentsException
+	 * @throws FunctionInvalidArgumentTypeException
+	 * @throws FunctionInvalidArgumentException
+	 * @throws CasException
+	 */
+	public String getPartialStringSyntax(List<Object> arguments)
+			throws EvaluatorException {
+		throw new NoSageRepresentationAvailableException(
+				"There is no String-representation for function " + this.getClass() + " implemented");
+	}
+	
 }

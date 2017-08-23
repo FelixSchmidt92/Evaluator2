@@ -131,8 +131,6 @@ public class OMSymbol {
 	public static final OMS STRINGJACK_MATCHES = OMCreator.createOMS("stringJACK", "matches");
 	
 	public static final OMS STRINGJACK_TEXTWITHVARIABLES = OMCreator.createOMS("stringJACK", "textWithVariables");
-	public static final OMS STRINGJACK_TEXTWITHEXPRESSION = OMCreator.createOMS("stringJACK", "textWithExpression");
-	
 	public static final OMS TESTTERMINALJACK_ISEMPTY = OMCreator.createOMS("testterminalJACK", "isEmpty");
 	public static final OMS TESTTERMINALJACK_ISNUMBER = OMCreator.createOMS("testterminalJACK", "isNumber");
 	public static final OMS TESTTERMINALJACK_ISPOLYNOMIAL = OMCreator.createOMS("testterminalJACK", "isPolynomial");

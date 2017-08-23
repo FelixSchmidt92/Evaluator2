@@ -36,11 +36,6 @@ public class EndsWith extends Function {
 	}
 
 	@Override
-	protected boolean keepOriginalTextValue() {
-		return true;
-	}
-
-	@Override
 	protected int minArgs() {
 		return 2;
 	}
