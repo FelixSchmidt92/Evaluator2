@@ -82,14 +82,14 @@ public class Root extends Function {
 	}
 	
 	@Override
-	public String getPartialLatexSyntax(List<String> arguments)
-			throws FunctionException, NoRepresentationAvailableException {
+	public String getPartialLatexSyntax(List<Object> arguments)
+			throws EvaluatorException {
 		
 		if(arguments.size() == 1) {
-			return "\\sqrt{" + arguments.get(0) + "}";
+			return "\\sqrt{" + getLatexSyntax(arguments.get(0))  + "}";
 		} else {
-			return "\\sqrt[" + arguments.get(1) + "]{"
-				+ arguments.get(0) + "}";
+			return "\\sqrt[" + getLatexSyntax(arguments.get(1))  + "]{"
+				+ getLatexSyntax(arguments.get(0)) + "}";
 		}
 	}
 }

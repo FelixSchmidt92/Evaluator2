@@ -53,6 +53,7 @@ public class OMSymbol {
 			"randomMatrixEigenvalue");
 	public static final OMS LINALGJACK_RANDOMMATRIXRANK = OMCreator.createOMS("linalgJACK", "randomMatrixRank");
 
+	public static final OMS LINALG1_DETERMINANT = OMCreator.createOMS("linalg1", "determinant");
 	public static final OMS LINALG2_MATRIX = OMCreator.createOMS("linalg2", "matrix");
 	public static final OMS LINALG2_MATRIXROW = OMCreator.createOMS("linalg2", "matrixrow");
 	public static final OMS LINALG2_VECTOR = OMCreator.createOMS("linalg2", "vector");

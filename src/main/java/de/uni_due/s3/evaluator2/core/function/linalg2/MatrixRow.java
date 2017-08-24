@@ -46,13 +46,13 @@ public class MatrixRow extends Function {
 	}
 	
 	@Override
-	public String getPartialLatexSyntax(List<String> arguments)
-			throws FunctionException, NoRepresentationAvailableException {
+	public String getPartialLatexSyntax(List<Object> arguments)
+			throws EvaluatorException {
 		String begin = "\\begin{array}{";
 		String args = "";
 		
 		for(int i = 0; i<arguments.size();i++) {
-			args += arguments.get(i)+" & ";
+			args += getLatexSyntax(arguments.get(i))+" & ";
 			begin += "r";
 		}
 		begin += "}";

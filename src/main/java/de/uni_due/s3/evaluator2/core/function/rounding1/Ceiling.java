@@ -41,9 +41,9 @@ public class Ceiling extends Function {
 	}
 	
 	@Override
-	public String getPartialLatexSyntax(List<String> arguments)
+	public String getPartialLatexSyntax(List<Object> arguments)
 			throws EvaluatorException, FunctionException, NoRepresentationAvailableException {
-		return "\\left\\lceil " +arguments.get(0)+ " \\right\\rceil";
+		return "\\left\\lceil " +getLatexSyntax(arguments.get(0))+ " \\right\\rceil";
 	}
 
 }

@@ -9,7 +9,6 @@ import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.openmath.InputMismatchException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 
 /**
  * Implements greatest-common-divisor with integers. For example gcd(12,6) = 3
@@ -51,10 +50,10 @@ public class GCD extends Function {
 	}
 	
 	@Override
-	public String getPartialLatexSyntax(List<String> arguments)
-			throws FunctionException, NoRepresentationAvailableException {
+	public String getPartialLatexSyntax(List<Object> arguments)
+			throws EvaluatorException {
 	
-		return "\\mbox{gcd}\\left("+arguments.get(0)+","+arguments.get(1)+"\\right)";
+		return "\\mbox{gcd}\\left("+getLatexSyntax(arguments.get(0)) +","+getLatexSyntax(arguments.get(1)) +"\\right)";
 	}
 
 }

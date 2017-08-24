@@ -67,11 +67,11 @@ public class TextWithVariables extends Function {
 
 	
 	@Override
-	public String getPartialLatexSyntax(List<String> arguments) throws EvaluatorException{
+	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException{
 		String temp = "";
 
-		for (String obj : arguments) {
-			temp += obj;
+		for (Object obj : arguments) {
+			temp += getLatexSyntax(obj);
 		}
 		return temp;
 	}

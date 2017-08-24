@@ -198,6 +198,7 @@ public abstract class Function {
 	 */
 	protected final String getLatexSyntax(Object omElement)
 			throws EvaluatorException {
+
 		return new OMToLatexVisitor().visit(omElement);
 	}
 	
@@ -205,12 +206,12 @@ public abstract class Function {
 	 * If a function should have a special latex representation, 
 	 * then this function has to be overwritten by that class.
 	 * 
-	 * @param arguments
+	 * @param omel
 	 * @return
 	 * @throws FunctionException
 	 * @throws NoRepresentationAvailableException
 	 * */
-	public String getPartialLatexSyntax(List<String> arguments)
+	public String getPartialLatexSyntax(List<Object> omel)
 			throws EvaluatorException, FunctionException, NoRepresentationAvailableException {
 		throw new NoRepresentationAvailableException(
 				"There is no latex representation for function " + this.getClass() + " implemented");

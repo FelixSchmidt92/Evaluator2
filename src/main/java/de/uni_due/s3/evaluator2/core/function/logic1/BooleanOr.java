@@ -3,8 +3,9 @@ package de.uni_due.s3.evaluator2.core.function.logic1;
 import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.OMUtils;
+import de.uni_due.s3.evaluator2.core.dictionaries.OMSPriority;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
-import de.uni_due.s3.evaluator2.core.function.Function;
+import de.uni_due.s3.evaluator2.core.function.BinaryFunction;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
@@ -14,7 +15,11 @@ import de.uni_due.s3.openmath.jaxb.OMS;
 /**
  * Implements openmath logic or. Example true | false => true
  */
-public class BooleanOr extends Function {
+public class BooleanOr extends BinaryFunction {
+
+	public BooleanOr() {
+		super(OMSPriority.getPriority(OMSymbol.LOGIC1_OR));
+	}
 
 	/**
 	 * Tests if one given argument is true. Expects two arguments of type
@@ -54,7 +59,7 @@ public class BooleanOr extends Function {
 	}
 	
 	@Override
-	public String getPartialLatexSyntax(List<String> arguments)
+	public String getPartialLatexSyntax(List<Object> arguments)
 			throws FunctionException, NoRepresentationAvailableException {
 		
 		return arguments.get(0)+"\\mbox{or}"+arguments.get(1);

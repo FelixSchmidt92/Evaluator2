@@ -46,15 +46,15 @@ public class Vector extends Function {
 	}
 	
 	@Override
-	public String getPartialLatexSyntax(List<String> arguments)
-			throws FunctionException, NoRepresentationAvailableException {
+	public String getPartialLatexSyntax(List<Object> arguments)
+			throws EvaluatorException {
 		
 		String begin = "\\left(\\begin{array}{";
 		String args = "";
 		
 		for(int i = 0; i<arguments.size();i++) {
 			begin += "r";
-			args += arguments.get(i)+"\\\\";
+			args += getLatexSyntax(arguments.get(i))+"\\\\";
 		}
 		begin += "}";
 		

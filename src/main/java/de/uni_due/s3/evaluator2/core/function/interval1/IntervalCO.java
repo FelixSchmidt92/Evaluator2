@@ -50,10 +50,10 @@ public class IntervalCO extends Function{
 	}
 	
 	@Override
-	public String getPartialLatexSyntax(List<String> arguments)
+	public String getPartialLatexSyntax(List<Object> arguments)
 			throws EvaluatorException, FunctionException, NoRepresentationAvailableException {
 		
-		return "\\\\left["+arguments.get(0)+","+arguments.get(1)+"\\\\right)";
+		return "\\\\left["+getLatexSyntax(arguments.get(0))+","+getLatexSyntax(arguments.get(1))+"\\\\right)";
 	}
 
 }

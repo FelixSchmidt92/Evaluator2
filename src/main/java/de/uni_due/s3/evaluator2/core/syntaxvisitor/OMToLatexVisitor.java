@@ -49,16 +49,16 @@ public class OMToLatexVisitor extends OMToCasVisitor{
 		} else if (oms.equals(OMSymbol.NUMS1_PI)) {
 			return "\\pi";
 		} else if (oms.equals(OMSymbol.NUMS1_E)) {
-			return "e";
+			return "\\mathrm{e}";
 		} else if (oms.equals(OMSymbol.NUMS1_NAN)) {
 			return "NaN";
 		} else if (oms.equals(OMSymbol.NUMS1_I)) {
-			return "I";
+			return "\\mathrm{i}";
 		} else if (oms.equals(OMSymbol.NUMS1_INFINITY)) {
 			return "\\infty";
 		} else {
 			throw new NoRepresentationAvailableException(
-					"There is no Sage Representation for OMS cd: " + oms.getCd() + ", name: " + oms.getName());
+					"There is no latex representation for OMS cd: " + oms.getCd() + ", name: " + oms.getName());
 		}
 
 	}
@@ -87,23 +87,24 @@ public class OMToLatexVisitor extends OMToCasVisitor{
 			throws EvaluatorException {
 		
 		if(function instanceof BinaryFunction) {
-			List<String> children = new ArrayList<String>(2);
+			List<Object> children = new ArrayList<Object>(2);
 			BinaryFunction parent = (BinaryFunction) function;
 			
 			children.add(getLatexSyntaxFromChild(omel.get(0), parent));
-			children.add(getLatexSyntaxFromChild(omel.get(1),parent));
+			if(omel.size()==2)	//because of unary minus
+				children.add(getLatexSyntaxFromChild(omel.get(1),parent));
 			return function.getPartialLatexSyntax(children);
 			
 		}else {
-			List<String> children = new LinkedList<String>();
-			
-			for(Object child : omel) {
-				children.add(visit(child));
-			}
+		
 			try {
-				return function.getPartialLatexSyntax(children);
+				return function.getPartialLatexSyntax(omel);
 			}catch(NoRepresentationAvailableException nr) {
 				//standard latex implementation for functions
+				List<String> children = new LinkedList<String>();
+				for(Object child:omel) {
+					children.add(visit(child));
+				}
 				return "\\mbox{"+oms.getName()+"}\\left("+String.join(",", children)+"\\right)";
 			}
 		}
@@ -122,7 +123,7 @@ public class OMToLatexVisitor extends OMToCasVisitor{
 		//if the child is an OMA check their priority
 		if(obj instanceof OMA) {
 			OMA child = (OMA)obj;
-			List<String> childOmel = new ArrayList<String>(child.getOmel().size()-1);
+			List<Object> childOmel = new ArrayList<Object>(child.getOmel().size()-1);
 			OMS childOMS = (OMS) child.getOmel().get(0);
 			Function childFunc = OMSFunctionDictionary.getInstance().getFunction(childOMS);
 			

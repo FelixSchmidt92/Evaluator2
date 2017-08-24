@@ -3,8 +3,9 @@ package de.uni_due.s3.evaluator2.core.function.logic1;
 import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.OMUtils;
+import de.uni_due.s3.evaluator2.core.dictionaries.OMSPriority;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
-import de.uni_due.s3.evaluator2.core.function.Function;
+import de.uni_due.s3.evaluator2.core.function.BinaryFunction;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
@@ -17,7 +18,12 @@ import de.uni_due.s3.openmath.jaxb.OMS;
  * @author frichtscheid
  *
  */
-public class BooleanNot extends Function {
+public class BooleanNot extends BinaryFunction{
+
+	public BooleanNot() {
+		super(OMSPriority.getPriority(OMSymbol.LOGIC1_NOT));
+	}
+
 
 	/**
 	 * Takes one boolean argument and returns the opposite value. Expects one
@@ -53,7 +59,7 @@ public class BooleanNot extends Function {
 	}
 	
 	@Override
-	public String getPartialLatexSyntax(List<String> arguments)
+	public String getPartialLatexSyntax(List<Object> arguments)
 			throws FunctionException, NoRepresentationAvailableException {
 		
 		return "\\neg"+arguments.get(0);

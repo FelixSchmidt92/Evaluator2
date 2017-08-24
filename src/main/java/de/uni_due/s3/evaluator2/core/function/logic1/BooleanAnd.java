@@ -3,8 +3,9 @@ package de.uni_due.s3.evaluator2.core.function.logic1;
 import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.OMUtils;
+import de.uni_due.s3.evaluator2.core.dictionaries.OMSPriority;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
-import de.uni_due.s3.evaluator2.core.function.Function;
+import de.uni_due.s3.evaluator2.core.function.BinaryFunction;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
@@ -17,7 +18,11 @@ import de.uni_due.s3.openmath.jaxb.OMS;
  * @author frichtscheid
  *
  */
-public class BooleanAnd extends Function {
+public class BooleanAnd extends BinaryFunction {
+
+	public BooleanAnd() {
+		super(OMSPriority.getPriority(OMSymbol.LOGIC1_AND));
+	}
 
 	/**
 	 * Tests if both given arguments are true. Expects two arguments of type
@@ -56,7 +61,7 @@ public class BooleanAnd extends Function {
 	}
 	
 	@Override
-	public String getPartialLatexSyntax(List<String> arguments)
+	public String getPartialLatexSyntax(List<Object> arguments)
 			throws FunctionException, NoRepresentationAvailableException {
 		
 		return arguments.get(0)+"\\mbox{and}"+arguments.get(1);

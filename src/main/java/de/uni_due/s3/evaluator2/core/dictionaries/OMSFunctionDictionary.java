@@ -30,6 +30,7 @@ import de.uni_due.s3.evaluator2.core.function.interval1.IntervalCC;
 import de.uni_due.s3.evaluator2.core.function.interval1.IntervalCO;
 import de.uni_due.s3.evaluator2.core.function.interval1.IntervalOC;
 import de.uni_due.s3.evaluator2.core.function.interval1.IntervalOO;
+import de.uni_due.s3.evaluator2.core.function.linalg1.Determinant;
 import de.uni_due.s3.evaluator2.core.function.linalg2.Matrix;
 import de.uni_due.s3.evaluator2.core.function.linalg2.MatrixRow;
 import de.uni_due.s3.evaluator2.core.function.linalg2.Vector;
@@ -187,6 +188,7 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.LINALGJACK_RANDOMMATRIXEIGENVALUE, new RandomMatrixEigenvalue());
 		functions.put(OMSymbol.LINALGJACK_RANDOMMATRIXRANK, new RandomMatrixRank());
 
+		functions.put(OMSymbol.LINALG1_DETERMINANT, new Determinant());
 		functions.put(OMSymbol.LINALG2_MATRIX, new Matrix());
 		functions.put(OMSymbol.LINALG2_MATRIXROW, new MatrixRow());
 		functions.put(OMSymbol.LINALG2_VECTOR, new Vector());

@@ -90,9 +90,8 @@ public abstract class OMToCasVisitor {
 		case "OMA":
 			result = visit((OMA) omElement);
 			break;
-
 		default:
-			throw new NoRepresentationAvailableException("Unable to visit omElement: " + omElement.toString());
+			throw new NoRepresentationAvailableException("Unable to visit omElement: " + omElement);
 		}
 
 		return result;

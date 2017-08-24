@@ -46,11 +46,11 @@ public class List extends Function {
 	}
 	
 	@Override
-	public String getPartialLatexSyntax(java.util.List<String> arguments)
-			throws FunctionException, NoRepresentationAvailableException {
+	public String getPartialLatexSyntax(java.util.List<Object> arguments)
+			throws EvaluatorException {
 		String args ="";
-		for(String arg:arguments) {
-			args += arg+",";
+		for(Object arg:arguments) {
+			args += getLatexSyntax(arg)+",";
 		}
 		args = args.substring(0, args.length()-1);
 		return "\\left\\{"+args+"\\right\\}";

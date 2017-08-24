@@ -73,7 +73,7 @@ public class Plus extends BinaryFunction {
 	}
 	
 	@Override
-	public String getPartialLatexSyntax(List<String> arguments)
+	public String getPartialLatexSyntax(List<Object> arguments)
 			throws FunctionException, NoRepresentationAvailableException {
 	
 		return arguments.get(0) + "+" + arguments.get(1);

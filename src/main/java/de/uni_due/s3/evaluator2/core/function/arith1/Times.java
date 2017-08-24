@@ -70,7 +70,7 @@ public class Times extends BinaryFunction {
 	}
 	
 	@Override
-	public String getPartialLatexSyntax(List<String> arguments)
+	public String getPartialLatexSyntax(List<Object> arguments)
 			throws FunctionException, NoRepresentationAvailableException {
 		
 		return arguments.get(0) + " \\cdot " + arguments.get(1);

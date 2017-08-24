@@ -3,8 +3,9 @@ package de.uni_due.s3.evaluator2.core.function.relation1;
 import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.OMUtils;
+import de.uni_due.s3.evaluator2.core.dictionaries.OMSPriority;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
-import de.uni_due.s3.evaluator2.core.function.Function;
+import de.uni_due.s3.evaluator2.core.function.BinaryFunction;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
@@ -13,8 +14,11 @@ import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvaila
 /**
  * Implements openmath relation1 gt. Example: 4 > 4 => true;
  */
-public class GreaterThan extends Function {
+public class GreaterThan extends BinaryFunction {
 
+	public GreaterThan() {
+		super(OMSPriority.getPriority(OMSymbol.RELATION1_GT));
+	}
 	/**
 	 * Tests if the first argument is greater than the second argument. Expects 2
 	 * arguments of type OMI or OMF
@@ -49,7 +53,7 @@ public class GreaterThan extends Function {
 		return getSageSyntax(arguments.get(0)) + " > " + getSageSyntax(arguments.get(1));
 	}
 	@Override
-	public String getPartialLatexSyntax(List<String> arguments)
+	public String getPartialLatexSyntax(List<Object> arguments)
 			throws FunctionException, NoRepresentationAvailableException {
 		return arguments.get(0) + ">" +arguments.get(1);
 	}

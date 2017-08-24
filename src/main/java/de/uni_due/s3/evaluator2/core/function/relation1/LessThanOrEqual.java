@@ -3,8 +3,9 @@ package de.uni_due.s3.evaluator2.core.function.relation1;
 import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.OMUtils;
+import de.uni_due.s3.evaluator2.core.dictionaries.OMSPriority;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
-import de.uni_due.s3.evaluator2.core.function.Function;
+import de.uni_due.s3.evaluator2.core.function.BinaryFunction;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
@@ -16,8 +17,11 @@ import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvaila
  * @author frichtscheid
  *
  */
-public class LessThanOrEqual extends Function {
+public class LessThanOrEqual extends BinaryFunction {
 
+	public LessThanOrEqual() {
+		super(OMSPriority.getPriority(OMSymbol.RELATION1_LEQ));
+	}
 	/**
 	 * Tests if the first argument is less or equal than the second argument.
 	 * Expects 2 arguments of type OMI or OMF
@@ -53,7 +57,7 @@ public class LessThanOrEqual extends Function {
 	}
 	
 	@Override
-	public String getPartialLatexSyntax(List<String> arguments)
+	public String getPartialLatexSyntax(List<Object> arguments)
 			throws FunctionException, NoRepresentationAvailableException {
 		return arguments.get(0) + "\\leq" +arguments.get(1);
 	}

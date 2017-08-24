@@ -1,5 +1,6 @@
 package de.uni_due.s3.evaluator2.core.function.set1;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
@@ -46,10 +47,13 @@ public class Set extends Function {
 	}
 	
 	@Override
-	public String getPartialLatexSyntax(List<String> arguments)
+	public String getPartialLatexSyntax(List<Object> arguments)
 			throws EvaluatorException, FunctionException, NoRepresentationAvailableException {
-
-		return "\\left\\{"+String.join(",", arguments)+"\\right\\}";
+		List<String> args = new LinkedList<String>();
+		for(Object arg:arguments) {
+			args.add(getLatexSyntax(arg));
+		}
+		return "\\left\\{"+String.join(",", args)+"\\right\\}";
 	}
 
 }

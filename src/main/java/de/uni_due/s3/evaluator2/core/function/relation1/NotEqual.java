@@ -3,8 +3,9 @@ package de.uni_due.s3.evaluator2.core.function.relation1;
 import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.OMUtils;
+import de.uni_due.s3.evaluator2.core.dictionaries.OMSPriority;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
-import de.uni_due.s3.evaluator2.core.function.Function;
+import de.uni_due.s3.evaluator2.core.function.BinaryFunction;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
@@ -14,8 +15,11 @@ import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvaila
 /**
  * Implements openmath relation neq. Example 10 != 5 => true
  */
-public class NotEqual extends Function {
+public class NotEqual extends BinaryFunction {
 
+	public NotEqual() {
+		super(OMSPriority.getPriority(OMSymbol.RELATION1_NEQ));
+	}
 	/**
 	 * Tests if two given objects are not equal by using the object-equal method.
 	 * Expects 2 arguments of any type
@@ -53,7 +57,7 @@ public class NotEqual extends Function {
 	}
 	
 	@Override
-	public String getPartialLatexSyntax(List<String> arguments)
+	public String getPartialLatexSyntax(List<Object> arguments)
 			throws FunctionException, NoRepresentationAvailableException {
 		return arguments.get(0) + "\\neq" +arguments.get(1);
 	}

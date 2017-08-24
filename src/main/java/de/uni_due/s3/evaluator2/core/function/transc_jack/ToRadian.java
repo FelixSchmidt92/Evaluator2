@@ -41,10 +41,10 @@ public class ToRadian extends Function {
 	}
 	
 	@Override
-	public String getPartialLatexSyntax(List<String> arguments)
+	public String getPartialLatexSyntax(List<Object> arguments)
 			throws EvaluatorException, FunctionException, NoRepresentationAvailableException {
 		
-		return "\\mbox{toRadian}\\left("+arguments.get(0)+"\\degree\\right)";
+		return "\\mbox{toRadian}\\left("+getLatexSyntax(arguments.get(0))+"\\degree\\right)";
 	}
 
 }

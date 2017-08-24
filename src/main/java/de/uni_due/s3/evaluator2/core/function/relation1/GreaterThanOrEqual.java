@@ -3,8 +3,9 @@ package de.uni_due.s3.evaluator2.core.function.relation1;
 import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.OMUtils;
+import de.uni_due.s3.evaluator2.core.dictionaries.OMSPriority;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
-import de.uni_due.s3.evaluator2.core.function.Function;
+import de.uni_due.s3.evaluator2.core.function.BinaryFunction;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
@@ -13,8 +14,11 @@ import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvaila
 /**
  * Implements openmath realtion1 geq operation. Example: 3 >= 3 => true
  */
-public class GreaterThanOrEqual extends Function {
+public class GreaterThanOrEqual extends BinaryFunction {
 
+	public GreaterThanOrEqual() {
+		super(OMSPriority.getPriority(OMSymbol.RELATION1_GEQ));
+	}
 	/**
 	 * Tests if the first argument is greater or equal than the second argument.
 	 * Expects 2 arguments of type OMI or OMF
@@ -50,7 +54,7 @@ public class GreaterThanOrEqual extends Function {
 	}
 	
 	@Override
-	public String getPartialLatexSyntax(List<String> arguments)
+	public String getPartialLatexSyntax(List<Object> arguments)
 			throws FunctionException, NoRepresentationAvailableException {
 		return arguments.get(0) + "\\geq" +arguments.get(1);
 	}

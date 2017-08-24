@@ -44,8 +44,8 @@ public class Min extends Function {
 	}
 	
 	@Override
-	public String getPartialLatexSyntax(List<String> arguments)
+	public String getPartialLatexSyntax(List<Object> arguments)
 			throws EvaluatorException, FunctionException, NoRepresentationAvailableException {
-		return "\\mbox{min}\\left(" + arguments.get(0)+","+arguments.get(1) + "\\right)";
+		return "\\mbox{min}\\left(" + getLatexSyntax(arguments.get(0)) +","+getLatexSyntax(arguments.get(1))  + "\\right)";
 	}
 }
