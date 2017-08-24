@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import de.uni_due.s3.evaluator2.Evaluator;
 import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
@@ -62,6 +63,13 @@ public class TestMin extends TestFunctionAbstract {
 		OMOBJ omobj = ExpressionParser.parse("min(10.1,17)", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals(OMCreator.createOMF(10.1), result.getOMF());
+	}
+	
+	@Test
+	public void testMinLatexSyntax() throws EvaluatorException {
+		OMOBJ omobj = ExpressionParser.parse("min(10,2)", null,null);
+		String latex = Evaluator.getLaTeX(omobj);
+		assertEquals("\\mbox{min}\\left(10,2\\right)",latex);
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)

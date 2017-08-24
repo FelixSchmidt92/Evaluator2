@@ -8,12 +8,19 @@ import java.util.List;
 
 import org.junit.Test;
 
+import de.uni_due.s3.evaluator2.Evaluator;
 import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
+import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedException;
+import de.uni_due.s3.evaluator2.exceptions.parser.ErroneousExerciseVariableException;
+import de.uni_due.s3.evaluator2.exceptions.parser.ErroneousFillInVariableException;
+import de.uni_due.s3.evaluator2.exceptions.parser.ParserException;
+import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedExerciseVariableException;
+import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedFillInVariableException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMCreator;
@@ -62,6 +69,13 @@ public class TestMax extends TestFunctionAbstract {
 		OMOBJ omobj = ExpressionParser.parse("max(10.1,17)", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals(OMCreator.createOMI(17), result.getOMI());
+	}
+	
+	@Test
+	public void testMaxLatexSyntax() throws EvaluatorException {
+		OMOBJ omobj = ExpressionParser.parse("max(10,2)", null,null);
+		String latex = Evaluator.getLaTeX(omobj);
+		assertEquals("\\mbox{max}\\left(10,2\\right)",latex);
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)

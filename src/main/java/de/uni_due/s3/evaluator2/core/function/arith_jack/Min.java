@@ -4,8 +4,11 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.OMUtils;
 import de.uni_due.s3.evaluator2.core.function.Function;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
+import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.openmath.InputMismatchException;
+import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 
 /**
  * Returns the smaller of two double values.
@@ -38,5 +41,11 @@ public class Min extends Function {
 	@Override
 	protected int maxArgs() {
 		return 2;
+	}
+	
+	@Override
+	public String getPartialLatexSyntax(List<String> arguments)
+			throws EvaluatorException, FunctionException, NoRepresentationAvailableException {
+		return "\\mbox{min}\\left(" + arguments.get(0)+","+arguments.get(1) + "\\right)";
 	}
 }

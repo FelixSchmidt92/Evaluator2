@@ -8,12 +8,19 @@ import java.util.List;
 
 import org.junit.Test;
 
+import de.uni_due.s3.evaluator2.Evaluator;
 import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
+import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedException;
+import de.uni_due.s3.evaluator2.exceptions.parser.ErroneousExerciseVariableException;
+import de.uni_due.s3.evaluator2.exceptions.parser.ErroneousFillInVariableException;
+import de.uni_due.s3.evaluator2.exceptions.parser.ParserException;
+import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedExerciseVariableException;
+import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedFillInVariableException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMCreator;
@@ -59,6 +66,13 @@ public class TestCeiling extends TestFunctionAbstract {
 		OMOBJ omobj = ExpressionParser.parse("ceil(10)", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals(OMCreator.createOMI(10), result.getOMI());
+	}
+	
+	@Test
+	public void testCeilingLatexSyntax() throws EvaluatorException {
+		OMOBJ omobj = ExpressionParser.parse("ceil(10)", null, null);
+		String latex = Evaluator.getLaTeX(omobj);
+		assertEquals("\\left\\lceil 10 \\right\\rceil",latex);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
