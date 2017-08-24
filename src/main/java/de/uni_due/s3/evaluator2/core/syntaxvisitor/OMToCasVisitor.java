@@ -214,7 +214,7 @@ public abstract class OMToCasVisitor {
 
 		function.argsBetweenMinMax(omel); // Check for Correct amount of
 											// Arguments
-		return getCASRepresentationForFunction(function, omel);
+		return getCASRepresentationForFunction(function,oms, omel);
 	}
 
 	/**
@@ -236,7 +236,7 @@ public abstract class OMToCasVisitor {
 	 *             OMOBJChildNotSupportedException
 	 * @throws OMObjectNotSupportedException
 	 */
-	protected abstract String getCASRepresentationForFunction(Function function, List<Object> omel)
+	protected abstract String getCASRepresentationForFunction(Function function,OMS oms, List<Object> omel)
 			throws EvaluatorException;
 
 }

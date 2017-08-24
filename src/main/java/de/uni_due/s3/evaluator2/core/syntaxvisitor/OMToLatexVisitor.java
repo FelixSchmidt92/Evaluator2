@@ -65,7 +65,7 @@ public class OMToLatexVisitor extends OMToCasVisitor{
 
 	@Override
 	protected String visit(OMSTR omstr) {
-		return  omstr.getContent();
+		return  "\\texttt{\""+omstr.getContent()+"\"}";
 	}
 
 	@Override
@@ -83,7 +83,7 @@ public class OMToLatexVisitor extends OMToCasVisitor{
 	 * TODO: weiter kommentieren
 	 */
 	@Override
-	protected String getCASRepresentationForFunction(Function function, List<Object> omel)
+	protected String getCASRepresentationForFunction(Function function,OMS oms, List<Object> omel)
 			throws EvaluatorException {
 		
 		if(function instanceof BinaryFunction) {
@@ -96,10 +96,16 @@ public class OMToLatexVisitor extends OMToCasVisitor{
 			
 		}else {
 			List<String> children = new LinkedList<String>();
+			
 			for(Object child : omel) {
 				children.add(visit(child));
 			}
-			return function.getPartialLatexSyntax(children);
+			try {
+				return function.getPartialLatexSyntax(children);
+			}catch(NoRepresentationAvailableException nr) {
+				//standard latex implementation for functions
+				return "\\mbox{"+oms.getName()+"}\\left("+String.join(",", children)+"\\right)";
+			}
 		}
 	}
 	

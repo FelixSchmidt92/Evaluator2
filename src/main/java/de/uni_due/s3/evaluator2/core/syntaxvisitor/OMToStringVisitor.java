@@ -63,7 +63,7 @@ public class OMToStringVisitor extends OMToCasVisitor {
 	}
 
 	@Override
-	protected String getCASRepresentationForFunction(Function function, List<Object> omel)
+	protected String getCASRepresentationForFunction(Function function,OMS oms, List<Object> omel)
 			throws EvaluatorException {
 		return function.getPartialStringSyntax(omel);
 	}

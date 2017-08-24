@@ -52,7 +52,7 @@ public class TestOMToCasVisitor {
 		}
 
 		@Override
-		protected String getCASRepresentationForFunction(Function function, List<Object> omel) {
+		protected String getCASRepresentationForFunction(Function function,OMS oms, List<Object> omel) {
 			return "function";
 		}
 

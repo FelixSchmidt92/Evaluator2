@@ -201,17 +201,21 @@ public abstract class Function {
 		return new OMToLatexVisitor().visit(omElement);
 	}
 	
-	/** This function has to be overwritten if the function has a specific representation in latex (like some BinaryFunction)
+	/**
+	 * If a function should have a special latex representation, 
+	 * then this function has to be overwritten by that class.
 	 * 
 	 * @param arguments
 	 * @return
 	 * @throws FunctionException
 	 * @throws NoRepresentationAvailableException
-	 */
+	 * */
 	public String getPartialLatexSyntax(List<String> arguments)
 			throws EvaluatorException, FunctionException, NoRepresentationAvailableException {
 		throw new NoRepresentationAvailableException(
 				"There is no latex representation for function " + this.getClass() + " implemented");
+		
+		//each function is represented by an OMS in a
 	}
 	
 	
