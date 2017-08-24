@@ -31,6 +31,8 @@ public class OMSymbol {
 	public static final OMS CASJACK_EVALUATEINSAGE = OMCreator.createOMS("casJACK", "evaluateInSage");
 	public static final OMS CASJACK_EVALUATEINSYMJA = OMCreator.createOMS("casJACK", "evaluateInSymja");
 
+	public static final OMS CALCULUS1_INT = OMCreator.createOMS("calculus1", "int");
+	
 	public static final OMS EDITOR1_INPUT_BOX = OMCreator.createOMS("editor1", "input_box");
 	
 	public static final OMS EVALJACK_EVAL = OMCreator.createOMS("evalJACK", "eval");

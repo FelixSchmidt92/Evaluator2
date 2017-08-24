@@ -115,20 +115,8 @@ public class OMExecutor {
 					arguments.add(i, (execute((OMA) o)));
 				else
 					arguments.add(i, (OMA) o);
-			} else if (o instanceof OMF) {
-				arguments.add(i, (OMF) o);
-
-			} else if (o instanceof OMI) {
-				arguments.add(i, (OMI) o);
-
-			} else if (o instanceof OMS) {
-				arguments.add(i, (OMS) o);
-
-			} else if (o instanceof OMSTR) {
-				arguments.add(i, (OMSTR) o);
-
-			} else if (o instanceof OMV) {
-				arguments.add(i, (OMV) o);
+			} else {
+				arguments.add(i, o);
 			}
 		}
 

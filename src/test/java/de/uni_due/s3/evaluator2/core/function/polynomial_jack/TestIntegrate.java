@@ -84,6 +84,44 @@ public class TestIntegrate extends TestFunctionAbstract {
 		Object result = func.evaluate(args);
 		assertEquals(expected.getOMA(), result);
 	}
+	
+	@Test
+	public void testIntegrateWithFunctions() throws JAXBException, EvaluatorException, OpenMathException {
+		List<Object> args = new ArrayList<Object>();
+		OMOBJ arg1 = OMConverter.toObject("<OMOBJ>" + "<OMA><OMS cd =\"transc1\" name=\"sin\"/>"
+		+"<OMV name=\"x\" />"
+		+ "</OMA>"
+		+ "</OMOBJ>");
+		args.add(arg1.getOMA());
+		args.add(OMCreator.createOMV("x"));
+		
+		OMOBJ expected = OMConverter.toObject("<OMOBJ>" + "<OMA><OMS cd =\"transc1\" name=\"cos\"/>"
+				+"<OMV name=\"x\" />"
+				+ "</OMA>"
+				+ "</OMOBJ>");
+		
+		Object result = func.evaluate(args);
+		assertEquals(expected.getOMA(), result);
+	}
+	
+	@Test
+	public void testIntegrateWithSquare() throws JAXBException, EvaluatorException, OpenMathException {
+		List<Object> args = new ArrayList<Object>();
+		OMOBJ arg1 = OMConverter.toObject("<OMOBJ>" + "<OMA><OMS cd =\"arith1\" name=\"times\"/>"
+		+"<OMI>2</OMI><OMV name=\"x\" />"
+		+ "</OMA>"
+		+ "</OMOBJ>");
+		args.add(arg1.getOMA());
+		args.add(OMCreator.createOMV("x"));
+		
+		OMOBJ expected = OMConverter.toObject("<OMOBJ>" + "<OMA><OMS cd =\"arith1\" name=\"power\"/>"
+				+"<OMV name=\"x\" /><OMI>2</OMI>"
+				+ "</OMA>"
+				+ "</OMOBJ>");
+		
+		Object result = func.evaluate(args);
+		assertEquals(expected.getOMA(), result);
+	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testIntegrateWithLessThanMinParam() throws OpenMathException, EvaluatorException {

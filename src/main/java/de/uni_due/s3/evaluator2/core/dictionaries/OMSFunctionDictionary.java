@@ -17,6 +17,7 @@ import de.uni_due.s3.evaluator2.core.function.arith_jack.Max;
 import de.uni_due.s3.evaluator2.core.function.arith_jack.Min;
 import de.uni_due.s3.evaluator2.core.function.binary_jack.ConvertToBinary;
 import de.uni_due.s3.evaluator2.core.function.binary_jack.EqualsBinary;
+import de.uni_due.s3.evaluator2.core.function.calculus1.Int;
 import de.uni_due.s3.evaluator2.core.function.cas_jack.EvaluateInR;
 import de.uni_due.s3.evaluator2.core.function.cas_jack.EvaluateInSage;
 import de.uni_due.s3.evaluator2.core.function.cas_jack.EvaluateInSymja;
@@ -164,6 +165,8 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.CASJACK_EVALUATEINSAGE, new EvaluateInSage());
 		functions.put(OMSymbol.CASJACK_EVALUATEINSYMJA, new EvaluateInSymja());
 
+		functions.put(OMSymbol.CALCULUS1_INT, new Int());
+		
 		functions.put(OMSymbol.EVALJACK_EVAL, new Eval());
 		functions.put(OMSymbol.EVALJACK_EVALEQ, new EvalEq());
 		functions.put(OMSymbol.EVALJACK_EVALPOLYNOMIAL, new EvalPolynomial());
