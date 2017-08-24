@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import de.uni_due.s3.evaluator2.Evaluator;
 import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.integer1.Remainder;
@@ -24,7 +25,7 @@ public class TestIEEERemainder {
 	private static Function func = new IEEERemainder();
 
 	@Test
-	public void testModulusInteger() throws OpenMathException, InputMismatchException, EvaluatorException {
+	public void testIEEERemainderInteger() throws OpenMathException, InputMismatchException, EvaluatorException {
 		func = new Remainder();
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(3));
@@ -34,35 +35,42 @@ public class TestIEEERemainder {
 	}
 
 	@Test
-	public void testModulusIntegration1() throws OpenMathException, InputMismatchException, EvaluatorException {
+	public void testIEEERemainderIntegration1() throws OpenMathException, InputMismatchException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("IEEEremainder(10,5)", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals(OMCreator.createOMI(0), result.getOMI());
 	}
 
 	@Test
-	public void testModulusIntegration2() throws OpenMathException, InputMismatchException, EvaluatorException {
+	public void testIEEERemainderIntegration2() throws OpenMathException, InputMismatchException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("IEEEremainder(3,-2)", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals(OMCreator.createOMI(-1), result.getOMI());
 	}
+	
+	@Test
+	public void testIEEERemainderLatexSyntax() throws EvaluatorException {
+		OMOBJ omobj = ExpressionParser.parse("IEEEremainder(3,-2)", null, null);
+		String latex = Evaluator.getLaTeX(omobj);
+		assertEquals("3\\mathbin{\\%}-2",latex);
+	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testMinusWithLessArguments() throws OpenMathException, InputMismatchException, EvaluatorException {
+	public void testIEEERemainderWithLessArguments() throws OpenMathException, InputMismatchException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("IEEEremainder('5')", null, null);
 		OMExecutor.execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testMinusWithMoreArguments() throws OpenMathException, InputMismatchException, EvaluatorException {
+	public void testIEEERemainderWithMoreArguments() throws OpenMathException, InputMismatchException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("IEEEremainder('2','5', 1)", null, null);
 		OMExecutor.execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testMinusWithWrongArguments() throws OpenMathException, InputMismatchException, EvaluatorException {
+	public void testIEEERemainderWithWrongArguments() throws OpenMathException, InputMismatchException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("IEEEremainder('test','5')", null, null);
 		OMExecutor.execute(omobj);
 		fail();

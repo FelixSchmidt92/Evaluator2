@@ -17,6 +17,7 @@ public class OMSPriority {
 		priorities.put(OMSymbol.ARITH1_DIVIDE, Priority.PRIO2);
 		priorities.put(OMSymbol.ARITH1_TIMES, Priority.PRIO2);
 		priorities.put(OMSymbol.ARITHJACK_IEEEREMAINDER, Priority.PRIO2);
+		priorities.put(OMSymbol.INTEGER1_REMAINDER, Priority.PRIO2);
 		
 		priorities.put(OMSymbol.ARITH1_PLUS, Priority.PRIO3);
 		priorities.put(OMSymbol.ARITH1_MINUS, Priority.PRIO3);
@@ -55,54 +56,67 @@ public class OMSPriority {
 		 * for ++, --, sign +, sign -, ~, ! and power(^)
 		 */
 		PRIO1,
+		
 		/**
 		 * for *, /, %
 		 */
 		PRIO2,
+		
 		/**
 		 * for +, -, string-concatenation
 		 */
 		PRIO3,
+		
 		/**
 		 * for <<,>>, >>>
 		 */
 		PRIO4,
+		
 		/**
 		 * for <,<=,>,>=
 		 */
 		PRIO5,
+		
 		/**
 		 * for ==, !=
 		 */
 		PRIO6,
+		
 		/**
 		 * for &
 		 */
 		PRIO7,
+		
 		/**
 		 * for ^ exlcusive or
 		 */
 		PRIO8,
+		
 		/**
 		 * for |
 		 */
 		PRIO9,
+		
 		/**
 		 * for &&
 		 */
 		PRIO10,
+		
 		/**
 		 * for ||
 		 */
 		PRIO11,
+		
 		/**
 		 * for ?: (ifthenelse)
 		 */
 		PRIO12,
+		
 		/**
 		 * for =, *=, /=, %=, +=, -=, <<=, >>=, >>>=, &=, ^=, |=
 		 */
 		PRIO13,
+		
 		/**
 		 * for anything else
 		 */

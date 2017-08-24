@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import de.uni_due.s3.evaluator2.Evaluator;
 import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
@@ -59,6 +60,13 @@ public class TestToRadian extends TestFunctionAbstract {
 		OMOBJ omobj = ExpressionParser.parse("toRadian(720)", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals(OMCreator.createOMF(Math.PI * 4), result.getOMF());
+	}
+	
+	@Test
+	public void testToRadianLatexSyntax() throws EvaluatorException {
+		OMOBJ omobj = ExpressionParser.parse("toRadian(120)", null, null);
+		String latex = Evaluator.getLaTeX(omobj);
+		assertEquals("\\mbox{toRadian}\\left(120\\degree\\right)",latex);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
