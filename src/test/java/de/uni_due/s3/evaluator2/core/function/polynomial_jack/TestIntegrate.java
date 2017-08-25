@@ -88,14 +88,14 @@ public class TestIntegrate extends TestFunctionAbstract {
 	@Test
 	public void testIntegrateWithFunctions() throws JAXBException, EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
-		OMOBJ arg1 = OMConverter.toObject("<OMOBJ>" + "<OMA><OMS cd =\"transc1\" name=\"sin\"/>"
+		OMOBJ arg1 = OMConverter.toObject("<OMOBJ>" + "<OMA><OMS cd =\"transc1\" name=\"cos\"/>"
 		+"<OMV name=\"x\" />"
 		+ "</OMA>"
 		+ "</OMOBJ>");
 		args.add(arg1.getOMA());
 		args.add(OMCreator.createOMV("x"));
 		
-		OMOBJ expected = OMConverter.toObject("<OMOBJ>" + "<OMA><OMS cd =\"transc1\" name=\"cos\"/>"
+		OMOBJ expected = OMConverter.toObject("<OMOBJ>" + "<OMA><OMS cd =\"transc1\" name=\"sin\"/>"
 				+"<OMV name=\"x\" />"
 				+ "</OMA>"
 				+ "</OMOBJ>");

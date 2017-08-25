@@ -57,4 +57,16 @@ public class TestTextValueWithVariables extends TestFunctionAbstract {
 		args.add(OMCreator.createOMSTR("]"));
 		assertEquals("[55, 22.22]", func.getPartialSageSyntax(args));
 	}
+	
+	@Test
+	public void testTextValueWithVariablesLatexSyntax() throws EvaluatorException {
+		ArrayList<Object> args = new ArrayList<>();
+
+		args.add(OMCreator.createOMSTR("["));
+		args.add(OMCreator.createOMI(55));
+		args.add(OMCreator.createOMSTR(", "));
+		args.add(OMCreator.createOMF(22.22));
+		args.add(OMCreator.createOMSTR("]"));
+		assertEquals("\\texttt{\"[\"}55\\texttt{\", \"}22.22\\texttt{\"]\"}", func.getPartialLatexSyntax(args));
+	}
 }

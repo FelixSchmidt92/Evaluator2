@@ -258,7 +258,7 @@ public abstract class Function {
 	 */
 	public String getPartialStringSyntax(List<Object> arguments)
 			throws EvaluatorException {
-		throw new NoSageRepresentationAvailableException(
+		throw new NoRepresentationAvailableException(
 				"There is no String-representation for function " + this.getClass() + " implemented");
 	}
 	
