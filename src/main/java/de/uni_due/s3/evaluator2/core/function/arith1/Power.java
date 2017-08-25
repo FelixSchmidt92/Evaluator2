@@ -26,7 +26,6 @@ public class Power extends BinaryFunction {
 
 	public Power() {
 		super(OMSPriority.getPriority(OMSymbol.ARITH1_POWER));
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

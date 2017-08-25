@@ -25,7 +25,6 @@ public class Times extends BinaryFunction {
 
 	public Times() {
 		super(OMSPriority.getPriority(OMSymbol.ARITH1_TIMES));
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

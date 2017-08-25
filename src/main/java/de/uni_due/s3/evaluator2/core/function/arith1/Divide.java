@@ -25,7 +25,6 @@ public class Divide extends BinaryFunction {
 
 	public Divide() {
 		super(OMSPriority.getPriority(OMSymbol.ARITH1_DIVIDE));
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

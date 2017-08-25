@@ -28,7 +28,6 @@ public class Minus extends BinaryFunction {
 
 	public Minus() {
 		super(OMSPriority.getPriority(OMSymbol.ARITH1_MINUS));
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

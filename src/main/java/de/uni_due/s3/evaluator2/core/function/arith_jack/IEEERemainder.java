@@ -4,10 +4,8 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.OMUtils;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSPriority;
-import de.uni_due.s3.evaluator2.core.dictionaries.OMSPriority.Priority;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.BinaryFunction;
-import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
@@ -31,7 +29,6 @@ public class IEEERemainder extends BinaryFunction {
 
 	public IEEERemainder() {
 		super(OMSPriority.getPriority(OMSymbol.ARITHJACK_IEEEREMAINDER));
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

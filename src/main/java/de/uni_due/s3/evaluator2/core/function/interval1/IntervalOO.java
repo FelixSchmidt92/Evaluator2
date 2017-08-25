@@ -39,13 +39,11 @@ public class IntervalOO extends Function{
 
 	@Override
 	protected int minArgs() {
-		// TODO Auto-generated method stub
 		return 2;
 	}
 
 	@Override
 	protected int maxArgs() {
-		// TODO Auto-generated method stub
 		return 2;
 	}
 	

@@ -8,7 +8,6 @@ import org.junit.Test;
 
 import de.uni_due.s3.evaluator2.Evaluator;
 import de.uni_due.s3.evaluator2.OMExecutor;
-import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
@@ -17,7 +16,6 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestInt extends TestFunctionAbstract{
 
-	private final Function func = new Int();
 	
 	@Test
 	public void testInt() throws JAXBException, OpenMathException, EvaluatorException {
