@@ -22,7 +22,9 @@ public class TestSage {
 
 	public static void initSage() {
 		List<SageConnection> aSageConnectionsList = new ArrayList<>();
-		aSageConnectionsList.add(new SageConnection("192.168.68.176", 8989));
+		aSageConnectionsList.add(new SageConnection("192.168.68.73", 8889));  //Main-Server-IP
+//		aSageConnectionsList.add(new SageConnection("192.168.68.176", 8989)); //spobel
+//		aSageConnectionsList.add(new SageConnection("192.168.68.207", 8989)); //dlux
 		Sage.init(aSageConnectionsList);
 	}
 
