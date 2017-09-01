@@ -60,7 +60,10 @@ public class Product extends Function {
 		
 		String sageVar = PolyUtils.getSageSyntaxVariableRepresentation(term);
 		
-		return sageVar+" var('"+getSageSyntax(variable)+"'); sum("+term+","+getSageSyntax(variable)+","+lowerBound+","+upperBound+")";
+		String result =  sageVar+" var('"+getSageSyntax(variable)+"'); prod("+term+" for "+getSageSyntax(variable)+" in ("+lowerBound+".."+upperBound+"))";
+		System.out.println(result);
+		return result;
+	
 	}
 	
 	@Override

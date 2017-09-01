@@ -50,9 +50,13 @@ public class TestProduct extends TestFunctionAbstract{
 		OMOBJ result = OMExecutor.execute(omobj);
 		OMOBJ expected = OMConverter.toObject("<OMOBJ>"
 				+"<OMA>"
-				+ "<OMS cd=\"arith1\" name=\"times\" />"
-				+ "<OMI>12</OMI>"
-				+ "<OMV name=\"x\"/>"
+				+"<OMS cd=\"arith1\" name=\"times\"/>"
+				+ "<OMI>81</OMI>"
+				+ "<OMA>"
+					+ "<OMS cd=\"arith1\" name=\"power\" />"
+					+ "<OMV name=\"x\"/>"
+					+ "<OMI>4</OMI>"
+				+ "</OMA>"	
 				+ "</OMA>"
 				+"</OMOBJ>");
 		
@@ -86,7 +90,7 @@ public class TestProduct extends TestFunctionAbstract{
 		omobj.getOMA().getOmel().remove(0);
 		List<Object> omel = omobj.getOMA().getOmel();
 		String result = func.getPartialSageSyntax(omel);
-		assertEquals("var('x'); var('n'); sum(3 * x,n,2,5)",result);
+		assertEquals("var('x'); var('n'); prod(3 * x for n in (2..5))",result);
 	}
 	
 	@Test
