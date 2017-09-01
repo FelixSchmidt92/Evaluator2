@@ -23,6 +23,7 @@ public class OMSymbol {
 	public static final OMS ARITH1_ROOT = OMCreator.createOMS("arith1", "root");
 	public static final OMS ARITH1_TIMES = OMCreator.createOMS("arith1", "times");
 	public static final OMS ARITH1_UNARY_MINUS = OMCreator.createOMS("arith1", "unary_minus");
+	public static final OMS ARITH1_PRODUCT = OMCreator.createOMS("arith1", "product");
 
 	public static final OMS BINARYJACK_CONVERTTOBINARY = OMCreator.createOMS("binaryJACK", "convertToBinary");
 	public static final OMS BINARYJACK_EQUALSBINARY = OMCreator.createOMS("binaryJACK", "equalsBinary");

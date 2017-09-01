@@ -9,6 +9,7 @@ import de.uni_due.s3.evaluator2.core.function.arith1.GCD;
 import de.uni_due.s3.evaluator2.core.function.arith1.Minus;
 import de.uni_due.s3.evaluator2.core.function.arith1.Plus;
 import de.uni_due.s3.evaluator2.core.function.arith1.Power;
+import de.uni_due.s3.evaluator2.core.function.arith1.Product;
 import de.uni_due.s3.evaluator2.core.function.arith1.Root;
 import de.uni_due.s3.evaluator2.core.function.arith1.Times;
 import de.uni_due.s3.evaluator2.core.function.arith1.UnaryMinus;
@@ -158,6 +159,7 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.ARITH1_ROOT, new Root());
 		functions.put(OMSymbol.ARITH1_TIMES, new Times());
 		functions.put(OMSymbol.ARITH1_UNARY_MINUS, new UnaryMinus());
+		functions.put(OMSymbol.ARITH1_PRODUCT, new Product());
 
 		functions.put(OMSymbol.BINARYJACK_CONVERTTOBINARY, new ConvertToBinary());
 		functions.put(OMSymbol.BINARYJACK_EQUALSBINARY, new EqualsBinary());
