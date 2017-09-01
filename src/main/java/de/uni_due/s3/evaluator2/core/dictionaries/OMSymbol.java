@@ -48,7 +48,7 @@ public class OMSymbol {
 	public static final OMS INTERVAL1_INTERVALCO = OMCreator.createOMS("interval1", "interval_co");
 	public static final OMS INTERVAL1_INTERVALOC = OMCreator.createOMS("interval1", "interval_oc");
 	public static final OMS INTERVAL1_INTERVALOO = OMCreator.createOMS("interval1", "interval_oo");
-	public static final OMS INTERVAL1_INTERVAL	 = OMCreator.createOMS("interval1", "interval");
+	public static final OMS INTERVAL1_INTERVAL	 = OMCreator.createOMS("interval1", "integer_interval");
 
 	public static final OMS LINALGJACK_EQUALBASIS = OMCreator.createOMS("linalgJACK", "equalBasis");
 	public static final OMS LINALGJACK_ISLINEARLYINDEPENDENT = OMCreator.createOMS("linalgJACK",

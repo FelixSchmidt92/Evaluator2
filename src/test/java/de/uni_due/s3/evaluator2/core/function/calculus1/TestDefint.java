@@ -22,7 +22,7 @@ public class TestDefint extends TestFunctionAbstract{
 		OMOBJ omobj = OMConverter.toObject("<OMOBJ><OMA>" + 
 				"<OMS cd=\"calculus1\" name=\"defint\"/>" + 
 				"<OMA>" +
-				  "<OMS cd=\"interval1\" name=\"interval\" />" +
+				  "<OMS cd=\"interval1\" name=\"integer_interval\" />" +
 				  "<OMI>0</OMI>"+
 				  "<OMS cd=\"nums1\" name=\"pi\" />" +
 				"</OMA>"+
@@ -50,7 +50,7 @@ public class TestDefint extends TestFunctionAbstract{
 		OMOBJ omobj = OMConverter.toObject("<OMOBJ><OMA>" + 
 				"<OMS cd=\"calculus1\" name=\"defint\"/>" + 
 				"<OMA>" +
-				  "<OMS cd=\"interval1\" name=\"interval\" />" +
+				  "<OMS cd=\"interval1\" name=\"integer_interval\" />" +
 				  "<OMI>0</OMI>"+
 				  "<OMF dec=\"1.5\" />"+
 				"</OMA>"+
