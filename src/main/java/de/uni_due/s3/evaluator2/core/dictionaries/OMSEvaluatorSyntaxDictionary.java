@@ -60,6 +60,8 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("evaluateInSage", OMSymbol.CASJACK_EVALUATEINSAGE);
 		functionSymbolMap.put("evaluateInSymja", OMSymbol.CASJACK_EVALUATEINSYMJA);
 		
+		//TODO: should the integral calculus function be added?
+		
 		functionSymbolMap.put("eval", OMSymbol.EVALJACK_EVAL);
 		functionSymbolMap.put("evalcplx", OMSymbol.POLYNOMIAL1_EXPAND);
 		functionSymbolMap.put("evalEq", OMSymbol.EVALJACK_EVALEQ);

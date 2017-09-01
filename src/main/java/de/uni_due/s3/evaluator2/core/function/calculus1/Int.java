@@ -32,7 +32,7 @@ public class Int extends Function{
 	@Override
 	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		
-		//collect the variable and the polinomial and pass it to the polynomialjack.integrate function
+		//collect the variable and the polynomial and pass it to the polynomialjack.integrate function
 		if(arguments.get(0) instanceof OMBIND) {
 			OMBIND ombind = (OMBIND) arguments.get(0);
 			OMBVAR ombvar = (OMBVAR) ombind.getContent().get(1);

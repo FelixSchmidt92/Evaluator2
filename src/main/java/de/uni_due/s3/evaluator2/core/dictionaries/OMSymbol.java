@@ -32,6 +32,7 @@ public class OMSymbol {
 	public static final OMS CASJACK_EVALUATEINSYMJA = OMCreator.createOMS("casJACK", "evaluateInSymja");
 
 	public static final OMS CALCULUS1_INT = OMCreator.createOMS("calculus1", "int");
+	public static final OMS CALCULUS1_DEFINT = OMCreator.createOMS("calculus1", "defint");
 	
 	public static final OMS EDITOR1_INPUT_BOX = OMCreator.createOMS("editor1", "input_box");
 	
@@ -47,6 +48,7 @@ public class OMSymbol {
 	public static final OMS INTERVAL1_INTERVALCO = OMCreator.createOMS("interval1", "interval_co");
 	public static final OMS INTERVAL1_INTERVALOC = OMCreator.createOMS("interval1", "interval_oc");
 	public static final OMS INTERVAL1_INTERVALOO = OMCreator.createOMS("interval1", "interval_oo");
+	public static final OMS INTERVAL1_INTERVAL	 = OMCreator.createOMS("interval1", "interval");
 
 	public static final OMS LINALGJACK_EQUALBASIS = OMCreator.createOMS("linalgJACK", "equalBasis");
 	public static final OMS LINALGJACK_ISLINEARLYINDEPENDENT = OMCreator.createOMS("linalgJACK",
