@@ -21,12 +21,12 @@ import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
- * Implements the product function from cd arith1, product.
+ * Implements the sum function from cd arith1, sum.
  * 
  * @author frichtscheid
  *
  */
-public class Product extends Function {
+public class Sum extends Function {
 
 	/**
 	 * Expects two argumuntes:
@@ -39,7 +39,7 @@ public class Product extends Function {
 		if (!OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.INTERVAL1_INTERVAL))
 			throw new FunctionInvalidArgumentTypeException(this, "first argument has to be an intervall");
 		if (!(arguments.get(1) instanceof OMBIND))
-			throw new FunctionInvalidArgumentTypeException(this, "there is no variable bound to the product");
+			throw new FunctionInvalidArgumentTypeException(this, "there is no variable bound to the sum");
 
 		return Sage.evaluateInCAS(getPartialSageSyntax(arguments));
 
@@ -71,7 +71,7 @@ public class Product extends Function {
 		
 		String sageVar = PolyUtils.getSageSyntaxVariableRepresentation(term);
 		
-		return sageVar+" var('"+getSageSyntax(variable)+"'); prod("+term+" for "+getSageSyntax(variable)+" in ("+lowerBound+".."+upperBound+"))";
+		return sageVar+" var('"+getSageSyntax(variable)+"'); sum("+term+" for "+getSageSyntax(variable)+" in ("+lowerBound+".."+upperBound+"))";
 	
 	}
 	
@@ -93,11 +93,11 @@ public class Product extends Function {
 		OMV omv = (OMV) ombvar.getOmvar().get(0); // use just one variable
 		OMA oma = (OMA) ombind.getContent().get(2);
 
-		return "\\prod_{"+lowerBound+"}^{"+upperBound+"} {" + getLatexSyntax(oma) + "}";
+		return "\\sum_{"+lowerBound+"}^{"+upperBound+"} {" + getLatexSyntax(oma) + "}";
 	}
 	
 	/**
-	 * Should be false so that the interval wont be evaluated
+	 * Should be false so that the interval won't be evaluated
 	 */
 	@Override
 	public boolean argumentsShouldBeEvaluated() {
