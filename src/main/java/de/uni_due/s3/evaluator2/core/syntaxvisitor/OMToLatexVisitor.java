@@ -63,11 +63,30 @@ public class OMToLatexVisitor extends OMToCasVisitor{
 
 	}
 
+	/**
+	 * Wraps a string in quotation marks. 
+	 * If the string is empty or has already latex commands, the string will not be wrapped.
+	 */
 	@Override
 	protected String visit(OMSTR omstr) {
-		return  "\\texttt{\""+omstr.getContent()+"\"}";
+		String content = omstr.getContent();
+
+		//if latex commands (starting with \ )
+		if(content.contains("\\")) {
+			return content;
+		}
+		//if string is not empty or not filled with space
+		for(byte b:content.getBytes()) {
+			if (b != ' ') {
+				return  "\\texttt{\""+omstr.getContent()+"\"}";
+			}
+		}
+		return content;
 	}
 
+	/**
+	 * Returns the name of the variable
+	 */
 	@Override
 	protected String visit(OMV omv) {
 		return omv.getName();

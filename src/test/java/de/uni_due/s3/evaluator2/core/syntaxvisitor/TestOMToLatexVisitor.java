@@ -47,5 +47,26 @@ public class TestOMToLatexVisitor {
 		String latex = Evaluator.getLaTeX(obj);
 		assertEquals("\\mbox{charAt}\\left(\\texttt{\"abder\"},3\\right)",latex);
 	}
+	
+	@Test
+	public void testOMToLatexvisitorWithNormalString() throws EvaluatorException, OpenMathException {
+		OMOBJ obj = Evaluator.evaluate("'hello'", new HashMap<>(), new HashMap<>());
+		String latex = new OMToLatexVisitor().visit(obj);
+		assertEquals("\\texttt{\"hello\"}", latex);
+	}
+	
+	@Test
+	public void testOMToLatexvisitorWithEmptyString() throws EvaluatorException, OpenMathException {
+		OMOBJ obj = Evaluator.evaluate("'  '", new HashMap<>(), new HashMap<>());
+		String latex = new OMToLatexVisitor().visit(obj);
+		assertEquals("  ", latex);
+	}
+	
+	@Test
+	public void testOMToLatexvisitorWithLatexCommandInString() throws EvaluatorException, OpenMathException {
+		OMOBJ obj = Evaluator.evaluate("'\\sum{hello}'", new HashMap<>(), new HashMap<>());
+		String latex = new OMToLatexVisitor().visit(obj);
+		assertEquals("\\sum{hello}", latex);
+	}
 		
 }
