@@ -71,7 +71,6 @@ public class DefInt extends Function {
 		query += " var(\'"+getSageSyntax(variable)+"\');";
 		query += " definite_integral("+getSageSyntax(polynomial)+","+getSageSyntax(variable)+","+lowerBound+","+upperBound+")";
 		
-		System.out.println(query);
 		return query;
 	}
 	
