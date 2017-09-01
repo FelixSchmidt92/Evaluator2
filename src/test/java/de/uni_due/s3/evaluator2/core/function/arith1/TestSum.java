@@ -28,7 +28,7 @@ public class TestSum extends TestFunctionAbstract{
 		OMOBJ omobj = OMConverter.toObject(""
 				+ "<OMOBJ>" + 
 				"                <OMA>" + 
-				"                    <OMS cd=\"arith1\" name=\"product\"/>" + 
+				"                    <OMS cd=\"arith1\" name=\"sum\"/>" + 
 				"                    <OMA>" + 
 				"                        <OMS cd=\"interval1\" name=\"integer_interval\"/>" + 
 				"                        <OMI>2</OMI>" + 
@@ -64,7 +64,7 @@ public class TestSum extends TestFunctionAbstract{
 		OMOBJ omobj = OMConverter.toObject(""
 				+ "<OMOBJ>" + 
 				"                <OMA>" + 
-				"                    <OMS cd=\"arith1\" name=\"product\"/>" + 
+				"                    <OMS cd=\"arith1\" name=\"sum\"/>" + 
 				"                    <OMA>" + 
 				"                        <OMS cd=\"interval1\" name=\"integer_interval\"/>" + 
 				"                        <OMI>2</OMI>" + 
@@ -94,7 +94,7 @@ public class TestSum extends TestFunctionAbstract{
 		OMOBJ omobj = OMConverter.toObject(""
 				+ "<OMOBJ>" + 
 				"                <OMA>" + 
-				"                    <OMS cd=\"arith1\" name=\"product\"/>" + 
+				"                    <OMS cd=\"arith1\" name=\"sum\"/>" + 
 				"                    <OMA>" + 
 				"                        <OMS cd=\"interval1\" name=\"integer_interval\"/>" + 
 				"                        <OMI>2</OMI>" + 

@@ -161,7 +161,7 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.ARITH1_TIMES, new Times());
 		functions.put(OMSymbol.ARITH1_UNARY_MINUS, new UnaryMinus());
 		functions.put(OMSymbol.ARITH1_PRODUCT, new Product());
-		functions.put(OMSymbol.ARITH1_PRODUCT, new Sum());
+		functions.put(OMSymbol.ARITH1_SUM, new Sum());
 		
 		functions.put(OMSymbol.BINARYJACK_CONVERTTOBINARY, new ConvertToBinary());
 		functions.put(OMSymbol.BINARYJACK_EQUALSBINARY, new EqualsBinary());
