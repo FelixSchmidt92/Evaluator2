@@ -45,14 +45,14 @@ public class TestOMToLatexVisitor {
 	public void testOMToLatexVisitorWithStandardRepresentation() throws EvaluatorException {
 		OMOBJ obj = ExpressionParser.parse("charAt('abder',3)", null, null);
 		String latex = Evaluator.getLaTeX(obj);
-		assertEquals("\\mbox{charAt}\\left(\\texttt{\"abder\"},3\\right)",latex);
+		assertEquals("\\mbox{charAt}\\left(abder,3\\right)",latex);
 	}
 	
 	@Test
 	public void testOMToLatexvisitorWithNormalString() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("'hello'", new HashMap<>(), new HashMap<>());
 		String latex = new OMToLatexVisitor().visit(obj);
-		assertEquals("\\texttt{\"hello\"}", latex);
+		assertEquals("hello", latex);
 	}
 	
 	@Test

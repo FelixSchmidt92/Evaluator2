@@ -69,19 +69,7 @@ public class OMToLatexVisitor extends OMToCasVisitor{
 	 */
 	@Override
 	protected String visit(OMSTR omstr) {
-		String content = omstr.getContent();
-
-		//if latex commands (starting with \ )
-		if(content.contains("\\")) {
-			return content;
-		}
-		//if string is not empty or not filled with space
-		for(byte b:content.getBytes()) {
-			if (b != ' ') {
-				return  "\\texttt{\""+omstr.getContent()+"\"}";
-			}
-		}
-		return content;
+		return omstr.getContent();
 	}
 
 	/**

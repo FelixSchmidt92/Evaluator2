@@ -67,6 +67,6 @@ public class TestTextValueWithVariables extends TestFunctionAbstract {
 		args.add(OMCreator.createOMSTR(", "));
 		args.add(OMCreator.createOMF(22.22));
 		args.add(OMCreator.createOMSTR("]"));
-		assertEquals("\\texttt{\"[\"}55\\texttt{\", \"}22.22\\texttt{\"]\"}", func.getPartialLatexSyntax(args));
+		assertEquals("[55, 22.22]", func.getPartialLatexSyntax(args));
 	}
 }
