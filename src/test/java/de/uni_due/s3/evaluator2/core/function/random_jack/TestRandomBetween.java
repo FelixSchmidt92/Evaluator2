@@ -17,7 +17,6 @@ import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeE
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMF;
-import de.uni_due.s3.openmath.jaxb.OMI;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
@@ -49,19 +48,6 @@ public class TestRandomBetween extends TestFunctionAbstract {
 			OMF omf = (OMF) func.evaluate(args);
 			assertTrue(omf.getDec() >= min);
 			assertTrue(omf.getDec() < max);
-		}
-	}
-	
-	@Test
-	public void testRandomBetweenWithThreeeArgs() throws OpenMathException, EvaluatorException {
-		List<Object> args = new ArrayList<Object>();
-		args.add(OMCreator.createOMF(min));
-		args.add(OMCreator.createOMI(max));
-		args.add(OMCreator.createOMSTR("NN"));
-		for (int i = 0; i < 10000; i++) {
-			OMI omi = (OMI) func.evaluate(args);
-			assertTrue(Integer.parseInt(omi.getValue()) >= min);
-			assertTrue(Integer.parseInt(omi.getValue()) < max + 1);
 		}
 	}
 
