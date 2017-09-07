@@ -81,7 +81,6 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("randomDiagonalizableMatrix", OMSymbol.LINALGJACK_RANDOMMATRIXEIGENVALUE);
 		functionSymbolMap.put("randomMatrixRank", OMSymbol.LINALGJACK_RANDOMMATRIXRANK);
 		functionSymbolMap.put("randomEchelonizableMatrix", OMSymbol.LINALGJACK_RANDOMMATRIXRANK);
-		
 
 		functionSymbolMap.put("matrix", OMSymbol.LINALG2_MATRIX);
 		functionSymbolMap.put("matrixrow", OMSymbol.LINALG2_MATRIXROW);
@@ -93,6 +92,8 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("ifthenelse", OMSymbol.LOGICJACK_IFTHENELSE);
 		functionSymbolMap.put("booleannot", OMSymbol.LOGIC1_NOT);
 		functionSymbolMap.put("booleanor", OMSymbol.LOGIC1_OR);
+		
+		functionSymbolMap.put("mcindex", OMSymbol.MCJACK_MCINDEX);
 
 		functionSymbolMap.put("countBasicOperations", OMSymbol.OPENMATHJACK_COUNTBASICOPERATIONS);
 		functionSymbolMap.put("countNodes", OMSymbol.OPENMATHJACK_COUNTNODES);
@@ -114,7 +115,8 @@ public class OMSEvaluatorSyntaxDictionary {
 		
 		functionSymbolMap.put("random", OMSymbol.RANDOMJACK_RANDOM);
 		functionSymbolMap.put("randomBetween", OMSymbol.RANDOMJACK_RANDOMBETWEEN);
-
+		functionSymbolMap.put("randomIntegerBetween", OMSymbol.RANDOMJACK_RANDOMINTEGERBETWEEN);
+		
 		functionSymbolMap.put("equal", OMSymbol.RELATION1_EQ);
 		functionSymbolMap.put("greaterthanorequal", OMSymbol.RELATION1_GEQ);
 		functionSymbolMap.put("greaterthan", OMSymbol.RELATION1_GT);

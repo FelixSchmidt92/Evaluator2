@@ -73,6 +73,8 @@ public class OMSymbol {
 	public static final OMS LOGIC1_NOT = OMCreator.createOMS("logic1", "not");
 	public static final OMS LOGIC1_OR = OMCreator.createOMS("logic1", "or");
 	public static final OMS LOGIC1_TRUE = OMCreator.createOMS("logic1", "true");
+	
+	public static final OMS MCJACK_MCINDEX = OMCreator.createOMS("mcJACK", "mcindex");
 
 	public static final OMS NUMS1_NAN = OMCreator.createOMS("nums1", "NaN");
 	public static final OMS NUMS1_E = OMCreator.createOMS("nums1", "e");
@@ -102,7 +104,8 @@ public class OMSymbol {
 	
 	public static final OMS RANDOMJACK_RANDOM = OMCreator.createOMS("randomJACK", "random");
 	public static final OMS RANDOMJACK_RANDOMBETWEEN = OMCreator.createOMS("randomJACK", "randomBetween");
-
+	public static final OMS RANDOMJACK_RANDOMINTEGERBETWEEN = OMCreator.createOMS("randomJACK", "randomIntegerBetween");
+	
 	public static final OMS RELATION1_EQ = OMCreator.createOMS("relation1", "eq");
 	public static final OMS RELATION1_GEQ = OMCreator.createOMS("relation1", "geq");
 	public static final OMS RELATION1_GT = OMCreator.createOMS("relation1", "gt");

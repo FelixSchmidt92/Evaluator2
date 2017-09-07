@@ -47,6 +47,7 @@ import de.uni_due.s3.evaluator2.core.function.logic1.BooleanAnd;
 import de.uni_due.s3.evaluator2.core.function.logic1.BooleanNot;
 import de.uni_due.s3.evaluator2.core.function.logic1.BooleanOr;
 import de.uni_due.s3.evaluator2.core.function.logic_jack.IfThenElse;
+import de.uni_due.s3.evaluator2.core.function.mc_jack.MCIndex;
 import de.uni_due.s3.evaluator2.core.function.openmath_jack.CountBasicOperations;
 import de.uni_due.s3.evaluator2.core.function.openmath_jack.CountNodes;
 import de.uni_due.s3.evaluator2.core.function.openmath_jack.GetDenominator;
@@ -112,6 +113,7 @@ import de.uni_due.s3.evaluator2.core.function.transc_jack.ToDegree;
 import de.uni_due.s3.evaluator2.core.function.transc_jack.ToRadian;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedRuntimeException;
 import de.uni_due.s3.evaluator2.core.function.random_jack.RandomBetween;
+import de.uni_due.s3.evaluator2.core.function.random_jack.RandomIntegerBetween;
 import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 
@@ -204,6 +206,8 @@ public class OMSFunctionDictionary {
 
 		functions.put(OMSymbol.LIST1_LIST, new List());
 		
+		functions.put(OMSymbol.MCJACK_MCINDEX, new MCIndex());
+		
 		functions.put(OMSymbol.NUMS1_RATIONAL, new Divide());
 
 		functions.put(OMSymbol.OPENMATHJACK_COUNTBASICOPERATIONS, new CountBasicOperations());
@@ -225,7 +229,8 @@ public class OMSFunctionDictionary {
 		
 		functions.put(OMSymbol.RANDOMJACK_RANDOM, new Random());
 		functions.put(OMSymbol.RANDOMJACK_RANDOMBETWEEN, new RandomBetween());
-
+		functions.put(OMSymbol.RANDOMJACK_RANDOMINTEGERBETWEEN, new RandomIntegerBetween());
+		
 		functions.put(OMSymbol.RELATION1_EQ, new Equal());
 		functions.put(OMSymbol.RELATION1_GEQ, new GreaterThanOrEqual());
 		functions.put(OMSymbol.RELATION1_GT, new GreaterThan());

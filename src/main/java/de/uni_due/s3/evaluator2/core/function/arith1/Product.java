@@ -89,8 +89,8 @@ public class Product extends Function {
 			throw new FunctionInvalidArgumentException(this, "intervall could not be converted to a number");
 		}
 		OMBIND ombind = (OMBIND) arguments.get(1);
-		OMBVAR ombvar = (OMBVAR) ombind.getContent().get(1);
-		OMV omv = (OMV) ombvar.getOmvar().get(0); // use just one variable
+//		OMBVAR ombvar = (OMBVAR) ombind.getContent().get(1);
+//		OMV omv = (OMV) ombvar.getOmvar().get(0); // use just one variable
 		OMA oma = (OMA) ombind.getContent().get(2);
 
 		return "\\prod_{"+lowerBound+"}^{"+upperBound+"} {" + getLatexSyntax(oma) + "}";

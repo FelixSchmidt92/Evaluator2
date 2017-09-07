@@ -20,7 +20,7 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
  * @author frichtscheid
  *
  */
-public class RandomBetween extends Function {
+public class RandomIntegerBetween extends Function {
 
 	/**
 	 * Expects two arguments: (1) integer or float (2) integer or float
@@ -35,7 +35,7 @@ public class RandomBetween extends Function {
 			double min = OMUtils.convertOMToDouble(arguments.get(0));
 			double max = OMUtils.convertOMToDouble(arguments.get(1));
 
-			return OMCreator.createOMF(min + (Math.random() * (max - min)));
+			return OMCreator.createOMI((int) Math.round(min + (Math.random() * (max - min))));
 
 		} catch (InputMismatchException ie) {
 			throw new FunctionInvalidArgumentTypeException(this,
