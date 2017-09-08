@@ -82,6 +82,8 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("randomMatrixRank", OMSymbol.LINALGJACK_RANDOMMATRIXRANK);
 		functionSymbolMap.put("randomEchelonizableMatrix", OMSymbol.LINALGJACK_RANDOMMATRIXRANK);
 
+		functionSymbolMap.put("det", OMSymbol.LINALG1_DETERMINANT);
+		
 		functionSymbolMap.put("matrix", OMSymbol.LINALG2_MATRIX);
 		functionSymbolMap.put("matrixrow", OMSymbol.LINALG2_MATRIXROW);
 		functionSymbolMap.put("vector", OMSymbol.LINALG2_VECTOR);
