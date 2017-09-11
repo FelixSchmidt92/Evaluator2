@@ -29,6 +29,7 @@ import de.uni_due.s3.evaluator2.core.function.eval_jack.EvalEq;
 import de.uni_due.s3.evaluator2.core.function.eval_jack.EvalPolynomial;
 import de.uni_due.s3.evaluator2.core.function.eval_jack.EvalPolynomialCplx;
 import de.uni_due.s3.evaluator2.core.function.eval_jack.EvalTerm2;
+import de.uni_due.s3.evaluator2.core.function.integer1.Factorial;
 import de.uni_due.s3.evaluator2.core.function.integer1.Remainder;
 import de.uni_due.s3.evaluator2.core.function.interval1.IntervalCC;
 import de.uni_due.s3.evaluator2.core.function.interval1.IntervalCO;
@@ -182,6 +183,7 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.EVALJACK_EVALTERM2, new EvalTerm2());
 
 		functions.put(OMSymbol.INTEGER1_REMAINDER, new Remainder());
+		functions.put(OMSymbol.INTEGER1_FACTORIAL, new Factorial());
 		
 		functions.put(OMSymbol.INTERVAL1_INTERVALCC, new IntervalCC());
 		functions.put(OMSymbol.INTERVAL1_INTERVALCO, new IntervalCO());

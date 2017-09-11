@@ -74,6 +74,7 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("evalterm2", OMSymbol.EVALJACK_EVALTERM2);
 
 		functionSymbolMap.put("remainder", OMSymbol.INTEGER1_REMAINDER);
+		functionSymbolMap.put("factorial", OMSymbol.INTEGER1_FACTORIAL);
 
 		functionSymbolMap.put("equalBasis", OMSymbol.LINALGJACK_EQUALBASIS);
 		functionSymbolMap.put("isLinearlyIndependent", OMSymbol.LINALGJACK_ISLINEARLYINDEPENDENT);

@@ -45,6 +45,7 @@ public class OMSymbol {
 	public static final OMS EVALJACK_EVALTERM2 = OMCreator.createOMS("evalJACK", "evalterm2");
 
 	public static final OMS INTEGER1_REMAINDER = OMCreator.createOMS("integer1", "remainder");
+	public static final OMS INTEGER1_FACTORIAL = OMCreator.createOMS("integer1", "factorial");
 	
 	public static final OMS INTERVAL1_INTERVALCC = OMCreator.createOMS("interval1", "interval_cc");
 	public static final OMS INTERVAL1_INTERVALCO = OMCreator.createOMS("interval1", "interval_co");
