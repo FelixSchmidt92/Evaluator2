@@ -111,4 +111,15 @@ public class Evaluator {
 	public static String getLaTeX(OMOBJ omobj) throws EvaluatorException {
 		return new OMToLatexVisitor().visit(omobj);
 	}
+	
+	
+	/**
+	 * Converts a OpenMath-Object into R Syntax
+	 * @param omobj
+	 * @return r-syntax
+	 * @throws EvaluatorException
+	 */
+	public static String getRSyntax(OMOBJ omobj) throws EvaluatorException {
+		throw new EvaluatorException("CasVisitor is not implemented yet");
+	}
 }

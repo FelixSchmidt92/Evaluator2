@@ -11,17 +11,20 @@ public class EvaluateInR extends Function {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public boolean argumentsShouldBeEvaluated() {
+		return false;
+	}
 
 	@Override
 	protected int minArgs() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 1;
 	}
 
 	@Override
 	protected int maxArgs() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 1;
 	}
 
 }
