@@ -115,14 +115,12 @@ public class TestBooleanOr extends TestIntegration {
 	
 	@Test(expected=ParserException.class)
 	public void testBooleanOrWithWrongInputCharacter() throws EvaluatorException, OpenMathException {
-		Evaluator.getBooleanResult("1 || ab", exerciseVariableMap, fillInVariableMap);
-		fail();
+		assertFalse(Evaluator.getBooleanResult("1 || ab", exerciseVariableMap, fillInVariableMap));
 	}
 	
 	@Test(expected=FunctionInvalidArgumentTypeException.class)
 	public void testBooleanOrWithWrongInputString() throws EvaluatorException, OpenMathException {
-		Evaluator.getBooleanResult("1 || 'a'", exerciseVariableMap, fillInVariableMap);
-		fail();
+		assertFalse(Evaluator.getBooleanResult("1 || 'a'", exerciseVariableMap, fillInVariableMap));
 	}
 	
 	@Test (expected=UndefinedExerciseVariableException.class)

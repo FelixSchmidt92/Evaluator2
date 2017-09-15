@@ -14,7 +14,7 @@ import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
-import de.uni_due.s3.evaluator2.core.syntaxvisitor.OMToLatexVisitor;
+import de.uni_due.s3.evaluator2.core.visitor.OMToLatexVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
@@ -95,7 +95,7 @@ public class TestMatrix extends TestFunctionAbstract {
 	public void testMatrixLatexSyntax() throws OpenMathException, EvaluatorException {
 		OMOBJ obj = Evaluator.evaluate("matrix(matrixrow(1,2,3),matrixrow(4,5))", new HashMap<>(), new HashMap<>());
 		String latex = new OMToLatexVisitor().visit(obj);
-		assertEquals("\\left(\\begin{array}{ll}"
+		assertEquals("\\left(\\begin{array}{rr}"
 				+ "\\begin{array}{rrr}1 & 2 & 3\\end{array}\\\\"
 				+ "\\begin{array}{rr}4 & 5\\end{array}\\\\"
 				+ "\\end{array}\\right)" 

@@ -3,7 +3,7 @@ package de.uni_due.s3.evaluator2.core;
 import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
-import de.uni_due.s3.evaluator2.core.syntaxvisitor.OMToStringVisitor;
+import de.uni_due.s3.evaluator2.core.visitor.OMToStringVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.openmath.jaxb.OMA;
@@ -167,83 +167,6 @@ public class OMUtils {
 				throw new InputMismatchException();
 			}
 		}else{
-			throw new InputMismatchException();
-		}
-	}
-
-	public static boolean convertOMToBoolean(Object obj) throws InputMismatchException {
-		if (obj instanceof OMOBJ) {
-			try {
-				obj = OMConverter.toElement((OMOBJ) obj);
-			} catch (OpenMathException e) {
-				throw new InputMismatchException();
-			}
-		}
-
-		if (obj instanceof OMS) {
-			if (obj.equals(OMSymbol.LOGIC1_TRUE) || obj.equals(OMSymbol.NUMS1_PI) || obj.equals(OMSymbol.NUMS1_E)
-					|| obj.equals(OMSymbol.NUMS1_INFINITY)) {
-				return true;
-			} else {
-				return false;
-			}
-		} else if (obj instanceof OMI) {
-			if (Integer.parseInt(((OMI) obj).getValue()) > 0) {
-				return true;
-			} else {
-				return false;
-			}
-		} else if (obj instanceof OMF) {
-			if (((OMF) obj).getDec() > 0) {
-				return true;
-			} else {
-				return false;
-			}
-		} else if (obj instanceof OMSTR) {
-			if (((OMSTR) obj).getContent().equals("true")) {
-				return true;
-			} else {
-				return false;
-			}
-		} else {
-			throw new InputMismatchException();
-		}
-	}
-
-	public static OMS convertToLogicBoolean(Object obj) throws InputMismatchException {
-
-		if (obj instanceof Integer) {
-			if ((Integer) obj > 0) {
-				return OMSymbol.LOGIC1_TRUE;
-			} else {
-				return OMSymbol.LOGIC1_FALSE;
-			}
-		} else if (obj instanceof Double) {
-			if (((Double) obj) > 0) {
-				return OMSymbol.LOGIC1_TRUE;
-			} else {
-				return OMSymbol.LOGIC1_FALSE;
-			}
-
-		} else if (obj instanceof Double) {
-			if (((Double) obj) > 0) {
-				return OMSymbol.LOGIC1_TRUE;
-			} else {
-				return OMSymbol.LOGIC1_FALSE;
-			}
-		} else if (obj instanceof Float) {
-			if (((Float) obj) > 0) {
-				return OMSymbol.LOGIC1_TRUE;
-			} else {
-				return OMSymbol.LOGIC1_FALSE;
-			}
-		} else if (obj instanceof Boolean) {
-			if (((Boolean) obj) == true) {
-				return OMSymbol.LOGIC1_TRUE;
-			} else {
-				return OMSymbol.LOGIC1_FALSE;
-			}
-		} else {
 			throw new InputMismatchException();
 		}
 	}

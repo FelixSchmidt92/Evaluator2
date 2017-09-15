@@ -66,7 +66,7 @@ public class Matrix extends Function {
 		String args = "";
 		
 		for(int i = 0; i<arguments.size();i++) {
-			begin += "l";
+			begin += "r";
 			args += getLatexSyntax(arguments.get(i))+"\\\\";
 		}
 		begin += "}";

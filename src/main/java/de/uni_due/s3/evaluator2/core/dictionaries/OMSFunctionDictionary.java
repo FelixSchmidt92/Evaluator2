@@ -47,8 +47,15 @@ import de.uni_due.s3.evaluator2.core.function.list1.List;
 import de.uni_due.s3.evaluator2.core.function.logic1.BooleanAnd;
 import de.uni_due.s3.evaluator2.core.function.logic1.BooleanNot;
 import de.uni_due.s3.evaluator2.core.function.logic1.BooleanOr;
+import de.uni_due.s3.evaluator2.core.function.logic1.False;
+import de.uni_due.s3.evaluator2.core.function.logic1.True;
 import de.uni_due.s3.evaluator2.core.function.logic_jack.IfThenElse;
 import de.uni_due.s3.evaluator2.core.function.mc_jack.MCIndex;
+import de.uni_due.s3.evaluator2.core.function.nums1.E;
+import de.uni_due.s3.evaluator2.core.function.nums1.I;
+import de.uni_due.s3.evaluator2.core.function.nums1.Infinity;
+import de.uni_due.s3.evaluator2.core.function.nums1.NaN;
+import de.uni_due.s3.evaluator2.core.function.nums1.Pi;
 import de.uni_due.s3.evaluator2.core.function.openmath_jack.CountBasicOperations;
 import de.uni_due.s3.evaluator2.core.function.openmath_jack.CountNodes;
 import de.uni_due.s3.evaluator2.core.function.openmath_jack.GetDenominator;
@@ -195,6 +202,8 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.LOGIC1_AND, new BooleanAnd());
 		functions.put(OMSymbol.LOGIC1_OR, new BooleanOr());
 		functions.put(OMSymbol.LOGIC1_NOT, new BooleanNot());
+		functions.put(OMSymbol.LOGIC1_TRUE, new True());
+		functions.put(OMSymbol.LOGIC1_FALSE, new False());
 
 		functions.put(OMSymbol.LINALGJACK_EQUALBASIS, new EqualBasis());
 		functions.put(OMSymbol.LINALGJACK_ISLINEARLYINDEPENDENT, new IsLinearlyIndependent());
@@ -211,6 +220,11 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.MCJACK_MCINDEX, new MCIndex());
 		
 		functions.put(OMSymbol.NUMS1_RATIONAL, new Divide());
+		functions.put(OMSymbol.NUMS1_E, new E());
+		functions.put(OMSymbol.NUMS1_I, new I());
+		functions.put(OMSymbol.NUMS1_INFINITY, new Infinity());
+		functions.put(OMSymbol.NUMS1_NAN, new NaN());
+		functions.put(OMSymbol.NUMS1_PI, new Pi());
 
 		functions.put(OMSymbol.OPENMATHJACK_COUNTBASICOPERATIONS, new CountBasicOperations());
 		functions.put(OMSymbol.OPENMATHJACK_COUNTNODES, new CountNodes());

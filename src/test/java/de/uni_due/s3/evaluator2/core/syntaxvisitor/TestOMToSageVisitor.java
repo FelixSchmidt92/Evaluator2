@@ -11,8 +11,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
+import de.uni_due.s3.evaluator2.core.visitor.OMToSageVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OMF;
 import de.uni_due.s3.openmath.jaxb.OMI;
@@ -86,7 +86,7 @@ public class TestOMToSageVisitor {
 	}
 
 	@Test
-	public void testVisitTerminals() throws NoRepresentationAvailableException {
+	public void testVisitTerminals() throws EvaluatorException {
 		assertEquals(omiString, visitor.visit(omi));
 		assertEquals(omfString, visitor.visit(omf));
 		assertEquals(omvString, visitor.visit(omv));

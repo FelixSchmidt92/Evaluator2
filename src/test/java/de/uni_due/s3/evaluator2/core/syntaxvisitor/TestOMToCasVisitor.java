@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator2.core.function.Function;
+import de.uni_due.s3.evaluator2.core.visitor.OMToSyntaxVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMA;
@@ -24,7 +25,7 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestOMToCasVisitor {
 
-	private class ImplVisitor extends OMToCasVisitor {
+	private class ImplVisitor extends OMToSyntaxVisitor<String> {
 
 		@Override
 		protected String visit(OMF omf) {
@@ -34,11 +35,6 @@ public class TestOMToCasVisitor {
 		@Override
 		protected String visit(OMI omi) {
 			return "omi";
-		}
-
-		@Override
-		protected String visit(OMS oms) {
-			return "oms";
 		}
 
 		@Override
@@ -52,7 +48,7 @@ public class TestOMToCasVisitor {
 		}
 
 		@Override
-		protected String getCASRepresentationForFunction(Function function,OMS oms, List<Object> omel) {
+		protected String getSyntaxRepresentationForFunction(Function function,OMS oms, List<Object> omel) {
 			return "function";
 		}
 
@@ -80,7 +76,7 @@ public class TestOMToCasVisitor {
 
 		Assert.assertEquals("omi", vis.visit(omobj));
 		Assert.assertEquals("omi", vis.visit(omi));
-		Assert.assertEquals("oms", vis.visit(oms));
+		Assert.assertEquals("function", vis.visit(oms));
 		Assert.assertEquals("omf", vis.visit(omf));
 		Assert.assertEquals("omv", vis.visit(omv));
 		Assert.assertEquals("omstr", vis.visit(omstr));
@@ -103,7 +99,7 @@ public class TestOMToCasVisitor {
 		Assert.assertEquals("omi", vis.visit(omobj));
 		Assert.assertEquals("omi", vis.visit(OMCreator.createOMOBJ(omi)));
 		Assert.assertEquals("omf", vis.visit(OMCreator.createOMOBJ(omf)));
-		Assert.assertEquals("oms", vis.visit(OMCreator.createOMOBJ(oms)));
+		Assert.assertEquals("function", vis.visit(OMCreator.createOMOBJ(oms)));
 		Assert.assertEquals("omv", vis.visit(OMCreator.createOMOBJ(omv)));
 		Assert.assertEquals("omstr", vis.visit(OMCreator.createOMOBJ(omstr)));
 		Assert.assertEquals("function", vis.visit(oma));

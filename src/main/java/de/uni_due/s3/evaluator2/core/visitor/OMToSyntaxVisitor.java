@@ -1,4 +1,4 @@
-package de.uni_due.s3.evaluator2.core.syntaxvisitor;
+package de.uni_due.s3.evaluator2.core.visitor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,61 +40,43 @@ import de.uni_due.s3.openmath.omutils.OMObjectNotSupportedException;
  * @author dlux, spobel, frichtscheid
  *
  */
-public abstract class OMToCasVisitor {
+public abstract class OMToSyntaxVisitor<T> {
 
 	/**
 	 * visits the specific omElement. If another OMA is found the method in
-	 * callInFunctionTheMethod is called. This method is called From the
-	 * Function!
+	 * callInFunctionTheMethod is called. This method is called From the Function!
 	 * 
 	 * @param omElement
 	 *            the Element to visit
-	 * @return the String Representation of this omElement (including its
-	 *         children!)
+	 * @return the String Representation of this omElement (including its children!)
 	 * @throws NoRepresentationAvailableException
 	 * @throws FunctionInvalidNumberOfArgumentsException
 	 * @throws FunctionInvalidArgumentTypeException
 	 * @throws FunctionInvalidArgumentException
 	 * @throws CasException
 	 */
-	public String visit(Object omElement) throws EvaluatorException {
-		String result = "";
-
+	public T visit(Object omElement) throws EvaluatorException {
 		if (omElement == null)
 			throw new NoRepresentationAvailableException("No Representation available for a Null-Object");
 
 		switch (omElement.getClass().getSimpleName()) {
 		case "OMOBJ":
-			result = visit((OMOBJ) omElement);
-			break;
+			return visit((OMOBJ) omElement);
 		case "OMF":
-			result = visit((OMF) omElement);
-			break;
-
+			return visit((OMF) omElement);
 		case "OMI":
-			result = visit((OMI) omElement);
-			break;
-
+			return visit((OMI) omElement);
 		case "OMS":
-			result = visit((OMS) omElement);
-			break;
-
+			return visit((OMS) omElement);
 		case "OMSTR":
-			result = visit((OMSTR) omElement);
-			break;
-
+			return visit((OMSTR) omElement);
 		case "OMV":
-			result = visit((OMV) omElement);
-			break;
-
+			return visit((OMV) omElement);
 		case "OMA":
-			result = visit((OMA) omElement);
-			break;
+			return visit((OMA) omElement);
 		default:
 			throw new NoRepresentationAvailableException("Unable to visit omElement: " + omElement);
 		}
-
-		return result;
 	}
 
 	/**
@@ -110,7 +92,7 @@ public abstract class OMToCasVisitor {
 	 * @throws FunctionInvalidArgumentException
 	 * @throws CasException
 	 */
-	private String visit(OMOBJ omobj) throws EvaluatorException {
+	private T visit(OMOBJ omobj) throws EvaluatorException {
 		if (omobj != null) {
 			if (omobj.getOMF() != null) {
 				return visit(omobj.getOMF());
@@ -141,7 +123,9 @@ public abstract class OMToCasVisitor {
 	 *            the element which is visited now
 	 * @return the String-Representation
 	 */
-	protected abstract String visit(OMF omf);
+	protected T visit(OMF omf) throws NoRepresentationAvailableException {
+		throw new NoRepresentationAvailableException("There is no Representation for omobj: " + omf);
+	}
 
 	/**
 	 * Implement here the String-Representation of this OMI-Element
@@ -150,20 +134,25 @@ public abstract class OMToCasVisitor {
 	 *            the element which is visited now
 	 * @return the String-Representation
 	 */
-	protected abstract String visit(OMI omi);
+	protected T visit(OMI omi) throws NoRepresentationAvailableException {
+		throw new NoRepresentationAvailableException("There is no Representation for omobj: " + omi);
+	}
 
 	/**
 	 * Implement here the String-Representation of this OMS-Element
 	 * 
-	 * Note: If this oms is visited, it is an Parameter in a Function, so a
-	 * Terminal like pi, e or i
+	 * Note: If this oms is visited, it is an Parameter in a Function, so a Terminal
+	 * like pi, e or i
 	 * 
 	 * @param oms
 	 *            the element which is visited now
 	 * @return the String-Representation
 	 * @throws NoRepresentationAvailableException
 	 */
-	protected abstract String visit(OMS oms) throws EvaluatorException;
+	private T visit(OMS oms) throws EvaluatorException {
+		Function function = OMSFunctionDictionary.getInstance().getFunction(oms);
+		return getSyntaxRepresentationForFunction(function, oms, null);
+	}
 
 	/**
 	 * Implement here the String-Representation of this OMSTR-Element
@@ -171,8 +160,11 @@ public abstract class OMToCasVisitor {
 	 * @param omstr
 	 *            the element which is visited now
 	 * @return the String-Representation
+	 * @throws NoRepresentationAvailableException
 	 */
-	protected abstract String visit(OMSTR omstr);
+	protected T visit(OMSTR omstr) throws NoRepresentationAvailableException {
+		throw new NoRepresentationAvailableException("There is no Representation for omobj: " + omstr);
+	}
 
 	/**
 	 * Implement here the String-Representation of this OMV-Element
@@ -181,12 +173,14 @@ public abstract class OMToCasVisitor {
 	 *            the element which is visited now
 	 * @return the String-Representation
 	 */
-	protected abstract String visit(OMV omv);
+	protected T visit(OMV omv) throws NoRepresentationAvailableException {
+		throw new NoRepresentationAvailableException("There is no Representation for omobj: " + omv);
+	}
 
 	/**
-	 * An OMA is visited here. Here the visit searches for the specific Function
-	 * and calls with this found Function callInFunctionTheMethod The List given
-	 * to this method is beforehand checked if Parameters are correct
+	 * An OMA is visited here. Here the visit searches for the specific Function and
+	 * calls with this found Function callInFunctionTheMethod The List given to this
+	 * method is beforehand checked if Parameters are correct
 	 * 
 	 * @param oma
 	 *            the visited oma
@@ -197,7 +191,7 @@ public abstract class OMToCasVisitor {
 	 * @throws FunctionInvalidArgumentException
 	 * @throws CasException
 	 */
-	private String visit(OMA oma) throws EvaluatorException {
+	private T visit(OMA oma) throws EvaluatorException {
 
 		List<Object> omel = new ArrayList<>();
 
@@ -213,7 +207,7 @@ public abstract class OMToCasVisitor {
 
 		function.argsBetweenMinMax(omel); // Check for Correct amount of
 											// Arguments
-		return getCASRepresentationForFunction(function,oms, omel);
+		return getSyntaxRepresentationForFunction(function, oms, omel);
 	}
 
 	/**
@@ -235,7 +229,7 @@ public abstract class OMToCasVisitor {
 	 *             OMOBJChildNotSupportedException
 	 * @throws OMObjectNotSupportedException
 	 */
-	protected abstract String getCASRepresentationForFunction(Function function,OMS oms, List<Object> omel)
+	protected abstract T getSyntaxRepresentationForFunction(Function function, OMS oms, List<Object> omel)
 			throws EvaluatorException;
 
 }

@@ -2,7 +2,6 @@ package de.uni_due.s3.evaluator2.core.function.logic1;
 
 import java.util.List;
 
-import de.uni_due.s3.evaluator2.core.OMUtils;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSPriority;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.BinaryFunction;
@@ -10,20 +9,18 @@ import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
-import de.uni_due.s3.openmath.jaxb.OMS;
 
 /**
  * Implement openmath logic not. Example: !true => false
  * 
- * @author frichtscheid
+ * @author spobel
  *
  */
-public class BooleanNot extends BinaryFunction{
+public class BooleanNot extends BinaryFunction {
 
 	public BooleanNot() {
 		super(OMSPriority.getPriority(OMSymbol.LOGIC1_NOT));
 	}
-
 
 	/**
 	 * Takes one boolean argument and returns the opposite value. Expects one
@@ -35,10 +32,9 @@ public class BooleanNot extends BinaryFunction{
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionException {
 		try {
-			OMS arg1 = OMUtils.convertToLogicBoolean(OMUtils.convertOMToBoolean(arguments.get(0)));
-			return (arg1.equals(OMSymbol.LOGIC1_TRUE)) ? OMSymbol.LOGIC1_FALSE : OMSymbol.LOGIC1_TRUE;
+			return (getBooleanSyntax(arguments.get(0))) ? OMSymbol.LOGIC1_FALSE : OMSymbol.LOGIC1_TRUE;
 		} catch (Exception e) {
-			throw new FunctionInvalidArgumentTypeException(this, "boolean, int or float");
+			throw new FunctionInvalidArgumentTypeException(this, "(1)Boolean|Integer|Float");
 		}
 	}
 
@@ -57,11 +53,11 @@ public class BooleanNot extends BinaryFunction{
 
 		return "not(" + getSageSyntax(arguments.get(0)) + ")";
 	}
-	
+
 	@Override
 	public String getPartialLatexSyntax(List<Object> arguments)
 			throws FunctionException, NoRepresentationAvailableException {
-		
-		return "\\neg"+arguments.get(0);
+
+		return "\\neg" + arguments.get(0);
 	}
 }

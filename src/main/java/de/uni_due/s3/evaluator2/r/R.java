@@ -66,7 +66,7 @@ public class R {
 			RConnection rConnection = new RConnection(con.getIp(), con.getPort());
 			
 			REXP result = rConnection.eval(rExpression);
-
+			result.getClass();
 			/**TODO FIXME Under Construction R Server 
 			* Missing conversion of result from R to OMOBJ
 			* 

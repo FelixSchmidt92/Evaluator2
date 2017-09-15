@@ -10,7 +10,6 @@ import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
-import de.uni_due.s3.evaluator2.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
@@ -35,20 +34,19 @@ public class IEEERemainder extends BinaryFunction {
 	 * Expects two argument of type OMI
 	 * 
 	 * @return OMI
-	 * @throws FunctionInvalidArgumentTypeException
 	 * @throws OpenMathException
-	 * @throws FunctionInvalidArgumentException
+	 * @throws EvaluatorException 
 	 */
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException, OpenMathException, FunctionInvalidArgumentException {
+	protected Object execute(List<Object> arguments) throws OpenMathException, EvaluatorException {
 		try {
-			Double leftValue = OMUtils.convertOMToDouble(arguments.get(0));
-			Double rightValue = OMUtils.convertOMToDouble(arguments.get(1));
+			Double leftValue = getDoubleSyntax(arguments.get(0));
+			Double rightValue = getDoubleSyntax(arguments.get(1));
 			if (rightValue == 0.0) {
 				throw new FunctionInvalidArgumentException(this, "Second argument for IEEERemainder has to be unequal 0.0 .");
 			}
 			return OMUtils.convertDoubleToOMIOMF(Math.IEEEremainder(leftValue, rightValue));
-		} catch (InputMismatchException e) {
+		} catch (NoRepresentationAvailableException e) {
 			throw new FunctionInvalidArgumentTypeException(this, "(1)Integer/Double/Float, (2)Integer/Double/Float");
 		}
 	}
