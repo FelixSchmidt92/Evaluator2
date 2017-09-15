@@ -1,8 +1,8 @@
 package de.uni_due.s3.evaluator2.core.integration.logic1;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
@@ -10,7 +10,6 @@ import org.junit.Test;
 import de.uni_due.s3.evaluator2.Evaluator;
 import de.uni_due.s3.evaluator2.core.integration.TestIntegration;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.parser.ParserException;
 import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedExerciseVariableException;
 import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedFillInVariableException;
@@ -118,9 +117,9 @@ public class TestBooleanOr extends TestIntegration {
 		assertFalse(Evaluator.getBooleanResult("1 || ab", exerciseVariableMap, fillInVariableMap));
 	}
 	
-	@Test(expected=FunctionInvalidArgumentTypeException.class)
+	@Test
 	public void testBooleanOrWithWrongInputString() throws EvaluatorException, OpenMathException {
-		assertFalse(Evaluator.getBooleanResult("1 || 'a'", exerciseVariableMap, fillInVariableMap));
+		assertTrue(Evaluator.getBooleanResult("1 || 'a'", exerciseVariableMap, fillInVariableMap));
 	}
 	
 	@Test (expected=UndefinedExerciseVariableException.class)
