@@ -96,8 +96,8 @@ public class TestMatrix extends TestFunctionAbstract {
 		OMOBJ obj = Evaluator.evaluate("matrix(matrixrow(1,2,3),matrixrow(4,5))", new HashMap<>(), new HashMap<>());
 		String latex = new OMToLatexVisitor().visit(obj);
 		assertEquals("\\left(\\begin{array}{rr}"
-				+ "\\begin{array}{rrr}1 & 2 & 3\\end{array}\\\\"
-				+ "\\begin{array}{rr}4 & 5\\end{array}\\\\"
+				+ "1 & 2 & 3\\\\"
+				+ "4 & 5\\\\"
 				+ "\\end{array}\\right)" 
 				, latex);
 	}

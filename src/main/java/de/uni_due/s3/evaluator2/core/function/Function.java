@@ -186,7 +186,7 @@ public abstract class Function {
 	public Boolean getPartialBooleanSyntax(List<Object> arguments)
 			throws EvaluatorException {
 		throw new NoRepresentationAvailableException(
-				"There is no String-representation for function " + this.getClass() + " implemented");
+				"There is no Boolean-representation for function " + this.getClass() + " implemented");
 	}
 	
 	/**
@@ -228,7 +228,7 @@ public abstract class Function {
 	public Double getPartialDoubleSyntax(List<Object> arguments)
 			throws EvaluatorException {
 		throw new NoRepresentationAvailableException(
-				"There is no String-representation for function " + this.getClass() + " implemented");
+				"There is no Double-representation for function " + this.getClass() + " implemented");
 	}
 	
 	/**
@@ -270,7 +270,7 @@ public abstract class Function {
 	public Integer getPartialIntegerSyntax(List<Object> arguments)
 			throws EvaluatorException {
 		throw new NoRepresentationAvailableException(
-				"There is no String-representation for function " + this.getClass() + " implemented");
+				"There is no Integer-representation for function " + this.getClass() + " implemented");
 	}
 
 	/**
@@ -305,11 +305,53 @@ public abstract class Function {
 	public String getPartialLatexSyntax(List<Object> omel)
 			throws EvaluatorException {
 		throw new NoRepresentationAvailableException(
-				"There is no latex representation for function " + this.getClass() + " implemented");
+				"There is no LaTeX representation for function " + this.getClass() + " implemented");
 		
 		//each function is represented by an OMS in a
 	}
 
+	/**
+	 * Call this Function, if you need your argument in Sage Syntax.
+	 * 
+	 * In getPartialSageSyntax: Call this Function on every argument, to get the
+	 * Sage-Syntax of this argument
+	 * 
+	 * @param omElement
+	 *            the argument, which should be represented in Sage
+	 * @return a String representation of this argument in Sage
+	 * @throws NoRepresentationAvailableException
+	 * @throws FunctionInvalidNumberOfArgumentsException
+	 * @throws FunctionInvalidArgumentTypeException
+	 * @throws CasException
+	 */
+	protected final String getRSyntax(Object omElement)
+			throws EvaluatorException {
+		return new OMToSageVisitor().visit(omElement);
+	}
+
+	/**
+	 * Define here how the Syntax should look like in Sage for this specific
+	 * Function All Arguments that are passed here can be recursively called
+	 * again with getSageSyntax(omElement). So only deal here with the
+	 * Representation of this Function and call (usually) the arguments in
+	 * getSageSyntax(omElement) For Examples: see Plus, Minus or Set
+	 * 
+	 * @param arguments
+	 *            A List of Arguments for this Function. Note: The arguments are
+	 *            not evaluated!
+	 * @return A String Representation of this Function AND all innerFunction
+	 * @throws NoRepresentationAvailableException
+	 * @throws FunctionInvalidNumberOfArgumentsException
+	 * @throws FunctionInvalidArgumentTypeException
+	 * @throws FunctionInvalidArgumentException
+	 * @throws CasException
+	 */
+	public String getPartialRSyntax(List<Object> arguments)
+			throws EvaluatorException {
+		throw new NoSageRepresentationAvailableException(
+				"There is no R representation for function " + this.getClass() + " implemented");
+	}
+	
 	/**
 	 * Call this Function, if you need your argument in Sage Syntax.
 	 * 

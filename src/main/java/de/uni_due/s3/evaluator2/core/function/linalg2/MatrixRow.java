@@ -44,22 +44,17 @@ public class MatrixRow extends Function {
 
 		return sageExpression + "]";
 	}
-	
+
 	@Override
-	public String getPartialLatexSyntax(List<Object> arguments)
-			throws EvaluatorException {
-		String begin = "\\begin{array}{";
+	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException {
 		String args = "";
-		
-		for(int i = 0; i<arguments.size();i++) {
-			args += getLatexSyntax(arguments.get(i))+" & ";
-			begin += "r";
+
+		for (int i = 0; i < arguments.size(); i++) {
+			args += getLatexSyntax(arguments.get(i)) + " & ";
 		}
-		begin += "}";
-		args = args.substring(0, args.length()-3); //remove last &
-		
-		
-		return begin + args + "\\end{array}";
+		args = args.substring(0, args.length() - 3); // remove last &
+
+		return args;
 	}
 
 }

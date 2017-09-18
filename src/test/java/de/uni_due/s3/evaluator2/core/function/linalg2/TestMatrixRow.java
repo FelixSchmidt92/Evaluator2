@@ -75,10 +75,6 @@ public class TestMatrixRow extends TestFunctionAbstract {
 	public void testMatrixRowLatexSyntax() throws OpenMathException, EvaluatorException {
 		OMOBJ obj = Evaluator.evaluate("matrixrow(1,2,3)", new HashMap<>(), new HashMap<>());
 		String latex = new OMToLatexVisitor().visit(obj);
-		assertEquals("\\begin{array}{rrr}" + 
-				"1 & " + 
-				"2 & " + 
-				"3" + 
-				"\\end{array}", latex);
+		assertEquals("1 & 2 & 3", latex);
 	}
 }

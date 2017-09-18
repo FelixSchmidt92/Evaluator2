@@ -40,8 +40,8 @@ public class TestDeterminant extends TestFunctionAbstract{
 		args.add(oma);
 		assertEquals("\\det{"
 				+ "\\left(\\begin{array}{rr}"
-						+ "\\begin{array}{rr}1 & 2\\end{array}\\\\"
-						+ "\\begin{array}{rr}1 & 2\\end{array}\\\\"
+						+ "1 & 2\\\\"
+						+ "1 & 2\\\\"
 						+ "\\end{array}\\right)"
 				+ "}",func.getPartialLatexSyntax(args));
 	}
