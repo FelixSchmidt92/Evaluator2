@@ -66,7 +66,7 @@ public class R {
 			RConnection rConnection = new RConnection(con.getIp(), con.getPort());
 			
 			REXP result = rConnection.eval(rExpression);
-			new RToOMOBJVisitor().visit(result);
+			System.out.println(new RToOMOBJVisitor().visit(result));
 			/**TODO FIXME Under Construction R Server 
 			* Missing conversion of result from R to OMOBJ
 			* 
