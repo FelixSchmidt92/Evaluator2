@@ -29,7 +29,11 @@ public class OMToSageVisitor extends OMToSyntaxVisitor<String> {
 
 	@Override
 	protected String visit(OMSTR omstr) {
-		return "'" + omstr.getContent() + "'";
+		if (omstr.getContent().equals("")) {
+			return "''";
+		} else {
+			return omstr.getContent();
+		}
 	}
 
 	@Override

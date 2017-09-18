@@ -143,7 +143,7 @@ public class TestIntegrate extends TestFunctionAbstract {
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void testIntegrateWithWrongArguments() throws OpenMathException, EvaluatorException {
 		List<Object> args = new ArrayList<Object>();
-		args.add(OMCreator.createOMSTR(null));
+		args.add(OMCreator.createOMSTR("''"));
 		args.add(OMCreator.createOMSTR("test"));
 		func.evaluate(args);
 		fail();

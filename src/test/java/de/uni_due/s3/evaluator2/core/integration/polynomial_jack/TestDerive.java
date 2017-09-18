@@ -54,7 +54,7 @@ public class TestDerive extends TestIntegration {
 	@Test
 	public void testDerive3() throws EvaluatorException, OpenMathException {
 		assertEquals(ExpressionParser.parse("2*x+2", null, null),
-				Evaluator.evaluate("derive('x^2 + 2x','x')", deriveExerciseVariableMap, deriveFillInVariableMap));
+				Evaluator.evaluate("derive('x^2+2*x','x')", deriveExerciseVariableMap, deriveFillInVariableMap));
 	}
 
 	@Test

@@ -39,7 +39,7 @@ public class TestOMToSageVisitor {
 			{ "42", "1.234", "y", "Another", OMSymbol.LOGIC1_FALSE, "False" },
 			{ "12345", "0.123", "z", "This", OMSymbol.NUMS1_PI, "pi" },
 			{ "0", "0.0012", "abc", "Test", OMSymbol.NUMS1_E, "e" },
-			{ "-1", "12345.1", "def", "", OMSymbol.NUMS1_NAN, "NaN" },
+			{ "-1", "12345.1", "def", "''", OMSymbol.NUMS1_NAN, "NaN" },
 			{ "9", "1.1", "ghi", "a", OMSymbol.NUMS1_I, "I" }, // [5]
 			{ "100", "5.5", "n", "äöü", OMSymbol.NUMS1_INFINITY, "Infinity" },
 
@@ -90,7 +90,7 @@ public class TestOMToSageVisitor {
 		assertEquals(omiString, visitor.visit(omi));
 		assertEquals(omfString, visitor.visit(omf));
 		assertEquals(omvString, visitor.visit(omv));
-		assertEquals("'" + omstrString + "'", visitor.visit(omstr));
+		assertEquals(omstrString, visitor.visit(omstr));
 		assertEquals(omsTerminalString, visitor.visit(omsTerminal));
 	}
 
