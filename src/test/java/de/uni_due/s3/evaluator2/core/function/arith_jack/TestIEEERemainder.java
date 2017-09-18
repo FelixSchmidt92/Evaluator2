@@ -49,7 +49,7 @@ public class TestIEEERemainder {
 	}
 	
 	@Test
-	public void testIEEERemainderLatexSyntax() throws EvaluatorException {
+	public void testIEEERemainderLatexSyntax() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("IEEEremainder(3,-2)", null, null);
 		String latex = Evaluator.getLaTeX(omobj);
 		assertEquals("3\\mathbin{\\%}-2",latex);

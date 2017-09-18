@@ -32,7 +32,7 @@ public class TestGetDenominator extends TestIntegration {
 
 	@BeforeClass
 	public static void beforeTest() throws FunctionNotImplementedException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException, ErroneousFillInVariableException, ErroneousExerciseVariableException {
+			UndefinedExerciseVariableException, ParserException, ErroneousFillInVariableException, ErroneousExerciseVariableException, OpenMathException {
 		getDenominatorFillInVariableMap.put(1, ExpressionParser.parse("0", null, null));
 		getDenominatorFillInVariableMap.put(2, ExpressionParser.parse("20/3", null, null));
 		getDenominatorFillInVariableMap.put(3, ExpressionParser.parse("10.3", null, null));

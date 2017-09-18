@@ -27,18 +27,17 @@ public class Size extends Function {
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionException {
 
-		if (OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.SET1_SET)) {
-			OMA set = (OMA) arguments.get(0);
-
-			OMI omi = new OMI();
-			omi.setValue(Integer.toString(set.getOmel().size() - 1)); // -1
-																		// wegen
-																		// oms
-			return omi;
+		if (!OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.SET1_SET)
+				&& !OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.LIST1_LIST)) {
+			throw new FunctionInvalidArgumentTypeException(this, "(0)Set|List");
 		}
+		OMA set = (OMA) arguments.get(0);
 
-		throw new FunctionInvalidArgumentTypeException(this, "set");
-
+		OMI omi = new OMI();
+		omi.setValue(Integer.toString(set.getOmel().size() - 1)); // -1
+																	// wegen
+																	// oms
+		return omi;
 	}
 
 	@Override

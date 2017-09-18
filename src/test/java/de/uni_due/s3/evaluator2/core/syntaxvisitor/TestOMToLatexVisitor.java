@@ -43,7 +43,7 @@ public class TestOMToLatexVisitor {
 	}
 	
 	@Test
-	public void testOMToLatexVisitorWithStandardRepresentation() throws EvaluatorException {
+	public void testOMToLatexVisitorWithStandardRepresentation() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = ExpressionParser.parse("charAt('abder',3)", null, null);
 		String latex = Evaluator.getLaTeX(obj);
 		assertEquals("\\mbox{charAt}\\left(abder,3\\right)",latex);

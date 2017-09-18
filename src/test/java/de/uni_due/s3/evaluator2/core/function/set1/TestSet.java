@@ -74,12 +74,32 @@ public class TestSet extends TestFunctionAbstract {
 	public void testSetIntegrationWithZero() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("{}", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
-		assertEquals(OMCreator.createOMA(OMSymbol.SET1_SET, new ArrayList<Object>()), result.getOMA());
+		assertEquals(OMCreator.createOMA(OMSymbol.LIST1_LIST, new ArrayList<Object>()), result.getOMA());
 	}
 
 	@Test
 	public void testSetIntegrationAsFunction() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("set(1,2,3)", null, null);
+		OMOBJ result = OMExecutor.execute(omobj);
+		List<Object> value = result.getOMA().getOmel();
+		assertEquals(OMCreator.createOMI(1), value.get(1));
+		assertEquals(OMCreator.createOMI(2), value.get(2));
+		assertEquals(OMCreator.createOMI(3), value.get(3));
+	}
+	
+	@Test
+	public void testSetIntegrationInBrace() throws OpenMathException, EvaluatorException {
+		OMOBJ omobj = ExpressionParser.parse("{1;2;3}", null, null);
+		OMOBJ result = OMExecutor.execute(omobj);
+		List<Object> value = result.getOMA().getOmel();
+		assertEquals(OMCreator.createOMI(1), value.get(1));
+		assertEquals(OMCreator.createOMI(2), value.get(2));
+		assertEquals(OMCreator.createOMI(3), value.get(3));
+	}
+	
+	@Test
+	public void testSetIntegrationWithSemi() throws OpenMathException, EvaluatorException {
+		OMOBJ omobj = ExpressionParser.parse("'1;2;3'", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		List<Object> value = result.getOMA().getOmel();
 		assertEquals(OMCreator.createOMI(1), value.get(1));

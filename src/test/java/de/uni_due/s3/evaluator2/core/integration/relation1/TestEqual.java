@@ -28,7 +28,7 @@ public class TestEqual extends TestIntegration {
 
 	@BeforeClass
 	public static void beforeTest() throws FunctionNotImplementedException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException, ErroneousFillInVariableException, ErroneousExerciseVariableException {
+			UndefinedExerciseVariableException, ParserException, ErroneousFillInVariableException, ErroneousExerciseVariableException, OpenMathException {
 		equalFillInVariableMap.put(1, ExpressionParser.parse("7", null, null));
 		equalFillInVariableMap.put(2, ExpressionParser.parse("2", null, null));
 

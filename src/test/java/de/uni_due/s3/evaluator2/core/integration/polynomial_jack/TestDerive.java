@@ -31,7 +31,7 @@ public class TestDerive extends TestIntegration {
 	@BeforeClass
 	public static void beforeTest() throws FunctionNotImplementedException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException, ErroneousFillInVariableException,
-			ErroneousExerciseVariableException {
+			ErroneousExerciseVariableException, OpenMathException {
 		deriveFillInVariableMap.put(1, ExpressionParser.parse("x", null, null));
 		deriveFillInVariableMap.put(2, ExpressionParser.parse("0.5", null, null));
 

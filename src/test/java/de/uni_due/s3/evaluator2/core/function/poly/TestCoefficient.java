@@ -103,7 +103,7 @@ public class TestCoefficient extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testCoefficientSageSyntax() throws EvaluatorException {
+	public void testCoefficientSageSyntax() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<Object>();
 		args.add(ExpressionParser.parse("1+a^2-b", null, null));
 		args.add(OMCreator.createOMV("a"));

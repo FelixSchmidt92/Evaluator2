@@ -29,7 +29,7 @@ public class TestEqualsExpr extends TestIntegration {
 
 	@BeforeClass
 	public static void beforeTest() throws FunctionNotImplementedException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException, ErroneousFillInVariableException, ErroneousExerciseVariableException {
+			UndefinedExerciseVariableException, ParserException, ErroneousFillInVariableException, ErroneousExerciseVariableException, OpenMathException {
 		equalsExprFillInVariableMap.put(1, ExpressionParser.parse("0", null, null));
 		equalsExprFillInVariableMap.put(2, ExpressionParser.parse("x^2", null, null));
 

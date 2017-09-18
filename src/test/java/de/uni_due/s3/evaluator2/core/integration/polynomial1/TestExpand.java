@@ -30,7 +30,7 @@ public class TestExpand extends TestIntegration {
 
 	@BeforeClass
 	public static void beforeTest() throws FunctionNotImplementedException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException, ErroneousFillInVariableException, ErroneousExerciseVariableException {
+			UndefinedExerciseVariableException, ParserException, ErroneousFillInVariableException, ErroneousExerciseVariableException, OpenMathException {
 		expandFillInVariableMap.put(1, ExpressionParser.parse("1", null, null));
 		expandFillInVariableMap.put(2, ExpressionParser.parse("5", null, null));
 

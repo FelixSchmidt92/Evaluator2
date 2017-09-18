@@ -66,7 +66,7 @@ public class TestMin extends TestFunctionAbstract {
 	}
 	
 	@Test
-	public void testMinLatexSyntax() throws EvaluatorException {
+	public void testMinLatexSyntax() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("min(10,2)", null,null);
 		String latex = Evaluator.getLaTeX(omobj);
 		assertEquals("\\mbox{min}\\left(10,2\\right)",latex);

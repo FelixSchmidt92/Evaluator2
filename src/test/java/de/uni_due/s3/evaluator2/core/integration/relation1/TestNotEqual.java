@@ -29,7 +29,7 @@ public class TestNotEqual extends TestIntegration {
 
 	@BeforeClass
 	public static void beforeTest() throws FunctionNotImplementedException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException, ErroneousFillInVariableException, ErroneousExerciseVariableException {
+			UndefinedExerciseVariableException, ParserException, ErroneousFillInVariableException, ErroneousExerciseVariableException, OpenMathException {
 		notEqualFillInVariableMap.put(1, ExpressionParser.parse("3", null, null));
 		notEqualFillInVariableMap.put(2, ExpressionParser.parse("10", null, null));
 		notEqualFillInVariableMap.put(3, ExpressionParser.parse("3.5", null, null));

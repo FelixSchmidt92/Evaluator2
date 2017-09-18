@@ -13,6 +13,7 @@ import de.uni_due.s3.evaluator2.exceptions.parser.ErroneousFillInVariableExcepti
 import de.uni_due.s3.evaluator2.exceptions.parser.ParserException;
 import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedExerciseVariableException;
 import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedFillInVariableException;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * This class tests the LexerErrorStrategy
@@ -45,7 +46,7 @@ public class TestLexerErrorStrategy {
 	@Test(expected = ParserException.class)
 	public void testSyntaxError() throws FunctionNotImplementedException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException, ErroneousFillInVariableException,
-			ErroneousExerciseVariableException {
+			ErroneousExerciseVariableException, OpenMathException {
 		ExpressionParser.parse(parameter, null, null);
 	}
 }

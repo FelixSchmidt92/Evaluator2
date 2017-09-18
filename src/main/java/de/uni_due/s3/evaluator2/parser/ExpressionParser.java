@@ -24,13 +24,9 @@ import de.uni_due.s3.evaluator2.exceptions.parserruntime.UndefinedExerciseVariab
 import de.uni_due.s3.evaluator2.exceptions.parserruntime.UndefinedFillInVariableRuntimeException;
 import de.uni_due.s3.evaluator2.parser.antlr.EvaluatorLexer;
 import de.uni_due.s3.evaluator2.parser.antlr.EvaluatorParser;
-import de.uni_due.s3.openmath.jaxb.OMA;
-import de.uni_due.s3.openmath.jaxb.OMF;
-import de.uni_due.s3.openmath.jaxb.OMI;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
-import de.uni_due.s3.openmath.jaxb.OMS;
-import de.uni_due.s3.openmath.jaxb.OMSTR;
-import de.uni_due.s3.openmath.jaxb.OMV;
+import de.uni_due.s3.openmath.omutils.OMCreator;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * This class contains only one Function 'parse' to parse the expression to the
@@ -58,13 +54,14 @@ public class ExpressionParser {
 	 * @throws FunctionNotImplementedException
 	 * @throws ErroneousFillInVariableException
 	 * @throws ErroneousExerciseVariableException
+	 * @throws OpenMathException 
 	 * @throws ParserRuntimeException
 	 *             if the given String is null or not parsable.
 	 */
 	public static OMOBJ parse(String expression, HashMap<String, OMOBJ> exerciseVariableMap,
 			HashMap<Integer, OMOBJ> fillInVariableMap)
 			throws UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException,
-			FunctionNotImplementedException, ErroneousFillInVariableException, ErroneousExerciseVariableException {
+			FunctionNotImplementedException, ErroneousFillInVariableException, ErroneousExerciseVariableException, OpenMathException {
 		try {
 			ParseTree tree = createParseTree(expression);
 
@@ -74,7 +71,7 @@ public class ExpressionParser {
 
 			// Convert Tree to OMOBJ, evaluate it and again convert the evaluated
 			// tree to OMOBJ
-			return convertToOmobj(omobjElementsTree);
+			return OMCreator.createOMOBJ(omobjElementsTree);
 		} catch (ErroneousFillInVariableRuntimeException e) {
 			throw new ErroneousFillInVariableException(e.getMessage());
 		} catch (ErroneousExerciseVariableRuntimeException e) {
@@ -132,49 +129,5 @@ public class ExpressionParser {
 		evaluatorParser.setErrorHandler(new ParserErrorStrategy());
 
 		return evaluatorParser.expression();
-	}
-
-	/**
-	 * This method just gets an unknown OpenMathObject and wraps it into an OMOBJ.
-	 * Only add Objects which an OMOBJ can store in here otherwise null will be
-	 * returned.
-	 * 
-	 * @param omElement
-	 *            The Object which should be wrapped into OMOBJ (has to be one of
-	 *            the JAXB-Classes)
-	 * @return an OMOBJ containing the omElement at the correct spot
-	 */
-	private static OMOBJ convertToOmobj(Object omElement) {
-		OMOBJ omobj = new OMOBJ();
-
-		switch (omElement.getClass().getSimpleName()) {
-		case "OMF":
-			omobj.setOMF((OMF) omElement);
-			break;
-
-		case "OMI":
-			omobj.setOMI((OMI) omElement);
-			break;
-
-		case "OMS":
-			omobj.setOMS((OMS) omElement);
-			break;
-
-		case "OMSTR":
-			omobj.setOMSTR((OMSTR) omElement);
-			break;
-
-		case "OMV":
-			omobj.setOMV((OMV) omElement);
-			break;
-
-		case "OMA":
-			omobj.setOMA((OMA) omElement);
-			break;
-
-		default:
-			omobj = null;
-		}
-		return omobj;
 	}
 }

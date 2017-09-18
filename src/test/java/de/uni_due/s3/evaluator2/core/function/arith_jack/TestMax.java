@@ -66,7 +66,7 @@ public class TestMax extends TestFunctionAbstract {
 	}
 	
 	@Test
-	public void testMaxLatexSyntax() throws EvaluatorException {
+	public void testMaxLatexSyntax() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("max(10,2)", null,null);
 		String latex = Evaluator.getLaTeX(omobj);
 		assertEquals("\\mbox{max}\\left(10,2\\right)",latex);

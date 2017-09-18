@@ -33,7 +33,7 @@ public class TestGetNumerator extends TestIntegration {
 	@BeforeClass
 	public static void beforeTest() throws FunctionNotImplementedException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException, ErroneousFillInVariableException,
-			ErroneousExerciseVariableException {
+			ErroneousExerciseVariableException, OpenMathException {
 		getNumeratorFillInVariableMap.put(1, ExpressionParser.parse("0", null, null));
 		getNumeratorFillInVariableMap.put(2, ExpressionParser.parse("20/3", null, null));
 		getNumeratorFillInVariableMap.put(3, ExpressionParser.parse("10.3", null, null));

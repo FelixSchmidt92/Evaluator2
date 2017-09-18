@@ -29,7 +29,7 @@ public class TestGreaterThan extends TestIntegration {
 
 	@BeforeClass
 	public static void beforeTest() throws FunctionNotImplementedException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException, ErroneousFillInVariableException, ErroneousExerciseVariableException {
+			UndefinedExerciseVariableException, ParserException, ErroneousFillInVariableException, ErroneousExerciseVariableException, OpenMathException {
 		greaterThanFillInVariableMap.put(1, ExpressionParser.parse("3", null, null));
 		greaterThanFillInVariableMap.put(2, ExpressionParser.parse("1", null, null));
 

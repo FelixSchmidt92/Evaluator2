@@ -31,7 +31,7 @@ public class TestRandomMatrixEigenvalue extends TestIntegration {
 	@BeforeClass
 	public static void beforeTest() throws FunctionNotImplementedException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException, ErroneousFillInVariableException,
-			ErroneousExerciseVariableException {
+			ErroneousExerciseVariableException, OpenMathException {
 		randomMatrixEigenvalueFillInVariableMap.put(1, ExpressionParser.parse("'[1,1,1]'", null, null));
 
 		randomMatrixEigenvalueExerciseVariableMap.put("a", ExpressionParser.parse("'[1,1,1]'", null, null));

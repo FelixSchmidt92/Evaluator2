@@ -6,7 +6,6 @@ import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
-import de.uni_due.s3.openmath.jaxb.OMSTR;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 
 /**
@@ -54,20 +53,13 @@ public class TextWithVariables extends Function {
 		String temp = "";
 
 		for (Object obj : arguments) {
-			if (obj instanceof OMSTR) {
-				// removing ' at beginning and end of OMSTR, because for
-				// Sage-Commands
-				temp += ((OMSTR) obj).getContent();
-			} else {
-				temp += getSageSyntax(obj);
-			}
+			temp += getSageSyntax(obj);
 		}
 		return temp;
 	}
 
-	
 	@Override
-	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException{
+	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException {
 		String temp = "";
 
 		for (Object obj : arguments) {

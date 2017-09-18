@@ -63,7 +63,7 @@ public class TestFloor extends TestFunctionAbstract {
 	}
 	
 	@Test
-	public void testFloorLatexSyntax() throws EvaluatorException {
+	public void testFloorLatexSyntax() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("floor(10)", null, null);
 		String latex = Evaluator.getLaTeX(omobj);
 		assertEquals("\\left\\lfloor 10 \\right\\rfloor",latex);

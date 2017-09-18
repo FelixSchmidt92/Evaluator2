@@ -31,7 +31,7 @@ public class TestDependsOn extends TestIntegration {
 	@BeforeClass
 	public static void beforeTest() throws FunctionNotImplementedException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException, ErroneousFillInVariableException,
-			ErroneousExerciseVariableException {
+			ErroneousExerciseVariableException, OpenMathException {
 		dependsOnFillInVariableMap.put(1, ExpressionParser.parse("x", null, null));
 		dependsOnFillInVariableMap.put(2, ExpressionParser.parse("y", null, null));
 

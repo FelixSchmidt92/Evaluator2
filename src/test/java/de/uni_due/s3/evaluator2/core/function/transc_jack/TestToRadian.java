@@ -63,7 +63,7 @@ public class TestToRadian extends TestFunctionAbstract {
 	}
 	
 	@Test
-	public void testToRadianLatexSyntax() throws EvaluatorException {
+	public void testToRadianLatexSyntax() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("toRadian(120)", null, null);
 		String latex = Evaluator.getLaTeX(omobj);
 		assertEquals("\\mbox{toRadian}\\left(120\\degree\\right)",latex);

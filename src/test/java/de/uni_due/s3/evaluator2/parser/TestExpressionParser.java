@@ -21,6 +21,7 @@ import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedFillInVariableExcepti
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.omutils.OMCreator;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 @RunWith(Parameterized.class)
 public class TestExpressionParser {
@@ -85,7 +86,7 @@ public class TestExpressionParser {
 	@Test
 	public void testParseOMS() throws FunctionNotImplementedException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException, ErroneousFillInVariableException,
-			ErroneousExerciseVariableException {
+			ErroneousExerciseVariableException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse(omsStr, exerciseVariableMap, fillInVariableMap);
 		OMOBJ expected = new OMOBJ();
 		expected.setOMS(oms);
@@ -95,7 +96,7 @@ public class TestExpressionParser {
 	@Test
 	public void testParseOMI() throws FunctionNotImplementedException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException, ErroneousFillInVariableException,
-			ErroneousExerciseVariableException {
+			ErroneousExerciseVariableException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse(omi, null, null);
 		OMOBJ expected = new OMOBJ();
 		expected.setOMI(OMCreator.createOMI(Integer.parseInt(omi)));
@@ -105,7 +106,7 @@ public class TestExpressionParser {
 	@Test
 	public void testParseOMSTR() throws FunctionNotImplementedException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException, ErroneousFillInVariableException,
-			ErroneousExerciseVariableException {
+			ErroneousExerciseVariableException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse(omstr, null, null);
 		OMOBJ expected = new OMOBJ();
 		expected.setOMSTR(OMCreator.createOMSTR(omstr.substring(1, omstr.length() - 1)));
@@ -115,7 +116,7 @@ public class TestExpressionParser {
 	@Test
 	public void testParseOMF() throws FunctionNotImplementedException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException, ErroneousFillInVariableException,
-			ErroneousExerciseVariableException {
+			ErroneousExerciseVariableException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse(omf, null, null);
 		OMOBJ expected = new OMOBJ();
 		expected.setOMF(OMCreator.createOMF(Double.parseDouble(omf)));
@@ -125,7 +126,7 @@ public class TestExpressionParser {
 	@Test
 	public void testParseOMA() throws FunctionNotImplementedException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException, ErroneousFillInVariableException,
-			ErroneousExerciseVariableException {
+			ErroneousExerciseVariableException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse(oma, null, null);
 		OMOBJ expected = new OMOBJ();
 		ArrayList<Object> omel = new ArrayList<>();
@@ -138,7 +139,7 @@ public class TestExpressionParser {
 	@Test
 	public void testParserExerciseVariable() throws FunctionNotImplementedException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException, ErroneousFillInVariableException,
-			ErroneousExerciseVariableException {
+			ErroneousExerciseVariableException, OpenMathException {
 		OMOBJ expected = exerciseVariableMap.get(var.substring(5, var.length() - 1));
 		OMOBJ actual = ExpressionParser.parse(var, exerciseVariableMap, fillInVariableMap);
 		assertEquals(expected, actual);
@@ -147,7 +148,7 @@ public class TestExpressionParser {
 	@Test
 	public void testParserFillInVariable() throws FunctionNotImplementedException, UndefinedFillInVariableException,
 			UndefinedExerciseVariableException, ParserException, ErroneousFillInVariableException,
-			ErroneousExerciseVariableException {
+			ErroneousExerciseVariableException, OpenMathException {
 		OMOBJ expected = fillInVariableMap.get(Integer.parseInt(pos.substring(5, pos.length() - 1)));
 		OMOBJ actual = ExpressionParser.parse(pos, exerciseVariableMap, fillInVariableMap);
 		assertEquals(expected, actual);

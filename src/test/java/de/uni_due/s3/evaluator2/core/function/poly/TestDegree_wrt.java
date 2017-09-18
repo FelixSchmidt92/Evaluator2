@@ -82,7 +82,7 @@ public class TestDegree_wrt extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testDegreeWrtSageSyntax() throws EvaluatorException {
+	public void testDegreeWrtSageSyntax() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<Object>();
 		args.add(ExpressionParser.parse("1+a^2-b", null, null));
 		args.add(OMCreator.createOMV("a"));

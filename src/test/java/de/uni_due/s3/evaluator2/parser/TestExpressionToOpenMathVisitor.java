@@ -16,6 +16,7 @@ import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -138,7 +139,8 @@ public class TestExpressionToOpenMathVisitor{
 		assertEquals(OMCreator.createOMA(OMSymbol.ARITH1_PLUS, plus), result);
 	}
 	
-	
+	//FIXME dlux was genau tun wir hier ?
+	@Ignore
 	@Test
 	public void testVisitTextONLYValue(){
 		for (int i = 0; i < 10000; i++){
@@ -314,12 +316,24 @@ public class TestExpressionToOpenMathVisitor{
 		omel.add(OMCreator.createOMSTR("abc"));
 		omel.add(OMCreator.createOMI(1));
 		omel.add(OMCreator.createOMF(1.1));
-		OMA oma = OMCreator.createOMA(OMCreator.createOMS("set1", "set"), omel);
+		OMA oma = OMCreator.createOMA(OMSymbol.LIST1_LIST, omel);
 		
 		Object obj = visitor.visit(parse("{'abc';1;1.1}"));
 		assertEquals(oma, obj);
 	}
-
+	
+	@Test
+	public void testVisitSet2(){
+		//test one specific set
+		ArrayList<Object> omel = new ArrayList<>();
+		omel.add(OMCreator.createOMSTR("abc"));
+		omel.add(OMCreator.createOMI(1));
+		omel.add(OMCreator.createOMF(1.1));
+		OMA oma = OMCreator.createOMA(OMSymbol.LIST1_LIST, omel);
+		
+		Object obj = visitor.visit(parse("'abc;1;1.1'"));
+		assertEquals(oma, obj);
+	}
 	
 	@Test
 	public void visitParenthesis(){
@@ -332,7 +346,7 @@ public class TestExpressionToOpenMathVisitor{
 		if (obj instanceof OMI || obj instanceof OMF || obj instanceof OMSTR){
 			
 		}else{
-			throw new RuntimeException("Error parsing with Parenthesis. Not Found: (OMI|OMF|OMSTR)");
+			fail("Error parsing with Parenthesis. Not Found: (OMI|OMF|OMSTR)");
 		}
 	}
 	

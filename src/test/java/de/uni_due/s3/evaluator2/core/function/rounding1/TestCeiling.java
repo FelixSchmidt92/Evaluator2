@@ -63,7 +63,7 @@ public class TestCeiling extends TestFunctionAbstract {
 	}
 	
 	@Test
-	public void testCeilingLatexSyntax() throws EvaluatorException {
+	public void testCeilingLatexSyntax() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("ceil(10)", null, null);
 		String latex = Evaluator.getLaTeX(omobj);
 		assertEquals("\\left\\lceil 10 \\right\\rceil",latex);

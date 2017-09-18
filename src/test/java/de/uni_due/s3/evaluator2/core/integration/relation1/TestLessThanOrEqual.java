@@ -29,7 +29,7 @@ public class TestLessThanOrEqual extends TestIntegration {
 
 	@BeforeClass
 	public static void beforeTest() throws FunctionNotImplementedException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException, ErroneousFillInVariableException, ErroneousExerciseVariableException {
+			UndefinedExerciseVariableException, ParserException, ErroneousFillInVariableException, ErroneousExerciseVariableException, OpenMathException {
 		lessThanOrEqualFillInVariableMap.put(1, ExpressionParser.parse("3", null, null));
 		lessThanOrEqualFillInVariableMap.put(2, ExpressionParser.parse("1", null, null));
 		lessThanOrEqualFillInVariableMap.put(3, ExpressionParser.parse("2.5", null, null));

@@ -13,6 +13,7 @@ import de.uni_due.s3.evaluator2.exceptions.parser.ErroneousFillInVariableExcepti
 import de.uni_due.s3.evaluator2.exceptions.parser.ParserException;
 import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedExerciseVariableException;
 import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedFillInVariableException;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * This class tests the ParserErrorStrategy.
@@ -49,7 +50,7 @@ public class TestParserErrorStrategy {
 	@Test(expected = ParserException.class)
 	public void testSyncANDRecoverInlineANDReportNoViableAlternative() throws FunctionNotImplementedException,
 			UndefinedFillInVariableException, UndefinedExerciseVariableException, ParserException,
-			ErroneousFillInVariableException, ErroneousExerciseVariableException {
+			ErroneousFillInVariableException, ErroneousExerciseVariableException, OpenMathException {
 		ExpressionParser.parse(parameter, null, null);
 	}
 }

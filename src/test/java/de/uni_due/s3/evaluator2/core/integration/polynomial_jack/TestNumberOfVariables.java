@@ -29,7 +29,7 @@ public class TestNumberOfVariables extends TestIntegration {
 
 	@BeforeClass
 	public static void beforeTest() throws FunctionNotImplementedException, UndefinedFillInVariableException,
-			UndefinedExerciseVariableException, ParserException, ErroneousFillInVariableException, ErroneousExerciseVariableException {
+			UndefinedExerciseVariableException, ParserException, ErroneousFillInVariableException, ErroneousExerciseVariableException, OpenMathException {
 		numberOfVariablesFillInVariableMap.put(1, ExpressionParser.parse("0", null, null));
 		numberOfVariablesFillInVariableMap.put(2, ExpressionParser.parse("3", null, null));
 		numberOfVariablesFillInVariableMap.put(3, ExpressionParser.parse("x", null, null));
