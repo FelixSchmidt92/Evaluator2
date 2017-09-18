@@ -43,7 +43,7 @@ public class R {
 	 * Returns the result of given expression in a R command line.
 	 * 
 	 * @param rExpression
-	 * @return sageResult
+	 * @return an REXP result converted from R into OM*
 	 * @throws RserveException
 	 *             when rExpression is not able to be evaluated
 	 * @throws CasNotAvailableException
@@ -66,7 +66,7 @@ public class R {
 			RConnection rConnection = new RConnection(con.getIp(), con.getPort());
 			
 			REXP result = rConnection.eval(rExpression);
-			result.getClass();
+			new RToOMOBJVisitor().visit(result);
 			/**TODO FIXME Under Construction R Server 
 			* Missing conversion of result from R to OMOBJ
 			* 

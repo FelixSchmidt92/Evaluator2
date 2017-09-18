@@ -4,25 +4,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.BeforeClass;
+import org.junit.Test;
 
-import de.uni_due.s3.evaluator2.sage.Sage;
-import de.uni_due.s3.evaluator2.sage.SageConnection;
+import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
+import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestR {
 
 	@BeforeClass
 	public static void beforeClass() {
-		initSage();
+		initR();
 	}
 
-	public static void initSage() {
-		List<SageConnection> aSageConnectionsList = new ArrayList<>();
-		aSageConnectionsList.add(new SageConnection("192.168.68.127", 6311));
-		Sage.init(aSageConnectionsList);
+	public static void initR() {
+		List<RConn> rConnectionsList = new ArrayList<>();
+		rConnectionsList.add(new RConn("192.168.68.207", 6312));
+		R.init(rConnectionsList);
 	}
 
-//	@Test(expected = CasException.class)
-//	public void testException1() throws CasEvaluationException, CasNotAvailableException, OpenMathException {
-//		Sage.evaluateInCAS("");
-//	}
+	//@Test
+	public void testException1() throws CasEvaluationException, CasNotAvailableException, OpenMathException {
+		R.evaluateInCAS("c(1,2,3,4)");
+	}
 }
