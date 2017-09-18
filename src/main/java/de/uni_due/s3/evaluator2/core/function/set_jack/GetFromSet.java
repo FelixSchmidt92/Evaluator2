@@ -24,8 +24,9 @@ public class GetFromSet extends Function {
 
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionException {
-		if (!OMTypeChecker.isOMAWithSymbol(arguments.get(1), OMSymbol.SET1_SET)) {
-			throw new FunctionInvalidArgumentTypeException(this, "(0)Integer, (1)Set");
+		if (!OMTypeChecker.isOMAWithSymbol(arguments.get(1), OMSymbol.SET1_SET)
+				&& !OMTypeChecker.isOMAWithSymbol(arguments.get(1), OMSymbol.LIST1_LIST)) {
+			throw new FunctionInvalidArgumentTypeException(this, "(0)Integer, (1)Set|List");
 		}
 		try {
 			int pos = OMUtils.convertOMToInteger(arguments.get(0));

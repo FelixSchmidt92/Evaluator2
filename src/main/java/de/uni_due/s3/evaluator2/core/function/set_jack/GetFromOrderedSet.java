@@ -26,15 +26,16 @@ public class GetFromOrderedSet extends Function {
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionException {
 
-		if (!OMTypeChecker.isOMAWithSymbol(arguments.get(1), OMSymbol.SET1_SET)) {
-			throw new FunctionInvalidArgumentTypeException(this, "(0)Set, (1)Integer");
+		if (!OMTypeChecker.isOMAWithSymbol(arguments.get(1), OMSymbol.SET1_SET)
+				&& !OMTypeChecker.isOMAWithSymbol(arguments.get(1), OMSymbol.LIST1_LIST)) {
+			throw new FunctionInvalidArgumentTypeException(this, "(0)Integer, (1)Set|List");
 		}
 
 		int pos = 0;
 		try {
 			pos = OMUtils.convertOMToInteger(arguments.get(0));
 		} catch (InputMismatchException e) {
-			throw new FunctionInvalidArgumentTypeException(this, "(0)Set, (1)Integer");
+			throw new FunctionInvalidArgumentTypeException(this, "(0)Integer, (1)Set|List");
 		}
 
 		List<Object> set = ((OMA) arguments.get(1)).getOmel();
