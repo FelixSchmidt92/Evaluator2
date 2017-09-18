@@ -23,12 +23,14 @@ public class ChooseFromComplement extends Function {
 
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionException {
-		if (!OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.SET1_SET)) {
-			throw new FunctionInvalidArgumentTypeException(this, "(0)Set, (1)Set");
+		if (!OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.SET1_SET)
+				&& !OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.LIST1_LIST)) {
+			throw new FunctionInvalidArgumentTypeException(this, "(0)Set|List, (1)Set|List");
 		}
 
-		if (!OMTypeChecker.isOMAWithSymbol(arguments.get(1), OMSymbol.SET1_SET)) {
-			throw new FunctionInvalidArgumentTypeException(this, "(0)Set, (1)Set");
+		if (!OMTypeChecker.isOMAWithSymbol(arguments.get(1), OMSymbol.SET1_SET)
+				&& !OMTypeChecker.isOMAWithSymbol(arguments.get(1), OMSymbol.LIST1_LIST)) {
+			throw new FunctionInvalidArgumentTypeException(this, "(0)Set|List, (1)Set|List");
 		}
 
 		java.util.Set<Object> set = new HashSet<Object>();

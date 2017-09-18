@@ -22,21 +22,22 @@ public class GetRandomFromSet extends Function {
 
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionException {
-		if (!OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.SET1_SET)) {
-			throw new FunctionInvalidArgumentTypeException(this, "(0)Set");
+		if (!OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.SET1_SET)
+				&& !OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.LIST1_LIST)) {
+			throw new FunctionInvalidArgumentTypeException(this, "(0)Set|List");
 		}
 		List<Object> set = ((OMA) arguments.get(0)).getOmel();
 		set.remove(0); // 0te element ist die OMS_SET1_SET
-		
+
 		if (set.size() == 0) {
 			throw new FunctionInvalidArgumentException(this, "Set has to have at least one element.");
 		}
-		
+
 		Integer pos = new java.util.Random().nextInt(set.size());
-		
-		return set.get(pos); 
+
+		return set.get(pos);
 	}
-	
+
 	@Override
 	protected int minArgs() {
 		return 1;
