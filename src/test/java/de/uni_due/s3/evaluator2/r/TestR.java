@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
+@Ignore
 public class TestR {
 
 	@BeforeClass
