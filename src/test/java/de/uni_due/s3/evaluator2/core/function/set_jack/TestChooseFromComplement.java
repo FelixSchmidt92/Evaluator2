@@ -15,7 +15,6 @@ import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
@@ -125,11 +124,11 @@ public class TestChooseFromComplement extends TestFunctionAbstract {
 		assertEquals(OMCreator.createOMA(OMSymbol.LINALG2_VECTOR, vector), result.getOMA());
 	}
 
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testChooseFromComplementIntegrationWrongArgsInSet() throws OpenMathException, EvaluatorException {
+	@Test
+	public void testChooseFromComplementIntegrationArgsInSet() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("chooseFromComplement({1;'Test'},1)", null, null);
-		OMExecutor.execute(omobj);
-		fail();
+		OMOBJ result = OMExecutor.execute(omobj);
+		assertEquals(OMCreator.createOMSTR("Test"), result.getOMSTR());
 	}
 
 	@Test(expected = FunctionInvalidArgumentException.class)

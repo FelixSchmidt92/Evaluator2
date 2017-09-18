@@ -12,7 +12,6 @@ import de.uni_due.s3.evaluator2.Evaluator;
 import de.uni_due.s3.evaluator2.core.integration.TestIntegration;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedExerciseVariableException;
 import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedFillInVariableException;
@@ -122,9 +121,12 @@ public class TestChooseFromComplement extends TestIntegration {
 		Evaluator.evaluate("chooseFromComplement('{a;b;1.5}','{a;b;1.5}')", exerVar, fillIn);
 	}
 
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testChooseFromComplementWithWrongInputCharacter() throws OpenMathException, EvaluatorException {
-		Evaluator.evaluate("chooseFromComplement('{a;b;c;d}', a)", exerVar, fillIn);
+	@Test
+	public void testChooseFromComplementWithInputCharacter() throws OpenMathException, EvaluatorException {
+		OMOBJ expected = new OMOBJ();
+		expected.setOMV(OMCreator.createOMV("b"));
+		assertTrue(expected
+				.equals(Evaluator.evaluate("chooseFromComplement('{a;b}', a)", exerVar, fillIn)));
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)

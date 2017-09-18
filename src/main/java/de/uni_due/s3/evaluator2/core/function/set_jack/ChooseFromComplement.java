@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
@@ -23,24 +24,25 @@ public class ChooseFromComplement extends Function {
 
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionException {
+		Set<Object> set = new HashSet<Object>();
+		
 		if (!OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.SET1_SET)
 				&& !OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.LIST1_LIST)) {
-			throw new FunctionInvalidArgumentTypeException(this, "(0)Set|List, (1)Set|List");
+			throw new FunctionInvalidArgumentTypeException(this, "(0)Set|List");
 		}
-
-		if (!OMTypeChecker.isOMAWithSymbol(arguments.get(1), OMSymbol.SET1_SET)
-				&& !OMTypeChecker.isOMAWithSymbol(arguments.get(1), OMSymbol.LIST1_LIST)) {
-			throw new FunctionInvalidArgumentTypeException(this, "(0)Set|List, (1)Set|List");
-		}
-
-		java.util.Set<Object> set = new HashSet<Object>();
+		
 		List<Object> list1 = ((OMA) arguments.get(0)).getOmel();
 		list1.remove(0); // OMS entfernen
 		set.addAll(list1);
-
-		List<Object> list2 = ((OMA) arguments.get(1)).getOmel();
-		list2.remove(0); // OMS entfernen
-		set.removeAll(list2);
+		
+		if (!OMTypeChecker.isOMAWithSymbol(arguments.get(1), OMSymbol.SET1_SET)
+				&& !OMTypeChecker.isOMAWithSymbol(arguments.get(1), OMSymbol.LIST1_LIST)) {
+			set.remove(arguments.get(1));
+		} else {
+			List<Object> list2 = ((OMA) arguments.get(1)).getOmel();
+			list2.remove(0); // OMS entfernen
+			set.removeAll(list2);
+		}
 
 		if (set.size() == 0) {
 			throw new FunctionInvalidArgumentException(this, "Set has to have at least one element.");
