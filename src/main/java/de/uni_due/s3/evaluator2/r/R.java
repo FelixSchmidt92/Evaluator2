@@ -66,13 +66,9 @@ public class R {
 			RConnection rConnection = new RConnection(con.getIp(), con.getPort());
 			
 			REXP result = rConnection.eval(rExpression);
-			System.out.println(new RToOMOBJVisitor().visit(result));
-			/**TODO FIXME Under Construction R Server 
-			* Missing conversion of result from R to OMOBJ
-			* 
-			*  Also Missing : Visitor from OMOBJ (or Expression-String) into RSyntax!
-			*
-			*/
+
+			// Convert XML String to OM*-Object
+			casResult = new RToOMOBJVisitor().visit(result);
 			
 		} catch (RserveException e) {
 			rConnectionList.remove(con);
@@ -90,26 +86,13 @@ public class R {
 
 		OMOBJ omobjResult = null;
 		try {
+			casResult = "<OMOBJ>" + casResult + "</OMOBJ>";
 			omobjResult = OMConverter.toObject(casResult);
 		} catch (JAXBException e) {
-			//R created a wrong OMOBJ
+			throw new CasEvaluationException("Error Converting OMXML back to OMOBJ with :" + casResult);
 		}
 		return OMConverter.toElement(omobjResult);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	/**
