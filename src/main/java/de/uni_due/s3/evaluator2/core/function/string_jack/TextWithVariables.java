@@ -40,6 +40,15 @@ public class TextWithVariables extends Function {
 	}
 
 	@Override
+	public String getPartialStringSyntax(List<Object> arguments) throws EvaluatorException {
+		StringBuilder sb = new StringBuilder();
+		for (Object arg : arguments) {
+			sb.append(getStringSyntax(arg));
+		}
+		return sb.toString();
+	}
+
+	@Override
 	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException {
 		String temp = "";
 
@@ -48,7 +57,7 @@ public class TextWithVariables extends Function {
 		}
 		return temp;
 	}
-	
+
 	@Override
 	public List<Object> getPartialListSyntax(List<Object> omel) throws EvaluatorException {
 		return omel;
@@ -66,7 +75,7 @@ public class TextWithVariables extends Function {
 	@Override
 	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
 		String temp = "";
-	
+
 		for (Object obj : arguments) {
 			temp += getSageSyntax(obj);
 		}

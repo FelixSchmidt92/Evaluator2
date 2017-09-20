@@ -31,12 +31,8 @@ public class BooleanAnd extends BinaryFunction {
 	 */
 	@Override
 	protected Object execute(List<Object> arguments) throws EvaluatorException {
-		try {
-			return (getBooleanSyntax(arguments.get(0)) && getBooleanSyntax(arguments.get(1))) ? OMSymbol.LOGIC1_TRUE
-					: OMSymbol.LOGIC1_FALSE;
-		} catch (NoRepresentationAvailableException e) {
-			throw new FunctionInvalidArgumentTypeException(this, "(1,2)Boolean|Integer|Float");
-		}
+		return (getBooleanSyntax(arguments.get(0)) && getBooleanSyntax(arguments.get(1))) ? OMSymbol.LOGIC1_TRUE
+				: OMSymbol.LOGIC1_FALSE;
 	}
 
 	@Override

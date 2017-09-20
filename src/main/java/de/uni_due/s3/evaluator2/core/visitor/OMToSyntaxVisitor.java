@@ -57,7 +57,7 @@ public abstract class OMToSyntaxVisitor<T> {
 	 */
 	public T visit(Object omElement) throws EvaluatorException {
 		if (omElement == null)
-			throw new NoRepresentationAvailableException("No Representation available for a Null-Object");
+			throw new NoRepresentationAvailableException("No Representation available for a Null-Object. Function got null instead of a parameter.");
 
 		switch (omElement.getClass().getSimpleName()) {
 		case "OMOBJ":
@@ -75,7 +75,7 @@ public abstract class OMToSyntaxVisitor<T> {
 		case "OMA":
 			return visit((OMA) omElement);
 		default:
-			throw new NoRepresentationAvailableException("Unable to visit omElement: " + omElement);
+			throw new NoRepresentationAvailableException("Please inform JACK Admin! There is no Representation for OpenMath Object:" + omElement.getClass().getSimpleName());
 		}
 	}
 
@@ -123,9 +123,7 @@ public abstract class OMToSyntaxVisitor<T> {
 	 *            the element which is visited now
 	 * @return the String-Representation
 	 */
-	protected T visit(OMF omf) throws NoRepresentationAvailableException {
-		throw new NoRepresentationAvailableException("There is no Representation for omobj: " + omf);
-	}
+	protected abstract T visit(OMF omf) throws NoRepresentationAvailableException;
 
 	/**
 	 * Implement here the String-Representation of this OMI-Element
@@ -134,9 +132,7 @@ public abstract class OMToSyntaxVisitor<T> {
 	 *            the element which is visited now
 	 * @return the String-Representation
 	 */
-	protected T visit(OMI omi) throws NoRepresentationAvailableException {
-		throw new NoRepresentationAvailableException("There is no Representation for omobj: " + omi);
-	}
+	protected abstract T visit(OMI omi) throws NoRepresentationAvailableException;
 
 	/**
 	 * Implement here the String-Representation of this OMS-Element
@@ -162,9 +158,7 @@ public abstract class OMToSyntaxVisitor<T> {
 	 * @return the String-Representation
 	 * @throws NoRepresentationAvailableException
 	 */
-	protected T visit(OMSTR omstr) throws NoRepresentationAvailableException {
-		throw new NoRepresentationAvailableException("There is no Representation for omobj: " + omstr);
-	}
+	protected abstract T visit(OMSTR omstr) throws NoRepresentationAvailableException;
 
 	/**
 	 * Implement here the String-Representation of this OMV-Element
@@ -173,9 +167,7 @@ public abstract class OMToSyntaxVisitor<T> {
 	 *            the element which is visited now
 	 * @return the String-Representation
 	 */
-	protected T visit(OMV omv) throws NoRepresentationAvailableException {
-		throw new NoRepresentationAvailableException("There is no Representation for omobj: " + omv);
-	}
+	protected abstract T visit(OMV omv) throws NoRepresentationAvailableException;
 
 	/**
 	 * An OMA is visited here. Here the visit searches for the specific Function and

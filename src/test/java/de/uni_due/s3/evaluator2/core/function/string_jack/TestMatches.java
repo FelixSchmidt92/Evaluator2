@@ -10,8 +10,6 @@ import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
-import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OMSTR;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
@@ -51,16 +49,5 @@ public class TestMatches extends TestFunctionAbstract {
 		args.add(reg);
 
 		assertEquals(OMSymbol.LOGIC1_TRUE, func.evaluate(args));
-	}
-
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testMatchesWithOMA() throws OpenMathException, EvaluatorException {
-		ArrayList<Object> args = new ArrayList<>();
-		OMA in = OMCreator.createOMA(OMSymbol.LINALG2_MATRIXROW, new ArrayList<>());
-		OMSTR reg = OMCreator.createOMSTR("\\d");
-		args.add(in);
-		args.add(reg);
-
-		func.evaluate(args);
 	}
 }

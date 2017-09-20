@@ -9,6 +9,7 @@ import de.uni_due.s3.openmath.jaxb.OMF;
 import de.uni_due.s3.openmath.jaxb.OMI;
 import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.jaxb.OMSTR;
+import de.uni_due.s3.openmath.jaxb.OMV;
 
 public class OMToBooleanVisitor extends OMToSyntaxVisitor<Boolean> {
 
@@ -23,8 +24,13 @@ public class OMToBooleanVisitor extends OMToSyntaxVisitor<Boolean> {
 	}
 
 	@Override
-	protected Boolean visit(OMSTR omstr) {
-		return new Boolean(omstr.getContent());
+	protected Boolean visit(OMSTR omstr) throws NoRepresentationAvailableException {
+		throw new NoRepresentationAvailableException("Function expects Boolean instead of String:" + omstr.getContent());
+	}
+
+	@Override
+	protected Boolean visit(OMV omv) throws NoRepresentationAvailableException {
+		throw new NoRepresentationAvailableException("Function expects Boolean instead of Variable:" + omv.getName());
 	}
 
 	@Override

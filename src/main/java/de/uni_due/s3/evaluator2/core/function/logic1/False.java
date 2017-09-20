@@ -21,6 +21,11 @@ public class False extends Function {
 	}
 	
 	@Override
+	public Boolean getPartialBooleanSyntax(List<Object> arguments) throws EvaluatorException {
+		return false;
+	}
+	
+	@Override
 	public Double getPartialDoubleSyntax(List<Object> arguments) throws EvaluatorException {
 		return 0.0;
 	}

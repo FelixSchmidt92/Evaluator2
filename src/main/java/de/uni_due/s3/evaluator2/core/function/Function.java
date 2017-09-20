@@ -165,7 +165,11 @@ public abstract class Function {
 	 * @throws CasException
 	 */
 	protected final Boolean getBooleanSyntax(Object omElement) throws EvaluatorException {
-		return new OMToBooleanVisitor().visit(omElement);
+		try {
+			return new OMToBooleanVisitor().visit(omElement);
+		} catch (NoRepresentationAvailableException e) {
+			throw new FunctionInvalidArgumentTypeException(this, "Boolean");
+		}
 	}
 
 	/**
@@ -187,7 +191,7 @@ public abstract class Function {
 	 */
 	public Boolean getPartialBooleanSyntax(List<Object> arguments) throws EvaluatorException {
 		throw new NoRepresentationAvailableException(
-				"There is no Boolean-representation for function " + this.getClass() + " implemented");
+				"There is no Boolean-representation for function " + this.getClass().getSimpleName());
 	}
 
 	/**
@@ -205,7 +209,11 @@ public abstract class Function {
 	 * @throws CasException
 	 */
 	protected final Double getDoubleSyntax(Object omElement) throws EvaluatorException {
-		return new OMToDoubleVisitor().visit(omElement);
+		try {
+			return new OMToDoubleVisitor().visit(omElement);
+		} catch (NoRepresentationAvailableException e) {
+			throw new FunctionInvalidArgumentTypeException(this, "Double");
+		}
 	}
 
 	/**
@@ -227,7 +235,7 @@ public abstract class Function {
 	 */
 	public Double getPartialDoubleSyntax(List<Object> arguments) throws EvaluatorException {
 		throw new NoRepresentationAvailableException(
-				"There is no Double-representation for function " + this.getClass() + " implemented");
+				"There is no Double-representation for function " + this.getClass().getSimpleName());
 	}
 
 	/**
@@ -245,7 +253,11 @@ public abstract class Function {
 	 * @throws CasException
 	 */
 	protected final Integer getIntegerSyntax(Object omElement) throws EvaluatorException {
-		return new OMToIntegerVisitor().visit(omElement);
+		try {
+			return new OMToIntegerVisitor().visit(omElement);
+		} catch (NoRepresentationAvailableException e) {
+			throw new FunctionInvalidArgumentTypeException(this, "Integer");
+		}
 	}
 
 	/**
@@ -267,7 +279,7 @@ public abstract class Function {
 	 */
 	public Integer getPartialIntegerSyntax(List<Object> arguments) throws EvaluatorException {
 		throw new NoRepresentationAvailableException(
-				"There is no Integer-representation for function " + this.getClass() + " implemented");
+				"There is no Integer-representation for function " + this.getClass().getSimpleName());
 	}
 
 	/**
@@ -280,7 +292,6 @@ public abstract class Function {
 	 * @throws EvaluatorException
 	 */
 	protected final String getLatexSyntax(Object omElement) throws EvaluatorException {
-
 		return new OMToLatexVisitor().visit(omElement);
 	}
 
@@ -295,7 +306,7 @@ public abstract class Function {
 	 */
 	public String getPartialLatexSyntax(List<Object> omel) throws EvaluatorException {
 		throw new NoRepresentationAvailableException(
-				"There is no LaTeX representation for function " + this.getClass() + " implemented");
+				"There is no LaTeX representation for function " + this.getClass().getSimpleName());
 	}
 
 	/**
@@ -308,7 +319,6 @@ public abstract class Function {
 	 * @throws EvaluatorException
 	 */
 	protected final List<Object> getListSyntax(Object omElement) throws EvaluatorException {
-
 		return new OMToListVisitor().visit(omElement);
 	}
 
@@ -323,7 +333,7 @@ public abstract class Function {
 	 */
 	public List<Object> getPartialListSyntax(List<Object> omel) throws EvaluatorException {
 		throw new NoRepresentationAvailableException(
-				"There is no List representation for function " + this.getClass() + " implemented");
+				"There is no List representation for function " + this.getClass().getSimpleName());
 	}
 
 	/**
@@ -363,7 +373,7 @@ public abstract class Function {
 	 */
 	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException {
 		throw new NoSageRepresentationAvailableException(
-				"There is no R representation for function " + this.getClass() + " implemented");
+				"There is no R representation for function " + this.getClass().getSimpleName());
 	}
 
 	/**
@@ -403,7 +413,7 @@ public abstract class Function {
 	 */
 	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
 		throw new NoSageRepresentationAvailableException(
-				"There is no sage representation for function " + this.getClass() + " implemented");
+				"There is no Sage representation for function " + this.getClass().getSimpleName());
 	}
 
 	/**
@@ -425,7 +435,11 @@ public abstract class Function {
 	 * @throws CasException
 	 */
 	protected final String getStringSyntax(Object omElement) throws EvaluatorException {
-		return new OMToStringVisitor().visit(omElement);
+		try {
+			return new OMToStringVisitor().visit(omElement);
+		} catch (NoRepresentationAvailableException e) {
+			throw new FunctionInvalidArgumentTypeException(this, "String");
+		}
 	}
 
 	/**
@@ -447,7 +461,7 @@ public abstract class Function {
 	 */
 	public String getPartialStringSyntax(List<Object> arguments) throws EvaluatorException {
 		throw new NoRepresentationAvailableException(
-				"There is no String-representation for function " + this.getClass() + " implemented");
+				"There is no String-representation for function " + this.getClass().getSimpleName());
 	}
 
 }

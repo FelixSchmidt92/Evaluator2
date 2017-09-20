@@ -14,7 +14,7 @@ public class FunctionInvalidArgumentTypeException extends FunctionException {
 	}
 	
 	public FunctionInvalidArgumentTypeException(Function function, String types) {
-		super("Wrong arguments in Function: " + function.getClass().getSimpleName() + ". Arguments needs to be: " + types);
+		super("Wrong argument in Function: " + function.getClass().getSimpleName() + ". Argument needs to be: " + types);
 	}
 
 }

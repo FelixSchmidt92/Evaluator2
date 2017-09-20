@@ -2,7 +2,6 @@ package de.uni_due.s3.evaluator2.core.function.relation1;
 
 import java.util.List;
 
-import de.uni_due.s3.evaluator2.core.OMUtils;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSPriority;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.BinaryFunction;
@@ -25,20 +24,17 @@ public class LessThan extends BinaryFunction {
 	/**
 	 * Tests if the first argument is less than the second argument. Expects 2
 	 * arguments of type OMI or OMF
+	 * @throws EvaluatorException 
 	 * 
 	 * @throws FunctionInvalidArgumentTypeException
 	 * 
 	 *             return true or false as OMS
 	 */
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionException {
-		try {
-			double first = OMUtils.convertOMToDouble(arguments.get(0));
-			double second = OMUtils.convertOMToDouble(arguments.get(1));
+	protected Object execute(List<Object> arguments) throws EvaluatorException {
+			double first = getDoubleSyntax(arguments.get(0));
+			double second = getDoubleSyntax(arguments.get(1));
 			return (first < second) ? OMSymbol.LOGIC1_TRUE : OMSymbol.LOGIC1_FALSE;
-		} catch (Exception e) {
-			throw new FunctionInvalidArgumentTypeException(this, "integer, float, double");
-		}
 	}
 
 	@Override

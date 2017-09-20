@@ -96,7 +96,7 @@ public class TestCharAt extends TestIntegration {
 				Evaluator.evaluate("charAt(charAt('abc', 1), 0)", charAtExerciseVariableMap, charAtFillInVariableMap));
 	}
 
-	@Test(expected = FunctionInvalidArgumentTypeException.class) //Throws Error, because carAt returns a String! This should not work
+	@Test
 	public void testCharAtWithExpressions2() throws EvaluatorException, OpenMathException {
 		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("a")),
 				Evaluator.evaluate("charAt('abc', charAt('00', 0))", charAtExerciseVariableMap, charAtFillInVariableMap));

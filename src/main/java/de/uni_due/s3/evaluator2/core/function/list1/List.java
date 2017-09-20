@@ -35,25 +35,24 @@ public class List extends Function {
 	}
 
 	@Override
-	public String getPartialLatexSyntax(java.util.List<Object> arguments)
-			throws EvaluatorException {
-		String args ="";
-		for(Object arg:arguments) {
-			args += getLatexSyntax(arg)+",";
+	public String getPartialLatexSyntax(java.util.List<Object> arguments) throws EvaluatorException {
+		String args = "";
+		for (Object arg : arguments) {
+			args += getLatexSyntax(arg) + ",";
 		}
-		args = args.substring(0, args.length()-1);
-		return "\\left\\{"+args+"\\right\\}";
+		args = args.substring(0, args.length() - 1);
+		return "\\left\\{" + args + "\\right\\}";
 	}
-	
+
 	@Override
 	public String getPartialRSyntax(java.util.List<Object> arguments) throws EvaluatorException {
-		
+
 		String list = "list(";
 		for (Object arg : arguments) {
 			list += getSageSyntax(arg) + ", ";
 		}
 		list = list.substring(0, list.length() - 2); // Removing ", "
-		
+
 		return list;
 	}
 
@@ -69,7 +68,7 @@ public class List extends Function {
 			set += getSageSyntax(arg) + ", ";
 		}
 		set = set.substring(0, set.length() - 2); // Removing ", "
-	
+
 		return set + "]";
 	}
 }

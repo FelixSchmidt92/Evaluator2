@@ -11,10 +11,10 @@ import org.junit.Test;
 import de.uni_due.s3.evaluator2.Evaluator;
 import de.uni_due.s3.evaluator2.core.integration.TestIntegration;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
+import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedExerciseVariableException;
 import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedFillInVariableException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
@@ -121,12 +121,12 @@ public class TestGetFromOrderedSet extends TestIntegration {
 				Evaluator.evaluate("getFromOrderedSet('1', '{a;b;c;d}')", exerVar, fillIn));
 	}
 
-	@Test(expected = NoRepresentationAvailableException.class)
+	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void testGetFromOrderedSetWithWrongInputCharacterIndex() throws OpenMathException, EvaluatorException {
 		Evaluator.getNumberResult("getFromOrderedSet('a', '{1;2;3;4}')", exerVar, fillIn);
 	}
 
-	@Test(expected = NoRepresentationAvailableException.class)
+	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void testGetFromOrderedSetWithWrongInputDoubleIndex() throws OpenMathException, EvaluatorException {
 		Evaluator.getNumberResult("getFromOrderedSet('5.5', '{1;2;3;4}')", exerVar, fillIn);
 	}

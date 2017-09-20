@@ -2,12 +2,9 @@ package de.uni_due.s3.evaluator2.core.function.transc_jack;
 
 import java.util.List;
 
-import de.uni_due.s3.evaluator2.core.OMUtils;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
-import de.uni_due.s3.evaluator2.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 
@@ -22,13 +19,9 @@ import de.uni_due.s3.openmath.omutils.OMCreator;
 public class ToRadian extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionException {
-		try {
-			Double value = OMUtils.convertOMToDouble(arguments.get(0));
+	protected Object execute(List<Object> arguments) throws EvaluatorException {
+			Double value = getDoubleSyntax(arguments.get(0));
 			return OMCreator.createOMIOMF(Math.toRadians(value));
-		} catch (InputMismatchException e) {
-			throw new FunctionInvalidArgumentTypeException(this, "(0)Integer");
-		}
 	}
 
 	@Override

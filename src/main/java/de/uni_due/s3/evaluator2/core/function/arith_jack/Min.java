@@ -2,12 +2,9 @@ package de.uni_due.s3.evaluator2.core.function.arith_jack;
 
 import java.util.List;
 
-import de.uni_due.s3.evaluator2.core.OMUtils;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
-import de.uni_due.s3.evaluator2.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 
@@ -21,17 +18,15 @@ public class Min extends Function {
 
 	/**
 	 * Returns the smaller of two double values.
+	 * 
+	 * @throws EvaluatorException
 	 */
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException {
-		try {
-			Double leftValue = OMUtils.convertOMToDouble(arguments.get(0));
-			Double rightValue = OMUtils.convertOMToDouble(arguments.get(1));
-			Double result = Math.min(leftValue, rightValue);
-			return OMCreator.createOMIOMF(result);
-		} catch (InputMismatchException np) {
-			throw new FunctionInvalidArgumentTypeException(this, "Integer/Double/Float");
-		}
+	protected Object execute(List<Object> arguments) throws EvaluatorException {
+		Double leftValue = getDoubleSyntax(arguments.get(0));
+		Double rightValue = getDoubleSyntax(arguments.get(1));
+		Double result = Math.min(leftValue, rightValue);
+		return OMCreator.createOMIOMF(result);
 	}
 
 	@Override
@@ -43,10 +38,11 @@ public class Min extends Function {
 	protected int maxArgs() {
 		return 2;
 	}
-	
+
 	@Override
 	public String getPartialLatexSyntax(List<Object> arguments)
 			throws EvaluatorException, FunctionException, NoRepresentationAvailableException {
-		return "\\mbox{min}\\left(" + getLatexSyntax(arguments.get(0)) +","+getLatexSyntax(arguments.get(1))  + "\\right)";
+		return "\\mbox{min}\\left(" + getLatexSyntax(arguments.get(0)) + "," + getLatexSyntax(arguments.get(1))
+				+ "\\right)";
 	}
 }

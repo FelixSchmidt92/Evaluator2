@@ -13,7 +13,7 @@ public class EvaluateInR extends Function {
 
 	@Override
 	protected Object execute(List<Object> arguments) throws CasEvaluationException, CasNotAvailableException, OpenMathException, EvaluatorException {
-		return R.evaluateInCAS(getSageSyntax(arguments.get(0)));
+		return R.evaluateInCAS(getRSyntax(arguments.get(0)));
 	}
 	
 	@Override

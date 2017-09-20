@@ -15,8 +15,9 @@ import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
- * Implements the creation of a matrix.
- * Example: matrix(matrixrow(1,2,3),matrixrow(4,5,6))
+ * Implements the creation of a matrix. Example:
+ * matrix(matrixrow(1,2,3),matrixrow(4,5,6))
+ * 
  * @author frichtscheid, spobel
  *
  */
@@ -58,20 +59,18 @@ public class Matrix extends Function {
 
 		return sageExpression + "])";
 	}
-	
+
 	@Override
-	public String getPartialLatexSyntax(List<Object> arguments)
-			throws EvaluatorException {
+	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException {
 		String begin = "\\left(\\begin{array}{";
 		String args = "";
-		
-		for(int i = 0; i<arguments.size();i++) {
+
+		for (int i = 0; i < arguments.size(); i++) {
 			begin += "r";
-			args += getLatexSyntax(arguments.get(i))+"\\\\";
+			args += getLatexSyntax(arguments.get(i)) + "\\\\";
 		}
 		begin += "}";
-		
-		
+
 		return begin + args + "\\end{array}\\right)";
 	}
 

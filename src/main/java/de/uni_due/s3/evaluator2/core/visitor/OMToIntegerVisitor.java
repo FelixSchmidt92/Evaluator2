@@ -9,6 +9,7 @@ import de.uni_due.s3.openmath.jaxb.OMF;
 import de.uni_due.s3.openmath.jaxb.OMI;
 import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.jaxb.OMSTR;
+import de.uni_due.s3.openmath.jaxb.OMV;
 
 public class OMToIntegerVisitor extends OMToSyntaxVisitor<Integer> {
 
@@ -18,7 +19,7 @@ public class OMToIntegerVisitor extends OMToSyntaxVisitor<Integer> {
 		if (val == (int) val)
 			return (int) val;
 		else
-			throw new NoRepresentationAvailableException("Unable to visit omElement: " + omf);
+			throw new NoRepresentationAvailableException("Function expects Integer instead of Double: " + omf.getDec());
 	}
 
 	@Override
@@ -31,7 +32,16 @@ public class OMToIntegerVisitor extends OMToSyntaxVisitor<Integer> {
 		try {
 			return Integer.valueOf(omstr.getContent());
 		} catch (NumberFormatException e) {
-			throw new NoRepresentationAvailableException("Unable to visit omElement: " + omstr);
+			throw new NoRepresentationAvailableException("Function expects Integer instead of String: " + omstr.getContent());
+		}
+	}
+
+	@Override
+	protected Integer visit(OMV omv) throws NoRepresentationAvailableException {
+		try {
+			return Integer.valueOf(omv.getName());
+		} catch (NumberFormatException e) {
+			throw new NoRepresentationAvailableException("Function expects Integer instead of Variable: " + omv.getName());
 		}
 	}
 

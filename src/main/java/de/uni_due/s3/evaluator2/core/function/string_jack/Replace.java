@@ -2,12 +2,9 @@ package de.uni_due.s3.evaluator2.core.function.string_jack;
 
 import java.util.List;
 
-import de.uni_due.s3.evaluator2.core.OMUtils;
 import de.uni_due.s3.evaluator2.core.function.Function;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
-import de.uni_due.s3.evaluator2.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 
 /**
@@ -30,19 +27,16 @@ import de.uni_due.s3.openmath.omutils.OMCreator;
 public class Replace extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException {
+		String string = getStringSyntax(arguments.get(0));
+		String toReplace = getStringSyntax(arguments.get(1));
+		String replaceWith = getStringSyntax(arguments.get(2));
 		try {
-			String string = OMUtils.convertOMToString(arguments.get(0));
-			String toReplace = OMUtils.convertOMToString(arguments.get(1));
-			String replaceWith = OMUtils.convertOMToString(arguments.get(2));
-
 			if (toReplace.length() == 1 && replaceWith.length() == 1) {
 				return OMCreator.createOMSTR(string.replace(toReplace.charAt(0), replaceWith.charAt(0)));
 			} else {
 				return OMCreator.createOMSTR(string.replaceAll(toReplace, replaceWith));
 			}
-		} catch (InputMismatchException e) {
-			throw new FunctionInvalidArgumentTypeException(this, "(0)String, (1)String/Char/Regex, (2)String/Char");
 		} catch (IndexOutOfBoundsException e) {
 			throw new FunctionInvalidArgumentException(this,
 					"Second and Third argument has to be in range of (String) first argument.");

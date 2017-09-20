@@ -27,15 +27,12 @@ public class BooleanNot extends BinaryFunction {
 	 * argument of type OMSymbol.LOGIC_TRUE or LOGIC_FALSE
 	 * 
 	 * @return true or false as OMS
+	 * @throws EvaluatorException 
 	 * @throws FunctionInvalidArgumentTypeException
 	 */
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionException {
-		try {
-			return (getBooleanSyntax(arguments.get(0))) ? OMSymbol.LOGIC1_FALSE : OMSymbol.LOGIC1_TRUE;
-		} catch (Exception e) {
-			throw new FunctionInvalidArgumentTypeException(this, "(1)Boolean|Integer|Float");
-		}
+	protected Object execute(List<Object> arguments) throws EvaluatorException {
+		return (getBooleanSyntax(arguments.get(0))) ? OMSymbol.LOGIC1_FALSE : OMSymbol.LOGIC1_TRUE;
 	}
 
 	@Override

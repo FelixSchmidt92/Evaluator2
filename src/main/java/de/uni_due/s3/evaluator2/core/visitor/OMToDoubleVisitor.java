@@ -9,6 +9,7 @@ import de.uni_due.s3.openmath.jaxb.OMF;
 import de.uni_due.s3.openmath.jaxb.OMI;
 import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.jaxb.OMSTR;
+import de.uni_due.s3.openmath.jaxb.OMV;
 
 public class OMToDoubleVisitor extends OMToSyntaxVisitor<Double> {
 
@@ -27,7 +28,16 @@ public class OMToDoubleVisitor extends OMToSyntaxVisitor<Double> {
 		try {
 			return Double.valueOf(omstr.getContent());
 		} catch (NumberFormatException e) {
-			throw new NoRepresentationAvailableException("Unable to visit omElement: " + omstr);
+			throw new NoRepresentationAvailableException("Function expects Double instead of String:" + omstr.getContent());
+		}
+	}
+	
+	@Override
+	protected Double visit(OMV omv) throws NoRepresentationAvailableException {
+		try {
+			return Double.valueOf(omv.getName());
+		} catch (NumberFormatException e) {
+			throw new NoRepresentationAvailableException("Function expects Double instead of Variable:" + omv.getName());
 		}
 	}
 
@@ -36,5 +46,4 @@ public class OMToDoubleVisitor extends OMToSyntaxVisitor<Double> {
 			throws EvaluatorException {
 		return function.getPartialDoubleSyntax(omel);
 	}
-
 }

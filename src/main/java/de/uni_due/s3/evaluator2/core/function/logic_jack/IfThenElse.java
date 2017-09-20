@@ -2,52 +2,36 @@ package de.uni_due.s3.evaluator2.core.function.logic_jack;
 
 import java.util.List;
 
-import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
-import de.uni_due.s3.openmath.jaxb.OMF;
-import de.uni_due.s3.openmath.jaxb.OMI;
-import de.uni_due.s3.openmath.jaxb.OMS;
-import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 
 /**
- * Implements the jack ifthenelse-operation{@link  https://jack-community.org/wiki/index.php/Ifthenelse}.
- *  
+ * Implements the jack
+ * ifthenelse-operation{@link https://jack-community.org/wiki/index.php/Ifthenelse}.
+ * 
  */
 public class IfThenElse extends Function {
 
 	/**
-	 * Expects 3 arguments:
-	 * 	1.) the condition - something that can be reduced to a boolean value
-	 *  2.) value if true - the value which should be returned if the condition is true
-	 *  3.) value if false - the value which should be returned if the condition is false
-	 *  
-	 *  @return second or third argument
-	 * @throws FunctionInvalidArgumentTypeException 
+	 * Expects 3 arguments: 1.) the condition - something that can be reduced to a
+	 * boolean value 2.) value if true - the value which should be returned if the
+	 * condition is true 3.) value if false - the value which should be returned if
+	 * the condition is false
+	 * 
+	 * @return second or third argument
+	 * @throws EvaluatorException 
+	 * @throws FunctionInvalidArgumentTypeException
 	 */
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionException {
-		OMS condition;
-		Object firstArg = arguments.get(0);
-		Object trueValue = arguments.get(1);
-		Object falseValue = arguments.get(2);
-		
-		//convert the condition to boolean value
-		if(OMTypeChecker.isOMS(firstArg) && ( ((OMS)firstArg).equals(OMSymbol.LOGIC1_TRUE) || ((OMS)firstArg).equals(OMSymbol.LOGIC1_FALSE) )){
-			condition = (OMS) firstArg;
-		}else if( OMTypeChecker.isOMF(firstArg)){
-			condition = ( ((OMF)firstArg).getDec()>0)? OMSymbol.LOGIC1_TRUE:OMSymbol.LOGIC1_FALSE; 
-		}else if( OMTypeChecker.isOMI(firstArg)){
-			condition = ( Integer.parseInt(((OMI)firstArg).getValue())>0)? OMSymbol.LOGIC1_TRUE:OMSymbol.LOGIC1_FALSE;
-		}else{
-			throw new FunctionInvalidArgumentTypeException(this, "1.) boolean, 2.) any, 3.) any");
+	protected Object execute(List<Object> arguments) throws EvaluatorException {
+		boolean condition = getBooleanSyntax(arguments.get(0));
+
+		if (condition) {
+			return arguments.get(1);
+		} else {
+			return arguments.get(2);
 		}
-		
-		if(condition.equals(OMSymbol.LOGIC1_TRUE))
-			return trueValue;
-		else
-			return falseValue;
 	}
 
 	@Override

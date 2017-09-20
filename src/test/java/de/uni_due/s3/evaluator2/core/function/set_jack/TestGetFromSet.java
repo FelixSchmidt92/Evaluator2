@@ -14,8 +14,8 @@ import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
+import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMCreator;
@@ -108,7 +108,7 @@ public class TestGetFromSet extends TestFunctionAbstract {
 		fail();
 	}
 
-	@Test(expected = NoRepresentationAvailableException.class)
+	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void testGetFromSetWithWrongArguments2() throws OpenMathException, EvaluatorException {
 		List<Object> plus = new ArrayList<Object>();
 		plus.add(OMCreator.createOMI(20));

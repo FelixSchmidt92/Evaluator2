@@ -19,7 +19,9 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class OMUtils {
 
-	/**
+	/** USE getDoubleSyntax(Object) in Function ! kein try und catch -> Exception muss zu JACK 
+	 * 
+	 * 
 	 * Diese Funktion nimmt ein Object obj entgegen, dieses muss vom Typen OMF
 	 * oder OMI sein. Sie erzeugt hieraus ein Double. OMI wird zu z.B. 5.0 oder
 	 * -3.0, OMF wird zu z.B. 5.54 oder -0.234
@@ -30,6 +32,7 @@ public class OMUtils {
 	 * @throws InputMismatchException
 	 *             wenn obj kein OMF, OMI oder NUMS1 Symbol ist
 	 */
+	@Deprecated
 	public static Double convertOMToDouble(Object obj) throws InputMismatchException {
 		// first if obj is OMOBJ get Element
 		if (obj instanceof OMOBJ) {
@@ -64,7 +67,8 @@ public class OMUtils {
 		}
 	}
 
-	/**
+	/** USE getIntegerSyntax(Object) in Function ! kein try und catch -> Exception muss zu JACK 
+	 *
 	 * Diese Funktion nimmt einen OMI oder ein OMF entgegen und erzeugt hieraus
 	 * einen Integer Im Falle eines OMF wird deren die Nachkommastellen einfach
 	 * ausgelassen.
@@ -74,6 +78,7 @@ public class OMUtils {
 	 * @return int
 	 * @throws InputMismatchException
 	 */
+	@Deprecated
 	public static int convertOMToInteger(Object obj) throws InputMismatchException {
 		if (obj instanceof OMOBJ) {
 			try {
@@ -101,7 +106,8 @@ public class OMUtils {
 		}
 	}
 
-	/**
+	/** USE getDoubleSyntax(Object) in Function ! kein try und catch -> Exception muss zu JACK 
+	 *
 	 * Diese Funktion nimmt einen OMSTR, OMI, OMF entgegen und erzeugt hieraus
 	 * ein String
 	 * 
@@ -110,6 +116,7 @@ public class OMUtils {
 	 * @return String rep.
 	 * @throws InputMismatchException
 	 */
+	@Deprecated
 	public static String convertOMToString(Object obj) throws InputMismatchException {
 		if (obj instanceof OMOBJ) {
 			try {

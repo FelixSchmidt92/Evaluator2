@@ -12,15 +12,13 @@ import de.uni_due.s3.evaluator2.sage.Sage;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
-public class Determinant extends Function{
+public class Determinant extends Function {
 
 	/**
 	 * Expects a matrix as argument
 	 */
 	@Override
 	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
-		// TODO Auto-generated method stub
-		
 		return Sage.evaluateInCAS(getPartialSageSyntax(arguments));
 	}
 
@@ -33,25 +31,26 @@ public class Determinant extends Function{
 	protected int maxArgs() {
 		return 1;
 	}
-	
+
 	@Override
 	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
-		//check if argument is of type matrix or vector
-		if(!OMTypeChecker.isOMAWithSymbol(arguments.get(0),OMSymbol.LINALG2_MATRIX) 
+		// check if argument is of type matrix or vector
+		if (!OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.LINALG2_MATRIX)
 				&& !OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.LINALG2_VECTOR)) {
-			
-			throw new FunctionInvalidArgumentTypeException(this,"(0) matrix");
+
+			throw new FunctionInvalidArgumentTypeException(this, "(0) matrix");
 		}
-		
-		return "M="+getSageSyntax(arguments.get(0))+"; M.determinant()";
+
+		return "M=" + getSageSyntax(arguments.get(0)) + "; M.determinant()";
 	}
+
 	@Override
 	public String getPartialLatexSyntax(List<Object> arguments)
 			throws EvaluatorException, FunctionException, NoRepresentationAvailableException {
-		
-		return "\\det{"+getLatexSyntax(arguments.get(0))+"}";
+
+		return "\\det{" + getLatexSyntax(arguments.get(0)) + "}";
 	}
-	
+
 	/**
 	 * argument should not be evaluated, because this function will do it
 	 */

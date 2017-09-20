@@ -3,13 +3,10 @@ package de.uni_due.s3.evaluator2.core.function.string_jack;
 import java.util.List;
 import java.util.regex.PatternSyntaxException;
 
-import de.uni_due.s3.evaluator2.core.OMUtils;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
-import de.uni_due.s3.evaluator2.exceptions.openmath.InputMismatchException;
 
 /**
  * This Class checks iff the first argument matches a Regex-Pattern from the
@@ -21,16 +18,13 @@ import de.uni_due.s3.evaluator2.exceptions.openmath.InputMismatchException;
 public class Matches extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException {
+		String in = getStringSyntax(arguments.get(0));
+		String regex = getStringSyntax(arguments.get(1));
 		try {
-			String in = OMUtils.convertOMToString(arguments.get(0));
-			String regex = OMUtils.convertOMToString(arguments.get(1));
-
 			if (in.matches(regex)) {// can throw PatternSyntaxException
 				return OMSymbol.LOGIC1_TRUE;
 			}
-		} catch (InputMismatchException e) {
-			throw new FunctionInvalidArgumentTypeException(this, "(0)String, (1)String");
 		} catch (PatternSyntaxException e) {
 			throw new FunctionInvalidArgumentException(this, "Second Argument, is not in Regex-Syntax");
 		}

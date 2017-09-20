@@ -2,14 +2,12 @@ package de.uni_due.s3.evaluator2.core.function.relation1;
 
 import java.util.List;
 
-import de.uni_due.s3.evaluator2.core.OMUtils;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSPriority;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.BinaryFunction;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
-import de.uni_due.s3.evaluator2.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 
 /**
@@ -34,10 +32,10 @@ public class Equal extends BinaryFunction {
 	@Override
 	protected Object execute(List<Object> arguments) throws EvaluatorException {
 		try {
-			double first = OMUtils.convertOMToDouble(arguments.get(0));
-			double second = OMUtils.convertOMToDouble(arguments.get(1));
+			double first = getDoubleSyntax(arguments.get(0));
+			double second = getDoubleSyntax(arguments.get(1));
 			return (first == second) ? OMSymbol.LOGIC1_TRUE : OMSymbol.LOGIC1_FALSE;
-		} catch (InputMismatchException np) {
+		} catch (FunctionInvalidArgumentTypeException e) {
 			if (arguments.get(0).equals(arguments.get(1)))
 				return OMSymbol.LOGIC1_TRUE;
 			else

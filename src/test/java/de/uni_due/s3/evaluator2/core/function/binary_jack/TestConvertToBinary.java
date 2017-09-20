@@ -14,7 +14,6 @@ import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
-import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OMF;
 import de.uni_due.s3.openmath.jaxb.OMI;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
@@ -73,15 +72,6 @@ public class TestConvertToBinary extends TestFunctionAbstract {
 		OMSTR omstr = OMCreator.createOMSTR("String");
 
 		args.add(omstr);
-		func.evaluate(args);
-	}
-
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void TestConvertToBinaryOMA() throws OpenMathException, EvaluatorException {
-		ArrayList<Object> args = new ArrayList<>();
-		OMA oma = OMCreator.createOMA(OMCreator.createOMS("", ""), new ArrayList<>());
-
-		args.add(oma);
 		func.evaluate(args);
 	}
 

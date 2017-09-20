@@ -8,7 +8,6 @@ import de.uni_due.s3.evaluator2.core.function.BinaryFunction;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
@@ -35,20 +34,19 @@ public class IEEERemainder extends BinaryFunction {
 	 * 
 	 * @return OMI
 	 * @throws OpenMathException
-	 * @throws EvaluatorException 
+	 * @throws EvaluatorException
 	 */
 	@Override
 	protected Object execute(List<Object> arguments) throws OpenMathException, EvaluatorException {
-		try {
-			Double leftValue = getDoubleSyntax(arguments.get(0));
-			Double rightValue = getDoubleSyntax(arguments.get(1));
-			if (rightValue == 0.0) {
-				throw new FunctionInvalidArgumentException(this, "Second argument for IEEERemainder has to be unequal 0.0 .");
-			}
-			return OMCreator.createOMIOMF(Math.IEEEremainder(leftValue, rightValue));
-		} catch (NoRepresentationAvailableException e) {
-			throw new FunctionInvalidArgumentTypeException(this, "(1)Integer/Double/Float, (2)Integer/Double/Float");
+
+		Double leftValue = getDoubleSyntax(arguments.get(0));
+		Double rightValue = getDoubleSyntax(arguments.get(1));
+		if (rightValue == 0.0) {
+			throw new FunctionInvalidArgumentException(this,
+					"Second argument for IEEERemainder has to be unequal 0.0 .");
 		}
+		return OMCreator.createOMIOMF(Math.IEEEremainder(leftValue, rightValue));
+
 	}
 
 	@Override
@@ -60,11 +58,11 @@ public class IEEERemainder extends BinaryFunction {
 	protected int maxArgs() {
 		return 2;
 	}
-	
+
 	@Override
 	public String getPartialLatexSyntax(List<Object> arguments)
 			throws EvaluatorException, FunctionException, NoRepresentationAvailableException {
-		
-		return arguments.get(0) +"\\mathbin{\\%}"+arguments.get(1); 
+
+		return arguments.get(0) + "\\mathbin{\\%}" + arguments.get(1);
 	}
 }

@@ -14,11 +14,11 @@ import de.uni_due.s3.evaluator2.Evaluator;
 import de.uni_due.s3.evaluator2.core.integration.TestIntegration;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
+import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator2.exceptions.parser.ParserException;
 import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedExerciseVariableException;
 import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedFillInVariableException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMConverter;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
@@ -96,7 +96,7 @@ public class TestEqualBasis extends TestIntegration {
 		assertTrue(!Evaluator.getBooleanResult("equalBasis('[var=a]', '[var=b]', '3')", equalBasisExerciseVariableMap, equalBasisFillInVariableMap));
 	}
 	
-	@Test(expected=NoRepresentationAvailableException.class)
+	@Test(expected=FunctionInvalidArgumentTypeException.class)
 	public void testEqualBasisWithWrongInputCharacterAsThirdParameter() throws EvaluatorException, OpenMathException {
 		Evaluator.getBooleanResult("equalBasis('(vector(QQ,(1,1,0)),vector(QQ,(0,1,1)))', '(vector(QQ,(3,3,0)),vector(QQ,(0,1,1)))', 'c')", equalBasisExerciseVariableMap, equalBasisFillInVariableMap);
 		fail();
@@ -114,7 +114,7 @@ public class TestEqualBasis extends TestIntegration {
 		fail();
 	}
 	
-	@Test(expected=NoRepresentationAvailableException.class)
+	@Test(expected=FunctionInvalidArgumentTypeException.class)
 	public void testEqualBasisWithEmptyStringArguments() throws EvaluatorException, OpenMathException {
 		Evaluator.getBooleanResult("equalBasis('', '', '')", equalBasisExerciseVariableMap, equalBasisFillInVariableMap);
 		fail();
