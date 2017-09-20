@@ -31,10 +31,10 @@ public class OMToListVisitor extends OMToSyntaxVisitor<List<Object>> {
 
 	@Override
 	protected List<Object> visit(OMSTR omstr) throws NoRepresentationAvailableException {
-		if (omstr.getContent().contains(",")) {
+		if (omstr.getContent().contains(";")) {
 			List<Object> omList = new ArrayList<>();
 			for (String element : omstr.getContent().split(";")) {
-				omList.add(OMCreator.createOMSTR(element));
+				omList.add(OMCreator.createOMSTR(element)); //vllt müssen wir hier auch alle teile parsen
 			}
 			return omList;
 		} else {
