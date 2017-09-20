@@ -62,14 +62,16 @@ public class R {
 
 		String casResult = "";
 		RConn con = getRandomFromConnectionList();
-		try  {
-			RConnection rConnection = new RConnection(con.getIp(), con.getPort());
+		RConnection rConnection = null;
+		try {
+			rConnection = new RConnection(con.getIp(), con.getPort());
 			
 			REXP result = rConnection.eval(rExpression);
 
 			// Convert XML String to OM*-Object
 			casResult = new RToOMOBJVisitor().visit(result);
 			
+
 		} catch (RserveException e) {
 			rConnectionList.remove(con);
 			rErrorConnectionList.add(con);
@@ -79,6 +81,10 @@ public class R {
 			}
 			// restart evaluation
 			return evaluateInCAS(rExpression);
+		}finally {
+			if (rConnection != null) {
+				rConnection.close();
+			}
 		}
 		if (casResult.contains("<OME>")) {
 			throw new CasEvaluationException(casResult);
@@ -155,6 +161,7 @@ public class R {
 					try {
 						RConnection rConnection = new RConnection(con.getIp(), con.getPort());
 						REXP result = rConnection.eval("1+1");
+						rConnection.detach();
 						if (result.asInteger() == 2) {
 							casConnectionIsWorking = true;
 						}

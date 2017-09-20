@@ -30,7 +30,7 @@ public class OMToRVisitor extends OMToSyntaxVisitor<String> {
 	@Override
 	protected String visit(OMSTR omstr) {
 		if (omstr.getContent().equals("")) {
-			return "''";
+			return "\"\""; //return an empty String
 		} else {
 			return omstr.getContent();
 		}

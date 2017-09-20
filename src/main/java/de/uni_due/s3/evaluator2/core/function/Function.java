@@ -311,14 +311,14 @@ public abstract class Function {
 	}
 
 	/**
-	 * Call this Function, if you need your argument in Sage Syntax.
+	 * Call this Function, if you need your argument in R Syntax.
 	 * 
-	 * In getPartialSageSyntax: Call this Function on every argument, to get the
+	 * In getPartialRSyntax: Call this Function on every argument, to get the
 	 * Sage-Syntax of this argument
 	 * 
 	 * @param omElement
-	 *            the argument, which should be represented in Sage
-	 * @return a String representation of this argument in Sage
+	 *            the argument, which should be represented in R
+	 * @return a String representation of this argument in R
 	 * @throws NoRepresentationAvailableException
 	 * @throws FunctionInvalidNumberOfArgumentsException
 	 * @throws FunctionInvalidArgumentTypeException
@@ -330,11 +330,11 @@ public abstract class Function {
 	}
 
 	/**
-	 * Define here how the Syntax should look like in Sage for this specific
-	 * Function All Arguments that are passed here can be recursively called
-	 * again with getSageSyntax(omElement). So only deal here with the
+	 * Define here how the Syntax should look like in R for this specific
+	 * Function all Arguments that are passed here can be recursively called
+	 * again with getRSyntax(omElement). So only deal here with the
 	 * Representation of this Function and call (usually) the arguments in
-	 * getSageSyntax(omElement) For Examples: see Plus, Minus or Set
+	 * getRSyntax(omElement) For Examples: see Plus, Minus or Set
 	 * 
 	 * @param arguments
 	 *            A List of Arguments for this Function. Note: The arguments are
@@ -348,7 +348,7 @@ public abstract class Function {
 	 */
 	public String getPartialRSyntax(List<Object> arguments)
 			throws EvaluatorException {
-		throw new NoSageRepresentationAvailableException(
+		throw new NoRepresentationAvailableException(
 				"There is no R representation for function " + this.getClass() + " implemented");
 	}
 	
