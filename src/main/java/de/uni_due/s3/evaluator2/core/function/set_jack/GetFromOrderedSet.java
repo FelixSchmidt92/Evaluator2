@@ -5,13 +5,11 @@ import java.util.Collections;
 import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.OMUtils;
-import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
-import de.uni_due.s3.evaluator2.exceptions.openmath.InputMismatchException;
-import de.uni_due.s3.openmath.jaxb.OMA;
+import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 
@@ -24,38 +22,26 @@ import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 public class GetFromOrderedSet extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException {
+		int pos = getIntegerSyntax(arguments.get(0));
 
-		if (!OMTypeChecker.isOMAWithSymbol(arguments.get(1), OMSymbol.SET1_SET)
-				&& !OMTypeChecker.isOMAWithSymbol(arguments.get(1), OMSymbol.LIST1_LIST)) {
-			throw new FunctionInvalidArgumentTypeException(this, "(0)Integer, (1)Set|List");
-		}
+		List<Object> list1 = getListSyntax(arguments.get(1));
 
-		int pos = 0;
-		try {
-			pos = OMUtils.convertOMToInteger(arguments.get(0));
-		} catch (InputMismatchException e) {
-			throw new FunctionInvalidArgumentTypeException(this, "(0)Integer, (1)Set|List");
-		}
-
-		List<Object> set = ((OMA) arguments.get(1)).getOmel();
-		set.remove(0); // OMS entfernen
-
-		if (set.size() == 0) {
+		if (list1.size() == 0) {
 			throw new FunctionInvalidArgumentException(this, "Set has to have at least one element.");
 		}
 
-		if (set.size() <= pos) {
+		if (list1.size() <= pos) {
 			throw new FunctionInvalidArgumentException(this,
 					"Second Argument of getFromOrderedSet is invalid. Not in Range of Set.");
 		}
 
-		if (OMTypeChecker.isOMNumber(set.get(0))) {
+		if (OMTypeChecker.isOMNumber(list1.get(0))) {
 			List<Double> setForSort = new ArrayList<Double>();
-			for (Object element : set) {
+			for (Object element : list1) {
 				try {
-					setForSort.add(OMUtils.convertOMToDouble(element));
-				} catch (InputMismatchException e) {
+					setForSort.add(getDoubleSyntax(element));
+				} catch (NoRepresentationAvailableException e) {
 					throw new FunctionInvalidArgumentTypeException(this,
 							"Set elements have to be from type String/Integer/Double/Float.");
 				}
@@ -65,17 +51,16 @@ public class GetFromOrderedSet extends Function {
 
 		} else {
 			List<String> setForSort = new ArrayList<String>();
-			for (Object element : set) {
+			for (Object element : list1) {
 				try {
-					setForSort.add(OMUtils.convertOMToString(element));
-				} catch (InputMismatchException e) {
+					setForSort.add(getStringSyntax(element));
+				} catch (NoRepresentationAvailableException e) {
 					throw new FunctionInvalidArgumentTypeException(this,
 							"Set elements have to be from type String/Integer/Double/Float.");
 				}
 			}
 			Collections.sort(setForSort);
 			return OMCreator.createOMSTR(setForSort.get(pos));
-
 		}
 	}
 

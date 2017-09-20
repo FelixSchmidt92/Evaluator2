@@ -13,7 +13,6 @@ import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
@@ -97,7 +96,7 @@ public class TestIsLinearlyIndependent extends TestFunctionAbstract {
 		fail();
 	}
 
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
+	@Test(expected = FunctionInvalidArgumentException.class)
 	public void testIsLinearlyIndependentWithWrongInput2() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("isLinearlyIndependent(vector(1,1,0))", null, null);
 		OMExecutor.execute(omobj);

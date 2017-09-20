@@ -18,7 +18,7 @@ public class MCIndex extends Function {
 
 	@Override
 	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
-		return OMCreator.createOMOBJ(OMCreator.createOMA(OMSymbol.MCJACK_MCINDEX, arguments));
+		return OMCreator.createOMA(OMSymbol.MCJACK_MCINDEX, arguments);
 	}
 	
 	@Override
@@ -35,4 +35,11 @@ public class MCIndex extends Function {
 	protected int maxArgs() {
 		return 4;
 	}
+	
+	@Override
+	public Integer getPartialIntegerSyntax(List<Object> arguments) throws EvaluatorException {
+		return getIntegerSyntax(arguments.get(0));
+	}
+	
+	
 }

@@ -14,8 +14,8 @@ import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
+import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMCreator;
@@ -99,15 +99,8 @@ public class TestGetFromSet extends TestFunctionAbstract {
 		fail();
 	}
 
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
+	@Test(expected = FunctionInvalidArgumentException.class)
 	public void testGetFromSetWithWrongArguments1() throws OpenMathException, EvaluatorException {
-		List<Object> plus = new ArrayList<Object>();
-		plus.add(OMCreator.createOMI(20));
-		plus.add(OMCreator.createOMI(1));
-		List<Object> set = new ArrayList<Object>();
-		set.add(OMCreator.createOMSTR("Test"));
-		set.add(OMCreator.createOMI(20));
-		set.add(OMCreator.createOMA(OMSymbol.ARITH1_PLUS, plus));
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(1));
 		args.add(OMCreator.createOMI(1)); // wrong
@@ -115,7 +108,7 @@ public class TestGetFromSet extends TestFunctionAbstract {
 		fail();
 	}
 
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
+	@Test(expected = NoRepresentationAvailableException.class)
 	public void testGetFromSetWithWrongArguments2() throws OpenMathException, EvaluatorException {
 		List<Object> plus = new ArrayList<Object>();
 		plus.add(OMCreator.createOMI(20));

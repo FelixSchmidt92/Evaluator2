@@ -39,6 +39,21 @@ public class TextWithVariables extends Function {
 		return -1;
 	}
 
+	@Override
+	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException {
+		String temp = "";
+
+		for (Object obj : arguments) {
+			temp += getLatexSyntax(obj);
+		}
+		return temp;
+	}
+	
+	@Override
+	public List<Object> getPartialListSyntax(List<Object> omel) throws EvaluatorException {
+		return omel;
+	}
+
 	/**
 	 * Here we want a Concatination of Strings and OMA'S in Sage Syntax
 	 * 
@@ -51,19 +66,9 @@ public class TextWithVariables extends Function {
 	@Override
 	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
 		String temp = "";
-
+	
 		for (Object obj : arguments) {
 			temp += getSageSyntax(obj);
-		}
-		return temp;
-	}
-
-	@Override
-	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException {
-		String temp = "";
-
-		for (Object obj : arguments) {
-			temp += getLatexSyntax(obj);
 		}
 		return temp;
 	}

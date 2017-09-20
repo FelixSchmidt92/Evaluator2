@@ -451,26 +451,11 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 		}
 
 		if (omel.isEmpty()) {
-			if (text.contains(";")) {
-				List<Object> omList = new ArrayList<>();
-				for (String element : text.split(";")) {
-					/* Return if the InputString is an Expression */
-					try {
-						ParseTree tree = ExpressionParser.createParseTree(element);
-						omList.add(this.visit(tree));
-					} catch (ErroneousFillInVariableRuntimeException | ErroneousExerciseVariableRuntimeException
-							| UndefinedFillInVariableRuntimeException | UndefinedExerciseVariableRuntimeException
-							| ParserRuntimeException | FunctionNotImplementedRuntimeException e) {
-						omList.add(OMCreator.createOMSTR(element));
-					}
-				}
-				OMS oms = OMSymbol.LIST1_LIST;
-				return OMCreator.createOMA(oms, omList);
-			} else {
-				return OMCreator.createOMSTR(ctx.getText().substring(1, ctx.getText().length() - 1));
-				// return OMSTR as usual (no pos or var Variables are found in
-				// String)
-			}
+
+			return OMCreator.createOMSTR(text);
+			// return OMSTR as usual (no pos or var Variables are found in
+			// String)
+
 		} else {
 			return OMCreator.createOMA(OMSymbol.STRINGJACK_TEXTWITHVARIABLES, omel);
 			// return jack-specific String with variables in String

@@ -323,19 +323,6 @@ public class TestExpressionToOpenMathVisitor{
 	}
 	
 	@Test
-	public void testVisitSet2(){
-		//test one specific set
-		ArrayList<Object> omel = new ArrayList<>();
-		omel.add(OMCreator.createOMSTR("abc"));
-		omel.add(OMCreator.createOMI(1));
-		omel.add(OMCreator.createOMF(1.1));
-		OMA oma = OMCreator.createOMA(OMSymbol.LIST1_LIST, omel);
-		
-		Object obj = visitor.visit(parse("'abc;1;1.1'"));
-		assertEquals(oma, obj);
-	}
-	
-	@Test
 	public void visitParenthesis(){
 		String term = gen.genRandomTerminalWithOutEXandFILLVariable(5, null);
 		for(int j = 0; j < new Random().nextInt(10); j++){

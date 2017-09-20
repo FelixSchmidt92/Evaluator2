@@ -6,6 +6,7 @@ import de.uni_due.s3.evaluator2.core.visitor.OMToBooleanVisitor;
 import de.uni_due.s3.evaluator2.core.visitor.OMToDoubleVisitor;
 import de.uni_due.s3.evaluator2.core.visitor.OMToIntegerVisitor;
 import de.uni_due.s3.evaluator2.core.visitor.OMToLatexVisitor;
+import de.uni_due.s3.evaluator2.core.visitor.OMToListVisitor;
 import de.uni_due.s3.evaluator2.core.visitor.OMToSageVisitor;
 import de.uni_due.s3.evaluator2.core.visitor.OMToStringVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
@@ -57,10 +58,10 @@ public abstract class Function {
 	abstract protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException;
 
 	/**
-	 * First: Check If maxArgs can be infinitely. Second:Check if arguments
-	 * length is in Range of minArgs and maxArgs to ensure for execute() that
-	 * the correct number of Arguments are passed. Then: call execute with the
-	 * correct number of arguments.
+	 * First: Check If maxArgs can be infinitely. Second:Check if arguments length
+	 * is in Range of minArgs and maxArgs to ensure for execute() that the correct
+	 * number of Arguments are passed. Then: call execute with the correct number of
+	 * arguments.
 	 * 
 	 * @param arguments
 	 *            A List of Arguments for this Function
@@ -81,9 +82,9 @@ public abstract class Function {
 	}
 
 	/**
-	 * This Method just tests if the length of the Arguments is in between
-	 * minArgs and maxArgs. If not then a
-	 * FunctionInvalidNumberOfArgumentsException is thrown.
+	 * This Method just tests if the length of the Arguments is in between minArgs
+	 * and maxArgs. If not then a FunctionInvalidNumberOfArgumentsException is
+	 * thrown.
 	 * 
 	 * @param arguments
 	 *            the List of arguments
@@ -110,8 +111,7 @@ public abstract class Function {
 	 * Override this method in a Function and set return to false to get the
 	 * unevaluated List of arguments.
 	 * 
-	 * True: evaluate the Arguments False: not evaluate just pass through
-	 * Arguments
+	 * True: evaluate the Arguments False: not evaluate just pass through Arguments
 	 * 
 	 * @return true, if not implemented otherwise
 	 */
@@ -120,10 +120,9 @@ public abstract class Function {
 	}
 
 	/**
-	 * Specify here the minimum number of Arguments for your Function. If
-	 * minArgs returns -1 (or 0) then the length can be the smallest amount
-	 * possible (here explicitly 0, negative number of Arguments is not
-	 * possible)
+	 * Specify here the minimum number of Arguments for your Function. If minArgs
+	 * returns -1 (or 0) then the length can be the smallest amount possible (here
+	 * explicitly 0, negative number of Arguments is not possible)
 	 * 
 	 * @Example minArgs returns 2, so number of arguments could be 2, 3, 4, ...
 	 * 
@@ -132,9 +131,9 @@ public abstract class Function {
 	abstract protected int minArgs();
 
 	/**
-	 * Specify here the maximum number of Arguments for your Function. If
-	 * maxArgs returns -1 (or any other negative number) then there is no limit
-	 * how many Arguments this function can maximal get. (currently limited to
+	 * Specify here the maximum number of Arguments for your Function. If maxArgs
+	 * returns -1 (or any other negative number) then there is no limit how many
+	 * Arguments this function can maximal get. (currently limited to
 	 * Integer.MAX_Value)
 	 * 
 	 * @Example maxArgs returns 5, so number of arguments could be 5, 4, 3, ...
@@ -148,6 +147,10 @@ public abstract class Function {
 	/**********************************************************/
 
 	/**
+	 * Add here more Translators from OMOBJ to Syntax
+	 */
+
+	/**
 	 * Call this Function, if you need your argument in String Syntax.
 	 * 
 	 * In getPartialStringSyntax: Call this Function on every argument, to get the
@@ -161,21 +164,20 @@ public abstract class Function {
 	 * @throws FunctionInvalidArgumentTypeException
 	 * @throws CasException
 	 */
-	protected final Boolean getBooleanSyntax(Object omElement)
-			throws EvaluatorException {
+	protected final Boolean getBooleanSyntax(Object omElement) throws EvaluatorException {
 		return new OMToBooleanVisitor().visit(omElement);
 	}
 
 	/**
 	 * Define here how the Syntax should look like in Double for this specific
-	 * Function All Arguments that are passed here can be recursively called
-	 * again with getDoubleSyntax(omElement). So only deal here with the
-	 * Representation of this Function and call (usually) the arguments in
-	 * getSageSyntax(omElement) For Examples: see Plus, Minus or Set
+	 * Function All Arguments that are passed here can be recursively called again
+	 * with getDoubleSyntax(omElement). So only deal here with the Representation of
+	 * this Function and call (usually) the arguments in getSageSyntax(omElement)
+	 * For Examples: see Plus, Minus or Set
 	 * 
 	 * @param arguments
-	 *            A List of Arguments for this Function. Note: The arguments are
-	 *            not evaluated!
+	 *            A List of Arguments for this Function. Note: The arguments are not
+	 *            evaluated!
 	 * @return A String Representation of this Function AND all innerFunction
 	 * @throws NoRepresentationAvailableException
 	 * @throws FunctionInvalidNumberOfArgumentsException
@@ -183,12 +185,11 @@ public abstract class Function {
 	 * @throws FunctionInvalidArgumentException
 	 * @throws CasException
 	 */
-	public Boolean getPartialBooleanSyntax(List<Object> arguments)
-			throws EvaluatorException {
+	public Boolean getPartialBooleanSyntax(List<Object> arguments) throws EvaluatorException {
 		throw new NoRepresentationAvailableException(
 				"There is no Boolean-representation for function " + this.getClass() + " implemented");
 	}
-	
+
 	/**
 	 * Call this Function, if you need your argument in String Syntax.
 	 * 
@@ -203,21 +204,20 @@ public abstract class Function {
 	 * @throws FunctionInvalidArgumentTypeException
 	 * @throws CasException
 	 */
-	protected final Double getDoubleSyntax(Object omElement)
-			throws EvaluatorException {
+	protected final Double getDoubleSyntax(Object omElement) throws EvaluatorException {
 		return new OMToDoubleVisitor().visit(omElement);
 	}
 
 	/**
 	 * Define here how the Syntax should look like in Double for this specific
-	 * Function All Arguments that are passed here can be recursively called
-	 * again with getDoubleSyntax(omElement). So only deal here with the
-	 * Representation of this Function and call (usually) the arguments in
-	 * getSageSyntax(omElement) For Examples: see Plus, Minus or Set
+	 * Function All Arguments that are passed here can be recursively called again
+	 * with getDoubleSyntax(omElement). So only deal here with the Representation of
+	 * this Function and call (usually) the arguments in getSageSyntax(omElement)
+	 * For Examples: see Plus, Minus or Set
 	 * 
 	 * @param arguments
-	 *            A List of Arguments for this Function. Note: The arguments are
-	 *            not evaluated!
+	 *            A List of Arguments for this Function. Note: The arguments are not
+	 *            evaluated!
 	 * @return A String Representation of this Function AND all innerFunction
 	 * @throws NoRepresentationAvailableException
 	 * @throws FunctionInvalidNumberOfArgumentsException
@@ -225,12 +225,11 @@ public abstract class Function {
 	 * @throws FunctionInvalidArgumentException
 	 * @throws CasException
 	 */
-	public Double getPartialDoubleSyntax(List<Object> arguments)
-			throws EvaluatorException {
+	public Double getPartialDoubleSyntax(List<Object> arguments) throws EvaluatorException {
 		throw new NoRepresentationAvailableException(
 				"There is no Double-representation for function " + this.getClass() + " implemented");
 	}
-	
+
 	/**
 	 * Call this Function, if you need your argument in String Syntax.
 	 * 
@@ -245,21 +244,20 @@ public abstract class Function {
 	 * @throws FunctionInvalidArgumentTypeException
 	 * @throws CasException
 	 */
-	protected final Integer getIntegerSyntax(Object omElement)
-			throws EvaluatorException {
+	protected final Integer getIntegerSyntax(Object omElement) throws EvaluatorException {
 		return new OMToIntegerVisitor().visit(omElement);
 	}
 
 	/**
 	 * Define here how the Syntax should look like in Double for this specific
-	 * Function All Arguments that are passed here can be recursively called
-	 * again with getDoubleSyntax(omElement). So only deal here with the
-	 * Representation of this Function and call (usually) the arguments in
-	 * getSageSyntax(omElement) For Examples: see Plus, Minus or Set
+	 * Function All Arguments that are passed here can be recursively called again
+	 * with getDoubleSyntax(omElement). So only deal here with the Representation of
+	 * this Function and call (usually) the arguments in getSageSyntax(omElement)
+	 * For Examples: see Plus, Minus or Set
 	 * 
 	 * @param arguments
-	 *            A List of Arguments for this Function. Note: The arguments are
-	 *            not evaluated!
+	 *            A List of Arguments for this Function. Note: The arguments are not
+	 *            evaluated!
 	 * @return A String Representation of this Function AND all innerFunction
 	 * @throws NoRepresentationAvailableException
 	 * @throws FunctionInvalidNumberOfArgumentsException
@@ -267,47 +265,65 @@ public abstract class Function {
 	 * @throws FunctionInvalidArgumentException
 	 * @throws CasException
 	 */
-	public Integer getPartialIntegerSyntax(List<Object> arguments)
-			throws EvaluatorException {
+	public Integer getPartialIntegerSyntax(List<Object> arguments) throws EvaluatorException {
 		throw new NoRepresentationAvailableException(
 				"There is no Integer-representation for function " + this.getClass() + " implemented");
 	}
 
 	/**
-	 * Add here more Translators from OMOBJ to CAS
-	 */
-	
-	/**
-	 * This function can be called if you want to have the latex syntax of the given element
-	 * @param omElement	OM-Object of which you want the latex syntax
+	 * This function can be called if you want to have the latex syntax of the given
+	 * element
+	 * 
+	 * @param omElement
+	 *            OM-Object of which you want the latex syntax
 	 * @return latex-string
 	 * @throws EvaluatorException
 	 */
-	protected final String getLatexSyntax(Object omElement)
-			throws EvaluatorException {
-	
+	protected final String getLatexSyntax(Object omElement) throws EvaluatorException {
+
 		return new OMToLatexVisitor().visit(omElement);
 	}
 
 	/**
-	 * Add here more Translators from OMOBJ to CAS
-	 */
-	
-	/**
-	 * If a function should have a special latex representation, 
-	 * then this function has to be overwritten by that class.
+	 * If a function should have a special latex representation, then this function
+	 * has to be overwritten by that class.
 	 * 
 	 * @param omel
 	 * @return
 	 * @throws FunctionException
 	 * @throws NoRepresentationAvailableException
-	 * */
-	public String getPartialLatexSyntax(List<Object> omel)
-			throws EvaluatorException {
+	 */
+	public String getPartialLatexSyntax(List<Object> omel) throws EvaluatorException {
 		throw new NoRepresentationAvailableException(
 				"There is no LaTeX representation for function " + this.getClass() + " implemented");
-		
-		//each function is represented by an OMS in a
+	}
+
+	/**
+	 * This function can be called if you want to have the latex syntax of the given
+	 * element
+	 * 
+	 * @param omElement
+	 *            OM-Object of which you want the latex syntax
+	 * @return latex-string
+	 * @throws EvaluatorException
+	 */
+	protected final List<Object> getListSyntax(Object omElement) throws EvaluatorException {
+
+		return new OMToListVisitor().visit(omElement);
+	}
+
+	/**
+	 * If a function should have a special latex representation, then this function
+	 * has to be overwritten by that class.
+	 * 
+	 * @param omel
+	 * @return
+	 * @throws FunctionException
+	 * @throws NoRepresentationAvailableException
+	 */
+	public List<Object> getPartialListSyntax(List<Object> omel) throws EvaluatorException {
+		throw new NoRepresentationAvailableException(
+				"There is no List representation for function " + this.getClass() + " implemented");
 	}
 
 	/**
@@ -324,21 +340,28 @@ public abstract class Function {
 	 * @throws FunctionInvalidArgumentTypeException
 	 * @throws CasException
 	 */
-	protected final String getRSyntax(Object omElement)
-			throws EvaluatorException {
+	protected final String getRSyntax(Object omElement) throws EvaluatorException {
 		return new OMToSageVisitor().visit(omElement);
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Define here how the Syntax should look like in R for this specific
 	 * Function all Arguments that are passed here can be recursively called
 	 * again with getRSyntax(omElement). So only deal here with the
 	 * Representation of this Function and call (usually) the arguments in
 	 * getRSyntax(omElement) For Examples: see Plus, Minus or Set
+=======
+	 * Define here how the Syntax should look like in Sage for this specific
+	 * Function All Arguments that are passed here can be recursively called again
+	 * with getSageSyntax(omElement). So only deal here with the Representation of
+	 * this Function and call (usually) the arguments in getSageSyntax(omElement)
+	 * For Examples: see Plus, Minus or Set
+>>>>>>> refs/remotes/origin/development
 	 * 
 	 * @param arguments
-	 *            A List of Arguments for this Function. Note: The arguments are
-	 *            not evaluated!
+	 *            A List of Arguments for this Function. Note: The arguments are not
+	 *            evaluated!
 	 * @return A String Representation of this Function AND all innerFunction
 	 * @throws NoRepresentationAvailableException
 	 * @throws FunctionInvalidNumberOfArgumentsException
@@ -346,12 +369,17 @@ public abstract class Function {
 	 * @throws FunctionInvalidArgumentException
 	 * @throws CasException
 	 */
+<<<<<<< HEAD
 	public String getPartialRSyntax(List<Object> arguments)
 			throws EvaluatorException {
 		throw new NoRepresentationAvailableException(
+=======
+	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException {
+		throw new NoSageRepresentationAvailableException(
+>>>>>>> refs/remotes/origin/development
 				"There is no R representation for function " + this.getClass() + " implemented");
 	}
-	
+
 	/**
 	 * Call this Function, if you need your argument in Sage Syntax.
 	 * 
@@ -366,21 +394,20 @@ public abstract class Function {
 	 * @throws FunctionInvalidArgumentTypeException
 	 * @throws CasException
 	 */
-	protected final String getSageSyntax(Object omElement)
-			throws EvaluatorException {
+	protected final String getSageSyntax(Object omElement) throws EvaluatorException {
 		return new OMToSageVisitor().visit(omElement);
 	}
 
 	/**
 	 * Define here how the Syntax should look like in Sage for this specific
-	 * Function All Arguments that are passed here can be recursively called
-	 * again with getSageSyntax(omElement). So only deal here with the
-	 * Representation of this Function and call (usually) the arguments in
-	 * getSageSyntax(omElement) For Examples: see Plus, Minus or Set
+	 * Function All Arguments that are passed here can be recursively called again
+	 * with getSageSyntax(omElement). So only deal here with the Representation of
+	 * this Function and call (usually) the arguments in getSageSyntax(omElement)
+	 * For Examples: see Plus, Minus or Set
 	 * 
 	 * @param arguments
-	 *            A List of Arguments for this Function. Note: The arguments are
-	 *            not evaluated!
+	 *            A List of Arguments for this Function. Note: The arguments are not
+	 *            evaluated!
 	 * @return A String Representation of this Function AND all innerFunction
 	 * @throws NoRepresentationAvailableException
 	 * @throws FunctionInvalidNumberOfArgumentsException
@@ -388,8 +415,7 @@ public abstract class Function {
 	 * @throws FunctionInvalidArgumentException
 	 * @throws CasException
 	 */
-	public String getPartialSageSyntax(List<Object> arguments)
-			throws EvaluatorException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
 		throw new NoSageRepresentationAvailableException(
 				"There is no sage representation for function " + this.getClass() + " implemented");
 	}
@@ -412,21 +438,20 @@ public abstract class Function {
 	 * @throws FunctionInvalidArgumentTypeException
 	 * @throws CasException
 	 */
-	protected final String getStringSyntax(Object omElement)
-			throws EvaluatorException {
+	protected final String getStringSyntax(Object omElement) throws EvaluatorException {
 		return new OMToStringVisitor().visit(omElement);
 	}
 
 	/**
 	 * Define here how the Syntax should look like in String for this specific
-	 * Function All Arguments that are passed here can be recursively called
-	 * again with getStringSyntax(omElement). So only deal here with the
-	 * Representation of this Function and call (usually) the arguments in
-	 * getSageSyntax(omElement) For Examples: see Plus, Minus or Set
+	 * Function All Arguments that are passed here can be recursively called again
+	 * with getStringSyntax(omElement). So only deal here with the Representation of
+	 * this Function and call (usually) the arguments in getSageSyntax(omElement)
+	 * For Examples: see Plus, Minus or Set
 	 * 
 	 * @param arguments
-	 *            A List of Arguments for this Function. Note: The arguments are
-	 *            not evaluated!
+	 *            A List of Arguments for this Function. Note: The arguments are not
+	 *            evaluated!
 	 * @return A String Representation of this Function AND all innerFunction
 	 * @throws NoRepresentationAvailableException
 	 * @throws FunctionInvalidNumberOfArgumentsException
@@ -434,10 +459,9 @@ public abstract class Function {
 	 * @throws FunctionInvalidArgumentException
 	 * @throws CasException
 	 */
-	public String getPartialStringSyntax(List<Object> arguments)
-			throws EvaluatorException {
+	public String getPartialStringSyntax(List<Object> arguments) throws EvaluatorException {
 		throw new NoRepresentationAvailableException(
 				"There is no String-representation for function " + this.getClass() + " implemented");
 	}
-	
+
 }

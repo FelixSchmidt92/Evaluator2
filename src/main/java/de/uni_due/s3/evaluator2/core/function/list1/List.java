@@ -35,17 +35,6 @@ public class List extends Function {
 	}
 
 	@Override
-	public String getPartialSageSyntax(java.util.List<Object> arguments) throws EvaluatorException {
-		String set = "[";
-		for (Object arg : arguments) {
-			set += getSageSyntax(arg) + ", ";
-		}
-		set = set.substring(0, set.length() - 2); // Removing ", "
-
-		return set + "]";
-	}
-	
-	@Override
 	public String getPartialLatexSyntax(java.util.List<Object> arguments)
 			throws EvaluatorException {
 		String args ="";
@@ -68,4 +57,19 @@ public class List extends Function {
 		return list;
 	}
 
+	@Override
+	public java.util.List<Object> getPartialListSyntax(java.util.List<Object> omel) throws EvaluatorException {
+		return omel;
+	}
+
+	@Override
+	public String getPartialSageSyntax(java.util.List<Object> arguments) throws EvaluatorException {
+		String set = "[";
+		for (Object arg : arguments) {
+			set += getSageSyntax(arg) + ", ";
+		}
+		set = set.substring(0, set.length() - 2); // Removing ", "
+	
+		return set + "]";
+	}
 }
