@@ -2,11 +2,9 @@ package de.uni_due.s3.evaluator2.core.function.rounding1;
 
 import java.util.List;
 
-import de.uni_due.s3.evaluator2.core.OMUtils;
 import de.uni_due.s3.evaluator2.core.function.Function;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
-import de.uni_due.s3.evaluator2.exceptions.openmath.InputMismatchException;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
+import de.uni_due.s3.openmath.omutils.OMCreator;
 
 /**
  * Returns the closest long to the argument, with ties rounding to positive
@@ -18,13 +16,17 @@ import de.uni_due.s3.evaluator2.exceptions.openmath.InputMismatchException;
 public class Round extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionException {
-		try {
-			double value = OMUtils.convertOMToDouble(arguments.get(0));
-			value = Math.round(value);
-			return OMUtils.convertDoubleToOMIOMF(value);
-		} catch (InputMismatchException e) {
-			throw new FunctionInvalidArgumentTypeException(this, "(0)Integer/Double/Float");
+	protected Object execute(List<Object> arguments) throws EvaluatorException {
+		if (arguments.size()==1) {
+			double param1 = getDoubleSyntax(arguments.get(0));
+			double result = Math.round(param1);
+			return OMCreator.createOMIOMF(result);
+		} else {
+			double param1 = getDoubleSyntax(arguments.get(0));
+			double param2 = getIntegerSyntax(arguments.get(1));
+			double factor = Math.pow(10, param2);
+			double result = Math.round(param1*factor)/factor;
+			return OMCreator.createOMIOMF(result);
 		}
 	}
 
@@ -35,7 +37,7 @@ public class Round extends Function {
 
 	@Override
 	protected int maxArgs() {
-		return 1;
+		return 2;
 	}
 
 }

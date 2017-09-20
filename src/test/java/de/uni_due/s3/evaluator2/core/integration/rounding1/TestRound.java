@@ -10,10 +10,10 @@ import org.junit.Test;
 import de.uni_due.s3.evaluator2.Evaluator;
 import de.uni_due.s3.evaluator2.core.integration.TestIntegration;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedExerciseVariableException;
 import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedFillInVariableException;
+import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
@@ -112,12 +112,12 @@ public class TestRound extends TestIntegration {
 		assertEquals(2, Evaluator.getNumberResult("round(round(round(2.1)))", exerVar, fillIn), 0);
 	}
 
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
+	@Test(expected = NoRepresentationAvailableException.class)
 	public void testRoundWithWrongInputCharacter() throws OpenMathException, EvaluatorException {
 		Evaluator.getNumberResult("round(a)", exerVar, fillIn);
 	}
 
-	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
+	@Test(expected = NoRepresentationAvailableException.class)
 	public void testRoundWithTwoArguments() throws OpenMathException, EvaluatorException {
 		Evaluator.getNumberResult("round(1.2, 1.3)", exerVar, fillIn);
 	}

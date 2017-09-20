@@ -9,6 +9,7 @@ import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
+import de.uni_due.s3.openmath.omutils.OMCreator;
 
 /**
  * Returns the largest (closest to positive infinity) double value that is less
@@ -24,7 +25,7 @@ public class Floor extends Function {
 		try {
 			double value = OMUtils.convertOMToDouble(arguments.get(0));
 			value = Math.floor(value);
-			return OMUtils.convertDoubleToOMIOMF(value);
+			return OMCreator.createOMIOMF(value);
 		} catch (InputMismatchException e) {
 			throw new FunctionInvalidArgumentTypeException(this, "(0)Integer/Double/Float");
 		}

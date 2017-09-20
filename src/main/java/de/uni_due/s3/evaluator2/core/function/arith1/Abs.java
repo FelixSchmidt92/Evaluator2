@@ -8,6 +8,7 @@ import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.openmath.InputMismatchException;
+import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
@@ -30,7 +31,7 @@ public class Abs extends Function {
 	protected Object execute(List<Object> arguments) throws FunctionException, OpenMathException {
 		try {
 			Double argValue = OMUtils.convertOMToDouble(arguments.get(0));
-			return OMUtils.convertDoubleToOMIOMF(Math.abs(argValue));
+			return OMCreator.createOMIOMF(Math.abs(argValue));
 		} catch (InputMismatchException e) {
 			throw new FunctionInvalidArgumentTypeException(this, "integer, float, double");
 		}

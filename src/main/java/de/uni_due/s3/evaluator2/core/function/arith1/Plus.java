@@ -42,7 +42,7 @@ public class Plus extends BinaryFunction {
 		try {
 			Double leftValue = OMUtils.convertOMToDouble(arguments.get(0));
 			Double rightValue = OMUtils.convertOMToDouble(arguments.get(1));
-			return OMUtils.convertDoubleToOMIOMF(leftValue + rightValue);
+			return OMCreator.createOMIOMF(leftValue + rightValue);
 		} catch (InputMismatchException e) {
 			if (OMTypeChecker.isOMV(arguments.get(0)) || OMTypeChecker.isOMV(arguments.get(1))
 					|| OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.ARITH1_PLUS, OMSymbol.ARITH1_MINUS,

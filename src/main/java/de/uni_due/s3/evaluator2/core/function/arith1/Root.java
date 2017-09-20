@@ -27,17 +27,17 @@ public class Root extends Function {
 		try {
 			if (arguments.size() == 1) {
 				Double argValue = OMUtils.convertOMToDouble(arguments.get(0));
-				return OMUtils.convertDoubleToOMIOMF(Math.sqrt(argValue));
+				return OMCreator.createOMIOMF(Math.sqrt(argValue));
 			} else {
 				Double argValue = OMUtils.convertOMToDouble(arguments.get(0));
 				Double nth = OMUtils.convertOMToDouble(arguments.get(1));
 				if (argValue < 0) {
 					if (nth % 2 == 1) {
 						Double result = -1 * Math.pow(Math.E, Math.log(Math.abs(argValue)) / nth);
-						return OMUtils.convertDoubleToOMIOMF(result);
+						return OMCreator.createOMIOMF(result);
 					}
 				}
-				return OMUtils.convertDoubleToOMIOMF(Math.pow(Math.E, Math.log(Math.abs(argValue)) / nth));
+				return OMCreator.createOMIOMF(Math.pow(Math.E, Math.log(Math.abs(argValue)) / nth));
 			}
 		} catch (InputMismatchException e) {
 			if (arguments.size() == 1) {

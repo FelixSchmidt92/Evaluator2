@@ -40,7 +40,7 @@ public class Power extends BinaryFunction {
 		try {
 			Double b = OMUtils.convertOMToDouble(arguments.get(0));
 			Double e = OMUtils.convertOMToDouble(arguments.get(1));
-			return OMUtils.convertDoubleToOMIOMF(Math.pow(b, e));
+			return OMCreator.createOMIOMF(Math.pow(b, e));
 		} catch (InputMismatchException e) {
 			if (OMTypeChecker.isOMV(arguments.get(0)) || OMTypeChecker.isOMV(arguments.get(1))
 					|| OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.ARITH1_PLUS, OMSymbol.ARITH1_MINUS,

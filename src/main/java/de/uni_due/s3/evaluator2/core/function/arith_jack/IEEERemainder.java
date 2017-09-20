@@ -2,7 +2,6 @@ package de.uni_due.s3.evaluator2.core.function.arith_jack;
 
 import java.util.List;
 
-import de.uni_due.s3.evaluator2.core.OMUtils;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSPriority;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.BinaryFunction;
@@ -11,6 +10,7 @@ import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
+import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
@@ -45,7 +45,7 @@ public class IEEERemainder extends BinaryFunction {
 			if (rightValue == 0.0) {
 				throw new FunctionInvalidArgumentException(this, "Second argument for IEEERemainder has to be unequal 0.0 .");
 			}
-			return OMUtils.convertDoubleToOMIOMF(Math.IEEEremainder(leftValue, rightValue));
+			return OMCreator.createOMIOMF(Math.IEEEremainder(leftValue, rightValue));
 		} catch (NoRepresentationAvailableException e) {
 			throw new FunctionInvalidArgumentTypeException(this, "(1)Integer/Double/Float, (2)Integer/Double/Float");
 		}

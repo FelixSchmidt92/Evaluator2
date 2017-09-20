@@ -37,7 +37,7 @@ public class UnaryMinus extends BinaryFunction {
 	protected Object execute(List<Object> arguments) throws FunctionException, OpenMathException {
 		try {
 			Double value = OMUtils.convertOMToDouble(arguments.get(0));
-			return OMUtils.convertDoubleToOMIOMF(value * -1);
+			return OMCreator.createOMIOMF(value * -1);
 		} catch (InputMismatchException e) {
 			if (OMTypeChecker.isOMV(arguments.get(0)) || OMTypeChecker.isOMAWithSymbol(arguments.get(0),
 					OMSymbol.ARITH1_PLUS, OMSymbol.ARITH1_MINUS, OMSymbol.ARITH1_TIMES, OMSymbol.ARITH1_DIVIDE,

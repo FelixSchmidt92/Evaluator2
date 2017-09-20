@@ -43,7 +43,7 @@ public class Divide extends BinaryFunction {
 				throw new FunctionInvalidArgumentException(this,
 						"Second argument of Division / has to be unequal zero.");
 			}
-			return OMUtils.convertDoubleToOMIOMF(leftValue / rightValue);
+			return OMCreator.createOMIOMF(leftValue / rightValue);
 		} catch (InputMismatchException e) {
 			if (OMTypeChecker.isOMV(arguments.get(0)) || OMTypeChecker.isOMV(arguments.get(1))
 					|| OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.ARITH1_PLUS, OMSymbol.ARITH1_MINUS,

@@ -3,11 +3,11 @@ package de.uni_due.s3.evaluator2.core.function.arith1;
 import java.math.BigInteger;
 import java.util.List;
 
-import de.uni_due.s3.evaluator2.core.OMUtils;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
+import de.uni_due.s3.openmath.omutils.OMCreator;
 
 /**
  * Implements greatest-common-divisor with integers. For example gcd(12,6) = 3
@@ -28,7 +28,7 @@ public class GCD extends Function {
 		try {
 			BigInteger leftValue = BigInteger.valueOf(getIntegerSyntax(arguments.get(0)));
 			BigInteger rightValue = BigInteger.valueOf(getIntegerSyntax(arguments.get(1)));
-			return OMUtils.convertDoubleToOMIOMF(leftValue.gcd(rightValue).doubleValue());
+			return OMCreator.createOMIOMF(leftValue.gcd(rightValue).doubleValue());
 		} catch (NoRepresentationAvailableException e) {
 			throw new FunctionInvalidArgumentTypeException(this, "(1)Integer, (2)Integer");
 		}

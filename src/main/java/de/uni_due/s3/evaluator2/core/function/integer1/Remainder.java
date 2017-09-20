@@ -13,6 +13,7 @@ import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeE
 import de.uni_due.s3.evaluator2.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMI;
+import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
@@ -51,7 +52,7 @@ public class Remainder extends BinaryFunction {
 
 			Double leftValue = OMUtils.convertOMToDouble(left);
 			Double rightValue = OMUtils.convertOMToDouble(right);
-			return OMUtils.convertDoubleToOMIOMF(leftValue % rightValue);
+			return OMCreator.createOMIOMF(leftValue % rightValue);
 		} catch (InputMismatchException e) {
 			throw new FunctionInvalidArgumentTypeException(this, "integer");
 		}

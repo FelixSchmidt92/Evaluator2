@@ -12,8 +12,8 @@ import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
+import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMCreator;
@@ -60,6 +60,13 @@ public class TestRound extends TestFunctionAbstract {
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals(OMCreator.createOMI(10), result.getOMI());
 	}
+	
+	@Test
+	public void testRoundIntegration3() throws OpenMathException, EvaluatorException {
+		OMOBJ omobj = ExpressionParser.parse("round(10.123,2)", null, null);
+		OMOBJ result = OMExecutor.execute(omobj);
+		assertEquals(OMCreator.createOMF(10.12), result.getOMF());
+	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testRoundWithLessThanMinParam() throws OpenMathException, EvaluatorException {
@@ -70,12 +77,12 @@ public class TestRound extends TestFunctionAbstract {
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testRoundWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
-		OMOBJ omobj = ExpressionParser.parse("round(1,3)", null, null);
+		OMOBJ omobj = ExpressionParser.parse("round(1,3,3)", null, null);
 		OMExecutor.execute(omobj);
 		fail();
 	}
 
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
+	@Test(expected = NoRepresentationAvailableException.class)
 	public void testRoundWithWrongArguments() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("round('test')", null, null);
 		OMExecutor.execute(omobj);

@@ -65,26 +65,6 @@ public class OMUtils {
 	}
 
 	/**
-	 * Diese Funktion nimmt einen Double entgegen und erzeugt hieraus ein OMF
-	 * bzw. OMI. OMI wird erzeugt wenn es eine als Integer darstellbare Zahl
-	 * ist. Sonst OMF.
-	 * 
-	 * @param result
-	 * @return OMF oder OMI
-	 */
-	public static Object convertDoubleToOMIOMF(Double result) {
-		if (((double) result.intValue()) == result.doubleValue()) {
-			OMI omiResult = new OMI();
-			omiResult.setValue(String.valueOf(result.intValue()));
-			return omiResult;
-		} else {
-			OMF omfResult = new OMF();
-			omfResult.setDec(result);
-			return omfResult;
-		}
-	}
-
-	/**
 	 * Diese Funktion nimmt einen OMI oder ein OMF entgegen und erzeugt hieraus
 	 * einen Integer Im Falle eines OMF wird deren die Nachkommastellen einfach
 	 * ausgelassen.

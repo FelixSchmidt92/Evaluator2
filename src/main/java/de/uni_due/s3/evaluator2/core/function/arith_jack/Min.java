@@ -9,6 +9,7 @@ import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
+import de.uni_due.s3.openmath.omutils.OMCreator;
 
 /**
  * Returns the smaller of two double values.
@@ -27,7 +28,7 @@ public class Min extends Function {
 			Double leftValue = OMUtils.convertOMToDouble(arguments.get(0));
 			Double rightValue = OMUtils.convertOMToDouble(arguments.get(1));
 			Double result = Math.min(leftValue, rightValue);
-			return OMUtils.convertDoubleToOMIOMF(result);
+			return OMCreator.createOMIOMF(result);
 		} catch (InputMismatchException np) {
 			throw new FunctionInvalidArgumentTypeException(this, "Integer/Double/Float");
 		}

@@ -8,6 +8,7 @@ import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.openmath.InputMismatchException;
+import de.uni_due.s3.openmath.omutils.OMCreator;
 
 /**
  * Returns the natural logarithm (base e) of a double value.
@@ -26,7 +27,7 @@ public class Log extends Function {
 				throw new FunctionInvalidArgumentException(this, "Function Log expects values greater than zero.");
 			}
 			Double result = Math.log(value);
-			return OMUtils.convertDoubleToOMIOMF(result);
+			return OMCreator.createOMIOMF(result);
 		} catch (InputMismatchException e) {
 			throw new FunctionInvalidArgumentTypeException(this, "integer, float, double");
 		}
