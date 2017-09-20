@@ -7,7 +7,6 @@ import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.sage.Sage;
 import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.omutils.OMCreator;
@@ -28,15 +27,7 @@ public class IsLinearlyIndependent extends Function {
 
 	@Override
 	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
-		// Check if first argument is set
-		if (!(OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.SET1_SET)
-				|| OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.LIST1_LIST))) {
-			throw new FunctionInvalidArgumentTypeException(this, "(0)Set/List");
-		}
-
-		OMA set = (OMA) arguments.get(0);
-		List<Object> vectorList = set.getOmel();
-		vectorList.remove(0);
+		List<Object> vectorList = getListSyntax(arguments.get(0));
 
 		for (Object vector : vectorList) {
 			if (!OMTypeChecker.isOMAWithSymbol(vector, OMSymbol.LINALG2_VECTOR)) {

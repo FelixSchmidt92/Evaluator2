@@ -15,7 +15,6 @@ import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMA;
@@ -105,11 +104,9 @@ public class TestGetRandomFromSet extends TestFunctionAbstract {
 		fail();
 	}
 
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
+	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testGetRandomFromSetWithWrongArguments1() throws OpenMathException, EvaluatorException {
-
 		List<Object> args = new ArrayList<Object>();
-		args.add(OMCreator.createOMI(1));
 		func.evaluate(args);
 		fail();
 	}

@@ -98,16 +98,6 @@ public class TestSet extends TestFunctionAbstract {
 	}
 	
 	@Test
-	public void testSetIntegrationWithSemi() throws OpenMathException, EvaluatorException {
-		OMOBJ omobj = ExpressionParser.parse("'1;2;3'", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
-		List<Object> value = result.getOMA().getOmel();
-		assertEquals(OMCreator.createOMI(1), value.get(1));
-		assertEquals(OMCreator.createOMI(2), value.get(2));
-		assertEquals(OMCreator.createOMI(3), value.get(3));
-	}
-	
-	@Test
 	public void testSetLatexSyntax() throws EvaluatorException, OpenMathException {
 		OMOBJ result = Evaluator.evaluate("{1;2;3}", null,null);
 		String latex = Evaluator.getLaTeX(result);
