@@ -12,6 +12,7 @@ import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeE
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMA;
+import de.uni_due.s3.openmath.jaxb.OME;
 import de.uni_due.s3.openmath.jaxb.OMF;
 import de.uni_due.s3.openmath.jaxb.OMI;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
@@ -112,6 +113,9 @@ public abstract class OMToSyntaxVisitor<T> {
 			if (omobj.getOMA() != null) {
 				return visit(omobj.getOMA());
 			}
+			if (omobj.getOME() != null) {
+				return visit(omobj.getOME());
+			}
 		}
 		throw new NoRepresentationAvailableException("Unable to extract omElement from OMOBJ: " + omobj.toString());
 	}
@@ -169,6 +173,19 @@ public abstract class OMToSyntaxVisitor<T> {
 	 */
 	protected abstract T visit(OMV omv) throws NoRepresentationAvailableException;
 
+	/**
+	 * Not every visitor has to implement the processing of OME objects. If a visitor
+	 * needs to process OME, overwrite this function.
+	 * 
+	 * @param ome
+	 *            the element which is visited now
+	 * @return the String-Representation
+	 * @throws EvaluatorException 
+	 */
+	protected  T visit(OME ome) throws NoRepresentationAvailableException {
+		throw new NoRepresentationAvailableException("processing of OME not supported");
+	}
+	
 	/**
 	 * An OMA is visited here. Here the visit searches for the specific Function and
 	 * calls with this found Function callInFunctionTheMethod The List given to this
