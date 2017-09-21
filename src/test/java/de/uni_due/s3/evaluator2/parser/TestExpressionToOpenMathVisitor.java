@@ -139,8 +139,7 @@ public class TestExpressionToOpenMathVisitor{
 		assertEquals(OMCreator.createOMA(OMSymbol.ARITH1_PLUS, plus), result);
 	}
 	
-	//FIXME dlux was genau tun wir hier ?
-	@Ignore
+	//@Ignore Hier wird getestet, ob ein zufällig generierte UTF8-String vom Parser akzeptiert wird (insb. wichtig wie bsplws. Linguisten)
 	@Test
 	public void testVisitTextONLYValue(){
 		for (int i = 0; i < 10000; i++){
