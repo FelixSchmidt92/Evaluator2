@@ -2,13 +2,10 @@ package de.uni_due.s3.evaluator2.core.function.arith1;
 
 import java.util.List;
 
-import de.uni_due.s3.evaluator2.core.OMUtils;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
-import de.uni_due.s3.evaluator2.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
@@ -23,14 +20,14 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 public class Root extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionException, OpenMathException {
+	protected Object execute(List<Object> arguments) throws OpenMathException, EvaluatorException {
 		try {
 			if (arguments.size() == 1) {
-				Double argValue = OMUtils.convertOMToDouble(arguments.get(0));
+				Double argValue =getDoubleSyntax(arguments.get(0));
 				return OMCreator.createOMIOMF(Math.sqrt(argValue));
 			} else {
-				Double argValue = OMUtils.convertOMToDouble(arguments.get(0));
-				Double nth = OMUtils.convertOMToDouble(arguments.get(1));
+				Double argValue = getDoubleSyntax(arguments.get(0));
+				Double nth = getDoubleSyntax(arguments.get(1));
 				if (argValue < 0) {
 					if (nth % 2 == 1) {
 						Double result = -1 * Math.pow(Math.E, Math.log(Math.abs(argValue)) / nth);
@@ -39,7 +36,7 @@ public class Root extends Function {
 				}
 				return OMCreator.createOMIOMF(Math.pow(Math.E, Math.log(Math.abs(argValue)) / nth));
 			}
-		} catch (InputMismatchException e) {
+		} catch (FunctionInvalidArgumentTypeException e) {
 			if (arguments.size() == 1) {
 				if (OMTypeChecker.isOMV(arguments.get(0)) || OMTypeChecker.isOMAWithSymbol(arguments.get(0),
 						OMSymbol.ARITH1_PLUS, OMSymbol.ARITH1_MINUS, OMSymbol.ARITH1_TIMES, OMSymbol.ARITH1_DIVIDE,

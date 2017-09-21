@@ -17,6 +17,7 @@ import de.uni_due.s3.openmath.omutils.OMConverter;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
+@Deprecated
 public class OMUtils {
 
 	/** USE getDoubleSyntax(Object) in Function ! kein try und catch -> Exception muss zu JACK 

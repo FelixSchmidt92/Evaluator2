@@ -2,7 +2,6 @@ package de.uni_due.s3.evaluator2.core.function.arith1;
 
 import java.util.List;
 
-import de.uni_due.s3.evaluator2.core.OMUtils;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSPriority;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.BinaryFunction;
@@ -12,7 +11,6 @@ import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
-import de.uni_due.s3.evaluator2.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
@@ -40,14 +38,15 @@ public class Minus extends BinaryFunction {
 	 * @throws CasNotAvailableException
 	 * @throws FunctionInvalidNumberOfArgumentsException
 	 * @throws OpenMathException
+	 * @throws EvaluatorException 
 	 */
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionException, OpenMathException {
+	protected Object execute(List<Object> arguments) throws OpenMathException, EvaluatorException {
 		try {
-			Double leftValue = OMUtils.convertOMToDouble(arguments.get(0));
-			Double rightValue = OMUtils.convertOMToDouble(arguments.get(1));
+			Double leftValue = getDoubleSyntax(arguments.get(0));
+			Double rightValue = getDoubleSyntax(arguments.get(1));
 			return OMCreator.createOMIOMF(leftValue - rightValue);
-		} catch (InputMismatchException e) {
+		} catch (FunctionInvalidArgumentTypeException e) {
 			if (OMTypeChecker.isOMV(arguments.get(0)) || OMTypeChecker.isOMV(arguments.get(1))
 					|| OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.ARITH1_PLUS, OMSymbol.ARITH1_MINUS,
 							OMSymbol.ARITH1_TIMES, OMSymbol.ARITH1_DIVIDE, OMSymbol.ARITH1_POWER, OMSymbol.ARITH1_ROOT,

@@ -3,9 +3,9 @@ package de.uni_due.s3.evaluator2.core.function.binary_jack;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import de.uni_due.s3.evaluator2.core.OMUtils;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.openmath.InputMismatchException;
@@ -21,12 +21,22 @@ public class EqualsBinary extends Function {
 
 	@Override
 	protected Object execute(List<Object> arguments)
-			throws FunctionInvalidArgumentTypeException, FunctionInvalidArgumentException {
+			throws EvaluatorException {
 		try {
-			String left = OMUtils.convertOMToString(arguments.get(0)); // Normal Number
-			String right = OMUtils.convertOMToString(arguments.get(1)); // Binary Number
-
-
+			String left = getStringSyntax(arguments.get(0)); // Normal Number
+			String right = getStringSyntax(arguments.get(1)); // Binary Number
+			
+			//If BOOl-Input then change these to 1 or 0
+			if (left.equals("True")) {
+				left = "1";
+			}else if (left.equals("False")) {
+					left = "1"; 
+			}
+			if (right.equals("True")) {
+				right = "1";
+			}else if (right.equals("False")) {
+				left = "1"; 
+		}
 			String leftBin = "";
 			if (left.contains(".") || left.contains(",")) {
 				leftBin = Long.toBinaryString(Double.doubleToRawLongBits(Double.parseDouble(left)));

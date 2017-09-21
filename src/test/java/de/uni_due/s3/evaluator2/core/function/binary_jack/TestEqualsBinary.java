@@ -29,7 +29,7 @@ public class TestEqualsBinary extends TestFunctionAbstract {
 
 	public static Object[][] arguments = { { "10", "1010", OMSymbol.LOGIC1_TRUE, OMCreator.createOMF(1.1) }, // [0]
 			{ "10", "001010", OMSymbol.LOGIC1_TRUE, OMCreator.createOMA(OMSymbol.SET1_SET, new ArrayList<>()) },
-			{ "11", "1011", OMSymbol.LOGIC1_TRUE, OMCreator.createOMS("myCD", "myName") },
+			{ "11", "1011", OMSymbol.LOGIC1_TRUE, OMCreator.createOMS("list1", "list") },
 			{ "10", "101000", OMSymbol.LOGIC1_FALSE, OMCreator.createOMI(2) },
 			{ "-10", "-0001010", OMSymbol.LOGIC1_TRUE, OMCreator.createOMI(50) },
 			{ "-7", "-000111", OMSymbol.LOGIC1_TRUE, OMCreator.createOMF(0.1) },// [5]

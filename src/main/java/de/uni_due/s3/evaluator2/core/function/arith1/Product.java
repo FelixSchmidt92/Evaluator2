@@ -2,7 +2,6 @@ package de.uni_due.s3.evaluator2.core.function.arith1;
 
 import java.util.List;
 
-import de.uni_due.s3.evaluator2.core.OMUtils;
 import de.uni_due.s3.evaluator2.core.PolyUtils;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
@@ -10,7 +9,6 @@ import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
-import de.uni_due.s3.evaluator2.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator2.sage.Sage;
 import de.uni_due.s3.openmath.jaxb.OMA;
@@ -83,9 +81,9 @@ public class Product extends Function {
 		String lowerBound, upperBound;
 		
 		try {
-			lowerBound = OMUtils.convertOMToString(intervall.getOmel().get(1));
-			upperBound = OMUtils.convertOMToString(intervall.getOmel().get(2));
-		} catch (InputMismatchException ime) {
+			lowerBound = getStringSyntax(intervall.getOmel().get(1));
+			upperBound = getStringSyntax(intervall.getOmel().get(2));
+		} catch (FunctionInvalidArgumentTypeException ime) {
 			throw new FunctionInvalidArgumentException(this, "intervall could not be converted to a number");
 		}
 		OMBIND ombind = (OMBIND) arguments.get(1);

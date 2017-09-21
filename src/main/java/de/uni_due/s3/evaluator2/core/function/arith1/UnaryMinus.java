@@ -2,14 +2,12 @@ package de.uni_due.s3.evaluator2.core.function.arith1;
 
 import java.util.List;
 
-import de.uni_due.s3.evaluator2.core.OMUtils;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSPriority;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.BinaryFunction;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
-import de.uni_due.s3.evaluator2.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
@@ -32,13 +30,14 @@ public class UnaryMinus extends BinaryFunction {
 	 * 
 	 * @return OMI or OMF
 	 * @throws OpenMathException
+	 * @throws EvaluatorException 
 	 */
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionException, OpenMathException {
+	protected Object execute(List<Object> arguments) throws OpenMathException, EvaluatorException {
 		try {
-			Double value = OMUtils.convertOMToDouble(arguments.get(0));
+			Double value = getDoubleSyntax(arguments.get(0));
 			return OMCreator.createOMIOMF(value * -1);
-		} catch (InputMismatchException e) {
+		} catch (FunctionInvalidArgumentTypeException e) {
 			if (OMTypeChecker.isOMV(arguments.get(0)) || OMTypeChecker.isOMAWithSymbol(arguments.get(0),
 					OMSymbol.ARITH1_PLUS, OMSymbol.ARITH1_MINUS, OMSymbol.ARITH1_TIMES, OMSymbol.ARITH1_DIVIDE,
 					OMSymbol.ARITH1_POWER, OMSymbol.ARITH1_ROOT, OMSymbol.ARITH1_UNARY_MINUS)) {
@@ -73,6 +72,11 @@ public class UnaryMinus extends BinaryFunction {
 	@Override
 	public String getPartialStringSyntax(List<Object> arguments) throws EvaluatorException {
 		return "-" + getStringSyntax(arguments.get(0));
+	}
+	
+	@Override
+	public Double getPartialDoubleSyntax(List<Object> arguments) throws EvaluatorException {
+		return new Double(-1* getDoubleSyntax(arguments.get(0)));
 	}
 
 }
