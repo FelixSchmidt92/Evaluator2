@@ -32,25 +32,22 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
  *
  */
 public class Evaluator {
-	
-	private static final List<RConn> rConnections = new ArrayList<RConn>();
-	private static final List<SageConnection> sageConnections = new ArrayList<SageConnection>();
-	private static boolean casInitialized = false;
 
 	private Evaluator() {
 	}
 	
-	private static void initCAS() {
-		if(!casInitialized) {
-			rConnections.add(new RConn("192.168.68.207", 6312));
-			sageConnections.add(new SageConnection("192.168.68.73", 8989));
-			
-			R.init(rConnections);
-			Sage.init(sageConnections);
-			casInitialized = true;
-		}
+	/**
+	 * Initialize connections to R & Sage Server. This Method has to be called once!
+	 * If the connections aren't initialized, methods like evaluateInR, evaluateInSage can't work
+	 * 
+	 * @param rConnections
+	 * @param sageConnections
+	 */
+	public static void initializeCAS(List<RConn> rConnections, List<SageConnection> sageConnections) {
+		Sage.init(sageConnections);
+		R.init(rConnections);
 	}
-
+	
 	public static boolean getBooleanResult(String expression, HashMap<String, OMOBJ> exerciseVariableMap,
 			HashMap<Integer, OMOBJ> fillInVariableMap) throws EvaluatorException, OpenMathException {
 		OMOBJ result = evaluate(expression, exerciseVariableMap, fillInVariableMap);
@@ -104,8 +101,6 @@ public class Evaluator {
 	public static OMOBJ evaluate(String expression, HashMap<String, OMOBJ> exerciseVariableMap,
 			HashMap<Integer, OMOBJ> fillInVariableMap) throws EvaluatorException, OpenMathException {
 		
-		initCAS();
-		
 		OMOBJ omobj = ExpressionParser.parse(expression, exerciseVariableMap, fillInVariableMap);
 		return OMExecutor.execute(omobj);
 	}
@@ -123,7 +118,6 @@ public class Evaluator {
 	 * @throws CasEvaluationException
 	 */
 	public static OMOBJ evaluate(OMOBJ omobj) throws EvaluatorException, OpenMathException {
-		initCAS();
 		return OMExecutor.execute(omobj);
 	}
 	
