@@ -338,10 +338,21 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	@Override
 	public Object visitNestedFunctionInExpression(NestedFunctionInExpressionContext ctx) {
 		List<Object> omel = new ArrayList<>();
-		for (ExpressionContext childctx : ctx.arguments) {
-			omel.add(visit(childctx));
-		}
 		OMS oms = OMSEvaluatorSyntaxDictionary.getInstance().getOMS(ctx.name.getText());
+		
+		//if the function is in the CASJACK cd, they should only have one text arguments
+		//which should not be parsed again (see issue #33)
+		//otherwise all children will be visited.
+		if (oms.getCd().equals(OMSymbol.CASJACK_EVALUATEINR.getCd())) {
+			ExpressionContext childctx = ctx.arguments.get(0);
+			String text = childctx.getText().substring(1, childctx.getText().length() - 1); // the
+			omel.add(OMCreator.createOMSTR(text));
+		}else {
+			for (ExpressionContext childctx : ctx.arguments) {
+				omel.add(visit(childctx));
+			}
+		}
+		
 		return OMCreator.createOMA(oms, omel);
 	}
 
