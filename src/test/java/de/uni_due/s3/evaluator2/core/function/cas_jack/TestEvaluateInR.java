@@ -5,13 +5,14 @@ import static org.junit.Assert.*;
 
 import de.uni_due.s3.evaluator2.Evaluator;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
+import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
-public class TestEvaluateInR{
+public class TestEvaluateInR extends TestFunctionAbstract{
 	
 	@Test
 	public void testEvaluateInRInteger() throws OpenMathException, EvaluatorException {
