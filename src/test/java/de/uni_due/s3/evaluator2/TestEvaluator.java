@@ -11,6 +11,7 @@ import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedException;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMConverter;
+import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestEvaluator {
@@ -43,6 +44,18 @@ public class TestEvaluator {
 				OMConverter.toString(Evaluator
 						.evaluate((OMOBJ) OMConverter.toObject("<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\"><OMA>" + "<OMS name=\"plus\" cd=\"arith1\"/>"
 								+ "<OMI>2</OMI>" + "<OMI>13</OMI>" + "</OMA></OMOBJ>"))));
+	}
+	
+	@Test
+	public void testEvaluatorRConnection() throws EvaluatorException, OpenMathException {
+		OMOBJ result = Evaluator.evaluate("evaluateInR('11')", exerciseVariableMap, fillInVariableMap);
+		Assert.assertEquals(OMCreator.createOMI(11),result.getOMI());
+	}
+	
+	@Test
+	public void testEvaluatorSageConnection() throws EvaluatorException, OpenMathException {
+		OMOBJ result = Evaluator.evaluate("evaluateInSage('10')", exerciseVariableMap, fillInVariableMap);
+		Assert.assertEquals(OMCreator.createOMI(10),result.getOMI());
 	}
 
 }

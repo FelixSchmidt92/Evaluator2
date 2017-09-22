@@ -1,6 +1,8 @@
 package de.uni_due.s3.evaluator2;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.OMUtils;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
@@ -15,6 +17,10 @@ import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedExerciseVariableExcep
 import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedFillInVariableException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
+import de.uni_due.s3.evaluator2.r.R;
+import de.uni_due.s3.evaluator2.r.RConn;
+import de.uni_due.s3.evaluator2.sage.Sage;
+import de.uni_due.s3.evaluator2.sage.SageConnection;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
@@ -26,8 +32,23 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
  *
  */
 public class Evaluator {
+	
+	private static final List<RConn> rConnections = new ArrayList<RConn>();
+	private static final List<SageConnection> sageConnections = new ArrayList<SageConnection>();
+	private static boolean casInitialized = false;
 
 	private Evaluator() {
+	}
+	
+	private static void initCAS() {
+		if(!casInitialized) {
+			rConnections.add(new RConn("192.168.68.207", 6312));
+			sageConnections.add(new SageConnection("192.168.68.73", 8989));
+			
+			R.init(rConnections);
+			Sage.init(sageConnections);
+			casInitialized = true;
+		}
 	}
 
 	public static boolean getBooleanResult(String expression, HashMap<String, OMOBJ> exerciseVariableMap,
@@ -82,6 +103,9 @@ public class Evaluator {
 	 */
 	public static OMOBJ evaluate(String expression, HashMap<String, OMOBJ> exerciseVariableMap,
 			HashMap<Integer, OMOBJ> fillInVariableMap) throws EvaluatorException, OpenMathException {
+		
+		initCAS();
+		
 		OMOBJ omobj = ExpressionParser.parse(expression, exerciseVariableMap, fillInVariableMap);
 		return OMExecutor.execute(omobj);
 	}
@@ -99,6 +123,7 @@ public class Evaluator {
 	 * @throws CasEvaluationException
 	 */
 	public static OMOBJ evaluate(OMOBJ omobj) throws EvaluatorException, OpenMathException {
+		initCAS();
 		return OMExecutor.execute(omobj);
 	}
 	
