@@ -79,4 +79,8 @@ public class UnaryMinus extends BinaryFunction {
 		return new Double(-1* getDoubleSyntax(arguments.get(0)));
 	}
 
+	@Override
+	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException {
+		return  "(-" + getRSyntax(arguments.get(0)) + ")";
+	}
 }

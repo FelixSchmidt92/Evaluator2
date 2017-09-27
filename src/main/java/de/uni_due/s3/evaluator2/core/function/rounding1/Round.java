@@ -40,4 +40,9 @@ public class Round extends Function {
 		return 2;
 	}
 
+	@Override
+	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException {
+		return "round(" + getRSyntax(arguments.get(0)) + ", " + getRSyntax(arguments.get(1)) + ")";
+	}
+
 }

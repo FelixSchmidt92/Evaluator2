@@ -93,4 +93,8 @@ public class Minus extends BinaryFunction {
 		return getStringSyntax(arguments.get(0)) + "-" + getStringSyntax(arguments.get(1));
 	}
 
+	@Override
+	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException {
+		return  "(" + getRSyntax(arguments.get(0)) + " - " + getRSyntax(arguments.get(1)) + ")";
+	}
 }

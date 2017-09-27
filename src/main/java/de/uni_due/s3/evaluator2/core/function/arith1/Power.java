@@ -80,4 +80,9 @@ public class Power extends BinaryFunction {
 	public String getPartialStringSyntax(List<Object> arguments) throws EvaluatorException {
 		return getStringSyntax(arguments.get(0)) + "^" + getStringSyntax(arguments.get(1));
 	}
+	
+	@Override
+	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException {
+		return  "(" + getRSyntax(arguments.get(0)) + "^" + getRSyntax(arguments.get(1)) + ")";
+	}
 }
