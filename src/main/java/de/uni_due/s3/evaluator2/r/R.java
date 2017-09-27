@@ -73,6 +73,9 @@ public class R {
 			
 
 		} catch (RserveException e) {
+			if (! e.getLocalizedMessage().contains("127")  && ! e.getLocalizedMessage().contains("syntax error")) { 
+				//If Exception does not contain Error-Code 127 (127: expr could not be evaled) or syntax Error
+				//then R Server might be down or is behaving wrong
 			rConnectionList.remove(con);
 			rErrorConnectionList.add(con);
 			if (!reviveFlag) {
@@ -81,8 +84,18 @@ public class R {
 			}
 			// restart evaluation
 			return evaluateInCAS(rExpression);
+			}
+			casResult = "<OME><OMSTR>Syntax Error in Expression</OMSTR></OME>";
+			
+			
 		}finally {
 			if (rConnection != null) {
+				// Uncomment this if R has to many Problems  handling alot of Sockets
+//				try {
+//					rConnection.voidEval("closeAllConnections()");
+//				} catch (RserveException  e) {
+//					//tried everything to close
+//				}
 				rConnection.close();
 			}
 		}

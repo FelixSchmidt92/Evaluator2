@@ -49,11 +49,11 @@ public class List extends Function {
 
 		String list = "list(";
 		for (Object arg : arguments) {
-			list += getSageSyntax(arg) + ", ";
+			list += getRSyntax(arg) + ", ";
 		}
 		list = list.substring(0, list.length() - 2); // Removing ", "
 
-		return list;
+		return list + ")";
 	}
 
 	@Override

@@ -10,8 +10,6 @@ import org.antlr.v4.runtime.tree.ParseTree;
 
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSEvaluatorSyntaxDictionary;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
-import de.uni_due.s3.evaluator2.core.visitor.OMToStringVisitor;
-import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedRuntimeException;
 import de.uni_due.s3.evaluator2.exceptions.parserruntime.ErroneousExerciseVariableRuntimeException;
 import de.uni_due.s3.evaluator2.exceptions.parserruntime.ErroneousFillInVariableRuntimeException;
@@ -342,21 +340,8 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 		List<Object> omel = new ArrayList<>();
 		OMS oms = OMSEvaluatorSyntaxDictionary.getInstance().getOMS(ctx.name.getText());
 		
-		//if the function is in the CASJACK cd, they should only have one text arguments
-		//which should not be parsed again (see issue #33)
-		//otherwise all children will be visited.
-		if (oms.getCd().equals(OMSymbol.CASJACK_EVALUATEINR.getCd())) {
-			TextValueContext childctx = null;
-			try {
-				childctx = (TextValueContext) ctx.arguments.get(0);
-			}catch(Exception e) {
-				throw new ParserRuntimeException("argument for evaluateIn-functions should be a String", e);
-			}
-			omel.add(convertTextValueToOMSTR(childctx));
-		}else {
-			for (ExpressionContext childctx : ctx.arguments) {
-				omel.add(visit(childctx));
-			}
+		for (ExpressionContext childctx : ctx.arguments) {
+			omel.add(visit(childctx));
 		}
 		
 		return OMCreator.createOMA(oms, omel);
@@ -515,59 +500,5 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	@Override
 	public Object visitVariable(VariableContext ctx) {
 		return OMCreator.createOMV(ctx.name.getText());
-	}
-	
-	/**
-	 * Converts a TextValue to one OMSTR.
-	 * Therefore it finds all Variables in the textValue and converts the content of it
-	 * to a string. Those converted variables will be concatenated with the original text.
-	 * This method is only used by visitNestedFunctions to build a string for 
-	 * evaluateIn-functions
-	 * 
-	 * @param ctx
-	 * @return
-	 */
-	private OMSTR convertTextValueToOMSTR(TextValueContext ctx) {
-		String text = ctx.getText().substring(1, ctx.getText().length() - 1);
-		String processedText = "";
-		Matcher varposMatcher = VARPOS.matcher(text); // PatternMatcher
-														// finds [pos=*] or
-														// [val=*]
-
-		int stringPointer = 0; // Pointer to get string subsequences
-		while (varposMatcher.find()) {
-			// Add leading text of pos/val Variables
-			processedText += text.substring(stringPointer, varposMatcher.start());
-			stringPointer = varposMatcher.end();
-			
-			boolean isVar = text.substring(varposMatcher.start(), varposMatcher.end()).contains("var");
-			//remove [pos= or [var=
-			String varposVal = text.substring(varposMatcher.start() + 5, varposMatcher.end() - 1); 
-
-			/* Extracting the pos OR var value.
-			 * If they aren't of type OMSTR then try to convert them to OMSTR 
-			 * */
-			OMOBJ variable;
-			if (isVar) {
-				variable = exerciseVariableMap.get(varposVal);
-			} else {
-				variable = fillInVariableMap.get(Integer.parseInt(varposVal));
-			}
-			try {
-				Object varObj = OMConverter.toElement(variable);	
-				OMToStringVisitor os = new OMToStringVisitor();
-				String varObjString = os.visit(varObj);
-				processedText += varObjString;
-			} catch (OpenMathException e) {
-				throw new UndefinedExerciseVariableRuntimeException(varposVal);
-			} catch (EvaluatorException e) {
-				e.printStackTrace();
-				throw new ParserRuntimeException("Variables could not converted to String", e);
-			}
-		}
-		if (stringPointer < text.length()) {
-			processedText += text.substring(stringPointer); // Maybe add one OMSTR after pos/val Variables
-		}
-		return OMCreator.createOMSTR(processedText);
 	}
 }

@@ -1,5 +1,8 @@
 package de.uni_due.s3.evaluator2;
 
+import java.io.IOException;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 
 import javax.xml.bind.JAXBException;
@@ -58,5 +61,11 @@ public class TestEvaluator extends TestFunctionAbstract{
 		OMOBJ result = Evaluator.evaluate("evaluateInSage('10')", exerciseVariableMap, fillInVariableMap);
 		Assert.assertEquals(OMCreator.createOMI(10),result.getOMI());
 	}
-
+	
+	@Test
+	public void socket() throws UnknownHostException, IOException {
+		Socket s = new Socket("localhost", 8989);
+		
+		s.close();
+	}
 }

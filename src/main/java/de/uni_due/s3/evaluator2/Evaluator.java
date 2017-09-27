@@ -1,17 +1,15 @@
 package de.uni_due.s3.evaluator2;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import de.uni_due.s3.evaluator2.core.OMUtils;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
+import de.uni_due.s3.evaluator2.core.visitor.OMToDoubleVisitor;
 import de.uni_due.s3.evaluator2.core.visitor.OMToLatexVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
-import de.uni_due.s3.evaluator2.exceptions.openmath.InputMismatchException;
 import de.uni_due.s3.evaluator2.exceptions.parser.ParserException;
 import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedExerciseVariableException;
 import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedFillInVariableException;
@@ -76,10 +74,10 @@ public class Evaluator {
 			HashMap<Integer, OMOBJ> fillInVariableMap) throws EvaluatorException, OpenMathException {
 		OMOBJ result = evaluate(expression, exerciseVariableMap, fillInVariableMap);
 		result = evaluate(result);
-		try {
-			return OMUtils.convertOMToDouble(result);
-		} catch (InputMismatchException e) {
-			throw new FunctionException("Result of expression:" + expression + "can't be converted to a number");
+		try {	
+			return new OMToDoubleVisitor().visit(result);
+		}catch (NoRepresentationAvailableException e){
+			throw new FunctionException("Error converting result into Double.", e);
 		}
 	}
 
