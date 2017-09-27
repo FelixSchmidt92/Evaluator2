@@ -24,6 +24,7 @@ import de.uni_due.s3.openmath.omutils.OMCreator;
  */
 public class TextWithVariables extends Function {
 
+
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionException {
 		return OMCreator.createOMA(OMSymbol.STRINGJACK_TEXTWITHVARIABLES, arguments);
@@ -78,6 +79,18 @@ public class TextWithVariables extends Function {
 
 		for (Object obj : arguments) {
 			temp += getSageSyntax(obj);
+		}
+		return temp;
+	}
+	
+	
+	
+	@Override
+	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException {
+		String temp = "";
+
+		for (Object obj : arguments) {
+			temp += getRSyntax(obj);
 		}
 		return temp;
 	}
