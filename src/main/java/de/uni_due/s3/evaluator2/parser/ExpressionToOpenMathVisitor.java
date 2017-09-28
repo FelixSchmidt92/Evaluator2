@@ -344,7 +344,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 			ExpressionContext childctx = ctx.arguments.get(0);
 			String text = childctx.getText().substring(1,childctx.getText().length()-1);
 			omel.add(textWithVariablesGenerator(text));
-			System.out.println(textWithVariablesGenerator(text).toString());
+			
 		}else {
 			for (ExpressionContext childctx : ctx.arguments) {
 				omel.add(visit(childctx));
