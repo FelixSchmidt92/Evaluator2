@@ -22,20 +22,22 @@ import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvaila
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
- * Function is an abstract Class where functions can be executed with the
+ * ConstructorFunction is an abstract Class where functions can be executed with their
  * ArgumentList. All Classes which inherit this Class <b>have to</b> implement
  * minArgs, maxArgs and the execute method(where the logic should be).
  * 
  * If you want to add a new Function please refer to the OpenMath Content
- * Dictionaries (www.openmath.org/cd/) and add the new Function to the (maybe
- * new) correct Package If this Function is not listed in OpenMath, use the
+ * Dictionaries (www.openmath.org/cd/) and add the new Function to the corresponding
+ * Package. If the Function is not listed in OpenMath, use the
  * *_jack package (then this Function is a jack-specific one, '*' can be linalg,
  * string etc..).
  * 
- * Getting an Function can be achieved with the OMSFunctionDictionary. The
+ * Getting a Function can be achieved with the OMSFunctionDictionary. The
  * OMSFunctionDictionary-Class will contain all available Functions for this
  * Evaluator. By Adding a new Function make this Function also available at
  * OMSFunctionDictionary.
+ * 
+ * Some getPartial... - functions are abstract and have to be implemented!.
  * 
  * @author dlux, frichtscheid, spobel
  */
@@ -189,7 +191,10 @@ public abstract class ConstructorFunction {
 	 * @throws FunctionInvalidArgumentException
 	 * @throws CasException
 	 */
-	public abstract Boolean getPartialBooleanSyntax(List<Object> arguments) throws EvaluatorException;
+	public Boolean getPartialBooleanSyntax(List<Object> arguments) throws EvaluatorException {
+		throw new NoRepresentationAvailableException(
+				"There is no Boolean-representation for function " + this.getClass().getSimpleName());
+	}
 
 	/**
 	 * Call this Function, if you need your argument in String Syntax.
@@ -230,8 +235,11 @@ public abstract class ConstructorFunction {
 	 * @throws FunctionInvalidArgumentException
 	 * @throws CasException
 	 */
-	public abstract Double getPartialDoubleSyntax(List<Object> arguments) throws EvaluatorException;
-
+	public Double getPartialDoubleSyntax(List<Object> arguments) throws EvaluatorException {
+		throw new NoRepresentationAvailableException(
+				"There is no Double-representation for function " + this.getClass().getSimpleName());
+	}
+	
 	/**
 	 * Call this Function, if you need your argument in String Syntax.
 	 * 
@@ -271,8 +279,10 @@ public abstract class ConstructorFunction {
 	 * @throws FunctionInvalidArgumentException
 	 * @throws CasException
 	 */
-	public abstract Integer getPartialIntegerSyntax(List<Object> arguments) throws EvaluatorException;
-
+	public Integer getPartialIntegerSyntax(List<Object> arguments) throws EvaluatorException {
+		throw new NoRepresentationAvailableException(
+				"There is no Integer-representation for function " + this.getClass().getSimpleName());
+	}
 	/**
 	 * This function can be called if you want to have the latex syntax of the given
 	 * element
@@ -319,7 +329,10 @@ public abstract class ConstructorFunction {
 	 * @throws FunctionException
 	 * @throws NoRepresentationAvailableException
 	 */
-	public abstract List<Object> getPartialListSyntax(List<Object> omel) throws EvaluatorException;
+	public List<Object> getPartialListSyntax(List<Object> omel) throws EvaluatorException {
+		throw new NoRepresentationAvailableException(
+				"There is no List representation for function " + this.getClass().getSimpleName());
+	}
 
 	/**
 	 * Call this Function, if you need your argument in Sage Syntax.
@@ -438,6 +451,8 @@ public abstract class ConstructorFunction {
 	 * @throws FunctionInvalidArgumentException
 	 * @throws CasException
 	 */
-	public abstract String getPartialStringSyntax(List<Object> arguments) throws EvaluatorException;
-
+	public String getPartialStringSyntax(List<Object> arguments) throws EvaluatorException {
+		throw new NoRepresentationAvailableException(
+				"There is no String-representation for function " + this.getClass().getSimpleName());
+	}
 }

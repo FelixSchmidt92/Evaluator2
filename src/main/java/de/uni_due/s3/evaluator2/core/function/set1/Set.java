@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
+import de.uni_due.s3.evaluator2.core.function.ConstructorFunction;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
@@ -18,7 +19,7 @@ import de.uni_due.s3.openmath.omutils.OMCreator;
  * @author frichtscheid
  *
  */
-public class Set extends Function {
+public class Set extends ConstructorFunction {
 
 	@Override
 	protected Object execute(List<Object> arguments) {
@@ -52,6 +53,17 @@ public class Set extends Function {
 
 	@Override
 	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
+		String set = "{";
+		for (Object arg : arguments) {
+			set += getSageSyntax(arg) + ", ";
+		}
+		set = set.substring(0, set.length() - 2); // Removing ", "
+	
+		return set + "}";
+	}
+
+	@Override
+	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException {
 		String set = "{";
 		for (Object arg : arguments) {
 			set += getSageSyntax(arg) + ", ";

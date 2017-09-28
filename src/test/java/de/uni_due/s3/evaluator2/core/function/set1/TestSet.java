@@ -10,8 +10,10 @@ import org.junit.Test;
 import de.uni_due.s3.evaluator2.Evaluator;
 import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
+import de.uni_due.s3.evaluator2.core.function.ConstructorFunction;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
+import de.uni_due.s3.evaluator2.core.visitor.OMToRVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMA;
@@ -21,7 +23,7 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestSet extends TestFunctionAbstract {
 
-	private Function func = new Set();
+	private ConstructorFunction func = new Set();
 	private List<Object> args;
 	private Object result;
 
@@ -102,6 +104,14 @@ public class TestSet extends TestFunctionAbstract {
 		OMOBJ result = Evaluator.evaluate("{1;2;3}", null,null);
 		String latex = Evaluator.getLaTeX(result);
 		assertEquals("\\left\\{1,2,3\\right\\}",latex);
+		
+	}
+	
+	@Test
+	public void testSetRSyntax() throws EvaluatorException, OpenMathException {
+		OMOBJ result = Evaluator.evaluate("set(1,2,3)", null,null);
+		String r = new OMToRVisitor().visit(result);
+		assertEquals("{1, 2, 3}",r);
 		
 	}
 }

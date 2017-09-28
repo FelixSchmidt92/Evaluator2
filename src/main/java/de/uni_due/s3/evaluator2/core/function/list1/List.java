@@ -1,7 +1,7 @@
 package de.uni_due.s3.evaluator2.core.function.list1;
 
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
-import de.uni_due.s3.evaluator2.core.function.Function;
+import de.uni_due.s3.evaluator2.core.function.ConstructorFunction;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
@@ -16,7 +16,7 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
  * @author dlux
  *
  */
-public class List extends Function {
+public class List extends ConstructorFunction {
 
 	@Override
 	protected Object execute(java.util.List<Object> arguments) throws FunctionException, CasEvaluationException,
@@ -71,4 +71,31 @@ public class List extends Function {
 
 		return set + "]";
 	}
+	
+
+	@Override
+	public Boolean getPartialBooleanSyntax(java.util.List<Object> arguments) throws EvaluatorException {
+		throw new NoRepresentationAvailableException(
+				"There is no Boolean-representation for function " + this.getClass().getSimpleName());
+	}
+
+	@Override
+	public Double getPartialDoubleSyntax(java.util.List<Object> arguments) throws EvaluatorException {
+		throw new NoRepresentationAvailableException(
+				"There is no Double-representation for function " + this.getClass().getSimpleName());
+	}
+
+	@Override
+	public Integer getPartialIntegerSyntax(java.util.List<Object> arguments) throws EvaluatorException {
+		throw new NoRepresentationAvailableException(
+				"There is no Integer-representation for function " + this.getClass().getSimpleName());
+	}
+
+	@Override
+	public String getPartialStringSyntax(java.util.List<Object> arguments) throws EvaluatorException {
+		throw new NoRepresentationAvailableException(
+				"There is no String-representation for function " + this.getClass().getSimpleName());
+	}
+
+
 }

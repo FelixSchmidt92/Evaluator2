@@ -15,6 +15,7 @@ import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.ConstructorFunction;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
 import de.uni_due.s3.evaluator2.core.visitor.OMToLatexVisitor;
+import de.uni_due.s3.evaluator2.core.visitor.OMToRVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
@@ -100,5 +101,12 @@ public class TestMatrix extends TestFunctionAbstract {
 				+ "4 & 5\\\\"
 				+ "\\end{array}\\right)" 
 				, latex);
+	}
+	
+	@Test
+	public void testMatrixRSyntax() throws OpenMathException, EvaluatorException {
+		OMOBJ obj = Evaluator.evaluate("matrix(matrixrow(1,2,3),matrixrow(4,5,6))", new HashMap<>(), new HashMap<>());
+		String r = new OMToRVisitor().visit(obj);
+		assertEquals("matrix(c(1,2,3,4,5,6), nrow=2, ncol=3, byrow=TRUE",r);
 	}
 }

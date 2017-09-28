@@ -12,7 +12,7 @@ import org.junit.Test;
 import de.uni_due.s3.evaluator2.Evaluator;
 import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
-import de.uni_due.s3.evaluator2.core.function.Function;
+import de.uni_due.s3.evaluator2.core.function.ConstructorFunction;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
 import de.uni_due.s3.evaluator2.core.visitor.OMToLatexVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
@@ -24,7 +24,7 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestMatrixRow extends TestFunctionAbstract {
 
-	private static Function func = new MatrixRow();
+	private static ConstructorFunction func = new MatrixRow();
 
 	@Test
 	public void testMatrixRowInteger() throws OpenMathException, EvaluatorException {

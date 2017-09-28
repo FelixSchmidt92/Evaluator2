@@ -10,6 +10,7 @@ import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
+import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
@@ -100,8 +101,21 @@ public class Matrix extends ConstructorFunction {
 
 	@Override
 	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException {
-		throw new NoRepresentationAvailableException(
-				"There is no R-representation for function " + this.getClass().getSimpleName());
+		//arguments should be oma of matrixrow
+		int nrow,ncol;
+		nrow = arguments.size();
+		ncol = ((OMA) arguments.get(0)).getOmel().size()-1;
+		StringBuilder sb = new StringBuilder();
+		for(Object arg:arguments) {
+			OMA row = (OMA) arg;
+			for(int i = 1;i<row.getOmel().size();i++) {
+				sb.append(getRSyntax(row.getOmel().get(i)));
+				sb.append(',');
+			}
+		}
+		sb.deleteCharAt(sb.length()-1);	//delete last ,
+		
+		return "matrix(c("+sb.toString()+"), nrow="+nrow+", ncol="+ncol+", byrow=TRUE";
 	}
 
 	@Override
