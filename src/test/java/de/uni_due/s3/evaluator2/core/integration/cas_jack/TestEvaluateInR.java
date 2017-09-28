@@ -1,5 +1,6 @@
-package de.uni_due.s3.evaluator2.core.function.cas_jack;
+package de.uni_due.s3.evaluator2.core.integration.cas_jack;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -8,14 +9,23 @@ import java.util.ArrayList;
 import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
+import de.uni_due.s3.evaluator2.core.integration.TestIntegration;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
+import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedException;
+import de.uni_due.s3.evaluator2.exceptions.parser.ErroneousExerciseVariableException;
+import de.uni_due.s3.evaluator2.exceptions.parser.ErroneousFillInVariableException;
+import de.uni_due.s3.evaluator2.exceptions.parser.ParserException;
+import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedExerciseVariableException;
+import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedFillInVariableException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
+import de.uni_due.s3.evaluator2.r.TestR;
+import de.uni_due.s3.evaluator2.sage.TestSage;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
-public class TestEvaluateInR extends TestFunctionAbstract {
+public class TestEvaluateInR extends TestIntegration  {
 	
 	@Test
 	public void testEvaluateInRInteger() throws OpenMathException, EvaluatorException {
@@ -79,6 +89,30 @@ public class TestEvaluateInR extends TestFunctionAbstract {
 		assertEquals(expected, actual);
 	}
 	
+	@Test
+	public void testEvaluateInRWithExerciseVariables() throws OpenMathException, EvaluatorException {
+		OMOBJ omobj = ExpressionParser.parse("evaluateInR('[var=a]')",exerciseVariableMap, fillInVariableMap);
+		OMOBJ actual = OMExecutor.execute(omobj);
+		
+		assertEquals(OMCreator.createOMI(0),actual.getOMI());
+	}
+	
+	@Test
+	public void testEvaluateInRWithFillInVariables() throws OpenMathException, EvaluatorException {
+		OMOBJ omobj = ExpressionParser.parse("evaluateInR('[pos=1]')",exerciseVariableMap, fillInVariableMap);
+		OMOBJ actual = OMExecutor.execute(omobj);
+		
+		assertEquals(OMCreator.createOMI(0),actual.getOMI());
+	}
+	
+	@Test
+	public void testEvaluateInRWithFillInVariablesAsVector() throws OpenMathException, EvaluatorException {
+		fillInVariableMap.put(20, ExpressionParser.parse("vector(1,1)", exerciseVariableMap, fillInVariableMap));
+		OMOBJ omobj = ExpressionParser.parse("evaluateInR('[pos=20]')",exerciseVariableMap, fillInVariableMap);
+		OMOBJ actual = OMExecutor.execute(omobj);
+		
+		assertEquals(OMCreator.createOMI(0),actual.getOMI());
+	}
 	
 	@Test(expected = CasEvaluationException.class)
 	public void testEvaluateInRWrongSyntax() throws OpenMathException, EvaluatorException {

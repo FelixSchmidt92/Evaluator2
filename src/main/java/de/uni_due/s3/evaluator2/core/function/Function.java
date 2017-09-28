@@ -143,7 +143,7 @@ public abstract class Function extends ConstructorFunction {
 	 * @throws CasException
 	 */
 	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException {
-		throw new NoSageRepresentationAvailableException(
+		throw new NoRepresentationAvailableException(
 				"There is no R representation for function " + this.getClass().getSimpleName());
 	}
 
@@ -165,7 +165,7 @@ public abstract class Function extends ConstructorFunction {
 	 * @throws CasException
 	 */
 	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
-		throw new NoSageRepresentationAvailableException(
+		throw new NoRepresentationAvailableException(
 				"There is no Sage representation for function " + this.getClass().getSimpleName());
 	}
 

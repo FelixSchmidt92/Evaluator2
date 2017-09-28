@@ -340,8 +340,15 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 		List<Object> omel = new ArrayList<>();
 		OMS oms = OMSEvaluatorSyntaxDictionary.getInstance().getOMS(ctx.name.getText());
 		
-		for (ExpressionContext childctx : ctx.arguments) {
-			omel.add(visit(childctx));
+		if(oms.getCd().equals(OMSymbol.CASJACK_EVALUATEINR.getCd())) {
+			ExpressionContext childctx = ctx.arguments.get(0);
+			String text = childctx.getText().substring(1,childctx.getText().length()-1);
+			omel.add(textWithVariablesGenerator(text));
+			System.out.println(textWithVariablesGenerator(text).toString());
+		}else {
+			for (ExpressionContext childctx : ctx.arguments) {
+				omel.add(visit(childctx));
+			}
 		}
 		
 		return OMCreator.createOMA(oms, omel);
@@ -406,7 +413,50 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 				| ParserRuntimeException | FunctionNotImplementedRuntimeException e) {
 			// do nothing continue Code below (In String is no Expression!)
 		}
+		
+		return textWithVariablesGenerator(text);
+		
+	}
 
+	/**
+	 * Implements the grammatical rule "Unary" for unary operations like - and !
+	 * Creates a OMA with the corresponding OMS and its argument
+	 * 
+	 * @return OMA
+	 */
+	@Override
+	public Object visitUnary(UnaryContext ctx) {
+		OMS oms = new OMS();
+		switch (ctx.operator.getText()) {
+		case "+":
+			return visit(ctx.getChild(1));
+		case "-":
+			oms = OMSymbol.ARITH1_UNARY_MINUS;
+			break;
+		case "!":
+			oms = OMSymbol.LOGIC1_NOT;
+			break;
+		default:
+			throw new FunctionNotImplementedRuntimeException(
+					"Unary Operator " + ctx.operator.getText() + " is not supported");
+		}
+		List<Object> omel = new ArrayList<>();
+		omel.add(visit(ctx.getChild(1)));
+		return OMCreator.createOMA(oms, omel);
+	}
+
+	/**
+	 * Implements the grammatical rule "Variable". Creates a OMV with the name of
+	 * the variable
+	 * 
+	 * @return OMV
+	 */
+	@Override
+	public Object visitVariable(VariableContext ctx) {
+		return OMCreator.createOMV(ctx.name.getText());
+	}
+	
+	private Object textWithVariablesGenerator(String text) {
 		/* Return if the InputString is a Text with or without variables */
 		ArrayList<Object> omel = new ArrayList<>();
 
@@ -462,43 +512,5 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 			return OMCreator.createOMA(OMSymbol.STRINGJACK_TEXTWITHVARIABLES, omel);
 			// return jack-specific String with variables in String
 		}
-	}
-
-	/**
-	 * Implements the grammatical rule "Unary" for unary operations like - and !
-	 * Creates a OMA with the corresponding OMS and its argument
-	 * 
-	 * @return OMA
-	 */
-	@Override
-	public Object visitUnary(UnaryContext ctx) {
-		OMS oms = new OMS();
-		switch (ctx.operator.getText()) {
-		case "+":
-			return visit(ctx.getChild(1));
-		case "-":
-			oms = OMSymbol.ARITH1_UNARY_MINUS;
-			break;
-		case "!":
-			oms = OMSymbol.LOGIC1_NOT;
-			break;
-		default:
-			throw new FunctionNotImplementedRuntimeException(
-					"Unary Operator " + ctx.operator.getText() + " is not supported");
-		}
-		List<Object> omel = new ArrayList<>();
-		omel.add(visit(ctx.getChild(1)));
-		return OMCreator.createOMA(oms, omel);
-	}
-
-	/**
-	 * Implements the grammatical rule "Variable". Creates a OMV with the name of
-	 * the variable
-	 * 
-	 * @return OMV
-	 */
-	@Override
-	public Object visitVariable(VariableContext ctx) {
-		return OMCreator.createOMV(ctx.name.getText());
 	}
 }

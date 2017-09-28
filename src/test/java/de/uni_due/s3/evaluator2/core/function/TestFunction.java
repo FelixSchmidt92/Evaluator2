@@ -99,13 +99,23 @@ public class TestFunction {
 		myFunction.argsBetweenMinMax(arguments);
 	}
 
-	@Test(expected = NoSageRepresentationAvailableException.class)
+	@Test(expected = NoRepresentationAvailableException.class)
 	public void testGetPartialSageSyntax() throws EvaluatorException {
 		myFunction.getPartialSageSyntax(null);
 	}
 
 	@Test(expected = NoRepresentationAvailableException.class)
 	public void testGetSageSyntax() throws EvaluatorException {
+		myFunction.getSageSyntax(null);
+	}
+	
+	@Test(expected = NoRepresentationAvailableException.class)
+	public void testGetPartialRSyntax() throws EvaluatorException {
+		myFunction.getPartialSageSyntax(null);
+	}
+
+	@Test(expected = NoRepresentationAvailableException.class)
+	public void testGetRSyntax() throws EvaluatorException {
 		myFunction.getSageSyntax(null);
 	}
 }
