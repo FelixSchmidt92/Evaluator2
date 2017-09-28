@@ -7,6 +7,7 @@ import javax.xml.bind.JAXBException;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 
+import de.uni_due.s3.evaluator2.r.TestR;
 import de.uni_due.s3.evaluator2.sage.TestSage;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMConverter;
@@ -71,6 +72,7 @@ public abstract class TestIntegration {
 	@BeforeClass
 	public static void beforeClass() {
 		TestSage.initSage();
+		TestR.initR();
 		resetFillInVariableMap();
 		resetExerciseVariableMap();
 	}
