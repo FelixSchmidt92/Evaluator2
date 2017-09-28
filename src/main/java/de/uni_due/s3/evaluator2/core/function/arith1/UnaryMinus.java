@@ -39,8 +39,7 @@ public class UnaryMinus extends BinaryFunction {
 			return OMCreator.createOMIOMF(value * -1);
 		} catch (FunctionInvalidArgumentTypeException e) {
 			if (OMTypeChecker.isOMV(arguments.get(0)) || OMTypeChecker.isOMAWithSymbol(arguments.get(0),
-					OMSymbol.ARITH1_PLUS, OMSymbol.ARITH1_MINUS, OMSymbol.ARITH1_TIMES, OMSymbol.ARITH1_DIVIDE,
-					OMSymbol.ARITH1_POWER, OMSymbol.ARITH1_ROOT, OMSymbol.ARITH1_UNARY_MINUS)) {
+					OMSymbol.SYMBOLIC_EXPRESSION)) {
 				return OMCreator.createOMA(OMSymbol.ARITH1_UNARY_MINUS, arguments);
 			}
 			throw new FunctionInvalidArgumentTypeException(this, "integer, float, double");
