@@ -1,26 +1,17 @@
 package de.uni_due.s3.evaluator2.core.integration.cas_jack;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 
+import org.junit.Test;
+
 import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
-import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
 import de.uni_due.s3.evaluator2.core.integration.TestIntegration;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedException;
-import de.uni_due.s3.evaluator2.exceptions.parser.ErroneousExerciseVariableException;
-import de.uni_due.s3.evaluator2.exceptions.parser.ErroneousFillInVariableException;
-import de.uni_due.s3.evaluator2.exceptions.parser.ParserException;
-import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedExerciseVariableException;
-import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedFillInVariableException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
-import de.uni_due.s3.evaluator2.r.TestR;
-import de.uni_due.s3.evaluator2.sage.TestSage;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
