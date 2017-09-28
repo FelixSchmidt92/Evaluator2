@@ -105,7 +105,7 @@ public abstract class Function extends ConstructorFunction {
 	 * @throws FunctionException
 	 * @throws NoRepresentationAvailableException
 	 */
-	public String getPartialLatexSyntax(List<Object> omel) throws EvaluatorException {
+	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException {
 		throw new NoRepresentationAvailableException(
 				"There is no LaTeX representation for function " + this.getClass().getSimpleName());
 	}

@@ -3,6 +3,9 @@ package de.uni_due.s3.evaluator2.core.integration.transc1;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -79,10 +82,11 @@ public class TestTan extends TestIntegration {
 		assertEquals(0, Evaluator.getNumberResult("tan(tan(tan(0)))", exerciseVariableMap, fillInVariableMap), 0.0001);
 	}
 
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
+	@Test
 	public void testTanWithONECharacter() throws EvaluatorException, OpenMathException {
-		Evaluator.getNumberResult("tan(a)", exerciseVariableMap, fillInVariableMap);
-		fail();
+		List<Object> omel = new ArrayList<>();
+		omel.add(OMCreator.createOMV("a"));
+		assertEquals(OMCreator.createOMA(OMSymbol.TRANSC1_TAN, omel), Evaluator.evaluate("tan(a)", exerciseVariableMap, fillInVariableMap).getOMA());
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)

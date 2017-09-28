@@ -3,13 +3,18 @@ package de.uni_due.s3.evaluator2.core.integration.transc1;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator2.Evaluator;
+import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.integration.TestIntegration;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.*;
 import de.uni_due.s3.evaluator2.exceptions.parser.*;
+import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestArcTan extends TestIntegration {
@@ -77,10 +82,11 @@ public class TestArcTan extends TestIntegration {
 		assertEquals(0, Evaluator.getNumberResult("atan(atan(atan(0)))", exerciseVariableMap, fillInVariableMap), 0.0);
 	}
 
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
+	@Test
 	public void testAtanWithONECharacter() throws EvaluatorException, OpenMathException {
-		Evaluator.getNumberResult("atan(a)", exerciseVariableMap, fillInVariableMap);
-		fail();
+		List<Object> omel = new ArrayList<>();
+		omel.add(OMCreator.createOMV("a"));
+		assertEquals(OMCreator.createOMA(OMSymbol.TRANSC1_ARCTAN, omel), Evaluator.evaluate("atan(a)", exerciseVariableMap, fillInVariableMap).getOMA());
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)

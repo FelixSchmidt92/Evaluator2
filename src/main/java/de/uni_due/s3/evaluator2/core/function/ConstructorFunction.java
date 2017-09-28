@@ -295,7 +295,7 @@ public abstract class ConstructorFunction {
 	 * @throws FunctionException
 	 * @throws NoRepresentationAvailableException
 	 */
-	public abstract String getPartialLatexSyntax(List<Object> omel) throws EvaluatorException;
+	public abstract String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException;
 
 	/**
 	 * This function can be called if you want to have the latex syntax of the given

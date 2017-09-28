@@ -2,6 +2,9 @@ package de.uni_due.s3.evaluator2.core.integration.transc1;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -102,9 +105,11 @@ public class TestCos extends TestIntegration {
 				Evaluator.getNumberResult("cos(cos(cos(0)))", exerciseVariableMap, fillInVariableMap), 0.0001);
 	}
 
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
+	@Test
 	public void testCosWithONECharacter() throws EvaluatorException, OpenMathException {
-		Evaluator.getNumberResult("cos(a)", exerciseVariableMap, fillInVariableMap);
+		List<Object> omel = new ArrayList<>();
+		omel.add(OMCreator.createOMV("a"));
+		assertEquals(OMCreator.createOMA(OMSymbol.TRANSC1_COS, omel), Evaluator.evaluate("cos(a)", exerciseVariableMap, fillInVariableMap).getOMA());
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)

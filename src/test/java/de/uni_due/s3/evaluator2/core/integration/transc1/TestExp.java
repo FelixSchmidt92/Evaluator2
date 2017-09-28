@@ -2,17 +2,22 @@ package de.uni_due.s3.evaluator2.core.integration.transc1;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.xml.bind.JAXBException;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator2.Evaluator;
+import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.integration.TestIntegration;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.*;
 import de.uni_due.s3.evaluator2.exceptions.parser.*;
 import de.uni_due.s3.openmath.omutils.OMConverter;
+import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestExp extends TestIntegration {
@@ -78,9 +83,11 @@ public class TestExp extends TestIntegration {
 		assertEquals(1, Evaluator.getNumberResult("exp(exp(-1000))", exerciseVariableMap, fillInVariableMap), 0.0001);
 	}
 
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
+	@Test
 	public void testExpWithWrongInputCharacter() throws EvaluatorException, OpenMathException {
-		Evaluator.getNumberResult("exp(a)", exerciseVariableMap, fillInVariableMap);
+		List<Object> omel = new ArrayList<>();
+		omel.add(OMCreator.createOMV("a"));
+		assertEquals(OMCreator.createOMA(OMSymbol.TRANSC1_EXP, omel), Evaluator.evaluate("exp(a)", exerciseVariableMap, fillInVariableMap).getOMA());
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)

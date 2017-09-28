@@ -3,17 +3,22 @@ package de.uni_due.s3.evaluator2.core.integration.transc1;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.xml.bind.JAXBException;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator2.Evaluator;
+import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.integration.TestIntegration;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.*;
 import de.uni_due.s3.evaluator2.exceptions.parser.*;
 import de.uni_due.s3.openmath.omutils.OMConverter;
+import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestLog extends TestIntegration {
@@ -128,10 +133,11 @@ public class TestLog extends TestIntegration {
 		fail();
 	}
 
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
+	@Test
 	public void testLogWithWrongInputCharacter() throws EvaluatorException, OpenMathException {
-		Evaluator.getNumberResult("log(a)", exerciseVariableMap, fillInVariableMap);
-		fail();
+		List<Object> omel = new ArrayList<>();
+		omel.add(OMCreator.createOMV("a"));
+		assertEquals(OMCreator.createOMA(OMSymbol.TRANSC1_LOG, omel), Evaluator.evaluate("log(a)", exerciseVariableMap, fillInVariableMap).getOMA());
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
