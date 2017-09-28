@@ -2,9 +2,12 @@ package de.uni_due.s3.evaluator2.core.function.arith1;
 
 import java.util.List;
 
+import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
+import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
+import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
@@ -24,8 +27,16 @@ public class Abs extends Function {
 	 */
 	@Override
 	protected Object execute(List<Object> arguments) throws OpenMathException, EvaluatorException {
-		Double argValue = getDoubleSyntax(arguments.get(0));
-		return OMCreator.createOMIOMF(Math.abs(argValue));
+		try {
+			Double argValue = getDoubleSyntax(arguments.get(0));
+			return OMCreator.createOMIOMF(Math.abs(argValue));
+		} catch (FunctionInvalidArgumentTypeException e) {
+			if (OMTypeChecker.isOMV(arguments.get(0))
+					|| OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.SYMBOLIC_EXPRESSION)) {
+				return OMCreator.createOMA(OMSymbol.ARITH1_ABS, arguments);
+			}
+			throw e;
+		}
 	}
 
 	@Override

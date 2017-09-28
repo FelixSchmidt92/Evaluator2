@@ -11,7 +11,7 @@ import org.junit.Test;
 import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSEvaluatorSyntaxDictionary;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSFunctionDictionary;
-import de.uni_due.s3.evaluator2.core.function.Function;
+import de.uni_due.s3.evaluator2.core.function.ConstructorFunction;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
@@ -23,7 +23,7 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestSin extends TestFunctionAbstract {
 
-	private static Function func = OMSFunctionDictionary.getInstance()
+	private static ConstructorFunction func = OMSFunctionDictionary.getInstance()
 			.getFunction(OMSEvaluatorSyntaxDictionary.getInstance().getOMS("sin"));
 
 	@Test

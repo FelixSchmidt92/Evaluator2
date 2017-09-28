@@ -2,7 +2,7 @@ package de.uni_due.s3.evaluator2.core.dictionaries;
 
 import java.util.HashMap;
 
-import de.uni_due.s3.evaluator2.core.function.Function;
+import de.uni_due.s3.evaluator2.core.function.ConstructorFunction;
 import de.uni_due.s3.evaluator2.core.function.arith1.Abs;
 import de.uni_due.s3.evaluator2.core.function.arith1.Divide;
 import de.uni_due.s3.evaluator2.core.function.arith1.GCD;
@@ -69,6 +69,8 @@ import de.uni_due.s3.evaluator2.core.function.polynomial_jack.EqualsExpr;
 import de.uni_due.s3.evaluator2.core.function.polynomial_jack.Integrate;
 import de.uni_due.s3.evaluator2.core.function.polynomial_jack.NumberOfVariables;
 import de.uni_due.s3.evaluator2.core.function.random_jack.Random;
+import de.uni_due.s3.evaluator2.core.function.random_jack.RandomBetween;
+import de.uni_due.s3.evaluator2.core.function.random_jack.RandomIntegerBetween;
 import de.uni_due.s3.evaluator2.core.function.relation1.Equal;
 import de.uni_due.s3.evaluator2.core.function.relation1.GreaterThan;
 import de.uni_due.s3.evaluator2.core.function.relation1.GreaterThanOrEqual;
@@ -120,8 +122,6 @@ import de.uni_due.s3.evaluator2.core.function.transc2.ArcTan2;
 import de.uni_due.s3.evaluator2.core.function.transc_jack.ToDegree;
 import de.uni_due.s3.evaluator2.core.function.transc_jack.ToRadian;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedRuntimeException;
-import de.uni_due.s3.evaluator2.core.function.random_jack.RandomBetween;
-import de.uni_due.s3.evaluator2.core.function.random_jack.RandomIntegerBetween;
 import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 
@@ -132,7 +132,7 @@ import de.uni_due.s3.openmath.omutils.OMCreator;
  */
 public class OMSFunctionDictionary {
 
-	private HashMap<OMS, Function> functions = new HashMap<>();
+	private HashMap<OMS, ConstructorFunction> functions = new HashMap<>();
 
 	private static OMSFunctionDictionary omsfd = new OMSFunctionDictionary();
 
@@ -316,7 +316,7 @@ public class OMSFunctionDictionary {
 	 * @throws FunctionNotImplementedRuntimeException
 	 *             if Function is not found in HashMap
 	 */
-	public Function getFunction(OMS oms) throws FunctionNotImplementedRuntimeException {
+	public ConstructorFunction getFunction(OMS oms) throws FunctionNotImplementedRuntimeException {
 		if (oms == null)
 			throw new FunctionNotImplementedRuntimeException(OMCreator.createOMS("NULL", "NULL"));
 

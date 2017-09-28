@@ -44,12 +44,8 @@ public class Divide extends BinaryFunction {
 			return OMCreator.createOMIOMF(leftValue / rightValue);
 		} catch (FunctionInvalidArgumentTypeException e) {
 			if (OMTypeChecker.isOMV(arguments.get(0)) || OMTypeChecker.isOMV(arguments.get(1))
-					|| OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.ARITH1_PLUS, OMSymbol.ARITH1_MINUS,
-							OMSymbol.ARITH1_TIMES, OMSymbol.ARITH1_DIVIDE, OMSymbol.ARITH1_POWER, OMSymbol.ARITH1_ROOT,
-							OMSymbol.ARITH1_UNARY_MINUS)
-					|| OMTypeChecker.isOMAWithSymbol(arguments.get(1), OMSymbol.ARITH1_PLUS, OMSymbol.ARITH1_MINUS,
-							OMSymbol.ARITH1_TIMES, OMSymbol.ARITH1_DIVIDE, OMSymbol.ARITH1_POWER, OMSymbol.ARITH1_ROOT,
-							OMSymbol.ARITH1_UNARY_MINUS)) {
+					|| OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.SYMBOLIC_EXPRESSION)
+					|| OMTypeChecker.isOMAWithSymbol(arguments.get(1), OMSymbol.SYMBOLIC_EXPRESSION)) {
 				return OMCreator.createOMA(OMSymbol.ARITH1_DIVIDE, arguments);
 			}
 			throw new FunctionInvalidArgumentTypeException(this, "integer, float, double");

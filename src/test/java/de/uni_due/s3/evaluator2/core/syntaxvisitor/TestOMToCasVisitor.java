@@ -7,7 +7,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.uni_due.s3.evaluator2.core.function.Function;
+import de.uni_due.s3.evaluator2.core.function.ConstructorFunction;
 import de.uni_due.s3.evaluator2.core.visitor.OMToSyntaxVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
@@ -48,7 +48,7 @@ public class TestOMToCasVisitor {
 		}
 
 		@Override
-		protected String getSyntaxRepresentationForFunction(Function function,OMS oms, List<Object> omel) {
+		protected String getSyntaxRepresentationForFunction(ConstructorFunction function, OMS oms, List<Object> omel) {
 			return "function";
 		}
 

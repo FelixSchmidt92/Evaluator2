@@ -3,15 +3,19 @@ package de.uni_due.s3.evaluator2.core.integration.arith1;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator2.Evaluator;
+import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.integration.TestIntegration;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedExerciseVariableException;
 import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedFillInVariableException;
+import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestAbs extends TestIntegration {
@@ -66,10 +70,11 @@ public class TestAbs extends TestIntegration {
 		assertEquals(5, Evaluator.getNumberResult("abs(-abs(abs(-5)))", exerciseVariableMap, fillInVariableMap), 0);
 	}
 
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
+	@Test
 	public void testAbsWithWrongInputCharacter1() throws EvaluatorException, OpenMathException {
-		Evaluator.getNumberResult("abs(a)", exerciseVariableMap, fillInVariableMap);
-		fail();
+		List<Object> omel = new ArrayList<>();
+		omel.add(OMCreator.createOMV("a"));
+		assertEquals(OMCreator.createOMA(OMSymbol.ARITH1_ABS, omel), Evaluator.evaluate("abs(a)", exerciseVariableMap, fillInVariableMap).getOMA());
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)

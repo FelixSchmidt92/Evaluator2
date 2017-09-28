@@ -35,9 +35,9 @@ public class OMSymbol {
 
 	public static final OMS CALCULUS1_INT = OMCreator.createOMS("calculus1", "int");
 	public static final OMS CALCULUS1_DEFINT = OMCreator.createOMS("calculus1", "defint");
-	
+
 	public static final OMS EDITOR1_INPUT_BOX = OMCreator.createOMS("editor1", "input_box");
-	
+
 	public static final OMS EVALJACK_EVAL = OMCreator.createOMS("evalJACK", "eval");
 	public static final OMS EVALJACK_EVALEQ = OMCreator.createOMS("evalJACK", "evalEq");
 	public static final OMS EVALJACK_EVALPOLYNOMIAL = OMCreator.createOMS("evalJACK", "evalpolynomial");
@@ -46,12 +46,12 @@ public class OMSymbol {
 
 	public static final OMS INTEGER1_REMAINDER = OMCreator.createOMS("integer1", "remainder");
 	public static final OMS INTEGER1_FACTORIAL = OMCreator.createOMS("integer1", "factorial");
-	
+
 	public static final OMS INTERVAL1_INTERVALCC = OMCreator.createOMS("interval1", "interval_cc");
 	public static final OMS INTERVAL1_INTERVALCO = OMCreator.createOMS("interval1", "interval_co");
 	public static final OMS INTERVAL1_INTERVALOC = OMCreator.createOMS("interval1", "interval_oc");
 	public static final OMS INTERVAL1_INTERVALOO = OMCreator.createOMS("interval1", "interval_oo");
-	public static final OMS INTERVAL1_INTERVAL	 = OMCreator.createOMS("interval1", "integer_interval");
+	public static final OMS INTERVAL1_INTERVAL = OMCreator.createOMS("interval1", "integer_interval");
 
 	public static final OMS LINALGJACK_EQUALBASIS = OMCreator.createOMS("linalgJACK", "equalBasis");
 	public static final OMS LINALGJACK_ISLINEARLYINDEPENDENT = OMCreator.createOMS("linalgJACK",
@@ -74,7 +74,7 @@ public class OMSymbol {
 	public static final OMS LOGIC1_NOT = OMCreator.createOMS("logic1", "not");
 	public static final OMS LOGIC1_OR = OMCreator.createOMS("logic1", "or");
 	public static final OMS LOGIC1_TRUE = OMCreator.createOMS("logic1", "true");
-	
+
 	public static final OMS MCJACK_MCINDEX = OMCreator.createOMS("mcJACK", "mcindex");
 
 	public static final OMS NUMS1_NAN = OMCreator.createOMS("nums1", "NaN");
@@ -102,11 +102,11 @@ public class OMSymbol {
 	public static final OMS POLYNOMIALJACK_EQUALSEXPR = OMCreator.createOMS("polynomialJACK", "equalsExpr");
 
 	public static final OMS POLYNOMIAL1_EXPAND = OMCreator.createOMS("polynomial1", "expand");
-	
+
 	public static final OMS RANDOMJACK_RANDOM = OMCreator.createOMS("randomJACK", "random");
 	public static final OMS RANDOMJACK_RANDOMBETWEEN = OMCreator.createOMS("randomJACK", "randomBetween");
 	public static final OMS RANDOMJACK_RANDOMINTEGERBETWEEN = OMCreator.createOMS("randomJACK", "randomIntegerBetween");
-	
+
 	public static final OMS RELATION1_EQ = OMCreator.createOMS("relation1", "eq");
 	public static final OMS RELATION1_GEQ = OMCreator.createOMS("relation1", "geq");
 	public static final OMS RELATION1_GT = OMCreator.createOMS("relation1", "gt");
@@ -123,7 +123,7 @@ public class OMSymbol {
 	public static final OMS SETJACK_GETFROMORDEREDSET = OMCreator.createOMS("setJACK", "getFromOrderedSet");
 	public static final OMS SETJACK_GETFROMSET = OMCreator.createOMS("setJACK", "getFromSet");
 	public static final OMS SETJACK_GETRANDOMFROMSET = OMCreator.createOMS("setJACK", "getRandomFromSet");
-	
+
 	public static final OMS SET1_EMPTYSET = OMCreator.createOMS("set1", "emptyset");
 	public static final OMS SET1_SET = OMCreator.createOMS("set1", "set");
 	public static final OMS SET1_SIZE = OMCreator.createOMS("set1", "size");
@@ -145,7 +145,7 @@ public class OMSymbol {
 	public static final OMS STRINGJACK_TOUPPERCASE = OMCreator.createOMS("stringJACK", "toUpperCase");
 	public static final OMS STRINGJACK_TRIM = OMCreator.createOMS("stringJACK", "trim");
 	public static final OMS STRINGJACK_MATCHES = OMCreator.createOMS("stringJACK", "matches");
-	
+
 	public static final OMS STRINGJACK_TEXTWITHVARIABLES = OMCreator.createOMS("stringJACK", "textWithVariables");
 	public static final OMS TESTTERMINALJACK_ISEMPTY = OMCreator.createOMS("testterminalJACK", "isEmpty");
 	public static final OMS TESTTERMINALJACK_ISNUMBER = OMCreator.createOMS("testterminalJACK", "isNumber");
@@ -165,4 +165,8 @@ public class OMSymbol {
 	public static final OMS TRANSC1_TAN = OMCreator.createOMS("transc1", "tan");
 
 	public static final OMS TRANSC2_ARCTAN2 = OMCreator.createOMS("transc2", "arctan");
+	
+	public static final OMS[] SYMBOLIC_EXPRESSION = { ARITH1_ABS, ARITH1_DIVIDE,
+			ARITH1_MINUS, ARITH1_PLUS, ARITH1_POWER, ARITH1_ROOT,
+			ARITH1_TIMES, ARITH1_UNARY_MINUS };
 }

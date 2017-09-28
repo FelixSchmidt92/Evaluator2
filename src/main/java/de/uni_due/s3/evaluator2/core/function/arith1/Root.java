@@ -39,18 +39,13 @@ public class Root extends Function {
 		} catch (FunctionInvalidArgumentTypeException e) {
 			if (arguments.size() == 1) {
 				if (OMTypeChecker.isOMV(arguments.get(0)) || OMTypeChecker.isOMAWithSymbol(arguments.get(0),
-						OMSymbol.ARITH1_PLUS, OMSymbol.ARITH1_MINUS, OMSymbol.ARITH1_TIMES, OMSymbol.ARITH1_DIVIDE,
-						OMSymbol.ARITH1_POWER, OMSymbol.ARITH1_ROOT, OMSymbol.ARITH1_UNARY_MINUS)) {
+						OMSymbol.SYMBOLIC_EXPRESSION)) {
 					return OMCreator.createOMA(OMSymbol.ARITH1_ROOT, arguments);
 				}
 			} else {
 				if (OMTypeChecker.isOMV(arguments.get(0)) || OMTypeChecker.isOMV(arguments.get(1))
-						|| OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.ARITH1_PLUS, OMSymbol.ARITH1_MINUS,
-								OMSymbol.ARITH1_TIMES, OMSymbol.ARITH1_DIVIDE, OMSymbol.ARITH1_POWER,
-								OMSymbol.ARITH1_ROOT, OMSymbol.ARITH1_UNARY_MINUS)
-						|| OMTypeChecker.isOMAWithSymbol(arguments.get(1), OMSymbol.ARITH1_PLUS, OMSymbol.ARITH1_MINUS,
-								OMSymbol.ARITH1_TIMES, OMSymbol.ARITH1_DIVIDE, OMSymbol.ARITH1_POWER,
-								OMSymbol.ARITH1_ROOT, OMSymbol.ARITH1_UNARY_MINUS)) {
+						|| OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.SYMBOLIC_EXPRESSION)
+						|| OMTypeChecker.isOMAWithSymbol(arguments.get(1), OMSymbol.SYMBOLIC_EXPRESSION)) {
 					return OMCreator.createOMA(OMSymbol.ARITH1_ROOT, arguments);
 				}
 			}
