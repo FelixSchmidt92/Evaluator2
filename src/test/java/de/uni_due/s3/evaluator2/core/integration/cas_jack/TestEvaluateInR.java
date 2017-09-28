@@ -98,11 +98,18 @@ public class TestEvaluateInR extends TestIntegration  {
 	
 	@Test
 	public void testEvaluateInRWithFillInVariablesAsVector() throws OpenMathException, EvaluatorException {
-		fillInVariableMap.put(20, ExpressionParser.parse("vector(1,1)", exerciseVariableMap, fillInVariableMap));
+		fillInVariableMap.put(20, ExpressionParser.parse("vector(1,2)", exerciseVariableMap, fillInVariableMap));
 		OMOBJ omobj = ExpressionParser.parse("evaluateInR('[pos=20]')",exerciseVariableMap, fillInVariableMap);
 		OMOBJ actual = OMExecutor.execute(omobj);
+		OMOBJ expected = new OMOBJ();
+		ArrayList<Object> omel = new ArrayList<>();
 		
-		assertEquals(OMCreator.createOMI(0),actual.getOMI());
+		omel.add(OMCreator.createOMI(1));
+		omel.add(OMCreator.createOMI(2));
+		
+		expected.setOMA(OMCreator.createOMA(OMSymbol.LINALG2_VECTOR, omel));
+		
+		assertEquals(expected, actual);
 	}
 	
 	@Test(expected = CasEvaluationException.class)
