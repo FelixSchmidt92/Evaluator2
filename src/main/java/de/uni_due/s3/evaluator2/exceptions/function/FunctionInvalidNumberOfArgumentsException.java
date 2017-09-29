@@ -10,10 +10,8 @@ import de.uni_due.s3.evaluator2.core.function.Function;
  */
 public class FunctionInvalidNumberOfArgumentsException extends FunctionException {
 
-	public FunctionInvalidNumberOfArgumentsException(Function function, int minArgs, int maxArgs,
-			int actualArgumentSize, String message) {
-		super("Function: " + function.getClass().getSimpleName() + " got " + actualArgumentSize
-				+ " but needs Arguments between " + minArgs + " and " + maxArgs + ". " + message);
+	public FunctionInvalidNumberOfArgumentsException(Function function, String message) {
+		super("Function: " + function.getClass().getSimpleName() + message);
 	}
 
 	/**

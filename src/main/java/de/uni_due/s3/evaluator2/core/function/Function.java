@@ -92,7 +92,13 @@ public abstract class Function {
 
 		if (!(minArgs() <= arguments.size() && max >= arguments.size())) {
 			// Arguments.size is not between minArgs and maxArgs so throw Error
-			throw new FunctionInvalidNumberOfArgumentsException(this, minArgs(), maxArgs(), arguments.size(), "");
+			if (minArgs() == max) {
+				throw new FunctionInvalidNumberOfArgumentsException(this,
+						" got " + arguments.size() + " but needs " + minArgs() + " Arguments.");
+			} else {
+				throw new FunctionInvalidNumberOfArgumentsException(this,
+						" got " + arguments.size() + " but needs Arguments between " + minArgs() + " and " + max + ".");
+			}
 		}
 	}
 
