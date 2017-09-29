@@ -1,12 +1,15 @@
 package de.uni_due.s3.evaluator2.core.function.transc1;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
+import de.uni_due.s3.evaluator2.core.visitor.OMToPaletteVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
+import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 
@@ -37,6 +40,28 @@ public class Log extends Function {
 			throw new FunctionInvalidArgumentTypeException(this, "integer, float, double, variable");
 		}
 		return result;
+	}
+	
+	/**
+	 * 
+	 * @param arguments should be zero or a omi
+	 * @return input_box || arg1 + input_box
+	 * @throws FunctionNotImplementedException
+	 */
+	@Override
+	public Object generatePalette(List<Object> arguments) throws FunctionNotImplementedException {
+		List<Object> args = new ArrayList<Object>(arguments.size());
+		switch(arguments.size()) {
+			default:{
+				args.add(OMSymbol.EDITOR1_INPUT_BOX);
+				return OMCreator.createOMA(OMSymbol.TRANSC1_LOG, args);
+			}
+			case 1:{
+				args.add(OMToPaletteVisitor.visit(arguments.get(0)));
+				args.add(OMSymbol.EDITOR1_INPUT_BOX);
+				return OMCreator.createOMA(OMSymbol.TRANSC1_LOG, args);
+			}
+		}
 	}
 
 	@Override

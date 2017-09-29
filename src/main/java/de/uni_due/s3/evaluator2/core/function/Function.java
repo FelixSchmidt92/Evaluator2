@@ -20,6 +20,7 @@ import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
+import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMV;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
@@ -73,6 +74,9 @@ public abstract class Function {
 		return execute(arguments);
 	}
 
+	public Object generatePalette(List<Object> arguments) throws FunctionNotImplementedException {
+		throw new FunctionNotImplementedException(this.getClass().getSimpleName()+" is not supported");
+	}
 	/**
 	 * This Method just tests if the length of the Arguments is in between minArgs
 	 * and maxArgs. If not then a FunctionInvalidNumberOfArgumentsException is

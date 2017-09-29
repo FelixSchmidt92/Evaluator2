@@ -37,7 +37,10 @@ public class OMSymbol {
 	public static final OMS CALCULUS1_DEFINT = OMCreator.createOMS("calculus1", "defint");
 
 	public static final OMS EDITOR1_INPUT_BOX = OMCreator.createOMS("editor1", "input_box");
-
+	public static final OMS EDITOR1_PALETTE = OMCreator.createOMS("editor1", "palette");
+	public static final OMS EDITOR1_PALETTE_TAB = OMCreator.createOMS("editor1", "palettetab");
+	public static final OMS EDITOR1_PALETTE_ROW = OMCreator.createOMS("editor1", "paletterow");
+	
 	public static final OMS EVALJACK_EVAL = OMCreator.createOMS("evalJACK", "eval");
 	public static final OMS EVALJACK_EVALEQ = OMCreator.createOMS("evalJACK", "evalEq");
 	public static final OMS EVALJACK_EVALPOLYNOMIAL = OMCreator.createOMS("evalJACK", "evalpolynomial");

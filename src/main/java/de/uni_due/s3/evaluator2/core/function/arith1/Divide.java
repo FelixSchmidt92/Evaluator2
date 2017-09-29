@@ -8,6 +8,7 @@ import de.uni_due.s3.evaluator2.core.function.BinaryFunction;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
+import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
@@ -50,6 +51,11 @@ public class Divide extends BinaryFunction {
 			}
 			throw new FunctionInvalidArgumentTypeException(this, "integer, float, double");
 		}
+	}
+	
+	@Override
+	public Object generatePalette(List<Object> arguments) throws FunctionNotImplementedException {
+		return OMSymbol.ARITH1_DIVIDE;
 	}
 
 	@Override

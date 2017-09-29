@@ -66,6 +66,10 @@ public class OMSEvaluatorSyntaxDictionary {
 		
 		//TODO: should the integral calculus function be added?
 		
+		functionSymbolMap.put("palette", OMSymbol.EDITOR1_PALETTE);
+		functionSymbolMap.put("palettetab", OMSymbol.EDITOR1_PALETTE_TAB);
+		functionSymbolMap.put("paletterow", OMSymbol.EDITOR1_PALETTE_ROW);
+		
 		functionSymbolMap.put("eval", OMSymbol.EVALJACK_EVAL);
 		functionSymbolMap.put("evalcplx", OMSymbol.POLYNOMIAL1_EXPAND);
 		functionSymbolMap.put("evalEq", OMSymbol.EVALJACK_EVALEQ);
