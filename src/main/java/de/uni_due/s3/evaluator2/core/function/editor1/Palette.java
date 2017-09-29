@@ -43,7 +43,7 @@ public class Palette extends ConstructorFunction{
 	@Override
 	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		if(!OMTypeChecker.isOMAWithSymbol(arguments.get(0),OMSymbol.EDITOR1_PALETTE_TAB)
-				|| !OMTypeChecker.isOMAWithSymbol(arguments.get(0),OMSymbol.EDITOR1_PALETTE_ROW) )
+				&& !OMTypeChecker.isOMAWithSymbol(arguments.get(0),OMSymbol.EDITOR1_PALETTE_ROW) )
 			throw new FunctionInvalidArgumentTypeException("(0) paletteTab or paletteRow");
 		
 		return OMCreator.createOMA(OMSymbol.EDITOR1_PALETTE, arguments);
