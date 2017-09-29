@@ -20,7 +20,7 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestIsFraction extends TestFunctionAbstract {
 
-	Function func = new isFraction();
+	Function func = new IsFraction();
 
 	@Test
 	public void testIsFractionWithRational() throws OpenMathException, EvaluatorException {

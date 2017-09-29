@@ -102,7 +102,6 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("countNodes", OMSymbol.OPENMATHJACK_COUNTNODES);
 		functionSymbolMap.put("getDenominator", OMSymbol.OPENMATHJACK_GETDENOMINATOR);
 		functionSymbolMap.put("getNumerator", OMSymbol.OPENMATHJACK_GETNUMERATOR);
-		functionSymbolMap.put("isFraction", OMSymbol.OPENMATHJACK_ISFRACTION);
 		
 		functionSymbolMap.put("factorOf", OMSymbol.POLY_COEFFICIENT);
 		functionSymbolMap.put("deg", OMSymbol.POLY_DEGREE_WRT);
@@ -134,6 +133,7 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("rint", OMSymbol.ROUNDING_JACK);
 
 		functionSymbolMap.put("chooseFromComplement", OMSymbol.SETJACK_CHOOSEFROMCOMPLEMENT);
+		functionSymbolMap.put("equalSet", OMSymbol.SETJACK_EQUALSET);
 		functionSymbolMap.put("getFromOrderedSet", OMSymbol.SETJACK_GETFROMORDEREDSET);
 		functionSymbolMap.put("getFromSet", OMSymbol.SETJACK_GETFROMSET);
 		functionSymbolMap.put("getRandomFromSet", OMSymbol.SETJACK_GETRANDOMFROMSET);
@@ -160,8 +160,12 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("trim", OMSymbol.STRINGJACK_TRIM);
 
 		functionSymbolMap.put("isEmpty", OMSymbol.TESTTERMINALJACK_ISEMPTY);
-		functionSymbolMap.put("isNumber", OMSymbol.TESTTERMINALJACK_ISNUMBER);
+		functionSymbolMap.put("isFraction", OMSymbol.TESTTERMINALJACK_ISFRACTION);
+		functionSymbolMap.put("isNaturalNumber", OMSymbol.TESTTERMINALJACK_ISNATURALNUMBER);		
 		functionSymbolMap.put("isPolynomial", OMSymbol.TESTTERMINALJACK_ISPOLYNOMIAL);
+		functionSymbolMap.put("isRationalNumber", OMSymbol.TESTTERMINALJACK_ISRATIONALNUMBER);
+		functionSymbolMap.put("isRealNumber", OMSymbol.TESTTERMINALJACK_ISREALNUMBER);
+		functionSymbolMap.put("isNumber", OMSymbol.TESTTERMINALJACK_ISREALNUMBER);
 		functionSymbolMap.put("isSet", OMSymbol.TESTTERMINALJACK_ISSET);
 
 		functionSymbolMap.put("toDegree", OMSymbol.TRANSCJACK_TODEGREE);

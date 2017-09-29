@@ -1,5 +1,6 @@
 package de.uni_due.s3.evaluator2.core.function.linalg_jack;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
@@ -63,7 +64,37 @@ public class EqualBasis extends Function {
 
 	@Override
 	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
-		return "V=QQ^" + getSageSyntax(arguments.get(2)) + ";U=V.span(" + getSageSyntax(arguments.get(0))
-				+ ");W=V.span(" + getSageSyntax(arguments.get(1)) + ");U==W";
+		StringBuilder preVector = new StringBuilder();
+		List<String> vList1 = new ArrayList<>();
+		List<Object> vectorList1 = getListSyntax(arguments.get(0));
+		int i = 1;
+		for (Object vector1 : vectorList1) {
+			preVector.append("v");
+			preVector.append(i);
+			preVector.append(" = ");
+			preVector.append(getSageSyntax(vector1));
+			preVector.append(";");
+			vList1.add("v" + i);
+			i++;
+		}
+		List<String> vList2 = new ArrayList<>();
+		List<Object> vectorList2 = getListSyntax(arguments.get(1));
+		int j = 1;
+		for (Object vector2 : vectorList2) {
+			preVector.append("w");
+			preVector.append(j);
+			preVector.append(" = ");
+			preVector.append(getSageSyntax(vector2));
+			preVector.append(";");
+			vList2.add("w" + j);
+			j++;
+		}
+		StringBuilder request = new StringBuilder();
+		request.append(preVector.toString());
+		request.append("V=RR^" + getSageSyntax(arguments.get(2)) + ";");
+		request.append("U=V.span([" + String.join(",", vList1) + "]);");
+		request.append("W=V.span([" + String.join(",", vList2) + "]);");
+		request.append("U==W");
+		return request.toString();
 	}
 }

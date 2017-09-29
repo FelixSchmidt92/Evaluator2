@@ -84,6 +84,7 @@ import de.uni_due.s3.evaluator2.core.function.rounding_jack.Rint;
 import de.uni_due.s3.evaluator2.core.function.set1.Set;
 import de.uni_due.s3.evaluator2.core.function.set1.Size;
 import de.uni_due.s3.evaluator2.core.function.set_jack.ChooseFromComplement;
+import de.uni_due.s3.evaluator2.core.function.set_jack.EqualSet;
 import de.uni_due.s3.evaluator2.core.function.set_jack.GetFromOrderedSet;
 import de.uni_due.s3.evaluator2.core.function.set_jack.GetFromSet;
 import de.uni_due.s3.evaluator2.core.function.set_jack.GetRandomFromSet;
@@ -106,10 +107,12 @@ import de.uni_due.s3.evaluator2.core.function.string_jack.ToLowerCase;
 import de.uni_due.s3.evaluator2.core.function.string_jack.ToUpperCase;
 import de.uni_due.s3.evaluator2.core.function.string_jack.Trim;
 import de.uni_due.s3.evaluator2.core.function.testterminal_jack.IsEmpty;
-import de.uni_due.s3.evaluator2.core.function.testterminal_jack.IsNumber;
+import de.uni_due.s3.evaluator2.core.function.testterminal_jack.IsFraction;
+import de.uni_due.s3.evaluator2.core.function.testterminal_jack.IsNaturalNumber;
 import de.uni_due.s3.evaluator2.core.function.testterminal_jack.IsPolynomial;
+import de.uni_due.s3.evaluator2.core.function.testterminal_jack.IsRationalNumber;
+import de.uni_due.s3.evaluator2.core.function.testterminal_jack.IsRealNumber;
 import de.uni_due.s3.evaluator2.core.function.testterminal_jack.IsSet;
-import de.uni_due.s3.evaluator2.core.function.testterminal_jack.isFraction;
 import de.uni_due.s3.evaluator2.core.function.transc1.ArcCos;
 import de.uni_due.s3.evaluator2.core.function.transc1.ArcSin;
 import de.uni_due.s3.evaluator2.core.function.transc1.ArcTan;
@@ -230,7 +233,6 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.OPENMATHJACK_COUNTNODES, new CountNodes());
 		functions.put(OMSymbol.OPENMATHJACK_GETDENOMINATOR, new GetDenominator());
 		functions.put(OMSymbol.OPENMATHJACK_GETNUMERATOR, new GetNumerator());
-		functions.put(OMSymbol.OPENMATHJACK_ISFRACTION, new isFraction());
 
 		functions.put(OMSymbol.POLY_COEFFICIENT, new Coefficient());
 		functions.put(OMSymbol.POLY_DEGREE_WRT, new Degree_wrt());
@@ -261,6 +263,7 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.ROUNDING_JACK, new Rint());
 
 		functions.put(OMSymbol.SETJACK_CHOOSEFROMCOMPLEMENT, new ChooseFromComplement());
+		functions.put(OMSymbol.SETJACK_EQUALSET, new EqualSet());
 		functions.put(OMSymbol.SETJACK_GETFROMORDEREDSET, new GetFromOrderedSet());
 		functions.put(OMSymbol.SETJACK_GETFROMSET, new GetFromSet());
 		functions.put(OMSymbol.SETJACK_GETRANDOMFROMSET, new GetRandomFromSet());
@@ -288,8 +291,11 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.STRINGJACK_TEXTWITHVARIABLES, new TextWithVariables());
 
 		functions.put(OMSymbol.TESTTERMINALJACK_ISEMPTY, new IsEmpty());
-		functions.put(OMSymbol.TESTTERMINALJACK_ISNUMBER, new IsNumber());
+		functions.put(OMSymbol.TESTTERMINALJACK_ISFRACTION, new IsFraction());
+		functions.put(OMSymbol.TESTTERMINALJACK_ISNATURALNUMBER, new IsNaturalNumber());
 		functions.put(OMSymbol.TESTTERMINALJACK_ISPOLYNOMIAL, new IsPolynomial());
+		functions.put(OMSymbol.TESTTERMINALJACK_ISRATIONALNUMBER, new IsRationalNumber());
+		functions.put(OMSymbol.TESTTERMINALJACK_ISREALNUMBER, new IsRealNumber());
 		functions.put(OMSymbol.TESTTERMINALJACK_ISSET, new IsSet());
 
 		functions.put(OMSymbol.TRANSCJACK_TODEGREE, new ToDegree());

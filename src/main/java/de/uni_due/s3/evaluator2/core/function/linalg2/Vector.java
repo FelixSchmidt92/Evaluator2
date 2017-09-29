@@ -32,7 +32,7 @@ public class Vector extends ConstructorFunction {
 
 	@Override
 	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
-		String sageExpression = "(";
+		String sageExpression = "vector([";
 
 		for (int i = 0; i < arguments.size(); i++) {
 			if (i == 0) {
@@ -42,7 +42,7 @@ public class Vector extends ConstructorFunction {
 			}
 		}
 
-		return sageExpression + ")";
+		return sageExpression + "])";
 	}
 
 	@Override

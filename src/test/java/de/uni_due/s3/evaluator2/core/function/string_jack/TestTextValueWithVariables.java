@@ -43,7 +43,7 @@ public class TestTextValueWithVariables extends TestFunctionAbstract {
 		args.add(OMCreator.createOMA(OMSymbol.LINALG2_VECTOR, omel));
 		args.add(OMCreator.createOMSTR(", someThing"));
 		args.add(OMCreator.createOMSTR(")"));
-		assertEquals("SomeFunc((5,3,1), someThing)", func.getPartialSageSyntax(args));
+		assertEquals("SomeFunc(vector([5,3,1]), someThing)", func.getPartialSageSyntax(args));
 	}
 
 	@Test

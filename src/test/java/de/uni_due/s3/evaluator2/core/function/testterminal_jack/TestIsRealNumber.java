@@ -6,25 +6,28 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
+import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OMF;
 import de.uni_due.s3.openmath.jaxb.OMI;
+import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.jaxb.OMSTR;
 import de.uni_due.s3.openmath.jaxb.OMV;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
-public class TestIsNumber extends TestFunctionAbstract {
+public class TestIsRealNumber extends TestFunctionAbstract {
 
-	Function func = new IsNumber();
+	Function func = new IsRealNumber();
 
 	@Test
-	public void testIsNumberOMIandOMF() throws OpenMathException, EvaluatorException {
+	public void testIsRealNumberOMIandOMF() throws OpenMathException, EvaluatorException {
 		ArrayList<Object> args = new ArrayList<>();
 		OMI omi = OMCreator.createOMI(1);
 		args.add(omi);
@@ -39,7 +42,7 @@ public class TestIsNumber extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testIsNumberOMSTR() throws OpenMathException, EvaluatorException {
+	public void testIsRealNumberOMSTR() throws OpenMathException, EvaluatorException {
 		ArrayList<Object> args = new ArrayList<>();
 		OMSTR omstr = OMCreator.createOMSTR("string");
 		args.add(omstr);
@@ -48,7 +51,7 @@ public class TestIsNumber extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testIsNumberOMV() throws OpenMathException, EvaluatorException {
+	public void testIsRealNumberOMV() throws OpenMathException, EvaluatorException {
 		ArrayList<Object> args = new ArrayList<>();
 		OMV omstr = OMCreator.createOMV("x");
 		args.add(omstr);
@@ -57,16 +60,19 @@ public class TestIsNumber extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testIsNumberOMA() throws OpenMathException, EvaluatorException {
+	public void testIsRealNumberOMA() throws OpenMathException, EvaluatorException {
 		ArrayList<Object> args = new ArrayList<>();
-		OMA oma = OMCreator.createOMA(OMSymbol.LINALG2_MATRIXROW, new ArrayList<>());
+		ArrayList<Object> args2 = new ArrayList<>();
+		args2.add(OMCreator.createOMF(1));
+		
+		OMA oma = OMCreator.createOMA(OMSymbol.LINALG2_MATRIXROW, args2);
 		args.add(oma);
 
 		assertEquals(OMSymbol.LOGIC1_FALSE, func.evaluate(args));
 	}
 
 	@Test
-	public void testIsNumberOMS() throws OpenMathException, EvaluatorException {
+	public void testIsRealNumberOMS() throws OpenMathException, EvaluatorException {
 		ArrayList<Object> args = new ArrayList<>();
 		OMS oms = OMSymbol.NUMS1_PI;
 		args.add(oms);
@@ -84,5 +90,11 @@ public class TestIsNumber extends TestFunctionAbstract {
 		args.add(oms);
 
 		assertEquals(OMSymbol.LOGIC1_FALSE, func.evaluate(args));
+	}
+	
+	@Test
+	public void testIsRealNumberCaseIntegration() throws OpenMathException, EvaluatorException {
+		OMOBJ omobj = ExpressionParser.parse("isRealNumber(3/4)", null, null);
+		assertEquals(OMSymbol.LOGIC1_TRUE, OMExecutor.execute(omobj).getOMS());
 	}
 }

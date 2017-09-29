@@ -20,7 +20,7 @@ import de.uni_due.s3.openmath.jaxb.OMI;
  * @author dlux
  *
  */
-public class isFraction extends Function {
+public class IsFraction extends Function {
 
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionException {

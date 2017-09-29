@@ -62,7 +62,7 @@ public class IsEmpty extends Function {
 			for (int i = 0; i < oma.getOmel().size(); i++){
 				ArrayList<Object> newArgs = new ArrayList<>();
 				newArgs.add(oma.getOmel().get(i));
-				OMS oms = (OMS)this.execute(newArgs);
+				OMS oms = (OMS)this.execute(newArgs); //wiederaufruf der Funktion, ist iwo ein Empty vorhanden -> alles Empty!
 				if (oms.equals(OMSymbol.LOGIC1_TRUE)){
 					isEmpty = true;
 					break; // Stop if something empty was found return empty then!
