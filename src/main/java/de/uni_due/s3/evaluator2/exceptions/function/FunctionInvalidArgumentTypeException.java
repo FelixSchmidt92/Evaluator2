@@ -1,6 +1,6 @@
 package de.uni_due.s3.evaluator2.exceptions.function;
 
-import de.uni_due.s3.evaluator2.core.function.ConstructorFunction;
+import de.uni_due.s3.evaluator2.core.function.Function;
 
 public class FunctionInvalidArgumentTypeException extends FunctionException {
 
@@ -13,7 +13,7 @@ public class FunctionInvalidArgumentTypeException extends FunctionException {
 		super(message);
 	}
 	
-	public FunctionInvalidArgumentTypeException(ConstructorFunction function, String types) {
+	public FunctionInvalidArgumentTypeException(Function function, String types) {
 		super("Wrong argument in Function: " + function.getClass().getSimpleName() + ". Argument needs to be: " + types);
 	}
 

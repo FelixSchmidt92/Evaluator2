@@ -2,7 +2,7 @@ package de.uni_due.s3.evaluator2.core.visitor;
 
 import java.util.List;
 
-import de.uni_due.s3.evaluator2.core.function.ConstructorFunction;
+import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMF;
@@ -34,7 +34,7 @@ public class OMToBooleanVisitor extends OMToSyntaxVisitor<Boolean> {
 	}
 
 	@Override
-	protected Boolean getSyntaxRepresentationForFunction(ConstructorFunction function, OMS oms, List<Object> omel)
+	protected Boolean getSyntaxRepresentationForFunction(Function function, OMS oms, List<Object> omel)
 			throws EvaluatorException {
 		try {
 			return function.getPartialBooleanSyntax(omel);

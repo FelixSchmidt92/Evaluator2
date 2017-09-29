@@ -1,6 +1,6 @@
 package de.uni_due.s3.evaluator2.exceptions.function;
 
-import de.uni_due.s3.evaluator2.core.function.ConstructorFunction;
+import de.uni_due.s3.evaluator2.core.function.Function;
 
 /**
  * This exception is thrown when a function gets to much or to few arguments
@@ -10,7 +10,7 @@ import de.uni_due.s3.evaluator2.core.function.ConstructorFunction;
  */
 public class FunctionInvalidNumberOfArgumentsException extends FunctionException {
 
-	public FunctionInvalidNumberOfArgumentsException(ConstructorFunction function, int minArgs, int maxArgs,
+	public FunctionInvalidNumberOfArgumentsException(Function function, int minArgs, int maxArgs,
 			int actualArgumentSize, String message) {
 		super("Function: " + function.getClass().getSimpleName() + " got " + actualArgumentSize
 				+ " but needs Arguments between " + minArgs + " and " + maxArgs + ". " + message);

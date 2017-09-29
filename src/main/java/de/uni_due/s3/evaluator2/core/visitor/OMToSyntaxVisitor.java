@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSFunctionDictionary;
-import de.uni_due.s3.evaluator2.core.function.ConstructorFunction;
+import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
@@ -150,7 +150,7 @@ public abstract class OMToSyntaxVisitor<T> {
 	 * @throws NoRepresentationAvailableException
 	 */
 	private T visit(OMS oms) throws EvaluatorException {
-		ConstructorFunction function = OMSFunctionDictionary.getInstance().getFunction(oms);
+		Function function = OMSFunctionDictionary.getInstance().getFunction(oms);
 		return getSyntaxRepresentationForFunction(function, oms, null);
 	}
 
@@ -211,7 +211,7 @@ public abstract class OMToSyntaxVisitor<T> {
 
 		OMS oms = (OMS) oma.getOmel().get(0); // First element of OMA is always
 												// an OMS
-		ConstructorFunction function = OMSFunctionDictionary.getInstance().getFunction(oms);
+		Function function = OMSFunctionDictionary.getInstance().getFunction(oms);
 		// Get function
 
 		function.argsBetweenMinMax(omel); // Check for Correct amount of
@@ -238,7 +238,7 @@ public abstract class OMToSyntaxVisitor<T> {
 	 *             OMOBJChildNotSupportedException
 	 * @throws OMObjectNotSupportedException
 	 */
-	protected abstract T getSyntaxRepresentationForFunction(ConstructorFunction function, OMS oms, List<Object> omel)
+	protected abstract T getSyntaxRepresentationForFunction(Function function, OMS oms, List<Object> omel)
 			throws EvaluatorException;
 
 }

@@ -2,7 +2,7 @@ package de.uni_due.s3.evaluator2.core.dictionaries;
 
 import java.util.HashMap;
 
-import de.uni_due.s3.evaluator2.core.function.ConstructorFunction;
+import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.arith1.Abs;
 import de.uni_due.s3.evaluator2.core.function.arith1.Divide;
 import de.uni_due.s3.evaluator2.core.function.arith1.GCD;
@@ -132,7 +132,7 @@ import de.uni_due.s3.openmath.omutils.OMCreator;
  */
 public class OMSFunctionDictionary {
 
-	private HashMap<OMS, ConstructorFunction> functions = new HashMap<>();
+	private HashMap<OMS, Function> functions = new HashMap<>();
 
 	private static OMSFunctionDictionary omsfd = new OMSFunctionDictionary();
 
@@ -316,7 +316,7 @@ public class OMSFunctionDictionary {
 	 * @throws FunctionNotImplementedRuntimeException
 	 *             if Function is not found in HashMap
 	 */
-	public ConstructorFunction getFunction(OMS oms) throws FunctionNotImplementedRuntimeException {
+	public Function getFunction(OMS oms) throws FunctionNotImplementedRuntimeException {
 		if (oms == null)
 			throw new FunctionNotImplementedRuntimeException(OMCreator.createOMS("NULL", "NULL"));
 

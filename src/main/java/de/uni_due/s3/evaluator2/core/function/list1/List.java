@@ -13,7 +13,7 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 /**
  * Implementation of List. This is a Terminal so it returns itself!
  * 
- * @author dlux
+ * @author spobel, dlux
  *
  */
 public class List extends ConstructorFunction {
@@ -35,45 +35,6 @@ public class List extends ConstructorFunction {
 	}
 
 	@Override
-	public String getPartialLatexSyntax(java.util.List<Object> arguments) throws EvaluatorException {
-		String args = "";
-		for (Object arg : arguments) {
-			args += getLatexSyntax(arg) + ",";
-		}
-		args = args.substring(0, args.length() - 1);
-		return "\\left\\{" + args + "\\right\\}";
-	}
-
-	@Override
-	public String getPartialRSyntax(java.util.List<Object> arguments) throws EvaluatorException {
-
-		String list = "list(";
-		for (Object arg : arguments) {
-			list += getRSyntax(arg) + ", ";
-		}
-		list = list.substring(0, list.length() - 2); // Removing ", "
-
-		return list + ")";
-	}
-
-	@Override
-	public java.util.List<Object> getPartialListSyntax(java.util.List<Object> omel) throws EvaluatorException {
-		return omel;
-	}
-
-	@Override
-	public String getPartialSageSyntax(java.util.List<Object> arguments) throws EvaluatorException {
-		String set = "[";
-		for (Object arg : arguments) {
-			set += getSageSyntax(arg) + ", ";
-		}
-		set = set.substring(0, set.length() - 2); // Removing ", "
-
-		return set + "]";
-	}
-	
-
-	@Override
 	public Boolean getPartialBooleanSyntax(java.util.List<Object> arguments) throws EvaluatorException {
 		throw new NoRepresentationAvailableException(
 				"There is no Boolean-representation for function " + this.getClass().getSimpleName());
@@ -92,10 +53,46 @@ public class List extends ConstructorFunction {
 	}
 
 	@Override
+	public String getPartialLatexSyntax(java.util.List<Object> arguments) throws EvaluatorException {
+		String args = "";
+		for (Object arg : arguments) {
+			args += getLatexSyntax(arg) + ",";
+		}
+		args = args.substring(0, args.length() - 1);
+		return "\\left\\{" + args + "\\right\\}";
+	}
+
+	@Override
+	public java.util.List<Object> getPartialListSyntax(java.util.List<Object> omel) throws EvaluatorException {
+		return omel;
+	}
+
+	@Override
+	public String getPartialRSyntax(java.util.List<Object> arguments) throws EvaluatorException {
+
+		String list = "list(";
+		for (Object arg : arguments) {
+			list += getRSyntax(arg) + ", ";
+		}
+		list = list.substring(0, list.length() - 2); // Removing ", "
+
+		return list + ")";
+	}
+
+	@Override
+	public String getPartialSageSyntax(java.util.List<Object> arguments) throws EvaluatorException {
+		String set = "[";
+		for (Object arg : arguments) {
+			set += getSageSyntax(arg) + ", ";
+		}
+		set = set.substring(0, set.length() - 2); // Removing ", "
+
+		return set + "]";
+	}
+
+	@Override
 	public String getPartialStringSyntax(java.util.List<Object> arguments) throws EvaluatorException {
 		throw new NoRepresentationAvailableException(
 				"There is no String-representation for function " + this.getClass().getSimpleName());
 	}
-
-
 }

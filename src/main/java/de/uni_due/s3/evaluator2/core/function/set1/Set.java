@@ -1,11 +1,10 @@
 package de.uni_due.s3.evaluator2.core.function.set1;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.ConstructorFunction;
-import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
@@ -39,7 +38,7 @@ public class Set extends ConstructorFunction {
 	@Override
 	public String getPartialLatexSyntax(List<Object> arguments)
 			throws EvaluatorException, FunctionException, NoRepresentationAvailableException {
-		List<String> args = new LinkedList<String>();
+		List<String> args = new ArrayList<String>();
 		for (Object arg : arguments) {
 			args.add(getLatexSyntax(arg));
 		}

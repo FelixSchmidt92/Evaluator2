@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSFunctionDictionary;
-import de.uni_due.s3.evaluator2.core.function.ConstructorFunction;
+import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
@@ -101,7 +101,7 @@ public class OMExecutor {
 	 */
 	private static Object execute(OMA oma) throws EvaluatorException, OpenMathException {
 		List<Object> omel = oma.getOmel();
-		ConstructorFunction function = OMSFunctionDictionary.getInstance().getFunction((OMS) omel.get(0));
+		Function function = OMSFunctionDictionary.getInstance().getFunction((OMS) omel.get(0));
 		List<Object> arguments = new ArrayList<Object>(omel.size() - 1);
 
 		for (int i = 0; i < omel.size() - 1; i++) {

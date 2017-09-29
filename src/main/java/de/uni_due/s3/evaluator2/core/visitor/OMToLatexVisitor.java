@@ -6,7 +6,7 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSFunctionDictionary;
 import de.uni_due.s3.evaluator2.core.function.BinaryFunction;
-import de.uni_due.s3.evaluator2.core.function.ConstructorFunction;
+import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMA;
@@ -86,7 +86,7 @@ public class OMToLatexVisitor extends OMToSyntaxVisitor<String> {
 	 * getLatexSyntax() on the arguments.
 	 */
 	@Override
-	protected String getSyntaxRepresentationForFunction(ConstructorFunction function, OMS oms, List<Object> omel)
+	protected String getSyntaxRepresentationForFunction(Function function, OMS oms, List<Object> omel)
 			throws EvaluatorException {
 
 		if (function instanceof BinaryFunction) {
@@ -129,7 +129,7 @@ public class OMToLatexVisitor extends OMToSyntaxVisitor<String> {
 			OMA child = (OMA) obj;
 			List<Object> childOmel = new ArrayList<Object>(child.getOmel().size() - 1);
 			OMS childOMS = (OMS) child.getOmel().get(0);
-			ConstructorFunction childFunc = OMSFunctionDictionary.getInstance().getFunction(childOMS);
+			Function childFunc = OMSFunctionDictionary.getInstance().getFunction(childOMS);
 
 			for (int i = 1; i < child.getOmel().size(); i++) {
 				childOmel.add(visit(child.getOmel().get(i)));
