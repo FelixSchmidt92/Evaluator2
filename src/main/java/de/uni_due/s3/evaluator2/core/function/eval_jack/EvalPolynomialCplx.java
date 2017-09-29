@@ -2,7 +2,6 @@ package de.uni_due.s3.evaluator2.core.function.eval_jack;
 
 import java.util.List;
 
-import de.uni_due.s3.evaluator2.core.PolyUtils;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
@@ -41,7 +40,7 @@ public class EvalPolynomialCplx extends Function {
 		try {
 			String term = getSageSyntax(arguments.get(0));
 
-			String sageVar = PolyUtils.getSageSyntaxVariableRepresentation(term + "; x;");
+			String sageVar = Sage.getSagePreVariable(term + "; x;");
 
 			StringBuilder sb = new StringBuilder();
 			sb.append(sageVar);

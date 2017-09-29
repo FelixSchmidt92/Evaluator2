@@ -2,7 +2,6 @@ package de.uni_due.s3.evaluator2.core.function.poly;
 
 import java.util.List;
 
-import de.uni_due.s3.evaluator2.core.PolyUtils;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.sage.Sage;
@@ -43,7 +42,7 @@ public class Degree_wrt extends Function {
 		String polynom = getSageSyntax(arguments.get(0));
 		String var = getSageSyntax(arguments.get(1));
 
-		String sageVar = PolyUtils.getSageSyntaxVariableRepresentation(polynom + var);
+		String sageVar = Sage.getSagePreVariable(polynom + var);
 
 		StringBuilder sb = new StringBuilder();
 		sb.append(sageVar);

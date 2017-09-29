@@ -2,7 +2,6 @@ package de.uni_due.s3.evaluator2.core.function.arith1;
 
 import java.util.List;
 
-import de.uni_due.s3.evaluator2.core.PolyUtils;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
@@ -67,7 +66,7 @@ public class Product extends Function {
 		OMA polynomial = (OMA) ombind.getContent().get(2);
 		String term = getSageSyntax(polynomial);
 		
-		String sageVar = PolyUtils.getSageSyntaxVariableRepresentation(term);
+		String sageVar = Sage.getSagePreVariable(term);
 		
 		return sageVar+" var('"+getSageSyntax(variable)+"'); prod("+term+" for "+getSageSyntax(variable)+" in ("+lowerBound+".."+upperBound+"))";
 	

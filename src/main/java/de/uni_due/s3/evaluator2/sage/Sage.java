@@ -7,10 +7,14 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.xml.bind.JAXBException;
 
@@ -103,6 +107,62 @@ public class Sage {
 		}
 		return OMConverter.toElement(omobjResult);
 	}
+	
+	private final static Pattern variable = Pattern.compile("(^[a-zA-Z])|([^a-zA-Z][a-zA-Z]([^a-zA-Z]|$))");
+	
+	/**
+	 * This function is searching for every variable in term and returns sage var('') deklaration.
+	 * 
+	 * term := 2*x+a=y
+	 * returns "var('a x y');"
+	 * @param term
+	 * @return sage var deklaration string
+	 */
+	public static String getSagePreVariable(String term) {
+		StringBuilder result = new StringBuilder();
+		Set<String> vars = new HashSet<>();
+		Matcher m = variable.matcher(term);
+		while (m.find()) {
+			String var = m.group();
+			if (var.length() == 1)
+				// if it is just one letter
+				vars.add(var);
+			else if (var.length() == 2)
+				// if there are two symbols, the last one is the variable
+				vars.add(var.substring(1, 2));
+			else
+				// if there are three symbols, the one in the middle is the
+				// variable
+				vars.add(var.substring(1, 2));
+		}
+		
+		result.append(String.join(" ", vars));
+		
+		if (vars.size() != 0) {
+			result.insert(0, "var('");
+			result.append("');");
+		}
+		
+		return result.toString();
+	}
+
+	/**
+	 * Returns an error SageServer address.
+	 * 
+	 * @return IP:PORT e.g.: 192.168.68.176:8888
+	 * @return null if no error SageServer address exists.
+	 */
+	private static SageConnection getRandomFromErrorConnectionList() {
+		if (sageErrorConnectionList.isEmpty()) {
+			return null;
+		} else {
+			Random rand = new Random();
+			int min = 0;
+			int max = sageErrorConnectionList.size() - 1;
+			int randomNum = rand.nextInt((max - min) + 1) + min;
+			return sageErrorConnectionList.get(randomNum);
+		}
+	}
 
 	/**
 	 * Returns a SageServer address.
@@ -121,24 +181,6 @@ public class Sage {
 			int max = sageConnectionList.size() - 1;
 			int randomNum = rand.nextInt((max - min) + 1) + min;
 			return sageConnectionList.get(randomNum);
-		}
-	}
-
-	/**
-	 * Returns an error SageServer address.
-	 * 
-	 * @return IP:PORT e.g.: 192.168.68.176:8888
-	 * @return null if no error SageServer address exists.
-	 */
-	private static SageConnection getRandomFromErrorConnectionList() {
-		if (sageErrorConnectionList.isEmpty()) {
-			return null;
-		} else {
-			Random rand = new Random();
-			int min = 0;
-			int max = sageErrorConnectionList.size() - 1;
-			int randomNum = rand.nextInt((max - min) + 1) + min;
-			return sageErrorConnectionList.get(randomNum);
 		}
 	}
 

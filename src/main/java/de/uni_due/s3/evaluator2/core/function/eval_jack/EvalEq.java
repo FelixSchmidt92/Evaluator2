@@ -2,7 +2,6 @@ package de.uni_due.s3.evaluator2.core.function.eval_jack;
 
 import java.util.List;
 
-import de.uni_due.s3.evaluator2.core.PolyUtils;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
@@ -43,7 +42,7 @@ public class EvalEq extends Function {
 			throw new FunctionInvalidArgumentException(this, "Input for this Function cannot be empty!");
 		}
 
-		String sageVar = PolyUtils.getSageSyntaxVariableRepresentation(term1 + term2);
+		String sageVar = Sage.getSagePreVariable(term1 + term2);
 
 		StringBuilder sb = new StringBuilder();
 		sb.append(sageVar);

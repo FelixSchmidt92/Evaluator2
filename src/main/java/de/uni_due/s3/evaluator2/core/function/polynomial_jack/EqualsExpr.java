@@ -2,7 +2,6 @@ package de.uni_due.s3.evaluator2.core.function.polynomial_jack;
 
 import java.util.List;
 
-import de.uni_due.s3.evaluator2.core.PolyUtils;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.sage.Sage;
@@ -42,7 +41,7 @@ public class EqualsExpr extends Function {
 		String term1 = getSageSyntax(arguments.get(0));
 		String term2 = getSageSyntax(arguments.get(1));
 
-		String sageVar = PolyUtils.getSageSyntaxVariableRepresentation(term1 + term2);
+		String sageVar = Sage.getSagePreVariable(term1 + term2);
 
 		StringBuilder sb = new StringBuilder();
 

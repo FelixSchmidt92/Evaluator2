@@ -2,7 +2,6 @@ package de.uni_due.s3.evaluator2.core.function.polynomial_jack;
 
 import java.util.List;
 
-import de.uni_due.s3.evaluator2.core.PolyUtils;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
@@ -42,7 +41,7 @@ public class Integrate extends Function {
 			throw new FunctionInvalidArgumentTypeException(this, "(0)Term, (1)Char");
 		}
 
-		String sageVar = PolyUtils.getSageSyntaxVariableRepresentation(term + var);
+		String sageVar = Sage.getSagePreVariable(term + var);
 
 		StringBuilder sb = new StringBuilder();
 
