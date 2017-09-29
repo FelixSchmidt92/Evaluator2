@@ -102,5 +102,12 @@ public class TestDependsOn extends TestFunctionAbstract {
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals(OMSymbol.LOGIC1_TRUE, result.getOMS());
 	}
+	
+	@Test
+	public void testEqualsIntegration2() throws OpenMathException, EvaluatorException {
+		OMOBJ omobj = ExpressionParser.parse("dependsOn(a,'a')", null, null);
+		OMOBJ result = OMExecutor.execute(omobj);
+		assertEquals(OMSymbol.LOGIC1_TRUE, result.getOMS());
+	}
 
 }

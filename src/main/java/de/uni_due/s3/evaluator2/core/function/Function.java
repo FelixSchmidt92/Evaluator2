@@ -1,6 +1,7 @@
 package de.uni_due.s3.evaluator2.core.function;
 
 import java.util.List;
+import java.util.Set;
 
 import de.uni_due.s3.evaluator2.core.visitor.OMToBooleanVisitor;
 import de.uni_due.s3.evaluator2.core.visitor.OMToDoubleVisitor;
@@ -10,6 +11,7 @@ import de.uni_due.s3.evaluator2.core.visitor.OMToListVisitor;
 import de.uni_due.s3.evaluator2.core.visitor.OMToRVisitor;
 import de.uni_due.s3.evaluator2.core.visitor.OMToSageVisitor;
 import de.uni_due.s3.evaluator2.core.visitor.OMToStringVisitor;
+import de.uni_due.s3.evaluator2.core.visitor.OMVariableVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasException;
@@ -19,6 +21,7 @@ import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentExcep
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
+import de.uni_due.s3.openmath.jaxb.OMV;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
@@ -451,5 +454,9 @@ public abstract class Function {
 	public String getPartialStringSyntax(List<Object> arguments) throws EvaluatorException {
 		throw new NoRepresentationAvailableException(
 				"There is no String-representation for function " + this.getClass().getSimpleName());
+	}
+
+	protected final Set<OMV> getVariablesAsOMVSet(Object omElement) throws EvaluatorException {
+		return new OMVariableVisitor().visit(omElement);
 	}
 }

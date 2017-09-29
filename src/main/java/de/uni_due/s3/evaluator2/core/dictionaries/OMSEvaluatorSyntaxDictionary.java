@@ -90,6 +90,8 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("vector", OMSymbol.LINALG2_VECTOR);
 
 		functionSymbolMap.put("list", OMSymbol.LIST1_LIST);
+		
+		functionSymbolMap.put("appendToList", OMSymbol.LIST2_APPEND);
 
 		functionSymbolMap.put("booleanand", OMSymbol.LOGIC1_AND);
 		functionSymbolMap.put("ifthenelse", OMSymbol.LOGICJACK_IFTHENELSE);

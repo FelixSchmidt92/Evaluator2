@@ -5,7 +5,6 @@ import java.util.Set;
 
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
-import de.uni_due.s3.evaluator2.core.visitor.OMVariableVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.openmath.jaxb.OMV;
@@ -31,7 +30,7 @@ public class DependsOn extends Function {
 			throw new FunctionInvalidArgumentTypeException(this, "(1)Char");
 		}
 		
-		Set<OMV> variables = new OMVariableVisitor().visit(arguments.get(0));
+		Set<OMV> variables = getVariablesAsOMVSet(arguments.get(0));
 		boolean containsVariable = variables.contains(arguments.get(1));
 
 		return containsVariable ? OMSymbol.LOGIC1_TRUE : OMSymbol.LOGIC1_FALSE;

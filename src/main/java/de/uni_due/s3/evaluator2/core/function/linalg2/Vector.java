@@ -1,5 +1,6 @@
 package de.uni_due.s3.evaluator2.core.function.linalg2;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
@@ -61,27 +62,10 @@ public class Vector extends ConstructorFunction {
 	}
 
 	@Override
-	public Boolean getPartialBooleanSyntax(List<Object> arguments) throws EvaluatorException {
-		throw new NoRepresentationAvailableException(
-				"There is no Boolean-representation for function " + this.getClass().getSimpleName());
-	}
-
-	@Override
-	public Double getPartialDoubleSyntax(List<Object> arguments) throws EvaluatorException {
-		throw new NoRepresentationAvailableException(
-				"There is no Double-representation for function " + this.getClass().getSimpleName());
-	}
-
-	@Override
-	public Integer getPartialIntegerSyntax(List<Object> arguments) throws EvaluatorException {
-		throw new NoRepresentationAvailableException(
-				"There is no Integer-representation for function " + this.getClass().getSimpleName());
-	}
-
-	@Override
 	public List<Object> getPartialListSyntax(List<Object> omel) throws EvaluatorException {
-		throw new NoRepresentationAvailableException(
-				"There is no List-representation for function " + this.getClass().getSimpleName());
+		List<Object> result = new ArrayList<>();
+		result.add(OMCreator.createOMA(OMSymbol.LINALG2_VECTOR, omel));
+		return result;
 	}
 
 	@Override

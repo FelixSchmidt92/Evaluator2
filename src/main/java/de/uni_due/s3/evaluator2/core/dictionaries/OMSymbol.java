@@ -66,6 +66,8 @@ public class OMSymbol {
 	public static final OMS LINALG2_VECTOR = OMCreator.createOMS("linalg2", "vector");
 
 	public static final OMS LIST1_LIST = OMCreator.createOMS("list1", "list");
+	
+	public static final OMS LIST2_APPEND = OMCreator.createOMS("list2", "append");
 
 	public static final OMS LOGICJACK_IFTHENELSE = OMCreator.createOMS("logicJACK", "ifthenelse");
 

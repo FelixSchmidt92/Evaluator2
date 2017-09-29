@@ -96,11 +96,11 @@ public class TestIsLinearlyIndependent extends TestFunctionAbstract {
 		fail();
 	}
 
-	@Test(expected = FunctionInvalidArgumentException.class)
+	@Test
 	public void testIsLinearlyIndependentWithWrongInput2() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("isLinearlyIndependent(vector(1,1,0))", null, null);
-		OMExecutor.execute(omobj);
-		fail();
+		OMOBJ result = OMExecutor.execute(omobj);
+		assertEquals(OMSymbol.LOGIC1_TRUE, result.getOMS());
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)

@@ -27,6 +27,9 @@ import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 public abstract class ConstructorFunction extends Function {
 
 	@Override
+	public abstract List<Object> getPartialListSyntax(List<Object> omel) throws EvaluatorException;
+	
+	@Override
 	public abstract String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException;
 
 	@Override

@@ -44,6 +44,7 @@ import de.uni_due.s3.evaluator2.core.function.linalg_jack.IsLinearlyIndependent;
 import de.uni_due.s3.evaluator2.core.function.linalg_jack.RandomMatrixEigenvalue;
 import de.uni_due.s3.evaluator2.core.function.linalg_jack.RandomMatrixRank;
 import de.uni_due.s3.evaluator2.core.function.list1.List;
+import de.uni_due.s3.evaluator2.core.function.list2.Append;
 import de.uni_due.s3.evaluator2.core.function.logic1.BooleanAnd;
 import de.uni_due.s3.evaluator2.core.function.logic1.BooleanNot;
 import de.uni_due.s3.evaluator2.core.function.logic1.BooleanOr;
@@ -219,6 +220,8 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.LINALG2_VECTOR, new Vector());
 
 		functions.put(OMSymbol.LIST1_LIST, new List());
+		
+		functions.put(OMSymbol.LIST2_APPEND, new Append());
 		
 		functions.put(OMSymbol.MCJACK_MCINDEX, new MCIndex());
 		
