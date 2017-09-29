@@ -57,7 +57,7 @@ public class Log extends Function {
 				return OMCreator.createOMA(OMSymbol.TRANSC1_LOG, args);
 			}
 			case 1:{
-				args.add(OMToPaletteVisitor.visit(arguments.get(0)));
+				args.add(getPaletteSyntax(arguments.get(0)));
 				args.add(OMSymbol.EDITOR1_INPUT_BOX);
 				return OMCreator.createOMA(OMSymbol.TRANSC1_LOG, args);
 			}

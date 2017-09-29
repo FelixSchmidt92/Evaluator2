@@ -8,6 +8,7 @@ import de.uni_due.s3.evaluator2.core.visitor.OMToDoubleVisitor;
 import de.uni_due.s3.evaluator2.core.visitor.OMToIntegerVisitor;
 import de.uni_due.s3.evaluator2.core.visitor.OMToLatexVisitor;
 import de.uni_due.s3.evaluator2.core.visitor.OMToListVisitor;
+import de.uni_due.s3.evaluator2.core.visitor.OMToPaletteVisitor;
 import de.uni_due.s3.evaluator2.core.visitor.OMToRVisitor;
 import de.uni_due.s3.evaluator2.core.visitor.OMToSageVisitor;
 import de.uni_due.s3.evaluator2.core.visitor.OMToStringVisitor;
@@ -468,5 +469,9 @@ public abstract class Function {
 
 	protected final Set<OMV> getVariablesAsOMVSet(Object omElement) throws EvaluatorException {
 		return new OMVariableVisitor().visit(omElement);
+	}
+	
+	protected final Object getPaletteSyntax(Object omElement) throws FunctionNotImplementedException {
+		return OMToPaletteVisitor.visit(omElement);
 	}
 }
