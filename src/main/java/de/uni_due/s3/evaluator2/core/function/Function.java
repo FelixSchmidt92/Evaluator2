@@ -27,9 +27,22 @@ import de.uni_due.s3.openmath.jaxb.OMV;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
- * This is a wrapper class for ConstructorFuntion which provides a default
- * implementation for all getPartial...-functions, so that not every extending
- * function has to implement those. You can implement those functions you need.
+ * Function is an abstract Class which all Function inherit it and can be
+ * executed with their ArgumentList. All Classes which inherit this Class
+ * <b>have to</b> implement minArgs, maxArgs and the execute method(where the
+ * logic of the specific Function should be).
+ * 
+ * If you want to add a new Function please refer to the OpenMath Content
+ * Dictionaries (www.openmath.org/cd/) and add the new Function to the
+ * corresponding Package. If the Function is not listed in OpenMath, use the
+ * *_jack package (then this Function is a jack-specific one, '*' can be linalg,
+ * string etc..).
+ * 
+ * Getting a Function can be achieved with the OMSFunctionDictionary. The
+ * OMSFunctionDictionary-Class will contain all available Functions for this
+ * Evaluator. By Adding a new Function make this Function also available at
+ * OMSFunctionDictionary.
+ * 
  * 
  * @author dlux, frichtscheid, spobel
  */
@@ -75,9 +88,6 @@ public abstract class Function {
 		return execute(arguments);
 	}
 
-	public Object generatePalette(List<Object> arguments) throws FunctionNotImplementedException {
-		throw new FunctionNotImplementedException(this.getClass().getSimpleName()+" is not supported");
-	}
 	/**
 	 * This Method just tests if the length of the Arguments is in between minArgs
 	 * and maxArgs. If not then a FunctionInvalidNumberOfArgumentsException is
@@ -154,14 +164,14 @@ public abstract class Function {
 	 */
 
 	/**
-	 * Call this Function, if you need your argument in String Syntax.
+	 * Call this Function, if you need your argument in Boolean Syntax.
 	 * 
-	 * In getPartialStringSyntax: Call this Function on every argument, to get the
-	 * String-Syntax of this argument
+	 * In getPartialBooleanSyntax: Call this Function on every argument, to get the
+	 * Boolean-Syntax of this argument
 	 * 
 	 * @param omElement
-	 *            the argument, which should be represented in String
-	 * @return a String representation of this argument in String
+	 *            the argument, which should be represented in Boolean
+	 * @return a String representation of this argument in Boolean
 	 * @throws NoRepresentationAvailableException
 	 * @throws FunctionInvalidNumberOfArgumentsException
 	 * @throws FunctionInvalidArgumentTypeException
@@ -176,16 +186,16 @@ public abstract class Function {
 	}
 
 	/**
-	 * Define here how the Syntax should look like in Double for this specific
+	 * Define here how the Syntax should look like in Boolean for this specific
 	 * Function All Arguments that are passed here can be recursively called again
-	 * with getDoubleSyntax(omElement). So only deal here with the Representation of
-	 * this Function and call (usually) the arguments in getSageSyntax(omElement)
-	 * For Examples: see Plus, Minus or Set
+	 * with getBooleanSyntax(omElement). So only deal here with the Representation
+	 * of this Function and call (usually) the arguments in
+	 * getBooleanSyntax(omElement) For Examples: see Plus, Minus or Set
 	 * 
 	 * @param arguments
 	 *            A List of Arguments for this Function. Note: The arguments are not
 	 *            evaluated!
-	 * @return A String Representation of this Function AND all innerFunction
+	 * @return A Boolean Representation of this Function AND all innerFunction
 	 * @throws NoRepresentationAvailableException
 	 * @throws FunctionInvalidNumberOfArgumentsException
 	 * @throws FunctionInvalidArgumentTypeException
@@ -198,14 +208,14 @@ public abstract class Function {
 	}
 
 	/**
-	 * Call this Function, if you need your argument in String Syntax.
+	 * Call this Function, if you need your argument in Double Syntax.
 	 * 
-	 * In getPartialStringSyntax: Call this Function on every argument, to get the
-	 * String-Syntax of this argument
+	 * In getPartialDoubleSyntax: Call this Function on every argument, to get the
+	 * Double-Syntax of this argument
 	 * 
 	 * @param omElement
-	 *            the argument, which should be represented in String
-	 * @return a String representation of this argument in String
+	 *            the argument, which should be represented in Double
+	 * @return a Double representation of this argument in Double
 	 * @throws NoRepresentationAvailableException
 	 * @throws FunctionInvalidNumberOfArgumentsException
 	 * @throws FunctionInvalidArgumentTypeException
@@ -223,13 +233,12 @@ public abstract class Function {
 	 * Define here how the Syntax should look like in Double for this specific
 	 * Function All Arguments that are passed here can be recursively called again
 	 * with getDoubleSyntax(omElement). So only deal here with the Representation of
-	 * this Function and call (usually) the arguments in getSageSyntax(omElement)
-	 * For Examples: see Plus, Minus or Set
+	 * this Function and call (usually) the arguments in getDoubleSyntax(omElement)
 	 * 
 	 * @param arguments
 	 *            A List of Arguments for this Function. Note: The arguments are not
 	 *            evaluated!
-	 * @return A String Representation of this Function AND all innerFunction
+	 * @return A Double Representation of this Function AND all innerFunction
 	 * @throws NoRepresentationAvailableException
 	 * @throws FunctionInvalidNumberOfArgumentsException
 	 * @throws FunctionInvalidArgumentTypeException
@@ -242,14 +251,14 @@ public abstract class Function {
 	}
 
 	/**
-	 * Call this Function, if you need your argument in String Syntax.
+	 * Call this Function, if you need your argument in Integer Syntax.
 	 * 
-	 * In getPartialStringSyntax: Call this Function on every argument, to get the
-	 * String-Syntax of this argument
+	 * In getPartialIntegerSyntax: Call this Function on every argument, to get the
+	 * Integer-Syntax of this argument
 	 * 
 	 * @param omElement
-	 *            the argument, which should be represented in String
-	 * @return a String representation of this argument in String
+	 *            the argument, which should be represented in Integer
+	 * @return a Integer representation of this argument in Integer
 	 * @throws NoRepresentationAvailableException
 	 * @throws FunctionInvalidNumberOfArgumentsException
 	 * @throws FunctionInvalidArgumentTypeException
@@ -264,16 +273,16 @@ public abstract class Function {
 	}
 
 	/**
-	 * Define here how the Syntax should look like in Double for this specific
+	 * Define here how the Syntax should look like in Integer for this specific
 	 * Function All Arguments that are passed here can be recursively called again
-	 * with getDoubleSyntax(omElement). So only deal here with the Representation of
-	 * this Function and call (usually) the arguments in getSageSyntax(omElement)
-	 * For Examples: see Plus, Minus or Set
+	 * with getIntegerSyntax(omElement). So only deal here with the Representation
+	 * of this Function and call (usually) the arguments in
+	 * getIntegerSyntax(omElement)
 	 * 
 	 * @param arguments
 	 *            A List of Arguments for this Function. Note: The arguments are not
 	 *            evaluated!
-	 * @return A String Representation of this Function AND all innerFunction
+	 * @return A Integer Representation of this Function AND all innerFunction
 	 * @throws NoRepresentationAvailableException
 	 * @throws FunctionInvalidNumberOfArgumentsException
 	 * @throws FunctionInvalidArgumentTypeException
@@ -286,12 +295,12 @@ public abstract class Function {
 	}
 
 	/**
-	 * This function can be called if you want to have the latex syntax of the given
+	 * This Function can be called if you want to have the Latex Syntax of the given
 	 * element
 	 * 
 	 * @param omElement
 	 *            OM-Object of which you want the latex syntax
-	 * @return latex-string
+	 * @return Latex-String
 	 * @throws EvaluatorException
 	 */
 	protected final String getLatexSyntax(Object omElement) throws EvaluatorException {
@@ -299,11 +308,11 @@ public abstract class Function {
 	}
 
 	/**
-	 * If a function should have a special latex representation, then this function
+	 * If a function should have a special Latex representation, then this Function
 	 * has to be overwritten by that class.
 	 * 
 	 * @param omel
-	 * @return
+	 * @return the specific Latex-Representation for that Function
 	 * @throws FunctionException
 	 * @throws NoRepresentationAvailableException
 	 */
@@ -313,12 +322,12 @@ public abstract class Function {
 	}
 
 	/**
-	 * This function can be called if you want to have the latex syntax of the given
+	 * This Function can be called if you want to have the List-Syntax of the given
 	 * element
 	 * 
 	 * @param omElement
-	 *            OM-Object of which you want the latex syntax
-	 * @return latex-string
+	 *            OM-Object of which you want the List-Syntax
+	 * @return A List
 	 * @throws EvaluatorException
 	 */
 	protected final List<Object> getListSyntax(Object omElement) throws EvaluatorException {
@@ -326,11 +335,11 @@ public abstract class Function {
 	}
 
 	/**
-	 * If a function should have a special latex representation, then this function
-	 * has to be overwritten by that class.
+	 * If a Function should have a special List-Representation, then this Function
+	 * has to be overwritten by that Class.
 	 * 
 	 * @param omel
-	 * @return
+	 * @return the specific List-Representation for that Function
 	 * @throws FunctionException
 	 * @throws NoRepresentationAvailableException
 	 */
@@ -340,14 +349,14 @@ public abstract class Function {
 	}
 
 	/**
-	 * Call this Function, if you need your argument in Sage Syntax.
+	 * Call this Function, if you need your argument in R Syntax.
 	 * 
-	 * In getPartialSageSyntax: Call this Function on every argument, to get the
-	 * Sage-Syntax of this argument
+	 * In getPartialRSyntax: Call this Function on every argument, to get the
+	 * R-Syntax of this argument
 	 * 
 	 * @param omElement
-	 *            the argument, which should be represented in Sage
-	 * @return a String representation of this argument in Sage
+	 *            the argument, which should be represented in R
+	 * @return a String representation of this argument in R
 	 * @throws NoRepresentationAvailableException
 	 * @throws FunctionInvalidNumberOfArgumentsException
 	 * @throws FunctionInvalidArgumentTypeException
@@ -358,11 +367,11 @@ public abstract class Function {
 	}
 
 	/**
-	 * Define here how the Syntax should look like in Sage for this specific
-	 * Function All Arguments that are passed here can be recursively called again
-	 * with getSageSyntax(omElement). So only deal here with the Representation of
-	 * this Function and call (usually) the arguments in getSageSyntax(omElement)
-	 * For Examples: see Plus, Minus or Set
+	 * Define here how the Syntax should look like in R for this specific Function.
+	 * All Arguments that are passed here can be recursively called again with
+	 * getRSyntax(omElement). So only deal here with the Representation of this
+	 * Function and call (usually) the arguments in getRSyntax(omElement) For
+	 * Examples: see Plus, Minus or Set
 	 * 
 	 * @param arguments
 	 *            A List of Arguments for this Function. Note: The arguments are not
@@ -449,8 +458,7 @@ public abstract class Function {
 	 * Define here how the Syntax should look like in String for this specific
 	 * Function All Arguments that are passed here can be recursively called again
 	 * with getStringSyntax(omElement). So only deal here with the Representation of
-	 * this Function and call (usually) the arguments in getSageSyntax(omElement)
-	 * For Examples: see Plus, Minus or Set
+	 * this Function and call (usually) the arguments in getStringSyntax(omElement)
 	 * 
 	 * @param arguments
 	 *            A List of Arguments for this Function. Note: The arguments are not
@@ -467,10 +475,33 @@ public abstract class Function {
 				"There is no String-representation for function " + this.getClass().getSimpleName());
 	}
 
+	/**
+	 * Call this Function before you use something in Sage to initialize all
+	 * Variables before.
+	 * 
+	 * TODO DOKU!
+	 * 
+	 * @param omElement
+	 * @return
+	 * @throws EvaluatorException
+	 */
 	protected final Set<OMV> getVariablesAsOMVSet(Object omElement) throws EvaluatorException {
 		return new OMVariableVisitor().visit(omElement);
 	}
-	
+
+	/**
+	 * Call this here to get the Palette of every OMA within the arguments?
+	 * 
+	 * TODO DOKU!
+	 * 
+	 * @param arguments
+	 * @return
+	 * @throws FunctionNotImplementedException
+	 */
+	public Object generatePalette(List<Object> arguments) throws FunctionNotImplementedException {
+		throw new FunctionNotImplementedException(this.getClass().getSimpleName() + " is not supported");
+	}
+
 	protected final Object getPaletteSyntax(Object omElement) throws FunctionNotImplementedException {
 		return OMToPaletteVisitor.visit(omElement);
 	}

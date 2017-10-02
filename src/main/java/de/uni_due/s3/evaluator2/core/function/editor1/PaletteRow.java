@@ -5,36 +5,16 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSFunctionDictionary;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
-import de.uni_due.s3.evaluator2.core.function.ConstructorFunction;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
-public class PaletteRow extends ConstructorFunction{
-
-	@Override
-	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException {
-		throw new NoRepresentationAvailableException(
-				"There is no Latex-representation for function " + this.getClass().getSimpleName());
-	}
-
-	@Override
-	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException {
-		throw new NoRepresentationAvailableException(
-				"There is no R-representation for function " + this.getClass().getSimpleName());
-	}
-
-	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
-		throw new NoRepresentationAvailableException(
-				"There is no Sage-representation for function " + this.getClass().getSimpleName());
-	}
+public class PaletteRow extends Function{
 
 	/**
 	 * Expects a list of OMObjects
@@ -71,12 +51,6 @@ public class PaletteRow extends ConstructorFunction{
 	@Override
 	public boolean argumentsShouldBeEvaluated() {
 		return false;
-	}
-
-	@Override
-	public List<Object> getPartialListSyntax(List<Object> omel) throws EvaluatorException {
-		throw new NoRepresentationAvailableException(
-				"There is no List-representation for function " + this.getClass().getSimpleName());
 	}
 	
 }

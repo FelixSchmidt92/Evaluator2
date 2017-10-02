@@ -28,7 +28,7 @@ public class OMSEvaluatorSyntaxDictionary {
 
 	/**
 	 * OMSEvaluatorSyntaxDictionary. Here are the Names and the corresponding
-	 * Symbols listesd
+	 * Symbols listed
 	 * 
 	 * If another Function for this Evaluator is written you have to add it here
 	 * and in OMSFunctionDictionary
