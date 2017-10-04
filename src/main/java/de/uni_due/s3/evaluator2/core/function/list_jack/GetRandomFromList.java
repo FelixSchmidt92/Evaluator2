@@ -1,4 +1,4 @@
-package de.uni_due.s3.evaluator2.core.function.set_jack;
+package de.uni_due.s3.evaluator2.core.function.list_jack;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentExcep
  * @author spobel
  *
  */
-public class GetRandomFromSet extends Function {
+public class GetRandomFromList extends Function {
 
 	@Override
 	protected Object execute(List<Object> arguments) throws EvaluatorException {

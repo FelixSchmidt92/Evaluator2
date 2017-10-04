@@ -1,4 +1,4 @@
-package de.uni_due.s3.evaluator2.core.function.set_jack;
+package de.uni_due.s3.evaluator2.core.function.list_jack;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,7 +18,7 @@ import de.uni_due.s3.openmath.omutils.OMTypeChecker;
  * @author spobel
  *
  */
-public class GetFromOrderedSet extends Function {
+public class GetFromOrderedList extends Function {
 
 	@Override
 	protected Object execute(List<Object> arguments) throws EvaluatorException {
@@ -27,12 +27,12 @@ public class GetFromOrderedSet extends Function {
 		List<Object> list1 = getListSyntax(arguments.get(1));
 
 		if (list1.size() == 0) {
-			throw new FunctionInvalidArgumentException(this, "Set has to have at least one element.");
+			throw new FunctionInvalidArgumentException(this, "List has to have at least one element.");
 		}
 
 		if (list1.size() <= pos) {
 			throw new FunctionInvalidArgumentException(this,
-					"Second Argument of getFromOrderedSet is invalid. Not in Range of Set.");
+					"Second Argument of getFromOrderedList is invalid. Not in Range of List.");
 		}
 
 		if (OMTypeChecker.isOMNumber(list1.get(0))) {
@@ -42,7 +42,7 @@ public class GetFromOrderedSet extends Function {
 					setForSort.add(getDoubleSyntax(element));
 				} catch (NoRepresentationAvailableException e) {
 					throw new FunctionInvalidArgumentTypeException(this,
-							"Set elements have to be from type String/Integer/Double/Float.");
+							"List elements have to be from type String/Integer/Double/Float.");
 				}
 			}
 			Collections.sort(setForSort);
@@ -55,7 +55,7 @@ public class GetFromOrderedSet extends Function {
 					setForSort.add(getStringSyntax(element));
 				} catch (NoRepresentationAvailableException e) {
 					throw new FunctionInvalidArgumentTypeException(this,
-							"Set elements have to be from type String/Integer/Double/Float.");
+							"List elements have to be from type String/Integer/Double/Float.");
 				}
 			}
 			Collections.sort(setForSort);

@@ -1,4 +1,4 @@
-package de.uni_due.s3.evaluator2.core.function.set_jack;
+package de.uni_due.s3.evaluator2.core.function.list_jack;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -25,12 +25,12 @@ import de.uni_due.s3.openmath.jaxb.OMSTR;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
-public class TestGetRandomFromSet extends TestFunctionAbstract {
+public class TestGetRandomFromList extends TestFunctionAbstract {
 
-	private static Function func = new GetRandomFromSet();
+	private static Function func = new GetRandomFromList();
 
 	@Test
-	public void testGetRandomFromSet1() throws OpenMathException, EvaluatorException {
+	public void testGetRandomFromList1() throws OpenMathException, EvaluatorException {
 		List<Object> set = new ArrayList<Object>();
 		List<Object> args = new ArrayList<Object>();
 
@@ -41,13 +41,13 @@ public class TestGetRandomFromSet extends TestFunctionAbstract {
 		set.add(omi);
 		set.add(omf);
 
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set));
+		args.add(OMCreator.createOMA(OMSymbol.LIST1_LIST, set));
 		Object result = func.evaluate(args);
 		assertTrue(result.equals(omf) || result.equals(omi) || result.equals(omstr));
 	}
 
 	@Test
-	public void testGetRandomFromSet2() throws OpenMathException, EvaluatorException {
+	public void testGetRandomFromList2() throws OpenMathException, EvaluatorException {
 		List<Object> set = new ArrayList<Object>();
 		List<Object> args = new ArrayList<Object>();
 
@@ -58,14 +58,14 @@ public class TestGetRandomFromSet extends TestFunctionAbstract {
 		set.add(omi);
 		set.add(omf);
 
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set));
+		args.add(OMCreator.createOMA(OMSymbol.LIST1_LIST, set));
 		Object result = func.evaluate(args);
 		assertTrue(result.equals(omf) || result.equals(omi) || result.equals(omstr));
 
 	}
 
 	@Test
-	public void testGetRandomFromSet3() throws OpenMathException, EvaluatorException {
+	public void testGetRandomFromList3() throws OpenMathException, EvaluatorException {
 		List<Object> set = new ArrayList<Object>();
 		List<Object> args = new ArrayList<Object>();
 
@@ -74,13 +74,13 @@ public class TestGetRandomFromSet extends TestFunctionAbstract {
 		set.add(oma);
 		set.add(oma);
 
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set));
+		args.add(OMCreator.createOMA(OMSymbol.LIST1_LIST, set));
 		Object result = func.evaluate(args);
 		assertTrue(result.equals(oma));
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testGetRandomFromSetWithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testGetRandomFromListWithLessThanMinParam() throws OpenMathException, EvaluatorException {
 
 		List<Object> args = new ArrayList<Object>();
 		func.evaluate(args);
@@ -88,7 +88,7 @@ public class TestGetRandomFromSet extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testGetRandomFromSetWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
+	public void testGetRandomFromListWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
 		List<Object> plus = new ArrayList<Object>();
 		plus.add(OMCreator.createOMI(20));
 		plus.add(OMCreator.createOMI(1));
@@ -98,43 +98,43 @@ public class TestGetRandomFromSet extends TestFunctionAbstract {
 		set.add(OMCreator.createOMA(OMSymbol.ARITH1_PLUS, plus));
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(1));
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set));
+		args.add(OMCreator.createOMA(OMSymbol.LIST1_LIST, set));
 		args.add(OMCreator.createOMI(1));
 		func.evaluate(args);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testGetRandomFromSetWithWrongArguments1() throws OpenMathException, EvaluatorException {
+	public void testGetRandomFromListWithWrongArguments1() throws OpenMathException, EvaluatorException {
 		List<Object> args = new ArrayList<Object>();
 		func.evaluate(args);
 		fail();
 	}
 
 	@Test
-	public void testGetRandomFromSetIntegration1() throws OpenMathException, EvaluatorException {
-		OMOBJ omobj = ExpressionParser.parse("getRandomFromSet({1})", null, null);
+	public void testGetRandomFromListIntegration1() throws OpenMathException, EvaluatorException {
+		OMOBJ omobj = ExpressionParser.parse("getRandomFromList({1})", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals(OMCreator.createOMI(1), result.getOMI());
 	}
 
 	@Test(expected = FunctionInvalidArgumentException.class)
-	public void testGetRandomFromSetWithEmptyArgs() throws OpenMathException, EvaluatorException {
-		OMOBJ omobj = ExpressionParser.parse("getRandomFromSet({})", null, null);
+	public void testGetRandomFromListWithEmptyArgs() throws OpenMathException, EvaluatorException {
+		OMOBJ omobj = ExpressionParser.parse("getRandomFromList({})", null, null);
 		OMExecutor.execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testGetRandomFromSetWithLessArgs() throws OpenMathException, EvaluatorException {
-		OMOBJ omobj = ExpressionParser.parse("getRandomFromSet()", null, null);
+	public void testGetRandomFromListWithLessArgs() throws OpenMathException, EvaluatorException {
+		OMOBJ omobj = ExpressionParser.parse("getRandomFromList()", null, null);
 		OMExecutor.execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testGetRandomFromSetWithMoreArgs() throws OpenMathException, EvaluatorException {
-		OMOBJ omobj = ExpressionParser.parse("getRandomFromSet({}, 0, 4)", null, null);
+	public void testGetRandomFromListWithMoreArgs() throws OpenMathException, EvaluatorException {
+		OMOBJ omobj = ExpressionParser.parse("getRandomFromList({}, 0, 4)", null, null);
 		OMExecutor.execute(omobj);
 		fail();
 	}

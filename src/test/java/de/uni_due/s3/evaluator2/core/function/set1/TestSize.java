@@ -28,13 +28,13 @@ public class TestSize extends TestFunctionAbstract {
 
 	@Test
 	public void testSize() throws OpenMathException, EvaluatorException {
-		args = new ArrayList<Object>(1);
+		args = new ArrayList<Object>();
 		List<Object> arguments = new ArrayList<Object>();
 		arguments.add(OMCreator.createOMI(10));
 		arguments.add(OMCreator.createOMI(10));
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, arguments));
+		args.add(OMCreator.createOMA(OMSymbol.LIST1_LIST, arguments));
 		result = func.evaluate(args);
-		assertEquals(OMCreator.createOMI(2), result);
+		assertEquals(OMCreator.createOMI(1), result);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
@@ -46,7 +46,7 @@ public class TestSize extends TestFunctionAbstract {
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testSizeWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
-		args = new ArrayList<Object>(2);
+		args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("test"));
 		args.add(OMCreator.createOMSTR("test"));
 		func.evaluate(args);
@@ -55,7 +55,7 @@ public class TestSize extends TestFunctionAbstract {
 
 	@Test(expected = NoRepresentationAvailableException.class)
 	public void testSizeWithWrongArguments() throws OpenMathException, EvaluatorException {
-		args = new ArrayList<Object>(2);
+		args = new ArrayList<Object>();
 		args.add(null);
 		func.evaluate(args);
 		fail();

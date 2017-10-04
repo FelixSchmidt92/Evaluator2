@@ -46,8 +46,8 @@ public class TestEqualBasis extends TestFunctionAbstract {
 		set2.add(OMCreator.createOMA(OMSymbol.LINALG2_VECTOR, vector4));
 
 		ArrayList<Object> args = new ArrayList<>();
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set1));
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set2));
+		args.add(OMCreator.createOMA(OMSymbol.LIST1_LIST, set1));
+		args.add(OMCreator.createOMA(OMSymbol.LIST1_LIST, set2));
 		args.add(OMCreator.createOMI(2));
 		assertEquals(OMSymbol.LOGIC1_FALSE, func.evaluate(args));
 	}
@@ -75,8 +75,8 @@ public class TestEqualBasis extends TestFunctionAbstract {
 		set2.add(OMCreator.createOMA(OMSymbol.LINALG2_VECTOR, vector4));
 
 		ArrayList<Object> args = new ArrayList<>();
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set1));
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set2));
+		args.add(OMCreator.createOMA(OMSymbol.LIST1_LIST, set1));
+		args.add(OMCreator.createOMA(OMSymbol.LIST1_LIST, set2));
 		args.add(OMCreator.createOMI(2));
 		assertEquals(OMSymbol.LOGIC1_TRUE, func.evaluate(args));
 	}

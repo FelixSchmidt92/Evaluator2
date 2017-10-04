@@ -1,12 +1,12 @@
 lexer grammar EvaluatorLexer;
 
-@lexer::header {package de.uni_due.s3.evaluator.parser.antlr;
+@lexer::header {package de.uni_due.s3.evaluator2.parser.antlr;
 }
 
 LeftParenthesis: '(';
 RightParenthesis: ')';
-SetOpen: '{';
-SetClose: '}';
+ListOpen: '{';
+ListClose: '}';
 Circumflex: '^';
 Plus: '+';
 Minus: '-';
@@ -27,7 +27,7 @@ FillInVariable: '[pos=' [0-9]+ ']';
 Variable: [a-z];
 FunctionName: [a-zA-Z] [a-zA-Z0-9]*;
 ArgumentSeparator: ',';
-SetArgumentSeparator: ';';
+ListArgumentSeparator: ';';
 Integer: [0-9]+;
 Float: [0-9]+( '.' [0-9]+);
 String: '\'' .*? '\'' ;

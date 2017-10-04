@@ -28,11 +28,11 @@ public class TestIsSet extends TestIntegration {
 		one.setOMI(OMCreator.createOMI(1));
 
 		exerVar.put("a", OMConverter.toObject(
-				"<OMOBJ><OMA><OMS cd='set1' name='set'/><OMA><OMS cd='linalg2' name='vector'/><OMI>1</OMI><OMI>2</OMI><OMI>3</OMI></OMA><OMA><OMS cd='linalg2' name='vector'/><OMI>3</OMI><OMI>3</OMI><OMI>3</OMI></OMA></OMA></OMOBJ>"));
+				"<OMOBJ><OMA><OMS cd='list1' name='list'/><OMA><OMS cd='linalg2' name='vector'/><OMI>1</OMI><OMI>2</OMI><OMI>3</OMI></OMA><OMA><OMS cd='linalg2' name='vector'/><OMI>3</OMI><OMI>3</OMI><OMI>3</OMI></OMA></OMA></OMOBJ>"));
 		exerVar.put("b", one);
 
 		fillIn.put(1, OMConverter.toObject(
-				"<OMOBJ><OMA><OMS cd='set1' name='set'/><OMA><OMS cd='linalg2' name='vector'/><OMI>1</OMI><OMI>2</OMI><OMI>3</OMI></OMA><OMA><OMS cd='linalg2' name='vector'/><OMI>3</OMI><OMI>3</OMI><OMI>3</OMI></OMA></OMA></OMOBJ>"));
+				"<OMOBJ><OMA><OMS cd='list1' name='list'/><OMA><OMS cd='linalg2' name='vector'/><OMI>1</OMI><OMI>2</OMI><OMI>3</OMI></OMA><OMA><OMS cd='linalg2' name='vector'/><OMI>3</OMI><OMI>3</OMI><OMI>3</OMI></OMA></OMA></OMOBJ>"));
 		fillIn.put(2, one);
 	}
 

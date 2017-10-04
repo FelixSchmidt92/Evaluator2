@@ -18,12 +18,12 @@ public class EvaluatorLexer extends Lexer {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		LeftParenthesis=1, RightParenthesis=2, SetOpen=3, SetClose=4, Circumflex=5, 
+		LeftParenthesis=1, RightParenthesis=2, ListOpen=3, ListClose=4, Circumflex=5, 
 		Plus=6, Minus=7, BooleanNot=8, Multiplication=9, Division=10, Modulus=11, 
 		LessThan=12, LessThanOrEqual=13, GreaterThan=14, GreaterThanOrEqual=15, 
 		Equal=16, NotEqual=17, BooleanAnd=18, BooleanOr=19, ExerciseVariable=20, 
 		FillInVariable=21, Variable=22, FunctionName=23, ArgumentSeparator=24, 
-		SetArgumentSeparator=25, Integer=26, Float=27, String=28, WS=29;
+		ListArgumentSeparator=25, Integer=26, Float=27, String=28, WS=29;
 	public static String[] channelNames = {
 		"DEFAULT_TOKEN_CHANNEL", "HIDDEN"
 	};
@@ -33,11 +33,11 @@ public class EvaluatorLexer extends Lexer {
 	};
 
 	public static final String[] ruleNames = {
-		"LeftParenthesis", "RightParenthesis", "SetOpen", "SetClose", "Circumflex", 
+		"LeftParenthesis", "RightParenthesis", "ListOpen", "ListClose", "Circumflex", 
 		"Plus", "Minus", "BooleanNot", "Multiplication", "Division", "Modulus", 
 		"LessThan", "LessThanOrEqual", "GreaterThan", "GreaterThanOrEqual", "Equal", 
 		"NotEqual", "BooleanAnd", "BooleanOr", "ExerciseVariable", "FillInVariable", 
-		"Variable", "FunctionName", "ArgumentSeparator", "SetArgumentSeparator", 
+		"Variable", "FunctionName", "ArgumentSeparator", "ListArgumentSeparator", 
 		"Integer", "Float", "String", "WS"
 	};
 
@@ -47,11 +47,11 @@ public class EvaluatorLexer extends Lexer {
 		null, null, null, "','", "';'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
-		null, "LeftParenthesis", "RightParenthesis", "SetOpen", "SetClose", "Circumflex", 
-		"Plus", "Minus", "BooleanNot", "Multiplication", "Division", "Modulus", 
-		"LessThan", "LessThanOrEqual", "GreaterThan", "GreaterThanOrEqual", "Equal", 
-		"NotEqual", "BooleanAnd", "BooleanOr", "ExerciseVariable", "FillInVariable", 
-		"Variable", "FunctionName", "ArgumentSeparator", "SetArgumentSeparator", 
+		null, "LeftParenthesis", "RightParenthesis", "ListOpen", "ListClose", 
+		"Circumflex", "Plus", "Minus", "BooleanNot", "Multiplication", "Division", 
+		"Modulus", "LessThan", "LessThanOrEqual", "GreaterThan", "GreaterThanOrEqual", 
+		"Equal", "NotEqual", "BooleanAnd", "BooleanOr", "ExerciseVariable", "FillInVariable", 
+		"Variable", "FunctionName", "ArgumentSeparator", "ListArgumentSeparator", 
 		"Integer", "Float", "String", "WS"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);

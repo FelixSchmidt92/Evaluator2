@@ -1,4 +1,4 @@
-package de.uni_due.s3.evaluator2.core.function.set_jack;
+package de.uni_due.s3.evaluator2.core.function.list_jack;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -11,7 +11,7 @@ import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
 
 /**
- * Implements a get Function for Set (List). First Set (List) will be ordered.
+ * Implements a get Function for List. First List will be ordered.
  * 
  * @author spobel
  *
@@ -28,7 +28,7 @@ public class ChooseFromComplement extends Function {
 		set.removeAll(list2);
 		
 		if (set.size() == 0) {
-			throw new FunctionInvalidArgumentException(this, "Set has to have at least one element.");
+			throw new FunctionInvalidArgumentException(this, "List has to have at least one element.");
 		}
 		
 		List<Object> resultList = new ArrayList<>();
