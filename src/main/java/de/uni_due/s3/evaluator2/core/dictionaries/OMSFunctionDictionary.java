@@ -60,6 +60,7 @@ import de.uni_due.s3.evaluator2.core.function.nums1.I;
 import de.uni_due.s3.evaluator2.core.function.nums1.Infinity;
 import de.uni_due.s3.evaluator2.core.function.nums1.NaN;
 import de.uni_due.s3.evaluator2.core.function.nums1.Pi;
+import de.uni_due.s3.evaluator2.core.function.nums1.Rational;
 import de.uni_due.s3.evaluator2.core.function.openmath_jack.CountBasicOperations;
 import de.uni_due.s3.evaluator2.core.function.openmath_jack.CountNodes;
 import de.uni_due.s3.evaluator2.core.function.openmath_jack.GetDenominator;
@@ -232,7 +233,7 @@ public class OMSFunctionDictionary {
 		
 		functions.put(OMSymbol.MCJACK_MCINDEX, new MCIndex());
 		
-		functions.put(OMSymbol.NUMS1_RATIONAL, new Divide());
+		functions.put(OMSymbol.NUMS1_RATIONAL, new Rational());
 		functions.put(OMSymbol.NUMS1_E, new E());
 		functions.put(OMSymbol.NUMS1_I, new I());
 		functions.put(OMSymbol.NUMS1_INFINITY, new Infinity());

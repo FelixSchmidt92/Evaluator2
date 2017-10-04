@@ -189,6 +189,15 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("tan", OMSymbol.TRANSC1_TAN);
 
 		functionSymbolMap.put("atan2", OMSymbol.TRANSC2_ARCTAN2);
+		
+		
+		
+		functionSymbolMap.put("rational", OMSymbol.NUMS1_RATIONAL);
+		functionSymbolMap.put("constE", OMSymbol.NUMS1_E);
+		functionSymbolMap.put("constI", OMSymbol.NUMS1_I);
+		functionSymbolMap.put("constInfinity", OMSymbol.NUMS1_INFINITY);
+		functionSymbolMap.put("constPi", OMSymbol.NUMS1_PI);
+		
 	}
 
 	/**
