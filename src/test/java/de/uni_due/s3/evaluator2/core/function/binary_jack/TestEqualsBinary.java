@@ -9,16 +9,17 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
+import de.uni_due.s3.evaluator2.Evaluator;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
+import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
-//FIXME hier fehlt ein Integrationstest !
 @RunWith(Parameterized.class)
 public class TestEqualsBinary extends TestFunctionAbstract {
 
@@ -67,5 +68,14 @@ public class TestEqualsBinary extends TestFunctionAbstract {
 		args.add(invalidType);
 
 		func.evaluate(args);
+	}
+	
+	@Test
+	public void testEqualsBinaryIntegration() throws EvaluatorException, OpenMathException {
+		OMOBJ expect = new OMOBJ();
+		expect.setOMS(expected);
+		OMOBJ result = Evaluator.evaluate("equalsBinary('" + left + "', '" + right + "')", null, null);
+		
+		assertEquals(expect,  result);
 	}
 }

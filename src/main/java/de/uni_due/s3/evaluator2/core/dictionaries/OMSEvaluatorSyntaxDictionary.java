@@ -28,7 +28,7 @@ public class OMSEvaluatorSyntaxDictionary {
 
 	/**
 	 * OMSEvaluatorSyntaxDictionary. Here are the Names and the corresponding
-	 * Symbols listesd
+	 * Symbols listed
 	 * 
 	 * If another Function for this Evaluator is written you have to add it here
 	 * and in OMSFunctionDictionary
@@ -65,6 +65,10 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("evaluateInSymja", OMSymbol.CASJACK_EVALUATEINSYMJA);
 		
 		//TODO: should the integral calculus function be added?
+		
+		functionSymbolMap.put("palette", OMSymbol.EDITOR1_PALETTE);
+		functionSymbolMap.put("palettetab", OMSymbol.EDITOR1_PALETTE_TAB);
+		functionSymbolMap.put("paletterow", OMSymbol.EDITOR1_PALETTE_ROW);
 		
 		functionSymbolMap.put("eval", OMSymbol.EVALJACK_EVAL);
 		functionSymbolMap.put("evalcplx", OMSymbol.POLYNOMIAL1_EXPAND);

@@ -8,6 +8,7 @@ import de.uni_due.s3.evaluator2.core.function.BinaryFunction;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
+import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
@@ -46,6 +47,11 @@ public class Times extends BinaryFunction {
 			}
 			throw new FunctionInvalidArgumentTypeException(this, "integer, float, double");
 		}
+	}
+	
+	@Override
+	public Object generatePalette(List<Object> arguments) throws FunctionNotImplementedException {
+		return OMSymbol.ARITH1_TIMES;
 	}
 
 	@Override

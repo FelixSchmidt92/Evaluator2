@@ -73,7 +73,7 @@ public class RToOMOBJVisitor {
 	}
 
 	/**
-	 * Parsing REXP with Integegers or Doubles into OpenMath-XML
+	 * Parsing REXP with Integers or Doubles into OpenMath-XML
 	 * @param rexp the rexp
 	 * @return OpenMath-XML
 	 * @throws REXPMismatchException
