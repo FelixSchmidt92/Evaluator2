@@ -37,7 +37,7 @@ public class TestIsLinearlyIndependent extends TestFunctionAbstract {
 		set.add(OMCreator.createOMA(OMSymbol.LINALG2_VECTOR, vector2));
 
 		ArrayList<Object> args = new ArrayList<>();
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set));
+		args.add(OMCreator.createOMA(OMSymbol.LIST1_LIST, set));
 		assertEquals(OMSymbol.LOGIC1_TRUE, func.evaluate(args));
 	}
 
@@ -55,7 +55,7 @@ public class TestIsLinearlyIndependent extends TestFunctionAbstract {
 		set.add(OMCreator.createOMA(OMSymbol.LINALG2_VECTOR, vector2));
 
 		ArrayList<Object> args = new ArrayList<>();
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set));
+		args.add(OMCreator.createOMA(OMSymbol.LIST1_LIST, set));
 		assertEquals(OMSymbol.LOGIC1_FALSE, func.evaluate(args));
 	}
 

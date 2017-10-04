@@ -92,11 +92,17 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("matrix", OMSymbol.LINALG2_MATRIX);
 		functionSymbolMap.put("matrixrow", OMSymbol.LINALG2_MATRIXROW);
 		functionSymbolMap.put("vector", OMSymbol.LINALG2_VECTOR);
-
+		
+		functionSymbolMap.put("chooseFromComplement", OMSymbol.LISTJACK_CHOOSEFROMCOMPLEMENT);
+		functionSymbolMap.put("getFromList", OMSymbol.LISTJACK_GETFROMLIST);
+		functionSymbolMap.put("getFromOrderedList", OMSymbol.LISTJACK_GETFROMORDEREDLIST);
+		functionSymbolMap.put("getRandomFromList", OMSymbol.LISTJACK_GETRANDOMFROMSET);
+		
 		functionSymbolMap.put("list", OMSymbol.LIST1_LIST);
 		
 		functionSymbolMap.put("appendToList", OMSymbol.LIST2_APPEND);
-
+		functionSymbolMap.put("sizeOfList", OMSymbol.LIST2_SIZE);
+		
 		functionSymbolMap.put("booleanand", OMSymbol.LOGIC1_AND);
 		functionSymbolMap.put("ifthenelse", OMSymbol.LOGICJACK_IFTHENELSE);
 		functionSymbolMap.put("booleannot", OMSymbol.LOGIC1_NOT);
@@ -138,14 +144,15 @@ public class OMSEvaluatorSyntaxDictionary {
 		
 		functionSymbolMap.put("rint", OMSymbol.ROUNDING_JACK);
 
-		functionSymbolMap.put("chooseFromComplement", OMSymbol.SETJACK_CHOOSEFROMCOMPLEMENT);
 		functionSymbolMap.put("equalSet", OMSymbol.SETJACK_EQUALSET);
-		functionSymbolMap.put("getFromOrderedSet", OMSymbol.SETJACK_GETFROMORDEREDSET);
-		functionSymbolMap.put("getFromSet", OMSymbol.SETJACK_GETFROMSET);
-		functionSymbolMap.put("getRandomFromSet", OMSymbol.SETJACK_GETRANDOMFROMSET);
 		
-		functionSymbolMap.put("set", OMSymbol.SET1_SET);
-		functionSymbolMap.put("size", OMSymbol.SET1_SIZE);
+		//Deprecated
+		functionSymbolMap.put("getFromOrderedSet", OMSymbol.LISTJACK_GETFROMORDEREDLIST);
+		//Deprecated
+		functionSymbolMap.put("getFromSet", OMSymbol.LISTJACK_GETFROMLIST);
+		
+		functionSymbolMap.put("set", OMSymbol.LIST1_LIST);
+		functionSymbolMap.put("sizeOfSet", OMSymbol.SET1_SIZE);
 
 		functionSymbolMap.put("charAt", OMSymbol.STRINGJACK_CHARAT);
 		functionSymbolMap.put("compareTo", OMSymbol.STRINGJACK_COMPARETO);

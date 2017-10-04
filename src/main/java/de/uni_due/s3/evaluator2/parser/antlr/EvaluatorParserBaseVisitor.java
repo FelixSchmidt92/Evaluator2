@@ -67,14 +67,14 @@ public class EvaluatorParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> i
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitSetInExpression(EvaluatorParser.SetInExpressionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitVariable(EvaluatorParser.VariableContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitVariable(EvaluatorParser.VariableContext ctx) { return visitChildren(ctx); }
+	@Override public T visitListInExpression(EvaluatorParser.ListInExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -158,5 +158,5 @@ public class EvaluatorParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> i
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitSet(EvaluatorParser.SetContext ctx) { return visitChildren(ctx); }
+	@Override public T visitList(EvaluatorParser.ListContext ctx) { return visitChildren(ctx); }
 }

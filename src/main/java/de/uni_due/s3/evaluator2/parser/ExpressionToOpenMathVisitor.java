@@ -26,9 +26,9 @@ import de.uni_due.s3.evaluator2.parser.antlr.EvaluatorParser.ExpressionContext;
 import de.uni_due.s3.evaluator2.parser.antlr.EvaluatorParser.FillInVarNameContext;
 import de.uni_due.s3.evaluator2.parser.antlr.EvaluatorParser.FloatValueContext;
 import de.uni_due.s3.evaluator2.parser.antlr.EvaluatorParser.IntegerValueContext;
+import de.uni_due.s3.evaluator2.parser.antlr.EvaluatorParser.ListContext;
 import de.uni_due.s3.evaluator2.parser.antlr.EvaluatorParser.NestedFunctionInExpressionContext;
 import de.uni_due.s3.evaluator2.parser.antlr.EvaluatorParser.ParenthesisContext;
-import de.uni_due.s3.evaluator2.parser.antlr.EvaluatorParser.SetContext;
 import de.uni_due.s3.evaluator2.parser.antlr.EvaluatorParser.TextValueContext;
 import de.uni_due.s3.evaluator2.parser.antlr.EvaluatorParser.UnaryContext;
 import de.uni_due.s3.evaluator2.parser.antlr.EvaluatorParser.VariableContext;
@@ -375,7 +375,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	 * @return OMA with Set symbol and the content
 	 */
 	@Override
-	public OMA visitSet(SetContext ctx) {
+	public OMA visitList(ListContext ctx) {
 		List<Object> omel = new ArrayList<>();
 		for (ExpressionContext childctx : ctx.arguments) {
 			omel.add(visit(childctx));

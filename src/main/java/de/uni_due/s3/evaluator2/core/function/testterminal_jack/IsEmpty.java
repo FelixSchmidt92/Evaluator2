@@ -19,6 +19,7 @@ import de.uni_due.s3.openmath.jaxb.OMV;
  * @author dlux
  *
  */
+//FIXME TypChecker nutzen
 public class IsEmpty extends Function {
 
 	@Override

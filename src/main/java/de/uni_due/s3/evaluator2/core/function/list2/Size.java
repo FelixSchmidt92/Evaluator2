@@ -1,6 +1,5 @@
-package de.uni_due.s3.evaluator2.core.function.set1;
+package de.uni_due.s3.evaluator2.core.function.list2;
 
-import java.util.HashSet;
 import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.function.Function;
@@ -26,8 +25,8 @@ public class Size extends Function {
 	@Override
 	protected Object execute(List<Object> arguments) throws EvaluatorException {
 		List<Object> list1 = getListSyntax(arguments.get(0));
-		java.util.Set<Object> set1 = new HashSet<>(list1);
-		return OMCreator.createOMI(set1.size());
+		
+		return OMCreator.createOMI(list1.size());
 	}
 
 	@Override

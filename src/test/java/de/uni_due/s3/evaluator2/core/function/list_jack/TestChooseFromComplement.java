@@ -1,4 +1,4 @@
-package de.uni_due.s3.evaluator2.core.function.set_jack;
+package de.uni_due.s3.evaluator2.core.function.list_jack;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -37,8 +37,8 @@ public class TestChooseFromComplement extends TestFunctionAbstract {
 		set2.add(OMCreator.createOMI(20));
 
 		List<Object> args = new ArrayList<Object>();
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set1));
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set2));
+		args.add(OMCreator.createOMA(OMSymbol.LIST1_LIST, set1));
+		args.add(OMCreator.createOMA(OMSymbol.LIST1_LIST, set2));
 		Object result = func.evaluate(args);
 		assertEquals(OMCreator.createOMF(3.123), result);
 	}
@@ -54,8 +54,8 @@ public class TestChooseFromComplement extends TestFunctionAbstract {
 		set2.add(OMCreator.createOMSTR("Hallo"));
 		set2.add(OMCreator.createOMSTR("Hello"));
 		List<Object> args = new ArrayList<Object>();
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set1));
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set2));
+		args.add(OMCreator.createOMA(OMSymbol.LIST1_LIST, set1));
+		args.add(OMCreator.createOMA(OMSymbol.LIST1_LIST, set2));
 		Object result = func.evaluate(args);
 		assertTrue(result.equals(OMCreator.createOMI(1)) || result.equals(OMCreator.createOMI(20))
 				|| result.equals(OMCreator.createOMF(3.123)));
@@ -67,7 +67,7 @@ public class TestChooseFromComplement extends TestFunctionAbstract {
 		set.add(OMCreator.createOMSTR("Test"));
 		set.add(OMCreator.createOMI(20));
 		List<Object> args = new ArrayList<Object>();
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set));
+		args.add(OMCreator.createOMA(OMSymbol.LIST1_LIST, set));
 		func.evaluate(args);
 		fail();
 	}
@@ -78,8 +78,8 @@ public class TestChooseFromComplement extends TestFunctionAbstract {
 		set.add(OMCreator.createOMSTR("Test"));
 		set.add(OMCreator.createOMI(20));
 		List<Object> args = new ArrayList<Object>();
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set));
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set));
+		args.add(OMCreator.createOMA(OMSymbol.LIST1_LIST, set));
+		args.add(OMCreator.createOMA(OMSymbol.LIST1_LIST, set));
 		args.add(OMCreator.createOMI(1));
 		func.evaluate(args);
 		fail();
@@ -91,8 +91,8 @@ public class TestChooseFromComplement extends TestFunctionAbstract {
 		set.add(OMCreator.createOMSTR("Test"));
 		set.add(OMCreator.createOMI(20));
 		List<Object> args = new ArrayList<Object>();
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set));
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set));
+		args.add(OMCreator.createOMA(OMSymbol.LIST1_LIST, set));
+		args.add(OMCreator.createOMA(OMSymbol.LIST1_LIST, set));
 		func.evaluate(args);
 		fail();
 	}
@@ -125,7 +125,7 @@ public class TestChooseFromComplement extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testChooseFromComplementIntegrationArgsInSet() throws OpenMathException, EvaluatorException {
+	public void testChooseFromComplementIntegrationArgsInList() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("chooseFromComplement({1;'Test'},1)", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals(OMCreator.createOMSTR("Test"), result.getOMSTR());
@@ -139,15 +139,15 @@ public class TestChooseFromComplement extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testGetFromOrderedSetWithLessArgs() throws OpenMathException, EvaluatorException {
-		OMOBJ omobj = ExpressionParser.parse("getFromOrderedSet({})", null, null);
+	public void testGetFromOrderedListWithLessArgs() throws OpenMathException, EvaluatorException {
+		OMOBJ omobj = ExpressionParser.parse("getFromOrderedList({})", null, null);
 		OMExecutor.execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testChooseFromComplementWithMoreArgs() throws OpenMathException, EvaluatorException {
-		OMOBJ omobj = ExpressionParser.parse("getFromOrderedSet({}, {}, 1)", null, null);
+		OMOBJ omobj = ExpressionParser.parse("getFromOrderedList({}, {}, 1)", null, null);
 		OMExecutor.execute(omobj);
 		fail();
 	}

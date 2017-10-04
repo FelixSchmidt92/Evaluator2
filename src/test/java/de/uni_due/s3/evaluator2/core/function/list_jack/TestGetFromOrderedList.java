@@ -1,4 +1,4 @@
-package de.uni_due.s3.evaluator2.core.function.set_jack;
+package de.uni_due.s3.evaluator2.core.function.list_jack;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -21,70 +21,70 @@ import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
-public class TestGetFromOrderedSet extends TestFunctionAbstract {
+public class TestGetFromOrderedList extends TestFunctionAbstract {
 
-	private static Function func = new GetFromOrderedSet();
+	private static Function func = new GetFromOrderedList();
 
 	@Test
-	public void testGetFromOrderedSet1() throws OpenMathException, EvaluatorException {
+	public void testGetFromOrderedList1() throws OpenMathException, EvaluatorException {
 		List<Object> set = new ArrayList<Object>();
 		set.add(OMCreator.createOMI(1));
 		set.add(OMCreator.createOMI(20));
 		set.add(OMCreator.createOMF(3.123));
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(1));
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set));
+		args.add(OMCreator.createOMA(OMSymbol.LIST1_LIST, set));
 
 		Object result = func.evaluate(args);
 		assertEquals(OMCreator.createOMF(3.123), result);
 	}
 
 	@Test
-	public void testGetFromOrderedSet2() throws OpenMathException, EvaluatorException {
+	public void testGetFromOrderedList2() throws OpenMathException, EvaluatorException {
 		List<Object> set = new ArrayList<Object>();
 		set.add(OMCreator.createOMSTR("Test"));
 		set.add(OMCreator.createOMSTR("Hallo"));
 		set.add(OMCreator.createOMSTR("Hello"));
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(0));
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set));
+		args.add(OMCreator.createOMA(OMSymbol.LIST1_LIST, set));
 
 		Object result = func.evaluate(args);
 		assertEquals(OMCreator.createOMSTR("Hallo"), result);
 	}
 
 	@Test
-	public void testGetFromOrderedSet3() throws OpenMathException, EvaluatorException {
+	public void testGetFromOrderedList3() throws OpenMathException, EvaluatorException {
 		List<Object> set = new ArrayList<Object>();
 		set.add(OMCreator.createOMF(3.343));
 		set.add(OMCreator.createOMI(20));
 		set.add(OMCreator.createOMF(3.243));
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(2));
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set));
+		args.add(OMCreator.createOMA(OMSymbol.LIST1_LIST, set));
 
 		Object result = func.evaluate(args);
 		assertEquals(OMCreator.createOMI(20), result);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testGetFromOrderedSetWithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testGetFromOrderedListWithLessThanMinParam() throws OpenMathException, EvaluatorException {
 		List<Object> set = new ArrayList<Object>();
 		set.add(OMCreator.createOMSTR("Test"));
 		set.add(OMCreator.createOMI(20));
 		List<Object> args = new ArrayList<Object>();
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set));
+		args.add(OMCreator.createOMA(OMSymbol.LIST1_LIST, set));
 		func.evaluate(args);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testGetFromOrderedSetWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
+	public void testGetFromOrderedListWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
 		List<Object> set = new ArrayList<Object>();
 		set.add(OMCreator.createOMSTR("Test"));
 		set.add(OMCreator.createOMI(20));
 		List<Object> args = new ArrayList<Object>();
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set));
+		args.add(OMCreator.createOMA(OMSymbol.LIST1_LIST, set));
 		args.add(OMCreator.createOMI(1));
 		args.add(OMCreator.createOMI(1));
 		func.evaluate(args);
@@ -92,7 +92,7 @@ public class TestGetFromOrderedSet extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidArgumentException.class)
-	public void testGetFromOrderedSetWithWrongArguments1() throws OpenMathException, EvaluatorException {
+	public void testGetFromOrderedListWithWrongArguments1() throws OpenMathException, EvaluatorException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(1)); // wrong
 		args.add(OMCreator.createOMI(1));
@@ -101,61 +101,61 @@ public class TestGetFromOrderedSet extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testGetFromOrderedSetWithWrongArguments2() throws OpenMathException, EvaluatorException {
+	public void testGetFromOrderedListWithWrongArguments2() throws OpenMathException, EvaluatorException {
 		List<Object> set = new ArrayList<Object>();
 		set.add(OMCreator.createOMSTR("Test"));
 		set.add(OMCreator.createOMI(20));
 		List<Object> args = new ArrayList<Object>();
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set));
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set)); // wrong
+		args.add(OMCreator.createOMA(OMSymbol.LIST1_LIST, set));
+		args.add(OMCreator.createOMA(OMSymbol.LIST1_LIST, set)); // wrong
 		func.evaluate(args);
 		fail();
 	}
 
 	@Test
-	public void testGetFromOrderedSetIntegration1() throws OpenMathException, EvaluatorException {
-		OMOBJ omobj = ExpressionParser.parse("getFromOrderedSet(0, {1;2})", null, null);
+	public void testGetFromOrderedListIntegration1() throws OpenMathException, EvaluatorException {
+		OMOBJ omobj = ExpressionParser.parse("getFromOrderedList(0, {1;2})", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals(OMCreator.createOMI(1), result.getOMI());
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testGetFromOrderedSetIntegrationWrongArgsInSet() throws OpenMathException, EvaluatorException {
-		OMOBJ omobj = ExpressionParser.parse("getFromOrderedSet({1;'Test'},1)", null, null);
+	public void testGetFromOrderedListIntegrationWrongArgsInList() throws OpenMathException, EvaluatorException {
+		OMOBJ omobj = ExpressionParser.parse("getFromOrderedList({1;'Test'},1)", null, null);
 		OMExecutor.execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentException.class)
-	public void testGetFromOrderedSetIntegrationWithOutOfBounds() throws OpenMathException, EvaluatorException {
-		OMOBJ omobj = ExpressionParser.parse("getFromOrderedSet(2, {1})", null, null);
+	public void testGetFromOrderedListIntegrationWithOutOfBounds() throws OpenMathException, EvaluatorException {
+		OMOBJ omobj = ExpressionParser.parse("getFromOrderedList(2, {1})", null, null);
 		OMExecutor.execute(omobj);
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testGetFromOrderedSetIntegration() throws OpenMathException, EvaluatorException {
-		OMOBJ omobj = ExpressionParser.parse("getFromOrderedSet({matrix(matrixrow(1,2)); vector(1,2)},1)", null, null);
+	public void testGetFromOrderedListIntegration() throws OpenMathException, EvaluatorException {
+		OMOBJ omobj = ExpressionParser.parse("getFromOrderedList({matrix(matrixrow(1,2)); vector(1,2)},1)", null, null);
 		OMExecutor.execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentException.class)
-	public void testGetFromOrderedSetWithZeroArgs() throws OpenMathException, EvaluatorException {
-		OMOBJ omobj = ExpressionParser.parse("getFromOrderedSet(0, {})", null, null);
+	public void testGetFromOrderedListWithZeroArgs() throws OpenMathException, EvaluatorException {
+		OMOBJ omobj = ExpressionParser.parse("getFromOrderedList(0, {})", null, null);
 		OMExecutor.execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testGetFromOrderedSetWithLessArgs() throws OpenMathException, EvaluatorException {
-		OMOBJ omobj = ExpressionParser.parse("getFromOrderedSet({})", null, null);
+	public void testGetFromOrderedListWithLessArgs() throws OpenMathException, EvaluatorException {
+		OMOBJ omobj = ExpressionParser.parse("getFromOrderedList({})", null, null);
 		OMExecutor.execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testGetFromOrderedSetWithMoreArgs() throws OpenMathException, EvaluatorException {
-		OMOBJ omobj = ExpressionParser.parse("getFromOrderedSet({}, 0, 4)", null, null);
+	public void testGetFromOrderedListWithMoreArgs() throws OpenMathException, EvaluatorException {
+		OMOBJ omobj = ExpressionParser.parse("getFromOrderedList({}, 0, 4)", null, null);
 		OMExecutor.execute(omobj);
 		fail();
 	}

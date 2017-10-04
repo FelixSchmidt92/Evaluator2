@@ -18,19 +18,19 @@ public class EvaluatorParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		LeftParenthesis=1, RightParenthesis=2, SetOpen=3, SetClose=4, Circumflex=5, 
+		LeftParenthesis=1, RightParenthesis=2, ListOpen=3, ListClose=4, Circumflex=5, 
 		Plus=6, Minus=7, BooleanNot=8, Multiplication=9, Division=10, Modulus=11, 
 		LessThan=12, LessThanOrEqual=13, GreaterThan=14, GreaterThanOrEqual=15, 
 		Equal=16, NotEqual=17, BooleanAnd=18, BooleanOr=19, ExerciseVariable=20, 
 		FillInVariable=21, Variable=22, FunctionName=23, ArgumentSeparator=24, 
-		SetArgumentSeparator=25, Integer=26, Float=27, String=28, WS=29;
+		ListArgumentSeparator=25, Integer=26, Float=27, String=28, WS=29;
 	public static final int
 		RULE_expression = 0, RULE_unaryOperatorForExpression = 1, RULE_binaryOperatorBoolean = 2, 
 		RULE_binaryOperatorRelational = 3, RULE_binaryOperatorArithLine = 4, RULE_binaryOperatorArithPoint = 5, 
-		RULE_set = 6;
+		RULE_list = 6;
 	public static final String[] ruleNames = {
 		"expression", "unaryOperatorForExpression", "binaryOperatorBoolean", "binaryOperatorRelational", 
-		"binaryOperatorArithLine", "binaryOperatorArithPoint", "set"
+		"binaryOperatorArithLine", "binaryOperatorArithPoint", "list"
 	};
 
 	private static final String[] _LITERAL_NAMES = {
@@ -39,11 +39,11 @@ public class EvaluatorParser extends Parser {
 		null, null, null, "','", "';'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
-		null, "LeftParenthesis", "RightParenthesis", "SetOpen", "SetClose", "Circumflex", 
-		"Plus", "Minus", "BooleanNot", "Multiplication", "Division", "Modulus", 
-		"LessThan", "LessThanOrEqual", "GreaterThan", "GreaterThanOrEqual", "Equal", 
-		"NotEqual", "BooleanAnd", "BooleanOr", "ExerciseVariable", "FillInVariable", 
-		"Variable", "FunctionName", "ArgumentSeparator", "SetArgumentSeparator", 
+		null, "LeftParenthesis", "RightParenthesis", "ListOpen", "ListClose", 
+		"Circumflex", "Plus", "Minus", "BooleanNot", "Multiplication", "Division", 
+		"Modulus", "LessThan", "LessThanOrEqual", "GreaterThan", "GreaterThanOrEqual", 
+		"Equal", "NotEqual", "BooleanAnd", "BooleanOr", "ExerciseVariable", "FillInVariable", 
+		"Variable", "FunctionName", "ArgumentSeparator", "ListArgumentSeparator", 
 		"Integer", "Float", "String", "WS"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
@@ -211,17 +211,6 @@ public class EvaluatorParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class SetInExpressionContext extends ExpressionContext {
-		public SetContext set() {
-			return getRuleContext(SetContext.class,0);
-		}
-		public SetInExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitSetInExpression(this);
-			else return visitor.visitChildren(this);
-		}
-	}
 	public static class VariableContext extends ExpressionContext {
 		public Token name;
 		public TerminalNode Variable() { return getToken(EvaluatorParser.Variable, 0); }
@@ -229,6 +218,17 @@ public class EvaluatorParser extends Parser {
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitVariable(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class ListInExpressionContext extends ExpressionContext {
+		public ListContext list() {
+			return getRuleContext(ListContext.class,0);
+		}
+		public ListInExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitListInExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -359,7 +359,7 @@ public class EvaluatorParser extends Parser {
 				setState(26);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << LeftParenthesis) | (1L << SetOpen) | (1L << Plus) | (1L << Minus) | (1L << BooleanNot) | (1L << ExerciseVariable) | (1L << FillInVariable) | (1L << Variable) | (1L << FunctionName) | (1L << Integer) | (1L << Float) | (1L << String))) != 0)) {
+				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << LeftParenthesis) | (1L << ListOpen) | (1L << Plus) | (1L << Minus) | (1L << BooleanNot) | (1L << ExerciseVariable) | (1L << FillInVariable) | (1L << Variable) | (1L << FunctionName) | (1L << Integer) | (1L << Float) | (1L << String))) != 0)) {
 					{
 					setState(18);
 					((NestedFunctionInExpressionContext)_localctx).expression = expression(0);
@@ -415,13 +415,13 @@ public class EvaluatorParser extends Parser {
 				expression(12);
 				}
 				break;
-			case SetOpen:
+			case ListOpen:
 				{
-				_localctx = new SetInExpressionContext(_localctx);
+				_localctx = new ListInExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(36);
-				set();
+				list();
 				}
 				break;
 			case Integer:
@@ -800,60 +800,60 @@ public class EvaluatorParser extends Parser {
 		return _localctx;
 	}
 
-	public static class SetContext extends ParserRuleContext {
+	public static class ListContext extends ParserRuleContext {
 		public ExpressionContext expression;
 		public List<ExpressionContext> arguments = new ArrayList<ExpressionContext>();
-		public TerminalNode SetOpen() { return getToken(EvaluatorParser.SetOpen, 0); }
-		public TerminalNode SetClose() { return getToken(EvaluatorParser.SetClose, 0); }
+		public TerminalNode ListOpen() { return getToken(EvaluatorParser.ListOpen, 0); }
+		public TerminalNode ListClose() { return getToken(EvaluatorParser.ListClose, 0); }
 		public List<ExpressionContext> expression() {
 			return getRuleContexts(ExpressionContext.class);
 		}
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
-		public List<TerminalNode> SetArgumentSeparator() { return getTokens(EvaluatorParser.SetArgumentSeparator); }
-		public TerminalNode SetArgumentSeparator(int i) {
-			return getToken(EvaluatorParser.SetArgumentSeparator, i);
+		public List<TerminalNode> ListArgumentSeparator() { return getTokens(EvaluatorParser.ListArgumentSeparator); }
+		public TerminalNode ListArgumentSeparator(int i) {
+			return getToken(EvaluatorParser.ListArgumentSeparator, i);
 		}
-		public SetContext(ParserRuleContext parent, int invokingState) {
+		public ListContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_set; }
+		@Override public int getRuleIndex() { return RULE_list; }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitSet(this);
+			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitList(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final SetContext set() throws RecognitionException {
-		SetContext _localctx = new SetContext(_ctx, getState());
-		enterRule(_localctx, 12, RULE_set);
+	public final ListContext list() throws RecognitionException {
+		ListContext _localctx = new ListContext(_ctx, getState());
+		enterRule(_localctx, 12, RULE_list);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(78);
-			match(SetOpen);
+			match(ListOpen);
 			setState(87);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << LeftParenthesis) | (1L << SetOpen) | (1L << Plus) | (1L << Minus) | (1L << BooleanNot) | (1L << ExerciseVariable) | (1L << FillInVariable) | (1L << Variable) | (1L << FunctionName) | (1L << Integer) | (1L << Float) | (1L << String))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << LeftParenthesis) | (1L << ListOpen) | (1L << Plus) | (1L << Minus) | (1L << BooleanNot) | (1L << ExerciseVariable) | (1L << FillInVariable) | (1L << Variable) | (1L << FunctionName) | (1L << Integer) | (1L << Float) | (1L << String))) != 0)) {
 				{
 				setState(79);
-				((SetContext)_localctx).expression = expression(0);
-				((SetContext)_localctx).arguments.add(((SetContext)_localctx).expression);
+				((ListContext)_localctx).expression = expression(0);
+				((ListContext)_localctx).arguments.add(((ListContext)_localctx).expression);
 				setState(84);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				while (_la==SetArgumentSeparator) {
+				while (_la==ListArgumentSeparator) {
 					{
 					{
 					setState(80);
-					match(SetArgumentSeparator);
+					match(ListArgumentSeparator);
 					setState(81);
-					((SetContext)_localctx).expression = expression(0);
-					((SetContext)_localctx).arguments.add(((SetContext)_localctx).expression);
+					((ListContext)_localctx).expression = expression(0);
+					((ListContext)_localctx).arguments.add(((ListContext)_localctx).expression);
 					}
 					}
 					setState(86);
@@ -864,7 +864,7 @@ public class EvaluatorParser extends Parser {
 			}
 
 			setState(89);
-			match(SetClose);
+			match(ListClose);
 			}
 		}
 		catch (RecognitionException re) {

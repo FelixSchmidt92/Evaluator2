@@ -48,6 +48,10 @@ import de.uni_due.s3.evaluator2.core.function.linalg_jack.RandomMatrixEigenvalue
 import de.uni_due.s3.evaluator2.core.function.linalg_jack.RandomMatrixRank;
 import de.uni_due.s3.evaluator2.core.function.list1.List;
 import de.uni_due.s3.evaluator2.core.function.list2.Append;
+import de.uni_due.s3.evaluator2.core.function.list_jack.ChooseFromComplement;
+import de.uni_due.s3.evaluator2.core.function.list_jack.GetFromList;
+import de.uni_due.s3.evaluator2.core.function.list_jack.GetFromOrderedList;
+import de.uni_due.s3.evaluator2.core.function.list_jack.GetRandomFromList;
 import de.uni_due.s3.evaluator2.core.function.logic1.BooleanAnd;
 import de.uni_due.s3.evaluator2.core.function.logic1.BooleanNot;
 import de.uni_due.s3.evaluator2.core.function.logic1.BooleanOr;
@@ -86,13 +90,8 @@ import de.uni_due.s3.evaluator2.core.function.rounding1.Ceiling;
 import de.uni_due.s3.evaluator2.core.function.rounding1.Floor;
 import de.uni_due.s3.evaluator2.core.function.rounding1.Round;
 import de.uni_due.s3.evaluator2.core.function.rounding_jack.Rint;
-import de.uni_due.s3.evaluator2.core.function.set1.Set;
 import de.uni_due.s3.evaluator2.core.function.set1.Size;
-import de.uni_due.s3.evaluator2.core.function.set_jack.ChooseFromComplement;
 import de.uni_due.s3.evaluator2.core.function.set_jack.EqualSet;
-import de.uni_due.s3.evaluator2.core.function.set_jack.GetFromOrderedSet;
-import de.uni_due.s3.evaluator2.core.function.set_jack.GetFromSet;
-import de.uni_due.s3.evaluator2.core.function.set_jack.GetRandomFromSet;
 import de.uni_due.s3.evaluator2.core.function.string_jack.CharAt;
 import de.uni_due.s3.evaluator2.core.function.string_jack.CompareTo;
 import de.uni_due.s3.evaluator2.core.function.string_jack.CompareToIgnoreCase;
@@ -227,9 +226,15 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.LINALG2_MATRIXROW, new MatrixRow());
 		functions.put(OMSymbol.LINALG2_VECTOR, new Vector());
 
+		functions.put(OMSymbol.LISTJACK_CHOOSEFROMCOMPLEMENT, new ChooseFromComplement());
+		functions.put(OMSymbol.LISTJACK_GETFROMLIST, new GetFromList());
+		functions.put(OMSymbol.LISTJACK_GETFROMORDEREDLIST, new GetFromOrderedList());
+		functions.put(OMSymbol.LISTJACK_GETRANDOMFROMSET, new GetRandomFromList());
+		
 		functions.put(OMSymbol.LIST1_LIST, new List());
 		
 		functions.put(OMSymbol.LIST2_APPEND, new Append());
+		functions.put(OMSymbol.LIST2_SIZE, new de.uni_due.s3.evaluator2.core.function.list2.Size());
 		
 		functions.put(OMSymbol.MCJACK_MCINDEX, new MCIndex());
 		
@@ -273,13 +278,8 @@ public class OMSFunctionDictionary {
 		
 		functions.put(OMSymbol.ROUNDING_JACK, new Rint());
 
-		functions.put(OMSymbol.SETJACK_CHOOSEFROMCOMPLEMENT, new ChooseFromComplement());
 		functions.put(OMSymbol.SETJACK_EQUALSET, new EqualSet());
-		functions.put(OMSymbol.SETJACK_GETFROMORDEREDSET, new GetFromOrderedSet());
-		functions.put(OMSymbol.SETJACK_GETFROMSET, new GetFromSet());
-		functions.put(OMSymbol.SETJACK_GETRANDOMFROMSET, new GetRandomFromSet());
 
-		functions.put(OMSymbol.SET1_SET, new Set());
 		functions.put(OMSymbol.SET1_SIZE, new Size());
 
 		functions.put(OMSymbol.STRINGJACK_CHARAT, new CharAt());

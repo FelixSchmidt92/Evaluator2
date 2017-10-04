@@ -1,4 +1,4 @@
-package de.uni_due.s3.evaluator2.core.function.set1;
+package de.uni_due.s3.evaluator2.core.function.list2;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -28,13 +28,13 @@ public class TestSize extends TestFunctionAbstract {
 
 	@Test
 	public void testSize() throws OpenMathException, EvaluatorException {
-		args = new ArrayList<Object>();
+		args = new ArrayList<Object>(1);
 		List<Object> arguments = new ArrayList<Object>();
 		arguments.add(OMCreator.createOMI(10));
 		arguments.add(OMCreator.createOMI(10));
 		args.add(OMCreator.createOMA(OMSymbol.LIST1_LIST, arguments));
 		result = func.evaluate(args);
-		assertEquals(OMCreator.createOMI(1), result);
+		assertEquals(OMCreator.createOMI(2), result);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
@@ -46,7 +46,7 @@ public class TestSize extends TestFunctionAbstract {
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testSizeWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
-		args = new ArrayList<Object>();
+		args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMSTR("test"));
 		args.add(OMCreator.createOMSTR("test"));
 		func.evaluate(args);
@@ -55,7 +55,7 @@ public class TestSize extends TestFunctionAbstract {
 
 	@Test(expected = NoRepresentationAvailableException.class)
 	public void testSizeWithWrongArguments() throws OpenMathException, EvaluatorException {
-		args = new ArrayList<Object>();
+		args = new ArrayList<Object>(2);
 		args.add(null);
 		func.evaluate(args);
 		fail();
@@ -63,7 +63,7 @@ public class TestSize extends TestFunctionAbstract {
 
 	@Test
 	public void testSizeIntegration() throws OpenMathException, EvaluatorException {
-		OMOBJ omobj = ExpressionParser.parse("sizeOfSet({1;2;3})", null, null);
+		OMOBJ omobj = ExpressionParser.parse("sizeOfList(list(1,2,3))", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals(OMCreator.createOMI(3), result.getOMI());
 	}

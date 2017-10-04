@@ -35,8 +35,8 @@ public class TestEqualSet extends TestFunctionAbstract {
 		set2.add(OMCreator.createOMI(20));
 
 		List<Object> args = new ArrayList<Object>();
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set1));
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set2));
+		args.add(OMCreator.createOMA(OMSymbol.LIST1_LIST, set1));
+		args.add(OMCreator.createOMA(OMSymbol.LIST1_LIST, set2));
 		Object result = func.evaluate(args);
 		assertEquals(OMSymbol.LOGIC1_FALSE, result);
 	}
@@ -52,8 +52,8 @@ public class TestEqualSet extends TestFunctionAbstract {
 		set2.add(OMCreator.createOMSTR("Hallo"));
 		set2.add(OMCreator.createOMSTR("Hello"));
 		List<Object> args = new ArrayList<Object>();
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set1));
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set2));
+		args.add(OMCreator.createOMA(OMSymbol.LIST1_LIST, set1));
+		args.add(OMCreator.createOMA(OMSymbol.LIST1_LIST, set2));
 		Object result = func.evaluate(args);
 		assertEquals(OMSymbol.LOGIC1_FALSE, result);
 	}
@@ -71,8 +71,8 @@ public class TestEqualSet extends TestFunctionAbstract {
 		set2.add(OMCreator.createOMF(3.123));
 
 		List<Object> args = new ArrayList<Object>();
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set1));
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set2));
+		args.add(OMCreator.createOMA(OMSymbol.LIST1_LIST, set1));
+		args.add(OMCreator.createOMA(OMSymbol.LIST1_LIST, set2));
 		Object result = func.evaluate(args);
 		assertEquals(OMSymbol.LOGIC1_TRUE, result);
 	}
@@ -90,8 +90,8 @@ public class TestEqualSet extends TestFunctionAbstract {
 		set2.add(OMCreator.createOMF(3.123));
 
 		List<Object> args = new ArrayList<Object>();
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set1));
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set2));
+		args.add(OMCreator.createOMA(OMSymbol.LIST1_LIST, set1));
+		args.add(OMCreator.createOMA(OMSymbol.LIST1_LIST, set2));
 		Object result = func.evaluate(args);
 		assertEquals(OMSymbol.LOGIC1_TRUE, result);
 	}
@@ -102,7 +102,7 @@ public class TestEqualSet extends TestFunctionAbstract {
 		set.add(OMCreator.createOMSTR("Test"));
 		set.add(OMCreator.createOMI(20));
 		List<Object> args = new ArrayList<Object>();
-		args.add(OMCreator.createOMA(OMSymbol.SET1_SET, set));
+		args.add(OMCreator.createOMA(OMSymbol.LIST1_LIST, set));
 		func.evaluate(args);
 		fail();
 	}

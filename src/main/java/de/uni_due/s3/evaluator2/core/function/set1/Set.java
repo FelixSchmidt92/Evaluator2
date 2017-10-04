@@ -15,14 +15,16 @@ import de.uni_due.s3.openmath.omutils.OMCreator;
  * set values could only occur ones!. We have to implement it this way,
  * otherwise we wouldn't be compatible with evaluator1
  * 
- * @author frichtscheid
+ * @author spobel, frichtscheid
  *
  */
 public class Set extends ConstructorFunction {
 
 	@Override
 	protected Object execute(List<Object> arguments) {
-		return OMCreator.createOMA(OMSymbol.SET1_SET, arguments);
+		//Wir erzeugen nur noch Listen, Sets sind im Evaluator nicht passend, 
+		//wir wollen immer vollständige Eingaben haben, Sets würden doppelte Elemente löschen
+		return OMCreator.createOMA(OMSymbol.LIST1_LIST, arguments);
 	}
 
 	@Override

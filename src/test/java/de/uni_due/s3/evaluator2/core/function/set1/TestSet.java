@@ -33,7 +33,7 @@ public class TestSet extends TestFunctionAbstract {
 		args.add(OMCreator.createOMI(20));
 		args.add(OMCreator.createOMI(30));
 		result = func.evaluate(args);
-		assertEquals(OMCreator.createOMA(OMSymbol.SET1_SET, args), result);
+		assertEquals(OMCreator.createOMA(OMSymbol.LIST1_LIST, args), result);
 	}
 
 	@Test
@@ -43,7 +43,7 @@ public class TestSet extends TestFunctionAbstract {
 		args.add(OMCreator.createOMF(20.3));
 		args.add(OMCreator.createOMF(30.12));
 		result = func.evaluate(args);
-		assertEquals(OMCreator.createOMA(OMSymbol.SET1_SET, args), result);
+		assertEquals(OMCreator.createOMA(OMSymbol.LIST1_LIST, args), result);
 	}
 
 	@Test
@@ -58,7 +58,7 @@ public class TestSet extends TestFunctionAbstract {
 		arguments.add(OMCreator.createOMA(OMSymbol.ARITH1_DIVIDE, args));
 		result = func.evaluate(arguments);
 		assertEquals(true, result instanceof OMA);
-		assertEquals(OMCreator.createOMA(OMSymbol.SET1_SET, arguments), result);
+		assertEquals(OMCreator.createOMA(OMSymbol.LIST1_LIST, arguments), result);
 	}
 
 	@Test
@@ -80,7 +80,7 @@ public class TestSet extends TestFunctionAbstract {
 
 	@Test
 	public void testSetIntegrationAsFunction() throws OpenMathException, EvaluatorException {
-		OMOBJ omobj = ExpressionParser.parse("set(1,2,3)", null, null);
+		OMOBJ omobj = ExpressionParser.parse("list(1,2,3)", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		List<Object> value = result.getOMA().getOmel();
 		assertEquals(OMCreator.createOMI(1), value.get(1));
@@ -108,9 +108,9 @@ public class TestSet extends TestFunctionAbstract {
 	
 	@Test
 	public void testSetRSyntax() throws EvaluatorException, OpenMathException {
-		OMOBJ result = Evaluator.evaluate("set(1,2,3)", null,null);
+		OMOBJ result = Evaluator.evaluate("list(1,2,3)", null,null);
 		String r = new OMToRVisitor().visit(result);
-		assertEquals("{1, 2, 3}",r);
+		assertEquals("list(1, 2, 3)",r);
 		
 	}
 }

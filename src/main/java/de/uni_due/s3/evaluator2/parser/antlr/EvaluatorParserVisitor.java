@@ -61,19 +61,19 @@ public interface EvaluatorParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitParenthesis(EvaluatorParser.ParenthesisContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code setInExpression}
-	 * labeled alternative in {@link EvaluatorParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitSetInExpression(EvaluatorParser.SetInExpressionContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code variable}
 	 * labeled alternative in {@link EvaluatorParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitVariable(EvaluatorParser.VariableContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code listInExpression}
+	 * labeled alternative in {@link EvaluatorParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitListInExpression(EvaluatorParser.ListInExpressionContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code exerciseVarName}
 	 * labeled alternative in {@link EvaluatorParser#expression}.
@@ -147,9 +147,9 @@ public interface EvaluatorParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitBinaryOperatorArithPoint(EvaluatorParser.BinaryOperatorArithPointContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link EvaluatorParser#set}.
+	 * Visit a parse tree produced by {@link EvaluatorParser#list}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSet(EvaluatorParser.SetContext ctx);
+	T visitList(EvaluatorParser.ListContext ctx);
 }

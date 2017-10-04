@@ -1,4 +1,4 @@
-package de.uni_due.s3.evaluator2.core.function.set_jack;
+package de.uni_due.s3.evaluator2.core.function.list_jack;
 
 import java.util.List;
 
@@ -7,14 +7,15 @@ import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
 
 /**
- * Implements a get Function for Set (List).
+ * Implements a get Function for List.
  * 
  * Returns element at index
  * 
  * @author spobel
  *
  */
-public class GetFromSet extends Function {
+public class GetFromList extends Function {
+	
 
 	@Override
 	protected Object execute(List<Object> arguments) throws EvaluatorException {
@@ -22,12 +23,12 @@ public class GetFromSet extends Function {
 		List<Object> list1 = getListSyntax(arguments.get(1));
 
 		if (list1.size() == 0) {
-			throw new FunctionInvalidArgumentException(this, "Set has to have at least one element.");
+			throw new FunctionInvalidArgumentException(this, "List has to have at least one element.");
 		}
 
 		if (list1.size() <= pos) {
 			throw new FunctionInvalidArgumentException(this,
-					"Second Argument of getFromSet is invalid. Not in Range of Set.");
+					"Second Argument of getFromList is invalid. Not in Range of List.");
 		}
 
 		return list1.get(pos);

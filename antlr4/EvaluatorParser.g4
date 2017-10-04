@@ -1,6 +1,6 @@
 parser grammar EvaluatorParser;
 
-@header{package de.uni_due.s3.evaluator.parser.antlr;
+@header{package de.uni_due.s3.evaluator2.parser.antlr;
 }
 
 options {
@@ -29,7 +29,7 @@ expression
 	| expression operator = binaryOperatorRelational expression #
 	binaryRelational
 	| expression operator = binaryOperatorBoolean expression # binaryBoolean
-	| set # setInExpression
+	| list # listInExpression
 	| value = Integer # integerValue
 	| value = Float # floatValue
 	| name = ExerciseVariable # exerciseVarName
@@ -88,13 +88,13 @@ binaryOperatorArithPoint
 	)
 ;
 
-set
+list
 :
-	SetOpen
+	ListOpen
 	(
 		arguments += expression
 		(
-			SetArgumentSeparator arguments += expression
+			ListArgumentSeparator arguments += expression
 		)*
-	)? SetClose
+	)? ListClose
 ;

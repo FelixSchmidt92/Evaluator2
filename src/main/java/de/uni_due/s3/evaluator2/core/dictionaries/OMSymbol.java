@@ -68,10 +68,16 @@ public class OMSymbol {
 	public static final OMS LINALG2_MATRIXROW = OMCreator.createOMS("linalg2", "matrixrow");
 	public static final OMS LINALG2_VECTOR = OMCreator.createOMS("linalg2", "vector");
 
+	public static final OMS LISTJACK_CHOOSEFROMCOMPLEMENT = OMCreator.createOMS("listJACK", "chooseFromComplement");
+	public static final OMS LISTJACK_GETFROMLIST = OMCreator.createOMS("listJACK", "getFromList");
+	public static final OMS LISTJACK_GETFROMORDEREDLIST = OMCreator.createOMS("listJACK", "getFromOrderedList");
+	public static final OMS LISTJACK_GETRANDOMFROMSET = OMCreator.createOMS("listJACK", "getRandomFromSet");
+
 	public static final OMS LIST1_LIST = OMCreator.createOMS("list1", "list");
 	
 	public static final OMS LIST2_APPEND = OMCreator.createOMS("list2", "append");
-
+	public static final OMS LIST2_SIZE = OMCreator.createOMS("list2", "size");
+	
 	public static final OMS LOGICJACK_IFTHENELSE = OMCreator.createOMS("logicJACK", "ifthenelse");
 
 	public static final OMS LOGIC1_AND = OMCreator.createOMS("logic1", "and");
@@ -123,12 +129,8 @@ public class OMSymbol {
 	public static final OMS ROUNDING1_ROUND = OMCreator.createOMS("rounding1", "round");
 	public static final OMS ROUNDING_JACK = OMCreator.createOMS("roundinJACK", "rint");
 
-	public static final OMS SETJACK_CHOOSEFROMCOMPLEMENT = OMCreator.createOMS("setJACK", "chooseFromComplement");
 	public static final OMS SETJACK_EQUALSET = OMCreator.createOMS("setJACK", "equalSet");
-	public static final OMS SETJACK_GETFROMORDEREDSET = OMCreator.createOMS("setJACK", "getFromOrderedSet");
-	public static final OMS SETJACK_GETFROMSET = OMCreator.createOMS("setJACK", "getFromSet");
-	public static final OMS SETJACK_GETRANDOMFROMSET = OMCreator.createOMS("setJACK", "getRandomFromSet");
-
+	
 	public static final OMS SET1_EMPTYSET = OMCreator.createOMS("set1", "emptyset");
 	public static final OMS SET1_SET = OMCreator.createOMS("set1", "set");
 	public static final OMS SET1_SIZE = OMCreator.createOMS("set1", "size");
