@@ -222,6 +222,7 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.LIST1_LIST, new List());
 		
 		functions.put(OMSymbol.LIST2_APPEND, new Append());
+		functions.put(OMSymbol.LIST2_SIZE, new de.uni_due.s3.evaluator2.core.function.list2.Size());
 		
 		functions.put(OMSymbol.MCJACK_MCINDEX, new MCIndex());
 		

@@ -92,7 +92,8 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("list", OMSymbol.LIST1_LIST);
 		
 		functionSymbolMap.put("appendToList", OMSymbol.LIST2_APPEND);
-
+		functionSymbolMap.put("sizeOfList", OMSymbol.LIST2_SIZE);
+		
 		functionSymbolMap.put("booleanand", OMSymbol.LOGIC1_AND);
 		functionSymbolMap.put("ifthenelse", OMSymbol.LOGICJACK_IFTHENELSE);
 		functionSymbolMap.put("booleannot", OMSymbol.LOGIC1_NOT);
@@ -141,7 +142,7 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("getRandomFromSet", OMSymbol.SETJACK_GETRANDOMFROMSET);
 		
 		functionSymbolMap.put("set", OMSymbol.SET1_SET);
-		functionSymbolMap.put("size", OMSymbol.SET1_SIZE);
+		functionSymbolMap.put("sizeOfSet", OMSymbol.SET1_SIZE);
 
 		functionSymbolMap.put("charAt", OMSymbol.STRINGJACK_CHARAT);
 		functionSymbolMap.put("compareTo", OMSymbol.STRINGJACK_COMPARETO);

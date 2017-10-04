@@ -68,7 +68,8 @@ public class OMSymbol {
 	public static final OMS LIST1_LIST = OMCreator.createOMS("list1", "list");
 	
 	public static final OMS LIST2_APPEND = OMCreator.createOMS("list2", "append");
-
+	public static final OMS LIST2_SIZE = OMCreator.createOMS("list2", "size");
+	
 	public static final OMS LOGICJACK_IFTHENELSE = OMCreator.createOMS("logicJACK", "ifthenelse");
 
 	public static final OMS LOGIC1_AND = OMCreator.createOMS("logic1", "and");

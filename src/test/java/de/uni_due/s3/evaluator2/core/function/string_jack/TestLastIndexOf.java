@@ -47,6 +47,13 @@ public class TestLastIndexOf extends TestFunctionAbstract {
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals(OMCreator.createOMI(3), result.getOMI());
 	}
+	
+	@Test
+	public void testLastIndexOfIntegration2() throws OpenMathException, EvaluatorException {
+		OMOBJ omobj = ExpressionParser.parse("lastIndexOf('Hello World!', 'o')", null, null);
+		OMOBJ result = OMExecutor.execute(omobj);
+		assertEquals(OMCreator.createOMI(7), result.getOMI());
+	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testLastIndexOfWithLessThanMinParam() throws OpenMathException, EvaluatorException {
