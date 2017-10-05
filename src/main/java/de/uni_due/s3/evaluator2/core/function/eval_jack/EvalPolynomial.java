@@ -38,11 +38,19 @@ public class EvalPolynomial extends Function {
 
 		String sageVar = Sage.getSagePreVariable(term + "; x;");
 
+		String[] varArray = sageVar.substring(5, sageVar.length()-3).split(" ");
+		
+		
+		
 		StringBuilder sb = new StringBuilder();
 		sb.append(sageVar);
-		sb.append("x =");
-		sb.append(value1);
-		sb.append(";(");
+		for(String var : varArray) {
+			sb.append(var + " =");
+			sb.append(value1);
+			sb.append(";");
+		}
+
+		sb.append("(");
 		sb.append(term);
 		sb.append(")");
 

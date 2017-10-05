@@ -244,7 +244,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 		String varName = var.substring(var.indexOf('=') + 1, var.indexOf(']')); // eg. a
 
 		// removes the OMOBJ-tags from the variable and returns its child
-		if (exerciseVariableMap.containsKey(varName)) {
+		if (exerciseVariableMap != null && exerciseVariableMap.containsKey(varName)) {
 			OMOBJ varOmobj = exerciseVariableMap.get(varName);
 			try {
 				return OMConverter.toElement(varOmobj);
@@ -271,7 +271,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 		int varNumber = Integer.parseInt(var.substring(var.indexOf('=') + 1, var.indexOf(']'))); // eg. 1
 
 		// removes the OMOBJ-tags from the variable and returns its child
-		if (fillInVariableMap.containsKey(varNumber)) {
+		if (fillInVariableMap !=  null && fillInVariableMap.containsKey(varNumber)) {
 			OMOBJ varOmobj = fillInVariableMap.get(varNumber);
 			try {
 				return OMConverter.toElement(varOmobj);

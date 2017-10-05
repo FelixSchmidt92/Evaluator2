@@ -54,7 +54,7 @@ public class TestEvalPolynomial extends TestFunctionAbstract {
 		args.add(OMCreator.createOMI(5));
 		Object result = func.evaluate(args);
 		assertEquals(OMConverter.toElement(OMConverter.toObject(
-				"<OMOBJ><OMA><OMS name=\"plus\" cd=\"arith1\"/><OMA><OMS name=\"times\" cd=\"arith1\"/><OMI>-5</OMI><OMV name=\"a\"/></OMA><OMI>31</OMI></OMA></OMOBJ>")),
+				"<OMOBJ><OMI>6</OMI></OMOBJ>")),
 				result);
 	}
 
@@ -77,7 +77,7 @@ public class TestEvalPolynomial extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testEvalTerm2Integration1() throws OpenMathException, EvaluatorException {
+	public void testEvalPolynomialIntegration1() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("evalpolynomial('x+x','1')", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals(OMCreator.createOMI(2), result.getOMI());
@@ -100,6 +100,6 @@ public class TestEvalPolynomial extends TestFunctionAbstract {
 						+ "<OMI>6</OMI>" + "</OMA></OMOBJ>");
 		args.add(arg1.getOMA());
 		args.add(OMCreator.createOMI(1));
-		assertEquals("var('a x');x =1.0;((((x)^(2) - 5 * a) + 6))", func.getPartialSageSyntax(args));
+		assertEquals("var('a x');a =1.0;x =1.0;((((x)^(2) - 5 * a) + 6))", func.getPartialSageSyntax(args));
 	}
 }

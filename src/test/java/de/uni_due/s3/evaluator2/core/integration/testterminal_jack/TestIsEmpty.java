@@ -37,7 +37,7 @@ public class TestIsEmpty extends TestIntegration {
 
 	@Test
 	public void testIsEmpty2() throws OpenMathException, EvaluatorException {
-		assertEquals(false, Evaluator.getBooleanResult("isEmpty('   ')", exerVar, fillIn));
+		assertEquals(true, Evaluator.getBooleanResult("isEmpty('   ')", exerVar, fillIn));
 	}
 
 	@Test

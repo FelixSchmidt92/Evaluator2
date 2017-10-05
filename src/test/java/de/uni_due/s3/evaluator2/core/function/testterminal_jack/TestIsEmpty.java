@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import de.uni_due.s3.evaluator2.Evaluator;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
@@ -13,6 +14,7 @@ import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OMF;
 import de.uni_due.s3.openmath.jaxb.OMI;
+import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.jaxb.OMSTR;
 import de.uni_due.s3.openmath.jaxb.OMV;
@@ -175,4 +177,25 @@ public class TestIsEmpty extends TestFunctionAbstract {
 		Object obj = func.evaluate(args);
 		assertEquals(OMSymbol.LOGIC1_FALSE, obj);
 	}
+
+	@Test
+	public void testIsEmptyIntegrationSpaceString() throws EvaluatorException, OpenMathException {
+		OMOBJ expected = new OMOBJ();
+		expected.setOMS(OMSymbol.LOGIC1_TRUE);
+
+		OMOBJ actual = Evaluator.evaluate("isEmpty('  ')", null, null);
+
+		assertEquals(expected, actual);
+	}
+
+	@Test
+	public void testIsEmptyIntegrationZeroLengthString() throws EvaluatorException, OpenMathException {
+		OMOBJ expected = new OMOBJ();
+		expected.setOMS(OMSymbol.LOGIC1_TRUE);
+
+		OMOBJ actual = Evaluator.evaluate("isEmpty('')", null, null);
+
+		assertEquals(expected, actual);
+	}
+
 }

@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import de.uni_due.s3.evaluator2.Evaluator;
 import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
@@ -74,6 +75,14 @@ public class TestUnaryMinus extends TestFunctionAbstract {
 		OMOBJ omobj = ExpressionParser.parse("-'test'", null, null);
 		OMExecutor.execute(omobj);
 		fail();
+	}
+	
+	@Test
+	public void testUnaryPlus() throws OpenMathException, EvaluatorException {
+		OMOBJ expected =new OMOBJ();
+		expected.setOMI(OMCreator.createOMI(1));
+		OMOBJ actual = Evaluator.evaluate("++++1", null, null);	
+		assertEquals(expected, actual);
 	}
 
 }
