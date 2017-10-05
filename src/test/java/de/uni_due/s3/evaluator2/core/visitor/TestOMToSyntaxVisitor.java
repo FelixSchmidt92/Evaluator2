@@ -1,4 +1,4 @@
-package de.uni_due.s3.evaluator2.core.syntaxvisitor;
+package de.uni_due.s3.evaluator2.core.visitor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,7 @@ import de.uni_due.s3.openmath.jaxb.OMV;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
-public class TestOMToCasVisitor {
+public class TestOMToSyntaxVisitor {
 
 	private class ImplVisitor extends OMToSyntaxVisitor<String> {
 

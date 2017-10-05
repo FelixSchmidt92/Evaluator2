@@ -48,7 +48,7 @@ public class TestExpressionToOpenMathVisitor{
 	
 	private static ExpressionToOpenMathVisitor visitor;
 	
-	//Retrying here 3 Times if a Test fails, caused by an invalid UTF-8 String
+	//Retrying here 3 Times if a Test fails, caused by an invalid UTF-8 String (see @Retry-Rule for some more Information)
 	@Rule public RetryRule retry = new RetryRule(3);
 	
 	private ParseTree parse(String text){
@@ -138,7 +138,7 @@ public class TestExpressionToOpenMathVisitor{
 		assertEquals(OMCreator.createOMA(OMSymbol.ARITH1_PLUS, plus), result);
 	}
 	
-	//@Ignore Hier wird getestet, ob ein zufällig generierte UTF8-String vom Parser akzeptiert wird (insb. wichtig wie bsplws. Linguisten)
+	//Here it tests random generated UTF-8 Strings, if the Parser AND Visitor can handle it like: ɐ, æ, ɕ, d͡  and many weird more!
 	@Test
 	public void testVisitTextONLYValue(){
 		for (int i = 0; i < 10000; i++){
@@ -152,6 +152,8 @@ public class TestExpressionToOpenMathVisitor{
 	
 	/**
 	 * @throws OpenMathException if Maps contains something wrong, which is defined here
+	 * 
+	 * Here we test, if the Parser and Visitor can handle Text-Values with Variables in it.
 	 */
 	@Test
 	public void testVisitTextWithPosAndVarValue() throws OpenMathException{
@@ -212,7 +214,7 @@ public class TestExpressionToOpenMathVisitor{
 	@Test
 	public void testVisitBinary(){
 		for (int i = 0; i < 10000; i++){
-			String[] binary = {"+", "-", "*", "/", "%",
+			String[] binary = {"+", "-", "*", "/", "%", "^",
 					"<", "<=", ">", ">=", 
 					"=", "==", "!=", "&&", "||"};
 			String getBinary = binary[new Random().nextInt(binary.length)];
@@ -230,6 +232,8 @@ public class TestExpressionToOpenMathVisitor{
 				oms = OMCreator.createOMS("arith1", "times");break;
 			case "/":
 				oms = OMCreator.createOMS("arith1", "divide");break;
+			case "^":
+				oms = OMCreator.createOMS("arith1", "power");break;
 			case "%":
 				oms = OMCreator.createOMS("integer1", "remainder");break;
 			case "<":
@@ -294,11 +298,29 @@ public class TestExpressionToOpenMathVisitor{
 		assertEquals(oma, obj);
 	}
 	
+	@Test
+	public void testVisitNestedInNestedFunction(){
+		Object obj = visitor.visit(parse("minus(1, plus(1, 2))"));
+		ArrayList<Object> omelPlus = new ArrayList<>();
+		omelPlus.add(OMCreator.createOMI(1));
+		omelPlus.add(OMCreator.createOMI(2));
+		
+		OMA omaPlus = OMCreator.createOMA(OMCreator.createOMS("arith1", "plus"), omelPlus);
+		
+		ArrayList<Object> omelMinus = new ArrayList<>();
+		omelMinus.add(OMCreator.createOMI(1));
+		omelMinus.add(omaPlus);
+		
+		OMA omaMinus = OMCreator.createOMA(OMCreator.createOMS("arith1", "minus"), omelMinus);
+		
+		assertEquals(omaMinus, obj);
+	}
+	
 
 	@Test
 	public void testVisitSet(){
-		//test if set accepts many different Set Combinations
-		for (int i = 0; i < 10000; i++){
+		//test if set/list accepts many different set/list Combinations
+		for (int i = 0; i < 1000; i++){
 
 			String builder = "{   ";
 			for (int j = 0; j < new Random().nextInt(50); j++){

@@ -1,4 +1,4 @@
-package de.uni_due.s3.evaluator2.core.syntaxvisitor;
+package de.uni_due.s3.evaluator2.core.visitor;
 
 import static org.junit.Assert.assertEquals;
 
