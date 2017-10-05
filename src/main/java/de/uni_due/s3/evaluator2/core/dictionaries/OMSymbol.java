@@ -31,8 +31,7 @@ public class OMSymbol {
 
 	public static final OMS CASJACK_EVALUATEINR = OMCreator.createOMS("casJACK", "evaluateInR");
 	public static final OMS CASJACK_EVALUATEINSAGE = OMCreator.createOMS("casJACK", "evaluateInSage");
-	public static final OMS CASJACK_EVALUATEINSYMJA = OMCreator.createOMS("casJACK", "evaluateInSymja");
-
+	
 	public static final OMS CALCULUS1_INT = OMCreator.createOMS("calculus1", "int");
 	public static final OMS CALCULUS1_DEFINT = OMCreator.createOMS("calculus1", "defint");
 

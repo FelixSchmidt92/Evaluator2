@@ -49,6 +49,7 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("plus", OMSymbol.ARITH1_PLUS);
 		functionSymbolMap.put("pow", OMSymbol.ARITH1_POWER);
 		functionSymbolMap.put("root", OMSymbol.ARITH1_ROOT);
+		//Deprecated
 		functionSymbolMap.put("sqrt", OMSymbol.ARITH1_ROOT);
 		functionSymbolMap.put("times", OMSymbol.ARITH1_TIMES);
 		functionSymbolMap.put("unaryminus", OMSymbol.ARITH1_UNARY_MINUS);
@@ -62,7 +63,6 @@ public class OMSEvaluatorSyntaxDictionary {
 
 		functionSymbolMap.put("evaluateInR", OMSymbol.CASJACK_EVALUATEINR);
 		functionSymbolMap.put("evaluateInSage", OMSymbol.CASJACK_EVALUATEINSAGE);
-		functionSymbolMap.put("evaluateInSymja", OMSymbol.CASJACK_EVALUATEINSYMJA);
 		
 		//TODO: should the integral calculus function be added?
 		
@@ -182,8 +182,10 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("isSet", OMSymbol.TESTTERMINALJACK_ISSET);
 
 		functionSymbolMap.put("toDegree", OMSymbol.TRANSCJACK_TODEGREE);
+		//Deprecated
 		functionSymbolMap.put("toDegrees", OMSymbol.TRANSCJACK_TODEGREE);
 		functionSymbolMap.put("toRadian", OMSymbol.TRANSCJACK_TORADIAN);
+		//Deprecated
 		functionSymbolMap.put("toRadians", OMSymbol.TRANSCJACK_TORADIAN);
 
 		functionSymbolMap.put("acos", OMSymbol.TRANSC1_ARCCOS);
