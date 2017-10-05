@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import de.uni_due.s3.evaluator2.Evaluator;
 import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
@@ -186,6 +187,18 @@ public class TestEqual extends TestFunctionAbstract {
 		args.add(OMCreator.createOMI(10));
 		args.add(OMCreator.createOMI(10));
 		assertEquals("10 == 10", func.getPartialSageSyntax(args));
+	}
+	
+	@Test
+	public void testEqualPalette() throws EvaluatorException, OpenMathException {
+		OMOBJ result = Evaluator.evaluate("palette(paletterow(equal()))", null, null);
+		String expected = "<OMOBJ><OMA>" + 
+				"<OMS name=\"palette\" cd=\"editor1\"/>" +
+				"<OMA>"	+
+					"<OMS name=\"palette_row\" cd=\"editor1\"/>" + 
+					"<OMS name=\"eq\" cd=\"relation1\"/>" + 
+				"</OMA></OMA></OMOBJ>";
+		assertEquals(expected, result.toString());
 	}
 
 }

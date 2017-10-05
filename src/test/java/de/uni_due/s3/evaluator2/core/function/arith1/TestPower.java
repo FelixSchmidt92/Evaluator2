@@ -72,15 +72,54 @@ public class TestPower extends TestFunctionAbstract {
 	}
 	
 	@Test
-	public void testPowerPalette() throws EvaluatorException, OpenMathException {
+	public void testPowerPaletteStandard() throws EvaluatorException, OpenMathException {
 		OMOBJ result = Evaluator.evaluate("palette(paletterow(power()))", null, null);
 		String expected = "<OMOBJ><OMA>" + 
 				"<OMS name=\"palette\" cd=\"editor1\"/>" +
 				"<OMA>"	+
 					"<OMS name=\"palette_row\" cd=\"editor1\"/>" + 
-					"<OMS name=\"power\" cd=\"arith1\"/>" + 
-				"</OMA></OMA></OMOBJ>";
-		assertEquals(expected, result.toString());
+					"<OMA>" + 
+						"<OMS name=\"power\" cd=\"arith1\"/>" + 
+						"<OMS name=\"input_box\" cd=\"editor1\"/>" +
+						"<OMS name=\"input_box\" cd=\"editor1\"/>" +
+					"</OMA>"+
+				"</OMA>"
+				+ "</OMA></OMOBJ>";
+		assertEquals(expected,result.toString());
 	}
+	@Test
+	public void testPowerPaletteOneArgument() throws EvaluatorException, OpenMathException {
+		OMOBJ result = Evaluator.evaluate("palette(paletterow(power(1)))", null, null);
+		String expected = "<OMOBJ><OMA>" + 
+				"<OMS name=\"palette\" cd=\"editor1\"/>" +
+				"<OMA>"	+
+					"<OMS name=\"palette_row\" cd=\"editor1\"/>" + 
+					"<OMA>" + 
+						"<OMS name=\"power\" cd=\"arith1\"/>" + 
+						"<OMS name=\"input_box\" cd=\"editor1\"/>" +
+						"<OMI>5</OMI>" +
+					"</OMA>"+
+				"</OMA>"
+				+ "</OMA></OMOBJ>";
+		assertEquals(expected,result.toString());
+	}
+	@Test
+	public void testPowerPaletteTwoArguments() throws EvaluatorException, OpenMathException {
+		OMOBJ result = Evaluator.evaluate("palette(paletterow(power(x,5)))", null, null);
+		String expected = "<OMOBJ><OMA>" + 
+				"<OMS name=\"palette\" cd=\"editor1\"/>" +
+				"<OMA>"	+
+					"<OMS name=\"palette_row\" cd=\"editor1\"/>" + 
+					"<OMA>" + 
+						"<OMS name=\"power\" cd=\"arith1\"/>" + 
+						"<OMS name=\"input_box\" cd=\"editor1\"/>" +
+						"<OMI>5</OMI>" +
+					"</OMA>"+
+				"</OMA>"
+				+ "</OMA></OMOBJ>";
+		assertEquals(expected,result.toString());
+	}
+	
+
 
 }

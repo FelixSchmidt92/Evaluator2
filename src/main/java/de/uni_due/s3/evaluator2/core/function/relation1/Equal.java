@@ -8,6 +8,7 @@ import de.uni_due.s3.evaluator2.core.function.BinaryFunction;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
+import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 
 /**
@@ -41,6 +42,11 @@ public class Equal extends BinaryFunction {
 			else
 				return OMSymbol.LOGIC1_FALSE;
 		}
+	}
+	
+	@Override
+	public Object generatePalette(List<Object> arguments) throws FunctionNotImplementedException {
+		return OMSymbol.RELATION1_EQ;
 	}
 
 	@Override

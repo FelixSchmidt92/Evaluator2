@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import de.uni_due.s3.evaluator2.Evaluator;
 import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
@@ -127,6 +128,18 @@ public class TestGreaterThan extends TestFunctionAbstract {
 		args.add(OMCreator.createOMI(10));
 		args.add(OMCreator.createOMI(9));
 		assertEquals("10 > 9", func.getPartialSageSyntax(args));
+	}
+	
+	@Test
+	public void testGreaterThanPalette() throws EvaluatorException, OpenMathException {
+		OMOBJ result = Evaluator.evaluate("palette(paletterow(greaterthan()))", null, null);
+		String expected = "<OMOBJ><OMA>" + 
+				"<OMS name=\"palette\" cd=\"editor1\"/>" +
+				"<OMA>"	+
+					"<OMS name=\"palette_row\" cd=\"editor1\"/>" + 
+					"<OMS name=\"gt\" cd=\"relation1\"/>" + 
+				"</OMA></OMA></OMOBJ>";
+		assertEquals(expected, result.toString());
 	}
 
 }

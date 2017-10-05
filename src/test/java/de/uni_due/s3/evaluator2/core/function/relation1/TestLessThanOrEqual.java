@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import de.uni_due.s3.evaluator2.Evaluator;
 import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
@@ -127,6 +128,18 @@ public class TestLessThanOrEqual extends TestFunctionAbstract {
 		args.add(OMCreator.createOMI(5));
 		args.add(OMCreator.createOMI(9));
 		assertEquals("5 <= 9", func.getPartialSageSyntax(args));
+	}
+	
+	@Test
+	public void testLessThanOrEqualPalette() throws EvaluatorException, OpenMathException {
+		OMOBJ result = Evaluator.evaluate("palette(paletterow(lessthanorequal()))", null, null);
+		String expected = "<OMOBJ><OMA>" + 
+				"<OMS name=\"palette\" cd=\"editor1\"/>" +
+				"<OMA>"	+
+					"<OMS name=\"palette_row\" cd=\"editor1\"/>" + 
+					"<OMS name=\"leq\" cd=\"relation1\"/>" + 
+				"</OMA></OMA></OMOBJ>";
+		assertEquals(expected, result.toString());
 	}
 
 }
