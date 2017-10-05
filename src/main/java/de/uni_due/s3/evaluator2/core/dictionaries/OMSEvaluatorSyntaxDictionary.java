@@ -55,8 +55,8 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("unaryminus", OMSymbol.ARITH1_UNARY_MINUS);
 		
 		//The evaluator has no command for these function, because the om-structure will be created with the formeleditor in jack
-		//functionSymbolMap.put("product", OMSymbol.ARITH1_PRODUCT);
-		//functionSymbolMap.put("sum", OMSymbol.ARITH1_SUM);
+		functionSymbolMap.put("product", OMSymbol.ARITH1_PRODUCT);
+		functionSymbolMap.put("sum", OMSymbol.ARITH1_SUM);
 		
 		functionSymbolMap.put("convertToBinary", OMSymbol.BINARYJACK_CONVERTTOBINARY);
 		functionSymbolMap.put("equalsBinary", OMSymbol.BINARYJACK_EQUALSBINARY);

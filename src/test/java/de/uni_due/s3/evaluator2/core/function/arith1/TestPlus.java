@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import de.uni_due.s3.evaluator2.Evaluator;
 import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
@@ -83,5 +84,17 @@ public class TestPlus extends TestFunctionAbstract {
 		OMOBJ omobj = ExpressionParser.parse("plus('test',17)", null, null);
 		OMExecutor.execute(omobj);
 		fail();
+	}
+	
+	@Test
+	public void testPlusPalette() throws EvaluatorException, OpenMathException {
+		OMOBJ result = Evaluator.evaluate("palette(paletterow(plus()))", null, null);
+		String expected = "<OMOBJ><OMA>" + 
+				"<OMS name=\"palette\" cd=\"editor1\"/>" +
+				"<OMA>"	+
+					"<OMS name=\"palette_row\" cd=\"editor1\"/>" + 
+					"<OMS name=\"plus\" cd=\"arith1\"/>" + 
+				"</OMA></OMA></OMOBJ>";
+		assertEquals(expected, result.toString());
 	}
 }

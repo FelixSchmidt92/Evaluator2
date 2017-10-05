@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import de.uni_due.s3.evaluator2.Evaluator;
 import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
@@ -68,6 +69,18 @@ public class TestPower extends TestFunctionAbstract {
 		args.add(OMCreator.createOMF(1.45));
 		args.add(OMCreator.createOMF(3));
 		assertEquals("(1.45)^(3)", func.getPartialSageSyntax(args));
+	}
+	
+	@Test
+	public void testPowerPalette() throws EvaluatorException, OpenMathException {
+		OMOBJ result = Evaluator.evaluate("palette(paletterow(power()))", null, null);
+		String expected = "<OMOBJ><OMA>" + 
+				"<OMS name=\"palette\" cd=\"editor1\"/>" +
+				"<OMA>"	+
+					"<OMS name=\"palette_row\" cd=\"editor1\"/>" + 
+					"<OMS name=\"power\" cd=\"arith1\"/>" + 
+				"</OMA></OMA></OMOBJ>";
+		assertEquals(expected, result.toString());
 	}
 
 }

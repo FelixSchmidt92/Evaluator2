@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import de.uni_due.s3.evaluator2.Evaluator;
 import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
@@ -87,6 +88,55 @@ public class TestRoot extends TestFunctionAbstract {
 		OMOBJ omobj = ExpressionParser.parse("root('test')", null, null);
 		OMExecutor.execute(omobj);
 		fail();
+	}
+	
+	@Test
+	public void testRootPaletteStandard() throws EvaluatorException, OpenMathException {
+		OMOBJ result = Evaluator.evaluate("palette(paletterow(root()))", null, null);
+		String expected = "<OMOBJ><OMA>" + 
+				"<OMS name=\"palette\" cd=\"editor1\"/>" +
+				"<OMA>"	+
+					"<OMS name=\"palette_row\" cd=\"editor1\"/>" + 
+					"<OMA>" + 
+						"<OMS name=\"root\" cd=\"arith1\"/>" + 
+						"<OMS name=\"input_box\" cd=\"editor1\"/>" +
+						"<OMS name=\"input_box\" cd=\"editor1\"/>" +
+					"</OMA>"+
+				"</OMA>"
+				+ "</OMA></OMOBJ>";
+		assertEquals(expected,result.toString());
+	}
+	@Test
+	public void testRootPaletteOneArgument() throws EvaluatorException, OpenMathException {
+		OMOBJ result = Evaluator.evaluate("palette(paletterow(root(1)))", null, null);
+		String expected = "<OMOBJ><OMA>" + 
+				"<OMS name=\"palette\" cd=\"editor1\"/>" +
+				"<OMA>"	+
+					"<OMS name=\"palette_row\" cd=\"editor1\"/>" + 
+					"<OMA>" + 
+						"<OMS name=\"root\" cd=\"arith1\"/>" + 
+						"<OMI>1</OMI>" +
+						"<OMS name=\"input_box\" cd=\"editor1\"/>" +
+					"</OMA>"+
+				"</OMA>"
+				+ "</OMA></OMOBJ>";
+		assertEquals(expected,result.toString());
+	}
+	@Test
+	public void testRootPaletteTwoArguments() throws EvaluatorException, OpenMathException {
+		OMOBJ result = Evaluator.evaluate("palette(paletterow(root(x,5)))", null, null);
+		String expected = "<OMOBJ><OMA>" + 
+				"<OMS name=\"palette\" cd=\"editor1\"/>" +
+				"<OMA>"	+
+					"<OMS name=\"palette_row\" cd=\"editor1\"/>" + 
+					"<OMA>" + 
+						"<OMS name=\"root\" cd=\"arith1\"/>" + 
+						"<OMS name=\"input_box\" cd=\"editor1\"/>" +
+						"<OMI>5</OMI>" +
+					"</OMA>"+
+				"</OMA>"
+				+ "</OMA></OMOBJ>";
+		assertEquals(expected,result.toString());
 	}
 
 }

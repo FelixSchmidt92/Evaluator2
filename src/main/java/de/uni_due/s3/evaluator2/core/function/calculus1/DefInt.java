@@ -28,7 +28,7 @@ public class DefInt extends Function {
 	@Override
 	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		// checking arguments
-		if (!OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.INTERVAL1_INTERVAL))
+		if (!OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.INTERVAL1_INTEGER_INTERVAL))
 			throw new FunctionInvalidArgumentTypeException(this, "first argument has to be an intervall");
 		if (!(arguments.get(1) instanceof OMBIND))
 			throw new FunctionInvalidArgumentTypeException(this, "there is no variable bound to the polynomial");

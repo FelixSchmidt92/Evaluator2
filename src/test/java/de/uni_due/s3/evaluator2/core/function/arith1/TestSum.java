@@ -116,4 +116,31 @@ public class TestSum extends TestFunctionAbstract{
 		String latex = Evaluator.getLaTeX(omobj);
 		assertEquals("\\sum_{2}^{5} {3 \\cdot x}",latex);
 	}
+	
+	@Test
+	public void testSumPalette() throws EvaluatorException, OpenMathException {
+		OMOBJ result = Evaluator.evaluate("palette(paletterow(sum()))", null, null);
+		String expected = "<OMOBJ><OMA>" + 
+				"<OMS name=\"palette\" cd=\"editor1\"/>" +
+				"<OMA>"	+
+					"<OMS name=\"palette_row\" cd=\"editor1\"/>" + 
+					"<OMA>" + 
+						"<OMS name=\"sum\" cd=\"arith1\"/>" + 
+						"<OMA>"+
+							"<OMS name=\"integer_interval\" cd=\"interval1\"/>"+
+							"<OMS name=\"input_box\" cd=\"editor1\"/>" +
+							"<OMS name=\"input_box\" cd=\"editor1\"/>" +
+						"</OMA>"+
+						"<OMBIND>"+
+							"<OMS name=\"lambda\" cd=\"fns1\"/>"+
+							"<OMBVAR>"+
+								"<OMV name=\"n\"/>"+
+							"</OMBVAR>"+
+							"<OMS name=\"input_box\" cd=\"editor1\"/>"+
+						"</OMBIND>"+
+					"</OMA>"+
+				"</OMA>"
+				+ "</OMA></OMOBJ>";
+		assertEquals(expected,result.toString());
+	}
 }
