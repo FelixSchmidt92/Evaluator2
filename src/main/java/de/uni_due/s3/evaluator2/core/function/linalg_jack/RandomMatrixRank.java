@@ -4,7 +4,6 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator2.sage.Sage;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
@@ -28,29 +27,7 @@ public class RandomMatrixRank extends Function {
 
 	@Override
 	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
-		String field = getStringSyntax(arguments.get(0));
-		Integer m = getIntegerSyntax(arguments.get(1));
-		Integer n = getIntegerSyntax(arguments.get(2));
-		Integer rank = getIntegerSyntax(arguments.get(3));
-
-		int maxMN = Math.max(m, n);
-		if (rank > maxMN) {
-			throw new FunctionInvalidArgumentException(this, "The third Argument is higher than (1) and (2)");
-		}
-
-		if (m < 0 || n < 0 || rank < 0) {
-			throw new FunctionInvalidArgumentException(this, "Every Integer of this Function has to be positive or 0");
-		}
-		if (arguments.size() == 4) {
-			return Sage.evaluateInCAS(
-					"sage.matrix.constructor.random_echelonizable_matrix(sage.matrix.matrix_space.MatrixSpace(" + field
-							+ ", " + m + ", " + n + "), rank=" + rank + ")");
-		} else {
-			return Sage.evaluateInCAS(
-					"sage.matrix.constructor.random_echelonizable_matrix(sage.matrix.matrix_space.MatrixSpace(" + field
-							+ ", " + m + ", " + n + "), rank=" + rank + ", upper_bound="
-							+ getSageSyntax(arguments.get(4)) + ")");
-		}
+		return Sage.evaluateInCAS(getPartialSageSyntax(arguments));
 	}
 
 	@Override
@@ -63,4 +40,24 @@ public class RandomMatrixRank extends Function {
 		return 5;
 	}
 
+	@Override
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
+		StringBuilder sb = new StringBuilder();
+		sb.append("sage.matrix.constructor.random_echelonizable_matrix(sage.matrix.matrix_space.MatrixSpace(");
+		sb.append(getSageSyntax(arguments.get(0)));// field
+		sb.append(", ");
+		sb.append(getSageSyntax(arguments.get(1)));// m
+		sb.append(", ");
+		sb.append(getSageSyntax(arguments.get(2)));// n
+		sb.append("), rank=");
+		sb.append(getSageSyntax(arguments.get(3)));// rank
+
+		if (arguments.size() == 5) {
+			sb.append(", upper_bound=");
+			sb.append(getSageSyntax(arguments.get(4)));// upperBound
+		}
+		sb.append(")");
+
+		return sb.toString();
+	}
 }

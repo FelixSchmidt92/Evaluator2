@@ -45,7 +45,7 @@ public class OMSymbol {
 	public static final OMS EVALJACK_EVALPOLYNOMIAL = OMCreator.createOMS("evalJACK", "evalpolynomial");
 	public static final OMS EVALJACK_EVALPOLYNOMIALCPLX = OMCreator.createOMS("evalJACK", "evalPolynomialCplx");
 	public static final OMS EVALJACK_EVALTERM2 = OMCreator.createOMS("evalJACK", "evalterm2");
-
+	
 	public static final OMS INTEGER1_REMAINDER = OMCreator.createOMS("integer1", "remainder");
 	public static final OMS INTEGER1_FACTORIAL = OMCreator.createOMS("integer1", "factorial");
 
@@ -133,6 +133,13 @@ public class OMSymbol {
 	public static final OMS SET1_EMPTYSET = OMCreator.createOMS("set1", "emptyset");
 	public static final OMS SET1_SET = OMCreator.createOMS("set1", "set");
 	public static final OMS SET1_SIZE = OMCreator.createOMS("set1", "size");
+	
+	public static final OMS SETNAME1_C = OMCreator.createOMS("setname1", "C");
+	public static final OMS SETNAME1_N = OMCreator.createOMS("setname1", "N");
+	public static final OMS SETNAME1_P = OMCreator.createOMS("setname1", "P");
+	public static final OMS SETNAME1_Q = OMCreator.createOMS("setname1", "Q");
+	public static final OMS SETNAME1_R = OMCreator.createOMS("setname1", "R");
+	public static final OMS SETNAME1_Z = OMCreator.createOMS("setname1", "Z");
 
 	public static final OMS STRINGJACK_CHARAT = OMCreator.createOMS("stringJACK", "charAt");
 	public static final OMS STRINGJACK_COMPARETO = OMCreator.createOMS("stringJACK", "compareTo");

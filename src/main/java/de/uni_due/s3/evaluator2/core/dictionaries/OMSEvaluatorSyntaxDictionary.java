@@ -109,6 +109,12 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("booleanor", OMSymbol.LOGIC1_OR);
 		
 		functionSymbolMap.put("mcindex", OMSymbol.MCJACK_MCINDEX);
+		
+		functionSymbolMap.put("rational", OMSymbol.NUMS1_RATIONAL);
+		functionSymbolMap.put("constE", OMSymbol.NUMS1_E);
+		functionSymbolMap.put("constI", OMSymbol.NUMS1_I);
+		functionSymbolMap.put("constInfinity", OMSymbol.NUMS1_INFINITY);
+		functionSymbolMap.put("constPi", OMSymbol.NUMS1_PI);
 
 		functionSymbolMap.put("countBasicOperations", OMSymbol.OPENMATHJACK_COUNTBASICOPERATIONS);
 		functionSymbolMap.put("countNodes", OMSymbol.OPENMATHJACK_COUNTNODES);
@@ -153,6 +159,13 @@ public class OMSEvaluatorSyntaxDictionary {
 		
 		functionSymbolMap.put("set", OMSymbol.LIST1_LIST);
 		functionSymbolMap.put("sizeOfSet", OMSymbol.SET1_SIZE);
+		
+		functionSymbolMap.put("cc", OMSymbol.SETNAME1_C);
+		functionSymbolMap.put("nn", OMSymbol.SETNAME1_N);
+		functionSymbolMap.put("pp", OMSymbol.SETNAME1_P);
+		functionSymbolMap.put("qq", OMSymbol.SETNAME1_Q);
+		functionSymbolMap.put("rr", OMSymbol.SETNAME1_R);
+		functionSymbolMap.put("zz", OMSymbol.SETNAME1_Z);
 
 		functionSymbolMap.put("charAt", OMSymbol.STRINGJACK_CHARAT);
 		functionSymbolMap.put("compareTo", OMSymbol.STRINGJACK_COMPARETO);
@@ -198,15 +211,6 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("tan", OMSymbol.TRANSC1_TAN);
 
 		functionSymbolMap.put("atan2", OMSymbol.TRANSC2_ARCTAN2);
-		
-		
-		
-		functionSymbolMap.put("rational", OMSymbol.NUMS1_RATIONAL);
-		functionSymbolMap.put("constE", OMSymbol.NUMS1_E);
-		functionSymbolMap.put("constI", OMSymbol.NUMS1_I);
-		functionSymbolMap.put("constInfinity", OMSymbol.NUMS1_INFINITY);
-		functionSymbolMap.put("constPi", OMSymbol.NUMS1_PI);
-		
 	}
 
 	/**

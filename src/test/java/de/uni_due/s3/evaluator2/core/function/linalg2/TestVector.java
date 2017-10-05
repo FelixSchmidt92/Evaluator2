@@ -85,11 +85,24 @@ public class TestVector extends TestFunctionAbstract {
 	public void testOMToLatexVisitorWithVector() throws OpenMathException, EvaluatorException {
 		OMOBJ obj = Evaluator.evaluate("vector(1,2,3,4)", new HashMap<>(), new HashMap<>());
 		String latex = new OMToLatexVisitor().visit(obj);
-		assertEquals("\\left(\\begin{array}{rrrr}" + 
+		assertEquals("\\left(\\begin{array}{r}" + 
 				"1\\\\" + 
 				"2\\\\" + 
 				"3\\\\" + 
 				"4\\\\" +
+				
+				
+				"\\end{array}\\right)", latex);
+	}
+	
+	@Test
+	public void testOMToLatexVisitorWithVector2() throws OpenMathException, EvaluatorException {
+		OMOBJ obj = Evaluator.evaluate("vector(123,2.023,[var=PI])", new HashMap<>(), new HashMap<>());
+		String latex = new OMToLatexVisitor().visit(obj);
+		assertEquals("\\left(\\begin{array}{r}" + 
+				"123\\\\" + 
+				"2.023\\\\" + 
+				"\\pi\\\\" + 
 				"\\end{array}\\right)", latex);
 	}
 }

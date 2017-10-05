@@ -91,6 +91,12 @@ import de.uni_due.s3.evaluator2.core.function.rounding1.Round;
 import de.uni_due.s3.evaluator2.core.function.rounding_jack.Rint;
 import de.uni_due.s3.evaluator2.core.function.set1.Size;
 import de.uni_due.s3.evaluator2.core.function.set_jack.EqualSet;
+import de.uni_due.s3.evaluator2.core.function.setname1.C;
+import de.uni_due.s3.evaluator2.core.function.setname1.N;
+import de.uni_due.s3.evaluator2.core.function.setname1.P;
+import de.uni_due.s3.evaluator2.core.function.setname1.Q;
+import de.uni_due.s3.evaluator2.core.function.setname1.R;
+import de.uni_due.s3.evaluator2.core.function.setname1.Z;
 import de.uni_due.s3.evaluator2.core.function.string_jack.CharAt;
 import de.uni_due.s3.evaluator2.core.function.string_jack.CompareTo;
 import de.uni_due.s3.evaluator2.core.function.string_jack.CompareToIgnoreCase;
@@ -279,6 +285,13 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.SETJACK_EQUALSET, new EqualSet());
 
 		functions.put(OMSymbol.SET1_SIZE, new Size());
+		
+		functions.put(OMSymbol.SETNAME1_C, new C());
+		functions.put(OMSymbol.SETNAME1_N, new N());
+		functions.put(OMSymbol.SETNAME1_P, new P());
+		functions.put(OMSymbol.SETNAME1_Q, new Q());
+		functions.put(OMSymbol.SETNAME1_R, new R());
+		functions.put(OMSymbol.SETNAME1_Z, new Z());
 
 		functions.put(OMSymbol.STRINGJACK_CHARAT, new CharAt());
 		functions.put(OMSymbol.STRINGJACK_COMPARETO, new CompareTo());

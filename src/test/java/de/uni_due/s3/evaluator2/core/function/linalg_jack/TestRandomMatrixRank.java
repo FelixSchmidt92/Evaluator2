@@ -87,4 +87,11 @@ public class TestRandomMatrixRank extends TestFunctionAbstract {
 
 		OMExecutor.execute(t);
 	}
+	
+	@Test
+	public void testRandomMatrixRankIntegration7Arguments() throws OpenMathException, EvaluatorException {
+		OMOBJ t = ExpressionParser.parse("randomMatrixRank(zz(), 2, 3, 2, 10)", null, null);
+
+		OMExecutor.execute(t);
+	}
 }

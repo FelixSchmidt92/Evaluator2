@@ -9,7 +9,7 @@ import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
+import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
@@ -53,7 +53,7 @@ public class TestRandomMatrixEigenvalue extends TestFunctionAbstract {
 		assertEquals(omobj3, obj);
 	}
 
-	@Test(expected = FunctionInvalidArgumentException.class)
+	@Test(expected = CasEvaluationException.class)
 	public void testRandomMatrixEigenValueCaseIntegration4() throws OpenMathException, EvaluatorException {
 		OMOBJ obj = ExpressionParser.parse("randomMatrixEigenvalue('QQ', 3, '[1,1,1]', 12)", null, null);
 		obj = OMExecutor.execute(obj);
@@ -61,4 +61,11 @@ public class TestRandomMatrixEigenvalue extends TestFunctionAbstract {
 		assertEquals(omobj3, obj);
 	}
 
+	@Test
+	public void testRandomMatrixEigenValueCaseIntegration5() throws OpenMathException, EvaluatorException {
+		OMOBJ obj = ExpressionParser.parse("randomMatrixEigenvalue(qq(), 3, list(1,1,1), list(1,1,1))", null, null);
+		obj = OMExecutor.execute(obj);
+
+		assertEquals(omobj3, obj);
+	}
 }

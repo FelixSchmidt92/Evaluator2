@@ -49,14 +49,12 @@ public class Vector extends ConstructorFunction {
 	@Override
 	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException {
 
-		String begin = "\\left(\\begin{array}{";
+		String begin = "\\left(\\begin{array}{r}";
 		String args = "";
 
 		for (int i = 0; i < arguments.size(); i++) {
-			begin += "r";
 			args += getLatexSyntax(arguments.get(i)) + "\\\\";
 		}
-		begin += "}";
 
 		return begin + args + "\\end{array}\\right)";
 	}

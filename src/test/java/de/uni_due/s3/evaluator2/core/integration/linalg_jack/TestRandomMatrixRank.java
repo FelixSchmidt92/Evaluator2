@@ -10,7 +10,7 @@ import org.junit.Test;
 import de.uni_due.s3.evaluator2.Evaluator;
 import de.uni_due.s3.evaluator2.core.integration.TestIntegration;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
+import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator2.exceptions.parser.ParserException;
 import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedExerciseVariableException;
@@ -66,7 +66,7 @@ public class TestRandomMatrixRank extends TestIntegration {
 		Evaluator.evaluate("randomMatrixRank(ab, ab, ab, ab)", randomMatrixRankExerciseVariableMap, randomMatrixRankFillInVariableMap);
 	}
 
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
+	@Test(expected = CasEvaluationException.class)
 	public void testRandomMatrixEigenValueWithEmptyStringArgument() throws EvaluatorException, OpenMathException {
 		Evaluator.evaluate("randomMatrixRank('', '', '', '')", randomMatrixRankExerciseVariableMap, randomMatrixRankFillInVariableMap);
 	}
