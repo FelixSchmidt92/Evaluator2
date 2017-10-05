@@ -71,6 +71,7 @@ public class TestPower extends TestFunctionAbstract {
 		assertEquals("(1.45)^(3)", func.getPartialSageSyntax(args));
 	}
 	
+	/*
 	@Test
 	public void testPowerPaletteStandard() throws EvaluatorException, OpenMathException {
 		OMOBJ result = Evaluator.evaluate("palette(paletterow(power()))", null, null);
@@ -119,7 +120,7 @@ public class TestPower extends TestFunctionAbstract {
 				+ "</OMA></OMOBJ>";
 		assertEquals(expected,result.toString());
 	}
-	
+	*/
 
 
 }
