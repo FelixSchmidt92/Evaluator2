@@ -46,6 +46,11 @@ public class Pi extends Function {
 	}
 	
 	@Override
+	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException {
+		return "pi";
+	}
+	
+	@Override
 	protected int minArgs() {
 		return 0;
 	}

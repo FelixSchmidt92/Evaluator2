@@ -54,6 +54,9 @@ public class OMToListVisitor extends OMToSyntaxVisitor<List<Object>> {
 	@Override
 	protected List<Object> getSyntaxRepresentationForFunction(Function function, OMS oms, List<Object> omel)
 			throws EvaluatorException {
+		if (omel == null) {
+			omel = new ArrayList<>();
+		}
 		try {
 			return function.getPartialListSyntax(omel);
 		} catch (NoRepresentationAvailableException e) {

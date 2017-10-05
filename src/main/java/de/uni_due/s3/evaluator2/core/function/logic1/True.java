@@ -51,6 +51,11 @@ public class True extends Function {
 	}
 	
 	@Override
+	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException {
+		return "TRUE";
+	}
+	
+	@Override
 	protected int minArgs() {
 		return 0;
 	}
