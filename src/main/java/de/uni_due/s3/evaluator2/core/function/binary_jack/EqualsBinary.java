@@ -20,23 +20,22 @@ import de.uni_due.s3.evaluator2.exceptions.openmath.InputMismatchException;
 public class EqualsBinary extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments)
-			throws EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException {
 		try {
 			String left = getStringSyntax(arguments.get(0)); // Normal Number
 			String right = getStringSyntax(arguments.get(1)); // Binary Number
-			
-			//If BOOl-Input then change these to 1 or 0
+
+			// If BOOl-Input then change these to 1 or 0
 			if (left.equals("True")) {
 				left = "1";
-			}else if (left.equals("False")) {
-					left = "1"; 
+			} else if (left.equals("False")) {
+				left = "0";
 			}
 			if (right.equals("True")) {
 				right = "1";
-			}else if (right.equals("False")) {
-				left = "1"; 
-		}
+			} else if (right.equals("False")) {
+				right = "0";
+			}
 			String leftBin = "";
 			if (left.contains(".") || left.contains(",")) {
 				leftBin = Long.toBinaryString(Double.doubleToRawLongBits(Double.parseDouble(left)));
@@ -59,10 +58,10 @@ public class EqualsBinary extends Function {
 			// replace leading -0's with -
 			leftBin = leftBin.replaceFirst("^-0+(?!$)", "-");
 			right = right.replaceFirst("^-0+(?!$)", "-");
-			
+
 			long l = Long.parseLong(leftBin, 2);
 			long r = Long.parseLong(right, 2);
-			
+
 			if (l == r) {
 				return OMSymbol.LOGIC1_TRUE;
 			}

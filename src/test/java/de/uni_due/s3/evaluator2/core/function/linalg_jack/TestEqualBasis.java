@@ -120,4 +120,12 @@ public class TestEqualBasis extends TestFunctionAbstract {
 		OMExecutor.execute(omobj);
 		fail();
 	}
+	
+	@Test
+	public void testEqualBasisIntegration4() throws OpenMathException, EvaluatorException {
+		OMOBJ omobj = ExpressionParser
+				.parse("equalBasis(set(vector(1,1,0), vector(0,1,1)), set(vector(1,1,0), vector(0,1,1)), 3)", null, null);
+		OMOBJ result = OMExecutor.execute(omobj);
+		assertEquals(OMSymbol.LOGIC1_TRUE, result.getOMS());
+	}
 }
