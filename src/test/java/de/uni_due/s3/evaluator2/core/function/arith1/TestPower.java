@@ -71,10 +71,10 @@ public class TestPower extends TestFunctionAbstract {
 		assertEquals("(1.45)^(3)", func.getPartialSageSyntax(args));
 	}
 	
-	/*
+	
 	@Test
 	public void testPowerPaletteStandard() throws EvaluatorException, OpenMathException {
-		OMOBJ result = Evaluator.evaluate("palette(paletterow(power()))", null, null);
+		OMOBJ result = Evaluator.evaluate("palette(paletterow(pow()))", null, null);
 		String expected = "<OMOBJ><OMA>" + 
 				"<OMS name=\"palette\" cd=\"editor1\"/>" +
 				"<OMA>"	+
@@ -90,15 +90,15 @@ public class TestPower extends TestFunctionAbstract {
 	}
 	@Test
 	public void testPowerPaletteOneArgument() throws EvaluatorException, OpenMathException {
-		OMOBJ result = Evaluator.evaluate("palette(paletterow(power(1)))", null, null);
+		OMOBJ result = Evaluator.evaluate("palette(paletterow(pow(1)))", null, null);
 		String expected = "<OMOBJ><OMA>" + 
 				"<OMS name=\"palette\" cd=\"editor1\"/>" +
 				"<OMA>"	+
 					"<OMS name=\"palette_row\" cd=\"editor1\"/>" + 
 					"<OMA>" + 
 						"<OMS name=\"power\" cd=\"arith1\"/>" + 
+						"<OMI>1</OMI>" + 
 						"<OMS name=\"input_box\" cd=\"editor1\"/>" +
-						"<OMI>5</OMI>" +
 					"</OMA>"+
 				"</OMA>"
 				+ "</OMA></OMOBJ>";
@@ -106,7 +106,7 @@ public class TestPower extends TestFunctionAbstract {
 	}
 	@Test
 	public void testPowerPaletteTwoArguments() throws EvaluatorException, OpenMathException {
-		OMOBJ result = Evaluator.evaluate("palette(paletterow(power(x,5)))", null, null);
+		OMOBJ result = Evaluator.evaluate("palette(paletterow(pow(x,5)))", null, null);
 		String expected = "<OMOBJ><OMA>" + 
 				"<OMS name=\"palette\" cd=\"editor1\"/>" +
 				"<OMA>"	+
@@ -120,7 +120,7 @@ public class TestPower extends TestFunctionAbstract {
 				+ "</OMA></OMOBJ>";
 		assertEquals(expected,result.toString());
 	}
-	*/
+	
 
 
 }

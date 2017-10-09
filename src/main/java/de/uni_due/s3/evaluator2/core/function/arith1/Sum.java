@@ -3,8 +3,6 @@ package de.uni_due.s3.evaluator2.core.function.arith1;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.JAXBException;
-
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
@@ -18,7 +16,6 @@ import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OMBIND;
 import de.uni_due.s3.openmath.jaxb.OMBVAR;
 import de.uni_due.s3.openmath.jaxb.OMV;
-import de.uni_due.s3.openmath.omutils.OMConverter;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.openmath.omutils.OpenMathException;

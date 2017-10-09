@@ -73,7 +73,7 @@ public class Power extends BinaryFunction {
 		 }
 		}
 		
-		return OMCreator.createOMA(OMSymbol.ARITH1_ROOT, args);
+		return OMCreator.createOMA(OMSymbol.ARITH1_POWER, args);
 	}
 
 	@Override
