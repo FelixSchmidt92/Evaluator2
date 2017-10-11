@@ -51,7 +51,7 @@ public class TestIntegrate extends TestFunctionAbstract {
 		List<Object> args = new ArrayList<Object>();
 		OMOBJ term = OMConverter.toObject(
 				"<OMOBJ><OMA>" + "<OMS cd=\"arith1\" name=\"plus\"/>" + "<OMA>" + "<OMS cd=\"arith1\" name=\"times\"/>"
-						+ "<OMI>2</OMI>" + "<OMV name=\"x\"/>" + "</OMA>" + "<OMI>v</OMI>" + "</OMA></OMOBJ>");
+						+ "<OMI>2</OMI>" + "<OMV name=\"x\"/>" + "</OMA>" + "<OMV name=\"v\"/>" + "</OMA></OMOBJ>");
 		args.add(term.getOMA());
 		args.add(OMCreator.createOMV("x"));
 

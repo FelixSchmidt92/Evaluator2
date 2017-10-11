@@ -66,7 +66,7 @@ public class TestEvalTerm2 extends TestFunctionAbstract {
 				.toObject("<OMOBJ><OMA><OMS cd=\"arith1\" name=\"plus\"/>" + "<OMA><OMS cd =\"arith1\" name=\"minus\"/>"
 						+ "<OMA><OMS cd=\"arith1\" name=\"power\" /><OMV name=\"x\"/><OMI>2</OMI></OMA>"
 						+ "<OMA><OMS cd=\"arith1\" name=\"times\" /><OMI>5</OMI><OMV name=\"a\"/></OMA>" + "</OMA>"
-						+ "<OMI>b</OMI>" + "</OMA></OMOBJ>");
+						+ "<OMV name=\"b\"/>" + "</OMA></OMOBJ>");
 		args.add(arg1.getOMA());
 		args.add(OMCreator.createOMI(2));
 		args.add(OMCreator.createOMI(-12));

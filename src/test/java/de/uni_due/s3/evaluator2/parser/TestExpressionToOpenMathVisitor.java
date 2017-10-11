@@ -97,11 +97,10 @@ public class TestExpressionToOpenMathVisitor{
 	public void testVisitIntegerValue(){
 		for (int i = 0; i < 1000; i++){
 			String val = gen.genRandomIntegerValue(9, null);
-			int t = Integer.parseInt(val);
 			
 			OMI omi = (OMI) visitor.visit(parse(val));
 			
-			assertEquals(String.valueOf(t), omi.getValue());
+			assertEquals(val, omi.getValue());
 		}
 	}
 	

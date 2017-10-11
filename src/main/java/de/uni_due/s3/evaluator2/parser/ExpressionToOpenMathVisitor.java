@@ -315,7 +315,12 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	@Override
 	public OMI visitIntegerValue(IntegerValueContext ctx) {
 		try {
-			return OMCreator.createOMI(Integer.parseInt(ctx.value.getText()));
+			//Check if parasable
+			Integer.parseInt(ctx.value.getText());
+			
+			OMI omi = new OMI();
+			omi.setValue(ctx.value.getText());
+			return omi;
 		} catch (NumberFormatException e) {
 			// fails converting to Integer by : "123456789123456789" -> in short
 			// by real high or low Numbers
