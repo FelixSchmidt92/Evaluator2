@@ -24,7 +24,7 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * This is the Evaluator. With This Class you can evaluate and get a result form
- * the Evaluator. 
+ * the Evaluator.
  * 
  * @author dlux,frichtscheid,spobel
  *
@@ -33,10 +33,11 @@ public class Evaluator {
 
 	private Evaluator() {
 	}
-	
+
 	/**
 	 * Initialize connections to R & Sage Server. This Method has to be called once!
-	 * If the connections aren't initialized, methods like evaluateInR, evaluateInSage can't work
+	 * If the connections aren't initialized, methods like evaluateInR,
+	 * evaluateInSage can't work
 	 * 
 	 * @param rConnections
 	 * @param sageConnections
@@ -45,11 +46,17 @@ public class Evaluator {
 		Sage.init(sageConnections);
 		R.init(rConnections);
 	}
-	
+
 	public static boolean getBooleanResult(String expression, HashMap<String, OMOBJ> exerciseVariableMap,
 			HashMap<Integer, OMOBJ> fillInVariableMap) throws EvaluatorException, OpenMathException {
 		OMOBJ result = evaluate(expression, exerciseVariableMap, fillInVariableMap);
-		return (result.getOMS() != null && result.getOMS().equals(OMSymbol.LOGIC1_TRUE));
+		if (result.getOMS() != null && result.getOMS().equals(OMSymbol.LOGIC1_TRUE)) {
+			return true;
+		} else if (result.getOMI() != null && result.getOMI().getValue().equals("1")) { // 1 ist auch True
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -74,9 +81,9 @@ public class Evaluator {
 			HashMap<Integer, OMOBJ> fillInVariableMap) throws EvaluatorException, OpenMathException {
 		OMOBJ result = evaluate(expression, exerciseVariableMap, fillInVariableMap);
 		result = evaluate(result);
-		try {	
+		try {
 			return new OMToDoubleVisitor().visit(result);
-		}catch (NoRepresentationAvailableException e){
+		} catch (NoRepresentationAvailableException e) {
 			throw new FunctionException("Error converting result into Double.", e);
 		}
 	}
@@ -98,7 +105,7 @@ public class Evaluator {
 	 */
 	public static OMOBJ evaluate(String expression, HashMap<String, OMOBJ> exerciseVariableMap,
 			HashMap<Integer, OMOBJ> fillInVariableMap) throws EvaluatorException, OpenMathException {
-		
+
 		OMOBJ omobj = ExpressionParser.parse(expression, exerciseVariableMap, fillInVariableMap);
 		return OMExecutor.execute(omobj);
 	}
@@ -118,9 +125,10 @@ public class Evaluator {
 	public static OMOBJ evaluate(OMOBJ omobj) throws EvaluatorException, OpenMathException {
 		return OMExecutor.execute(omobj);
 	}
-	
+
 	/**
 	 * Converts a OpenMath-Object into latex
+	 * 
 	 * @param omobj
 	 * @return latex
 	 * @throws EvaluatorException
@@ -128,10 +136,10 @@ public class Evaluator {
 	public static String getLaTeX(OMOBJ omobj) throws EvaluatorException {
 		return new OMToLatexVisitor().visit(omobj);
 	}
-	
-	
+
 	/**
 	 * Converts a OpenMath-Object into R Syntax
+	 * 
 	 * @param omobj
 	 * @return r-syntax
 	 * @throws EvaluatorException
