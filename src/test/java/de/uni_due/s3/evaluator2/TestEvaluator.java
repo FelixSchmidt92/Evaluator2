@@ -58,4 +58,6 @@ public class TestEvaluator extends TestFunctionAbstract{
 		OMOBJ result = Evaluator.evaluate("evaluateInSage('10')", exerciseVariableMap, fillInVariableMap);
 		Assert.assertEquals(OMCreator.createOMI(10),result.getOMI());
 	}
+	
+	
 }

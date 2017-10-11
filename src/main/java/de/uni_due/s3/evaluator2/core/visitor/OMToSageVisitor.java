@@ -24,7 +24,8 @@ public class OMToSageVisitor extends OMToSyntaxVisitor<String> {
 
 	@Override
 	protected String visit(OMI omi) {
-		return omi.getValue();
+		//remove leading, this might result in Error in Sage (Sage thinks its octaval)
+		return String.valueOf(Integer.valueOf(omi.getValue()));
 	}
 
 	@Override
