@@ -23,7 +23,7 @@ public class Rational extends Function {
 
 	@Override
 	public Boolean getPartialBooleanSyntax(List<Object> arguments) throws EvaluatorException {
-		return true;
+		return getBooleanSyntax(arguments.get(0));
 	}
 
 	@Override

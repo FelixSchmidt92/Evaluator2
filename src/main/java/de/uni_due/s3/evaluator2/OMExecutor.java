@@ -9,6 +9,8 @@ import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
+import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedException;
+import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedRuntimeException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
@@ -101,7 +103,14 @@ public class OMExecutor {
 	 */
 	private static Object execute(OMA oma) throws EvaluatorException, OpenMathException {
 		List<Object> omel = oma.getOmel();
-		Function function = OMSFunctionDictionary.getInstance().getFunction((OMS) omel.get(0));
+		
+		Function function = null;
+		try { // A Runtime-Exception can be thrown, by using getFunction
+		function = OMSFunctionDictionary.getInstance().getFunction((OMS) omel.get(0));
+		}catch (FunctionNotImplementedRuntimeException er){
+			throw new FunctionNotImplementedException(er.getMessage());
+		}
+		
 		List<Object> arguments = new ArrayList<Object>(omel.size() - 1);
 
 		for (int i = 0; i < omel.size() - 1; i++) {
