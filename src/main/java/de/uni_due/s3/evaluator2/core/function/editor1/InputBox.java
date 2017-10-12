@@ -7,7 +7,20 @@ import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
-public class InputBox extends Function{
+/**
+ * This is a "pseudo"-Terminal
+ * 
+ * In The Editor in Jack2, an empty Input can send to the Evaluator as an OMOBJ.
+ * This is a useless Terminal, which cannot be executed! Executing results in a
+ * FunctionException.
+ * 
+ * However a Rep. is needed for this "pseudo"-Terminal, because Jack2 tries to
+ * represent this at the SolutionList. (Jack2 also tries to execute this)  
+ * 
+ * @author dlux
+ *
+ */
+public class InputBox extends Function {
 
 	@Override
 	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
