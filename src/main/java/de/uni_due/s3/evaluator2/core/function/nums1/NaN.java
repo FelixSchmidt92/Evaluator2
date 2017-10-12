@@ -36,6 +36,11 @@ public class NaN extends Function {
 	}
 	
 	@Override
+	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException {
+		return "NaN";
+	}
+	
+	@Override
 	protected int minArgs() {
 		return 0;
 	}

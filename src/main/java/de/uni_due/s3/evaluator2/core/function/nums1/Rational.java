@@ -36,7 +36,7 @@ public class Rational extends Function {
 
 	@Override
 	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException {
-		return "\\frac{" + arguments.get(0) + "}{" + arguments.get(1) + "}";
+		return "\\frac{" + getLatexSyntax(arguments.get(0)) + "}{" + getLatexSyntax(arguments.get(1)) + "}";
 	}
 
 	@Override

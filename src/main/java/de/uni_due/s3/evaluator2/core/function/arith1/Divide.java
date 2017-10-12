@@ -75,10 +75,8 @@ public class Divide extends BinaryFunction {
 	}
 	
 	@Override
-	public String getPartialLatexSyntax(List<Object> arguments)
-			throws EvaluatorException {
-
-		return "\\frac{"+arguments.get(0) + "}{" + arguments.get(1)+"}";
+	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException {
+		return "\\frac{" + getLatexSyntax(arguments.get(0)) + "}{" + getLatexSyntax(arguments.get(1)) + "}";
 	}
 
 	@Override
