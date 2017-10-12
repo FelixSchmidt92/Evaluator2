@@ -25,6 +25,8 @@ public class IsPolynomial extends Function {
 
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionInvalidArgumentTypeException {
+		
+		
 		if (arguments.get(0) instanceof OMSTR || arguments.get(1) instanceof OMSTR ) {
 			throw new FunctionInvalidArgumentTypeException("(0)Polynom, (1)Variable");
 		}

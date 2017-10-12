@@ -107,6 +107,9 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("ifthenelse", OMSymbol.LOGICJACK_IFTHENELSE);
 		functionSymbolMap.put("booleannot", OMSymbol.LOGIC1_NOT);
 		functionSymbolMap.put("booleanor", OMSymbol.LOGIC1_OR);
+		functionSymbolMap.put("constTrue", OMSymbol.LOGIC1_TRUE);
+		functionSymbolMap.put("constFalse", OMSymbol.LOGIC1_FALSE);
+		
 		
 		functionSymbolMap.put("mcindex", OMSymbol.MCJACK_MCINDEX);
 		

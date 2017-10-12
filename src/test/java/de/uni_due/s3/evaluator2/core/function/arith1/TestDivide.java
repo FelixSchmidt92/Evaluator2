@@ -97,7 +97,7 @@ public class TestDivide extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testMinusWithWrongArguments() throws OpenMathException, EvaluatorException {
+	public void testDivideWithWrongArguments() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("10/'test'", null, null);
 		OMExecutor.execute(omobj);
 		fail();
@@ -114,5 +114,18 @@ public class TestDivide extends TestFunctionAbstract {
 				"</OMA></OMA></OMOBJ>";
 		assertEquals(expected, result.toString());
 	}
+	
+	
+	@Test
+	public void testDivideLatex() throws EvaluatorException {
+		ArrayList<Object> args = new ArrayList<>();
+		args.add(OMCreator.createOMF(1.2));
+		args.add(OMCreator.createOMI(5));
+		
+		String result = func.getPartialLatexSyntax(args);
+		
+		assertEquals("\\frac{1.2}{5}", result);
+	}
+	
 
 }
