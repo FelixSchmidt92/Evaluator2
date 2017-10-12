@@ -10,6 +10,8 @@ import de.uni_due.s3.evaluator2.exceptions.cas.CasException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
+import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedException;
+import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedRuntimeException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OME;
@@ -150,7 +152,12 @@ public abstract class OMToSyntaxVisitor<T> {
 	 * @throws NoRepresentationAvailableException
 	 */
 	private T visit(OMS oms) throws EvaluatorException {
-		Function function = OMSFunctionDictionary.getInstance().getFunction(oms);
+		Function function = null;
+		try {
+		function = OMSFunctionDictionary.getInstance().getFunction(oms);
+		}catch (FunctionNotImplementedRuntimeException er){
+			throw new FunctionNotImplementedException(er.getMessage());
+		}
 		return getSyntaxRepresentationForFunction(function, oms, null);
 	}
 
@@ -211,7 +218,12 @@ public abstract class OMToSyntaxVisitor<T> {
 
 		OMS oms = (OMS) oma.getOmel().get(0); // First element of OMA is always
 												// an OMS
-		Function function = OMSFunctionDictionary.getInstance().getFunction(oms);
+		Function function = null;
+		try {
+		function = OMSFunctionDictionary.getInstance().getFunction(oms);
+		}catch (FunctionNotImplementedRuntimeException er){
+			throw new FunctionNotImplementedException(er.getMessage());
+		}
 		// Get function
 
 		function.argsBetweenMinMax(omel); // Check for Correct amount of

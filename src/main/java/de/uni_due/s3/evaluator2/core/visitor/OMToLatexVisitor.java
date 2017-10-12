@@ -8,6 +8,8 @@ import de.uni_due.s3.evaluator2.core.dictionaries.OMSFunctionDictionary;
 import de.uni_due.s3.evaluator2.core.function.BinaryFunction;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
+import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedException;
+import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedRuntimeException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OME;
@@ -129,7 +131,13 @@ public class OMToLatexVisitor extends OMToSyntaxVisitor<String> {
 			OMA child = (OMA) obj;
 			List<Object> childOmel = new ArrayList<Object>(child.getOmel().size() - 1);
 			OMS childOMS = (OMS) child.getOmel().get(0);
-			Function childFunc = OMSFunctionDictionary.getInstance().getFunction(childOMS);
+			
+			Function childFunc = null;
+			try {
+			childFunc = OMSFunctionDictionary.getInstance().getFunction(childOMS);
+			}catch (FunctionNotImplementedRuntimeException er){
+				throw new FunctionNotImplementedException(er.getMessage());
+			}
 
 			for (int i = 1; i < child.getOmel().size(); i++) {
 				childOmel.add(visit(child.getOmel().get(i)));

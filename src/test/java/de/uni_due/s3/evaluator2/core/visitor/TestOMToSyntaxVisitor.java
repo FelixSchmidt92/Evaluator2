@@ -119,4 +119,11 @@ public class TestOMToSyntaxVisitor {
 		vis.visit(omobj);
 		vis.visit(new OMOBJ());
 	}
+	
+	
+	
+	@Test(expected = EvaluatorException.class)
+	public void testVisitNonExisitngFunction() throws EvaluatorException {
+		vis.visit(OMCreator.createOMS("NonExisitingCD", "NonExisitingFunction"));
+	}
 }
