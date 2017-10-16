@@ -77,14 +77,6 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 
 		if (exerciseVariableMap != null) {
 			this.exerciseVariableMap = exerciseVariableMap;
-
-			OMOBJ pi = new OMOBJ();
-			pi.setOMS(OMSymbol.NUMS1_PI);
-			exerciseVariableMap.put("PI", pi);
-
-			OMOBJ e = new OMOBJ();
-			e.setOMS(OMSymbol.NUMS1_E);
-			exerciseVariableMap.put("E", e);
 		} else {
 			exerciseVariableMap = new HashMap<>();
 		}
@@ -243,8 +235,12 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 		String var = ctx.name.getText(); // eg. [var=a]
 		String varName = var.substring(var.indexOf('=') + 1, var.indexOf(']')); // eg. a
 
-		// removes the OMOBJ-tags from the variable and returns its child
-		if (exerciseVariableMap != null && exerciseVariableMap.containsKey(varName)) {
+		if (varName.equals("E")) {
+			return OMSymbol.NUMS1_E;
+		} else if (varName.equals("PI")) {
+			return OMSymbol.NUMS1_PI;
+		} else if (exerciseVariableMap != null && exerciseVariableMap.containsKey(varName)) {
+			// removes the OMOBJ-tags from the variable and returns its child
 			OMOBJ varOmobj = exerciseVariableMap.get(varName);
 			try {
 				return OMConverter.toElement(varOmobj);
