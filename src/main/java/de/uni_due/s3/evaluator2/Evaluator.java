@@ -6,6 +6,7 @@ import java.util.List;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.visitor.OMToDoubleVisitor;
 import de.uni_due.s3.evaluator2.core.visitor.OMToLatexVisitor;
+import de.uni_due.s3.evaluator2.core.visitor.OMToStringVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
@@ -137,6 +138,17 @@ public class Evaluator {
 		return new OMToLatexVisitor().visit(omobj);
 	}
 
+	/**
+	 * Converts a OpenMath-Object into String
+	 * 
+	 * @param omobj
+	 * @return string
+	 * @throws EvaluatorException
+	 */
+	public static String getString(OMOBJ omobj) throws EvaluatorException {
+		return new OMToStringVisitor().visit(omobj);
+	}
+	
 	/**
 	 * Converts a OpenMath-Object into R Syntax
 	 * 
