@@ -20,11 +20,17 @@ public class IsNaturalNumber extends Function {
 	@Override
 	protected Object execute(List<Object> arguments) throws EvaluatorException {
 		try {
-			getIntegerSyntax(arguments.get(0));
+			Integer toTest = getIntegerSyntax(arguments.get(0));
+			if (toTest < 0) return OMSymbol.LOGIC1_FALSE;
 		} catch (FunctionInvalidArgumentTypeException e) {
 			return OMSymbol.LOGIC1_FALSE;
 		}
 		return OMSymbol.LOGIC1_TRUE;
+	}
+	
+	@Override
+	public boolean argumentsShouldBeEvaluated() {
+		return false;
 	}
 
 	@Override

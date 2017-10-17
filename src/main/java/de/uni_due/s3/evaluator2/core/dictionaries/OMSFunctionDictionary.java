@@ -118,6 +118,7 @@ import de.uni_due.s3.evaluator2.core.function.string_jack.ToUpperCase;
 import de.uni_due.s3.evaluator2.core.function.string_jack.Trim;
 import de.uni_due.s3.evaluator2.core.function.testterminal_jack.IsEmpty;
 import de.uni_due.s3.evaluator2.core.function.testterminal_jack.IsFraction;
+import de.uni_due.s3.evaluator2.core.function.testterminal_jack.IsIntegerNumber;
 import de.uni_due.s3.evaluator2.core.function.testterminal_jack.IsNaturalNumber;
 import de.uni_due.s3.evaluator2.core.function.testterminal_jack.IsPolynomial;
 import de.uni_due.s3.evaluator2.core.function.testterminal_jack.IsRationalNumber;
@@ -316,6 +317,7 @@ public class OMSFunctionDictionary {
 
 		functions.put(OMSymbol.TESTTERMINALJACK_ISEMPTY, new IsEmpty());
 		functions.put(OMSymbol.TESTTERMINALJACK_ISFRACTION, new IsFraction());
+		functions.put(OMSymbol.TESTTERMINALJACK_ISINTEGERNUMBER, new IsIntegerNumber());
 		functions.put(OMSymbol.TESTTERMINALJACK_ISNATURALNUMBER, new IsNaturalNumber());
 		functions.put(OMSymbol.TESTTERMINALJACK_ISPOLYNOMIAL, new IsPolynomial());
 		functions.put(OMSymbol.TESTTERMINALJACK_ISRATIONALNUMBER, new IsRationalNumber());

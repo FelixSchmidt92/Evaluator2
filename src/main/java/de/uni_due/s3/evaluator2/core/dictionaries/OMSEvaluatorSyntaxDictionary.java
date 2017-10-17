@@ -190,6 +190,7 @@ public class OMSEvaluatorSyntaxDictionary {
 
 		functionSymbolMap.put("isEmpty", OMSymbol.TESTTERMINALJACK_ISEMPTY);
 		functionSymbolMap.put("isFraction", OMSymbol.TESTTERMINALJACK_ISFRACTION);
+		functionSymbolMap.put("isIntegerNumber", OMSymbol.TESTTERMINALJACK_ISINTEGERNUMBER);
 		functionSymbolMap.put("isNaturalNumber", OMSymbol.TESTTERMINALJACK_ISNATURALNUMBER);		
 		functionSymbolMap.put("isPolynomial", OMSymbol.TESTTERMINALJACK_ISPOLYNOMIAL);
 		functionSymbolMap.put("isRationalNumber", OMSymbol.TESTTERMINALJACK_ISRATIONALNUMBER);
