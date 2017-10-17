@@ -111,7 +111,7 @@ public class TestIsPolynomial extends TestIntegration {
 
 	@Test // (expected=AssertionError.class)
 	public void testIsPolynomialWithNumberAsSecondArgument3() throws OpenMathException, EvaluatorException {
-		assertEquals(true, Evaluator.getBooleanResult("isPolynomial('x^2+x+1','2')", exerVar, fillIn));// Look if 2 is
+		assertEquals(false, Evaluator.getBooleanResult("isPolynomial('x^2+x+1','2')", exerVar, fillIn));// Look if 2 is
 																										// Polynomial
 	}
 

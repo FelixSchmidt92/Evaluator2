@@ -9,6 +9,7 @@ import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
+import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
@@ -98,11 +99,35 @@ public class TestIsPolynomial extends TestFunctionAbstract {
 		OMExecutor.execute(t);
 	}
 
-	@Test(expected = FunctionInvalidArgumentTypeException.class)
+	@Test(expected = CasEvaluationException.class)
 	public void isPolynomialWithIntegration8() throws OpenMathException, EvaluatorException {
 
 		OMOBJ t = ExpressionParser.parse("isPolynomial('abcd', 'a')", null, null);
 
 		OMExecutor.execute(t);
+	}
+	
+	@Test
+	public void isPolynomialWithIntegration9() throws OpenMathException, EvaluatorException {
+
+		OMOBJ t = ExpressionParser.parse("isPolynomial('2*x^2 + y^-1 + 2*x*a^-1', 'x')", null, null);
+
+		OMOBJ actual = OMExecutor.execute(t);
+
+		OMOBJ expected = new OMOBJ();
+		expected.setOMS(OMSymbol.LOGIC1_TRUE);
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void isPolynomialWithIntegration10() throws OpenMathException, EvaluatorException {
+
+		OMOBJ t = ExpressionParser.parse("isPolynomial('0', 'x')", null, null);
+
+		OMOBJ actual = OMExecutor.execute(t);
+
+		OMOBJ expected = new OMOBJ();
+		expected.setOMS(OMSymbol.LOGIC1_TRUE);
+		assertEquals(expected, actual);
 	}
 }
