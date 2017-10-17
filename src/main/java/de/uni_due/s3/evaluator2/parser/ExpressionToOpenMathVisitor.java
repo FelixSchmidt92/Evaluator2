@@ -10,6 +10,8 @@ import org.antlr.v4.runtime.tree.ParseTree;
 
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSEvaluatorSyntaxDictionary;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
+import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
+import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedRuntimeException;
 import de.uni_due.s3.evaluator2.exceptions.parserruntime.ErroneousExerciseVariableRuntimeException;
 import de.uni_due.s3.evaluator2.exceptions.parserruntime.ErroneousFillInVariableRuntimeException;
@@ -341,8 +343,11 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 		List<Object> omel = new ArrayList<>();
 		OMS oms = OMSEvaluatorSyntaxDictionary.getInstance().getOMS(ctx.name.getText());
 		
-		if(oms.getCd().equals(OMSymbol.CASJACK_EVALUATEINR.getCd())) {
+		if(oms.getCd().equals("casJACK")) {
 			ExpressionContext childctx = ctx.arguments.get(0);
+			if (!childctx.getText().startsWith("'") || !childctx.getText().endsWith("'")) {
+				throw new ParserRuntimeException("Function " + oms.getName() + " is a CAS Function. It has to contain only one String. But got something without apos.");
+			}
 			String text = childctx.getText().substring(1,childctx.getText().length()-1);
 			omel.add(textWithVariablesGenerator(text));
 			
