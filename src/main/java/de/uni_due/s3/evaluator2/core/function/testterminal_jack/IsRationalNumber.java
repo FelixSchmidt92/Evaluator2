@@ -30,6 +30,11 @@ public class IsRationalNumber extends Function {
 		}
 		return OMSymbol.LOGIC1_TRUE;
 	}
+	
+	@Override
+	public boolean argumentsShouldBeEvaluated() {
+		return false;
+	}
 
 	@Override
 	protected int minArgs() {

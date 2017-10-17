@@ -87,8 +87,20 @@ public class TestIsRationalNumber extends TestFunctionAbstract {
 	}
 	
 	@Test
-	public void testIsRationalNumberCaseIntegration() throws OpenMathException, EvaluatorException {
+	public void testIsRationalNumberCaseIntegration1() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("isRationalNumber(3/4)", null, null);
 		assertEquals(OMSymbol.LOGIC1_TRUE, OMExecutor.execute(omobj).getOMS());
+	}
+	
+	@Test
+	public void testIsRationalNumberCaseIntegration2() throws OpenMathException, EvaluatorException {
+		OMOBJ omobj = ExpressionParser.parse("isRationalNumber(sqrt(2))", null, null);
+		assertEquals(OMSymbol.LOGIC1_FALSE, OMExecutor.execute(omobj).getOMS());
+	}
+	
+	@Test
+	public void testIsRationalNumberCaseIntegration3() throws OpenMathException, EvaluatorException {
+		OMOBJ omobj = ExpressionParser.parse("isRationalNumber(sqrt(-1))", null, null);
+		assertEquals(OMSymbol.LOGIC1_FALSE, OMExecutor.execute(omobj).getOMS());
 	}
 }

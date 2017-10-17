@@ -57,6 +57,12 @@ public class UnaryMinus extends BinaryFunction {
 	}
 
 	@Override
+	public Integer getPartialIntegerSyntax(List<Object> arguments) throws EvaluatorException {
+		Integer value = getIntegerSyntax(arguments.get(0));
+		return -1*value;
+	}
+	
+	@Override
 	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
 		return "-" + getSageSyntax(arguments.get(0));
 	}

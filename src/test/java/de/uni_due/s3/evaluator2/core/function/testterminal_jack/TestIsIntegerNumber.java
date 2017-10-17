@@ -22,27 +22,30 @@ import de.uni_due.s3.openmath.jaxb.OMV;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
-public class TestIsRealNumber extends TestFunctionAbstract {
+public class TestIsIntegerNumber extends TestFunctionAbstract {
 
-	Function func = new IsRealNumber();
+	Function func = new IsIntegerNumber();
 
 	@Test
-	public void testIsRealNumberOMIandOMF() throws OpenMathException, EvaluatorException {
+	public void testIsIntegerNumberOMI() throws OpenMathException, EvaluatorException {
 		ArrayList<Object> args = new ArrayList<>();
 		OMI omi = OMCreator.createOMI(1);
 		args.add(omi);
 
 		assertEquals(OMSymbol.LOGIC1_TRUE, func.evaluate(args));
-
-		OMF omf = OMCreator.createOMF(1.1);
-		args.remove(0);
-		args.add(omf);
-
-		assertEquals(OMSymbol.LOGIC1_TRUE, func.evaluate(args));
 	}
 
 	@Test
-	public void testIsRealNumberOMSTR() throws OpenMathException, EvaluatorException {
+	public void testIsIntegerNumberOMF() throws OpenMathException, EvaluatorException {
+		ArrayList<Object> args = new ArrayList<>();
+		OMF omf = OMCreator.createOMF(1.1);
+		args.add(omf);
+
+		assertEquals(OMSymbol.LOGIC1_FALSE, func.evaluate(args));
+	}
+
+	@Test
+	public void testIsIntegerNumberOMSTR() throws OpenMathException, EvaluatorException {
 		ArrayList<Object> args = new ArrayList<>();
 		OMSTR omstr = OMCreator.createOMSTR("string");
 		args.add(omstr);
@@ -51,7 +54,7 @@ public class TestIsRealNumber extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testIsRealNumberOMV() throws OpenMathException, EvaluatorException {
+	public void testIsIntegerNumberOMV() throws OpenMathException, EvaluatorException {
 		ArrayList<Object> args = new ArrayList<>();
 		OMV omstr = OMCreator.createOMV("x");
 		args.add(omstr);
@@ -60,60 +63,62 @@ public class TestIsRealNumber extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testIsRealNumberOMA() throws OpenMathException, EvaluatorException {
+	public void testIsIntegerNumberOMA() throws OpenMathException, EvaluatorException {
 		ArrayList<Object> args = new ArrayList<>();
 		ArrayList<Object> args2 = new ArrayList<>();
 		args2.add(OMCreator.createOMF(1));
-		
-		OMA oma = OMCreator.createOMA(OMSymbol.LINALG2_VECTOR, args2);
+
+		OMA oma = OMCreator.createOMA(OMSymbol.LINALG2_MATRIXROW, args2);
 		args.add(oma);
 
 		assertEquals(OMSymbol.LOGIC1_FALSE, func.evaluate(args));
 	}
 
 	@Test
-	public void testIsRealNumberOMS() throws OpenMathException, EvaluatorException {
+	public void testIsIntegerNumberOMS1() throws OpenMathException, EvaluatorException {
 		ArrayList<Object> args = new ArrayList<>();
 		OMS oms = OMSymbol.NUMS1_PI;
 		args.add(oms);
 
-		assertEquals(OMSymbol.LOGIC1_TRUE, func.evaluate(args));
+		assertEquals(OMSymbol.LOGIC1_FALSE, func.evaluate(args));
+	}
 
-		oms = OMSymbol.NUMS1_E;
-		args.remove(0);
-		args.add(oms);
-
-		assertEquals(OMSymbol.LOGIC1_TRUE, func.evaluate(args));
-
-		oms = OMSymbol.ARITH1_ABS;
-		args.remove(0);
+	@Test
+	public void testIsIntegerNumberOMS2() throws OpenMathException, EvaluatorException {
+		ArrayList<Object> args = new ArrayList<>();
+		OMS oms = OMSymbol.NUMS1_E;
 		args.add(oms);
 
 		assertEquals(OMSymbol.LOGIC1_FALSE, func.evaluate(args));
 	}
+
+	@Test
+	public void testIsIntegerNumberCaseIntegration1() throws OpenMathException, EvaluatorException {
+		OMOBJ omobj = ExpressionParser.parse("isIntegerNumber(3)", null, null);
+		assertEquals(OMSymbol.LOGIC1_TRUE, OMExecutor.execute(omobj).getOMS());
+	}
+
+	@Test
+	public void testIsIntegerNumberCaseIntegration2() throws OpenMathException, EvaluatorException {
+		OMOBJ omobj = ExpressionParser.parse("isIntegerNumber(3/3)", null, null);
+		assertEquals(OMSymbol.LOGIC1_FALSE, OMExecutor.execute(omobj).getOMS());
+	}
+
+	@Test
+	public void testIsIntegerNumberCaseIntegration3() throws OpenMathException, EvaluatorException {
+		OMOBJ omobj = ExpressionParser.parse("isIntegerNumber(abs(3))", null, null);
+		assertEquals(OMSymbol.LOGIC1_FALSE, OMExecutor.execute(omobj).getOMS());
+	}
 	
 	@Test
-	public void testIsRealNumberCaseIntegration1() throws OpenMathException, EvaluatorException {
-		OMOBJ omobj = ExpressionParser.parse("isRealNumber(3/4)", null, null);
+	public void testIsIntegerNumberCaseIntegration4() throws OpenMathException, EvaluatorException {
+		OMOBJ omobj = ExpressionParser.parse("isIntegerNumber(0)", null, null);
 		assertEquals(OMSymbol.LOGIC1_TRUE, OMExecutor.execute(omobj).getOMS());
 	}
 	
 	@Test
-	public void testIsRealNumberCaseIntegration2() throws OpenMathException, EvaluatorException {
-		OMOBJ omobj = ExpressionParser.parse("isRealNumber(sqrt(-1))", null, null);
-		assertEquals(OMSymbol.LOGIC1_FALSE, OMExecutor.execute(omobj).getOMS());
+	public void testIsIntegerNumberCaseIntegration5() throws OpenMathException, EvaluatorException {
+		OMOBJ omobj = ExpressionParser.parse("isIntegerNumber(-102891)", null, null);
+		assertEquals(OMSymbol.LOGIC1_TRUE, OMExecutor.execute(omobj).getOMS());
 	}
-	
-	@Test
-	public void testIsRealNumberCaseIntegration3() throws OpenMathException, EvaluatorException {
-		OMOBJ omobj = ExpressionParser.parse("isRealNumber(sqrt(2))", null, null);
-		assertEquals(OMSymbol.LOGIC1_FALSE, OMExecutor.execute(omobj).getOMS());
-	}
-	
-	@Test
-	public void testIsRealNumberCaseIntegration4() throws OpenMathException, EvaluatorException {
-		OMOBJ omobj = ExpressionParser.parse("isRealNumber(constInfinity())", null, null);
-		assertEquals(OMSymbol.LOGIC1_FALSE, OMExecutor.execute(omobj).getOMS());
-	}
-	
 }

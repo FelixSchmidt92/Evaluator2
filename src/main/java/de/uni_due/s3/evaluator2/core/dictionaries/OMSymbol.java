@@ -164,6 +164,7 @@ public class OMSymbol {
 	
 	public static final OMS TESTTERMINALJACK_ISEMPTY = OMCreator.createOMS("testterminalJACK", "isEmpty");
 	public static final OMS TESTTERMINALJACK_ISFRACTION = OMCreator.createOMS("testterminalJACK", "isFraction");
+	public static final OMS TESTTERMINALJACK_ISINTEGERNUMBER = OMCreator.createOMS("testterminalJACK", "isIntegerNumber");
 	public static final OMS TESTTERMINALJACK_ISNATURALNUMBER = OMCreator.createOMS("testterminalJACK", "isNaturalNumber");
 	public static final OMS TESTTERMINALJACK_ISPOLYNOMIAL = OMCreator.createOMS("testterminalJACK", "isPolynomial");
 	public static final OMS TESTTERMINALJACK_ISRATIONALNUMBER = OMCreator.createOMS("testterminalJACK", "isRational");
