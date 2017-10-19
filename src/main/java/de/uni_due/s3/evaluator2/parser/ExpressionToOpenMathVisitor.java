@@ -225,7 +225,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	/**
 	 * Implements the grammatical rule "ExerciseVarName". Each exerciseVariable like
 	 * [var=a] will be replaced by its corresponding openmath content which will
-	 * then integrated into the om-structure.
+	 * then integrated into the om-structure. E and PI are also substituted here!
 	 * 
 	 * @return OM-Object depends on the content of the variable. Colud be a OMI,
 	 *         OMF, OMA ...

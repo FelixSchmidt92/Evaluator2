@@ -1,12 +1,15 @@
 package de.uni_due.s3.evaluator2.core.function.string_jack;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
+import de.uni_due.s3.openmath.jaxb.OMSTR;
 import de.uni_due.s3.openmath.omutils.OMCreator;
+import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 
 /**
  * This Function is not registered in OMSEvaluatorSyntaxDictionary.
@@ -61,7 +64,34 @@ public class TextWithVariables extends Function {
 
 	@Override
 	public List<Object> getPartialListSyntax(List<Object> omel) throws EvaluatorException {
-		return omel;
+		List<Object> convertedOmel = new ArrayList<>();
+		//Generate a List of already substututed Vars
+		
+		for (Object om : omel) {
+			if(OMTypeChecker.isOMSTR(om)) {
+				OMSTR str = (OMSTR) om;
+				
+				if (str.getContent().contains(";")) {
+				//Maybe in a String can be a ';' like in "[var=a];[var=b];0" the ";0"
+					String[] strArray = str.getContent().split(";");
+					
+					for(String string : strArray) {
+						//Ignore ZeroLength-Strings as Elements
+						if(string.length() != 0) {
+							convertedOmel.add(OMCreator.createOMSTR(string));
+						}
+					}
+				}else {
+				//No ';' in OMSTR just add it here
+					convertedOmel.add(om);
+				}
+				
+			}else {
+			//add all other Elements which are not OMSTR
+				convertedOmel.add(om);
+			}
+		}
+		return convertedOmel;
 	}
 
 	/**
