@@ -59,5 +59,4 @@ public class TestEvaluator extends TestFunctionAbstract{
 		Assert.assertEquals(OMCreator.createOMI(10),result.getOMI());
 	}
 	
-	
 }

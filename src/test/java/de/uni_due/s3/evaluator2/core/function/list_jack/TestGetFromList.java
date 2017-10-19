@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Test;
@@ -189,5 +190,22 @@ public class TestGetFromList extends TestFunctionAbstract {
 		OMOBJ omobj = ExpressionParser.parse("getFromList({}, 0, 4)", null, null);
 		OMExecutor.execute(omobj);
 		fail();
+	}
+	
+	@Test
+	public void testGetFromListIntegration7() throws OpenMathException, EvaluatorException {
+		HashMap<String, OMOBJ> vars = new HashMap<>();
+		OMOBJ p0 = new OMOBJ();
+		OMOBJ p00 = new OMOBJ();
+		p0.setOMI(OMCreator.createOMI(2));
+		p00.setOMI(OMCreator.createOMI(1));
+		vars.put("p0", p0);
+		vars.put("p00",p00);
+		
+		OMOBJ omobj = ExpressionParser.parse("getFromList(1, '[var=p0];[var=p00];0')", vars, null);
+		OMOBJ result = OMExecutor.execute(omobj);
+		
+		OMOBJ expected = OMCreator.createOMOBJ(OMCreator.createOMI(1));
+		assertEquals(expected, result);
 	}
 }
