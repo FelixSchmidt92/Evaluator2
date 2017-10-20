@@ -101,8 +101,13 @@ public class Sage {
 		}
 
 		OMOBJ omobjResult = null;
-		//omobjResult = OMConverter.toObject(casResult);
-		omobjResult = OMCreator.createOMOBJ(OMCreator.createOMSTR(casResult));
+		try {
+			omobjResult = OMConverter.toObject(casResult);
+		} catch (JAXBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//omobjResult = OMCreator.createOMOBJ(OMCreator.createOMSTR(casResult));
 		return OMConverter.toElement(omobjResult);
 	}
 	
