@@ -21,8 +21,8 @@ This may cause Errors by some tests or by Evaluator2 iteself.
 
 To refresh and get the actual dependencies, do the following -->
 
---> After importing the repo you have to run Maven generate-Ressources (or another Maven LifeCycle)
-	After Maven completed its procedure it automatically downloaded the newest Version of the 
+--> After importing the repo you have to run Maven generate-resources (or another Maven LifeCycle)
+	After Maven completed the procedure it automatically downloads the newest Version of the 
 	Dependencies, which are included it the lib folder.
 	
     
