@@ -264,18 +264,22 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	@Override
 	public Object visitFillInVarName(FillInVarNameContext ctx) {
 		String var = ctx.name.getText(); // eg. [pos=1]
-		int varNumber = Integer.parseInt(var.substring(var.indexOf('=') + 1, var.indexOf(']'))); // eg. 1
-
+		int varNumber = 0;
+		try {
+			varNumber = Integer.parseInt(var.substring(var.indexOf('=') + 1, var.indexOf(']'))); // eg. 1
+		} catch (NumberFormatException e) {
+			throw new UndefinedFillInVariableRuntimeException(String.valueOf(varNumber) + ". Has to be Integer!");
+		}
 		// removes the OMOBJ-tags from the variable and returns its child
-		if (fillInVariableMap !=  null && fillInVariableMap.containsKey(varNumber)) {
+		if (fillInVariableMap != null && fillInVariableMap.containsKey(varNumber)) {
 			OMOBJ varOmobj = fillInVariableMap.get(varNumber);
 			try {
 				return OMConverter.toElement(varOmobj);
 			} catch (OpenMathException e) {
-				throw new ErroneousFillInVariableRuntimeException(varNumber);
+				throw new ErroneousFillInVariableRuntimeException(String.valueOf(varNumber));
 			}
 		} else {
-			throw new UndefinedFillInVariableRuntimeException(varNumber);
+			throw new UndefinedFillInVariableRuntimeException(String.valueOf(varNumber));
 		}
 	}
 
@@ -311,9 +315,9 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	@Override
 	public OMI visitIntegerValue(IntegerValueContext ctx) {
 		try {
-			//Check if parasable
+			// Check if parasable
 			Integer.parseInt(ctx.value.getText());
-			
+
 			OMI omi = new OMI();
 			omi.setValue(ctx.value.getText());
 			return omi;
@@ -340,21 +344,22 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	public Object visitNestedFunctionInExpression(NestedFunctionInExpressionContext ctx) {
 		List<Object> omel = new ArrayList<>();
 		OMS oms = OMSEvaluatorSyntaxDictionary.getInstance().getOMS(ctx.name.getText());
-		
-		if(oms.getCd().equals("casJACK")) {
+
+		if (oms.getCd().equals("casJACK")) {
 			ExpressionContext childctx = ctx.arguments.get(0);
 			if (!childctx.getText().startsWith("'") || !childctx.getText().endsWith("'")) {
-				throw new ParserRuntimeException("Function " + oms.getName() + " is a CAS Function. It has to contain only one String. But got something without apos.");
+				throw new ParserRuntimeException("Function " + oms.getName()
+						+ " is a CAS Function. It has to contain only one String. But got something without apos.");
 			}
-			String text = childctx.getText().substring(1,childctx.getText().length()-1);
+			String text = childctx.getText().substring(1, childctx.getText().length() - 1);
 			omel.add(textWithVariablesGenerator(text));
-			
-		}else {
+
+		} else {
 			for (ExpressionContext childctx : ctx.arguments) {
 				omel.add(visit(childctx));
 			}
 		}
-		
+
 		return OMCreator.createOMA(oms, omel);
 	}
 
@@ -417,9 +422,9 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 				| ParserRuntimeException | FunctionNotImplementedRuntimeException e) {
 			// do nothing continue Code below (In String is no Expression!)
 		}
-		
+
 		return textWithVariablesGenerator(text);
-		
+
 	}
 
 	/**
@@ -459,7 +464,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	public Object visitVariable(VariableContext ctx) {
 		return OMCreator.createOMV(ctx.name.getText());
 	}
-	
+
 	private Object textWithVariablesGenerator(String text) {
 		/* Return if the InputString is a Text with or without variables */
 		ArrayList<Object> omel = new ArrayList<>();
@@ -478,26 +483,44 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 			}
 
 			boolean isVar = text.substring(varposMatcher.start(), varposMatcher.end()).contains("var");
-			String varposVal = text.substring(varposMatcher.start() + 5, varposMatcher.end() - 1); // remove
+			String varName = text.substring(varposMatcher.start() + 5, varposMatcher.end() - 1); // remove
 			// or
 			// "[var="
 
 			/* extracting the pos OR var value */
 			if (isVar) {
-				OMOBJ omobjvar = exerciseVariableMap.get(varposVal);
-				try {
-					Object varObj = OMConverter.toElement(omobjvar);
-					omel.add(varObj);
-				} catch (OpenMathException e) {
-					throw new UndefinedExerciseVariableRuntimeException(varposVal);
+				if (varName.equals("E")) {
+					omel.add(OMSymbol.NUMS1_E);
+				} else if (varName.equals("PI")) {
+					omel.add(OMSymbol.NUMS1_PI);
+				} else if (exerciseVariableMap != null && exerciseVariableMap.containsKey(varName)) {
+					OMOBJ omobjvar = exerciseVariableMap.get(varName);
+					try {
+						Object varObj = OMConverter.toElement(omobjvar);
+						omel.add(varObj);
+					} catch (OpenMathException e) {
+						throw new ErroneousExerciseVariableRuntimeException(varName);
+					}
+				} else {
+					throw new UndefinedExerciseVariableRuntimeException(varName);
 				}
 			} else {
-				OMOBJ omobjpos = fillInVariableMap.get(Integer.parseInt(varposVal));
+				int varPosValue = 0;
 				try {
-					Object posObj = OMConverter.toElement(omobjpos);
-					omel.add(posObj);
-				} catch (OpenMathException e1) {
-					throw new UndefinedFillInVariableRuntimeException(Integer.parseInt(varposVal));
+					varPosValue = Integer.parseInt(varName);
+				} catch (NumberFormatException e) {
+					throw new UndefinedFillInVariableRuntimeException(varName + ". Has to be Integer!");
+				}
+				if (fillInVariableMap != null && fillInVariableMap.containsKey(varPosValue)) {
+					OMOBJ omobjpos = fillInVariableMap.get(varPosValue);
+					try {
+						Object posObj = OMConverter.toElement(omobjpos);
+						omel.add(posObj);
+					} catch (OpenMathException e1) {
+						throw new ErroneousFillInVariableRuntimeException(String.valueOf(varPosValue));
+					}
+				} else {
+					throw new UndefinedFillInVariableRuntimeException(String.valueOf(varPosValue));
 				}
 			}
 		}

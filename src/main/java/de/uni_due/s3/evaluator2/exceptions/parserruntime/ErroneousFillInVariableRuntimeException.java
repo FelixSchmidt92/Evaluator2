@@ -8,7 +8,7 @@ package de.uni_due.s3.evaluator2.exceptions.parserruntime;
  */
 public class ErroneousFillInVariableRuntimeException extends RuntimeException {
 
-	public ErroneousFillInVariableRuntimeException(Integer variableName) {
+	public ErroneousFillInVariableRuntimeException(String variableName) {
 		super("FillInVariable with name " + variableName + " is erroneous.");
 	}
 
