@@ -9,6 +9,9 @@ Functions implemented in this Evaluator directly calculate with the given
 subtree and return an OpenMath-Objects.
 
 
+The JUnit-Tests depend on a working Sage- and R-Connection.
+A not working Sage- or R-Server leads to a failure in build, caused by not working Tests!
+
 
 
 
