@@ -64,7 +64,7 @@ public class TestIsRationalNumber extends TestFunctionAbstract {
 		ArrayList<Object> args = new ArrayList<>();
 		ArrayList<Object> args2 = new ArrayList<>();
 		args2.add(OMCreator.createOMF(1));
-		
+
 		OMA oma = OMCreator.createOMA(OMSymbol.LINALG2_VECTOR, args2);
 		args.add(oma);
 
@@ -72,35 +72,62 @@ public class TestIsRationalNumber extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testIsRationalNumberOMS() throws OpenMathException, EvaluatorException {
+	public void testIsRationalNumberOMS_PI() throws OpenMathException, EvaluatorException {
 		ArrayList<Object> args = new ArrayList<>();
 		OMS oms = OMSymbol.NUMS1_PI;
 		args.add(oms);
 
 		assertEquals(OMSymbol.LOGIC1_FALSE, func.evaluate(args));
+	}
 
-		oms = OMSymbol.NUMS1_E;
-		args.remove(0);
+	@Test
+	public void testIsRationalNumberOMS_E() throws OpenMathException, EvaluatorException {
+		ArrayList<Object> args = new ArrayList<>();
+		OMS oms = OMSymbol.NUMS1_E;
 		args.add(oms);
 
 		assertEquals(OMSymbol.LOGIC1_FALSE, func.evaluate(args));
 	}
-	
+
 	@Test
 	public void testIsRationalNumberCaseIntegration1() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("isRationalNumber(3/4)", null, null);
 		assertEquals(OMSymbol.LOGIC1_TRUE, OMExecutor.execute(omobj).getOMS());
 	}
-	
+
 	@Test
 	public void testIsRationalNumberCaseIntegration2() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("isRationalNumber(sqrt(2))", null, null);
 		assertEquals(OMSymbol.LOGIC1_FALSE, OMExecutor.execute(omobj).getOMS());
 	}
-	
+
 	@Test
 	public void testIsRationalNumberCaseIntegration3() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("isRationalNumber(sqrt(-1))", null, null);
+		assertEquals(OMSymbol.LOGIC1_FALSE, OMExecutor.execute(omobj).getOMS());
+	}
+
+	@Test
+	public void testIsRationalNumberCaseIntegration4() throws OpenMathException, EvaluatorException {
+		OMOBJ omobj = ExpressionParser.parse("isRationalNumber(rational(3,4))", null, null);
+		assertEquals(OMSymbol.LOGIC1_TRUE, OMExecutor.execute(omobj).getOMS());
+	}
+
+	@Test
+	public void testIsRationalNumberCaseIntegration5() throws OpenMathException, EvaluatorException {
+		OMOBJ omobj = ExpressionParser.parse("isRationalNumber(0)", null, null);
+		assertEquals(OMSymbol.LOGIC1_TRUE, OMExecutor.execute(omobj).getOMS());
+	}
+
+	@Test
+	public void testIsRationalNumberCaseIntegration6() throws OpenMathException, EvaluatorException {
+		OMOBJ omobj = ExpressionParser.parse("isRationalNumber(1)", null, null);
+		assertEquals(OMSymbol.LOGIC1_TRUE, OMExecutor.execute(omobj).getOMS());
+	}
+	
+	@Test
+	public void testIsRationalNumberCaseIntegration7() throws OpenMathException, EvaluatorException {
+		OMOBJ omobj = ExpressionParser.parse("isRationalNumber(3*4)", null, null);
 		assertEquals(OMSymbol.LOGIC1_FALSE, OMExecutor.execute(omobj).getOMS());
 	}
 }

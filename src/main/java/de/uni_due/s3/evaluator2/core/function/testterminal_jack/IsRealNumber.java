@@ -5,7 +5,6 @@ import java.util.List;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.sage.Sage;
 
 /**
@@ -22,18 +21,24 @@ public class IsRealNumber extends Function {
 	@Override
 	protected Object execute(List<Object> arguments) throws EvaluatorException {
 		try {
-			Double toTest = getDoubleSyntax(arguments.get(0));
-			if (Double.isInfinite(toTest))
-				return OMSymbol.LOGIC1_FALSE;
-		} catch (FunctionInvalidArgumentTypeException e) {
+			Sage.evaluateInCAS("Rational('" + getSageSyntax(arguments.get(0)) + "')");// Rational('1/3')
+			return OMSymbol.LOGIC1_TRUE;
+		} catch (Exception e) {
 			try {
-				Sage.evaluateInCAS("Rational(" + getSageSyntax(arguments.get(0)) + ")");
+				Sage.evaluateInCAS("RealNumber('" + getSageSyntax(arguments.get(0)) + "')");
 				return OMSymbol.LOGIC1_TRUE;
 			} catch (Exception e1) {
-				return OMSymbol.LOGIC1_FALSE;
+				try {
+					if (OMSymbol.LOGIC1_TRUE
+							.equals(Sage.evaluateInCAS(getSageSyntax(arguments.get(0)) + ".is_real()"))) {
+						return OMSymbol.LOGIC1_TRUE;
+					}
+				} catch (Exception e2) {
+				}
 			}
 		}
-		return OMSymbol.LOGIC1_TRUE;
+		return OMSymbol.LOGIC1_FALSE;
+
 	}
 
 	@Override

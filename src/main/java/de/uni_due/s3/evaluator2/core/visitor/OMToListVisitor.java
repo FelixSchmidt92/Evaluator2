@@ -34,7 +34,7 @@ public class OMToListVisitor extends OMToSyntaxVisitor<List<Object>> {
 		if (omstr.getContent().contains(";")) {
 			List<Object> omList = new ArrayList<>();
 			for (String element : omstr.getContent().split(";")) {
-				omList.add(OMCreator.createOMSTR(element)); //vllt müssen wir hier auch alle teile parsen
+				omList.add(OMCreator.createOMSTR(element));
 			}
 			return omList;
 		} else {

@@ -6,7 +6,6 @@ import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.sage.Sage;
-import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * This Function tests if the first Argument can be casted to OMI|OMF, if it
@@ -22,11 +21,13 @@ public class IsRationalNumber extends Function {
 	@Override
 	protected Object execute(List<Object> arguments) throws EvaluatorException {
 		try {
-			Sage.evaluateInCAS(getPartialSageSyntax(arguments));
-		} catch (EvaluatorException e) {
-			return OMSymbol.LOGIC1_FALSE;
-		} catch (OpenMathException e) {
-			return OMSymbol.LOGIC1_FALSE;
+			Sage.evaluateInCAS("Rational('" + getSageSyntax(arguments.get(0)) + "')");//Rational('1/3')
+		} catch (Exception e) {
+			try {
+				Sage.evaluateInCAS("Rational(RealNumber('" + getSageSyntax(arguments.get(0)) + "'))"); //Rational(1.1)
+			} catch (Exception e1) {
+				return OMSymbol.LOGIC1_FALSE;
+			}
 		}
 		return OMSymbol.LOGIC1_TRUE;
 	}
@@ -45,10 +46,4 @@ public class IsRationalNumber extends Function {
 	protected int maxArgs() {
 		return 1;
 	}
-
-	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
-		return "Rational(" + getSageSyntax(arguments.get(0)) + ")";
-	}
-
 }
