@@ -9,8 +9,8 @@ package de.uni_due.s3.evaluator2.exceptions.parserruntime;
  */
 public class UndefinedFillInVariableRuntimeException extends RuntimeException {
 
-	public UndefinedFillInVariableRuntimeException(int number) {
-		super("There is no FillIn variable at position " + number);
+	public UndefinedFillInVariableRuntimeException(String varposVal) {
+		super("There is no FillIn variable at position " + varposVal);
 	}
 
 	private static final long serialVersionUID = 1L;
