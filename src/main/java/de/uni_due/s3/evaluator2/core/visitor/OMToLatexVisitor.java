@@ -1,17 +1,11 @@
 package de.uni_due.s3.evaluator2.core.visitor;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import de.uni_due.s3.evaluator2.core.dictionaries.OMSFunctionDictionary;
-import de.uni_due.s3.evaluator2.core.function.BinaryFunction;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedRuntimeException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
-import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OME;
 import de.uni_due.s3.openmath.jaxb.OMF;
 import de.uni_due.s3.openmath.jaxb.OMI;
@@ -90,71 +84,15 @@ public class OMToLatexVisitor extends OMToSyntaxVisitor<String> {
 	@Override
 	protected String getSyntaxRepresentationForFunction(Function function, OMS oms, List<Object> omel)
 			throws EvaluatorException {
-
-		if (function instanceof BinaryFunction) {
-			List<Object> children = new ArrayList<Object>(2);
-			BinaryFunction parent = (BinaryFunction) function;
-
-			children.add(getLatexSyntaxFromChild(omel.get(0), parent));
-			if (omel.size() == 2) // because of unary minus
-				children.add(getLatexSyntaxFromChild(omel.get(1), parent));
-			return function.getPartialLatexSyntax(children);
-
-		} else {
-
-			try {
-				return function.getPartialLatexSyntax(omel);
-			} catch (NoRepresentationAvailableException nr) {
-				// standard latex implementation for functions
-				List<String> children = new LinkedList<String>();
-				for (Object child : omel) {
-					children.add(visit(child));
-				}
-				return "\\mbox{" + oms.getName() + "}\\left(" + String.join(",", children) + "\\right)";
+		try {
+			return function.getPartialLatexSyntax(omel);
+		} catch (NoRepresentationAvailableException nr) {
+			// standard latex implementation for functions
+			List<String> children = new LinkedList<String>();
+			for (Object child : omel) {
+				children.add(visit(child));
 			}
+			return "\\mbox{" + oms.getName() + "}\\left(" + String.join(",", children) + "\\right)";
 		}
 	}
-
-	/**
-	 * Put child in brackets if needed and calls the getPartialLatexSyntax() for
-	 * this children. ( if the priority of the child-operator is greater than the
-	 * priority of the parent)
-	 * 
-	 * @param obj
-	 * @param parent
-	 * @return
-	 * @throws EvaluatorException
-	 */
-	private String getLatexSyntaxFromChild(Object obj, BinaryFunction parent) throws EvaluatorException {
-		// if the child is an OMA check their priority
-		if (obj instanceof OMA) {
-			OMA child = (OMA) obj;
-			List<Object> childOmel = new ArrayList<Object>(child.getOmel().size() - 1);
-			OMS childOMS = (OMS) child.getOmel().get(0);
-			
-			Function childFunc = null;
-			try {
-			childFunc = OMSFunctionDictionary.getInstance().getFunction(childOMS);
-			}catch (FunctionNotImplementedRuntimeException er){
-				throw new FunctionNotImplementedException(er.getMessage());
-			}
-
-			for (int i = 1; i < child.getOmel().size(); i++) {
-				childOmel.add(visit(child.getOmel().get(i)));
-			}
-
-			if (childFunc instanceof BinaryFunction) {
-				if (((BinaryFunction) childFunc).priority.compareTo(parent.priority) > 0) {
-					return "\\left(" + childFunc.getPartialLatexSyntax(childOmel) + "\\right)";
-				} else {
-					return childFunc.getPartialLatexSyntax(childOmel);
-				}
-			} else {
-				return childFunc.getPartialLatexSyntax(childOmel);
-			}
-		} else {
-			return visit(obj);
-		}
-	}
-
 }

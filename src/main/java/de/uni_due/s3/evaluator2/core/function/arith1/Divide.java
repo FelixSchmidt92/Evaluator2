@@ -2,7 +2,6 @@ package de.uni_due.s3.evaluator2.core.function.arith1;
 
 import java.util.List;
 
-import de.uni_due.s3.evaluator2.core.dictionaries.OMSPriority;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.BinaryFunction;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
@@ -20,10 +19,6 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
  *
  */
 public class Divide extends BinaryFunction {
-
-	public Divide() {
-		super(OMSPriority.getPriority(OMSymbol.ARITH1_DIVIDE));
-	}
 
 	/**
 	 * It expects two arguments. Each argument has to be an OMI or OMF
@@ -76,7 +71,7 @@ public class Divide extends BinaryFunction {
 	
 	@Override
 	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException {
-		return "\\frac{" + getLatexSyntax(arguments.get(0)) + "}{" + getLatexSyntax(arguments.get(1)) + "}";
+		return "\\frac{" + getBinaryLatex(arguments.get(0)) + "}{" + getBinaryLatex(arguments.get(1)) + "}";
 	}
 
 	@Override

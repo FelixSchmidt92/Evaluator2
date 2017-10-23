@@ -2,14 +2,11 @@ package de.uni_due.s3.evaluator2.core.function.arith1;
 
 import java.util.List;
 
-import de.uni_due.s3.evaluator2.core.dictionaries.OMSPriority;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.BinaryFunction;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
@@ -21,11 +18,7 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
  *
  */
 public class Times extends BinaryFunction {
-
-	public Times() {
-		super(OMSPriority.getPriority(OMSymbol.ARITH1_TIMES));
-	}
-
+	
 	/**
 	 * Expects two argument either of type OMI or OMF
 	 * 
@@ -71,9 +64,9 @@ public class Times extends BinaryFunction {
 	
 	@Override
 	public String getPartialLatexSyntax(List<Object> arguments)
-			throws FunctionException, NoRepresentationAvailableException {
+			throws EvaluatorException {
 		
-		return arguments.get(0) + " \\cdot " + arguments.get(1);
+		return getBinaryLatex(arguments.get(0)) + " \\cdot " + getBinaryLatex(arguments.get(1));
 	}
 	
 	@Override

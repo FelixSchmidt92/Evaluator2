@@ -2,14 +2,11 @@ package de.uni_due.s3.evaluator2.core.function.relation1;
 
 import java.util.List;
 
-import de.uni_due.s3.evaluator2.core.dictionaries.OMSPriority;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.BinaryFunction;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 
 /**
  * Implements openmath arithmetic relation lt. Example:
@@ -19,13 +16,11 @@ import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvaila
  */
 public class LessThan extends BinaryFunction {
 
-	public LessThan() {
-		super(OMSPriority.getPriority(OMSymbol.RELATION1_LT));
-	}
 	/**
 	 * Tests if the first argument is less than the second argument. Expects 2
 	 * arguments of type OMI or OMF
-	 * @throws EvaluatorException 
+	 * 
+	 * @throws EvaluatorException
 	 * 
 	 * @throws FunctionInvalidArgumentTypeException
 	 * 
@@ -33,11 +28,11 @@ public class LessThan extends BinaryFunction {
 	 */
 	@Override
 	protected Object execute(List<Object> arguments) throws EvaluatorException {
-			double first = getDoubleSyntax(arguments.get(0));
-			double second = getDoubleSyntax(arguments.get(1));
-			return (first < second) ? OMSymbol.LOGIC1_TRUE : OMSymbol.LOGIC1_FALSE;
+		double first = getDoubleSyntax(arguments.get(0));
+		double second = getDoubleSyntax(arguments.get(1));
+		return (first < second) ? OMSymbol.LOGIC1_TRUE : OMSymbol.LOGIC1_FALSE;
 	}
-	
+
 	@Override
 	public Object generatePalette(List<Object> arguments) throws FunctionNotImplementedException {
 		return OMSymbol.RELATION1_LT;
@@ -57,11 +52,10 @@ public class LessThan extends BinaryFunction {
 	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
 		return getSageSyntax(arguments.get(0)) + " < " + getSageSyntax(arguments.get(1));
 	}
-	
+
 	@Override
-	public String getPartialLatexSyntax(List<Object> arguments)
-			throws FunctionException, NoRepresentationAvailableException {
-		return arguments.get(0) + "<" +arguments.get(1);
+	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException {
+		return getBinaryLatex(arguments.get(0)) + "<" + getBinaryLatex(arguments.get(1));
 	}
 
 }

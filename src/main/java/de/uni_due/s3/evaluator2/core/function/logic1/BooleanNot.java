@@ -2,13 +2,10 @@ package de.uni_due.s3.evaluator2.core.function.logic1;
 
 import java.util.List;
 
-import de.uni_due.s3.evaluator2.core.dictionaries.OMSPriority;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.BinaryFunction;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 
 /**
  * Implement openmath logic not. Example: !true => false
@@ -18,16 +15,12 @@ import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvaila
  */
 public class BooleanNot extends BinaryFunction {
 
-	public BooleanNot() {
-		super(OMSPriority.getPriority(OMSymbol.LOGIC1_NOT));
-	}
-
 	/**
 	 * Takes one boolean argument and returns the opposite value. Expects one
 	 * argument of type OMSymbol.LOGIC_TRUE or LOGIC_FALSE
 	 * 
 	 * @return true or false as OMS
-	 * @throws EvaluatorException 
+	 * @throws EvaluatorException
 	 * @throws FunctionInvalidArgumentTypeException
 	 */
 	@Override
@@ -52,9 +45,8 @@ public class BooleanNot extends BinaryFunction {
 	}
 
 	@Override
-	public String getPartialLatexSyntax(List<Object> arguments)
-			throws FunctionException, NoRepresentationAvailableException {
+	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException {
 
-		return "\\neg" + arguments.get(0);
+		return "\\neg" + getBinaryLatex(arguments.get(0));
 	}
 }

@@ -2,28 +2,22 @@ package de.uni_due.s3.evaluator2.core.function.relation1;
 
 import java.util.List;
 
-import de.uni_due.s3.evaluator2.core.dictionaries.OMSPriority;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.BinaryFunction;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 
 /**
  * Implements openmath realtion1 geq operation. Example: 3 >= 3 => true
  */
 public class GreaterThanOrEqual extends BinaryFunction {
 
-	public GreaterThanOrEqual() {
-		super(OMSPriority.getPriority(OMSymbol.RELATION1_GEQ));
-	}
-
 	/**
 	 * Tests if the first argument is greater or equal than the second argument.
 	 * Expects 2 arguments of type OMI or OMF
-	 * @throws EvaluatorException 
+	 * 
+	 * @throws EvaluatorException
 	 * 
 	 * @throws FunctionInvalidArgumentTypeException
 	 * 
@@ -35,7 +29,7 @@ public class GreaterThanOrEqual extends BinaryFunction {
 		double second = getDoubleSyntax(arguments.get(1));
 		return (first >= second) ? OMSymbol.LOGIC1_TRUE : OMSymbol.LOGIC1_FALSE;
 	}
-	
+
 	@Override
 	public Object generatePalette(List<Object> arguments) throws FunctionNotImplementedException {
 		return OMSymbol.RELATION1_GEQ;
@@ -57,9 +51,8 @@ public class GreaterThanOrEqual extends BinaryFunction {
 	}
 
 	@Override
-	public String getPartialLatexSyntax(List<Object> arguments)
-			throws FunctionException, NoRepresentationAvailableException {
-		return arguments.get(0) + "\\geq" + arguments.get(1);
+	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException {
+		return getBinaryLatex(arguments.get(0)) + "\\geq" + getBinaryLatex(arguments.get(1));
 	}
 
 }

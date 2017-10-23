@@ -2,8 +2,6 @@ package de.uni_due.s3.evaluator2.core.function.arith_jack;
 
 import java.util.List;
 
-import de.uni_due.s3.evaluator2.core.dictionaries.OMSPriority;
-import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.BinaryFunction;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
@@ -24,10 +22,6 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
  *
  */
 public class IEEERemainder extends BinaryFunction {
-
-	public IEEERemainder() {
-		super(OMSPriority.getPriority(OMSymbol.ARITHJACK_IEEEREMAINDER));
-	}
 
 	/**
 	 * Expects two argument of type OMI
@@ -63,6 +57,6 @@ public class IEEERemainder extends BinaryFunction {
 	public String getPartialLatexSyntax(List<Object> arguments)
 			throws EvaluatorException, FunctionException, NoRepresentationAvailableException {
 
-		return arguments.get(0) + "\\mathbin{\\%}" + arguments.get(1);
+		return getBinaryLatex(arguments.get(0)) + "\\mathbin{\\%}" + getBinaryLatex(arguments.get(1));
 	}
 }

@@ -2,13 +2,11 @@ package de.uni_due.s3.evaluator2.core.function.arith1;
 
 import java.util.List;
 
-import de.uni_due.s3.evaluator2.core.dictionaries.OMSPriority;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.BinaryFunction;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedException;
@@ -24,10 +22,6 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
  *
  */
 public class Plus extends BinaryFunction {
-
-	public Plus() {
-		super(OMSPriority.getPriority(OMSymbol.ARITH1_PLUS));
-	}
 
 	/**
 	 * @throws OpenMathException
@@ -78,9 +72,9 @@ public class Plus extends BinaryFunction {
 
 	@Override
 	public String getPartialLatexSyntax(List<Object> arguments)
-			throws FunctionException, NoRepresentationAvailableException {
+			throws EvaluatorException {
 
-		return arguments.get(0) + "+" + arguments.get(1);
+		return getBinaryLatex(arguments.get(0)) + "+" + getBinaryLatex(arguments.get(1));
 	}
 
 	@Override
