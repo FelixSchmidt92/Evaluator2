@@ -22,7 +22,6 @@ import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMConverter;
-import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
@@ -104,10 +103,9 @@ public class Sage {
 		try {
 			omobjResult = OMConverter.toObject(casResult);
 		} catch (JAXBException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//do currently nothing. Usually everything should be parsable.  TODO maybe another Check?
 		}
-		//omobjResult = OMCreator.createOMOBJ(OMCreator.createOMSTR(casResult));
+
 		return OMConverter.toElement(omobjResult);
 	}
 	
