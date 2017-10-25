@@ -22,7 +22,7 @@ public class TestFalse {
 		OMOBJ expected = new OMOBJ();
 		expected.setOMS(OMSymbol.LOGIC1_FALSE);
 
-		OMOBJ actual = Evaluator.evaluate("constFalse()", null, null);
+		OMOBJ actual = Evaluator.evaluate("False", null, null);
 
 		assertEquals(expected, actual);
 	}

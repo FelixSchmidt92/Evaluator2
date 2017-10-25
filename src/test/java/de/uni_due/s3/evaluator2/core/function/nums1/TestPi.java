@@ -24,7 +24,7 @@ public class TestPi extends TestFunctionAbstract {
 		OMOBJ expected = new OMOBJ();
 		expected.setOMS(OMSymbol.NUMS1_PI);
 		
-		OMOBJ actual = Evaluator.evaluate("constPi()", null, null);
+		OMOBJ actual = Evaluator.evaluate("PI", null, null);
 		
 		assertEquals(expected, actual);
 	}

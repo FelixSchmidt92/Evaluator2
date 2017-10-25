@@ -107,18 +107,11 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("and", OMSymbol.LOGIC1_AND);
 		functionSymbolMap.put("ifthenelse", OMSymbol.LOGICJACK_IFTHENELSE);
 		functionSymbolMap.put("not", OMSymbol.LOGIC1_NOT);
-		functionSymbolMap.put("or", OMSymbol.LOGIC1_OR);
-		functionSymbolMap.put("constTrue", OMSymbol.LOGIC1_TRUE);
-		functionSymbolMap.put("constFalse", OMSymbol.LOGIC1_FALSE);
-		
+		functionSymbolMap.put("or", OMSymbol.LOGIC1_OR);		
 		
 		functionSymbolMap.put("mcindex", OMSymbol.MCJACK_MCINDEX);
 		
 		functionSymbolMap.put("rational", OMSymbol.NUMS1_RATIONAL);
-		functionSymbolMap.put("constE", OMSymbol.NUMS1_E);
-		functionSymbolMap.put("constI", OMSymbol.NUMS1_I);
-		functionSymbolMap.put("constInfinity", OMSymbol.NUMS1_INFINITY);
-		functionSymbolMap.put("constPi", OMSymbol.NUMS1_PI);
 
 		functionSymbolMap.put("countBasicOperations", OMSymbol.OPENMATHJACK_COUNTBASICOPERATIONS);
 		functionSymbolMap.put("countNodes", OMSymbol.OPENMATHJACK_COUNTNODES);
@@ -142,11 +135,11 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("randomIntegerBetween", OMSymbol.RANDOMJACK_RANDOMINTEGERBETWEEN);
 		
 		functionSymbolMap.put("equal", OMSymbol.RELATION1_EQ);
-		functionSymbolMap.put("greaterthanorequal", OMSymbol.RELATION1_GEQ);
-		functionSymbolMap.put("greaterthan", OMSymbol.RELATION1_GT);
-		functionSymbolMap.put("lessthanorequal", OMSymbol.RELATION1_LEQ);
-		functionSymbolMap.put("lessthan", OMSymbol.RELATION1_LT);
-		functionSymbolMap.put("notequal", OMSymbol.RELATION1_NEQ);
+		functionSymbolMap.put("greaterThanOrEqual", OMSymbol.RELATION1_GEQ);
+		functionSymbolMap.put("greaterThan", OMSymbol.RELATION1_GT);
+		functionSymbolMap.put("lessThanOrEqual", OMSymbol.RELATION1_LEQ);
+		functionSymbolMap.put("lessThan", OMSymbol.RELATION1_LT);
+		functionSymbolMap.put("notEqual", OMSymbol.RELATION1_NEQ);
 
 		functionSymbolMap.put("ceil", OMSymbol.ROUNDING1_CEILING);
 		functionSymbolMap.put("floor", OMSymbol.ROUNDING1_FLOOR);

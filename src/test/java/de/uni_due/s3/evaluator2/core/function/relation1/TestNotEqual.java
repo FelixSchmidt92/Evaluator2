@@ -157,7 +157,7 @@ public class TestNotEqual extends TestFunctionAbstract {
 
 	@Test
 	public void testNotEqualsIntegration() throws OpenMathException, EvaluatorException {
-		OMOBJ omobj = ExpressionParser.parse("notequal(10,3)", null, null);
+		OMOBJ omobj = ExpressionParser.parse("notEqual(10,3)", null, null);
 		OMOBJ result = OMExecutor.execute(omobj);
 		assertEquals(OMSymbol.LOGIC1_TRUE, result.getOMS());
 	}
@@ -172,7 +172,7 @@ public class TestNotEqual extends TestFunctionAbstract {
 	
 	@Test
 	public void testNotEqualPalette() throws EvaluatorException, OpenMathException {
-		OMOBJ result = Evaluator.evaluate("palette(paletterow(notequal()))", null, null);
+		OMOBJ result = Evaluator.evaluate("palette(paletterow(notEqual()))", null, null);
 		String expected = "<OMOBJ><OMA>" + 
 				"<OMS name=\"palette\" cd=\"editor1\"/>" +
 				"<OMA>"	+

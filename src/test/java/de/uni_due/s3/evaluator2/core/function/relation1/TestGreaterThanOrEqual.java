@@ -132,7 +132,7 @@ public class TestGreaterThanOrEqual extends TestFunctionAbstract {
 	
 	@Test
 	public void testGreaterThanOrEqualPalette() throws EvaluatorException, OpenMathException {
-		OMOBJ result = Evaluator.evaluate("palette(paletterow(greaterthanorequal()))", null, null);
+		OMOBJ result = Evaluator.evaluate("palette(paletterow(greaterThanOrEqual()))", null, null);
 		String expected = "<OMOBJ><OMA>" + 
 				"<OMS name=\"palette\" cd=\"editor1\"/>" +
 				"<OMA>"	+

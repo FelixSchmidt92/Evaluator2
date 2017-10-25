@@ -132,7 +132,7 @@ public class TestLessThanOrEqual extends TestFunctionAbstract {
 	
 	@Test
 	public void testLessThanOrEqualPalette() throws EvaluatorException, OpenMathException {
-		OMOBJ result = Evaluator.evaluate("palette(paletterow(lessthanorequal()))", null, null);
+		OMOBJ result = Evaluator.evaluate("palette(paletterow(lessThanOrEqual()))", null, null);
 		String expected = "<OMOBJ><OMA>" + 
 				"<OMS name=\"palette\" cd=\"editor1\"/>" +
 				"<OMA>"	+

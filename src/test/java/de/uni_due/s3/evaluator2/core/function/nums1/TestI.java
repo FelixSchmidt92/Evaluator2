@@ -24,7 +24,7 @@ public class TestI extends TestFunctionAbstract {
 		OMOBJ expected = new OMOBJ();
 		expected.setOMS(OMSymbol.NUMS1_I);
 		
-		OMOBJ actual = Evaluator.evaluate("constI()", null, null);
+		OMOBJ actual = Evaluator.evaluate("I", null, null);
 		
 		assertEquals(expected, actual);
 	}

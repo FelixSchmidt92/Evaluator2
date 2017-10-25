@@ -13,6 +13,7 @@ import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
+import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestE extends TestFunctionAbstract {
@@ -20,13 +21,20 @@ public class TestE extends TestFunctionAbstract {
 	Function func = new E();
 	
 	@Test
-	public void testEIntegration() throws EvaluatorException, OpenMathException {
+	public void testEIntegration1() throws EvaluatorException, OpenMathException {
 		OMOBJ expected = new OMOBJ();
 		expected.setOMS(OMSymbol.NUMS1_E);
 		
-		OMOBJ actual = Evaluator.evaluate("constE()", null, null);
+		OMOBJ actual = Evaluator.evaluate("E", null, null);
 		
 		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testEIntegration2() throws EvaluatorException, OpenMathException {
+		OMOBJ actual = Evaluator.evaluate("E*2", null, null);
+		
+		assertEquals(OMCreator.createOMF(5.43656365691809), actual.getOMF());
 	}
 	
 	@Test

@@ -109,7 +109,7 @@ public class TestIsRealNumber extends TestFunctionAbstract {
 
 	@Test
 	public void testIsRealNumberCaseIntegration4() throws OpenMathException, EvaluatorException {
-		OMOBJ omobj = ExpressionParser.parse("isRealNumber(constInfinity())", null, null);
+		OMOBJ omobj = ExpressionParser.parse("isRealNumber(INFINITY)", null, null);
 		assertEquals(OMSymbol.LOGIC1_FALSE, OMExecutor.execute(omobj).getOMS());
 	}
 	

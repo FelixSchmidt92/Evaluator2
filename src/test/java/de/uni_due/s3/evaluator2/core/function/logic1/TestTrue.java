@@ -23,7 +23,7 @@ public class TestTrue extends TestFunctionAbstract {
 		OMOBJ expected = new OMOBJ();
 		expected.setOMS(OMSymbol.LOGIC1_TRUE);
 
-		OMOBJ actual = Evaluator.evaluate("constTrue()", null, null);
+		OMOBJ actual = Evaluator.evaluate("True", null, null);
 
 		assertEquals(expected, actual);
 	}
