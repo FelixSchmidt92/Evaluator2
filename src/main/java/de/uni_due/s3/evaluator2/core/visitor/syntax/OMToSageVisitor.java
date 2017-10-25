@@ -34,7 +34,7 @@ public class OMToSageVisitor extends OMToSyntaxVisitor<String> {
 		if (omstr.getContent().equals("")) {
 			return "''";
 		} else {
-			return omstr.getContent();
+			return omstr.getContent().replaceAll("&apos;", "'");
 		}
 	}
 
