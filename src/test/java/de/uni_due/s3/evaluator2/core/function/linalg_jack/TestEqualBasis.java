@@ -7,10 +7,10 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
+import de.uni_due.s3.evaluator2.core.visitor.OMToResultVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
@@ -85,7 +85,7 @@ public class TestEqualBasis extends TestFunctionAbstract {
 	public void testEqualBasisIntegration1() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse(
 				"equalBasis(set(vector(1,2,3), vector(3,2,1)), set(vector(1,2,3), vector(3,2,1)), 3)", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		assertEquals(OMSymbol.LOGIC1_TRUE, result.getOMS());
 	}
 
@@ -93,7 +93,7 @@ public class TestEqualBasis extends TestFunctionAbstract {
 	public void testEqualBasisIntegration2() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser
 				.parse("equalBasis(set(vector(1,0), vector(0,1)), set(vector(1,0), vector(1,0)), 2)", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		assertEquals(OMSymbol.LOGIC1_FALSE, result.getOMS());
 	}
 
@@ -101,7 +101,7 @@ public class TestEqualBasis extends TestFunctionAbstract {
 	public void testEqualBasisWithWrongInput() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser
 				.parse("equalBasis(set(vector(1,0), vector(0,1)), set(vector(1,0), vector(1,0)), 'Hello')", null, null);
-		OMExecutor.execute(omobj);
+		new OMToResultVisitor().execute(omobj);
 		fail();
 	}
 
@@ -109,7 +109,7 @@ public class TestEqualBasis extends TestFunctionAbstract {
 	public void testEqualBasisWithLess() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("equalBasis(set(vector(1,0), vector(0,1)), set(vector(1,0), vector(1,0)))",
 				null, null);
-		OMExecutor.execute(omobj);
+		new OMToResultVisitor().execute(omobj);
 		fail();
 	}
 
@@ -117,7 +117,7 @@ public class TestEqualBasis extends TestFunctionAbstract {
 	public void testEqualBasisWithMore() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser
 				.parse("equalBasis(set(vector(1,0), vector(0,1)), set(vector(1,0), vector(1,0)), 1, 2)", null, null);
-		OMExecutor.execute(omobj);
+		new OMToResultVisitor().execute(omobj);
 		fail();
 	}
 	
@@ -125,7 +125,7 @@ public class TestEqualBasis extends TestFunctionAbstract {
 	public void testEqualBasisIntegration4() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser
 				.parse("equalBasis(set(vector(1,1,0), vector(0,1,1)), set(vector(1,1,0), vector(0,1,1)), 3)", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		assertEquals(OMSymbol.LOGIC1_TRUE, result.getOMS());
 	}
 }

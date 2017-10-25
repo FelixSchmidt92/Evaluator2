@@ -9,10 +9,10 @@ import java.util.List;
 
 import org.junit.Test;
 
-import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
+import de.uni_due.s3.evaluator2.core.visitor.OMToResultVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
@@ -114,28 +114,28 @@ public class TestGetRandomFromList extends TestFunctionAbstract {
 	@Test
 	public void testGetRandomFromListIntegration1() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("getRandomFromList({1})", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		assertEquals(OMCreator.createOMI(1), result.getOMI());
 	}
 
 	@Test(expected = FunctionInvalidArgumentException.class)
 	public void testGetRandomFromListWithEmptyArgs() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("getRandomFromList({})", null, null);
-		OMExecutor.execute(omobj);
+		new OMToResultVisitor().execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testGetRandomFromListWithLessArgs() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("getRandomFromList()", null, null);
-		OMExecutor.execute(omobj);
+		new OMToResultVisitor().execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testGetRandomFromListWithMoreArgs() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("getRandomFromList({}, 0, 4)", null, null);
-		OMExecutor.execute(omobj);
+		new OMToResultVisitor().execute(omobj);
 		fail();
 	}
 }

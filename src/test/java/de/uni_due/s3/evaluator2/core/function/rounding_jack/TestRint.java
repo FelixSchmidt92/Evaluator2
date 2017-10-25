@@ -7,9 +7,9 @@ import java.util.Random;
 
 import org.junit.Test;
 
-import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
+import de.uni_due.s3.evaluator2.core.visitor.OMToResultVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
@@ -61,7 +61,7 @@ public class TestRint extends TestFunctionAbstract {
 		OMOBJ tree = ExpressionParser.parse("rint(22.2)", null, null);
 		OMOBJ expected = new OMOBJ();
 		expected.setOMI(OMCreator.createOMI(22));
-		OMOBJ actual = OMExecutor.execute(tree);
+		OMOBJ actual = new OMToResultVisitor().execute(tree);
 
 		assertEquals(expected, actual);
 	}
@@ -71,7 +71,7 @@ public class TestRint extends TestFunctionAbstract {
 		OMOBJ tree = ExpressionParser.parse("rint('22.2')", null, null);
 		OMOBJ expected = new OMOBJ();
 		expected.setOMI(OMCreator.createOMI(22));
-		OMOBJ actual = OMExecutor.execute(tree);
+		OMOBJ actual = new OMToResultVisitor().execute(tree);
 
 		assertEquals(expected, actual);
 	}

@@ -8,10 +8,10 @@ import java.util.List;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator2.Evaluator;
-import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.ConstructorFunction;
 import de.uni_due.s3.evaluator2.core.visitor.OMToRVisitor;
+import de.uni_due.s3.evaluator2.core.visitor.OMToResultVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMA;
@@ -63,7 +63,7 @@ public class TestList {
 	@Test
 	public void testListIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("list(1,2,3)", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		List<Object> value = result.getOMA().getOmel();
 		assertEquals(OMCreator.createOMI(1), value.get(1));
 		assertEquals(OMCreator.createOMI(2), value.get(2));

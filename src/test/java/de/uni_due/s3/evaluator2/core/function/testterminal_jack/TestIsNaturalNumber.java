@@ -6,10 +6,10 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
+import de.uni_due.s3.evaluator2.core.visitor.OMToResultVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMA;
@@ -95,24 +95,24 @@ public class TestIsNaturalNumber extends TestFunctionAbstract {
 	@Test
 	public void testIsNaturalNumberCaseIntegration1() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("isNaturalNumber(3)", null, null);
-		assertEquals(OMSymbol.LOGIC1_TRUE, OMExecutor.execute(omobj).getOMS());
+		assertEquals(OMSymbol.LOGIC1_TRUE, new OMToResultVisitor().execute(omobj).getOMS());
 	}
 
 	@Test
 	public void testIsNaturalNumberCaseIntegration2() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("isNaturalNumber(3/3)", null, null);
-		assertEquals(OMSymbol.LOGIC1_FALSE, OMExecutor.execute(omobj).getOMS());
+		assertEquals(OMSymbol.LOGIC1_FALSE, new OMToResultVisitor().execute(omobj).getOMS());
 	}
 
 	@Test
 	public void testIsNaturalNumberCaseIntegration3() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("isNaturalNumber(abs(3))", null, null);
-		assertEquals(OMSymbol.LOGIC1_FALSE, OMExecutor.execute(omobj).getOMS());
+		assertEquals(OMSymbol.LOGIC1_FALSE, new OMToResultVisitor().execute(omobj).getOMS());
 	}
 	
 	@Test
 	public void testIsNaturalNumberCaseIntegration4() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("isNaturalNumber(-3)", null, null);
-		assertEquals(OMSymbol.LOGIC1_FALSE, OMExecutor.execute(omobj).getOMS());
+		assertEquals(OMSymbol.LOGIC1_FALSE, new OMToResultVisitor().execute(omobj).getOMS());
 	}
 }

@@ -10,12 +10,12 @@ import java.util.List;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator2.Evaluator;
-import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.ConstructorFunction;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
 import de.uni_due.s3.evaluator2.core.visitor.OMToLatexVisitor;
 import de.uni_due.s3.evaluator2.core.visitor.OMToRVisitor;
+import de.uni_due.s3.evaluator2.core.visitor.OMToResultVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
@@ -52,7 +52,7 @@ public class TestMatrix extends TestFunctionAbstract {
 	@Test
 	public void testMatrixIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("matrix(matrixrow(1,3),matrixrow(0.0,4))", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		List<Object> matrix = new ArrayList<Object>();
 		List<Object> matrixrow1 = new ArrayList<Object>();
 		matrixrow1.add(OMCreator.createOMI(1));
@@ -82,13 +82,13 @@ public class TestMatrix extends TestFunctionAbstract {
 	@Test
 	public void testMatrixWithZeroParam() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("matrix()", null, null);
-		OMExecutor.execute(omobj);
+		new OMToResultVisitor().execute(omobj);
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void testMatrixWithWrongArguments() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("matrix('Test')", null, null);
-		OMExecutor.execute(omobj);
+		new OMToResultVisitor().execute(omobj);
 		fail();
 	}
 	

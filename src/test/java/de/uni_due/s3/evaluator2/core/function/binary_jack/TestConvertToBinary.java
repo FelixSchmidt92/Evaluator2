@@ -7,9 +7,9 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
+import de.uni_due.s3.evaluator2.core.visitor.OMToResultVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
@@ -78,21 +78,21 @@ public class TestConvertToBinary extends TestFunctionAbstract {
 	@Test
 	public void TestConvertToBinaryIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("convertToBinary(3)", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		assertEquals(OMCreator.createOMSTR("11"), result.getOMSTR());
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void TestConvertToBinaryWithMoreArgs() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("convertToBinary(3, 2)", null, null);
-		OMExecutor.execute(omobj);
+		new OMToResultVisitor().execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void TestConvertToBinaryWithLesssArgs() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("convertToBinary()", null, null);
-		OMExecutor.execute(omobj);
+		new OMToResultVisitor().execute(omobj);
 		fail();
 	}
 

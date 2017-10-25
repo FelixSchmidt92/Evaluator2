@@ -6,9 +6,9 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.integration.TestIntegration;
+import de.uni_due.s3.evaluator2.core.visitor.OMToResultVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
@@ -21,7 +21,7 @@ public class TestEvaluateInR extends TestIntegration  {
 	@Test
 	public void testEvaluateInRInteger() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("evaluateInR('9')", null, null);
-		OMOBJ actual = OMExecutor.execute(omobj);
+		OMOBJ actual = new OMToResultVisitor().execute(omobj);
 		
 		OMOBJ expected = new OMOBJ();
 		expected.setOMI(OMCreator.createOMI(9));
@@ -32,7 +32,7 @@ public class TestEvaluateInR extends TestIntegration  {
 	@Test
 	public void testEvaluateInRFloat() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("evaluateInR('9.123')", null, null);
-		OMOBJ actual = OMExecutor.execute(omobj);
+		OMOBJ actual = new OMToResultVisitor().execute(omobj);
 		
 		OMOBJ expected = new OMOBJ();
 		expected.setOMF(OMCreator.createOMF(9.123));
@@ -43,7 +43,7 @@ public class TestEvaluateInR extends TestIntegration  {
 	@Test
 	public void testEvaluateInRString() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("evaluateInR('\"This\"')", null, null);
-		OMOBJ actual = OMExecutor.execute(omobj);
+		OMOBJ actual = new OMToResultVisitor().execute(omobj);
 		
 		OMOBJ expected = new OMOBJ();
 		expected.setOMSTR(OMCreator.createOMSTR("This"));
@@ -54,7 +54,7 @@ public class TestEvaluateInR extends TestIntegration  {
 	@Test
 	public void testEvaluateInRBool() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("evaluateInR('TRUE')", null, null);
-		OMOBJ actual = OMExecutor.execute(omobj);
+		OMOBJ actual = new OMToResultVisitor().execute(omobj);
 		
 		OMOBJ expected = new OMOBJ();
 		expected.setOMS(OMSymbol.LOGIC1_TRUE);
@@ -65,7 +65,7 @@ public class TestEvaluateInR extends TestIntegration  {
 	@Test
 	public void testEvaluateInRList() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("evaluateInR('list(1, 2, 3, 4)')", null, null);
-		OMOBJ actual = OMExecutor.execute(omobj);
+		OMOBJ actual = new OMToResultVisitor().execute(omobj);
 		
 		OMOBJ expected = new OMOBJ();
 		ArrayList<Object> omel = new ArrayList<>();
@@ -83,7 +83,7 @@ public class TestEvaluateInR extends TestIntegration  {
 	@Test
 	public void testEvaluateInRWithExerciseVariables() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("evaluateInR('[var=a]')",exerciseVariableMap, fillInVariableMap);
-		OMOBJ actual = OMExecutor.execute(omobj);
+		OMOBJ actual = new OMToResultVisitor().execute(omobj);
 		
 		assertEquals(OMCreator.createOMI(0),actual.getOMI());
 	}
@@ -91,7 +91,7 @@ public class TestEvaluateInR extends TestIntegration  {
 	@Test
 	public void testEvaluateInRWithFillInVariables() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("evaluateInR('[pos=1]')",exerciseVariableMap, fillInVariableMap);
-		OMOBJ actual = OMExecutor.execute(omobj);
+		OMOBJ actual = new OMToResultVisitor().execute(omobj);
 		
 		assertEquals(OMCreator.createOMI(0),actual.getOMI());
 	}
@@ -100,7 +100,7 @@ public class TestEvaluateInR extends TestIntegration  {
 	public void testEvaluateInRWithFillInVariablesAsVector() throws OpenMathException, EvaluatorException {
 		fillInVariableMap.put(20, ExpressionParser.parse("vector(1,2)", exerciseVariableMap, fillInVariableMap));
 		OMOBJ omobj = ExpressionParser.parse("evaluateInR('[pos=20]')",exerciseVariableMap, fillInVariableMap);
-		OMOBJ actual = OMExecutor.execute(omobj);
+		OMOBJ actual = new OMToResultVisitor().execute(omobj);
 		OMOBJ expected = new OMOBJ();
 		ArrayList<Object> omel = new ArrayList<>();
 		
@@ -115,7 +115,7 @@ public class TestEvaluateInR extends TestIntegration  {
 	@Test(expected = CasEvaluationException.class)
 	public void testEvaluateInRWrongSyntax() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("evaluateInR('wrong input')", null, null);
-		OMExecutor.execute(omobj);
+		new OMToResultVisitor().execute(omobj);
 	}
 	
 }

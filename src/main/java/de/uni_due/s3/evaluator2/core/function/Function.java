@@ -84,7 +84,7 @@ public abstract class Function {
 	public final Object evaluate(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		if (arguments == null)
 			throw new FunctionInvalidArgumentException(this, "The List of arguments is of Type NULL");
-		argsBetweenMinMax(arguments); // Check
+		argsBetweenMinMax(arguments); // Double-Check!
 		return execute(arguments);
 	}
 
