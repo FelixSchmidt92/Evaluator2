@@ -66,7 +66,7 @@ public class TestOMToDoubleVisitor {
 	
 	@Test
 	public void TestOMDoubleVisitor7() throws OpenMathException, EvaluatorException {
-		OMOBJ obj = Evaluator.evaluate("constPi()", new HashMap<>(), new HashMap<>());
+		OMOBJ obj = Evaluator.evaluate("PI", new HashMap<>(), new HashMap<>());
 		Double result = new OMToDoubleVisitor().visit(obj);
 		Double expected = Math.PI;
 		assertEquals(expected, result);
