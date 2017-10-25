@@ -158,7 +158,7 @@ public abstract class OMToSyntaxVisitor<T> {
 		}catch (FunctionNotImplementedRuntimeException er){
 			throw new FunctionNotImplementedException(er.getMessage());
 		}
-		return getSyntaxRepresentationForFunction(function, oms, null);
+		return getSyntaxRepresentationForFunction(function, oms, new ArrayList<>());
 	}
 
 	/**

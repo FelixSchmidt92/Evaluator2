@@ -1,6 +1,6 @@
 parser grammar EvaluatorParser;
 
-@header{package de.uni_due.s3.evaluator2.parser.antlr;
+@header {package de.uni_due.s3.evaluator2.parser.antlr;
 }
 
 options {
@@ -9,35 +9,25 @@ options {
 
 expression
 :
-	name = Variable # variable
-	|
-	(
-		name = FunctionName LeftParenthesis
-		(
-			arguments += expression
-			(
-				ArgumentSeparator arguments += expression
-			)*
-		)? RightParenthesis
-	) # nestedFunctionInExpression
-	| LeftParenthesis expression RightParenthesis # parenthesis
-	| operator = unaryOperatorForExpression expression # unary
-	| expression Circumflex expression # binaryCircumflex
-	| expression operator = binaryOperatorArithPoint expression #
-	binaryArithPoint
-	| expression operator = binaryOperatorArithLine expression # binaryArithLine
-	| expression operator = binaryOperatorRelational expression #
-	binaryRelational
-	| expression operator = binaryOperatorBoolean expression # binaryBoolean
+	name = Variable # variableInExpression
+	| constant # constantInExpression
+	| function # functionInExpression
+	| LeftParenthesis expression RightParenthesis # parenthesisInExpression
+	| unaryOperator expression # unaryOperatorInExpression
+	| expression Circumflex expression # binaryOperatorCircumflexInExpression
+	| expression binaryOperatorArithPoint expression # binaryOperatorArithPointInExpression
+	| expression binaryOperatorArithLine expression # binaryOperatorArithLineInExpression
+	| expression binaryOperatorRelational expression # binaryOperatorRelationalInExpression
+	| expression binaryOperatorBoolean expression # binaryOperatorBooleanInExpression
 	| list # listInExpression
-	| value = Integer # integerValue
-	| value = Float # floatValue
-	| name = ExerciseVariable # exerciseVarName
-	| name = FillInVariable # fillInVarName
-	| value = String # textValue
+	| value = Integer # integerValueInExpression
+	| value = Float # floatValueInExpression
+	| name = ExerciseVariable # exerciseVarNameInExpression
+	| name = FillInVariable # fillInVarNameInExpression
+	| value = String # textValueInExpression
 ;
 
-unaryOperatorForExpression
+unaryOperator
 :
 	operator =
 	(
@@ -87,6 +77,31 @@ binaryOperatorArithPoint
 		| Modulus
 	)
 ;
+
+constant
+:
+	name =
+	(
+		True
+		| False
+		| E
+		| I
+		| Infinity
+		| Pi
+	)
+;
+
+function:
+(
+		name = FunctionName LeftParenthesis
+		(
+			arguments += expression
+			(
+				ArgumentSeparator arguments += expression
+			)*
+		)? RightParenthesis
+	)
+	;
 
 list
 :

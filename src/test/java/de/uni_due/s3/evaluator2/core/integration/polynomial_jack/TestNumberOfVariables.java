@@ -52,7 +52,7 @@ public class TestNumberOfVariables extends TestIntegration {
 
 	@Test
 	public void testNumberOfVariables3() throws EvaluatorException, OpenMathException {
-		assertEquals(5, Evaluator.getNumberResult("numberOfVariables('sin(i)*E^(e)+ q/sqrt(s)')",
+		assertEquals(4, Evaluator.getNumberResult("numberOfVariables('sin(i)*E^(e)+ q/sqrt(s)')",
 				numberOfVariablesExerciseVariableMap, numberOfVariablesFillInVariableMap), 0.0);
 	}
 

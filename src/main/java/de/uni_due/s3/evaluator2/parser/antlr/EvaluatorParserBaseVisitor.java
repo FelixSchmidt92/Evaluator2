@@ -18,56 +18,84 @@ public class EvaluatorParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> i
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitBinaryCircumflex(EvaluatorParser.BinaryCircumflexContext ctx) { return visitChildren(ctx); }
+	@Override public T visitParenthesisInExpression(EvaluatorParser.ParenthesisInExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitBinaryRelational(EvaluatorParser.BinaryRelationalContext ctx) { return visitChildren(ctx); }
+	@Override public T visitBinaryOperatorArithLineInExpression(EvaluatorParser.BinaryOperatorArithLineInExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitTextValue(EvaluatorParser.TextValueContext ctx) { return visitChildren(ctx); }
+	@Override public T visitBinaryOperatorRelationalInExpression(EvaluatorParser.BinaryOperatorRelationalInExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitFloatValue(EvaluatorParser.FloatValueContext ctx) { return visitChildren(ctx); }
+	@Override public T visitFloatValueInExpression(EvaluatorParser.FloatValueInExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitNestedFunctionInExpression(EvaluatorParser.NestedFunctionInExpressionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitUnaryOperatorInExpression(EvaluatorParser.UnaryOperatorInExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitUnary(EvaluatorParser.UnaryContext ctx) { return visitChildren(ctx); }
+	@Override public T visitIntegerValueInExpression(EvaluatorParser.IntegerValueInExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitParenthesis(EvaluatorParser.ParenthesisContext ctx) { return visitChildren(ctx); }
+	@Override public T visitTextValueInExpression(EvaluatorParser.TextValueInExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitVariable(EvaluatorParser.VariableContext ctx) { return visitChildren(ctx); }
+	@Override public T visitVariableInExpression(EvaluatorParser.VariableInExpressionContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitConstantInExpression(EvaluatorParser.ConstantInExpressionContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitBinaryOperatorArithPointInExpression(EvaluatorParser.BinaryOperatorArithPointInExpressionContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitBinaryOperatorBooleanInExpression(EvaluatorParser.BinaryOperatorBooleanInExpressionContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitFunctionInExpression(EvaluatorParser.FunctionInExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -81,49 +109,28 @@ public class EvaluatorParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> i
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitExerciseVarName(EvaluatorParser.ExerciseVarNameContext ctx) { return visitChildren(ctx); }
+	@Override public T visitExerciseVarNameInExpression(EvaluatorParser.ExerciseVarNameInExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitBinaryArithPoint(EvaluatorParser.BinaryArithPointContext ctx) { return visitChildren(ctx); }
+	@Override public T visitFillInVarNameInExpression(EvaluatorParser.FillInVarNameInExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitIntegerValue(EvaluatorParser.IntegerValueContext ctx) { return visitChildren(ctx); }
+	@Override public T visitBinaryOperatorCircumflexInExpression(EvaluatorParser.BinaryOperatorCircumflexInExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitBinaryArithLine(EvaluatorParser.BinaryArithLineContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitFillInVarName(EvaluatorParser.FillInVarNameContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitBinaryBoolean(EvaluatorParser.BinaryBooleanContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitUnaryOperatorForExpression(EvaluatorParser.UnaryOperatorForExpressionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitUnaryOperator(EvaluatorParser.UnaryOperatorContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -152,6 +159,20 @@ public class EvaluatorParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> i
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitBinaryOperatorArithPoint(EvaluatorParser.BinaryOperatorArithPointContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitConstant(EvaluatorParser.ConstantContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitFunction(EvaluatorParser.FunctionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

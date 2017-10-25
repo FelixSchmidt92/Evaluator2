@@ -52,7 +52,8 @@ public class OMSEvaluatorSyntaxDictionary {
 		//Deprecated
 		functionSymbolMap.put("sqrt", OMSymbol.ARITH1_ROOT);
 		functionSymbolMap.put("times", OMSymbol.ARITH1_TIMES);
-		functionSymbolMap.put("unaryminus", OMSymbol.ARITH1_UNARY_MINUS);
+		functionSymbolMap.put("unaryMinus", OMSymbol.ARITH1_UNARY_MINUS);
+		functionSymbolMap.put("unaryPlus", OMSymbol.ARITH1_UNARY_PLUS);
 		
 		//The evaluator has no command for these function, because the om-structure will be created with the formeleditor in jack
 		functionSymbolMap.put("product", OMSymbol.ARITH1_PRODUCT);
@@ -103,10 +104,10 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("appendToList", OMSymbol.LIST2_APPEND);
 		functionSymbolMap.put("sizeOfList", OMSymbol.LIST2_SIZE);
 		
-		functionSymbolMap.put("booleanand", OMSymbol.LOGIC1_AND);
+		functionSymbolMap.put("and", OMSymbol.LOGIC1_AND);
 		functionSymbolMap.put("ifthenelse", OMSymbol.LOGICJACK_IFTHENELSE);
-		functionSymbolMap.put("booleannot", OMSymbol.LOGIC1_NOT);
-		functionSymbolMap.put("booleanor", OMSymbol.LOGIC1_OR);
+		functionSymbolMap.put("not", OMSymbol.LOGIC1_NOT);
+		functionSymbolMap.put("or", OMSymbol.LOGIC1_OR);
 		functionSymbolMap.put("constTrue", OMSymbol.LOGIC1_TRUE);
 		functionSymbolMap.put("constFalse", OMSymbol.LOGIC1_FALSE);
 		

@@ -112,7 +112,7 @@ public class TestBooleanAnd extends TestFunctionAbstract {
 	
 	@Test
 	public void testBooleanAndPalette() throws EvaluatorException, OpenMathException {
-		OMOBJ result = Evaluator.evaluate("palette(paletterow(booleanand()))", null, null);
+		OMOBJ result = Evaluator.evaluate("palette(paletterow(and()))", null, null);
 		String expected = "<OMOBJ><OMA>" + 
 				"<OMS name=\"palette\" cd=\"editor1\"/>" +
 				"<OMA>"	+

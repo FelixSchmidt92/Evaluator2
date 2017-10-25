@@ -22,29 +22,33 @@ public class EvaluatorParser extends Parser {
 		Plus=6, Minus=7, BooleanNot=8, Multiplication=9, Division=10, Modulus=11, 
 		LessThan=12, LessThanOrEqual=13, GreaterThan=14, GreaterThanOrEqual=15, 
 		Equal=16, NotEqual=17, BooleanAnd=18, BooleanOr=19, ExerciseVariable=20, 
-		FillInVariable=21, Variable=22, FunctionName=23, ArgumentSeparator=24, 
-		ListArgumentSeparator=25, Integer=26, Float=27, String=28, WS=29;
+		FillInVariable=21, Variable=22, True=23, False=24, E=25, I=26, Infinity=27, 
+		Pi=28, FunctionName=29, ArgumentSeparator=30, ListArgumentSeparator=31, 
+		Integer=32, Float=33, String=34, WS=35;
 	public static final int
-		RULE_expression = 0, RULE_unaryOperatorForExpression = 1, RULE_binaryOperatorBoolean = 2, 
+		RULE_expression = 0, RULE_unaryOperator = 1, RULE_binaryOperatorBoolean = 2, 
 		RULE_binaryOperatorRelational = 3, RULE_binaryOperatorArithLine = 4, RULE_binaryOperatorArithPoint = 5, 
-		RULE_list = 6;
+		RULE_constant = 6, RULE_function = 7, RULE_list = 8;
 	public static final String[] ruleNames = {
-		"expression", "unaryOperatorForExpression", "binaryOperatorBoolean", "binaryOperatorRelational", 
-		"binaryOperatorArithLine", "binaryOperatorArithPoint", "list"
+		"expression", "unaryOperator", "binaryOperatorBoolean", "binaryOperatorRelational", 
+		"binaryOperatorArithLine", "binaryOperatorArithPoint", "constant", "function", 
+		"list"
 	};
 
 	private static final String[] _LITERAL_NAMES = {
 		null, "'('", "')'", "'{'", "'}'", "'^'", "'+'", "'-'", "'!'", "'*'", "'/'", 
 		"'%'", "'<'", "'<='", "'>'", "'>='", null, "'!='", "'&&'", "'||'", null, 
-		null, null, null, "','", "';'"
+		null, null, null, null, "'E'", "'I'", "'INFINITY'", "'PI'", null, "','", 
+		"';'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
 		null, "LeftParenthesis", "RightParenthesis", "ListOpen", "ListClose", 
 		"Circumflex", "Plus", "Minus", "BooleanNot", "Multiplication", "Division", 
 		"Modulus", "LessThan", "LessThanOrEqual", "GreaterThan", "GreaterThanOrEqual", 
 		"Equal", "NotEqual", "BooleanAnd", "BooleanOr", "ExerciseVariable", "FillInVariable", 
-		"Variable", "FunctionName", "ArgumentSeparator", "ListArgumentSeparator", 
-		"Integer", "Float", "String", "WS"
+		"Variable", "True", "False", "E", "I", "Infinity", "Pi", "FunctionName", 
+		"ArgumentSeparator", "ListArgumentSeparator", "Integer", "Float", "String", 
+		"WS"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -106,23 +110,37 @@ public class EvaluatorParser extends Parser {
 			super.copyFrom(ctx);
 		}
 	}
-	public static class BinaryCircumflexContext extends ExpressionContext {
+	public static class ParenthesisInExpressionContext extends ExpressionContext {
+		public TerminalNode LeftParenthesis() { return getToken(EvaluatorParser.LeftParenthesis, 0); }
+		public ExpressionContext expression() {
+			return getRuleContext(ExpressionContext.class,0);
+		}
+		public TerminalNode RightParenthesis() { return getToken(EvaluatorParser.RightParenthesis, 0); }
+		public ParenthesisInExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitParenthesisInExpression(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class BinaryOperatorArithLineInExpressionContext extends ExpressionContext {
 		public List<ExpressionContext> expression() {
 			return getRuleContexts(ExpressionContext.class);
 		}
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
-		public TerminalNode Circumflex() { return getToken(EvaluatorParser.Circumflex, 0); }
-		public BinaryCircumflexContext(ExpressionContext ctx) { copyFrom(ctx); }
+		public BinaryOperatorArithLineContext binaryOperatorArithLine() {
+			return getRuleContext(BinaryOperatorArithLineContext.class,0);
+		}
+		public BinaryOperatorArithLineInExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitBinaryCircumflex(this);
+			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitBinaryOperatorArithLineInExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class BinaryRelationalContext extends ExpressionContext {
-		public BinaryOperatorRelationalContext operator;
+	public static class BinaryOperatorRelationalInExpressionContext extends ExpressionContext {
 		public List<ExpressionContext> expression() {
 			return getRuleContexts(ExpressionContext.class);
 		}
@@ -132,92 +150,120 @@ public class EvaluatorParser extends Parser {
 		public BinaryOperatorRelationalContext binaryOperatorRelational() {
 			return getRuleContext(BinaryOperatorRelationalContext.class,0);
 		}
-		public BinaryRelationalContext(ExpressionContext ctx) { copyFrom(ctx); }
+		public BinaryOperatorRelationalInExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitBinaryRelational(this);
+			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitBinaryOperatorRelationalInExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class TextValueContext extends ExpressionContext {
-		public Token value;
-		public TerminalNode String() { return getToken(EvaluatorParser.String, 0); }
-		public TextValueContext(ExpressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitTextValue(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class FloatValueContext extends ExpressionContext {
+	public static class FloatValueInExpressionContext extends ExpressionContext {
 		public Token value;
 		public TerminalNode Float() { return getToken(EvaluatorParser.Float, 0); }
-		public FloatValueContext(ExpressionContext ctx) { copyFrom(ctx); }
+		public FloatValueInExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitFloatValue(this);
+			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitFloatValueInExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class NestedFunctionInExpressionContext extends ExpressionContext {
+	public static class UnaryOperatorInExpressionContext extends ExpressionContext {
+		public UnaryOperatorContext unaryOperator() {
+			return getRuleContext(UnaryOperatorContext.class,0);
+		}
+		public ExpressionContext expression() {
+			return getRuleContext(ExpressionContext.class,0);
+		}
+		public UnaryOperatorInExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitUnaryOperatorInExpression(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class IntegerValueInExpressionContext extends ExpressionContext {
+		public Token value;
+		public TerminalNode Integer() { return getToken(EvaluatorParser.Integer, 0); }
+		public IntegerValueInExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitIntegerValueInExpression(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class TextValueInExpressionContext extends ExpressionContext {
+		public Token value;
+		public TerminalNode String() { return getToken(EvaluatorParser.String, 0); }
+		public TextValueInExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitTextValueInExpression(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class VariableInExpressionContext extends ExpressionContext {
 		public Token name;
-		public ExpressionContext expression;
-		public List<ExpressionContext> arguments = new ArrayList<ExpressionContext>();
-		public TerminalNode LeftParenthesis() { return getToken(EvaluatorParser.LeftParenthesis, 0); }
-		public TerminalNode RightParenthesis() { return getToken(EvaluatorParser.RightParenthesis, 0); }
-		public TerminalNode FunctionName() { return getToken(EvaluatorParser.FunctionName, 0); }
+		public TerminalNode Variable() { return getToken(EvaluatorParser.Variable, 0); }
+		public VariableInExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitVariableInExpression(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class ConstantInExpressionContext extends ExpressionContext {
+		public ConstantContext constant() {
+			return getRuleContext(ConstantContext.class,0);
+		}
+		public ConstantInExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitConstantInExpression(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class BinaryOperatorArithPointInExpressionContext extends ExpressionContext {
 		public List<ExpressionContext> expression() {
 			return getRuleContexts(ExpressionContext.class);
 		}
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
-		public List<TerminalNode> ArgumentSeparator() { return getTokens(EvaluatorParser.ArgumentSeparator); }
-		public TerminalNode ArgumentSeparator(int i) {
-			return getToken(EvaluatorParser.ArgumentSeparator, i);
+		public BinaryOperatorArithPointContext binaryOperatorArithPoint() {
+			return getRuleContext(BinaryOperatorArithPointContext.class,0);
 		}
-		public NestedFunctionInExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
+		public BinaryOperatorArithPointInExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitNestedFunctionInExpression(this);
+			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitBinaryOperatorArithPointInExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class UnaryContext extends ExpressionContext {
-		public UnaryOperatorForExpressionContext operator;
-		public ExpressionContext expression() {
-			return getRuleContext(ExpressionContext.class,0);
+	public static class BinaryOperatorBooleanInExpressionContext extends ExpressionContext {
+		public List<ExpressionContext> expression() {
+			return getRuleContexts(ExpressionContext.class);
 		}
-		public UnaryOperatorForExpressionContext unaryOperatorForExpression() {
-			return getRuleContext(UnaryOperatorForExpressionContext.class,0);
+		public ExpressionContext expression(int i) {
+			return getRuleContext(ExpressionContext.class,i);
 		}
-		public UnaryContext(ExpressionContext ctx) { copyFrom(ctx); }
+		public BinaryOperatorBooleanContext binaryOperatorBoolean() {
+			return getRuleContext(BinaryOperatorBooleanContext.class,0);
+		}
+		public BinaryOperatorBooleanInExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitUnary(this);
+			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitBinaryOperatorBooleanInExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class ParenthesisContext extends ExpressionContext {
-		public TerminalNode LeftParenthesis() { return getToken(EvaluatorParser.LeftParenthesis, 0); }
-		public ExpressionContext expression() {
-			return getRuleContext(ExpressionContext.class,0);
+	public static class FunctionInExpressionContext extends ExpressionContext {
+		public FunctionContext function() {
+			return getRuleContext(FunctionContext.class,0);
 		}
-		public TerminalNode RightParenthesis() { return getToken(EvaluatorParser.RightParenthesis, 0); }
-		public ParenthesisContext(ExpressionContext ctx) { copyFrom(ctx); }
+		public FunctionInExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitParenthesis(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class VariableContext extends ExpressionContext {
-		public Token name;
-		public TerminalNode Variable() { return getToken(EvaluatorParser.Variable, 0); }
-		public VariableContext(ExpressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitVariable(this);
+			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitFunctionInExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -232,87 +278,38 @@ public class EvaluatorParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class ExerciseVarNameContext extends ExpressionContext {
+	public static class ExerciseVarNameInExpressionContext extends ExpressionContext {
 		public Token name;
 		public TerminalNode ExerciseVariable() { return getToken(EvaluatorParser.ExerciseVariable, 0); }
-		public ExerciseVarNameContext(ExpressionContext ctx) { copyFrom(ctx); }
+		public ExerciseVarNameInExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitExerciseVarName(this);
+			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitExerciseVarNameInExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class BinaryArithPointContext extends ExpressionContext {
-		public BinaryOperatorArithPointContext operator;
-		public List<ExpressionContext> expression() {
-			return getRuleContexts(ExpressionContext.class);
-		}
-		public ExpressionContext expression(int i) {
-			return getRuleContext(ExpressionContext.class,i);
-		}
-		public BinaryOperatorArithPointContext binaryOperatorArithPoint() {
-			return getRuleContext(BinaryOperatorArithPointContext.class,0);
-		}
-		public BinaryArithPointContext(ExpressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitBinaryArithPoint(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class IntegerValueContext extends ExpressionContext {
-		public Token value;
-		public TerminalNode Integer() { return getToken(EvaluatorParser.Integer, 0); }
-		public IntegerValueContext(ExpressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitIntegerValue(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class BinaryArithLineContext extends ExpressionContext {
-		public BinaryOperatorArithLineContext operator;
-		public List<ExpressionContext> expression() {
-			return getRuleContexts(ExpressionContext.class);
-		}
-		public ExpressionContext expression(int i) {
-			return getRuleContext(ExpressionContext.class,i);
-		}
-		public BinaryOperatorArithLineContext binaryOperatorArithLine() {
-			return getRuleContext(BinaryOperatorArithLineContext.class,0);
-		}
-		public BinaryArithLineContext(ExpressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitBinaryArithLine(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class FillInVarNameContext extends ExpressionContext {
+	public static class FillInVarNameInExpressionContext extends ExpressionContext {
 		public Token name;
 		public TerminalNode FillInVariable() { return getToken(EvaluatorParser.FillInVariable, 0); }
-		public FillInVarNameContext(ExpressionContext ctx) { copyFrom(ctx); }
+		public FillInVarNameInExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitFillInVarName(this);
+			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitFillInVarNameInExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class BinaryBooleanContext extends ExpressionContext {
-		public BinaryOperatorBooleanContext operator;
+	public static class BinaryOperatorCircumflexInExpressionContext extends ExpressionContext {
 		public List<ExpressionContext> expression() {
 			return getRuleContexts(ExpressionContext.class);
 		}
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
-		public BinaryOperatorBooleanContext binaryOperatorBoolean() {
-			return getRuleContext(BinaryOperatorBooleanContext.class,0);
-		}
-		public BinaryBooleanContext(ExpressionContext ctx) { copyFrom(ctx); }
+		public TerminalNode Circumflex() { return getToken(EvaluatorParser.Circumflex, 0); }
+		public BinaryOperatorCircumflexInExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitBinaryBoolean(this);
+			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitBinaryOperatorCircumflexInExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -328,77 +325,56 @@ public class EvaluatorParser extends Parser {
 		ExpressionContext _prevctx = _localctx;
 		int _startState = 0;
 		enterRecursionRule(_localctx, 0, RULE_expression, _p);
-		int _la;
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(42);
+			setState(35);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case Variable:
 				{
-				_localctx = new VariableContext(_localctx);
+				_localctx = new VariableInExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 
-				setState(15);
-				((VariableContext)_localctx).name = match(Variable);
+				setState(19);
+				((VariableInExpressionContext)_localctx).name = match(Variable);
+				}
+				break;
+			case True:
+			case False:
+			case E:
+			case I:
+			case Infinity:
+			case Pi:
+				{
+				_localctx = new ConstantInExpressionContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
+				setState(20);
+				constant();
 				}
 				break;
 			case FunctionName:
 				{
-				_localctx = new NestedFunctionInExpressionContext(_localctx);
+				_localctx = new FunctionInExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				{
-				setState(16);
-				((NestedFunctionInExpressionContext)_localctx).name = match(FunctionName);
-				setState(17);
-				match(LeftParenthesis);
-				setState(26);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << LeftParenthesis) | (1L << ListOpen) | (1L << Plus) | (1L << Minus) | (1L << BooleanNot) | (1L << ExerciseVariable) | (1L << FillInVariable) | (1L << Variable) | (1L << FunctionName) | (1L << Integer) | (1L << Float) | (1L << String))) != 0)) {
-					{
-					setState(18);
-					((NestedFunctionInExpressionContext)_localctx).expression = expression(0);
-					((NestedFunctionInExpressionContext)_localctx).arguments.add(((NestedFunctionInExpressionContext)_localctx).expression);
-					setState(23);
-					_errHandler.sync(this);
-					_la = _input.LA(1);
-					while (_la==ArgumentSeparator) {
-						{
-						{
-						setState(19);
-						match(ArgumentSeparator);
-						setState(20);
-						((NestedFunctionInExpressionContext)_localctx).expression = expression(0);
-						((NestedFunctionInExpressionContext)_localctx).arguments.add(((NestedFunctionInExpressionContext)_localctx).expression);
-						}
-						}
-						setState(25);
-						_errHandler.sync(this);
-						_la = _input.LA(1);
-					}
-					}
-				}
-
-				setState(28);
-				match(RightParenthesis);
-				}
+				setState(21);
+				function();
 				}
 				break;
 			case LeftParenthesis:
 				{
-				_localctx = new ParenthesisContext(_localctx);
+				_localctx = new ParenthesisInExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(29);
+				setState(22);
 				match(LeftParenthesis);
-				setState(30);
+				setState(23);
 				expression(0);
-				setState(31);
+				setState(24);
 				match(RightParenthesis);
 				}
 				break;
@@ -406,12 +382,12 @@ public class EvaluatorParser extends Parser {
 			case Minus:
 			case BooleanNot:
 				{
-				_localctx = new UnaryContext(_localctx);
+				_localctx = new UnaryOperatorInExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(33);
-				((UnaryContext)_localctx).operator = unaryOperatorForExpression();
-				setState(34);
+				setState(26);
+				unaryOperator();
+				setState(27);
 				expression(12);
 				}
 				break;
@@ -420,136 +396,136 @@ public class EvaluatorParser extends Parser {
 				_localctx = new ListInExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(36);
+				setState(29);
 				list();
 				}
 				break;
 			case Integer:
 				{
-				_localctx = new IntegerValueContext(_localctx);
+				_localctx = new IntegerValueInExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(37);
-				((IntegerValueContext)_localctx).value = match(Integer);
+				setState(30);
+				((IntegerValueInExpressionContext)_localctx).value = match(Integer);
 				}
 				break;
 			case Float:
 				{
-				_localctx = new FloatValueContext(_localctx);
+				_localctx = new FloatValueInExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(38);
-				((FloatValueContext)_localctx).value = match(Float);
+				setState(31);
+				((FloatValueInExpressionContext)_localctx).value = match(Float);
 				}
 				break;
 			case ExerciseVariable:
 				{
-				_localctx = new ExerciseVarNameContext(_localctx);
+				_localctx = new ExerciseVarNameInExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(39);
-				((ExerciseVarNameContext)_localctx).name = match(ExerciseVariable);
+				setState(32);
+				((ExerciseVarNameInExpressionContext)_localctx).name = match(ExerciseVariable);
 				}
 				break;
 			case FillInVariable:
 				{
-				_localctx = new FillInVarNameContext(_localctx);
+				_localctx = new FillInVarNameInExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(40);
-				((FillInVarNameContext)_localctx).name = match(FillInVariable);
+				setState(33);
+				((FillInVarNameInExpressionContext)_localctx).name = match(FillInVariable);
 				}
 				break;
 			case String:
 				{
-				_localctx = new TextValueContext(_localctx);
+				_localctx = new TextValueInExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(41);
-				((TextValueContext)_localctx).value = match(String);
+				setState(34);
+				((TextValueInExpressionContext)_localctx).value = match(String);
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(65);
+			setState(58);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,4,_ctx);
+			_alt = getInterpreter().adaptivePredict(_input,2,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(63);
+					setState(56);
 					_errHandler.sync(this);
-					switch ( getInterpreter().adaptivePredict(_input,3,_ctx) ) {
+					switch ( getInterpreter().adaptivePredict(_input,1,_ctx) ) {
 					case 1:
 						{
-						_localctx = new BinaryCircumflexContext(new ExpressionContext(_parentctx, _parentState));
+						_localctx = new BinaryOperatorCircumflexInExpressionContext(new ExpressionContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
-						setState(44);
+						setState(37);
 						if (!(precpred(_ctx, 11))) throw new FailedPredicateException(this, "precpred(_ctx, 11)");
-						setState(45);
+						setState(38);
 						match(Circumflex);
-						setState(46);
+						setState(39);
 						expression(12);
 						}
 						break;
 					case 2:
 						{
-						_localctx = new BinaryArithPointContext(new ExpressionContext(_parentctx, _parentState));
+						_localctx = new BinaryOperatorArithPointInExpressionContext(new ExpressionContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
-						setState(47);
+						setState(40);
 						if (!(precpred(_ctx, 10))) throw new FailedPredicateException(this, "precpred(_ctx, 10)");
-						setState(48);
-						((BinaryArithPointContext)_localctx).operator = binaryOperatorArithPoint();
-						setState(49);
+						setState(41);
+						binaryOperatorArithPoint();
+						setState(42);
 						expression(11);
 						}
 						break;
 					case 3:
 						{
-						_localctx = new BinaryArithLineContext(new ExpressionContext(_parentctx, _parentState));
+						_localctx = new BinaryOperatorArithLineInExpressionContext(new ExpressionContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
-						setState(51);
+						setState(44);
 						if (!(precpred(_ctx, 9))) throw new FailedPredicateException(this, "precpred(_ctx, 9)");
-						setState(52);
-						((BinaryArithLineContext)_localctx).operator = binaryOperatorArithLine();
-						setState(53);
+						setState(45);
+						binaryOperatorArithLine();
+						setState(46);
 						expression(10);
 						}
 						break;
 					case 4:
 						{
-						_localctx = new BinaryRelationalContext(new ExpressionContext(_parentctx, _parentState));
+						_localctx = new BinaryOperatorRelationalInExpressionContext(new ExpressionContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
-						setState(55);
+						setState(48);
 						if (!(precpred(_ctx, 8))) throw new FailedPredicateException(this, "precpred(_ctx, 8)");
-						setState(56);
-						((BinaryRelationalContext)_localctx).operator = binaryOperatorRelational();
-						setState(57);
+						setState(49);
+						binaryOperatorRelational();
+						setState(50);
 						expression(9);
 						}
 						break;
 					case 5:
 						{
-						_localctx = new BinaryBooleanContext(new ExpressionContext(_parentctx, _parentState));
+						_localctx = new BinaryOperatorBooleanInExpressionContext(new ExpressionContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
-						setState(59);
+						setState(52);
 						if (!(precpred(_ctx, 7))) throw new FailedPredicateException(this, "precpred(_ctx, 7)");
-						setState(60);
-						((BinaryBooleanContext)_localctx).operator = binaryOperatorBoolean();
-						setState(61);
+						setState(53);
+						binaryOperatorBoolean();
+						setState(54);
 						expression(8);
 						}
 						break;
 					}
 					} 
 				}
-				setState(67);
+				setState(60);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,4,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,2,_ctx);
 			}
 			}
 		}
@@ -564,34 +540,34 @@ public class EvaluatorParser extends Parser {
 		return _localctx;
 	}
 
-	public static class UnaryOperatorForExpressionContext extends ParserRuleContext {
+	public static class UnaryOperatorContext extends ParserRuleContext {
 		public Token operator;
 		public TerminalNode Plus() { return getToken(EvaluatorParser.Plus, 0); }
 		public TerminalNode Minus() { return getToken(EvaluatorParser.Minus, 0); }
 		public TerminalNode BooleanNot() { return getToken(EvaluatorParser.BooleanNot, 0); }
-		public UnaryOperatorForExpressionContext(ParserRuleContext parent, int invokingState) {
+		public UnaryOperatorContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_unaryOperatorForExpression; }
+		@Override public int getRuleIndex() { return RULE_unaryOperator; }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitUnaryOperatorForExpression(this);
+			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitUnaryOperator(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final UnaryOperatorForExpressionContext unaryOperatorForExpression() throws RecognitionException {
-		UnaryOperatorForExpressionContext _localctx = new UnaryOperatorForExpressionContext(_ctx, getState());
-		enterRule(_localctx, 2, RULE_unaryOperatorForExpression);
+	public final UnaryOperatorContext unaryOperator() throws RecognitionException {
+		UnaryOperatorContext _localctx = new UnaryOperatorContext(_ctx, getState());
+		enterRule(_localctx, 2, RULE_unaryOperator);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(68);
-			((UnaryOperatorForExpressionContext)_localctx).operator = _input.LT(1);
+			setState(61);
+			((UnaryOperatorContext)_localctx).operator = _input.LT(1);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << Plus) | (1L << Minus) | (1L << BooleanNot))) != 0)) ) {
-				((UnaryOperatorForExpressionContext)_localctx).operator = (Token)_errHandler.recoverInline(this);
+				((UnaryOperatorContext)_localctx).operator = (Token)_errHandler.recoverInline(this);
 			}
 			else {
 				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
@@ -633,7 +609,7 @@ public class EvaluatorParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(70);
+			setState(63);
 			((BinaryOperatorBooleanContext)_localctx).operator = _input.LT(1);
 			_la = _input.LA(1);
 			if ( !(_la==BooleanAnd || _la==BooleanOr) ) {
@@ -683,7 +659,7 @@ public class EvaluatorParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(72);
+			setState(65);
 			((BinaryOperatorRelationalContext)_localctx).operator = _input.LT(1);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << LessThan) | (1L << LessThanOrEqual) | (1L << GreaterThan) | (1L << GreaterThanOrEqual) | (1L << Equal) | (1L << NotEqual))) != 0)) ) {
@@ -729,7 +705,7 @@ public class EvaluatorParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(74);
+			setState(67);
 			((BinaryOperatorArithLineContext)_localctx).operator = _input.LT(1);
 			_la = _input.LA(1);
 			if ( !(_la==Plus || _la==Minus) ) {
@@ -776,7 +752,7 @@ public class EvaluatorParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(76);
+			setState(69);
 			((BinaryOperatorArithPointContext)_localctx).operator = _input.LT(1);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << Multiplication) | (1L << Division) | (1L << Modulus))) != 0)) ) {
@@ -786,6 +762,140 @@ public class EvaluatorParser extends Parser {
 				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
 				_errHandler.reportMatch(this);
 				consume();
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class ConstantContext extends ParserRuleContext {
+		public Token name;
+		public TerminalNode True() { return getToken(EvaluatorParser.True, 0); }
+		public TerminalNode False() { return getToken(EvaluatorParser.False, 0); }
+		public TerminalNode E() { return getToken(EvaluatorParser.E, 0); }
+		public TerminalNode I() { return getToken(EvaluatorParser.I, 0); }
+		public TerminalNode Infinity() { return getToken(EvaluatorParser.Infinity, 0); }
+		public TerminalNode Pi() { return getToken(EvaluatorParser.Pi, 0); }
+		public ConstantContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_constant; }
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitConstant(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final ConstantContext constant() throws RecognitionException {
+		ConstantContext _localctx = new ConstantContext(_ctx, getState());
+		enterRule(_localctx, 12, RULE_constant);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(71);
+			((ConstantContext)_localctx).name = _input.LT(1);
+			_la = _input.LA(1);
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << True) | (1L << False) | (1L << E) | (1L << I) | (1L << Infinity) | (1L << Pi))) != 0)) ) {
+				((ConstantContext)_localctx).name = (Token)_errHandler.recoverInline(this);
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
+				consume();
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class FunctionContext extends ParserRuleContext {
+		public Token name;
+		public ExpressionContext expression;
+		public List<ExpressionContext> arguments = new ArrayList<ExpressionContext>();
+		public TerminalNode LeftParenthesis() { return getToken(EvaluatorParser.LeftParenthesis, 0); }
+		public TerminalNode RightParenthesis() { return getToken(EvaluatorParser.RightParenthesis, 0); }
+		public TerminalNode FunctionName() { return getToken(EvaluatorParser.FunctionName, 0); }
+		public List<ExpressionContext> expression() {
+			return getRuleContexts(ExpressionContext.class);
+		}
+		public ExpressionContext expression(int i) {
+			return getRuleContext(ExpressionContext.class,i);
+		}
+		public List<TerminalNode> ArgumentSeparator() { return getTokens(EvaluatorParser.ArgumentSeparator); }
+		public TerminalNode ArgumentSeparator(int i) {
+			return getToken(EvaluatorParser.ArgumentSeparator, i);
+		}
+		public FunctionContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_function; }
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof EvaluatorParserVisitor ) return ((EvaluatorParserVisitor<? extends T>)visitor).visitFunction(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final FunctionContext function() throws RecognitionException {
+		FunctionContext _localctx = new FunctionContext(_ctx, getState());
+		enterRule(_localctx, 14, RULE_function);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			{
+			setState(73);
+			((FunctionContext)_localctx).name = match(FunctionName);
+			setState(74);
+			match(LeftParenthesis);
+			setState(83);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << LeftParenthesis) | (1L << ListOpen) | (1L << Plus) | (1L << Minus) | (1L << BooleanNot) | (1L << ExerciseVariable) | (1L << FillInVariable) | (1L << Variable) | (1L << True) | (1L << False) | (1L << E) | (1L << I) | (1L << Infinity) | (1L << Pi) | (1L << FunctionName) | (1L << Integer) | (1L << Float) | (1L << String))) != 0)) {
+				{
+				setState(75);
+				((FunctionContext)_localctx).expression = expression(0);
+				((FunctionContext)_localctx).arguments.add(((FunctionContext)_localctx).expression);
+				setState(80);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				while (_la==ArgumentSeparator) {
+					{
+					{
+					setState(76);
+					match(ArgumentSeparator);
+					setState(77);
+					((FunctionContext)_localctx).expression = expression(0);
+					((FunctionContext)_localctx).arguments.add(((FunctionContext)_localctx).expression);
+					}
+					}
+					setState(82);
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+				}
+				}
+			}
+
+			setState(85);
+			match(RightParenthesis);
 			}
 			}
 		}
@@ -828,42 +938,42 @@ public class EvaluatorParser extends Parser {
 
 	public final ListContext list() throws RecognitionException {
 		ListContext _localctx = new ListContext(_ctx, getState());
-		enterRule(_localctx, 12, RULE_list);
+		enterRule(_localctx, 16, RULE_list);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(78);
-			match(ListOpen);
 			setState(87);
+			match(ListOpen);
+			setState(96);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << LeftParenthesis) | (1L << ListOpen) | (1L << Plus) | (1L << Minus) | (1L << BooleanNot) | (1L << ExerciseVariable) | (1L << FillInVariable) | (1L << Variable) | (1L << FunctionName) | (1L << Integer) | (1L << Float) | (1L << String))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << LeftParenthesis) | (1L << ListOpen) | (1L << Plus) | (1L << Minus) | (1L << BooleanNot) | (1L << ExerciseVariable) | (1L << FillInVariable) | (1L << Variable) | (1L << True) | (1L << False) | (1L << E) | (1L << I) | (1L << Infinity) | (1L << Pi) | (1L << FunctionName) | (1L << Integer) | (1L << Float) | (1L << String))) != 0)) {
 				{
-				setState(79);
+				setState(88);
 				((ListContext)_localctx).expression = expression(0);
 				((ListContext)_localctx).arguments.add(((ListContext)_localctx).expression);
-				setState(84);
+				setState(93);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==ListArgumentSeparator) {
 					{
 					{
-					setState(80);
+					setState(89);
 					match(ListArgumentSeparator);
-					setState(81);
+					setState(90);
 					((ListContext)_localctx).expression = expression(0);
 					((ListContext)_localctx).arguments.add(((ListContext)_localctx).expression);
 					}
 					}
-					setState(86);
+					setState(95);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
 				}
 			}
 
-			setState(89);
+			setState(98);
 			match(ListClose);
 			}
 		}
@@ -902,31 +1012,32 @@ public class EvaluatorParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\37^\4\2\t\2\4\3\t"+
-		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\3\2\3\2\3\2\3\2\3\2\3\2\3\2"+
-		"\7\2\30\n\2\f\2\16\2\33\13\2\5\2\35\n\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3"+
-		"\2\3\2\3\2\3\2\3\2\3\2\3\2\5\2-\n\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3"+
-		"\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\7\2B\n\2\f\2\16\2E\13\2\3\3"+
-		"\3\3\3\4\3\4\3\5\3\5\3\6\3\6\3\7\3\7\3\b\3\b\3\b\3\b\7\bU\n\b\f\b\16\b"+
-		"X\13\b\5\bZ\n\b\3\b\3\b\3\b\2\3\2\t\2\4\6\b\n\f\16\2\7\3\2\b\n\3\2\24"+
-		"\25\3\2\16\23\3\2\b\t\3\2\13\r\2h\2,\3\2\2\2\4F\3\2\2\2\6H\3\2\2\2\bJ"+
-		"\3\2\2\2\nL\3\2\2\2\fN\3\2\2\2\16P\3\2\2\2\20\21\b\2\1\2\21-\7\30\2\2"+
-		"\22\23\7\31\2\2\23\34\7\3\2\2\24\31\5\2\2\2\25\26\7\32\2\2\26\30\5\2\2"+
-		"\2\27\25\3\2\2\2\30\33\3\2\2\2\31\27\3\2\2\2\31\32\3\2\2\2\32\35\3\2\2"+
-		"\2\33\31\3\2\2\2\34\24\3\2\2\2\34\35\3\2\2\2\35\36\3\2\2\2\36-\7\4\2\2"+
-		"\37 \7\3\2\2 !\5\2\2\2!\"\7\4\2\2\"-\3\2\2\2#$\5\4\3\2$%\5\2\2\16%-\3"+
-		"\2\2\2&-\5\16\b\2\'-\7\34\2\2(-\7\35\2\2)-\7\26\2\2*-\7\27\2\2+-\7\36"+
-		"\2\2,\20\3\2\2\2,\22\3\2\2\2,\37\3\2\2\2,#\3\2\2\2,&\3\2\2\2,\'\3\2\2"+
-		"\2,(\3\2\2\2,)\3\2\2\2,*\3\2\2\2,+\3\2\2\2-C\3\2\2\2./\f\r\2\2/\60\7\7"+
-		"\2\2\60B\5\2\2\16\61\62\f\f\2\2\62\63\5\f\7\2\63\64\5\2\2\r\64B\3\2\2"+
-		"\2\65\66\f\13\2\2\66\67\5\n\6\2\678\5\2\2\f8B\3\2\2\29:\f\n\2\2:;\5\b"+
-		"\5\2;<\5\2\2\13<B\3\2\2\2=>\f\t\2\2>?\5\6\4\2?@\5\2\2\n@B\3\2\2\2A.\3"+
-		"\2\2\2A\61\3\2\2\2A\65\3\2\2\2A9\3\2\2\2A=\3\2\2\2BE\3\2\2\2CA\3\2\2\2"+
-		"CD\3\2\2\2D\3\3\2\2\2EC\3\2\2\2FG\t\2\2\2G\5\3\2\2\2HI\t\3\2\2I\7\3\2"+
-		"\2\2JK\t\4\2\2K\t\3\2\2\2LM\t\5\2\2M\13\3\2\2\2NO\t\6\2\2O\r\3\2\2\2P"+
-		"Y\7\5\2\2QV\5\2\2\2RS\7\33\2\2SU\5\2\2\2TR\3\2\2\2UX\3\2\2\2VT\3\2\2\2"+
-		"VW\3\2\2\2WZ\3\2\2\2XV\3\2\2\2YQ\3\2\2\2YZ\3\2\2\2Z[\3\2\2\2[\\\7\6\2"+
-		"\2\\\17\3\2\2\2\t\31\34,ACVY";
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3%g\4\2\t\2\4\3\t\3"+
+		"\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\3\2\3\2\3\2\3"+
+		"\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\5\2&\n\2\3\2\3"+
+		"\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2"+
+		"\7\2;\n\2\f\2\16\2>\13\2\3\3\3\3\3\4\3\4\3\5\3\5\3\6\3\6\3\7\3\7\3\b\3"+
+		"\b\3\t\3\t\3\t\3\t\3\t\7\tQ\n\t\f\t\16\tT\13\t\5\tV\n\t\3\t\3\t\3\n\3"+
+		"\n\3\n\3\n\7\n^\n\n\f\n\16\na\13\n\5\nc\n\n\3\n\3\n\3\n\2\3\2\13\2\4\6"+
+		"\b\n\f\16\20\22\2\b\3\2\b\n\3\2\24\25\3\2\16\23\3\2\b\t\3\2\13\r\3\2\31"+
+		"\36\2p\2%\3\2\2\2\4?\3\2\2\2\6A\3\2\2\2\bC\3\2\2\2\nE\3\2\2\2\fG\3\2\2"+
+		"\2\16I\3\2\2\2\20K\3\2\2\2\22Y\3\2\2\2\24\25\b\2\1\2\25&\7\30\2\2\26&"+
+		"\5\16\b\2\27&\5\20\t\2\30\31\7\3\2\2\31\32\5\2\2\2\32\33\7\4\2\2\33&\3"+
+		"\2\2\2\34\35\5\4\3\2\35\36\5\2\2\16\36&\3\2\2\2\37&\5\22\n\2 &\7\"\2\2"+
+		"!&\7#\2\2\"&\7\26\2\2#&\7\27\2\2$&\7$\2\2%\24\3\2\2\2%\26\3\2\2\2%\27"+
+		"\3\2\2\2%\30\3\2\2\2%\34\3\2\2\2%\37\3\2\2\2% \3\2\2\2%!\3\2\2\2%\"\3"+
+		"\2\2\2%#\3\2\2\2%$\3\2\2\2&<\3\2\2\2\'(\f\r\2\2()\7\7\2\2);\5\2\2\16*"+
+		"+\f\f\2\2+,\5\f\7\2,-\5\2\2\r-;\3\2\2\2./\f\13\2\2/\60\5\n\6\2\60\61\5"+
+		"\2\2\f\61;\3\2\2\2\62\63\f\n\2\2\63\64\5\b\5\2\64\65\5\2\2\13\65;\3\2"+
+		"\2\2\66\67\f\t\2\2\678\5\6\4\289\5\2\2\n9;\3\2\2\2:\'\3\2\2\2:*\3\2\2"+
+		"\2:.\3\2\2\2:\62\3\2\2\2:\66\3\2\2\2;>\3\2\2\2<:\3\2\2\2<=\3\2\2\2=\3"+
+		"\3\2\2\2><\3\2\2\2?@\t\2\2\2@\5\3\2\2\2AB\t\3\2\2B\7\3\2\2\2CD\t\4\2\2"+
+		"D\t\3\2\2\2EF\t\5\2\2F\13\3\2\2\2GH\t\6\2\2H\r\3\2\2\2IJ\t\7\2\2J\17\3"+
+		"\2\2\2KL\7\37\2\2LU\7\3\2\2MR\5\2\2\2NO\7 \2\2OQ\5\2\2\2PN\3\2\2\2QT\3"+
+		"\2\2\2RP\3\2\2\2RS\3\2\2\2SV\3\2\2\2TR\3\2\2\2UM\3\2\2\2UV\3\2\2\2VW\3"+
+		"\2\2\2WX\7\4\2\2X\21\3\2\2\2Yb\7\5\2\2Z_\5\2\2\2[\\\7!\2\2\\^\5\2\2\2"+
+		"][\3\2\2\2^a\3\2\2\2_]\3\2\2\2_`\3\2\2\2`c\3\2\2\2a_\3\2\2\2bZ\3\2\2\2"+
+		"bc\3\2\2\2cd\3\2\2\2de\7\6\2\2e\23\3\2\2\2\t%:<RU_b";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

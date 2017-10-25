@@ -7,6 +7,7 @@ import java.util.HashMap;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator2.Evaluator;
+import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
@@ -58,10 +59,10 @@ public class TestOMToIntegerVisitor {
 		new OMToIntegerVisitor().visit(obj);
 	}
 
-	@Test(expected = NoRepresentationAvailableException.class)
+	@Test
 	public void TestOMIntegerVisitor7() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("'True'", new HashMap<>(), new HashMap<>());
-		new OMToIntegerVisitor().visit(obj);
+		assertEquals(OMSymbol.LOGIC1_TRUE, obj.getOMS());
 	}
 
 	@Test(expected = NoRepresentationAvailableException.class)

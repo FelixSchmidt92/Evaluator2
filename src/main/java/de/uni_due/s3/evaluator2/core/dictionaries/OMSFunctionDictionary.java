@@ -14,6 +14,7 @@ import de.uni_due.s3.evaluator2.core.function.arith1.Root;
 import de.uni_due.s3.evaluator2.core.function.arith1.Sum;
 import de.uni_due.s3.evaluator2.core.function.arith1.Times;
 import de.uni_due.s3.evaluator2.core.function.arith1.UnaryMinus;
+import de.uni_due.s3.evaluator2.core.function.arith1.UnaryPlus;
 import de.uni_due.s3.evaluator2.core.function.arith_jack.IEEERemainder;
 import de.uni_due.s3.evaluator2.core.function.arith_jack.Max;
 import de.uni_due.s3.evaluator2.core.function.arith_jack.Min;
@@ -184,6 +185,7 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.ARITH1_ROOT, new Root());
 		functions.put(OMSymbol.ARITH1_TIMES, new Times());
 		functions.put(OMSymbol.ARITH1_UNARY_MINUS, new UnaryMinus());
+		functions.put(OMSymbol.ARITH1_UNARY_PLUS, new UnaryPlus());
 		functions.put(OMSymbol.ARITH1_PRODUCT, new Product());
 		functions.put(OMSymbol.ARITH1_SUM, new Sum());
 		
