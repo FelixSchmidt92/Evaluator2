@@ -6,10 +6,10 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
+import de.uni_due.s3.evaluator2.core.visitor.operation.OMToResultVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
@@ -49,7 +49,7 @@ public class TestGetDenominator extends TestFunctionAbstract {
 	@Test
 	public void TestGetDenominatorCaseIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ t = ExpressionParser.parse("getDenominator(2/3)", null, null);
-		OMOBJ actual = OMExecutor.execute(t);
+		OMOBJ actual = new OMToResultVisitor().execute(t);
 
 		assertEquals(OMCreator.createOMI(3), actual.getOMI());
 	}
@@ -57,7 +57,7 @@ public class TestGetDenominator extends TestFunctionAbstract {
 	@Test
 	public void TestGetDenominatorCaseIntegrationWithFloat() throws OpenMathException, EvaluatorException {
 		OMOBJ t = ExpressionParser.parse("getDenominator(2/3.3)", null, null);
-		OMOBJ actual = OMExecutor.execute(t);
+		OMOBJ actual = new OMToResultVisitor().execute(t);
 
 		assertEquals(OMCreator.createOMF(3.3), actual.getOMF());
 	}

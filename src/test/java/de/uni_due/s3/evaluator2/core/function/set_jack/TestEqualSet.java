@@ -8,10 +8,10 @@ import java.util.List;
 
 import org.junit.Test;
 
-import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
+import de.uni_due.s3.evaluator2.core.visitor.operation.OMToResultVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
@@ -123,7 +123,7 @@ public class TestEqualSet extends TestFunctionAbstract {
 	@Test
 	public void testEqualSetIntegration1() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("equalSet({1;2;3;4},{1;2;3})", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		assertEquals(OMSymbol.LOGIC1_FALSE, result.getOMS());
 	}
 
@@ -131,7 +131,7 @@ public class TestEqualSet extends TestFunctionAbstract {
 	public void testEqualSetIntegration2() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser
 				.parse("equalSet({1;'test';vector(1,2,3)},{1;'test';vector(1,2,3)})", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		assertEquals(OMSymbol.LOGIC1_TRUE, result.getOMS());
 	}
 
@@ -139,49 +139,49 @@ public class TestEqualSet extends TestFunctionAbstract {
 	public void testEqualSetIntegration3() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("equalSet({1;'test';vector(1,2,3);4},{1;'test';4})", null,
 				null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		assertEquals(OMSymbol.LOGIC1_FALSE, result.getOMS());
 	}
 
 	@Test
 	public void testEqualSetIntegrationArgsNotInSet1() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("equalSet({1;'Test'},1)", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		assertEquals(OMSymbol.LOGIC1_FALSE, result.getOMS());
 	}
 	
 	@Test
 	public void testEqualSetIntegrationArgsNotInSet2() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("equalSet({1},1)", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		assertEquals(OMSymbol.LOGIC1_TRUE, result.getOMS());
 	}
 
 	@Test
 	public void testEqualSetWithZeroArgs1() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("equalSet({}, {2;3})", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		assertEquals(OMSymbol.LOGIC1_FALSE, result.getOMS());
 	}
 
 	@Test
 	public void testEqualSetWithZeroArgs2() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("equalSet({}, {})", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		assertEquals(OMSymbol.LOGIC1_TRUE, result.getOMS());
 	}
 	
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testEqualSetWithLessArgs() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("equalSet({})", null, null);
-		OMExecutor.execute(omobj);
+		new OMToResultVisitor().execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testEqualSetWithMoreArgs() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("equalSet({}, {}, 1)", null, null);
-		OMExecutor.execute(omobj);
+		new OMToResultVisitor().execute(omobj);
 		fail();
 	}
 }

@@ -8,9 +8,9 @@ import java.util.HashMap;
 
 import org.junit.Test;
 
-import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
+import de.uni_due.s3.evaluator2.core.visitor.operation.OMToResultVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
@@ -73,7 +73,7 @@ public class TestRandom extends TestFunctionAbstract {
 		OMOBJ p = ExpressionParser.parse("random()", null, null); // Test for
 																	// Empty
 																	// Arguments!
-		OMExecutor.execute(p);
+		new OMToResultVisitor().execute(p);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
@@ -81,7 +81,7 @@ public class TestRandom extends TestFunctionAbstract {
 		OMOBJ p = ExpressionParser.parse("random(2)", null, null); // Test for
 																	// Empty
 																	// Arguments!
-		OMExecutor.execute(p);
+		new OMToResultVisitor().execute(p);
 		fail();
 	}
 

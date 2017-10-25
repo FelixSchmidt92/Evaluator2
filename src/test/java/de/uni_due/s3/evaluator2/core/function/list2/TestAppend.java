@@ -7,9 +7,9 @@ import java.util.List;
 
 import org.junit.Test;
 
-import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
+import de.uni_due.s3.evaluator2.core.visitor.operation.OMToResultVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
@@ -71,7 +71,7 @@ public class TestAppend {
 	@Test
 	public void testListIntegration1() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("appendToList(list(1,2,3),2)", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		List<Object> l3 = new ArrayList<>();
 		l3.add(OMCreator.createOMI(1));
 		l3.add(OMCreator.createOMI(2));
@@ -83,7 +83,7 @@ public class TestAppend {
 	@Test
 	public void testListIntegration2() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("appendToList(list(1,2,3),{2})", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		List<Object> l3 = new ArrayList<>();
 		l3.add(OMCreator.createOMI(1));
 		l3.add(OMCreator.createOMI(2));
@@ -95,7 +95,7 @@ public class TestAppend {
 	@Test
 	public void testListIntegration3() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("appendToList(list(1,2,3),{vector(1)})", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		List<Object> l3 = new ArrayList<>();
 		l3.add(OMCreator.createOMI(1));
 		l3.add(OMCreator.createOMI(2));
@@ -110,7 +110,7 @@ public class TestAppend {
 	@Test
 	public void testListIntegration4() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("appendToList(2,vector(1))", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		List<Object> l3 = new ArrayList<>();
 		l3.add(OMCreator.createOMI(2));
 		List<Object> arg1 = new ArrayList<>();

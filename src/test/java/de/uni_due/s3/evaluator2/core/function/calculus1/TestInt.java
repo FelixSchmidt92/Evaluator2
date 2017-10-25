@@ -7,8 +7,8 @@ import javax.xml.bind.JAXBException;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator2.Evaluator;
-import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
+import de.uni_due.s3.evaluator2.core.visitor.operation.OMToResultVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMConverter;
@@ -33,7 +33,7 @@ public class TestInt extends TestFunctionAbstract{
 				"</OMA>" + 
 				"</OMBIND>" + 
 				"</OMA></OMOBJ>");
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		OMOBJ expected = OMConverter.toObject("<OMOBJ>"
 				+"<OMA><OMS name=\"power\" cd=\"arith1\"/><OMV name=\"x\"/><OMI>2</OMI></OMA>"
 				+"</OMOBJ>");

@@ -6,9 +6,9 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
+import de.uni_due.s3.evaluator2.core.visitor.operation.OMToResultVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
@@ -97,7 +97,7 @@ public class TestFactorial extends TestFunctionAbstract{
 	@Test
 	public void testFactorialIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("factorial(5)", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		assertEquals(OMCreator.createOMI(120), result.getOMI());
 	}
 }

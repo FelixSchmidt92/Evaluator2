@@ -24,7 +24,7 @@ import de.uni_due.s3.evaluator2.core.function.relation1.GreaterThanOrEqual;
 import de.uni_due.s3.evaluator2.core.function.relation1.LessThan;
 import de.uni_due.s3.evaluator2.core.function.relation1.LessThanOrEqual;
 import de.uni_due.s3.evaluator2.core.function.relation1.NotEqual;
-import de.uni_due.s3.evaluator2.core.visitor.OMToLatexVisitor;
+import de.uni_due.s3.evaluator2.core.visitor.syntax.OMToLatexVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedRuntimeException;

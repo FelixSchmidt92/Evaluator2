@@ -6,10 +6,10 @@ import java.util.HashMap;
 
 import org.junit.Test;
 
-import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
 import de.uni_due.s3.evaluator2.core.function.cas_jack.EvaluateInSage;
+import de.uni_due.s3.evaluator2.core.visitor.operation.OMToResultVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
@@ -28,7 +28,7 @@ public class TestEvaluateInSage extends TestFunctionAbstract {
 		exer.put("a", t1);
 
 		OMOBJ t = ExpressionParser.parse("evaluateInSage('[var=a].imag()')", exer, fill);
-		OMOBJ actual = OMExecutor.execute(t);
+		OMOBJ actual = new OMToResultVisitor().execute(t);
 
 		assertEquals(OMCreator.createOMI(0), actual.getOMI());
 	}
@@ -42,7 +42,7 @@ public class TestEvaluateInSage extends TestFunctionAbstract {
 		exer.put("a", t1);
 
 		OMOBJ t = ExpressionParser.parse("evaluateInSage('[var=a].real()')", exer, fill);
-		OMOBJ actual = OMExecutor.execute(t);
+		OMOBJ actual = new OMToResultVisitor().execute(t);
 
 		assertEquals(OMCreator.createOMI(55), actual.getOMI());
 	}
@@ -56,7 +56,7 @@ public class TestEvaluateInSage extends TestFunctionAbstract {
 		exer.put("a", t1);
 
 		OMOBJ t = ExpressionParser.parse("evaluateInSage('s = [var=a].real(); s*([var=a]-53)')", exer, fill);
-		OMOBJ actual = OMExecutor.execute(t);
+		OMOBJ actual = new OMToResultVisitor().execute(t);
 
 		assertEquals(OMCreator.createOMI(110), actual.getOMI());
 	}
@@ -71,7 +71,7 @@ public class TestEvaluateInSage extends TestFunctionAbstract {
 		fill.put(2, t1);
 
 		OMOBJ t = ExpressionParser.parse("evaluateInSage('s = [var=a].real(); s*[pos=2]')", exer, fill);
-		OMOBJ actual = OMExecutor.execute(t);
+		OMOBJ actual = new OMToResultVisitor().execute(t);
 
 		assertEquals(OMCreator.createOMI(25), actual.getOMI());
 	}

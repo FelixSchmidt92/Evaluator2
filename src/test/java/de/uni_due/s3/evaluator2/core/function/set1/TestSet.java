@@ -8,11 +8,11 @@ import java.util.List;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator2.Evaluator;
-import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.ConstructorFunction;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
-import de.uni_due.s3.evaluator2.core.visitor.OMToRVisitor;
+import de.uni_due.s3.evaluator2.core.visitor.operation.OMToResultVisitor;
+import de.uni_due.s3.evaluator2.core.visitor.syntax.OMToRVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMA;
@@ -64,7 +64,7 @@ public class TestSet extends TestFunctionAbstract {
 	@Test
 	public void testSetIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("{1;2;3}", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		List<Object> value = result.getOMA().getOmel();
 		assertEquals(OMCreator.createOMI(1), value.get(1));
 		assertEquals(OMCreator.createOMI(2), value.get(2));
@@ -74,14 +74,14 @@ public class TestSet extends TestFunctionAbstract {
 	@Test
 	public void testSetIntegrationWithZero() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("{}", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		assertEquals(OMCreator.createOMA(OMSymbol.LIST1_LIST, new ArrayList<Object>()), result.getOMA());
 	}
 
 	@Test
 	public void testSetIntegrationAsFunction() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("list(1,2,3)", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		List<Object> value = result.getOMA().getOmel();
 		assertEquals(OMCreator.createOMI(1), value.get(1));
 		assertEquals(OMCreator.createOMI(2), value.get(2));
@@ -91,7 +91,7 @@ public class TestSet extends TestFunctionAbstract {
 	@Test
 	public void testSetIntegrationInBrace() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("{1;2;3}", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		List<Object> value = result.getOMA().getOmel();
 		assertEquals(OMCreator.createOMI(1), value.get(1));
 		assertEquals(OMCreator.createOMI(2), value.get(2));

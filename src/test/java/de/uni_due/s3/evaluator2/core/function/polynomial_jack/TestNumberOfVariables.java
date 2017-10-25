@@ -10,9 +10,9 @@ import javax.xml.bind.JAXBException;
 
 import org.junit.Test;
 
-import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
+import de.uni_due.s3.evaluator2.core.visitor.operation.OMToResultVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
@@ -73,7 +73,7 @@ public class TestNumberOfVariables extends TestFunctionAbstract {
 	@Test
 	public void testEqualsExprIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("numberOfVariables('1+x^3+a')", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		assertEquals(OMCreator.createOMI(2), result.getOMI());
 	}
 }

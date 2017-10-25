@@ -8,9 +8,9 @@ import java.util.List;
 
 import org.junit.Test;
 
-import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
+import de.uni_due.s3.evaluator2.core.visitor.operation.OMToResultVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
@@ -42,7 +42,7 @@ public class TestCos extends TestFunctionAbstract {
 	@Test
 	public void testCosIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("cos(0)", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		assertEquals(OMCreator.createOMI(1), result.getOMI());
 	}
 
@@ -56,21 +56,21 @@ public class TestCos extends TestFunctionAbstract {
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testCosWithLessThanMinParam() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("cos()", null, null);
-		OMExecutor.execute(omobj);
+		new OMToResultVisitor().execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testCosWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("cos(1,3)", null, null);
-		OMExecutor.execute(omobj);
+		new OMToResultVisitor().execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void testCosWithWrongArguments() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("cos('Test')", null, null);
-		OMExecutor.execute(omobj);
+		new OMToResultVisitor().execute(omobj);
 		fail();
 	}
 }

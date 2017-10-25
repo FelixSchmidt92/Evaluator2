@@ -9,9 +9,9 @@ import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
+import de.uni_due.s3.evaluator2.core.visitor.operation.OMToResultVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
@@ -55,21 +55,21 @@ public class TestRandomBetween extends TestFunctionAbstract {
 	public void testRandomBetweenIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ p = ExpressionParser.parse("randomBetween(3,10)", null, null);
 
-		double result = OMExecutor.execute(p).getOMF().getDec();
+		double result = new OMToResultVisitor().execute(p).getOMF().getDec();
 		assertTrue(3 <= result && result < 10);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testRandomBetweenIntegerationTooFewArguments() throws OpenMathException, EvaluatorException {
 		OMOBJ p = ExpressionParser.parse("randomBetween()", null, null);
-		OMExecutor.execute(p);
+		new OMToResultVisitor().execute(p);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void testRandomBetweenIntegerationWithWrongArguments() throws OpenMathException, EvaluatorException {
 		OMOBJ p = ExpressionParser.parse("randomBetween('','')", null, null);
-		OMExecutor.execute(p);
+		new OMToResultVisitor().execute(p);
 		fail();
 	}
 

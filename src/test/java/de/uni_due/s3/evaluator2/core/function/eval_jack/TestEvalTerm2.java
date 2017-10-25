@@ -10,9 +10,9 @@ import javax.xml.bind.JAXBException;
 
 import org.junit.Test;
 
-import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
+import de.uni_due.s3.evaluator2.core.visitor.operation.OMToResultVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
@@ -95,14 +95,14 @@ public class TestEvalTerm2 extends TestFunctionAbstract {
 	@Test
 	public void testEvalTerm2Integration1() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("evalterm2('x+y','1','2')", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		assertEquals(OMCreator.createOMI(3), result.getOMI());
 	}
 
 	@Test
 	public void testEvalTerm2Integration2() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("evalterm2('x+y','1', -3)", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		assertEquals(OMCreator.createOMI(-2), result.getOMI());
 	}
 

@@ -8,10 +8,10 @@ import java.util.List;
 
 import org.junit.Test;
 
-import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
+import de.uni_due.s3.evaluator2.core.visitor.operation.OMToResultVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
@@ -61,7 +61,7 @@ public class TestArcTan2 extends TestFunctionAbstract {
 	@Test
 	public void testArcTan2Integration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("atan2(2,1)", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		assertEquals(OMCreator.createOMF(1.10714871779409), result.getOMF());
 	}
 
@@ -76,21 +76,21 @@ public class TestArcTan2 extends TestFunctionAbstract {
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testArcTan2WithLessThanMinParam() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("atan2(1)", null, null);
-		OMExecutor.execute(omobj);
+		new OMToResultVisitor().execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testArcTan2WithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("atan2(1,3,7)", null, null);
-		OMExecutor.execute(omobj);
+		new OMToResultVisitor().execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void testArcTan2WithWrongArguments() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("atan2('Test',2)", null, null);
-		OMExecutor.execute(omobj);
+		new OMToResultVisitor().execute(omobj);
 		fail();
 	}
 }

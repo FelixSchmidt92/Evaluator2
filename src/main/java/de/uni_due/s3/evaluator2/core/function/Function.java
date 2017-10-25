@@ -3,16 +3,16 @@ package de.uni_due.s3.evaluator2.core.function;
 import java.util.List;
 import java.util.Set;
 
-import de.uni_due.s3.evaluator2.core.visitor.OMToBooleanVisitor;
-import de.uni_due.s3.evaluator2.core.visitor.OMToDoubleVisitor;
-import de.uni_due.s3.evaluator2.core.visitor.OMToIntegerVisitor;
-import de.uni_due.s3.evaluator2.core.visitor.OMToLatexVisitor;
-import de.uni_due.s3.evaluator2.core.visitor.OMToListVisitor;
 import de.uni_due.s3.evaluator2.core.visitor.OMToPaletteVisitor;
-import de.uni_due.s3.evaluator2.core.visitor.OMToRVisitor;
-import de.uni_due.s3.evaluator2.core.visitor.OMToSageVisitor;
-import de.uni_due.s3.evaluator2.core.visitor.OMToStringVisitor;
-import de.uni_due.s3.evaluator2.core.visitor.OMVariableVisitor;
+import de.uni_due.s3.evaluator2.core.visitor.primitve.OMToBooleanVisitor;
+import de.uni_due.s3.evaluator2.core.visitor.primitve.OMToDoubleVisitor;
+import de.uni_due.s3.evaluator2.core.visitor.primitve.OMToIntegerVisitor;
+import de.uni_due.s3.evaluator2.core.visitor.primitve.OMToListVisitor;
+import de.uni_due.s3.evaluator2.core.visitor.primitve.OMToStringVisitor;
+import de.uni_due.s3.evaluator2.core.visitor.syntax.OMToLatexVisitor;
+import de.uni_due.s3.evaluator2.core.visitor.syntax.OMToRVisitor;
+import de.uni_due.s3.evaluator2.core.visitor.syntax.OMToSageVisitor;
+import de.uni_due.s3.evaluator2.core.visitor.syntax.OMVariableVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasException;
@@ -84,7 +84,7 @@ public abstract class Function {
 	public final Object evaluate(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		if (arguments == null)
 			throw new FunctionInvalidArgumentException(this, "The List of arguments is of Type NULL");
-		argsBetweenMinMax(arguments); // Check
+		argsBetweenMinMax(arguments); // Double-Check!
 		return execute(arguments);
 	}
 

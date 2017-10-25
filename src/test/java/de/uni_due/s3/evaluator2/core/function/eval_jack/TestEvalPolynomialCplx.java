@@ -10,9 +10,9 @@ import javax.xml.bind.JAXBException;
 
 import org.junit.Test;
 
-import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
+import de.uni_due.s3.evaluator2.core.visitor.operation.OMToResultVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
@@ -82,14 +82,14 @@ public class TestEvalPolynomialCplx extends TestFunctionAbstract {
 	@Test
 	public void testEvalTerm2Integration1() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("evalPolynomialCplx('x+x', 'x', '1')", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		assertEquals(OMCreator.createOMI(2), result.getOMI());
 	}
 
 	@Test
 	public void testEvalPolynomialIntegration2() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("evalPolynomialCplx('x+2*x', 3*x, -4)", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		assertEquals(OMCreator.createOMI(-4), result.getOMI());
 	}
 

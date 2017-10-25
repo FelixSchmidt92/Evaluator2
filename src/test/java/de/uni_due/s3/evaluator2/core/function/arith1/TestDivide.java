@@ -9,9 +9,9 @@ import java.util.List;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator2.Evaluator;
-import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
+import de.uni_due.s3.evaluator2.core.visitor.operation.OMToResultVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
@@ -63,28 +63,28 @@ public class TestDivide extends TestFunctionAbstract {
 	@Test
 	public void testDivideIntegration1() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("10/5", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		assertEquals(OMCreator.createOMI(2), result.getOMI());
 	}
 
 	@Test
 	public void testDivideIntegration2() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("divide(1,-4)", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		assertEquals(OMCreator.createOMF(-0.25), result.getOMF());
 	}
 
 	@Test(expected = FunctionInvalidArgumentException.class)
 	public void testDivideIntegrationWithWrongParam() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("10/0", null, null);
-		OMExecutor.execute(omobj);
+		new OMToResultVisitor().execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentException.class)
 	public void testDivideIntegrationWithWrongParam2() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("10/(1-1.0)", null, null);
-		OMExecutor.execute(omobj);
+		new OMToResultVisitor().execute(omobj);
 		fail();
 	}
 
@@ -99,7 +99,7 @@ public class TestDivide extends TestFunctionAbstract {
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void testDivideWithWrongArguments() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("10/'test'", null, null);
-		OMExecutor.execute(omobj);
+		new OMToResultVisitor().execute(omobj);
 		fail();
 	}
 	

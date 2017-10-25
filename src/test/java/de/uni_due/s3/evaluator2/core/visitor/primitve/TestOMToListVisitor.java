@@ -1,4 +1,4 @@
-package de.uni_due.s3.evaluator2.core.visitor;
+package de.uni_due.s3.evaluator2.core.visitor.primitve;
 
 import static org.junit.Assert.assertEquals;
 
@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import de.uni_due.s3.evaluator2.Evaluator;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
+import de.uni_due.s3.evaluator2.core.visitor.primitve.OMToListVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMCreator;
@@ -55,7 +56,7 @@ public class TestOMToListVisitor {
 
 	@Test
 	public void TestOMListVisitor5() throws OpenMathException, EvaluatorException {
-		OMOBJ obj = Evaluator.evaluate("PI", new HashMap<>(), new HashMap<>());
+		OMOBJ obj = Evaluator.evaluate("constPi()", new HashMap<>(), new HashMap<>());
 		List<Object> result = new OMToListVisitor().visit(obj);
 		List<Object> expected = new ArrayList<>();
 		expected.add(OMSymbol.NUMS1_PI);

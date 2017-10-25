@@ -1,18 +1,18 @@
-package de.uni_due.s3.evaluator2;
+package de.uni_due.s3.evaluator2.core.visitor.operation;
 
-import javax.xml.bind.JAXBException;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Collection;
+
+import javax.xml.bind.JAXBException;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
+import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMB;
 import de.uni_due.s3.openmath.jaxb.OMBIND;
 import de.uni_due.s3.openmath.jaxb.OME;
@@ -20,11 +20,10 @@ import de.uni_due.s3.openmath.jaxb.OMFOREIGN;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.jaxb.OMR;
 import de.uni_due.s3.openmath.omutils.OMConverter;
-import de.uni_due.s3.openmath.omutils.OMOBJChildNotSupportedException;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 @RunWith(Parameterized.class)
-public class TestOMExecuter {
+public class TestOMToResultVisitor {
 	
 	static Object[][] parameters = {
 			{ "<OMOBJ><OMI>5</OMI></OMOBJ>", 
@@ -37,7 +36,7 @@ public class TestOMExecuter {
 				"<OMOBJ><OMF dec=\"15.36\"/></OMOBJ>",
 				new OME()}, 
 			
-			{ "<OMOBJ><OMS cd=\"arith1\" name=\"plus\"/></OMOBJ>", 
+			{ "<OMOBJ><OMS cd=\"nums1\" name=\"e\"/></OMOBJ>", 
 				"<OMOBJ><OMA><OMS cd=\"arith1\" name=\"plus\"/><OMF dec=\"1.23\"/><OMI>4</OMI></OMA></OMOBJ>", 
 				"<OMOBJ><OMF dec=\"5.23\"/></OMOBJ>",
 				new OMBIND()},
@@ -67,7 +66,7 @@ public class TestOMExecuter {
 	}
 	
 	
-	public TestOMExecuter(String terminalStringToObject, String omaStringToObject, String resultStringToObject, Object foreignChild) {
+	public TestOMToResultVisitor(String terminalStringToObject, String omaStringToObject, String resultStringToObject, Object foreignChild) {
 		this.terminalStringToObject = terminalStringToObject;
 		this.omaStringToObject = omaStringToObject;
 		this.resultStringToObject = resultStringToObject;
@@ -79,7 +78,7 @@ public class TestOMExecuter {
 	public void visitorTestOMOBJ() throws JAXBException, OpenMathException, EvaluatorException {
 		// test OMI, OMF, OMS, OMSTR, OMV
 		OMOBJ current = (OMOBJ) OMConverter.toObject(terminalStringToObject);
-		OMOBJ curResult = OMExecutor.execute(current);
+		OMOBJ curResult = new OMToResultVisitor().execute(current);
 		OMOBJ expected = OMConverter.toObject(terminalStringToObject);
 		assertEquals(expected, curResult);
 	}
@@ -88,13 +87,13 @@ public class TestOMExecuter {
 	@Test
 	public void visitorTestOMA() throws JAXBException, OpenMathException, EvaluatorException {
 		OMOBJ current = OMConverter.toObject(omaStringToObject);
-		OMOBJ curResult = OMExecutor.execute(current);
+		OMOBJ curResult = new OMToResultVisitor().execute(current);
 		OMOBJ expected = OMConverter.toObject(resultStringToObject);
 		assertEquals(expected, curResult);
 	}
 	
 	
-	@Test(expected = OMOBJChildNotSupportedException.class)
+	@Test(expected = NoRepresentationAvailableException.class)
 	public void testNotImplementedOMobject() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = new OMOBJ();
 		
@@ -107,6 +106,6 @@ public class TestOMExecuter {
 		if (foreignChild instanceof OMR)
 			omobj.setOMR((OMR) foreignChild);
 		
-		OMExecutor.execute(omobj);
+		new OMToResultVisitor().execute(omobj);
 	}
 }

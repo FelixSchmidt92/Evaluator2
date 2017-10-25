@@ -10,11 +10,11 @@ import java.util.List;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator2.Evaluator;
-import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.ConstructorFunction;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
-import de.uni_due.s3.evaluator2.core.visitor.OMToLatexVisitor;
+import de.uni_due.s3.evaluator2.core.visitor.operation.OMToResultVisitor;
+import de.uni_due.s3.evaluator2.core.visitor.syntax.OMToLatexVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
@@ -47,7 +47,7 @@ public class TestVector extends TestFunctionAbstract {
 	@Test
 	public void testVectorIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("vector(1,2,3)", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(1));
 		args.add(OMCreator.createOMI(2));
@@ -77,7 +77,7 @@ public class TestVector extends TestFunctionAbstract {
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testVectorWithLessThanMinParam() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("vector()", null, null);
-		OMExecutor.execute(omobj);
+		new OMToResultVisitor().execute(omobj);
 		fail();
 	}
 	

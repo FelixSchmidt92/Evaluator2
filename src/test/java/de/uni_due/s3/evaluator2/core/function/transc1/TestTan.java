@@ -8,9 +8,9 @@ import java.util.List;
 
 import org.junit.Test;
 
-import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
+import de.uni_due.s3.evaluator2.core.visitor.operation.OMToResultVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
@@ -42,7 +42,7 @@ public class TestTan extends TestFunctionAbstract {
 	@Test
 	public void testTanIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("tan(0)", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		assertEquals(OMCreator.createOMI(0), result.getOMI());
 	}
 
@@ -56,21 +56,21 @@ public class TestTan extends TestFunctionAbstract {
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testTanWithLessThanMinParam() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("tan()", null, null);
-		OMExecutor.execute(omobj);
+		new OMToResultVisitor().execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testTanWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("tan(1,3)", null, null);
-		OMExecutor.execute(omobj);
+		new OMToResultVisitor().execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void testTanWithWrongArguments() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("tan('Test')", null, null);
-		OMExecutor.execute(omobj);
+		new OMToResultVisitor().execute(omobj);
 		fail();
 	}
 }

@@ -1,4 +1,4 @@
-package de.uni_due.s3.evaluator2.core.visitor;
+package de.uni_due.s3.evaluator2.core.visitor.primitve;
 
 import static org.junit.Assert.assertEquals;
 
@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import de.uni_due.s3.evaluator2.Evaluator;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
+import de.uni_due.s3.evaluator2.core.visitor.primitve.OMToDoubleVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
@@ -65,7 +66,7 @@ public class TestOMToDoubleVisitor {
 	
 	@Test
 	public void TestOMDoubleVisitor7() throws OpenMathException, EvaluatorException {
-		OMOBJ obj = Evaluator.evaluate("PI", new HashMap<>(), new HashMap<>());
+		OMOBJ obj = Evaluator.evaluate("constPi()", new HashMap<>(), new HashMap<>());
 		Double result = new OMToDoubleVisitor().visit(obj);
 		Double expected = Math.PI;
 		assertEquals(expected, result);

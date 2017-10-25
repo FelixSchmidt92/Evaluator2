@@ -1,8 +1,9 @@
-package de.uni_due.s3.evaluator2.core.visitor;
+package de.uni_due.s3.evaluator2.core.visitor.primitve;
 
 import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.function.Function;
+import de.uni_due.s3.evaluator2.core.visitor.OMToSyntaxVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.openmath.jaxb.OMF;
 import de.uni_due.s3.openmath.jaxb.OMI;
@@ -10,7 +11,7 @@ import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.jaxb.OMSTR;
 import de.uni_due.s3.openmath.jaxb.OMV;
 
-public class OMToRVisitor extends OMToSyntaxVisitor<String> {
+public class OMToStringVisitor extends OMToSyntaxVisitor<String> {
 
 	@Override
 	protected String visit(OMF omf) {
@@ -24,17 +25,12 @@ public class OMToRVisitor extends OMToSyntaxVisitor<String> {
 
 	@Override
 	protected String visit(OMI omi) {
-		//remove leading, this might result in Error in Sage (Sage thinks its octaval)
-		return String.valueOf(Integer.valueOf(omi.getValue()));
+		return omi.getValue();
 	}
 
 	@Override
 	protected String visit(OMSTR omstr) {
-		if (omstr.getContent().equals("")) {
-			return "\"\""; //return an empty String
-		} else {
-			return omstr.getContent();
-		}
+		return omstr.getContent();
 	}
 
 	@Override
@@ -45,7 +41,7 @@ public class OMToRVisitor extends OMToSyntaxVisitor<String> {
 	@Override
 	protected String getSyntaxRepresentationForFunction(Function function, OMS oms, List<Object> omel)
 			throws EvaluatorException {
-		return function.getPartialRSyntax(omel);
+		return function.getPartialStringSyntax(omel);
 	}
 
 }

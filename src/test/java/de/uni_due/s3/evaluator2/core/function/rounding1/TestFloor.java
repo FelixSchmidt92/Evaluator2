@@ -9,9 +9,9 @@ import java.util.List;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator2.Evaluator;
-import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
+import de.uni_due.s3.evaluator2.core.visitor.operation.OMToResultVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
@@ -51,14 +51,14 @@ public class TestFloor extends TestFunctionAbstract {
 	@Test
 	public void testFloorIntegration1() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("floor(12.2)", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		assertEquals(OMCreator.createOMI(12), result.getOMI());
 	}
 
 	@Test
 	public void testFloorIntegration2() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("floor(10)", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		assertEquals(OMCreator.createOMI(10), result.getOMI());
 	}
 	
@@ -73,21 +73,21 @@ public class TestFloor extends TestFunctionAbstract {
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testFloorWithLessThanMinParam() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("floor()", null, null);
-		OMExecutor.execute(omobj);
+		new OMToResultVisitor().execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testFloorWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("floor(1,3)", null, null);
-		OMExecutor.execute(omobj);
+		new OMToResultVisitor().execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void testFloorWithWrongArguments() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("floor('test')", null, null);
-		OMExecutor.execute(omobj);
+		new OMToResultVisitor().execute(omobj);
 		fail();
 	}
 }

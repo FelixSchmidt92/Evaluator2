@@ -8,10 +8,10 @@ import java.util.List;
 
 import org.junit.Test;
 
-import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
+import de.uni_due.s3.evaluator2.core.visitor.operation.OMToResultVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
@@ -95,11 +95,11 @@ public class TestIfThenElse extends TestFunctionAbstract {
 	@Test
 	public void testIfThenEleseIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("ifthenelse('5*3*9>=10','true','false')", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		assertEquals("true", result.getOMSTR().getContent());
 
 		omobj = ExpressionParser.parse("ifthenelse('5*3*10==10','true','false')", null, null);
-		result = OMExecutor.execute(omobj);
+		result = new OMToResultVisitor().execute(omobj);
 		assertEquals("false", result.getOMSTR().getContent());
 	}
 

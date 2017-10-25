@@ -9,10 +9,10 @@ import java.util.List;
 
 import org.junit.Test;
 
-import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
+import de.uni_due.s3.evaluator2.core.visitor.operation.OMToResultVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
@@ -128,21 +128,21 @@ public class TestGetFromList extends TestFunctionAbstract {
 	@Test
 	public void testGetFromListIntegration1() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("getFromList(0,{1;2})", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		assertEquals(OMCreator.createOMI(1), result.getOMI());
 	}
 
 	@Test
 	public void testGetFromListIntegration2() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("getFromList(1, {1;'Test'})", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		assertEquals(OMCreator.createOMSTR("Test"), result.getOMSTR());
 	}
 
 	@Test(expected = FunctionInvalidArgumentException.class)
 	public void testGetFromListIntegration3() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("getFromList(2, {1})", null, null);
-		OMExecutor.execute(omobj);
+		new OMToResultVisitor().execute(omobj);
 		fail();
 	}
 
@@ -150,7 +150,7 @@ public class TestGetFromList extends TestFunctionAbstract {
 	public void testGetFromListIntegration4() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("getFromList(1, {1; matrix(matrixrow(1,2));getFromList(0, {vector(1,2)})})",
 				null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		List<Object> matrix = new ArrayList<Object>();
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(1));
@@ -163,7 +163,7 @@ public class TestGetFromList extends TestFunctionAbstract {
 	public void testGetFromListIntegration5() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser
 				.parse("getFromList(2, {1; matrix(matrixrow(1,2)); getFromList(0, {vector(1,2,7.1); 0})})", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(1));
 		args.add(OMCreator.createOMI(2));
@@ -174,21 +174,21 @@ public class TestGetFromList extends TestFunctionAbstract {
 	@Test(expected = FunctionInvalidArgumentException.class)
 	public void testGetFromListWithZeroArgs() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("getFromList(0, {})", null, null);
-		OMExecutor.execute(omobj);
+		new OMToResultVisitor().execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testGetFromListWithLessArgs() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("getFromList({})", null, null);
-		OMExecutor.execute(omobj);
+		new OMToResultVisitor().execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testGetFromListWithMoreArgs() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("getFromList({}, 0, 4)", null, null);
-		OMExecutor.execute(omobj);
+		new OMToResultVisitor().execute(omobj);
 		fail();
 	}
 	
@@ -203,7 +203,7 @@ public class TestGetFromList extends TestFunctionAbstract {
 		vars.put("p00",p00);
 		
 		OMOBJ omobj = ExpressionParser.parse("getFromList(1, '[var=p0];[var=p00];0')", vars, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		
 		OMOBJ expected = OMCreator.createOMOBJ(OMCreator.createOMI(1));
 		assertEquals(expected, result);

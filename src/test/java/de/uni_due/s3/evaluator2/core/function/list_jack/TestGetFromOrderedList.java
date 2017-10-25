@@ -8,10 +8,10 @@ import java.util.List;
 
 import org.junit.Test;
 
-import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
+import de.uni_due.s3.evaluator2.core.visitor.operation.OMToResultVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
@@ -115,48 +115,48 @@ public class TestGetFromOrderedList extends TestFunctionAbstract {
 	@Test
 	public void testGetFromOrderedListIntegration1() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("getFromOrderedList(0, {1;2})", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		assertEquals(OMCreator.createOMI(1), result.getOMI());
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void testGetFromOrderedListIntegrationWrongArgsInList() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("getFromOrderedList({1;'Test'},1)", null, null);
-		OMExecutor.execute(omobj);
+		new OMToResultVisitor().execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentException.class)
 	public void testGetFromOrderedListIntegrationWithOutOfBounds() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("getFromOrderedList(2, {1})", null, null);
-		OMExecutor.execute(omobj);
+		new OMToResultVisitor().execute(omobj);
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void testGetFromOrderedListIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("getFromOrderedList({matrix(matrixrow(1,2)); vector(1,2)},1)", null, null);
-		OMExecutor.execute(omobj);
+		new OMToResultVisitor().execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentException.class)
 	public void testGetFromOrderedListWithZeroArgs() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("getFromOrderedList(0, {})", null, null);
-		OMExecutor.execute(omobj);
+		new OMToResultVisitor().execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testGetFromOrderedListWithLessArgs() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("getFromOrderedList({})", null, null);
-		OMExecutor.execute(omobj);
+		new OMToResultVisitor().execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testGetFromOrderedListWithMoreArgs() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("getFromOrderedList({}, 0, 4)", null, null);
-		OMExecutor.execute(omobj);
+		new OMToResultVisitor().execute(omobj);
 		fail();
 	}
 }

@@ -10,9 +10,9 @@ import javax.xml.bind.JAXBException;
 
 import org.junit.Test;
 
-import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
+import de.uni_due.s3.evaluator2.core.visitor.operation.OMToResultVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
@@ -62,7 +62,7 @@ public class TestExpand extends TestFunctionAbstract {
 	@Test
 	public void testDegreeWrtIntegration1() throws OpenMathException, JAXBException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("expand((2 + x) * (x - 2))", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		assertEquals(OMConverter.toElement(OMConverter.toObject(
 				"<OMOBJ><OMA><OMS name=\"plus\" cd=\"arith1\"/><OMA><OMS name=\"power\" cd=\"arith1\"/><OMV name=\"x\"/><OMI>2</OMI></OMA><OMI>-4</OMI></OMA></OMOBJ>")),
 				result.getOMA());
@@ -71,7 +71,7 @@ public class TestExpand extends TestFunctionAbstract {
 	@Test
 	public void testDegreeWrtIntegration2() throws OpenMathException, JAXBException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("expand('(x - 2)*(2 + x)')", null, null);
-		OMOBJ result = OMExecutor.execute(omobj);
+		OMOBJ result = new OMToResultVisitor().execute(omobj);
 		assertEquals(OMConverter.toElement(OMConverter.toObject(
 				"<OMOBJ><OMA><OMS name=\"plus\" cd=\"arith1\"/><OMA><OMS name=\"power\" cd=\"arith1\"/><OMV name=\"x\"/><OMI>2</OMI></OMA><OMI>-4</OMI></OMA></OMOBJ>")),
 				result.getOMA());

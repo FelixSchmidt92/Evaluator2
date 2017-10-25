@@ -6,10 +6,10 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
+import de.uni_due.s3.evaluator2.core.visitor.operation.OMToResultVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMA;
@@ -71,27 +71,27 @@ public class TestRandomMatrixRank extends TestFunctionAbstract {
 	public void testRandomMatrixRankIntegration4Arguments() throws OpenMathException, EvaluatorException {
 		OMOBJ t = ExpressionParser.parse("randomMatrixRank('QQ', 2, 3, 2)", null, null);
 
-		OMExecutor.execute(t);
+		new OMToResultVisitor().execute(t);
 	}
 
 	@Test
 	public void testRandomMatrixRankIntegration5Arguments() throws OpenMathException, EvaluatorException {
 		OMOBJ t = ExpressionParser.parse("randomMatrixRank('QQ', 2, 3, 2, 10)", null, null);
 
-		OMExecutor.execute(t);
+		new OMToResultVisitor().execute(t);
 	}
 
 	@Test
 	public void testRandomMatrixRankIntegration6Arguments() throws OpenMathException, EvaluatorException {
 		OMOBJ t = ExpressionParser.parse("randomMatrixRank('QQ', '2', '3', '2', '10')", null, null);
 
-		OMExecutor.execute(t);
+		new OMToResultVisitor().execute(t);
 	}
 	
 	@Test
 	public void testRandomMatrixRankIntegration7Arguments() throws OpenMathException, EvaluatorException {
 		OMOBJ t = ExpressionParser.parse("randomMatrixRank(zz(), 2, 3, 2, 10)", null, null);
 
-		OMExecutor.execute(t);
+		new OMToResultVisitor().execute(t);
 	}
 }

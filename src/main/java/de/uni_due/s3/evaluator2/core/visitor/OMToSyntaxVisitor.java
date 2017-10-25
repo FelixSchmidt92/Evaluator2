@@ -21,10 +21,9 @@ import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.jaxb.OMSTR;
 import de.uni_due.s3.openmath.jaxb.OMV;
-import de.uni_due.s3.openmath.omutils.OMObjectNotSupportedException;
 
 /**
- * This is a Template! For implementing an OMOBJ to CAS inherit this class.
+ * This is a Template! For implementing an OMOBJ to Something inherit this class.
  * Implement all methods and Add "2" Methods in Function.
  * 
  * One Method (protected) which references to your implemented Class and calls
@@ -37,7 +36,7 @@ import de.uni_due.s3.openmath.omutils.OMObjectNotSupportedException;
  * 
  * 
  * This Visitor Pattern visits all its Terminals and Functions. By calling the
- * method visit(omElement) the String representation will be returned for this
+ * method visit(omElement) the T representation will be returned for this
  * omElement including its childs.
  * 
  * @author dlux, spobel, frichtscheid
@@ -143,8 +142,8 @@ public abstract class OMToSyntaxVisitor<T> {
 	/**
 	 * Implement here the String-Representation of this OMS-Element
 	 * 
-	 * Note: If this oms is visited, it is an Parameter in a Function, so a Terminal
-	 * like pi, e or i
+	 * Note: If this OMS is visited, it is an Parameter in a Function, so a Terminal
+	 * like pi, e, NaN or i
 	 * 
 	 * @param oms
 	 *            the element which is visited now
@@ -216,11 +215,10 @@ public abstract class OMToSyntaxVisitor<T> {
 											// should not be changed)
 		}
 
-		OMS oms = (OMS) oma.getOmel().get(0); // First element of OMA is always
-												// an OMS
+		OMS oms = (OMS) oma.getOmel().get(0); // First element of OMA is always OMS
 		Function function = null;
 		try {
-		function = OMSFunctionDictionary.getInstance().getFunction(oms);
+			function = OMSFunctionDictionary.getInstance().getFunction(oms);
 		}catch (FunctionNotImplementedRuntimeException er){
 			throw new FunctionNotImplementedException(er.getMessage());
 		}
@@ -233,7 +231,7 @@ public abstract class OMToSyntaxVisitor<T> {
 
 	/**
 	 * Define here which Method in all available Evaluator-Functions should be
-	 * called This Function should return the Representation of it in an String
+	 * called This Function should return the Representation of it in T
 	 * 
 	 * @param function
 	 *            the specific Function which is next to be called
@@ -243,12 +241,8 @@ public abstract class OMToSyntaxVisitor<T> {
 	 *            argumentsShouldBeEvaluated returns true. Not evaluated if it
 	 *            returns false
 	 * @return a String which is in CAS-Syntax
-	 * @throws FunctionInvalidNumberOfArgumentsException
-	 * @throws FunctionInvalidArgumentTypeException
-	 * @throws FunctionInvalidArgumentException
-	 * @throws @throws
-	 *             OMOBJChildNotSupportedException
-	 * @throws OMObjectNotSupportedException
+	 * @throws EvaluatorException
+
 	 */
 	protected abstract T getSyntaxRepresentationForFunction(Function function, OMS oms, List<Object> omel)
 			throws EvaluatorException;

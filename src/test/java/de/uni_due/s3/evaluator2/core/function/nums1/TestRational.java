@@ -8,10 +8,10 @@ import java.util.List;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator2.Evaluator;
-import de.uni_due.s3.evaluator2.OMExecutor;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
+import de.uni_due.s3.evaluator2.core.visitor.operation.OMToResultVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
@@ -73,7 +73,7 @@ public class TestRational extends TestFunctionAbstract {
 	@Test
 	public void testRationalIntegration1() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("rational(10, 5)", null, null);
-		Object result = OMExecutor.execute(omobj);
+		Object result = new OMToResultVisitor().execute(omobj);
 		
 		ArrayList<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMI(10));
@@ -89,7 +89,7 @@ public class TestRational extends TestFunctionAbstract {
 	@Test
 	public void testRationalIntegration2() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("rational(1,-4)", null, null);
-		Object result = OMExecutor.execute(omobj);
+		Object result = new OMToResultVisitor().execute(omobj);
 		
 		ArrayList<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMI(1));
@@ -107,7 +107,7 @@ public class TestRational extends TestFunctionAbstract {
 		OMOBJ omobj = ExpressionParser.parse("rational(10, 0)", null, null);
 		
 
-		Object result = OMExecutor.execute(omobj);
+		Object result = new OMToResultVisitor().execute(omobj);
 		
 		ArrayList<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMI(10));
