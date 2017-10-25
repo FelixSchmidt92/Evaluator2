@@ -28,6 +28,7 @@ import de.uni_due.s3.evaluator2.core.visitor.syntax.OMToLatexVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedRuntimeException;
+import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OMS;
 
@@ -62,10 +63,14 @@ public abstract class BinaryFunction extends Function {
 			}
 
 			if (childFunc instanceof BinaryFunction) {
+				try {
 				if (priorities.get(childFunc.getClass()).compareTo(priorities.get(this.getClass())) > 0) {
 					return "\\left(" + childFunc.getPartialLatexSyntax(childOmel) + "\\right)";
 				} else {
 					return childFunc.getPartialLatexSyntax(childOmel);
+				}
+				} catch (NullPointerException e) {
+					throw new NoRepresentationAvailableException("The BinaryFunction " + this.getClass() + " has no priority defined!");
 				}
 			} else {
 				return childFunc.getPartialLatexSyntax(childOmel);
