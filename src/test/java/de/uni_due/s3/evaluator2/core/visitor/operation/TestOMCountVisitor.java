@@ -1,4 +1,4 @@
-package de.uni_due.s3.evaluator2.core.visitor;
+package de.uni_due.s3.evaluator2.core.visitor.operation;
 
 import static org.junit.Assert.assertEquals;
 
@@ -7,7 +7,7 @@ import java.util.HashMap;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator2.Evaluator;
-import de.uni_due.s3.evaluator2.core.visitor.OMCountVisitor;
+import de.uni_due.s3.evaluator2.core.visitor.operation.OMCountVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OpenMathException;

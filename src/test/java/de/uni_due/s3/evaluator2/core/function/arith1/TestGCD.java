@@ -11,8 +11,8 @@ import org.junit.Test;
 
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
-import de.uni_due.s3.evaluator2.core.visitor.OMToLatexVisitor;
-import de.uni_due.s3.evaluator2.core.visitor.OMToResultVisitor;
+import de.uni_due.s3.evaluator2.core.visitor.operation.OMToResultVisitor;
+import de.uni_due.s3.evaluator2.core.visitor.syntax.OMToLatexVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;

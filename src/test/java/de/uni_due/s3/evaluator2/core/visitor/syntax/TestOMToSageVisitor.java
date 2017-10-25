@@ -1,4 +1,4 @@
-package de.uni_due.s3.evaluator2.core.visitor;
+package de.uni_due.s3.evaluator2.core.visitor.syntax;
 
 import static org.junit.Assert.assertEquals;
 
@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
-import de.uni_due.s3.evaluator2.core.visitor.OMToSageVisitor;
+import de.uni_due.s3.evaluator2.core.visitor.syntax.OMToSageVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OMF;

@@ -4,10 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
-import de.uni_due.s3.evaluator2.core.visitor.OMToDoubleVisitor;
-import de.uni_due.s3.evaluator2.core.visitor.OMToLatexVisitor;
-import de.uni_due.s3.evaluator2.core.visitor.OMToStringVisitor;
-import de.uni_due.s3.evaluator2.core.visitor.OMToResultVisitor;
+import de.uni_due.s3.evaluator2.core.visitor.operation.OMToResultVisitor;
+import de.uni_due.s3.evaluator2.core.visitor.primitve.OMToDoubleVisitor;
+import de.uni_due.s3.evaluator2.core.visitor.primitve.OMToStringVisitor;
+import de.uni_due.s3.evaluator2.core.visitor.syntax.OMToLatexVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
