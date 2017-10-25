@@ -55,10 +55,8 @@ public class Remainder extends BinaryFunction {
 	}
 
 	@Override
-	public String getPartialLatexSyntax(List<Object> arguments)
-			throws EvaluatorException, FunctionException, NoRepresentationAvailableException {
-
-		return getBinaryLatex(arguments.get(0)) + "\\mathbin{\\%}" + getBinaryLatex(arguments.get(1));
+	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException, FunctionException, NoRepresentationAvailableException {
+		return getLatexSyntax(arguments.get(0)) + "\\mathbin{\\%}" + getLatexSyntax(arguments.get(1));
 	}
 
 }

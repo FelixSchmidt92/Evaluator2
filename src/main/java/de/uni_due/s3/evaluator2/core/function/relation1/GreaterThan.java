@@ -52,7 +52,7 @@ public class GreaterThan extends BinaryFunction {
 
 	@Override
 	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException {
-		return getBinaryLatex(arguments.get(0)) + ">" + getBinaryLatex(arguments.get(1));
+		return getLatexSyntax(arguments.get(0)) + ">" + getLatexSyntax(arguments.get(1));
 	}
 
 }

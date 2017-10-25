@@ -304,7 +304,11 @@ public abstract class Function {
 	 * @throws EvaluatorException
 	 */
 	protected final String getLatexSyntax(Object omElement) throws EvaluatorException {
-		return new OMToLatexVisitor().visit(omElement);
+		if (this instanceof BinaryFunction) {
+			return ((BinaryFunction) this).getBinaryLatex(omElement);
+		} else {
+			return new OMToLatexVisitor().visit(omElement);
+		}
 	}
 
 	/**
@@ -404,6 +408,7 @@ public abstract class Function {
 	 */
 	protected final String getSageSyntax(Object omElement) throws EvaluatorException {
 		return new OMToSageVisitor().visit(omElement);
+
 	}
 
 	/**

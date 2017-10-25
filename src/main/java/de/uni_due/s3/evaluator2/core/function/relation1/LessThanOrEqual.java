@@ -55,7 +55,7 @@ public class LessThanOrEqual extends BinaryFunction {
 
 	@Override
 	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException {
-		return getBinaryLatex(arguments.get(0)) + "\\leq" + getBinaryLatex(arguments.get(1));
+		return getLatexSyntax(arguments.get(0)) + "\\leq" + getLatexSyntax(arguments.get(1));
 	}
 
 }

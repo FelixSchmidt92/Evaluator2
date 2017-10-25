@@ -24,6 +24,7 @@ import de.uni_due.s3.evaluator2.core.function.relation1.GreaterThanOrEqual;
 import de.uni_due.s3.evaluator2.core.function.relation1.LessThan;
 import de.uni_due.s3.evaluator2.core.function.relation1.LessThanOrEqual;
 import de.uni_due.s3.evaluator2.core.function.relation1.NotEqual;
+import de.uni_due.s3.evaluator2.core.visitor.OMToLatexVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedRuntimeException;
@@ -43,16 +44,16 @@ import de.uni_due.s3.openmath.jaxb.OMS;
  */
 public abstract class BinaryFunction extends Function {
 
-	public String getBinaryLatex(Object omElement) throws EvaluatorException {
+	protected final String getBinaryLatex(Object omElement) throws EvaluatorException {
 		if (omElement instanceof OMA) {
 			OMA child = (OMA) omElement;
 			List<Object> childOmel = new ArrayList<Object>(child.getOmel().size() - 1);
 			OMS childOMS = (OMS) child.getOmel().get(0);
-			
+
 			Function childFunc = null;
 			try {
-			childFunc = OMSFunctionDictionary.getInstance().getFunction(childOMS);
-			}catch (FunctionNotImplementedRuntimeException er){
+				childFunc = OMSFunctionDictionary.getInstance().getFunction(childOMS);
+			} catch (FunctionNotImplementedRuntimeException er) {
 				throw new FunctionNotImplementedException(er.getMessage());
 			}
 
@@ -61,7 +62,7 @@ public abstract class BinaryFunction extends Function {
 			}
 
 			if (childFunc instanceof BinaryFunction) {
-				if(priorities.get(childFunc.getClass()).compareTo(priorities.get(this.getClass())) > 0) {
+				if (priorities.get(childFunc.getClass()).compareTo(priorities.get(this.getClass())) > 0) {
 					return "\\left(" + childFunc.getPartialLatexSyntax(childOmel) + "\\right)";
 				} else {
 					return childFunc.getPartialLatexSyntax(childOmel);
@@ -70,38 +71,39 @@ public abstract class BinaryFunction extends Function {
 				return childFunc.getPartialLatexSyntax(childOmel);
 			}
 		} else {
-			return getLatexSyntax(omElement);
+			// Do not call the getLatexSyntax-Function in Function so to propagate to the
+			// next child
+			return new OMToLatexVisitor().visit(omElement);
 		}
 	}
-	
-	
-	private static final Map<Class<?>,Integer> priorities;
-		
+
+	private static final Map<Class<?>, Integer> priorities;
+
 	static {
-			priorities = new HashMap<Class<?>,Integer>();
-			priorities.put(UnaryMinus.class, 1);
-			priorities.put(BooleanNot.class, 1);
-			
-			priorities.put(Power.class, 2);
-			priorities.put(Divide.class, 2);
-			priorities.put(Times.class, 2);
-			priorities.put(IEEERemainder.class, 2);
-			priorities.put(Remainder.class, 2);
-			
-			priorities.put(Plus.class, 3);
-			priorities.put(Minus.class, 3);
-			
-			priorities.put(LessThan.class, 5);
-			priorities.put(LessThanOrEqual.class, 5);
-			priorities.put(GreaterThan.class, 5);
-			priorities.put(GreaterThanOrEqual.class, 5);
-			
-			priorities.put(Equal.class, 6);
-			priorities.put(NotEqual.class, 6);
-			
-			priorities.put(BooleanAnd.class, 10);
-			priorities.put(BooleanOr.class, 11);
-			priorities.put(IfThenElse.class, 12);		
-			
-		}
+		priorities = new HashMap<Class<?>, Integer>();
+		priorities.put(UnaryMinus.class, 1);
+		priorities.put(BooleanNot.class, 1);
+
+		priorities.put(Power.class, 2);
+		priorities.put(Divide.class, 2);
+		priorities.put(Times.class, 2);
+		priorities.put(IEEERemainder.class, 2);
+		priorities.put(Remainder.class, 2);
+
+		priorities.put(Plus.class, 3);
+		priorities.put(Minus.class, 3);
+
+		priorities.put(LessThan.class, 5);
+		priorities.put(LessThanOrEqual.class, 5);
+		priorities.put(GreaterThan.class, 5);
+		priorities.put(GreaterThanOrEqual.class, 5);
+
+		priorities.put(Equal.class, 6);
+		priorities.put(NotEqual.class, 6);
+
+		priorities.put(BooleanAnd.class, 10);
+		priorities.put(BooleanOr.class, 11);
+		priorities.put(IfThenElse.class, 12);
+
+	}
 }

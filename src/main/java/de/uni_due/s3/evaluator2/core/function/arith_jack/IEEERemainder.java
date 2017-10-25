@@ -57,6 +57,6 @@ public class IEEERemainder extends BinaryFunction {
 	public String getPartialLatexSyntax(List<Object> arguments)
 			throws EvaluatorException, FunctionException, NoRepresentationAvailableException {
 
-		return getBinaryLatex(arguments.get(0)) + "\\mathbin{\\%}" + getBinaryLatex(arguments.get(1));
+		return getLatexSyntax(arguments.get(0)) + "\\mathbin{\\%}" + getLatexSyntax(arguments.get(1));
 	}
 }

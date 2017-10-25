@@ -40,13 +40,11 @@ public class BooleanNot extends BinaryFunction {
 
 	@Override
 	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
-
-		return "not(" + getSageSyntax(arguments.get(0)) + ")";
+		return "not(" + getLatexSyntax(arguments.get(0)) + ")";
 	}
 
 	@Override
 	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException {
-
-		return "\\neg" + getBinaryLatex(arguments.get(0));
+		return "\\neg" + getLatexSyntax(arguments.get(0));
 	}
 }

@@ -63,10 +63,8 @@ public class Times extends BinaryFunction {
 	}
 	
 	@Override
-	public String getPartialLatexSyntax(List<Object> arguments)
-			throws EvaluatorException {
-		
-		return getBinaryLatex(arguments.get(0)) + " \\cdot " + getBinaryLatex(arguments.get(1));
+	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException {
+		return getLatexSyntax(arguments.get(0)) + " \\cdot " + getLatexSyntax(arguments.get(1));
 	}
 	
 	@Override
