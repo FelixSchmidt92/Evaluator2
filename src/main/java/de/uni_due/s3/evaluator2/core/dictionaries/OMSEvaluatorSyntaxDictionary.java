@@ -30,11 +30,11 @@ public class OMSEvaluatorSyntaxDictionary {
 	 * OMSEvaluatorSyntaxDictionary. Here are the Names and the corresponding
 	 * Symbols listed
 	 * 
-	 * If another Function for this Evaluator is written you have to add it here
-	 * and in OMSFunctionDictionary
+	 * If another Function for this Evaluator is written you have to add it here and
+	 * in OMSFunctionDictionary
 	 * 
-	 * Also add the OMSymbol in OMSymbol, so referencing this new Function can
-	 * be made easy!
+	 * Also add the OMSymbol in OMSymbol, so referencing this new Function can be
+	 * made easy!
 	 */
 	private OMSEvaluatorSyntaxDictionary() {
 
@@ -49,28 +49,29 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("plus", OMSymbol.ARITH1_PLUS);
 		functionSymbolMap.put("pow", OMSymbol.ARITH1_POWER);
 		functionSymbolMap.put("root", OMSymbol.ARITH1_ROOT);
-		//Deprecated
+		// Deprecated
 		functionSymbolMap.put("sqrt", OMSymbol.ARITH1_ROOT);
 		functionSymbolMap.put("times", OMSymbol.ARITH1_TIMES);
 		functionSymbolMap.put("unaryMinus", OMSymbol.ARITH1_UNARY_MINUS);
 		functionSymbolMap.put("unaryPlus", OMSymbol.ARITH1_UNARY_PLUS);
-		
-		//The evaluator has no command for these function, because the om-structure will be created with the formeleditor in jack
+
+		// The evaluator has no command for these function, because the om-structure
+		// will be created with the formeleditor in jack
 		functionSymbolMap.put("product", OMSymbol.ARITH1_PRODUCT);
 		functionSymbolMap.put("sum", OMSymbol.ARITH1_SUM);
-		
+
 		functionSymbolMap.put("convertToBinary", OMSymbol.BINARYJACK_CONVERTTOBINARY);
 		functionSymbolMap.put("equalsBinary", OMSymbol.BINARYJACK_EQUALSBINARY);
 
 		functionSymbolMap.put("evaluateInR", OMSymbol.CASJACK_EVALUATEINR);
 		functionSymbolMap.put("evaluateInSage", OMSymbol.CASJACK_EVALUATEINSAGE);
-		
-		//TODO: should the integral calculus function be added?
-		
+
+		// TODO: should the integral calculus function be added?
+
 		functionSymbolMap.put("palette", OMSymbol.EDITOR1_PALETTE);
 		functionSymbolMap.put("palettetab", OMSymbol.EDITOR1_PALETTE_TAB);
 		functionSymbolMap.put("paletterow", OMSymbol.EDITOR1_PALETTE_ROW);
-		
+
 		functionSymbolMap.put("eval", OMSymbol.EVALJACK_EVAL);
 		functionSymbolMap.put("evalcplx", OMSymbol.POLYNOMIAL1_EXPAND);
 		functionSymbolMap.put("evalEq", OMSymbol.EVALJACK_EVALEQ);
@@ -89,35 +90,39 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("randomEchelonizableMatrix", OMSymbol.LINALGJACK_RANDOMMATRIXRANK);
 
 		functionSymbolMap.put("det", OMSymbol.LINALG1_DETERMINANT);
-		
+
 		functionSymbolMap.put("matrix", OMSymbol.LINALG2_MATRIX);
 		functionSymbolMap.put("matrixrow", OMSymbol.LINALG2_MATRIXROW);
 		functionSymbolMap.put("vector", OMSymbol.LINALG2_VECTOR);
-		
+
 		functionSymbolMap.put("chooseFromComplement", OMSymbol.LISTJACK_CHOOSEFROMCOMPLEMENT);
 		functionSymbolMap.put("getFromList", OMSymbol.LISTJACK_GETFROMLIST);
 		functionSymbolMap.put("getFromOrderedList", OMSymbol.LISTJACK_GETFROMORDEREDLIST);
 		functionSymbolMap.put("getRandomFromList", OMSymbol.LISTJACK_GETRANDOMFROMSET);
-		
+		// Deprecated
+		functionSymbolMap.put("getFromOrderedSet", OMSymbol.LISTJACK_GETFROMORDEREDLIST);
+		// Deprecated
+		functionSymbolMap.put("getFromSet", OMSymbol.LISTJACK_GETFROMLIST);
+
 		functionSymbolMap.put("list", OMSymbol.LIST1_LIST);
-		
+
 		functionSymbolMap.put("appendToList", OMSymbol.LIST2_APPEND);
 		functionSymbolMap.put("sizeOfList", OMSymbol.LIST2_SIZE);
-		
+
 		functionSymbolMap.put("and", OMSymbol.LOGIC1_AND);
 		functionSymbolMap.put("ifthenelse", OMSymbol.LOGICJACK_IFTHENELSE);
 		functionSymbolMap.put("not", OMSymbol.LOGIC1_NOT);
-		functionSymbolMap.put("or", OMSymbol.LOGIC1_OR);		
-		
+		functionSymbolMap.put("or", OMSymbol.LOGIC1_OR);
+
 		functionSymbolMap.put("mcindex", OMSymbol.MCJACK_MCINDEX);
-		
+
 		functionSymbolMap.put("rational", OMSymbol.NUMS1_RATIONAL);
 
 		functionSymbolMap.put("countBasicOperations", OMSymbol.OPENMATHJACK_COUNTBASICOPERATIONS);
 		functionSymbolMap.put("countNodes", OMSymbol.OPENMATHJACK_COUNTNODES);
 		functionSymbolMap.put("getDenominator", OMSymbol.OPENMATHJACK_GETDENOMINATOR);
 		functionSymbolMap.put("getNumerator", OMSymbol.OPENMATHJACK_GETNUMERATOR);
-		
+
 		functionSymbolMap.put("factorOf", OMSymbol.POLY_COEFFICIENT);
 		functionSymbolMap.put("deg", OMSymbol.POLY_DEGREE_WRT);
 
@@ -127,13 +132,13 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("derive", OMSymbol.POLYNOMIALJACK_DERIVE);
 		functionSymbolMap.put("integrate", OMSymbol.POLYNOMIALJACK_INTEGRATE);
 		functionSymbolMap.put("numberOfVariables", OMSymbol.POLYNOMIALJACK_NUMBEROFVARIABLES);
-		
+
 		functionSymbolMap.put("expand", OMSymbol.POLYNOMIAL1_EXPAND);
-		
+
 		functionSymbolMap.put("random", OMSymbol.RANDOMJACK_RANDOM);
 		functionSymbolMap.put("randomBetween", OMSymbol.RANDOMJACK_RANDOMBETWEEN);
 		functionSymbolMap.put("randomIntegerBetween", OMSymbol.RANDOMJACK_RANDOMINTEGERBETWEEN);
-		
+
 		functionSymbolMap.put("equal", OMSymbol.RELATION1_EQ);
 		functionSymbolMap.put("greaterThanOrEqual", OMSymbol.RELATION1_GEQ);
 		functionSymbolMap.put("greaterThan", OMSymbol.RELATION1_GT);
@@ -144,19 +149,21 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("ceil", OMSymbol.ROUNDING1_CEILING);
 		functionSymbolMap.put("floor", OMSymbol.ROUNDING1_FLOOR);
 		functionSymbolMap.put("round", OMSymbol.ROUNDING1_ROUND);
-		
+
 		functionSymbolMap.put("rint", OMSymbol.ROUNDING_JACK);
 
 		functionSymbolMap.put("equalSet", OMSymbol.SETJACK_EQUALSET);
-		
-		//Deprecated
-		functionSymbolMap.put("getFromOrderedSet", OMSymbol.LISTJACK_GETFROMORDEREDLIST);
-		//Deprecated
-		functionSymbolMap.put("getFromSet", OMSymbol.LISTJACK_GETFROMLIST);
-		
+
+		functionSymbolMap.put("emptySet", OMSymbol.SET1_EMPTYSET);
+		functionSymbolMap.put("in", OMSymbol.SET1_IN);
+		functionSymbolMap.put("intersect", OMSymbol.SET1_INTERSECT);
+		functionSymbolMap.put("notIn", OMSymbol.SET1_NOTIN);
 		functionSymbolMap.put("set", OMSymbol.LIST1_LIST);
+		functionSymbolMap.put("setDiff", OMSymbol.SET1_SETDIFF);
 		functionSymbolMap.put("sizeOfSet", OMSymbol.SET1_SIZE);
-		
+		functionSymbolMap.put("subset", OMSymbol.SET1_SUBSET);
+		functionSymbolMap.put("union", OMSymbol.SET1_UNION);
+
 		functionSymbolMap.put("cc", OMSymbol.SETNAME1_C);
 		functionSymbolMap.put("nn", OMSymbol.SETNAME1_N);
 		functionSymbolMap.put("pp", OMSymbol.SETNAME1_P);
@@ -185,7 +192,7 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("isEmpty", OMSymbol.TESTTERMINALJACK_ISEMPTY);
 		functionSymbolMap.put("isFraction", OMSymbol.TESTTERMINALJACK_ISFRACTION);
 		functionSymbolMap.put("isIntegerNumber", OMSymbol.TESTTERMINALJACK_ISINTEGERNUMBER);
-		functionSymbolMap.put("isNaturalNumber", OMSymbol.TESTTERMINALJACK_ISNATURALNUMBER);		
+		functionSymbolMap.put("isNaturalNumber", OMSymbol.TESTTERMINALJACK_ISNATURALNUMBER);
 		functionSymbolMap.put("isPolynomial", OMSymbol.TESTTERMINALJACK_ISPOLYNOMIAL);
 		functionSymbolMap.put("isRationalNumber", OMSymbol.TESTTERMINALJACK_ISRATIONALNUMBER);
 		functionSymbolMap.put("isRealNumber", OMSymbol.TESTTERMINALJACK_ISREALNUMBER);
@@ -193,10 +200,10 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("isSet", OMSymbol.TESTTERMINALJACK_ISSET);
 
 		functionSymbolMap.put("toDegree", OMSymbol.TRANSCJACK_TODEGREE);
-		//Deprecated
+		// Deprecated
 		functionSymbolMap.put("toDegrees", OMSymbol.TRANSCJACK_TODEGREE);
 		functionSymbolMap.put("toRadian", OMSymbol.TRANSCJACK_TORADIAN);
-		//Deprecated
+		// Deprecated
 		functionSymbolMap.put("toRadians", OMSymbol.TRANSCJACK_TORADIAN);
 
 		functionSymbolMap.put("acos", OMSymbol.TRANSC1_ARCCOS);

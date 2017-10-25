@@ -91,7 +91,14 @@ import de.uni_due.s3.evaluator2.core.function.rounding1.Ceiling;
 import de.uni_due.s3.evaluator2.core.function.rounding1.Floor;
 import de.uni_due.s3.evaluator2.core.function.rounding1.Round;
 import de.uni_due.s3.evaluator2.core.function.rounding_jack.Rint;
+import de.uni_due.s3.evaluator2.core.function.set1.EmptySet;
+import de.uni_due.s3.evaluator2.core.function.set1.In;
+import de.uni_due.s3.evaluator2.core.function.set1.Intersect;
+import de.uni_due.s3.evaluator2.core.function.set1.NotIn;
+import de.uni_due.s3.evaluator2.core.function.set1.Setdiff;
 import de.uni_due.s3.evaluator2.core.function.set1.Size;
+import de.uni_due.s3.evaluator2.core.function.set1.Subset;
+import de.uni_due.s3.evaluator2.core.function.set1.Union;
 import de.uni_due.s3.evaluator2.core.function.set_jack.EqualSet;
 import de.uni_due.s3.evaluator2.core.function.setname1.C;
 import de.uni_due.s3.evaluator2.core.function.setname1.N;
@@ -289,7 +296,14 @@ public class OMSFunctionDictionary {
 
 		functions.put(OMSymbol.SETJACK_EQUALSET, new EqualSet());
 
+		functions.put(OMSymbol.SET1_EMPTYSET, new EmptySet());
+		functions.put(OMSymbol.SET1_IN, new In());
+		functions.put(OMSymbol.SET1_INTERSECT, new Intersect());
+		functions.put(OMSymbol.SET1_NOTIN, new NotIn());
+		functions.put(OMSymbol.SET1_SETDIFF, new Setdiff());
 		functions.put(OMSymbol.SET1_SIZE, new Size());
+		functions.put(OMSymbol.SET1_SUBSET, new Subset());
+		functions.put(OMSymbol.SET1_UNION, new Union());
 		
 		functions.put(OMSymbol.SETNAME1_C, new C());
 		functions.put(OMSymbol.SETNAME1_N, new N());

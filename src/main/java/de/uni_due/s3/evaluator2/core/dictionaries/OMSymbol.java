@@ -32,7 +32,7 @@ public class OMSymbol {
 
 	public static final OMS CASJACK_EVALUATEINR = OMCreator.createOMS("casJACK", "evaluateInR");
 	public static final OMS CASJACK_EVALUATEINSAGE = OMCreator.createOMS("casJACK", "evaluateInSage");
-	
+
 	public static final OMS CALCULUS1_INT = OMCreator.createOMS("calculus1", "int");
 	public static final OMS CALCULUS1_DEFINT = OMCreator.createOMS("calculus1", "defint");
 
@@ -40,15 +40,15 @@ public class OMSymbol {
 	public static final OMS EDITOR1_PALETTE = OMCreator.createOMS("editor1", "palette");
 	public static final OMS EDITOR1_PALETTE_TAB = OMCreator.createOMS("editor1", "palette_tab");
 	public static final OMS EDITOR1_PALETTE_ROW = OMCreator.createOMS("editor1", "palette_row");
-	
+
 	public static final OMS EVALJACK_EVAL = OMCreator.createOMS("evalJACK", "eval");
 	public static final OMS EVALJACK_EVALEQ = OMCreator.createOMS("evalJACK", "evalEq");
 	public static final OMS EVALJACK_EVALPOLYNOMIAL = OMCreator.createOMS("evalJACK", "evalpolynomial");
 	public static final OMS EVALJACK_EVALPOLYNOMIALCPLX = OMCreator.createOMS("evalJACK", "evalPolynomialCplx");
 	public static final OMS EVALJACK_EVALTERM2 = OMCreator.createOMS("evalJACK", "evalterm2");
-	
+
 	public static final OMS FNS1_LAMBDA = OMCreator.createOMS("fns1", "lambda");
-	
+
 	public static final OMS INTEGER1_REMAINDER = OMCreator.createOMS("integer1", "remainder");
 	public static final OMS INTEGER1_FACTORIAL = OMCreator.createOMS("integer1", "factorial");
 
@@ -76,10 +76,10 @@ public class OMSymbol {
 	public static final OMS LISTJACK_GETRANDOMFROMSET = OMCreator.createOMS("listJACK", "getRandomFromSet");
 
 	public static final OMS LIST1_LIST = OMCreator.createOMS("list1", "list");
-	
+
 	public static final OMS LIST2_APPEND = OMCreator.createOMS("list2", "append");
 	public static final OMS LIST2_SIZE = OMCreator.createOMS("list2", "size");
-	
+
 	public static final OMS LOGICJACK_IFTHENELSE = OMCreator.createOMS("logicJACK", "ifthenelse");
 
 	public static final OMS LOGIC1_AND = OMCreator.createOMS("logic1", "and");
@@ -102,7 +102,7 @@ public class OMSymbol {
 	public static final OMS OPENMATHJACK_COUNTNODES = OMCreator.createOMS("openmathJACK", "countNodes");
 	public static final OMS OPENMATHJACK_GETDENOMINATOR = OMCreator.createOMS("openmathJflrACK", "getDenominator");
 	public static final OMS OPENMATHJACK_GETNUMERATOR = OMCreator.createOMS("openmathJACK", "getNumerator");
-	
+
 	public static final OMS POLY_COEFFICIENT = OMCreator.createOMS("poly", "coefficient");
 	public static final OMS POLY_DEGREE_WRT = OMCreator.createOMS("poly", "degree_wrt");
 
@@ -132,11 +132,17 @@ public class OMSymbol {
 	public static final OMS ROUNDING_JACK = OMCreator.createOMS("roundinJACK", "rint");
 
 	public static final OMS SETJACK_EQUALSET = OMCreator.createOMS("setJACK", "equalSet");
-	
+
 	public static final OMS SET1_EMPTYSET = OMCreator.createOMS("set1", "emptyset");
+	public static final OMS SET1_IN = OMCreator.createOMS("set1", "in");
+	public static final OMS SET1_INTERSECT = OMCreator.createOMS("set1", "intersect");
+	public static final OMS SET1_NOTIN = OMCreator.createOMS("set1", "notin");
 	public static final OMS SET1_SET = OMCreator.createOMS("set1", "set");
+	public static final OMS SET1_SETDIFF = OMCreator.createOMS("set1", "setdiff");
 	public static final OMS SET1_SIZE = OMCreator.createOMS("set1", "size");
-	
+	public static final OMS SET1_SUBSET = OMCreator.createOMS("set1", "subset");
+	public static final OMS SET1_UNION = OMCreator.createOMS("set1", "union");
+
 	public static final OMS SETNAME1_C = OMCreator.createOMS("setname1", "C");
 	public static final OMS SETNAME1_N = OMCreator.createOMS("setname1", "N");
 	public static final OMS SETNAME1_P = OMCreator.createOMS("setname1", "P");
@@ -162,11 +168,13 @@ public class OMSymbol {
 	public static final OMS STRINGJACK_TRIM = OMCreator.createOMS("stringJACK", "trim");
 	public static final OMS STRINGJACK_MATCHES = OMCreator.createOMS("stringJACK", "matches");
 	public static final OMS STRINGJACK_TEXTWITHVARIABLES = OMCreator.createOMS("stringJACK", "textWithVariables");
-	
+
 	public static final OMS TESTTERMINALJACK_ISEMPTY = OMCreator.createOMS("testterminalJACK", "isEmpty");
 	public static final OMS TESTTERMINALJACK_ISFRACTION = OMCreator.createOMS("testterminalJACK", "isFraction");
-	public static final OMS TESTTERMINALJACK_ISINTEGERNUMBER = OMCreator.createOMS("testterminalJACK", "isIntegerNumber");
-	public static final OMS TESTTERMINALJACK_ISNATURALNUMBER = OMCreator.createOMS("testterminalJACK", "isNaturalNumber");
+	public static final OMS TESTTERMINALJACK_ISINTEGERNUMBER = OMCreator.createOMS("testterminalJACK",
+			"isIntegerNumber");
+	public static final OMS TESTTERMINALJACK_ISNATURALNUMBER = OMCreator.createOMS("testterminalJACK",
+			"isNaturalNumber");
 	public static final OMS TESTTERMINALJACK_ISPOLYNOMIAL = OMCreator.createOMS("testterminalJACK", "isPolynomial");
 	public static final OMS TESTTERMINALJACK_ISRATIONALNUMBER = OMCreator.createOMS("testterminalJACK", "isRational");
 	public static final OMS TESTTERMINALJACK_ISREALNUMBER = OMCreator.createOMS("testterminalJACK", "isRealNumber");
