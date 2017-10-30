@@ -41,6 +41,7 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("IEEEremainder", OMSymbol.ARITHJACK_IEEEREMAINDER);
 		functionSymbolMap.put("max", OMSymbol.ARITHJACK_MAX);
 		functionSymbolMap.put("min", OMSymbol.ARITHJACK_MIN);
+		functionSymbolMap.put("shorten", OMSymbol.ARITHJACK_SHORTEN);
 
 		functionSymbolMap.put("abs", OMSymbol.ARITH1_ABS);
 		functionSymbolMap.put("divide", OMSymbol.ARITH1_DIVIDE);

@@ -106,7 +106,8 @@ public class TestEvalEq extends TestFunctionAbstract {
 						+ "<OMV name=\"x\"/>" + "<OMI>3</OMI>" + "</OMA>" + "</OMA></OMOBJ>");
 		args.add(arg1.getOMA());
 		args.add(arg2.getOMA());
-		assertEquals("var('x');expand(((((x)^(2) - 5 * x) + 6)) - ((x - 2) * (x - 3)))",
+		assertEquals(
+				"var('x');expand(((( (( (x)^(2) ) - ( (( 5 ) * ( x )) )) ) + ( 6 ))) - ((( (( x ) - ( 2 )) ) * ( (( x ) - ( 3 )) ))))",
 				func.getPartialSageSyntax(args));
 	}
 }

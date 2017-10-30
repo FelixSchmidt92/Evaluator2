@@ -20,18 +20,28 @@ public class IsRationalNumber extends Function {
 
 	@Override
 	protected Object execute(List<Object> arguments) throws EvaluatorException {
+		String toTest = getSageSyntax(arguments.get(0));
 		try {
-			Sage.evaluateInCAS("Rational('" + getSageSyntax(arguments.get(0)) + "')");//Rational('1/3')
+			if (Sage.evaluateInCAS("isinstance(" + toTest + ", sage.rings.rational.Rational)")
+					.equals(OMSymbol.LOGIC1_TRUE)) {
+				return OMSymbol.LOGIC1_TRUE;// Rational('1/3')
+			} else {
+				throw new Exception();
+			}
 		} catch (Exception e) {
 			try {
-				Sage.evaluateInCAS("Rational(RealNumber('" + getSageSyntax(arguments.get(0)) + "'))"); //Rational(1.1)
+				Sage.evaluateInCAS("Rational('" + toTest + "')");// Rational('1/3')
 			} catch (Exception e1) {
-				return OMSymbol.LOGIC1_FALSE;
+				try {
+					Sage.evaluateInCAS("Rational(RealNumber('" + toTest + "'))"); // Rational(1.1)
+				} catch (Exception e2) {
+					return OMSymbol.LOGIC1_FALSE;
+				}
 			}
 		}
 		return OMSymbol.LOGIC1_TRUE;
 	}
-	
+
 	@Override
 	public boolean argumentsShouldBeEvaluated() {
 		return false;

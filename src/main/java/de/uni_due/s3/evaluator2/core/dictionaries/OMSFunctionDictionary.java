@@ -18,6 +18,7 @@ import de.uni_due.s3.evaluator2.core.function.arith1.UnaryPlus;
 import de.uni_due.s3.evaluator2.core.function.arith_jack.IEEERemainder;
 import de.uni_due.s3.evaluator2.core.function.arith_jack.Max;
 import de.uni_due.s3.evaluator2.core.function.arith_jack.Min;
+import de.uni_due.s3.evaluator2.core.function.arith_jack.Shorten;
 import de.uni_due.s3.evaluator2.core.function.binary_jack.ConvertToBinary;
 import de.uni_due.s3.evaluator2.core.function.binary_jack.EqualsBinary;
 import de.uni_due.s3.evaluator2.core.function.calculus1.DefInt;
@@ -183,7 +184,8 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.ARITHJACK_IEEEREMAINDER, new IEEERemainder());
 		functions.put(OMSymbol.ARITHJACK_MAX, new Max());
 		functions.put(OMSymbol.ARITHJACK_MIN, new Min());
-
+		functions.put(OMSymbol.ARITHJACK_SHORTEN, new Shorten());
+		
 		functions.put(OMSymbol.ARITH1_ABS, new Abs());
 		functions.put(OMSymbol.ARITH1_DIVIDE, new Divide());
 		functions.put(OMSymbol.ARITH1_GCD, new GCD());

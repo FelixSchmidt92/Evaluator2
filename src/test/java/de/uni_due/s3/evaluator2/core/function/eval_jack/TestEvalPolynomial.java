@@ -100,6 +100,6 @@ public class TestEvalPolynomial extends TestFunctionAbstract {
 						+ "<OMI>6</OMI>" + "</OMA></OMOBJ>");
 		args.add(arg1.getOMA());
 		args.add(OMCreator.createOMI(1));
-		assertEquals("var('a x');a =1.0;x =1.0;((((x)^(2) - 5 * a) + 6))", func.getPartialSageSyntax(args));
+		assertEquals("var('a x');a =1.0;x =1.0;((( (( (x)^(2) ) - ( (( 5 ) * ( a )) )) ) + ( 6 )))", func.getPartialSageSyntax(args));
 	}
 }

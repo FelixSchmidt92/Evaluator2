@@ -13,6 +13,7 @@ public class OMSymbol {
 	public static final OMS ARITHJACK_IEEEREMAINDER = OMCreator.createOMS("arithJACK", "ieeeremainder");
 	public static final OMS ARITHJACK_MAX = OMCreator.createOMS("arithJACK", "max");
 	public static final OMS ARITHJACK_MIN = OMCreator.createOMS("arithJACK", "min");
+	public static final OMS ARITHJACK_SHORTEN = OMCreator.createOMS("arithJACK", "shorten");
 
 	public static final OMS ARITH1_ABS = OMCreator.createOMS("arith1", "abs");
 	public static final OMS ARITH1_DIVIDE = OMCreator.createOMS("arith1", "divide");

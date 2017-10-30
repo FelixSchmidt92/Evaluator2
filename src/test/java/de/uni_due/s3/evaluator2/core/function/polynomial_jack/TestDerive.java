@@ -119,6 +119,6 @@ public class TestDerive extends TestFunctionAbstract {
 						+ "<OMI>6</OMI>" + "</OMA></OMOBJ>");
 		args.add(arg1.getOMA());
 		args.add(OMCreator.createOMV("a"));
-		assertEquals("var('a x');derivative((((x)^(2) - 5 * a) + 6), a)", func.getPartialSageSyntax(args));
+		assertEquals("var('a x');derivative((( (( (x)^(2) ) - ( (( 5 ) * ( a )) )) ) + ( 6 )), a)", func.getPartialSageSyntax(args));
 	}
 }
