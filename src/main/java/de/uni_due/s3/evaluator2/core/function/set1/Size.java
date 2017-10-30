@@ -3,6 +3,7 @@ package de.uni_due.s3.evaluator2.core.function.set1;
 import java.util.HashSet;
 import java.util.List;
 
+import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
@@ -27,7 +28,10 @@ public class Size extends Function {
 	protected Object execute(List<Object> arguments) throws EvaluatorException {
 		List<Object> list1 = getListSyntax(arguments.get(0));
 		java.util.Set<Object> set1 = new HashSet<>(list1);
-		return OMCreator.createOMI(set1.size());
+		if (set1.size()==1 && set1.contains(OMSymbol.EDITOR1_INPUT_BOX)) {
+			return OMCreator.createOMIOMF(0);
+		}
+		return OMCreator.createOMIOMF(set1.size());
 	}
 
 	@Override

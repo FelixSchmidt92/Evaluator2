@@ -19,10 +19,10 @@ public class IsSet extends Function {
 	@Override
 	protected Object execute(List<Object> arguments) throws FunctionException {
 		Object obj = arguments.get(0);
-		if (OMTypeChecker.isOMAWithSymbol(obj, OMSymbol.SET1_SET, OMSymbol.LIST1_LIST)) {
+		if (OMTypeChecker.isOMAWithSymbol(obj, OMSymbol.SET1_SET, OMSymbol.LIST1_LIST)
+				|| arguments.get(0).equals(OMSymbol.SET1_EMPTYSET)) {
 			return OMSymbol.LOGIC1_TRUE;
 		}
-
 		return OMSymbol.LOGIC1_FALSE;
 	}
 

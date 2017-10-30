@@ -69,7 +69,6 @@ public class List extends ConstructorFunction {
 
 	@Override
 	public String getPartialRSyntax(java.util.List<Object> arguments) throws EvaluatorException {
-
 		String list = "list(";
 		for (Object arg : arguments) {
 			list += getRSyntax(arg) + ", ";

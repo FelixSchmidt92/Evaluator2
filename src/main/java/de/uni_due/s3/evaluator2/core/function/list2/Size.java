@@ -2,6 +2,7 @@ package de.uni_due.s3.evaluator2.core.function.list2;
 
 import java.util.List;
 
+import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
@@ -25,7 +26,9 @@ public class Size extends Function {
 	@Override
 	protected Object execute(List<Object> arguments) throws EvaluatorException {
 		List<Object> list1 = getListSyntax(arguments.get(0));
-		
+		if (list1.size()==1 && list1.get(0).equals(OMSymbol.EDITOR1_INPUT_BOX)) {
+			return OMCreator.createOMIOMF(0);
+		}
 		return OMCreator.createOMI(list1.size());
 	}
 
