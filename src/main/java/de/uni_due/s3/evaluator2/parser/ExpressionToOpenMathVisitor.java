@@ -409,9 +409,10 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 			ExpressionContext childctx = ctx.arguments.get(0);
 			if (!childctx.getText().startsWith("'") || !childctx.getText().endsWith("'")) {
 				throw new ParserRuntimeException("Function " + oms.getName()
-						+ " is a CAS Function. It has to contain only one String. But got something without apos.");
+						+ " is a CAS Function. It has to contain only one String. But got something without startApos and endApos.");
 			}
 			String text = childctx.getText().substring(1, childctx.getText().length() - 1);
+			text = text.replaceAll("\\\\'", "'"); // Damit Eingaben z.B. für Sage mit inneren Apos möglich sind
 			omel.add(textWithVariablesGenerator(text));
 
 		} else {
@@ -474,7 +475,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	public Object visitTextValueInExpression(TextValueInExpressionContext ctx) {
 		String text = ctx.getText().substring(1, ctx.getText().length() - 1); // the
 																				// input
-
+		text = text.replaceAll("\\\\'", "'"); // Damit Eingaben z.B. für Sage mit inneren Apos möglich sind
 		/* Return if the InputString is an Expression */
 		try {
 			ParseTree tree = ExpressionParser.createParseTree(text);

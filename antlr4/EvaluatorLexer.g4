@@ -36,5 +36,6 @@ ArgumentSeparator: ',';
 ListArgumentSeparator: ';';
 Integer: [0-9]+;
 Float: [0-9]+( '.' [0-9]+);
-String: '\'' .*? '\'' ;
+fragment EscApos: '\\' '\'';
+String: '\'' (EscApos | .)*? '\'';
 WS: [ \r\t\n] -> skip;

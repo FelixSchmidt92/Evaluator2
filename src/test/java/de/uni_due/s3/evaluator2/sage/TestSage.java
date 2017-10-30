@@ -36,4 +36,6 @@ public class TestSage {
 	public void testExceptionEIsNotVariable() throws CasEvaluationException, CasNotAvailableException, OpenMathException {
 		assertEquals(OMSymbol.LOGIC1_TRUE, Sage.evaluateInCAS("var('e'); e.is_real()"));
 	}
+	
+	
 }

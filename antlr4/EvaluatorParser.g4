@@ -15,10 +15,14 @@ expression
 	| LeftParenthesis expression RightParenthesis # parenthesisInExpression
 	| unaryOperator expression # unaryOperatorInExpression
 	| expression Circumflex expression # binaryOperatorCircumflexInExpression
-	| expression binaryOperatorArithPoint expression # binaryOperatorArithPointInExpression
-	| expression binaryOperatorArithLine expression # binaryOperatorArithLineInExpression
-	| expression binaryOperatorRelational expression # binaryOperatorRelationalInExpression
-	| expression binaryOperatorBoolean expression # binaryOperatorBooleanInExpression
+	| expression binaryOperatorArithPoint expression #
+	binaryOperatorArithPointInExpression
+	| expression binaryOperatorArithLine expression #
+	binaryOperatorArithLineInExpression
+	| expression binaryOperatorRelational expression #
+	binaryOperatorRelationalInExpression
+	| expression binaryOperatorBoolean expression #
+	binaryOperatorBooleanInExpression
 	| list # listInExpression
 	| value = Integer # integerValueInExpression
 	| value = Float # floatValueInExpression
@@ -91,8 +95,9 @@ constant
 	)
 ;
 
-function:
-(
+function
+:
+	(
 		name = FunctionName LeftParenthesis
 		(
 			arguments += expression
@@ -101,7 +106,7 @@ function:
 			)*
 		)? RightParenthesis
 	)
-	;
+;
 
 list
 :

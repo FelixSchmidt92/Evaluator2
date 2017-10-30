@@ -14,7 +14,7 @@ public class TestEvaluateInSage extends TestFunctionAbstract{
 
 	@Test
 	public void testEvaluateInSageIntegration1() throws EvaluatorException, OpenMathException {
-		OMOBJ result = Evaluator.evaluate("evaluateInSage('var(&apos;a b c d&apos;); matrix(SR,2,2,[a,b,c,d])')", null, null);
-		assertEquals("<OMA><OMS name=\"matrix\" cd=\"linalg2\"/><OMA><OMS name=\"matrixrow\" cd=\"linalg2\"/><OMV name=\"a\"/><OMV name=\"b\"/></OMA><OMA><OMS name=\"matrixrow\" cd=\"linalg2\"/><OMV name=\"c\"/><OMV name=\"d\"/></OMA></OMA>", result.getOMA().toString());
+		OMOBJ result = Evaluator.evaluate("evaluateInSage('var(\\' a b c d \\'); matrix(SR,2,2,[a,b,c,d])')", null, null);
+		assertEquals("<OMOBJ><OMA><OMS name=\"matrix\" cd=\"linalg2\"/><OMA><OMS name=\"matrixrow\" cd=\"linalg2\"/><OMV name=\"a\"/><OMV name=\"b\"/></OMA><OMA><OMS name=\"matrixrow\" cd=\"linalg2\"/><OMV name=\"c\"/><OMV name=\"d\"/></OMA></OMA></OMOBJ>", result.toString());
 	}
 }
