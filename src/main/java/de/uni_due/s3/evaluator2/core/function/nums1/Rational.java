@@ -5,6 +5,7 @@ import java.util.List;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
+import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
@@ -23,7 +24,11 @@ public class Rational extends Function {
 
 	@Override
 	public Boolean getPartialBooleanSyntax(List<Object> arguments) throws EvaluatorException {
-		return getBooleanSyntax(arguments.get(0));
+		Double arg1 = getDoubleSyntax(arguments.get(0));
+		Double arg2 = getDoubleSyntax(arguments.get(1));
+		if ((arg1 / arg2) == 0) return false;
+		if ((arg1 / arg2) == 1) return true;
+		throw new NoRepresentationAvailableException("Function expects Boolean instead of Rational:" + arg1 + "/" + arg2);
 	}
 
 	@Override

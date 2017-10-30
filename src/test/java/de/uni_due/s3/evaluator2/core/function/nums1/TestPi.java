@@ -16,20 +16,20 @@ import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestPi extends TestFunctionAbstract {
-	
+
 	Function func = new Pi();
-	
+
 	@Test
 	public void testPiIntegration() throws EvaluatorException, OpenMathException {
 		OMOBJ expected = new OMOBJ();
 		expected.setOMS(OMSymbol.NUMS1_PI);
-		
+
 		OMOBJ actual = Evaluator.evaluate("PI", null, null);
-		
+
 		assertEquals(expected, actual);
 	}
 
-	@Test
+	@Test(expected = NoRepresentationAvailableException.class)
 	public void testPiBoolean() throws EvaluatorException {
 		assertEquals(new Boolean(true), func.getPartialBooleanSyntax(new ArrayList<>()));
 	}

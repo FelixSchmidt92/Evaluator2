@@ -29,7 +29,7 @@ public class TestInfinity extends TestFunctionAbstract {
 		assertEquals(expected, actual);
 	}
 	
-	@Test
+	@Test(expected = NoRepresentationAvailableException.class)
 	public void testInfinityBoolean() throws EvaluatorException {
 		assertEquals(new Boolean(true), func.getPartialBooleanSyntax(new ArrayList<>()));
 	}

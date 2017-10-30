@@ -21,11 +21,6 @@ public class E extends Function {
 	}
 	
 	@Override
-	public Boolean getPartialBooleanSyntax(List<Object> arguments) throws EvaluatorException {
-		return true;
-	}
-	
-	@Override
 	public Double getPartialDoubleSyntax(List<Object> arguments) throws EvaluatorException {
 		return Math.E;
 	}

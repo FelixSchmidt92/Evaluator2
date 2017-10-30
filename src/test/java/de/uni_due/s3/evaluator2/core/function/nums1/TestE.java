@@ -37,7 +37,7 @@ public class TestE extends TestFunctionAbstract {
 		assertEquals(OMCreator.createOMF(5.43656365691809), actual.getOMF());
 	}
 	
-	@Test
+	@Test(expected = NoRepresentationAvailableException.class)
 	public void testEBoolean() throws EvaluatorException {
 		assertEquals(new Boolean(true), func.getPartialBooleanSyntax(new ArrayList<>()));
 	}
