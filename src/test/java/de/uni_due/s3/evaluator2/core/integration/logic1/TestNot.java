@@ -11,7 +11,7 @@ import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
-public class TestBooleanNot extends TestIntegration {
+public class TestNot extends TestIntegration {
 
 	@Test
 	public void testBooleanNot1() throws EvaluatorException, OpenMathException {

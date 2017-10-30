@@ -22,9 +22,9 @@ import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
-public class TestBooleanAnd extends TestFunctionAbstract {
+public class TestAnd extends TestFunctionAbstract {
 
-	private final Function func = new BooleanAnd();
+	private final Function func = new And();
 
 	@Test
 	public void TestBooleanAndWithBothArgumentsTrue() throws OpenMathException, EvaluatorException {
@@ -87,10 +87,10 @@ public class TestBooleanAnd extends TestFunctionAbstract {
 		fail();
 	}
 
-	@Test
+	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testEqualsWithWrongArguments() throws OpenMathException, EvaluatorException {
 		List<Object> args = new ArrayList<Object>(2);
-		args.add(OMSymbol.ARITH1_DIVIDE);
+		args.add(OMSymbol.NUMS1_RATIONAL);
 		args.add(OMSymbol.LOGIC1_FALSE);
 		func.evaluate(args);
 	}
@@ -120,6 +120,14 @@ public class TestBooleanAnd extends TestFunctionAbstract {
 					"<OMS name=\"and\" cd=\"logic1\"/>" + 
 				"</OMA></OMA></OMOBJ>";
 		assertEquals(expected, result.toString());
+	}
+	
+	@Test
+	public void testBooleaAndPartialEvaluation() throws OpenMathException, EvaluatorException {
+		OMOBJ obj = ExpressionParser.parse("FALSE && evaluateInSage('Something not executable')", new HashMap<>(), new HashMap<>());
+		OMOBJ actual = Evaluator.evaluate(obj);
+		OMOBJ expected = OMCreator.createOMOBJ(OMSymbol.LOGIC1_FALSE);
+		assertEquals(expected, actual);
 	}
 
 }

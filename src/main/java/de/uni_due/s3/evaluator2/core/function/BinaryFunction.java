@@ -14,9 +14,9 @@ import de.uni_due.s3.evaluator2.core.function.arith1.Times;
 import de.uni_due.s3.evaluator2.core.function.arith1.UnaryMinus;
 import de.uni_due.s3.evaluator2.core.function.arith_jack.IEEERemainder;
 import de.uni_due.s3.evaluator2.core.function.integer1.Remainder;
-import de.uni_due.s3.evaluator2.core.function.logic1.BooleanAnd;
-import de.uni_due.s3.evaluator2.core.function.logic1.BooleanNot;
-import de.uni_due.s3.evaluator2.core.function.logic1.BooleanOr;
+import de.uni_due.s3.evaluator2.core.function.logic1.And;
+import de.uni_due.s3.evaluator2.core.function.logic1.Not;
+import de.uni_due.s3.evaluator2.core.function.logic1.Or;
 import de.uni_due.s3.evaluator2.core.function.logic_jack.IfThenElse;
 import de.uni_due.s3.evaluator2.core.function.relation1.Equal;
 import de.uni_due.s3.evaluator2.core.function.relation1.GreaterThan;
@@ -87,7 +87,7 @@ public abstract class BinaryFunction extends Function {
 	static {
 		priorities = new HashMap<Class<?>, Integer>();
 		priorities.put(UnaryMinus.class, 1);
-		priorities.put(BooleanNot.class, 1);
+		priorities.put(Not.class, 1);
 
 		priorities.put(Power.class, 2);
 		priorities.put(Divide.class, 2);
@@ -106,8 +106,8 @@ public abstract class BinaryFunction extends Function {
 		priorities.put(Equal.class, 6);
 		priorities.put(NotEqual.class, 6);
 
-		priorities.put(BooleanAnd.class, 10);
-		priorities.put(BooleanOr.class, 11);
+		priorities.put(And.class, 10);
+		priorities.put(Or.class, 11);
 		priorities.put(IfThenElse.class, 12);
 
 	}

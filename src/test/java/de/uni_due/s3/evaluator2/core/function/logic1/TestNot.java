@@ -20,9 +20,9 @@ import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
-public class TestBooleanNot extends TestFunctionAbstract {
+public class TestNot extends TestFunctionAbstract {
 
-	private final Function func = new BooleanNot();
+	private final Function func = new Not();
 
 	@Test
 	public void TestBooleanNotWithArgumentTrue() throws OpenMathException, EvaluatorException {

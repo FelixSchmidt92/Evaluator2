@@ -15,7 +15,7 @@ import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedExerciseVariableExcep
 import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedFillInVariableException;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
-public class TestBooleanOr extends TestIntegration {
+public class TestOr extends TestIntegration {
 
 	@Test
 	public void testBooleanOr1() throws EvaluatorException, OpenMathException {

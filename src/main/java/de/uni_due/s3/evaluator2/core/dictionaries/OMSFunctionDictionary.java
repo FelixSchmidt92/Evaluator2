@@ -53,9 +53,9 @@ import de.uni_due.s3.evaluator2.core.function.list_jack.ChooseFromComplement;
 import de.uni_due.s3.evaluator2.core.function.list_jack.GetFromList;
 import de.uni_due.s3.evaluator2.core.function.list_jack.GetFromOrderedList;
 import de.uni_due.s3.evaluator2.core.function.list_jack.GetRandomFromList;
-import de.uni_due.s3.evaluator2.core.function.logic1.BooleanAnd;
-import de.uni_due.s3.evaluator2.core.function.logic1.BooleanNot;
-import de.uni_due.s3.evaluator2.core.function.logic1.BooleanOr;
+import de.uni_due.s3.evaluator2.core.function.logic1.And;
+import de.uni_due.s3.evaluator2.core.function.logic1.Not;
+import de.uni_due.s3.evaluator2.core.function.logic1.Or;
 import de.uni_due.s3.evaluator2.core.function.logic1.False;
 import de.uni_due.s3.evaluator2.core.function.logic1.True;
 import de.uni_due.s3.evaluator2.core.function.logic_jack.IfThenElse;
@@ -219,9 +219,9 @@ public class OMSFunctionDictionary {
 
 		functions.put(OMSymbol.LOGICJACK_IFTHENELSE, new IfThenElse());
 
-		functions.put(OMSymbol.LOGIC1_AND, new BooleanAnd());
-		functions.put(OMSymbol.LOGIC1_OR, new BooleanOr());
-		functions.put(OMSymbol.LOGIC1_NOT, new BooleanNot());
+		functions.put(OMSymbol.LOGIC1_AND, new And());
+		functions.put(OMSymbol.LOGIC1_OR, new Or());
+		functions.put(OMSymbol.LOGIC1_NOT, new Not());
 		functions.put(OMSymbol.LOGIC1_TRUE, new True());
 		functions.put(OMSymbol.LOGIC1_FALSE, new False());
 
