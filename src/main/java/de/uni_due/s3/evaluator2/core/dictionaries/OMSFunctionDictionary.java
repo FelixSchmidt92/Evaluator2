@@ -24,6 +24,7 @@ import de.uni_due.s3.evaluator2.core.function.calculus1.DefInt;
 import de.uni_due.s3.evaluator2.core.function.calculus1.Int;
 import de.uni_due.s3.evaluator2.core.function.cas_jack.EvaluateInR;
 import de.uni_due.s3.evaluator2.core.function.cas_jack.EvaluateInSage;
+import de.uni_due.s3.evaluator2.core.function.ecc.Tuple;
 import de.uni_due.s3.evaluator2.core.function.editor1.InputBox;
 import de.uni_due.s3.evaluator2.core.function.editor1.Palette;
 import de.uni_due.s3.evaluator2.core.function.editor1.PaletteRow;
@@ -204,6 +205,8 @@ public class OMSFunctionDictionary {
 		
 		functions.put(OMSymbol.CALCULUS1_INT, new Int());
 		functions.put(OMSymbol.CALCULUS1_DEFINT, new DefInt());
+		
+		functions.put(OMSymbol.ECC_TUPLE, new Tuple());
 		
 		functions.put(OMSymbol.EDITOR1_INPUT_BOX, new InputBox());
 		functions.put(OMSymbol.EDITOR1_PALETTE, new Palette());

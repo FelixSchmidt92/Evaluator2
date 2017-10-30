@@ -46,6 +46,8 @@ public class OMSymbol {
 	public static final OMS EVALJACK_EVALPOLYNOMIAL = OMCreator.createOMS("evalJACK", "evalpolynomial");
 	public static final OMS EVALJACK_EVALPOLYNOMIALCPLX = OMCreator.createOMS("evalJACK", "evalPolynomialCplx");
 	public static final OMS EVALJACK_EVALTERM2 = OMCreator.createOMS("evalJACK", "evalterm2");
+	
+	public static final OMS ECC_TUPLE = OMCreator.createOMS("ecc", "Tuple");
 
 	public static final OMS FNS1_LAMBDA = OMCreator.createOMS("fns1", "lambda");
 
