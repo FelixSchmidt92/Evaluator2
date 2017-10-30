@@ -68,6 +68,8 @@ public class OMSEvaluatorSyntaxDictionary {
 
 		// TODO: should the integral calculus function be added?
 
+		functionSymbolMap.put("tuple", OMSymbol.ECC_TUPLE);
+		
 		functionSymbolMap.put("palette", OMSymbol.EDITOR1_PALETTE);
 		functionSymbolMap.put("palettetab", OMSymbol.EDITOR1_PALETTE_TAB);
 		functionSymbolMap.put("paletterow", OMSymbol.EDITOR1_PALETTE_ROW);
