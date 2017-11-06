@@ -2,10 +2,10 @@ package de.uni_due.s3.evaluator2.core.function.testterminal_jack;
 
 import java.util.List;
 
+import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
-import de.uni_due.s3.evaluator2.sage.Sage;
+import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
@@ -17,45 +17,28 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
  * @author dlux
  *
  */
-public class IsPolynomial extends Function {
+public class IsTuple extends Function {
 
 	@Override
 	protected Object execute(List<Object> arguments) throws OpenMathException, EvaluatorException {
-		String term = getSageSyntax(arguments.get(0));
-		String var = getSageSyntax(arguments.get(1));
-
-		if (var.length() != 1) {
-			throw new FunctionInvalidArgumentTypeException(this, "(0)Term, (1)Char");
+		if (OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.ECC_TUPLE)) {
+			return OMSymbol.LOGIC1_TRUE;
 		}
-
-		String sageVar = Sage.getSagePreVariable(term + " " + var);
-
-		StringBuilder sb = new StringBuilder();
-
-		sb.append(sageVar);
-		sb.append("SR(");
-		sb.append(term);
-		sb.append(").is_polynomial(");
-		sb.append(var);
-		sb.append(")");
-
-		Object result = Sage.evaluateInCAS(sb.toString());
-		return result;
+		return OMSymbol.LOGIC1_FALSE;
 	}
 
 	@Override
 	protected int minArgs() {
-		return 2;
+		return 1;
 	}
 
 	@Override
 	protected int maxArgs() {
-		return 2;
+		return 1;
 	}
 
 	@Override
 	public boolean argumentsShouldBeEvaluated() {
 		return false;
 	}
-
 }

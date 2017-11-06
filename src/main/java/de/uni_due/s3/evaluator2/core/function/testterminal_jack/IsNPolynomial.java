@@ -17,17 +17,25 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
  * @author dlux
  *
  */
-public class IsPolynomial extends Function {
+public class IsNPolynomial extends Function {
 
 	@Override
 	protected Object execute(List<Object> arguments) throws OpenMathException, EvaluatorException {
 		String term = getSageSyntax(arguments.get(0));
 		String var = getSageSyntax(arguments.get(1));
+		String grad = getSageSyntax(arguments.get(2));
+		
 
 		if (var.length() != 1) {
-			throw new FunctionInvalidArgumentTypeException(this, "(0)Term, (1)Char");
+			throw new FunctionInvalidArgumentTypeException(this, "(1)Char");
 		}
-
+		
+		try {
+			Integer.parseInt(grad);
+		} catch (NumberFormatException e) {
+			throw new FunctionInvalidArgumentTypeException(this, "(2)Integer");
+		}
+	
 		String sageVar = Sage.getSagePreVariable(term + " " + var);
 
 		StringBuilder sb = new StringBuilder();
@@ -37,7 +45,14 @@ public class IsPolynomial extends Function {
 		sb.append(term);
 		sb.append(").is_polynomial(");
 		sb.append(var);
-		sb.append(")");
+		sb.append(") and ");
+
+		sb.append("SR(");
+		sb.append(term);
+		sb.append(").degree(");
+		sb.append(var);
+		sb.append(")==");
+		sb.append(grad);
 
 		Object result = Sage.evaluateInCAS(sb.toString());
 		return result;
@@ -45,17 +60,16 @@ public class IsPolynomial extends Function {
 
 	@Override
 	protected int minArgs() {
-		return 2;
+		return 3;
 	}
 
 	@Override
 	protected int maxArgs() {
-		return 2;
+		return 3;
 	}
 
 	@Override
 	public boolean argumentsShouldBeEvaluated() {
 		return false;
 	}
-
 }

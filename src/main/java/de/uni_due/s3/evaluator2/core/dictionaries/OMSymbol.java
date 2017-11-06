@@ -176,12 +176,19 @@ public class OMSymbol {
 	public static final OMS TESTTERMINALJACK_ISFRACTION = OMCreator.createOMS("testterminalJACK", "isFraction");
 	public static final OMS TESTTERMINALJACK_ISINTEGERNUMBER = OMCreator.createOMS("testterminalJACK",
 			"isIntegerNumber");
+	public static final OMS TESTTERMINALJACK_ISMATRIX = OMCreator.createOMS("testterminalJACK",
+			"isMatrix");
+	public static final OMS TESTTERMINALJACK_ISMNMATRIX = OMCreator.createOMS("testterminalJACK",
+			"isMNMatrix");
 	public static final OMS TESTTERMINALJACK_ISNATURALNUMBER = OMCreator.createOMS("testterminalJACK",
 			"isNaturalNumber");
+	public static final OMS TESTTERMINALJACK_ISNPOLYNOMIAL = OMCreator.createOMS("testterminalJACK", "isNPolynomial");
 	public static final OMS TESTTERMINALJACK_ISPOLYNOMIAL = OMCreator.createOMS("testterminalJACK", "isPolynomial");
 	public static final OMS TESTTERMINALJACK_ISRATIONALNUMBER = OMCreator.createOMS("testterminalJACK", "isRational");
 	public static final OMS TESTTERMINALJACK_ISREALNUMBER = OMCreator.createOMS("testterminalJACK", "isRealNumber");
 	public static final OMS TESTTERMINALJACK_ISSET = OMCreator.createOMS("testterminalJACK", "isSet");
+	public static final OMS TESTTERMINALJACK_ISTUPLE = OMCreator.createOMS("testterminalJACK", "isTuple");
+	public static final OMS TESTTERMINALJACK_ISNTUPLE = OMCreator.createOMS("testterminalJACK", "isNTuple");
 
 	public static final OMS TRANSCJACK_TODEGREE = OMCreator.createOMS("transcjack", "toDegree");
 	public static final OMS TRANSCJACK_TORADIAN = OMCreator.createOMS("transcjack", "toRadian");

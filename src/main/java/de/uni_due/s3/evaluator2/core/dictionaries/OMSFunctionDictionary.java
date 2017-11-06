@@ -129,11 +129,16 @@ import de.uni_due.s3.evaluator2.core.function.string_jack.Trim;
 import de.uni_due.s3.evaluator2.core.function.testterminal_jack.IsEmpty;
 import de.uni_due.s3.evaluator2.core.function.testterminal_jack.IsFraction;
 import de.uni_due.s3.evaluator2.core.function.testterminal_jack.IsIntegerNumber;
+import de.uni_due.s3.evaluator2.core.function.testterminal_jack.IsMNMatrix;
+import de.uni_due.s3.evaluator2.core.function.testterminal_jack.IsMatrix;
+import de.uni_due.s3.evaluator2.core.function.testterminal_jack.IsNPolynomial;
+import de.uni_due.s3.evaluator2.core.function.testterminal_jack.IsNTuple;
 import de.uni_due.s3.evaluator2.core.function.testterminal_jack.IsNaturalNumber;
 import de.uni_due.s3.evaluator2.core.function.testterminal_jack.IsPolynomial;
 import de.uni_due.s3.evaluator2.core.function.testterminal_jack.IsRationalNumber;
 import de.uni_due.s3.evaluator2.core.function.testterminal_jack.IsRealNumber;
 import de.uni_due.s3.evaluator2.core.function.testterminal_jack.IsSet;
+import de.uni_due.s3.evaluator2.core.function.testterminal_jack.IsTuple;
 import de.uni_due.s3.evaluator2.core.function.transc1.ArcCos;
 import de.uni_due.s3.evaluator2.core.function.transc1.ArcSin;
 import de.uni_due.s3.evaluator2.core.function.transc1.ArcTan;
@@ -339,12 +344,17 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.TESTTERMINALJACK_ISEMPTY, new IsEmpty());
 		functions.put(OMSymbol.TESTTERMINALJACK_ISFRACTION, new IsFraction());
 		functions.put(OMSymbol.TESTTERMINALJACK_ISINTEGERNUMBER, new IsIntegerNumber());
+		functions.put(OMSymbol.TESTTERMINALJACK_ISMATRIX, new IsMatrix());
+		functions.put(OMSymbol.TESTTERMINALJACK_ISMNMATRIX, new IsMNMatrix());
 		functions.put(OMSymbol.TESTTERMINALJACK_ISNATURALNUMBER, new IsNaturalNumber());
-		functions.put(OMSymbol.TESTTERMINALJACK_ISPOLYNOMIAL, new IsPolynomial());
+		functions.put(OMSymbol.TESTTERMINALJACK_ISNPOLYNOMIAL, new IsNPolynomial());
+		functions.put(OMSymbol.TESTTERMINALJACK_ISPOLYNOMIAL, new IsPolynomial());		
 		functions.put(OMSymbol.TESTTERMINALJACK_ISRATIONALNUMBER, new IsRationalNumber());
 		functions.put(OMSymbol.TESTTERMINALJACK_ISREALNUMBER, new IsRealNumber());
 		functions.put(OMSymbol.TESTTERMINALJACK_ISSET, new IsSet());
-
+		functions.put(OMSymbol.TESTTERMINALJACK_ISTUPLE, new IsTuple());
+		functions.put(OMSymbol.TESTTERMINALJACK_ISNTUPLE, new IsNTuple());
+		
 		functions.put(OMSymbol.TRANSCJACK_TODEGREE, new ToDegree());
 		functions.put(OMSymbol.TRANSCJACK_TORADIAN, new ToRadian());
 

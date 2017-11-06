@@ -195,13 +195,18 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("isEmpty", OMSymbol.TESTTERMINALJACK_ISEMPTY);
 		functionSymbolMap.put("isFraction", OMSymbol.TESTTERMINALJACK_ISFRACTION);
 		functionSymbolMap.put("isIntegerNumber", OMSymbol.TESTTERMINALJACK_ISINTEGERNUMBER);
+		functionSymbolMap.put("isMatrix", OMSymbol.TESTTERMINALJACK_ISMATRIX);
+		functionSymbolMap.put("isMNMatrix", OMSymbol.TESTTERMINALJACK_ISMNMATRIX);
 		functionSymbolMap.put("isNaturalNumber", OMSymbol.TESTTERMINALJACK_ISNATURALNUMBER);
+		functionSymbolMap.put("isNPolynomial", OMSymbol.TESTTERMINALJACK_ISNPOLYNOMIAL);
 		functionSymbolMap.put("isPolynomial", OMSymbol.TESTTERMINALJACK_ISPOLYNOMIAL);
 		functionSymbolMap.put("isRationalNumber", OMSymbol.TESTTERMINALJACK_ISRATIONALNUMBER);
 		functionSymbolMap.put("isRealNumber", OMSymbol.TESTTERMINALJACK_ISREALNUMBER);
 		functionSymbolMap.put("isNumber", OMSymbol.TESTTERMINALJACK_ISREALNUMBER);
 		functionSymbolMap.put("isSet", OMSymbol.TESTTERMINALJACK_ISSET);
-
+		functionSymbolMap.put("isTuple", OMSymbol.TESTTERMINALJACK_ISTUPLE);
+		functionSymbolMap.put("isNTuple", OMSymbol.TESTTERMINALJACK_ISNTUPLE);
+		
 		functionSymbolMap.put("toDegree", OMSymbol.TRANSCJACK_TODEGREE);
 		// Deprecated
 		functionSymbolMap.put("toDegrees", OMSymbol.TRANSCJACK_TODEGREE);
