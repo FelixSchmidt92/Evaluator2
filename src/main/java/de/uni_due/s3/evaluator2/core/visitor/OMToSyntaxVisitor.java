@@ -21,10 +21,11 @@ import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.jaxb.OMSTR;
 import de.uni_due.s3.openmath.jaxb.OMV;
+import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 
 /**
- * This is a Template! For implementing an OMOBJ to Something inherit this class.
- * Implement all methods and Add "2" Methods in Function.
+ * This is a Template! For implementing an OMOBJ to Something inherit this
+ * class. Implement all methods and Add "2" Methods in Function.
  * 
  * One Method (protected) which references to your implemented Class and calls
  * visit.
@@ -59,7 +60,8 @@ public abstract class OMToSyntaxVisitor<T> {
 	 */
 	public T visit(Object omElement) throws EvaluatorException {
 		if (omElement == null)
-			throw new NoRepresentationAvailableException("No Representation available for a Null-Object. Function got null instead of a parameter.");
+			throw new NoRepresentationAvailableException(
+					"No Representation available for a Null-Object. Function got null instead of a parameter.");
 
 		switch (omElement.getClass().getSimpleName()) {
 		case "OMOBJ":
@@ -77,7 +79,9 @@ public abstract class OMToSyntaxVisitor<T> {
 		case "OMA":
 			return visit((OMA) omElement);
 		default:
-			throw new NoRepresentationAvailableException("Please inform JACK Admin! There is no Representation for OpenMath Object:" + omElement.getClass().getSimpleName());
+			throw new NoRepresentationAvailableException(
+					"Please inform JACK Admin! There is no Representation for OpenMath Object:"
+							+ omElement.getClass().getSimpleName());
 		}
 	}
 
@@ -153,8 +157,8 @@ public abstract class OMToSyntaxVisitor<T> {
 	private T visit(OMS oms) throws EvaluatorException {
 		Function function = null;
 		try {
-		function = OMSFunctionDictionary.getInstance().getFunction(oms);
-		}catch (FunctionNotImplementedRuntimeException er){
+			function = OMSFunctionDictionary.getInstance().getFunction(oms);
+		} catch (FunctionNotImplementedRuntimeException er) {
 			throw new FunctionNotImplementedException(er.getMessage());
 		}
 		return getSyntaxRepresentationForFunction(function, oms, new ArrayList<>());
@@ -180,18 +184,18 @@ public abstract class OMToSyntaxVisitor<T> {
 	protected abstract T visit(OMV omv) throws NoRepresentationAvailableException;
 
 	/**
-	 * Not every visitor has to implement the processing of OME objects. If a visitor
-	 * needs to process OME, overwrite this function.
+	 * Not every visitor has to implement the processing of OME objects. If a
+	 * visitor needs to process OME, overwrite this function.
 	 * 
 	 * @param ome
 	 *            the element which is visited now
 	 * @return the String-Representation
-	 * @throws EvaluatorException 
+	 * @throws EvaluatorException
 	 */
-	protected  T visit(OME ome) throws NoRepresentationAvailableException {
+	protected T visit(OME ome) throws NoRepresentationAvailableException {
 		throw new NoRepresentationAvailableException("processing of OME not supported");
 	}
-	
+
 	/**
 	 * An OMA is visited here. Here the visit searches for the specific Function and
 	 * calls with this found Function callInFunctionTheMethod The List given to this
@@ -208,18 +212,36 @@ public abstract class OMToSyntaxVisitor<T> {
 	 */
 	private T visit(OMA oma) throws EvaluatorException {
 
+		if (OMTypeChecker.isOMA(oma.getOmel().get(0))) {
+			// Change Structure, so that always an OMS is the first argument in an OMA
+			OMA second = (OMA) oma.getOmel().get(0);
+
+			Object secondinner = second.getOmel().get(1);
+
+			oma.getOmel().set(0, secondinner);
+
+			second.getOmel().set(1, oma);
+
+			oma = second;
+		}
+
 		List<Object> omel = new ArrayList<>();
 
 		for (int i = 1; i < oma.getOmel().size(); i++) {
 			omel.add(oma.getOmel().get(i)); // Deep Copy of List (oma.getOmel
 											// should not be changed)
 		}
+		OMS oms = null;
+		try {
+			oms = (OMS) oma.getOmel().get(0); // First element of OMA is always OMS
+		} catch (ClassCastException e) {
+			throw new EvaluatorException("OpenMath-Object is invalid!", e);
+		}
 
-		OMS oms = (OMS) oma.getOmel().get(0); // First element of OMA is always OMS
 		Function function = null;
 		try {
 			function = OMSFunctionDictionary.getInstance().getFunction(oms);
-		}catch (FunctionNotImplementedRuntimeException er){
+		} catch (FunctionNotImplementedRuntimeException er) {
 			throw new FunctionNotImplementedException(er.getMessage());
 		}
 		// Get function
@@ -242,7 +264,7 @@ public abstract class OMToSyntaxVisitor<T> {
 	 *            returns false
 	 * @return a String which is in CAS-Syntax
 	 * @throws EvaluatorException
-
+	 * 
 	 */
 	protected abstract T getSyntaxRepresentationForFunction(Function function, OMS oms, List<Object> omel)
 			throws EvaluatorException;
