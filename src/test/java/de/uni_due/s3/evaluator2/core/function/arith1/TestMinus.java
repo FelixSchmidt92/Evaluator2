@@ -85,17 +85,4 @@ public class TestMinus extends TestFunctionAbstract {
 		new OMToResultVisitor().execute(omobj);
 		fail();
 	}
-	
-	@Test
-	public void testMinusPalette() throws EvaluatorException, OpenMathException {
-		OMOBJ result = Evaluator.evaluate("palette(paletterow(minus()))", null, null);
-		String expected = "<OMOBJ><OMA>" + 
-				"<OMS name=\"palette\" cd=\"editor1\"/>" +
-				"<OMA>"	+
-					"<OMS name=\"palette_row\" cd=\"editor1\"/>" + 
-					"<OMS name=\"minus\" cd=\"arith1\"/>" + 
-				"</OMA></OMA></OMOBJ>";
-		assertEquals(expected, result.toString());
-	}
-
 }

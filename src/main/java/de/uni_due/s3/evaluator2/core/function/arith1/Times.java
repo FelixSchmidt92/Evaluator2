@@ -7,7 +7,6 @@ import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.BinaryFunction;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
@@ -62,11 +61,6 @@ public class Times extends BinaryFunction {
 
 			return OMCreator.createOMA(OMSymbol.ARITH1_TIMES, newArgs);
 		}
-	}
-
-	@Override
-	public Object generatePalette(List<Object> arguments) throws FunctionNotImplementedException {
-		return OMSymbol.ARITH1_TIMES;
 	}
 
 	@Override

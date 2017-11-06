@@ -111,18 +111,6 @@ public class TestOr extends TestFunctionAbstract {
 	}
 	
 	@Test
-	public void testBooleanAndPalette() throws EvaluatorException, OpenMathException {
-		OMOBJ result = Evaluator.evaluate("palette(paletterow(or()))", null, null);
-		String expected = "<OMOBJ><OMA>" + 
-				"<OMS name=\"palette\" cd=\"editor1\"/>" +
-				"<OMA>"	+
-					"<OMS name=\"palette_row\" cd=\"editor1\"/>" + 
-					"<OMS name=\"or\" cd=\"logic1\"/>" + 
-				"</OMA></OMA></OMOBJ>";
-		assertEquals(expected, result.toString());
-	}
-	
-	@Test
 	public void testBooleaOrPartialEvaluation() throws OpenMathException, EvaluatorException {
 		OMOBJ obj = ExpressionParser.parse("TRUE || evaluateInSage('Something not executable')", new HashMap<>(), new HashMap<>());
 		OMOBJ actual = Evaluator.evaluate(obj);

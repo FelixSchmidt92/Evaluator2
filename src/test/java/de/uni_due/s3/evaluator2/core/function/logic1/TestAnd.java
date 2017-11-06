@@ -109,19 +109,7 @@ public class TestAnd extends TestFunctionAbstract {
 		args.add(OMSymbol.LOGIC1_TRUE);
 		assertEquals("True & True", func.getPartialSageSyntax(args));
 	}
-	
-	@Test
-	public void testBooleanAndPalette() throws EvaluatorException, OpenMathException {
-		OMOBJ result = Evaluator.evaluate("palette(paletterow(and()))", null, null);
-		String expected = "<OMOBJ><OMA>" + 
-				"<OMS name=\"palette\" cd=\"editor1\"/>" +
-				"<OMA>"	+
-					"<OMS name=\"palette_row\" cd=\"editor1\"/>" + 
-					"<OMS name=\"and\" cd=\"logic1\"/>" + 
-				"</OMA></OMA></OMOBJ>";
-		assertEquals(expected, result.toString());
-	}
-	
+
 	@Test
 	public void testBooleaAndPartialEvaluation() throws OpenMathException, EvaluatorException {
 		OMOBJ obj = ExpressionParser.parse("FALSE && evaluateInSage('Something not executable')", new HashMap<>(), new HashMap<>());

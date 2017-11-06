@@ -6,7 +6,6 @@ import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.BinaryFunction;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedException;
 
 /**
  * Implements openmath relation neq. Example 10 != 5 => true
@@ -34,11 +33,6 @@ public class NotEqual extends BinaryFunction {
 			else
 				return OMSymbol.LOGIC1_TRUE;
 		}
-	}
-
-	@Override
-	public Object generatePalette(List<Object> arguments) throws FunctionNotImplementedException {
-		return OMSymbol.RELATION1_NEQ;
 	}
 
 	@Override

@@ -27,9 +27,6 @@ import de.uni_due.s3.evaluator2.core.function.cas_jack.EvaluateInR;
 import de.uni_due.s3.evaluator2.core.function.cas_jack.EvaluateInSage;
 import de.uni_due.s3.evaluator2.core.function.ecc.Tuple;
 import de.uni_due.s3.evaluator2.core.function.editor1.InputBox;
-import de.uni_due.s3.evaluator2.core.function.editor1.Palette;
-import de.uni_due.s3.evaluator2.core.function.editor1.PaletteRow;
-import de.uni_due.s3.evaluator2.core.function.editor1.PaletteTab;
 import de.uni_due.s3.evaluator2.core.function.eval_jack.Eval;
 import de.uni_due.s3.evaluator2.core.function.eval_jack.EvalEq;
 import de.uni_due.s3.evaluator2.core.function.eval_jack.EvalPolynomial;
@@ -56,9 +53,9 @@ import de.uni_due.s3.evaluator2.core.function.list_jack.GetFromList;
 import de.uni_due.s3.evaluator2.core.function.list_jack.GetFromOrderedList;
 import de.uni_due.s3.evaluator2.core.function.list_jack.GetRandomFromList;
 import de.uni_due.s3.evaluator2.core.function.logic1.And;
+import de.uni_due.s3.evaluator2.core.function.logic1.False;
 import de.uni_due.s3.evaluator2.core.function.logic1.Not;
 import de.uni_due.s3.evaluator2.core.function.logic1.Or;
-import de.uni_due.s3.evaluator2.core.function.logic1.False;
 import de.uni_due.s3.evaluator2.core.function.logic1.True;
 import de.uni_due.s3.evaluator2.core.function.logic_jack.IfThenElse;
 import de.uni_due.s3.evaluator2.core.function.mc_jack.MCIndex;
@@ -216,9 +213,6 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.ECC_TUPLE, new Tuple());
 		
 		functions.put(OMSymbol.EDITOR1_INPUT_BOX, new InputBox());
-		functions.put(OMSymbol.EDITOR1_PALETTE, new Palette());
-		functions.put(OMSymbol.EDITOR1_PALETTE_TAB, new PaletteTab());
-		functions.put(OMSymbol.EDITOR1_PALETTE_ROW, new PaletteRow());
 		
 		functions.put(OMSymbol.EVALJACK_EVAL, new Eval());
 		functions.put(OMSymbol.EVALJACK_EVALEQ, new EvalEq());

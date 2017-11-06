@@ -129,17 +129,4 @@ public class TestOMToSyntaxVisitor {
 	public void testVisitNonExisitngFunction() throws EvaluatorException {
 		vis.visit(OMCreator.createOMS("NonExisitingCD", "NonExisitingFunction"));
 	}
-	
-	
-	@Test
-	public void testVisitAlternateTree() throws OpenMathException, EvaluatorException, JAXBException {
-	OMOBJ eval = OMConverter.toObject("<OMOBJ><OMA><OMA><OMS name=\"power\" cd=\"arith1\"/><OMS name=\"cos\" cd=\"transc1\"/><OMI>2</OMI></OMA><OMV name=\"x\"/></OMA></OMOBJ>");
-		
-		String actual = vis.visit(eval);
-		
-		System.out.println(eval);
-		System.out.println(actual);
-	}
-	
-	
 }

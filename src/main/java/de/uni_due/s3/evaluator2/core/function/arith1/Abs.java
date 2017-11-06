@@ -1,14 +1,11 @@
 package de.uni_due.s3.evaluator2.core.function.arith1;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
-import de.uni_due.s3.evaluator2.core.visitor.OMToPaletteVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
@@ -42,17 +39,6 @@ public class Abs extends Function {
 		}
 	}
 	
-	@Override
-	public Object generatePalette(List<Object> arguments) throws FunctionNotImplementedException {
-		List<Object> args = new ArrayList<Object>();
-		if(arguments.size() >0) {
-			args.add(OMToPaletteVisitor.visit(arguments.get(0)));
-		}else {
-			args.add(OMSymbol.EDITOR1_INPUT_BOX);
-		}
-		return OMCreator.createOMA(OMSymbol.ARITH1_ABS, args);
-	}
-
 	@Override
 	protected int minArgs() {
 		return 1;

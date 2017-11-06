@@ -6,7 +6,6 @@ import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.BinaryFunction;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedException;
 
 /**
  * Implements openmath relation1 gt. Example: 4 > 4 => true;
@@ -28,11 +27,6 @@ public class GreaterThan extends BinaryFunction {
 		double first = getDoubleSyntax(arguments.get(0));
 		double second = getDoubleSyntax(arguments.get(1));
 		return (first > second) ? OMSymbol.LOGIC1_TRUE : OMSymbol.LOGIC1_FALSE;
-	}
-
-	@Override
-	public Object generatePalette(List<Object> arguments) throws FunctionNotImplementedException {
-		return OMSymbol.RELATION1_GT;
 	}
 
 	@Override
