@@ -491,4 +491,5 @@ public abstract class Function {
 	protected final Set<OMV> getVariablesAsOMVSet(Object omElement) throws EvaluatorException {
 		return new OMVariableVisitor().visit(omElement);
 	}
+	
 }
