@@ -110,6 +110,6 @@ public class TestCoefficient extends TestFunctionAbstract {
 		args.add(OMCreator.createOMI(0));
 		args.add(OMCreator.createOMV("b"));
 		args.add(OMCreator.createOMI(0));
-		assertEquals("var('a b');f = (( (( 1 ) + ( (a)^(2) )) ) - ( b )); f.coefficient(a,0)", func.getPartialSageSyntax(args));
+		assertEquals("var('a b');f = (( (( ( (1) + ((a)^(2)) ) )) ) - ( b )); f.coefficient(a,0)", func.getPartialSageSyntax(args));
 	}
 }

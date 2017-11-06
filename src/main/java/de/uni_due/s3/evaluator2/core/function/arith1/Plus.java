@@ -1,16 +1,13 @@
 package de.uni_due.s3.evaluator2.core.function.arith1;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.BinaryFunction;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
@@ -18,35 +15,51 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 /**
  * Implements plus operation for numbers Example: 3.56 + 4 = 7.56
  * 
- * @author frichtscheid, spobel
+ * NOTE: This is an n-ary function!
+ * 
+ * @author frichtscheid, spobel, dlux
  *
  */
 public class Plus extends BinaryFunction {
 
-	/**
-	 * @throws OpenMathException
-	 *             Expects two arguments of type OMI or OMF
-	 * @throws EvaluatorException 
-	 * @throws NoRepresentationAvailableException
-	 * @throws CasNotAvailableException
-	 * @throws FunctionInvalidNumberOfArgumentsException
-	 * @throws CasEvaluationException
-	 * @throws FunctionInvalidArgumentTypeException
-	 */
+	
 	@Override
 	protected Object execute(List<Object> arguments) throws OpenMathException, EvaluatorException {
-		// evaluate this method in sage
-		try {
-			Double leftValue = getDoubleSyntax(arguments.get(0));
-			Double rightValue = getDoubleSyntax(arguments.get(1));
-			return OMCreator.createOMIOMF(leftValue + rightValue);
-		} catch (FunctionInvalidArgumentTypeException e) {
-			if (OMTypeChecker.isOMV(arguments.get(0)) || OMTypeChecker.isOMV(arguments.get(1))
-					|| OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.SYMBOLIC_EXPRESSION)
-					|| OMTypeChecker.isOMAWithSymbol(arguments.get(1), OMSymbol.SYMBOLIC_EXPRESSION)) {
-				return OMCreator.createOMA(OMSymbol.ARITH1_PLUS, arguments);
+		Double rightValue = null;
+		Double result = 0d;
+		List<Integer> failures = new ArrayList<>();
+		for (int i = 0; i < arguments.size(); i++) {
+			try {
+				rightValue = getDoubleSyntax(arguments.get(i));
+				result = result + rightValue;
+			} catch (FunctionInvalidArgumentTypeException e) {
+				failures.add(i);
 			}
-			throw new FunctionInvalidArgumentTypeException(this, "integer, float, double");
+
+		}
+
+		if (failures.isEmpty()) { // No Operation failed only Numbers in Arguments
+			return OMCreator.createOMIOMF(result);
+
+		} else { // Some Operation failed return an OMA
+			ArrayList<Object> newArgs = new ArrayList<>();
+			
+			if(result != 0 || failures.size() == 1) {
+				newArgs.add(OMCreator.createOMIOMF(result)); // add evaluated result
+			}
+			for (int faili : failures) {
+				if (OMTypeChecker.isOMV(arguments.get(faili))
+						|| OMTypeChecker.isOMAWithSymbol(arguments.get(faili), OMSymbol.SYMBOLIC_EXPRESSION)) {
+					// Only allow some specific non-evaluated Arguments!
+					// as OMVs, or a Divide, or an Rational (see: OMSymbol.SYMBOLIC_EXPRESSION)
+					newArgs.add(arguments.get(faili));
+				} else {
+					throw new FunctionInvalidArgumentTypeException(this, "integer, float, double, symbolicExpression");
+				}
+
+			}
+
+			return OMCreator.createOMA(OMSymbol.ARITH1_PLUS, newArgs);
 		}
 	}
 	
@@ -62,27 +75,51 @@ public class Plus extends BinaryFunction {
 
 	@Override
 	protected int maxArgs() {
-		return 2;
+		return -1;
 	}
 
 	@Override
 	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
-		return "(( " + getSageSyntax(arguments.get(0)) + " ) + ( " + getSageSyntax(arguments.get(1)) + " ))";
+		String sage = "(" + getSageSyntax(arguments.get(0)) + ")";
+		
+		for(int i = 1; i < arguments.size(); i++) {
+			sage = "( " + sage + " + (" + getSageSyntax(arguments.get(i)) + ") )";
+		}
+		
+		return "(( " + sage + " ))";
 	}
 
 	@Override
 	public String getPartialLatexSyntax(List<Object> arguments) 	throws EvaluatorException {
-		return getLatexSyntax(arguments.get(0)) + "+" + getLatexSyntax(arguments.get(1));
+		String latex = getLatexSyntax(arguments.get(0));
+		
+		for(int i = 1; i < arguments.size(); i++) {
+			latex += " + " + getLatexSyntax(arguments.get(i));
+		}
+		
+		return latex;
 	}
 
 	@Override
 	public String getPartialStringSyntax(List<Object> arguments) throws EvaluatorException {
-		return getStringSyntax(arguments.get(0)) + "+" + getStringSyntax(arguments.get(1));
+		String string = getLatexSyntax(arguments.get(0));
+		
+		for(int i = 1; i < arguments.size(); i++) {
+			string += "+" + getLatexSyntax(arguments.get(i));
+		}
+		
+		return string;
 	}
 	
 	@Override
 	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException {
-		return "(( " + getRSyntax(arguments.get(0)) + " ) + ( " + getRSyntax(arguments.get(1)) + " ))";
+		String r = "(" + getRSyntax(arguments.get(0)) + ")";
+		
+		for(int i = 1; i < arguments.size(); i++) {
+			r = "( " + r + " + (" + getRSyntax(arguments.get(i)) + ") )";
+		}
+		
+		return "(( " + r + " ))";
 	}
 
 }

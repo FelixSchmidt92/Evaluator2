@@ -9,11 +9,13 @@ import java.util.List;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator2.Evaluator;
+import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
 import de.uni_due.s3.evaluator2.core.visitor.operation.OMToResultVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
+import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
@@ -68,7 +70,7 @@ public class TestTimes extends TestFunctionAbstract {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(1.0));
 		args.add(OMCreator.createOMI(10));
-		assertEquals("(( 1 ) * ( 10 ))", func.getPartialSageSyntax(args));
+		assertEquals("(( ( (1) * (10) ) ))", func.getPartialSageSyntax(args));
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
@@ -97,4 +99,70 @@ public class TestTimes extends TestFunctionAbstract {
 		assertEquals(expected, result.toString());
 	}
 
+	@Test
+	public void testTimesThreeArguments() throws OpenMathException, EvaluatorException {
+		List<Object> args = new ArrayList<Object>();
+		args.add(OMCreator.createOMI(2));
+		args.add(OMCreator.createOMI(3));
+		args.add(OMCreator.createOMI(4));
+		Object result = func.evaluate(args);
+		assertEquals(OMCreator.createOMI(24), result);
+	}
+	
+	@Test
+	public void testTimesFourArguments() throws OpenMathException, EvaluatorException {
+		List<Object> args = new ArrayList<Object>();
+		args.add(OMCreator.createOMI(2));
+		args.add(OMCreator.createOMI(3));
+		args.add(OMCreator.createOMI(4));
+		args.add(OMCreator.createOMI(5));
+		Object result = func.evaluate(args);
+		assertEquals(OMCreator.createOMI(120), result);
+	}
+	
+	@Test
+	public void testTimesFourArgumentsWithFirstVariable() throws OpenMathException, EvaluatorException {
+		List<Object> args = new ArrayList<Object>();
+		args.add(OMCreator.createOMV("a"));
+		args.add(OMCreator.createOMI(3));
+		args.add(OMCreator.createOMI(4));
+		args.add(OMCreator.createOMI(5));
+		Object result = func.evaluate(args);
+		
+		
+		List<Object> expArgs = new ArrayList<Object>(2);
+		expArgs.add(OMCreator.createOMI(60));
+		expArgs.add(OMCreator.createOMV("a"));
+		OMA expected = OMCreator.createOMA(OMSymbol.ARITH1_TIMES, expArgs);
+		assertEquals(expected, result);
+	}
+	
+	@Test
+	public void testTimesFourArgumentsWithLastVariable() throws OpenMathException, EvaluatorException {
+		List<Object> args = new ArrayList<Object>();
+		args.add(OMCreator.createOMI(2));
+		args.add(OMCreator.createOMI(3));
+		args.add(OMCreator.createOMI(4));
+		args.add(OMCreator.createOMV("a"));
+		Object result = func.evaluate(args);
+		
+		
+		List<Object> expArgs = new ArrayList<Object>(2);
+		expArgs.add(OMCreator.createOMI(24));
+		expArgs.add(OMCreator.createOMV("a"));
+		OMA expected = OMCreator.createOMA(OMSymbol.ARITH1_TIMES, expArgs);
+		assertEquals(expected, result);
+	}
+	
+	
+	@Test
+	public void testTimesFourArgumentsLatex() throws OpenMathException, EvaluatorException {
+		List<Object> args = new ArrayList<Object>();
+		args.add(OMCreator.createOMI(2));
+		args.add(OMCreator.createOMI(3));
+		args.add(OMCreator.createOMI(4));
+		args.add(OMCreator.createOMI(5));
+		String result = func.getPartialLatexSyntax(args);
+		assertEquals("2 \\cdot 3 \\cdot 4 \\cdot 5", result);
+	}
 }

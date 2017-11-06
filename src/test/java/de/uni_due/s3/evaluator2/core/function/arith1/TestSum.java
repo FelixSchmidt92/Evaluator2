@@ -86,7 +86,7 @@ public class TestSum extends TestFunctionAbstract{
 		omobj.getOMA().getOmel().remove(0);
 		List<Object> omel = omobj.getOMA().getOmel();
 		String result = func.getPartialSageSyntax(omel);
-		assertEquals("var('x'); var('n'); sum((( 3 ) * ( x )) for n in (2..5))",result);
+		assertEquals("var('x'); var('n'); sum((( ( (3) * (x) ) )) for n in (2..5))",result);
 	}
 	
 	@Test

@@ -86,6 +86,6 @@ public class TestDegree_wrt extends TestFunctionAbstract {
 		ArrayList<Object> args = new ArrayList<Object>();
 		args.add(ExpressionParser.parse("1+a^2-b", null, null));
 		args.add(OMCreator.createOMV("a"));
-		assertEquals("var('a b');f = (( (( 1 ) + ( (a)^(2) )) ) - ( b )); f.degree(a)", func.getPartialSageSyntax(args));
+		assertEquals("var('a b');f = (( (( ( (1) + ((a)^(2)) ) )) ) - ( b )); f.degree(a)", func.getPartialSageSyntax(args));
 	}
 }

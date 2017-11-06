@@ -104,6 +104,6 @@ public class TestEvalPolynomialCplx extends TestFunctionAbstract {
 		args.add(arg1.getOMA());
 		args.add(OMCreator.createOMI(-5));
 		args.add(OMCreator.createOMI(1));
-		assertEquals("((( (x)^(2) ) + ( (( (( 1 ) * ( a )) ) + ( 6 )) )))", func.getPartialSageSyntax(args));
+		assertEquals("((( ( ( ((x)^(2)) + ((( ( (1) * (a) ) ))) ) + (6) ) )))", func.getPartialSageSyntax(args));
 	}
 }

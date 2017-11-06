@@ -9,12 +9,14 @@ import java.util.List;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator2.Evaluator;
+import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
 import de.uni_due.s3.evaluator2.core.visitor.operation.OMToResultVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
+import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
@@ -69,7 +71,7 @@ public class TestPlus extends TestFunctionAbstract {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(1.0));
 		args.add(OMCreator.createOMI(1));
-		assertEquals("(( 1 ) + ( 1 ))", func.getPartialSageSyntax(args));
+		assertEquals("(( ( (1) + (1) ) ))", func.getPartialSageSyntax(args));
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
@@ -96,5 +98,73 @@ public class TestPlus extends TestFunctionAbstract {
 					"<OMS name=\"plus\" cd=\"arith1\"/>" + 
 				"</OMA></OMA></OMOBJ>";
 		assertEquals(expected, result.toString());
+	}
+	
+	
+	@Test
+	public void testPlusThreeArguments() throws OpenMathException, EvaluatorException {
+		List<Object> args = new ArrayList<Object>();
+		args.add(OMCreator.createOMI(2));
+		args.add(OMCreator.createOMI(3));
+		args.add(OMCreator.createOMI(4));
+		Object result = func.evaluate(args);
+		assertEquals(OMCreator.createOMI(9), result);
+	}
+	
+	@Test
+	public void testPlusFourArguments() throws OpenMathException, EvaluatorException {
+		List<Object> args = new ArrayList<Object>();
+		args.add(OMCreator.createOMI(2));
+		args.add(OMCreator.createOMI(3));
+		args.add(OMCreator.createOMI(4));
+		args.add(OMCreator.createOMI(5));
+		Object result = func.evaluate(args);
+		assertEquals(OMCreator.createOMI(14), result);
+	}
+	
+	@Test
+	public void testPlusFourArgumentsWithFirstVariable() throws OpenMathException, EvaluatorException {
+		List<Object> args = new ArrayList<Object>();
+		args.add(OMCreator.createOMV("a"));
+		args.add(OMCreator.createOMI(3));
+		args.add(OMCreator.createOMI(4));
+		args.add(OMCreator.createOMI(5));
+		Object result = func.evaluate(args);
+		
+		
+		List<Object> expArgs = new ArrayList<Object>(2);
+		expArgs.add(OMCreator.createOMI(12));
+		expArgs.add(OMCreator.createOMV("a"));
+		OMA expected = OMCreator.createOMA(OMSymbol.ARITH1_PLUS, expArgs);
+		assertEquals(expected, result);
+	}
+	
+	@Test
+	public void testPlusFourArgumentsWithLastVariable() throws OpenMathException, EvaluatorException {
+		List<Object> args = new ArrayList<Object>();
+		args.add(OMCreator.createOMI(2));
+		args.add(OMCreator.createOMI(3));
+		args.add(OMCreator.createOMI(4));
+		args.add(OMCreator.createOMV("a"));
+		Object result = func.evaluate(args);
+		
+		
+		List<Object> expArgs = new ArrayList<Object>(2);
+		expArgs.add(OMCreator.createOMI(9));
+		expArgs.add(OMCreator.createOMV("a"));
+		OMA expected = OMCreator.createOMA(OMSymbol.ARITH1_PLUS, expArgs);
+		assertEquals(expected, result);
+	}
+	
+	
+	@Test
+	public void testPlusFourArgumentsLatex() throws OpenMathException, EvaluatorException {
+		List<Object> args = new ArrayList<Object>();
+		args.add(OMCreator.createOMI(2));
+		args.add(OMCreator.createOMI(3));
+		args.add(OMCreator.createOMI(4));
+		args.add(OMCreator.createOMI(5));
+		String result = func.getPartialLatexSyntax(args);
+		assertEquals("2 + 3 + 4 + 5", result);
 	}
 }
