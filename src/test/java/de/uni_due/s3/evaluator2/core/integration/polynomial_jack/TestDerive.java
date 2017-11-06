@@ -5,6 +5,8 @@ import static org.junit.Assert.fail;
 
 import java.util.HashMap;
 
+import javax.xml.bind.JAXBException;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -21,6 +23,7 @@ import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedExerciseVariableExcep
 import de.uni_due.s3.evaluator2.exceptions.parser.UndefinedFillInVariableException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
+import de.uni_due.s3.openmath.omutils.OMConverter;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestDerive extends TestIntegration {
@@ -76,8 +79,23 @@ public class TestDerive extends TestIntegration {
 	}
 
 	@Test
-	public void testDerive7() throws EvaluatorException, OpenMathException {
-		OMOBJ expected = ExpressionParser.parse("2*(y^2*x)", null, null);
+	public void testDerive7() throws EvaluatorException, OpenMathException, JAXBException {
+		OMOBJ expected = OMConverter
+				.toObject("<OMOBJ>"
+						+ "<OMA>"
+							+ "<OMS name=\"times\" cd=\"arith1\"/>"
+							+ "<OMI>2</OMI>"
+							
+							+ "<OMA>"
+								+ "<OMS name=\"power\" cd=\"arith1\"/>"
+								+ "<OMV name=\"y\"/>"
+								+ "<OMI>2</OMI>"
+							+ "</OMA>"
+							
+							+ "<OMV name=\"x\"/>"
+						+ "</OMA>"
+						+ "</OMOBJ>");
+		
 		assertEquals(expected.getOMA(), Evaluator
 				.evaluate("derive('(x*y)^2','x')", deriveExerciseVariableMap, deriveFillInVariableMap).getOMA());
 	}

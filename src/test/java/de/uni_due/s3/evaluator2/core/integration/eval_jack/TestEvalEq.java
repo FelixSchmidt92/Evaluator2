@@ -31,14 +31,12 @@ public class TestEvalEq extends TestIntegration {
 					+ "<OMI>2</OMI>"
 				+ "</OMA>"
 				+ "<OMA>"
-					+ "<OMS name=\"plus\" cd=\"arith1\"/>"
-					+ "<OMA>"
-						+ "<OMS name=\"times\" cd=\"arith1\"/>"
-						+ "<OMI>-1</OMI>"
-						+ "<OMV name=\"x\"/>"
-					+ "</OMA>"
+					+ "<OMS name=\"times\" cd=\"arith1\"/>"
 					+ "<OMI>-1</OMI>"
+					+ "<OMV name=\"x\"/>"
 				+ "</OMA>"
+				
+				+ "<OMI>-1</OMI>"
 			+ "</OMA></OMOBJ>"); //returns x^2+(-1*x)+-1
 		assertEquals(expected,
 				Evaluator.evaluate("evalEq('x^2', 'x+1')", exerciseVariableMap, fillInVariableMap));
@@ -56,14 +54,11 @@ public class TestEvalEq extends TestIntegration {
 					+ "<OMI>2</OMI>"
 				+ "</OMA>"
 				+ "<OMA>"
-					+ "<OMS name=\"plus\" cd=\"arith1\"/>"
-					+ "<OMA>"
-						+ "<OMS name=\"times\" cd=\"arith1\"/>"
-						+ "<OMI>-1</OMI>"
-						+ "<OMV name=\"y\"/>"
-					+ "</OMA>"
+					+ "<OMS name=\"times\" cd=\"arith1\"/>"
 					+ "<OMI>-1</OMI>"
+					+ "<OMV name=\"y\"/>"
 				+ "</OMA>"
+				+ "<OMI>-1</OMI>"
 			+ "</OMA></OMOBJ>"); //returns   x^2  +  -1*y + -1
 		assertEquals(expected,
 				Evaluator.evaluate("evalEq('x^2', 'y+1')", exerciseVariableMap, fillInVariableMap));

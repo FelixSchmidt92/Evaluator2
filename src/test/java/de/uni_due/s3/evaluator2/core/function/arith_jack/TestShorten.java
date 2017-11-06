@@ -50,20 +50,18 @@ public class TestShorten extends TestFunctionAbstract {
 				+ "<OMA>"
 					+ "<OMS name=\"times\" cd=\"arith1\"/>"
 					+ "<OMI>2</OMI>"
+						
 					+ "<OMA>"
-						+ "<OMS name=\"times\" cd=\"arith1\"/>"
-							+ "<OMA>"
-								+ "<OMS name=\"power\" cd=\"arith1\"/>"
-								+ "<OMV name=\"z\"/>"
-								+ "<OMI>2</OMI>"
-							+ "</OMA>"
-							+ "<OMA>"
-								+ "<OMS name=\"times\" cd=\"arith1\"/>"
-								+ "<OMV name=\"x\"/>"
-								+ "<OMV name=\"a\"/>"
-							+ "</OMA>"
-						+ "</OMA>"
+						+ "<OMS name=\"power\" cd=\"arith1\"/>"
+						+ "<OMV name=\"z\"/>"
+						+ "<OMI>2</OMI>"
 					+ "</OMA>"
+					
+					+ "<OMV name=\"x\"/>"
+								
+					+ "<OMV name=\"a\"/>"
+				
+				+ "</OMA>"
 				+ "</OMOBJ>",
 				result.toString());
 	}

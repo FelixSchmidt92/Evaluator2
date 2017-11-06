@@ -55,11 +55,31 @@ public class TestEvalEq extends TestFunctionAbstract {
 		OMOBJ arg2 = OMConverter.toObject("<OMOBJ><OMV name=\"a\"/></OMOBJ>");
 
 		OMOBJ expectation = OMConverter
-				.toObject("<OMOBJ><OMA><OMS name=\"plus\" cd=\"arith1\"/><OMA><OMS name=\"power\" cd=\"arith1\"/>"
-						+ "<OMV name=\"x\"/><OMI>2</OMI></OMA><OMA><OMS name=\"plus\" cd=\"arith1\"/><OMA>"
-						+ "<OMS name=\"times\" cd=\"arith1\"/><OMI>-1</OMI><OMV name=\"a\"/></OMA>"
-						+ "<OMA><OMS name=\"plus\" cd=\"arith1\"/><OMA><OMS name=\"times\" cd=\"arith1\"/><OMI>-5</OMI>"
-						+ "<OMV name=\"x\"/></OMA><OMI>6</OMI></OMA></OMA></OMA></OMOBJ>");
+				.toObject("<OMOBJ>"
+						+ "<OMA>"
+							+ "<OMS name=\"plus\" cd=\"arith1\"/>"
+							
+							+ "<OMA>"
+								+ "<OMS name=\"power\" cd=\"arith1\"/>"
+								+ "<OMV name=\"x\"/>"
+								+ "<OMI>2</OMI>"
+							+ "</OMA>"
+							
+							+ "<OMA>"
+								+ "<OMS name=\"times\" cd=\"arith1\"/>"
+								+ "<OMI>-1</OMI>"
+								+ "<OMV name=\"a\"/>"
+							+ "</OMA>"
+							
+							+ "<OMA>"
+								+ "<OMS name=\"times\" cd=\"arith1\"/>"
+								+ "<OMI>-5</OMI>"
+								+ "<OMV name=\"x\"/>"
+							+ "</OMA>"
+							
+							+ "<OMI>6</OMI>"
+						+ "</OMA>"
+						+ "</OMOBJ>");
 
 		args.add(arg1);
 		args.add(arg2);
