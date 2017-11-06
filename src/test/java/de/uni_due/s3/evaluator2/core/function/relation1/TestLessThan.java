@@ -129,17 +129,4 @@ public class TestLessThan extends TestFunctionAbstract {
 		args.add(OMCreator.createOMI(9));
 		assertEquals("5 < 9", func.getPartialSageSyntax(args));
 	}
-	
-	@Test
-	public void testLessThanPalette() throws EvaluatorException, OpenMathException {
-		OMOBJ result = Evaluator.evaluate("palette(paletterow(lessThan()))", null, null);
-		String expected = "<OMOBJ><OMA>" + 
-				"<OMS name=\"palette\" cd=\"editor1\"/>" +
-				"<OMA>"	+
-					"<OMS name=\"palette_row\" cd=\"editor1\"/>" + 
-					"<OMS name=\"lt\" cd=\"relation1\"/>" + 
-				"</OMA></OMA></OMOBJ>";
-		assertEquals(expected, result.toString());
-	}
-
 }

@@ -104,19 +104,6 @@ public class TestDivide extends TestFunctionAbstract {
 	}
 	
 	@Test
-	public void testDividePalette() throws EvaluatorException, OpenMathException {
-		OMOBJ result = Evaluator.evaluate("palette(paletterow(divide()))", null, null);
-		String expected = "<OMOBJ><OMA>" + 
-				"<OMS name=\"palette\" cd=\"editor1\"/>" +
-				"<OMA>"	+
-					"<OMS name=\"palette_row\" cd=\"editor1\"/>" + 
-					"<OMS name=\"divide\" cd=\"arith1\"/>" + 
-				"</OMA></OMA></OMOBJ>";
-		assertEquals(expected, result.toString());
-	}
-	
-	
-	@Test
 	public void testDivideLatex() throws EvaluatorException {
 		ArrayList<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMF(1.2));

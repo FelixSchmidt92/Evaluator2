@@ -1,14 +1,11 @@
 package de.uni_due.s3.evaluator2.core.function.arith1;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.BinaryFunction;
-import de.uni_due.s3.evaluator2.core.visitor.OMToPaletteVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
@@ -44,29 +41,6 @@ public class Power extends BinaryFunction {
 			}
 			throw new FunctionInvalidArgumentTypeException(this, "integer, float, double");
 		}
-	}
-
-	@Override
-	public Object generatePalette(List<Object> arguments) throws FunctionNotImplementedException {
-		List<Object> args = new ArrayList<Object>();
-		switch (arguments.size()) {
-		case 2: {
-			args.add(OMToPaletteVisitor.visit(arguments.get(0)));
-			args.add(OMToPaletteVisitor.visit(arguments.get(1)));
-			break;
-		}
-		case 1: {
-			args.add(OMToPaletteVisitor.visit(arguments.get(0)));
-			args.add(OMSymbol.EDITOR1_INPUT_BOX);
-			break;
-		}
-		default: {
-			args.add(OMSymbol.EDITOR1_INPUT_BOX);
-			args.add(OMSymbol.EDITOR1_INPUT_BOX);
-		}
-		}
-
-		return OMCreator.createOMA(OMSymbol.ARITH1_POWER, args);
 	}
 
 	@Override

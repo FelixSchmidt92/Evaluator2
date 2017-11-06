@@ -169,17 +169,4 @@ public class TestNotEqual extends TestFunctionAbstract {
 		args.add(OMCreator.createOMI(1));
 		assertEquals("10 != 1", func.getPartialSageSyntax(args));
 	}
-	
-	@Test
-	public void testNotEqualPalette() throws EvaluatorException, OpenMathException {
-		OMOBJ result = Evaluator.evaluate("palette(paletterow(notEqual()))", null, null);
-		String expected = "<OMOBJ><OMA>" + 
-				"<OMS name=\"palette\" cd=\"editor1\"/>" +
-				"<OMA>"	+
-					"<OMS name=\"palette_row\" cd=\"editor1\"/>" + 
-					"<OMS name=\"neq\" cd=\"relation1\"/>" + 
-				"</OMA></OMA></OMOBJ>";
-		assertEquals(expected, result.toString());
-	}
-
 }

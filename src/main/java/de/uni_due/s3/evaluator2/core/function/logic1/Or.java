@@ -6,7 +6,6 @@ import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.BinaryFunction;
 import de.uni_due.s3.evaluator2.core.visitor.operation.OMToResultVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedException;
 
 /**
  * Implements openmath logic or. Example true | false => true
@@ -55,10 +54,4 @@ public class Or extends BinaryFunction {
 	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException {
 		return getLatexSyntax(arguments.get(0)) + "\\mbox{or}" + getLatexSyntax(arguments.get(1));
 	}
-
-	@Override
-	public Object generatePalette(List<Object> arguments) throws FunctionNotImplementedException {
-		return OMSymbol.LOGIC1_OR;
-	}
-
 }

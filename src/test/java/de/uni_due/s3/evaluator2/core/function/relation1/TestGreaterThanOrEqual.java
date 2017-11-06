@@ -129,17 +129,4 @@ public class TestGreaterThanOrEqual extends TestFunctionAbstract {
 		args.add(OMCreator.createOMI(9));
 		assertEquals("10 >= 9", func.getPartialSageSyntax(args));
 	}
-	
-	@Test
-	public void testGreaterThanOrEqualPalette() throws EvaluatorException, OpenMathException {
-		OMOBJ result = Evaluator.evaluate("palette(paletterow(greaterThanOrEqual()))", null, null);
-		String expected = "<OMOBJ><OMA>" + 
-				"<OMS name=\"palette\" cd=\"editor1\"/>" +
-				"<OMA>"	+
-					"<OMS name=\"palette_row\" cd=\"editor1\"/>" + 
-					"<OMS name=\"geq\" cd=\"relation1\"/>" + 
-				"</OMA></OMA></OMOBJ>";
-		assertEquals(expected, result.toString());
-	}
-
 }

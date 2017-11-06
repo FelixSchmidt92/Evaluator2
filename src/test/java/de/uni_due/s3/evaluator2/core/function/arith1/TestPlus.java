@@ -87,20 +87,7 @@ public class TestPlus extends TestFunctionAbstract {
 		new OMToResultVisitor().execute(omobj);
 		fail();
 	}
-	
-	@Test
-	public void testPlusPalette() throws EvaluatorException, OpenMathException {
-		OMOBJ result = Evaluator.evaluate("palette(paletterow(plus()))", null, null);
-		String expected = "<OMOBJ><OMA>" + 
-				"<OMS name=\"palette\" cd=\"editor1\"/>" +
-				"<OMA>"	+
-					"<OMS name=\"palette_row\" cd=\"editor1\"/>" + 
-					"<OMS name=\"plus\" cd=\"arith1\"/>" + 
-				"</OMA></OMA></OMOBJ>";
-		assertEquals(expected, result.toString());
-	}
-	
-	
+
 	@Test
 	public void testPlusThreeArguments() throws OpenMathException, EvaluatorException {
 		List<Object> args = new ArrayList<Object>();

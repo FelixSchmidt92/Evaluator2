@@ -88,18 +88,6 @@ public class TestTimes extends TestFunctionAbstract {
 	}
 	
 	@Test
-	public void testPlusPalette() throws EvaluatorException, OpenMathException {
-		OMOBJ result = Evaluator.evaluate("palette(paletterow(times()))", null, null);
-		String expected = "<OMOBJ><OMA>" + 
-				"<OMS name=\"palette\" cd=\"editor1\"/>" +
-				"<OMA>"	+
-					"<OMS name=\"palette_row\" cd=\"editor1\"/>" + 
-					"<OMS name=\"times\" cd=\"arith1\"/>" + 
-				"</OMA></OMA></OMOBJ>";
-		assertEquals(expected, result.toString());
-	}
-
-	@Test
 	public void testTimesThreeArguments() throws OpenMathException, EvaluatorException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(2));

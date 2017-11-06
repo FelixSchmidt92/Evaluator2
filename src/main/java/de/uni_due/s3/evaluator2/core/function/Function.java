@@ -3,7 +3,6 @@ package de.uni_due.s3.evaluator2.core.function;
 import java.util.List;
 import java.util.Set;
 
-import de.uni_due.s3.evaluator2.core.visitor.OMToPaletteVisitor;
 import de.uni_due.s3.evaluator2.core.visitor.primitve.OMToBooleanVisitor;
 import de.uni_due.s3.evaluator2.core.visitor.primitve.OMToDoubleVisitor;
 import de.uni_due.s3.evaluator2.core.visitor.primitve.OMToIntegerVisitor;
@@ -21,7 +20,6 @@ import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMV;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
@@ -492,22 +490,5 @@ public abstract class Function {
 	 */
 	protected final Set<OMV> getVariablesAsOMVSet(Object omElement) throws EvaluatorException {
 		return new OMVariableVisitor().visit(omElement);
-	}
-
-	/**
-	 * Call this here to get the Palette of every OMA within the arguments?
-	 * 
-	 * TODO DOKU!
-	 * 
-	 * @param arguments
-	 * @return
-	 * @throws FunctionNotImplementedException
-	 */
-	public Object generatePalette(List<Object> arguments) throws FunctionNotImplementedException {
-		throw new FunctionNotImplementedException(this.getClass().getSimpleName() + " is not supported");
-	}
-
-	protected final Object getPaletteSyntax(Object omElement) throws FunctionNotImplementedException {
-		return OMToPaletteVisitor.visit(omElement);
 	}
 }
