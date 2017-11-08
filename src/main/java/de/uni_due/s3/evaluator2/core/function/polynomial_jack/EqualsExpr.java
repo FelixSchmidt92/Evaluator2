@@ -4,6 +4,8 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
+import de.uni_due.s3.evaluator2.exceptions.cas.CasException;
+import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.sage.Sage;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
@@ -22,8 +24,13 @@ public class EqualsExpr extends Function {
 	 */
 	@Override
 	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
+		try{
 		Object result = Sage.evaluateInCAS(getPartialSageSyntax(arguments));
 		return result;
+		
+		} catch(CasException ce) {
+			throw new FunctionException("Error evaluating Arguments in " + this.getClass().getSimpleName(), ce);
+		}
 	}
 
 	@Override
