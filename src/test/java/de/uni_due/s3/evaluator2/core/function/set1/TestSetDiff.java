@@ -14,35 +14,35 @@ public class TestSetDiff extends TestFunctionAbstract {
 
 	@Test
 	public void testInIntegration1() throws EvaluatorException, OpenMathException {
-		OMOBJ result = Evaluator.evaluate("setDiff(list(1,2),list(1,2,3))", null, null);
+		OMOBJ result = Evaluator.evaluate("complement(list(1,2),list(1,2,3))", null, null);
 		OMOBJ expected = Evaluator.evaluate("list()", null, null);
 		assertEquals(expected, result);
 	}
 	
 	@Test
 	public void testInIntegration2() throws EvaluatorException, OpenMathException {
-		OMOBJ result = Evaluator.evaluate("setDiff(list(1,2,3),list(1,2,3))", null, null);
+		OMOBJ result = Evaluator.evaluate("complement(list(1,2,3),list(1,2,3))", null, null);
 		OMOBJ expected = Evaluator.evaluate("list()", null, null);
 		assertEquals(expected, result);
 	}
 	
 	@Test
 	public void testInIntegration3() throws EvaluatorException, OpenMathException {
-		OMOBJ result = Evaluator.evaluate("setDiff(list(1,2,3),list(2,3))", null, null);
+		OMOBJ result = Evaluator.evaluate("complement(list(1,2,3),list(2,3))", null, null);
 		OMOBJ expected = Evaluator.evaluate("list(1)", null, null);
 		assertEquals(expected, result);
 	}
 	
 	@Test
 	public void testInIntegration4() throws EvaluatorException, OpenMathException {
-		OMOBJ result = Evaluator.evaluate("setDiff(emptySet(),list(1,2,3))", null, null);
+		OMOBJ result = Evaluator.evaluate("complement(emptySet(),list(1,2,3))", null, null);
 		OMOBJ expected = Evaluator.evaluate("list()", null, null);
 		assertEquals(expected, result);
 	}
 	
 	@Test
 	public void testInIntegration5() throws EvaluatorException, OpenMathException {
-		OMOBJ result = Evaluator.evaluate("setDiff(1,list(2,3))", null, null);
+		OMOBJ result = Evaluator.evaluate("complement(1,list(2,3))", null, null);
 		OMOBJ expected = Evaluator.evaluate("list(1)", null, null);
 		assertEquals(expected, result);
 	}

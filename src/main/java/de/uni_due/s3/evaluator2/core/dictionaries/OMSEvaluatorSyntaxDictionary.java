@@ -160,7 +160,7 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("emptySet", OMSymbol.SET1_EMPTYSET);
 		functionSymbolMap.put("isElementOf", OMSymbol.SET1_IN);
 		functionSymbolMap.put("intersect", OMSymbol.SET1_INTERSECT);
-		functionSymbolMap.put("isNoElementOf", OMSymbol.SET1_NOTIN);
+		functionSymbolMap.put("isNotElementOf", OMSymbol.SET1_NOTIN);
 		functionSymbolMap.put("set", OMSymbol.LIST1_LIST);
 		functionSymbolMap.put("complement", OMSymbol.SET1_SETDIFF);
 		functionSymbolMap.put("sizeOfSet", OMSymbol.SET1_SIZE);

@@ -15,55 +15,55 @@ public class TestSubset extends TestFunctionAbstract {
 
 	@Test
 	public void testInIntegration1() throws EvaluatorException, OpenMathException {
-		OMOBJ result = Evaluator.evaluate("subset(1,list(1,2,3))", null, null);
+		OMOBJ result = Evaluator.evaluate("isSubsetOf(1,list(1,2,3))", null, null);
 		assertEquals(OMSymbol.LOGIC1_TRUE, result.getOMS());
 	}
 	
 	@Test
 	public void testInIntegration2() throws EvaluatorException, OpenMathException {
-		OMOBJ result = Evaluator.evaluate("subset(vector(1,3,2),list(1,2,3,vector(1,3,2)))", null, null);
+		OMOBJ result = Evaluator.evaluate("isSubsetOf(vector(1,3,2),list(1,2,3,vector(1,3,2)))", null, null);
 		assertEquals(OMSymbol.LOGIC1_TRUE, result.getOMS());
 	}
 	
 	@Test
 	public void testInIntegration3() throws EvaluatorException, OpenMathException {
-		OMOBJ result = Evaluator.evaluate("subset(vector(1,3,2),list(1,2,3,vector(1,3,3)))", null, null);
+		OMOBJ result = Evaluator.evaluate("isSubsetOf(vector(1,3,2),list(1,2,3,vector(1,3,3)))", null, null);
 		assertEquals(OMSymbol.LOGIC1_FALSE, result.getOMS());
 	}
 	
 	@Test
 	public void testInIntegration4() throws EvaluatorException, OpenMathException {
-		OMOBJ result = Evaluator.evaluate("subset(2,2)", null, null);
+		OMOBJ result = Evaluator.evaluate("isSubsetOf(2,2)", null, null);
 		assertEquals(OMSymbol.LOGIC1_TRUE, result.getOMS());
 	}
 	
 	@Test
 	public void testInIntegration5() throws EvaluatorException, OpenMathException {
-		OMOBJ result = Evaluator.evaluate("subset(2,0)", null, null);
+		OMOBJ result = Evaluator.evaluate("isSubsetOf(2,0)", null, null);
 		assertEquals(OMSymbol.LOGIC1_FALSE, result.getOMS());
 	}
 	
 	@Test
 	public void testInIntegration6() throws EvaluatorException, OpenMathException {
-		OMOBJ result = Evaluator.evaluate("subset(emptySet(),list(1,2))", null, null);
+		OMOBJ result = Evaluator.evaluate("isSubsetOf(emptySet(),list(1,2))", null, null);
 		assertEquals(OMSymbol.LOGIC1_TRUE, result.getOMS());
 	}
 	
 	@Test
 	public void testInIntegration7() throws EvaluatorException, OpenMathException {
-		OMOBJ result = Evaluator.evaluate("subset(list(3,4),list(1,2))", null, null);
+		OMOBJ result = Evaluator.evaluate("isSubsetOf(list(3,4),list(1,2))", null, null);
 		assertEquals(OMSymbol.LOGIC1_FALSE, result.getOMS());
 	}
 	
 	@Test
 	public void testInIntegration8() throws EvaluatorException, OpenMathException {
-		OMOBJ result = Evaluator.evaluate("subset(list(1,2),list(1,2))", null, null);
+		OMOBJ result = Evaluator.evaluate("isSubsetOf(list(1,2),list(1,2))", null, null);
 		assertEquals(OMSymbol.LOGIC1_TRUE, result.getOMS());
 	}
 	
 	@Test
 	public void testInIntegration9() throws EvaluatorException, OpenMathException {
-		OMOBJ result = Evaluator.evaluate("subset(list(1,3),list(1,2))", null, null);
+		OMOBJ result = Evaluator.evaluate("isSubsetOf(list(1,3),list(1,2))", null, null);
 		assertEquals(OMSymbol.LOGIC1_FALSE, result.getOMS());
 	}
 }

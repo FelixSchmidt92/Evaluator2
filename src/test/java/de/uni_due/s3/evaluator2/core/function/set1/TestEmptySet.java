@@ -25,7 +25,7 @@ public class TestEmptySet extends TestFunctionAbstract {
 	
 	@Test
 	public void testInIntegration2() throws EvaluatorException, OpenMathException {
-		OMOBJ result = Evaluator.evaluate("in(vector(1,3,2),emptySet())", null, null);
+		OMOBJ result = Evaluator.evaluate("isElementOf(vector(1,3,2),emptySet())", null, null);
 		assertEquals(OMSymbol.LOGIC1_FALSE, result.getOMS());
 	}
 	
