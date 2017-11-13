@@ -8,8 +8,12 @@ stages:
   - build
   - deploy
 
-build:
-  script: "mvn install -B"
-           
-deploy:
-  script: "curl -u s3gitlab:$ARTIFACTORY_KEY -X PUT \"$ARTIFACTORY_URL\" -T \"$EVALUATOR_JAR\""
+job1:
+  stage: build
+  script:
+    - "mvn install -B"
+
+job2:
+  stage: deploy
+  script:
+    - "curl -u s3gitlab:$ARTIFACTORY_KEY -X PUT \"$ARTIFACTORY_URL\" -T \"$EVALUATOR_JAR\""
