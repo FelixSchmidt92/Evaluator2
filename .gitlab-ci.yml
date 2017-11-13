@@ -12,6 +12,11 @@ job1:
   stage: build
   script:
     - "mvn install -B"
+  artifacts:
+    paths:
+    - $EVALUATOR_JAR
+    expire_in: 1 week
+
 
 job2:
   stage: deploy
