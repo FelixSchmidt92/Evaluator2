@@ -98,7 +98,7 @@ public class TestCoefficient extends TestFunctionAbstract {
 	@Test
 	public void testCoefficientIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("factorOf('1+2*x^3','x','3')", null, null);
-		OMOBJ result = new OMToResultVisitor().execute(omobj);
+		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
 		assertEquals(OMCreator.createOMI(2), result.getOMI());
 	}
 

@@ -44,14 +44,14 @@ public class TestCountNodes extends TestFunctionAbstract {
 	@Test
 	public void testCountNodesIntegration1() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("countNodes(1+2)", null, null);
-		OMOBJ result = new OMToResultVisitor().execute(omobj);
+		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
 		assertEquals(OMCreator.createOMI(4), result.getOMI());
 	}
 
 	@Test
 	public void testCountNodesIntegration2() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("countNodes(1+2/3)", null, null);
-		OMOBJ result = new OMToResultVisitor().execute(omobj);
+		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
 		assertEquals(OMCreator.createOMI(7), result.getOMI());
 	}
 

@@ -13,6 +13,18 @@ import de.uni_due.s3.openmath.jaxb.OMV;
 
 public class OMToStringVisitor extends OMToSyntaxVisitor<String> {
 
+	private static OMToStringVisitor visitor;
+	
+	private OMToStringVisitor() throws EvaluatorException { }
+
+	public static OMToSyntaxVisitor<String> getInstance() throws EvaluatorException {
+		if (visitor != null) {
+			return visitor;
+		}
+		visitor = new OMToStringVisitor();
+		return visitor;
+	}
+	
 	@Override
 	protected String visit(OMF omf) {
 		double value = omf.getDec();

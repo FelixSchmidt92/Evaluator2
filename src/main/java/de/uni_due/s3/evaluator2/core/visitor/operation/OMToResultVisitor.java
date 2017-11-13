@@ -30,6 +30,18 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class OMToResultVisitor extends OMToSyntaxVisitor<Object>{
 
+	private static OMToResultVisitor visitor;
+	
+	private OMToResultVisitor() throws EvaluatorException { }
+
+	public static OMToResultVisitor getInstance() throws EvaluatorException {
+		if (visitor != null) {
+			return visitor;
+		}
+		visitor = new OMToResultVisitor();
+		return visitor;
+	}
+	
 	@Override
 	protected Object visit(OMF omf) throws NoRepresentationAvailableException {
 		return omf;

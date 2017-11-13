@@ -21,7 +21,7 @@ public class TestOMToListVisitor {
 	@Test
 	public void TestOMListVisitor1() throws OpenMathException, EvaluatorException {
 		OMOBJ obj = Evaluator.evaluate("1==1", new HashMap<>(), new HashMap<>());
-		List<Object> result = new OMToListVisitor().visit(obj);
+		List<Object> result = OMToListVisitor.getInstance().visit(obj);
 		List<Object> expected = new ArrayList<>();
 		expected.add(OMSymbol.LOGIC1_TRUE);
 		assertEquals(expected, result);
@@ -30,7 +30,7 @@ public class TestOMToListVisitor {
 	@Test
 	public void TestOMListVisitor2() throws OpenMathException, EvaluatorException {
 		OMOBJ obj = Evaluator.evaluate("1!=1", new HashMap<>(), new HashMap<>());
-		List<Object> result = new OMToListVisitor().visit(obj);
+		List<Object> result = OMToListVisitor.getInstance().visit(obj);
 		List<Object> expected = new ArrayList<>();
 		expected.add(OMSymbol.LOGIC1_FALSE);
 		assertEquals(expected, result);
@@ -39,7 +39,7 @@ public class TestOMToListVisitor {
 	@Test
 	public void TestOMListVisitor3() throws OpenMathException, EvaluatorException {
 		OMOBJ obj = Evaluator.evaluate("1", new HashMap<>(), new HashMap<>());
-		List<Object> result = new OMToListVisitor().visit(obj);
+		List<Object> result = OMToListVisitor.getInstance().visit(obj);
 		List<Object> expected = new ArrayList<>();
 		expected.add(OMCreator.createOMI(1));
 		assertEquals(expected, result);
@@ -48,7 +48,7 @@ public class TestOMToListVisitor {
 	@Test
 	public void TestOMListVisitor4() throws OpenMathException, EvaluatorException {
 		OMOBJ obj = Evaluator.evaluate("0", new HashMap<>(), new HashMap<>());
-		List<Object> result = new OMToListVisitor().visit(obj);
+		List<Object> result = OMToListVisitor.getInstance().visit(obj);
 		List<Object> expected = new ArrayList<>();
 		expected.add(OMCreator.createOMI(0));
 		assertEquals(expected, result);
@@ -57,7 +57,7 @@ public class TestOMToListVisitor {
 	@Test
 	public void TestOMListVisitor5() throws OpenMathException, EvaluatorException {
 		OMOBJ obj = Evaluator.evaluate("PI", new HashMap<>(), new HashMap<>());
-		List<Object> result = new OMToListVisitor().visit(obj);
+		List<Object> result = OMToListVisitor.getInstance().visit(obj);
 		List<Object> expected = new ArrayList<>();
 		expected.add(OMSymbol.NUMS1_PI);
 		assertEquals(expected, result);
@@ -66,7 +66,7 @@ public class TestOMToListVisitor {
 	@Test
 	public void TestOMListVisitor6() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("'Test  '", new HashMap<>(), new HashMap<>());
-		List<Object> result = new OMToListVisitor().visit(obj);
+		List<Object> result = OMToListVisitor.getInstance().visit(obj);
 		List<Object> expected = new ArrayList<>();
 		expected.add(OMCreator.createOMSTR("Test  "));
 		assertEquals(expected, result);
@@ -75,7 +75,7 @@ public class TestOMToListVisitor {
 	@Test
 	public void TestOMListVisitor7() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("a", new HashMap<>(), new HashMap<>());
-		List<Object> result = new OMToListVisitor().visit(obj);
+		List<Object> result = OMToListVisitor.getInstance().visit(obj);
 		List<Object> expected = new ArrayList<>();
 		expected.add(OMCreator.createOMV("a"));
 		assertEquals(expected, result);

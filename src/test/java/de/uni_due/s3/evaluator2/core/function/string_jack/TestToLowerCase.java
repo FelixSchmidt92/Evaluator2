@@ -57,28 +57,28 @@ public class TestToLowerCase extends TestFunctionAbstract {
 	@Test
 	public void testToLowerCaseIntegration1() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("toLowerCase('Hello')", null, null);
-		OMOBJ result = new OMToResultVisitor().execute(omobj);
+		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
 		assertEquals(OMCreator.createOMSTR("hello"), result.getOMSTR());
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void testToLowerCaseWithWrongArguments() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("toLowerCase(vector(1))", null, null);
-		new OMToResultVisitor().execute(omobj);
+		OMToResultVisitor.getInstance().execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testToLowerCaseWithLessThanMinParam() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("toLowerCase()", null, null);
-		new OMToResultVisitor().execute(omobj);
+		OMToResultVisitor.getInstance().execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testToLowerCaseWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("toLowerCase('Test', 'Zwei')", null, null);
-		new OMToResultVisitor().execute(omobj);
+		OMToResultVisitor.getInstance().execute(omobj);
 		fail();
 	}
 }

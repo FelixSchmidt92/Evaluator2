@@ -108,7 +108,7 @@ public class TestEvalEq extends TestFunctionAbstract {
 	@Test
 	public void testEvalEqIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("evalEq('1+x^3','x*x*x+1')", null, null);
-		OMOBJ result = new OMToResultVisitor().execute(omobj);
+		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
 		assertEquals(OMCreator.createOMI(0), result.getOMI());
 	}
 

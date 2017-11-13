@@ -114,28 +114,28 @@ public class TestGetRandomFromList extends TestFunctionAbstract {
 	@Test
 	public void testGetRandomFromListIntegration1() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("getRandomFromList({1})", null, null);
-		OMOBJ result = new OMToResultVisitor().execute(omobj);
+		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
 		assertEquals(OMCreator.createOMI(1), result.getOMI());
 	}
 
 	@Test(expected = FunctionInvalidArgumentException.class)
 	public void testGetRandomFromListWithEmptyArgs() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("getRandomFromList({})", null, null);
-		new OMToResultVisitor().execute(omobj);
+		OMToResultVisitor.getInstance().execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testGetRandomFromListWithLessArgs() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("getRandomFromList()", null, null);
-		new OMToResultVisitor().execute(omobj);
+		OMToResultVisitor.getInstance().execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testGetRandomFromListWithMoreArgs() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("getRandomFromList({}, 0, 4)", null, null);
-		new OMToResultVisitor().execute(omobj);
+		OMToResultVisitor.getInstance().execute(omobj);
 		fail();
 	}
 }

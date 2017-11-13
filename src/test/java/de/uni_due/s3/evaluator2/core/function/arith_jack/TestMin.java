@@ -54,14 +54,14 @@ public class TestMin extends TestFunctionAbstract {
 	@Test
 	public void testMinIntegration1() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("min(5,10)", null, null);
-		OMOBJ result = new OMToResultVisitor().execute(omobj);
+		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
 		assertEquals(OMCreator.createOMI(5), result.getOMI());
 	}
 
 	@Test
 	public void testMinIntegration2() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("min(10.1,17)", null, null);
-		OMOBJ result = new OMToResultVisitor().execute(omobj);
+		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
 		assertEquals(OMCreator.createOMF(10.1), result.getOMF());
 	}
 	
@@ -75,28 +75,28 @@ public class TestMin extends TestFunctionAbstract {
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void testMinWithWrongArguments1() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("min(10,'test')", null, null);
-		new OMToResultVisitor().execute(omobj);
+		OMToResultVisitor.getInstance().execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void testMinWithWrongArguments2() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("min('test',17)", null, null);
-		new OMToResultVisitor().execute(omobj);
+		OMToResultVisitor.getInstance().execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testMinWithWrongNumberOfArgs1() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("min('test',17, 3)", null, null);
-		new OMToResultVisitor().execute(omobj);
+		OMToResultVisitor.getInstance().execute(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testMinWithWrongNumberOfArgs2() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("min('test')", null, null);
-		new OMToResultVisitor().execute(omobj);
+		OMToResultVisitor.getInstance().execute(omobj);
 		fail();
 	}
 }

@@ -19,10 +19,10 @@ public class Or extends BinaryFunction {
 
 	@Override
 	protected Object execute(List<Object> arguments) throws EvaluatorException {
-		if (getBooleanSyntax(new OMToResultVisitor().visit(arguments.get(0)))) {
+		if (getBooleanSyntax(OMToResultVisitor.getInstance().visit(arguments.get(0)))) {
 			return OMSymbol.LOGIC1_TRUE;
 		} else {
-			if (getBooleanSyntax(new OMToResultVisitor().visit(arguments.get(1)))) {
+			if (getBooleanSyntax(OMToResultVisitor.getInstance().visit(arguments.get(1)))) {
 				return OMSymbol.LOGIC1_TRUE;
 			} else {
 				return OMSymbol.LOGIC1_FALSE;

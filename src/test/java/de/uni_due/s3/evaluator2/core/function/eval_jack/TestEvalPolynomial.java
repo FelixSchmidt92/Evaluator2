@@ -79,14 +79,14 @@ public class TestEvalPolynomial extends TestFunctionAbstract {
 	@Test
 	public void testEvalPolynomialIntegration1() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("evalpolynomial('x+x','1')", null, null);
-		OMOBJ result = new OMToResultVisitor().execute(omobj);
+		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
 		assertEquals(OMCreator.createOMI(2), result.getOMI());
 	}
 
 	@Test
 	public void testEvalPolynomialIntegration2() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("evalpolynomial('x+2*x',-4)", null, null);
-		OMOBJ result = new OMToResultVisitor().execute(omobj);
+		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
 		assertEquals(OMCreator.createOMI(-12), result.getOMI());
 	}
 

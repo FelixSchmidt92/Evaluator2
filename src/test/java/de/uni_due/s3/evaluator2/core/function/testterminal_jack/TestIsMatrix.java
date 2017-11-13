@@ -21,25 +21,25 @@ public class TestIsMatrix extends TestFunctionAbstract {
 	@Test
 	public void integrationTestMatrix1() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("isMatrix(-3)", null, null);
-		assertEquals(OMSymbol.LOGIC1_FALSE, new OMToResultVisitor().execute(omobj).getOMS());
+		assertEquals(OMSymbol.LOGIC1_FALSE, OMToResultVisitor.getInstance().execute(omobj).getOMS());
 	}
 	
 	@Test
 	public void integrationTestMatrix2() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("isMatrix(matrix(matrixrow(1,2)))", null, null);
-		assertEquals(OMSymbol.LOGIC1_TRUE, new OMToResultVisitor().execute(omobj).getOMS());
+		assertEquals(OMSymbol.LOGIC1_TRUE, OMToResultVisitor.getInstance().execute(omobj).getOMS());
 	}
 	
 	@Test
 	public void integrationTestMatrix3() throws OpenMathException, EvaluatorException {
 		exMap.put("A", ExpressionParser.parse("matrix(matrixrow(1,2),matrixrow(1,2))", null, null));
 		OMOBJ omobj = ExpressionParser.parse("isMatrix([var=A])", exMap, null);
-		assertEquals(OMSymbol.LOGIC1_TRUE, new OMToResultVisitor().execute(omobj).getOMS());
+		assertEquals(OMSymbol.LOGIC1_TRUE, OMToResultVisitor.getInstance().execute(omobj).getOMS());
 	}
 	
 	@Test
 	public void integrationTestMatrix4() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("isMatrix(matrix())", null, null);
-		assertEquals(OMSymbol.LOGIC1_FALSE, new OMToResultVisitor().execute(omobj).getOMS());
+		assertEquals(OMSymbol.LOGIC1_FALSE, OMToResultVisitor.getInstance().execute(omobj).getOMS());
 	}
 }

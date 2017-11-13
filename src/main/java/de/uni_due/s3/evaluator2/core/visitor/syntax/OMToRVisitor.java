@@ -13,6 +13,19 @@ import de.uni_due.s3.openmath.jaxb.OMV;
 
 public class OMToRVisitor extends OMToSyntaxVisitor<String> {
 
+	private static OMToRVisitor visitor;
+	
+	private OMToRVisitor() throws EvaluatorException { }
+	
+	
+	public static OMToSyntaxVisitor<String> getInstance() throws EvaluatorException {
+		if (visitor != null) {
+			return visitor;
+		}
+		visitor = new OMToRVisitor();
+		return visitor;
+	}
+
 	@Override
 	protected String visit(OMF omf) {
 		double value = omf.getDec();
@@ -48,5 +61,7 @@ public class OMToRVisitor extends OMToSyntaxVisitor<String> {
 			throws EvaluatorException {
 		return function.getPartialRSyntax(omel);
 	}
+
+
 
 }

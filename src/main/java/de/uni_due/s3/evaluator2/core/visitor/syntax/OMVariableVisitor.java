@@ -19,6 +19,18 @@ import de.uni_due.s3.openmath.omutils.OMCreator;
 
 public class OMVariableVisitor extends OMToSyntaxVisitor<Set<OMV>> {
 
+	private static OMVariableVisitor visitor;
+	
+	private OMVariableVisitor() throws EvaluatorException { }
+
+	public static OMToSyntaxVisitor<Set<OMV>> getInstance() throws EvaluatorException {
+		if (visitor != null) {
+			return visitor;
+		}
+		visitor = new OMVariableVisitor();
+		return visitor;
+	}
+	
 	@Override
 	protected Set<OMV> visit(OMF omf) {
 		Set<OMV> omvSet = new HashSet<>();

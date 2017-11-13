@@ -64,7 +64,7 @@ public class TestSize extends TestFunctionAbstract {
 	@Test
 	public void testSizeIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("sizeOfList(list(1,2,3))", null, null);
-		OMOBJ result = new OMToResultVisitor().execute(omobj);
+		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
 		assertEquals(OMCreator.createOMI(3), result.getOMI());
 	}
 }

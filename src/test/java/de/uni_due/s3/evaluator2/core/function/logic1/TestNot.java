@@ -59,7 +59,7 @@ public class TestNot extends TestFunctionAbstract {
 	@Test
 	public void testBooleanNotLatexSyntax() throws OpenMathException, EvaluatorException {
 		OMOBJ obj = ExpressionParser.parse("!3", new HashMap<>(), new HashMap<>());
-		String latex = new OMToLatexVisitor().visit(obj);
+		String latex = OMToLatexVisitor.getInstance().visit(obj);
 		assertEquals("\\neg3", latex);
 	}
 
@@ -73,14 +73,14 @@ public class TestNot extends TestFunctionAbstract {
 	@Test
 	public void testBooleanNotIntegration1() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("!(2==1)", null, null);
-		OMOBJ result = new OMToResultVisitor().execute(omobj);
+		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
 		assertEquals(OMSymbol.LOGIC1_TRUE, result.getOMS());
 	}
 
 	@Test
 	public void testBooleanNotIntegration2() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("!(2>1)", null, null);
-		OMOBJ result = new OMToResultVisitor().execute(omobj);
+		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
 		assertEquals(OMSymbol.LOGIC1_FALSE, result.getOMS());
 	}
 

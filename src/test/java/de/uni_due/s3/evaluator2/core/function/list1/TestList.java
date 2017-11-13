@@ -63,7 +63,7 @@ public class TestList {
 	@Test
 	public void testListIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("list(1,2,3)", null, null);
-		OMOBJ result = new OMToResultVisitor().execute(omobj);
+		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
 		List<Object> value = result.getOMA().getOmel();
 		assertEquals(OMCreator.createOMI(1), value.get(1));
 		assertEquals(OMCreator.createOMI(2), value.get(2));
@@ -80,7 +80,7 @@ public class TestList {
 	@Test
 	public void testListRSyntax() throws EvaluatorException, OpenMathException {
 		OMOBJ result = Evaluator.evaluate("list(1,2,3)", null,null);
-		String r = new OMToRVisitor().visit(result);
+		String r = OMToRVisitor.getInstance().visit(result);
 		assertEquals("list(1, 2, 3)",r);
 		
 	}

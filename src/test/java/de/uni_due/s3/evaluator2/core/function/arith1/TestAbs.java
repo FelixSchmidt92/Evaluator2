@@ -42,14 +42,14 @@ public class TestAbs extends TestFunctionAbstract {
 	@Test
 	public void testAbsIntegration1() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("abs(-13)", null, null);
-		OMOBJ result = new OMToResultVisitor().execute(omobj);
+		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
 		assertEquals(OMCreator.createOMI(13), result.getOMI());
 	}
 
 	@Test
 	public void testAbsIntegration2() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("abs(10)", null, null);
-		OMOBJ result = new OMToResultVisitor().execute(omobj);
+		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
 		assertEquals(OMCreator.createOMI(10), result.getOMI());
 	}
 
@@ -70,14 +70,14 @@ public class TestAbs extends TestFunctionAbstract {
 	@Test
 	public void testAbsLatexSyntax() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = ExpressionParser.parse("abs(5)", new HashMap<>(), new HashMap<>());
-		String latex = new OMToLatexVisitor().visit(obj);
+		String latex = OMToLatexVisitor.getInstance().visit(obj);
 		assertEquals("\\left|5\\right|", latex);
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void testAbsWithWrongArguments() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("abs('test')", null, null);
-		new OMToResultVisitor().execute(omobj);
+		OMToResultVisitor.getInstance().execute(omobj);
 		fail();
 	}
 }

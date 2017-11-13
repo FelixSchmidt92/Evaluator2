@@ -37,7 +37,7 @@ public class TestDefint extends TestFunctionAbstract{
 					"</OMA>" + 
 				"</OMBIND>" + 
 				"</OMA></OMOBJ>");
-		OMOBJ result = new OMToResultVisitor().execute(omobj);
+		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
 		OMOBJ expected = OMConverter.toObject("<OMOBJ>"
 				+"<OMI>2</OMI>"
 				+"</OMOBJ>");

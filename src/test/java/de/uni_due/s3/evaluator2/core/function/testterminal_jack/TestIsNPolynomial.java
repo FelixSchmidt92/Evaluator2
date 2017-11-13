@@ -24,7 +24,7 @@ public class TestIsNPolynomial extends TestFunctionAbstract {
 
 		OMOBJ t = ExpressionParser.parse("isNPolynomial('a*2+ c', x, 1)", null, null);
 
-		OMOBJ actual = new OMToResultVisitor().execute(t);
+		OMOBJ actual = OMToResultVisitor.getInstance().execute(t);
 
 		OMOBJ expected = new OMOBJ();
 		expected.setOMS(OMSymbol.LOGIC1_FALSE);
@@ -36,7 +36,7 @@ public class TestIsNPolynomial extends TestFunctionAbstract {
 
 		OMOBJ t = ExpressionParser.parse("isNPolynomial('a*2+ c',a,'1')", null, null);
 
-		OMOBJ actual = new OMToResultVisitor().execute(t);
+		OMOBJ actual = OMToResultVisitor.getInstance().execute(t);
 
 		OMOBJ expected = new OMOBJ();
 		expected.setOMS(OMSymbol.LOGIC1_TRUE);
@@ -48,7 +48,7 @@ public class TestIsNPolynomial extends TestFunctionAbstract {
 
 		OMOBJ t = ExpressionParser.parse("isNPolynomial('x^2+x+1', 'x',2)", null, null);
 
-		OMOBJ actual = new OMToResultVisitor().execute(t);
+		OMOBJ actual = OMToResultVisitor.getInstance().execute(t);
 
 		OMOBJ expected = new OMOBJ();
 		expected.setOMS(OMSymbol.LOGIC1_TRUE);
@@ -60,7 +60,7 @@ public class TestIsNPolynomial extends TestFunctionAbstract {
 
 		OMOBJ t = ExpressionParser.parse("isNPolynomial('sin(x)+ y^3', 'x',1)", null, null);
 
-		OMOBJ actual = new OMToResultVisitor().execute(t);
+		OMOBJ actual = OMToResultVisitor.getInstance().execute(t);
 
 		OMOBJ expected = new OMOBJ();
 		expected.setOMS(OMSymbol.LOGIC1_FALSE);
@@ -72,7 +72,7 @@ public class TestIsNPolynomial extends TestFunctionAbstract {
 
 		OMOBJ t = ExpressionParser.parse("isNPolynomial('sin(x)+ y^3', 'y',3)", null, null);
 
-		OMOBJ actual = new OMToResultVisitor().execute(t);
+		OMOBJ actual = OMToResultVisitor.getInstance().execute(t);
 
 		OMOBJ expected = new OMOBJ();
 		expected.setOMS(OMSymbol.LOGIC1_TRUE);
@@ -84,7 +84,7 @@ public class TestIsNPolynomial extends TestFunctionAbstract {
 
 		OMOBJ t = ExpressionParser.parse("isNPolynomial('sin(x)+ -y^3', 'y',0)", null, null);
 
-		OMOBJ actual = new OMToResultVisitor().execute(t);
+		OMOBJ actual = OMToResultVisitor.getInstance().execute(t);
 
 		OMOBJ expected = new OMOBJ();
 		expected.setOMS(OMSymbol.LOGIC1_FALSE);
@@ -96,7 +96,7 @@ public class TestIsNPolynomial extends TestFunctionAbstract {
 
 		OMOBJ t = ExpressionParser.parse("isNPolynomial('sin(x)+ -y^3', 'abcd',1)", null, null);
 
-		new OMToResultVisitor().execute(t);
+		OMToResultVisitor.getInstance().execute(t);
 	}
 
 	@Test(expected = CasEvaluationException.class)
@@ -104,7 +104,7 @@ public class TestIsNPolynomial extends TestFunctionAbstract {
 
 		OMOBJ t = ExpressionParser.parse("isNPolynomial('abcd', 'a',1)", null, null);
 
-		new OMToResultVisitor().execute(t);
+		OMToResultVisitor.getInstance().execute(t);
 	}
 	
 	@Test
@@ -112,7 +112,7 @@ public class TestIsNPolynomial extends TestFunctionAbstract {
 
 		OMOBJ t = ExpressionParser.parse("isNPolynomial('2*x^2 + y^-1 + 2*x*a^-1', 'x',2)", null, null);
 
-		OMOBJ actual = new OMToResultVisitor().execute(t);
+		OMOBJ actual = OMToResultVisitor.getInstance().execute(t);
 
 		OMOBJ expected = new OMOBJ();
 		expected.setOMS(OMSymbol.LOGIC1_TRUE);
@@ -124,7 +124,7 @@ public class TestIsNPolynomial extends TestFunctionAbstract {
 
 		OMOBJ t = ExpressionParser.parse("isNPolynomial('0', 'x',0)", null, null);
 
-		OMOBJ actual = new OMToResultVisitor().execute(t);
+		OMOBJ actual = OMToResultVisitor.getInstance().execute(t);
 
 		OMOBJ expected = new OMOBJ();
 		expected.setOMS(OMSymbol.LOGIC1_TRUE);

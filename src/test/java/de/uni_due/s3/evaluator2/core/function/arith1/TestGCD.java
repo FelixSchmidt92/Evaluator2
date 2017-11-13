@@ -37,14 +37,14 @@ public class TestGCD extends TestFunctionAbstract {
 	@Test
 	public void testGcdIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("gcd(10,5)", null, null);
-		OMOBJ result = new OMToResultVisitor().execute(omobj);
+		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
 		assertEquals(OMCreator.createOMI(5), result.getOMI());
 	}
 	
 	@Test
 	public void testGcdLatexSyntax() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = ExpressionParser.parse("gcd(1,2)", new HashMap<>(), new HashMap<>());
-		String latex = new OMToLatexVisitor().visit(obj);
+		String latex = OMToLatexVisitor.getInstance().visit(obj);
 		assertEquals("\\mbox{gcd}\\left(1,2\\right)", latex);
 	}
 
@@ -59,7 +59,7 @@ public class TestGCD extends TestFunctionAbstract {
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void testGcdWithWrongArguments() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("gcd(2,'test')", null, null);
-		new OMToResultVisitor().execute(omobj);
+		OMToResultVisitor.getInstance().execute(omobj);
 		fail();
 	}
 

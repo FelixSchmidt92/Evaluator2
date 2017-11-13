@@ -14,6 +14,18 @@ import de.uni_due.s3.openmath.jaxb.OMV;
 
 public class OMToBooleanVisitor extends OMToSyntaxVisitor<Boolean> {
 
+	private static OMToBooleanVisitor visitor;
+	
+	private OMToBooleanVisitor() throws EvaluatorException { }
+
+	public static OMToSyntaxVisitor<Boolean> getInstance() throws EvaluatorException {
+		if (visitor != null) {
+			return visitor;
+		}
+		visitor = new OMToBooleanVisitor();
+		return visitor;
+	}
+	
 	@Override
 	protected Boolean visit(OMF omf) {
 		return (omf.getDec() > 0);

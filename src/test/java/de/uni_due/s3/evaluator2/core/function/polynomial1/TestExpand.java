@@ -62,7 +62,7 @@ public class TestExpand extends TestFunctionAbstract {
 	@Test
 	public void testDegreeWrtIntegration1() throws OpenMathException, JAXBException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("expand((2 + x) * (x - 2))", null, null);
-		OMOBJ result = new OMToResultVisitor().execute(omobj);
+		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
 		assertEquals(OMConverter.toElement(OMConverter.toObject(
 				"<OMOBJ><OMA><OMS name=\"plus\" cd=\"arith1\"/><OMA><OMS name=\"power\" cd=\"arith1\"/><OMV name=\"x\"/><OMI>2</OMI></OMA><OMI>-4</OMI></OMA></OMOBJ>")),
 				result.getOMA());
@@ -71,7 +71,7 @@ public class TestExpand extends TestFunctionAbstract {
 	@Test
 	public void testDegreeWrtIntegration2() throws OpenMathException, JAXBException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("expand('(x - 2)*(2 + x)')", null, null);
-		OMOBJ result = new OMToResultVisitor().execute(omobj);
+		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
 		assertEquals(OMConverter.toElement(OMConverter.toObject(
 				"<OMOBJ><OMA><OMS name=\"plus\" cd=\"arith1\"/><OMA><OMS name=\"power\" cd=\"arith1\"/><OMV name=\"x\"/><OMI>2</OMI></OMA><OMI>-4</OMI></OMA></OMOBJ>")),
 				result.getOMA());

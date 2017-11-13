@@ -84,7 +84,7 @@ public class Evaluator {
 		OMOBJ result = evaluate(expression, exerciseVariableMap, fillInVariableMap);
 		result = evaluate(result);
 		try {
-			return new OMToDoubleVisitor().visit(result);
+			return OMToDoubleVisitor.getInstance().visit(result);
 		} catch (NoRepresentationAvailableException e) {
 			throw new FunctionException("Error converting result into Double.", e);
 		}
@@ -109,7 +109,7 @@ public class Evaluator {
 			HashMap<Integer, OMOBJ> fillInVariableMap) throws EvaluatorException, OpenMathException {
 
 		OMOBJ omobj = ExpressionParser.parse(expression, exerciseVariableMap, fillInVariableMap);
-		return new OMToResultVisitor().execute(omobj);
+		return OMToResultVisitor.getInstance().execute(omobj);
 	}
 
 	/**
@@ -125,7 +125,7 @@ public class Evaluator {
 	 * @throws CasEvaluationException
 	 */
 	public static OMOBJ evaluate(OMOBJ omobj) throws EvaluatorException, OpenMathException {
-		return new OMToResultVisitor().execute(omobj);
+		return OMToResultVisitor.getInstance().execute(omobj);
 	}
 
 	/**
@@ -136,7 +136,7 @@ public class Evaluator {
 	 * @throws EvaluatorException
 	 */
 	public static String getLaTeX(OMOBJ omobj) throws EvaluatorException {
-		return new OMToLatexVisitor().visit(omobj);
+		return OMToLatexVisitor.getInstance().visit(omobj);
 	}
 
 	/**
@@ -147,7 +147,7 @@ public class Evaluator {
 	 * @throws EvaluatorException
 	 */
 	public static String getString(OMOBJ omobj) throws EvaluatorException {
-		return new OMToStringVisitor().visit(omobj);
+		return OMToStringVisitor.getInstance().visit(omobj);
 	}
 	
 	/**

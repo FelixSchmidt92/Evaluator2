@@ -14,6 +14,18 @@ import de.uni_due.s3.openmath.jaxb.OMV;
 
 public class OMToIntegerVisitor extends OMToSyntaxVisitor<Integer> {
 
+	private static OMToIntegerVisitor visitor;
+	
+	private OMToIntegerVisitor() throws EvaluatorException { }
+
+	public static OMToSyntaxVisitor<Integer> getInstance() throws EvaluatorException {
+		if (visitor != null) {
+			return visitor;
+		}
+		visitor = new OMToIntegerVisitor();
+		return visitor;
+	}
+	
 	@Override
 	protected Integer visit(OMF omf) throws NoRepresentationAvailableException {
 		double val = omf.getDec();

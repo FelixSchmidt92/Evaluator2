@@ -47,7 +47,7 @@ public class TestVector extends TestFunctionAbstract {
 	@Test
 	public void testVectorIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("vector(1,2,3)", null, null);
-		OMOBJ result = new OMToResultVisitor().execute(omobj);
+		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(1));
 		args.add(OMCreator.createOMI(2));
@@ -77,14 +77,14 @@ public class TestVector extends TestFunctionAbstract {
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testVectorWithLessThanMinParam() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("vector()", null, null);
-		new OMToResultVisitor().execute(omobj);
+		OMToResultVisitor.getInstance().execute(omobj);
 		fail();
 	}
 	
 	@Test
 	public void testOMToLatexVisitorWithVector() throws OpenMathException, EvaluatorException {
 		OMOBJ obj = Evaluator.evaluate("vector(1,2,3,4)", new HashMap<>(), new HashMap<>());
-		String latex = new OMToLatexVisitor().visit(obj);
+		String latex = OMToLatexVisitor.getInstance().visit(obj);
 		assertEquals("\\left(\\begin{array}{r}" + 
 				"1\\\\" + 
 				"2\\\\" + 
@@ -98,7 +98,7 @@ public class TestVector extends TestFunctionAbstract {
 	@Test
 	public void testOMToLatexVisitorWithVector2() throws OpenMathException, EvaluatorException {
 		OMOBJ obj = Evaluator.evaluate("vector(123,2.023,[var=PI])", new HashMap<>(), new HashMap<>());
-		String latex = new OMToLatexVisitor().visit(obj);
+		String latex = OMToLatexVisitor.getInstance().visit(obj);
 		assertEquals("\\left(\\begin{array}{r}" + 
 				"123\\\\" + 
 				"2.023\\\\" + 

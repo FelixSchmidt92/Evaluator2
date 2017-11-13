@@ -14,6 +14,18 @@ import de.uni_due.s3.openmath.jaxb.OMV;
 
 public class OMToDoubleVisitor extends OMToSyntaxVisitor<Double> {
 
+	private static OMToDoubleVisitor visitor;
+	
+	private OMToDoubleVisitor() throws EvaluatorException { }
+
+	public static OMToSyntaxVisitor<Double> getInstance() throws EvaluatorException {
+		if (visitor != null) {
+			return visitor;
+		}
+		visitor = new OMToDoubleVisitor();
+		return visitor;
+	}
+	
 	@Override
 	protected Double visit(OMF omf) {
 		return omf.getDec();

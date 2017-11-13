@@ -32,7 +32,7 @@ public class TestRandomMatrixEigenvalue extends TestFunctionAbstract {
 	@Test
 	public void testRandomMatrixEigenValueWithIntegration1() throws OpenMathException, EvaluatorException {
 		OMOBJ obj = ExpressionParser.parse("randomMatrixEigenvalue('QQ', 1, '[1]', '[1]')", null, null);
-		obj = new OMToResultVisitor().execute(obj);
+		obj = OMToResultVisitor.getInstance().execute(obj);
 
 		assertEquals(omobj1, obj);
 	}
@@ -40,7 +40,7 @@ public class TestRandomMatrixEigenvalue extends TestFunctionAbstract {
 	@Test
 	public void testRandomMatrixEigenValueCaseIntegration2() throws OpenMathException, EvaluatorException {
 		OMOBJ obj = ExpressionParser.parse("randomMatrixEigenvalue('QQ', 2, '[1,1]', '[1,1]')", null, null);
-		obj = new OMToResultVisitor().execute(obj);
+		obj = OMToResultVisitor.getInstance().execute(obj);
 
 		assertEquals(omobj2, obj);
 	}
@@ -48,7 +48,7 @@ public class TestRandomMatrixEigenvalue extends TestFunctionAbstract {
 	@Test
 	public void testRandomMatrixEigenValueCaseIntegration3() throws OpenMathException, EvaluatorException {
 		OMOBJ obj = ExpressionParser.parse("randomMatrixEigenvalue('QQ', 3, '[1,1,1]', '[1,1,1]')", null, null);
-		obj = new OMToResultVisitor().execute(obj);
+		obj = OMToResultVisitor.getInstance().execute(obj);
 
 		assertEquals(omobj3, obj);
 	}
@@ -56,7 +56,7 @@ public class TestRandomMatrixEigenvalue extends TestFunctionAbstract {
 	@Test(expected = CasEvaluationException.class)
 	public void testRandomMatrixEigenValueCaseIntegration4() throws OpenMathException, EvaluatorException {
 		OMOBJ obj = ExpressionParser.parse("randomMatrixEigenvalue('QQ', 3, '[1,1,1]', 12)", null, null);
-		obj = new OMToResultVisitor().execute(obj);
+		obj = OMToResultVisitor.getInstance().execute(obj);
 
 		assertEquals(omobj3, obj);
 	}
@@ -64,7 +64,7 @@ public class TestRandomMatrixEigenvalue extends TestFunctionAbstract {
 	@Test
 	public void testRandomMatrixEigenValueCaseIntegration5() throws OpenMathException, EvaluatorException {
 		OMOBJ obj = ExpressionParser.parse("randomMatrixEigenvalue(qq(), 3, list(1,1,1), list(1,1,1))", null, null);
-		obj = new OMToResultVisitor().execute(obj);
+		obj = OMToResultVisitor.getInstance().execute(obj);
 
 		assertEquals(omobj3, obj);
 	}

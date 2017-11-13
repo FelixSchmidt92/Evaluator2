@@ -73,7 +73,7 @@ public class TestOMToResultVisitor {
 	public void visitorTestOMOBJ() throws JAXBException, OpenMathException, EvaluatorException {
 		// test OMI, OMF, OMS, OMSTR, OMV
 		OMOBJ current = (OMOBJ) OMConverter.toObject(terminalStringToObject);
-		OMOBJ curResult = new OMToResultVisitor().execute(current);
+		OMOBJ curResult = OMToResultVisitor.getInstance().execute(current);
 		OMOBJ expected = OMConverter.toObject(terminalStringToObject);
 		assertEquals(expected, curResult);
 	}
@@ -81,7 +81,7 @@ public class TestOMToResultVisitor {
 	@Test
 	public void visitorTestOMA() throws JAXBException, OpenMathException, EvaluatorException {
 		OMOBJ current = OMConverter.toObject(omaStringToObject);
-		OMOBJ curResult = new OMToResultVisitor().execute(current);
+		OMOBJ curResult = OMToResultVisitor.getInstance().execute(current);
 		OMOBJ expected = OMConverter.toObject(resultStringToObject);
 		assertEquals(expected, curResult);
 	}
@@ -99,14 +99,14 @@ public class TestOMToResultVisitor {
 		if (foreignChild instanceof OMR)
 			omobj.setOMR((OMR) foreignChild);
 
-		new OMToResultVisitor().execute(omobj);
+		OMToResultVisitor.getInstance().execute(omobj);
 	}
 
 	@Test
 	public void testVisitAlternateTree() throws OpenMathException, EvaluatorException, JAXBException {
 		OMOBJ eval = OMConverter.toObject(
 				"<OMOBJ><OMA><OMA><OMS name=\"power\" cd=\"arith1\"/><OMS name=\"cos\" cd=\"transc1\"/><OMI>2</OMI></OMA><OMV name=\"x\"/></OMA></OMOBJ>");
-		OMOBJ actual = new OMToResultVisitor().execute(eval);
+		OMOBJ actual = OMToResultVisitor.getInstance().execute(eval);
 
 		OMOBJ expected = OMConverter.toObject(
 				"<OMOBJ><OMA><OMS name=\"power\" cd=\"arith1\"/><OMA><OMS name=\"cos\" cd=\"transc1\"/><OMV name=\"x\"/></OMA><OMI>2</OMI></OMA></OMOBJ>");

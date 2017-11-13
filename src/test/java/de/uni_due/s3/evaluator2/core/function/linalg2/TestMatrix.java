@@ -52,7 +52,7 @@ public class TestMatrix extends TestFunctionAbstract {
 	@Test
 	public void testMatrixIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("matrix(matrixrow(1,3),matrixrow(0.0,4))", null, null);
-		OMOBJ result = new OMToResultVisitor().execute(omobj);
+		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
 		List<Object> matrix = new ArrayList<Object>();
 		List<Object> matrixrow1 = new ArrayList<Object>();
 		matrixrow1.add(OMCreator.createOMI(1));
@@ -82,20 +82,20 @@ public class TestMatrix extends TestFunctionAbstract {
 	@Test
 	public void testMatrixWithZeroParam() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("matrix()", null, null);
-		new OMToResultVisitor().execute(omobj);
+		OMToResultVisitor.getInstance().execute(omobj);
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void testMatrixWithWrongArguments() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("matrix('Test')", null, null);
-		new OMToResultVisitor().execute(omobj);
+		OMToResultVisitor.getInstance().execute(omobj);
 		fail();
 	}
 	
 	@Test
 	public void testMatrixLatexSyntax() throws OpenMathException, EvaluatorException {
 		OMOBJ obj = Evaluator.evaluate("matrix(matrixrow(1,2,3),matrixrow(4,5))", new HashMap<>(), new HashMap<>());
-		String latex = new OMToLatexVisitor().visit(obj);
+		String latex = OMToLatexVisitor.getInstance().visit(obj);
 		assertEquals("\\left(\\begin{array}{rr}"
 				+ "1 & 2 & 3\\\\"
 				+ "4 & 5\\\\"
@@ -106,7 +106,7 @@ public class TestMatrix extends TestFunctionAbstract {
 	@Test
 	public void testMatrixRSyntax() throws OpenMathException, EvaluatorException {
 		OMOBJ obj = Evaluator.evaluate("matrix(matrixrow(1,2,3),matrixrow(4,5,6))", new HashMap<>(), new HashMap<>());
-		String r = new OMToRVisitor().visit(obj);
+		String r = OMToRVisitor.getInstance().visit(obj);
 		assertEquals("matrix(c(1,2,3,4,5,6), nrow=2, ncol=3, byrow=TRUE",r);
 	}
 }

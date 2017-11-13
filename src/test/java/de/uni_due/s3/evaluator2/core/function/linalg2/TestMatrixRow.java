@@ -48,7 +48,7 @@ public class TestMatrixRow extends TestFunctionAbstract {
 	@Test
 	public void testMatrixRowIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("matrixrow(1,3,0.0)", null, null);
-		OMOBJ result = new OMToResultVisitor().execute(omobj);
+		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(1));
 		args.add(OMCreator.createOMI(3));
@@ -67,14 +67,14 @@ public class TestMatrixRow extends TestFunctionAbstract {
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testMatrixRowWithLessThanMinParam() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("matrixrow()", null, null);
-		new OMToResultVisitor().execute(omobj);
+		OMToResultVisitor.getInstance().execute(omobj);
 		fail();
 	}
 	
 	@Test
 	public void testMatrixRowLatexSyntax() throws OpenMathException, EvaluatorException {
 		OMOBJ obj = Evaluator.evaluate("matrixrow(1,2,3)", new HashMap<>(), new HashMap<>());
-		String latex = new OMToLatexVisitor().visit(obj);
+		String latex = OMToLatexVisitor.getInstance().visit(obj);
 		assertEquals("1 & 2 & 3", latex);
 	}
 }

@@ -14,6 +14,18 @@ import de.uni_due.s3.openmath.jaxb.OMV;
 
 public class OMCountVisitor extends OMToSyntaxVisitor<Integer> {
 
+	private static OMCountVisitor visitor;
+	
+	private OMCountVisitor() throws EvaluatorException { }
+
+	public static OMToSyntaxVisitor<Integer> getInstance() throws EvaluatorException {
+		if (visitor != null) {
+			return visitor;
+		}
+		visitor = new OMCountVisitor();
+		return visitor;
+	}
+	
 	@Override
 	protected Integer visit(OMF omf) {
 		return 1;

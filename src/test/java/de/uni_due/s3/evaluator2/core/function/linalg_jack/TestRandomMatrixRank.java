@@ -71,27 +71,27 @@ public class TestRandomMatrixRank extends TestFunctionAbstract {
 	public void testRandomMatrixRankIntegration4Arguments() throws OpenMathException, EvaluatorException {
 		OMOBJ t = ExpressionParser.parse("randomMatrixRank('QQ', 2, 3, 2)", null, null);
 
-		new OMToResultVisitor().execute(t);
+		OMToResultVisitor.getInstance().execute(t);
 	}
 
 	@Test
 	public void testRandomMatrixRankIntegration5Arguments() throws OpenMathException, EvaluatorException {
 		OMOBJ t = ExpressionParser.parse("randomMatrixRank('QQ', 2, 3, 2, 10)", null, null);
 
-		new OMToResultVisitor().execute(t);
+		OMToResultVisitor.getInstance().execute(t);
 	}
 
 	@Test
 	public void testRandomMatrixRankIntegration6Arguments() throws OpenMathException, EvaluatorException {
 		OMOBJ t = ExpressionParser.parse("randomMatrixRank('QQ', '2', '3', '2', '10')", null, null);
 
-		new OMToResultVisitor().execute(t);
+		OMToResultVisitor.getInstance().execute(t);
 	}
 	
 	@Test
 	public void testRandomMatrixRankIntegration7Arguments() throws OpenMathException, EvaluatorException {
 		OMOBJ t = ExpressionParser.parse("randomMatrixRank(zz(), 2, 3, 2, 10)", null, null);
 
-		new OMToResultVisitor().execute(t);
+		OMToResultVisitor.getInstance().execute(t);
 	}
 }

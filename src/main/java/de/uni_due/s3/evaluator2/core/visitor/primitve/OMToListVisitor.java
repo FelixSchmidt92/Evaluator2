@@ -16,6 +16,18 @@ import de.uni_due.s3.openmath.omutils.OMCreator;
 
 public class OMToListVisitor extends OMToSyntaxVisitor<List<Object>> {
 
+	private static OMToListVisitor visitor;
+	
+	private OMToListVisitor() throws EvaluatorException { }
+
+	public static OMToSyntaxVisitor<List<Object>> getInstance() throws EvaluatorException {
+		if (visitor != null) {
+			return visitor;
+		}
+		visitor = new OMToListVisitor();
+		return visitor;
+	}
+	
 	@Override
 	protected List<Object> visit(OMF omf) {
 		List<Object> omList = new ArrayList<>();

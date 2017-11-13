@@ -47,7 +47,7 @@ public class TestSum extends TestFunctionAbstract{
 				"                    </OMBIND>" + 
 				"                </OMA>" + 
 				"            </OMOBJ>");
-		OMOBJ result = new OMToResultVisitor().execute(omobj);
+		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
 		OMOBJ expected = OMConverter.toObject("<OMOBJ>"
 				+"<OMA>"
 				+"<OMS cd=\"arith1\" name=\"times\"/>"

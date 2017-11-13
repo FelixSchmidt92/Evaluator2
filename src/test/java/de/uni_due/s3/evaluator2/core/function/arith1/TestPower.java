@@ -51,14 +51,14 @@ public class TestPower extends TestFunctionAbstract {
 	@Test
 	public void testPowerIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("pow(2,3)", null, null);
-		OMOBJ result = new OMToResultVisitor().execute(omobj);
+		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
 		assertEquals(OMCreator.createOMI(8), result.getOMI());
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void testPowerWithInvalidArgumentType() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("pow(5,'Test')", null, null);
-		new OMToResultVisitor().execute(omobj);
+		OMToResultVisitor.getInstance().execute(omobj);
 		fail();
 	}
 

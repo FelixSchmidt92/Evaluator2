@@ -65,7 +65,7 @@ public class TestOr extends TestFunctionAbstract {
 	@Test
 	public void testBooleanOrLatexSyntax() throws OpenMathException, EvaluatorException {
 		OMOBJ obj = ExpressionParser.parse("3 || 2", new HashMap<>(), new HashMap<>());
-		String latex = new OMToLatexVisitor().visit(obj);
+		String latex = OMToLatexVisitor.getInstance().visit(obj);
 		assertEquals("3\\mbox{or}2", latex);
 	}
 
@@ -98,7 +98,7 @@ public class TestOr extends TestFunctionAbstract {
 	@Test
 	public void testBooleanOrIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("(1<2) || (2==1)", null, null);
-		OMOBJ result = new OMToResultVisitor().execute(omobj);
+		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
 		assertEquals(OMSymbol.LOGIC1_TRUE, result.getOMS());
 	}
 

@@ -95,14 +95,14 @@ public class TestEvalTerm2 extends TestFunctionAbstract {
 	@Test
 	public void testEvalTerm2Integration1() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("evalterm2('x+y','1','2')", null, null);
-		OMOBJ result = new OMToResultVisitor().execute(omobj);
+		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
 		assertEquals(OMCreator.createOMI(3), result.getOMI());
 	}
 
 	@Test
 	public void testEvalTerm2Integration2() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("evalterm2('x+y','1', -3)", null, null);
-		OMOBJ result = new OMToResultVisitor().execute(omobj);
+		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
 		assertEquals(OMCreator.createOMI(-2), result.getOMI());
 	}
 

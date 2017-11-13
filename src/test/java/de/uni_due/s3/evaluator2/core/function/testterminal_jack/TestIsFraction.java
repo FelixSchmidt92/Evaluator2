@@ -85,6 +85,6 @@ public class TestIsFraction extends TestFunctionAbstract {
 	@Test
 	public void testIsFractionCaseIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("isFraction(3/4)", null, null);
-		assertEquals(OMSymbol.LOGIC1_TRUE, new OMToResultVisitor().execute(omobj).getOMS());
+		assertEquals(OMSymbol.LOGIC1_TRUE, OMToResultVisitor.getInstance().execute(omobj).getOMS());
 	}
 }

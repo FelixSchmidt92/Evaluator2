@@ -21,25 +21,25 @@ public class TestIsTuple extends TestFunctionAbstract {
 	@Test
 	public void integrationTestMatrix1() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("isTuple(-3)", null, null);
-		assertEquals(OMSymbol.LOGIC1_FALSE, new OMToResultVisitor().execute(omobj).getOMS());
+		assertEquals(OMSymbol.LOGIC1_FALSE, OMToResultVisitor.getInstance().execute(omobj).getOMS());
 	}
 
 	@Test
 	public void integrationTestMatrix2() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("isTuple(matrix(matrixrow(1,2)))", null, null);
-		assertEquals(OMSymbol.LOGIC1_FALSE, new OMToResultVisitor().execute(omobj).getOMS());
+		assertEquals(OMSymbol.LOGIC1_FALSE, OMToResultVisitor.getInstance().execute(omobj).getOMS());
 	}
 
 	@Test
 	public void integrationTestMatrix3() throws OpenMathException, EvaluatorException {
 		exMap.put("A", ExpressionParser.parse("tuple(vector(1,2),1,2)", null, null));
 		OMOBJ omobj = ExpressionParser.parse("isTuple([var=A])", exMap, null);
-		assertEquals(OMSymbol.LOGIC1_TRUE, new OMToResultVisitor().execute(omobj).getOMS());
+		assertEquals(OMSymbol.LOGIC1_TRUE, OMToResultVisitor.getInstance().execute(omobj).getOMS());
 	}
 
 	@Test
 	public void integrationTestMatrix4() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("isTuple(tuple())", null, null);
-		assertEquals(OMSymbol.LOGIC1_TRUE, new OMToResultVisitor().execute(omobj).getOMS());
+		assertEquals(OMSymbol.LOGIC1_TRUE, OMToResultVisitor.getInstance().execute(omobj).getOMS());
 	}
 }

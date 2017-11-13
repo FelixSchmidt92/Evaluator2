@@ -19,7 +19,7 @@ public class TestOMToIntegerVisitor {
 	@Test
 	public void TestOMIntegerVisitor1() throws OpenMathException, EvaluatorException {
 		OMOBJ obj = Evaluator.evaluate("1==1", new HashMap<>(), new HashMap<>());
-		Integer result = new OMToIntegerVisitor().visit(obj);
+		Integer result = OMToIntegerVisitor.getInstance().visit(obj);
 		Integer expected = 1;
 		assertEquals(expected, result);
 	}
@@ -27,7 +27,7 @@ public class TestOMToIntegerVisitor {
 	@Test
 	public void TestOMIntegerVisitor2() throws OpenMathException, EvaluatorException {
 		OMOBJ obj = Evaluator.evaluate("1!=1", new HashMap<>(), new HashMap<>());
-		Integer result = new OMToIntegerVisitor().visit(obj);
+		Integer result = OMToIntegerVisitor.getInstance().visit(obj);
 		Integer expected = 0;
 		assertEquals(expected, result);
 	}
@@ -35,13 +35,13 @@ public class TestOMToIntegerVisitor {
 	@Test(expected = NoRepresentationAvailableException.class)
 	public void TestOMIntegerVisitor3() throws OpenMathException, EvaluatorException {
 		OMOBJ obj = Evaluator.evaluate("1.3", new HashMap<>(), new HashMap<>());
-		new OMToIntegerVisitor().visit(obj);
+		OMToIntegerVisitor.getInstance().visit(obj);
 	}
 
 	@Test
 	public void TestOMIntegerVisitor4() throws OpenMathException, EvaluatorException {
 		OMOBJ obj = Evaluator.evaluate("0.0", new HashMap<>(), new HashMap<>());
-		Integer result = new OMToIntegerVisitor().visit(obj);
+		Integer result = OMToIntegerVisitor.getInstance().visit(obj);
 		Integer expected = 0;
 		assertEquals(expected, result);
 	}
@@ -49,7 +49,7 @@ public class TestOMToIntegerVisitor {
 	@Test
 	public void TestOMIntegerVisitor5() throws OpenMathException, EvaluatorException {
 		OMOBJ obj = Evaluator.evaluate("1", new HashMap<>(), new HashMap<>());
-		Integer result = new OMToIntegerVisitor().visit(obj);
+		Integer result = OMToIntegerVisitor.getInstance().visit(obj);
 		Integer expected = 1;
 		assertEquals(expected, result);
 	}
@@ -57,7 +57,7 @@ public class TestOMToIntegerVisitor {
 	@Test(expected = NoRepresentationAvailableException.class)
 	public void TestOMIntegerVisitor6() throws OpenMathException, EvaluatorException {
 		OMOBJ obj = Evaluator.evaluate("PI", new HashMap<>(), new HashMap<>());
-		new OMToIntegerVisitor().visit(obj);
+		OMToIntegerVisitor.getInstance().visit(obj);
 	}
 
 	@Test
@@ -69,6 +69,6 @@ public class TestOMToIntegerVisitor {
 	@Test(expected = NoRepresentationAvailableException.class)
 	public void TestOMIntegerVisitor8() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("a", new HashMap<>(), new HashMap<>());
-		new OMToIntegerVisitor().visit(obj);
+		OMToIntegerVisitor.getInstance().visit(obj);
 	}
 }

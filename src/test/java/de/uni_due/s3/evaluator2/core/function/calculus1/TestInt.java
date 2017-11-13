@@ -33,7 +33,7 @@ public class TestInt extends TestFunctionAbstract{
 				"</OMA>" + 
 				"</OMBIND>" + 
 				"</OMA></OMOBJ>");
-		OMOBJ result = new OMToResultVisitor().execute(omobj);
+		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
 		OMOBJ expected = OMConverter.toObject("<OMOBJ>"
 				+"<OMA><OMS name=\"power\" cd=\"arith1\"/><OMV name=\"x\"/><OMI>2</OMI></OMA>"
 				+"</OMOBJ>");

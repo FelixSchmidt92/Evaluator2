@@ -65,7 +65,7 @@ public class TestAnd extends TestFunctionAbstract {
 	@Test
 	public void testBooleanAndLatexSyntax() throws OpenMathException, EvaluatorException {
 		OMOBJ obj = ExpressionParser.parse("3 && 2", new HashMap<>(), new HashMap<>());
-		String latex = new OMToLatexVisitor().visit(obj);
+		String latex = OMToLatexVisitor.getInstance().visit(obj);
 		assertEquals("3\\mbox{and}2", latex);
 	}
 
@@ -98,7 +98,7 @@ public class TestAnd extends TestFunctionAbstract {
 	@Test
 	public void testBooleanAndIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("countNodes(1+2)", null, null);
-		OMOBJ result = new OMToResultVisitor().execute(omobj);
+		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
 		assertEquals(OMCreator.createOMI(4), result.getOMI());
 	}
 

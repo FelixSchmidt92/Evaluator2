@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
+import de.uni_due.s3.evaluator2.core.visitor.OMToSyntaxVisitor;
 import de.uni_due.s3.evaluator2.core.visitor.syntax.OMToSageVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.openmath.jaxb.OMA;
@@ -33,7 +34,6 @@ public class TestOMToSageVisitor {
 	private OMS oms;
 	private OMSTR omstr;
 
-	private static OMToSageVisitor visitor = new OMToSageVisitor();
 
 	static Object[][] parameters = { { "12", "2.12", "x", "String", OMSymbol.LOGIC1_TRUE, "True" }, // [0]
 			{ "42", "1.234", "y", "Another", OMSymbol.LOGIC1_FALSE, "False" },
@@ -87,17 +87,17 @@ public class TestOMToSageVisitor {
 
 	@Test
 	public void testVisitTerminals() throws EvaluatorException {
-		assertEquals(omiString, visitor.visit(omi));
-		assertEquals(omfString, visitor.visit(omf));
-		assertEquals(omvString, visitor.visit(omv));
-		assertEquals(omstrString, visitor.visit(omstr));
-		assertEquals(omsTerminalString, visitor.visit(omsTerminal));
+		assertEquals(omiString, OMToSageVisitor.getInstance().visit(omi));
+		assertEquals(omfString, OMToSageVisitor.getInstance().visit(omf));
+		assertEquals(omvString, OMToSageVisitor.getInstance().visit(omv));
+		assertEquals(omstrString, OMToSageVisitor.getInstance().visit(omstr));
+		assertEquals(omsTerminalString, OMToSageVisitor.getInstance().visit(omsTerminal));
 	}
 
 	/* The Class Plus has to be implemented in Functions */
 	@Test
 	public void testVisitApplication() throws EvaluatorException {
-		assertEquals("(( ( (" + omiString + ") + (" + omfString + ") ) ))", visitor.visit(oma));
-		assertEquals("(( ( (" + omiString + ") + (" + omfString + ") ) ))", visitor.visit(omobj));
+		assertEquals("(( ( (" + omiString + ") + (" + omfString + ") ) ))", OMToSageVisitor.getInstance().visit(oma));
+		assertEquals("(( ( (" + omiString + ") + (" + omfString + ") ) ))", OMToSageVisitor.getInstance().visit(omobj));
 	}
 }

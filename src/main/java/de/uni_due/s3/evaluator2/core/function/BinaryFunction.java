@@ -78,7 +78,7 @@ public abstract class BinaryFunction extends Function {
 		} else {
 			// Do not call the getLatexSyntax-Function in Function so to propagate to the
 			// next child
-			return new OMToLatexVisitor().visit(omElement);
+			return OMToLatexVisitor.getInstance().visit(omElement);
 		}
 	}
 

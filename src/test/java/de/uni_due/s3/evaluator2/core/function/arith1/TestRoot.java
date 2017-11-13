@@ -42,14 +42,14 @@ public class TestRoot extends TestFunctionAbstract {
 	@Test
 	public void testRootIntegration1() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("root(25)", null, null);
-		OMOBJ result = new OMToResultVisitor().execute(omobj);
+		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
 		assertEquals(OMCreator.createOMI(5), result.getOMI());
 	}
 
 	@Test
 	public void testRootIntegration2() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("root(25)", null, null);
-		OMOBJ result = new OMToResultVisitor().execute(omobj);
+		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
 		assertEquals(OMCreator.createOMI(5), result.getOMI());
 	}
 	
@@ -57,35 +57,35 @@ public class TestRoot extends TestFunctionAbstract {
 	@Test
 	public void testRootLatexSyntaxOneArgument() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = ExpressionParser.parse("root(3)", new HashMap<>(), new HashMap<>());
-		String latex = new OMToLatexVisitor().visit(obj);
+		String latex = OMToLatexVisitor.getInstance().visit(obj);
 		assertEquals("\\sqrt{3}", latex);
 	}
 	
 	@Test
 	public void testRootLatexSyntaxTwoArguments() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = ExpressionParser.parse("root(10,3)", new HashMap<>(), new HashMap<>());
-		String latex = new OMToLatexVisitor().visit(obj);
+		String latex = OMToLatexVisitor.getInstance().visit(obj);
 		assertEquals("\\sqrt[3]{10}", latex);
 	}
 
 	@Test
 	public void testRootIntegration3() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("root(125, 3)", null, null);
-		OMOBJ result = new OMToResultVisitor().execute(omobj);
+		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
 		assertEquals(OMCreator.createOMI(5), result.getOMI());
 	}
 
 	@Test
 	public void testRootIntegration4() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("root(-125, 3)", null, null);
-		OMOBJ result = new OMToResultVisitor().execute(omobj);
+		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
 		assertEquals(OMCreator.createOMI(-5), result.getOMI());
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void testAbsWithWrongArguments() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("root('test')", null, null);
-		new OMToResultVisitor().execute(omobj);
+		OMToResultVisitor.getInstance().execute(omobj);
 		fail();
 	}
 }

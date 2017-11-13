@@ -17,7 +17,7 @@ public class TestOMToStringVisitor {
 	@Test
 	public void TestOMStringVisitor1() throws OpenMathException, EvaluatorException {
 		OMOBJ obj = Evaluator.evaluate("1==1", new HashMap<>(), new HashMap<>());
-		String result = new OMToStringVisitor().visit(obj);
+		String result = OMToStringVisitor.getInstance().visit(obj);
 		String expected = "True";
 		assertEquals(expected, result);
 	}
@@ -25,7 +25,7 @@ public class TestOMToStringVisitor {
 	@Test
 	public void TestOMStringVisitor2() throws OpenMathException, EvaluatorException {
 		OMOBJ obj = Evaluator.evaluate("1!=1", new HashMap<>(), new HashMap<>());
-		String result = new OMToStringVisitor().visit(obj);
+		String result = OMToStringVisitor.getInstance().visit(obj);
 		String expected = "False";
 		assertEquals(expected, result);
 	}
@@ -33,7 +33,7 @@ public class TestOMToStringVisitor {
 	@Test
 	public void TestOMStringVisitor3() throws OpenMathException, EvaluatorException {
 		OMOBJ obj = Evaluator.evaluate("1", new HashMap<>(), new HashMap<>());
-		String result = new OMToStringVisitor().visit(obj);
+		String result = OMToStringVisitor.getInstance().visit(obj);
 		String expected = "1";
 		assertEquals(expected, result);
 	}
@@ -41,7 +41,7 @@ public class TestOMToStringVisitor {
 	@Test
 	public void TestOMStringVisitor4() throws OpenMathException, EvaluatorException {
 		OMOBJ obj = Evaluator.evaluate("0", new HashMap<>(), new HashMap<>());
-		String result = new OMToStringVisitor().visit(obj);
+		String result = OMToStringVisitor.getInstance().visit(obj);
 		String expected = "0";
 		assertEquals(expected, result);
 	}
@@ -49,7 +49,7 @@ public class TestOMToStringVisitor {
 	@Test
 	public void TestOMStringVisitor5() throws OpenMathException, EvaluatorException {
 		OMOBJ obj = Evaluator.evaluate("1.1", new HashMap<>(), new HashMap<>());
-		String result = new OMToStringVisitor().visit(obj);
+		String result = OMToStringVisitor.getInstance().visit(obj);
 		String expected = "1.1";
 		assertEquals(expected, result);
 	}
@@ -57,7 +57,7 @@ public class TestOMToStringVisitor {
 	@Test
 	public void TestOMStringVisitor6() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("'Test  '", new HashMap<>(), new HashMap<>());
-		String result = new OMToStringVisitor().visit(obj);
+		String result = OMToStringVisitor.getInstance().visit(obj);
 		String expected = "Test  ";
 		assertEquals(expected, result);
 	}
@@ -65,7 +65,7 @@ public class TestOMToStringVisitor {
 	@Test
 	public void TestOMStringVisitor7() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("a", new HashMap<>(), new HashMap<>());
-		String result = new OMToStringVisitor().visit(obj);
+		String result = OMToStringVisitor.getInstance().visit(obj);
 		String expected = "a";
 		assertEquals(expected, result);
 	}

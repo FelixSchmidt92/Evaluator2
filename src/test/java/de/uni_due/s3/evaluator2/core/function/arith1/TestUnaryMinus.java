@@ -45,14 +45,14 @@ public class TestUnaryMinus extends TestFunctionAbstract {
 	@Test
 	public void testUnaryMinusIntegration1() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("-1075", null, null);
-		OMOBJ result = new OMToResultVisitor().execute(omobj);
+		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
 		assertEquals(OMCreator.createOMI(-1075), result.getOMI());
 	}
 
 	@Test
 	public void testUnaryMinusIntegration2() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("-2075.32", null, null);
-		OMOBJ result = new OMToResultVisitor().execute(omobj);
+		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
 		assertEquals(OMCreator.createOMF(-2075.32), result.getOMF());
 	}
 
@@ -66,14 +66,14 @@ public class TestUnaryMinus extends TestFunctionAbstract {
 	@Test
 	public void testUnaryMinusLatexSyntax() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = ExpressionParser.parse("-3", new HashMap<>(), new HashMap<>());
-		String latex = new OMToLatexVisitor().visit(obj);
+		String latex = OMToLatexVisitor.getInstance().visit(obj);
 		assertEquals("-3", latex);
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void testUnaryMinusWithWrongArguments() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("-'test'", null, null);
-		new OMToResultVisitor().execute(omobj);
+		OMToResultVisitor.getInstance().execute(omobj);
 		fail();
 	}
 	

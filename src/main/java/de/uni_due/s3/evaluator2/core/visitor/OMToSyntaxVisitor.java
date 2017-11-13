@@ -1,5 +1,9 @@
 package de.uni_due.s3.evaluator2.core.visitor;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,11 +50,42 @@ import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 public abstract class OMToSyntaxVisitor<T> {
 
 	/**
+	 * Checking at RUNTIME here using Reflection: Inherited Class have to implement
+	 * a private Constructor! It also has to implement a getInstance method, which
+	 * is set to public static!
+	 * 
+	 * dlux
+	 * 
+	 * @throws EvaluatorException
+	 *             if inherited Class is implemented wrong!
+	 */
+	protected OMToSyntaxVisitor() throws EvaluatorException {
+		Constructor<?>[] constructors = this.getClass().getConstructors();
+
+		for (Constructor<?> constructor : constructors) {
+			if (constructor.getModifiers() != Modifier.PRIVATE) {
+				throw new EvaluatorException("Constructor for " + this.getClass().getSimpleName() + " is not private!");
+			}
+		}
+		try {
+			Method method = (Method) this.getClass().getMethod("getInstance");
+			if (method.getModifiers() != (Modifier.PUBLIC | Modifier.STATIC)) {
+				throw new EvaluatorException("Function 'getInstance' is not public!");
+			}
+		} catch (Exception e) {
+			throw new EvaluatorException(
+					"Function 'getInstance' is not implemented for" + this.getClass().getSimpleName(), e);
+		}
+
+	}
+
+	/**
 	 * visits the specific omElement. If another OMA is found the method in
 	 * callInFunctionTheMethod is called. This method is called From the Function!
 	 * 
 	 * @param omElement
 	 *            the Element to visit
+	 * @return
 	 * @return the String Representation of this omElement (including its children!)
 	 * @throws NoRepresentationAvailableException
 	 * @throws FunctionInvalidNumberOfArgumentsException

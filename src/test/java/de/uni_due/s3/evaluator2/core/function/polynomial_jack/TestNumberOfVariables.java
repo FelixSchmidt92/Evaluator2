@@ -73,7 +73,7 @@ public class TestNumberOfVariables extends TestFunctionAbstract {
 	@Test
 	public void testEqualsExprIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("numberOfVariables('1+x^3+a')", null, null);
-		OMOBJ result = new OMToResultVisitor().execute(omobj);
+		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
 		assertEquals(OMCreator.createOMI(2), result.getOMI());
 	}
 }

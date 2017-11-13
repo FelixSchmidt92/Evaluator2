@@ -177,7 +177,7 @@ public abstract class Function {
 	 */
 	protected final Boolean getBooleanSyntax(Object omElement) throws EvaluatorException {
 		try {
-			return new OMToBooleanVisitor().visit(omElement);
+			return OMToBooleanVisitor.getInstance().visit(omElement);
 		} catch (NoRepresentationAvailableException e) {
 			throw new FunctionInvalidArgumentTypeException(this, "Boolean");
 		}
@@ -221,7 +221,7 @@ public abstract class Function {
 	 */
 	protected final Double getDoubleSyntax(Object omElement) throws EvaluatorException {
 		try {
-			return new OMToDoubleVisitor().visit(omElement);
+			return OMToDoubleVisitor.getInstance().visit(omElement);
 		} catch (NoRepresentationAvailableException e) {
 			throw new FunctionInvalidArgumentTypeException(this, "Double");
 		}
@@ -264,7 +264,7 @@ public abstract class Function {
 	 */
 	protected final Integer getIntegerSyntax(Object omElement) throws EvaluatorException {
 		try {
-			return new OMToIntegerVisitor().visit(omElement);
+			return OMToIntegerVisitor.getInstance().visit(omElement);
 		} catch (NoRepresentationAvailableException e) {
 			throw new FunctionInvalidArgumentTypeException(this, "Integer");
 		}
@@ -305,7 +305,7 @@ public abstract class Function {
 		if (this instanceof BinaryFunction) {
 			return ((BinaryFunction) this).getBinaryLatex(omElement);
 		} else {
-			return new OMToLatexVisitor().visit(omElement);
+			return OMToLatexVisitor.getInstance().visit(omElement);
 		}
 	}
 
@@ -333,7 +333,7 @@ public abstract class Function {
 	 * @throws EvaluatorException
 	 */
 	protected final List<Object> getListSyntax(Object omElement) throws EvaluatorException {
-		return new OMToListVisitor().visit(omElement);
+		return OMToListVisitor.getInstance().visit(omElement);
 	}
 
 	/**
@@ -365,7 +365,7 @@ public abstract class Function {
 	 * @throws CasException
 	 */
 	protected final String getRSyntax(Object omElement) throws EvaluatorException {
-		return new OMToRVisitor().visit(omElement);
+		return OMToRVisitor.getInstance().visit(omElement);
 	}
 
 	/**
@@ -405,7 +405,7 @@ public abstract class Function {
 	 * @throws CasException
 	 */
 	protected final String getSageSyntax(Object omElement) throws EvaluatorException {
-		return new OMToSageVisitor().visit(omElement);
+		return OMToSageVisitor.getInstance().visit(omElement);
 
 	}
 
@@ -451,7 +451,7 @@ public abstract class Function {
 	 */
 	protected final String getStringSyntax(Object omElement) throws EvaluatorException {
 		try {
-			return new OMToStringVisitor().visit(omElement);
+			return OMToStringVisitor.getInstance().visit(omElement);
 		} catch (NoRepresentationAvailableException e) {
 			throw new FunctionInvalidArgumentTypeException(this, "String");
 		}
@@ -489,7 +489,7 @@ public abstract class Function {
 	 * @throws EvaluatorException
 	 */
 	protected final Set<OMV> getVariablesAsOMVSet(Object omElement) throws EvaluatorException {
-		return new OMVariableVisitor().visit(omElement);
+		return OMVariableVisitor.getInstance().visit(omElement);
 	}
 	
 }

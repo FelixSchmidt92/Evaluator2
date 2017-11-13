@@ -1,30 +1,25 @@
 package de.uni_due.s3.evaluator2.core.visitor;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
-import de.uni_due.s3.openmath.jaxb.OMA;
-import de.uni_due.s3.openmath.jaxb.OMATP;
 import de.uni_due.s3.openmath.jaxb.OMF;
 import de.uni_due.s3.openmath.jaxb.OMI;
-import de.uni_due.s3.openmath.jaxb.OMOBJ;
-import de.uni_due.s3.openmath.jaxb.OMR;
 import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.jaxb.OMSTR;
 import de.uni_due.s3.openmath.jaxb.OMV;
-import de.uni_due.s3.openmath.omutils.OMCreator;
-import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestOMToSyntaxVisitor {
 
 	private class ImplVisitor extends OMToSyntaxVisitor<String> {
+		
+		public ImplVisitor() throws EvaluatorException {
+			super();
+		}
+		
 
 		@Override
 		protected String visit(OMF omf) {
@@ -52,77 +47,53 @@ public class TestOMToSyntaxVisitor {
 		}
 
 	}
-
-	private ImplVisitor vis;
-
-	@Before
-	public void init() {
-		vis = new ImplVisitor();
-	}
-
-	@Test
-	public void testVisitObject() throws OpenMathException, EvaluatorException {
-		OMI omi = OMCreator.createOMI(1);
-		OMF omf = OMCreator.createOMF(1.0);
-		OMV omv = OMCreator.createOMV("test");
-		OMSTR omstr = OMCreator.createOMSTR("str");
-		OMS oms = OMCreator.createOMS("arith1", "plus"); // OMSEvaluatorSyntaxDictionary.getInstance().getOMS("plus");
-		List<Object> args = new ArrayList<Object>();
-		args.add(omi);
-		args.add(omi);
-		OMA oma = OMCreator.createOMA(oms, args);
-		OMOBJ omobj = OMCreator.createOMOBJ(omi);
-
-		Assert.assertEquals("omi", vis.visit(omobj));
-		Assert.assertEquals("omi", vis.visit(omi));
-		Assert.assertEquals("function", vis.visit(oms));
-		Assert.assertEquals("omf", vis.visit(omf));
-		Assert.assertEquals("omv", vis.visit(omv));
-		Assert.assertEquals("omstr", vis.visit(omstr));
-		Assert.assertEquals("function", vis.visit(oma));
-	}
-
-	@Test
-	public void testVisitOMOBJ() throws OpenMathException, EvaluatorException {
-		OMI omi = OMCreator.createOMI(1);
-		OMF omf = OMCreator.createOMF(1.0);
-		OMV omv = OMCreator.createOMV("test");
-		OMSTR omstr = OMCreator.createOMSTR("str");
-		OMS oms = OMCreator.createOMS("arith1", "plus"); // OMSEvaluatorSyntaxDictionary.getInstance().getOMS("plus");
-		List<Object> args = new ArrayList<Object>();
-		args.add(omi);
-		args.add(omi);
-		OMA oma = OMCreator.createOMA(oms, args);
-		OMOBJ omobj = OMCreator.createOMOBJ(omi);
-
-		Assert.assertEquals("omi", vis.visit(omobj));
-		Assert.assertEquals("omi", vis.visit(OMCreator.createOMOBJ(omi)));
-		Assert.assertEquals("omf", vis.visit(OMCreator.createOMOBJ(omf)));
-		Assert.assertEquals("function", vis.visit(OMCreator.createOMOBJ(oms)));
-		Assert.assertEquals("omv", vis.visit(OMCreator.createOMOBJ(omv)));
-		Assert.assertEquals("omstr", vis.visit(OMCreator.createOMOBJ(omstr)));
-		Assert.assertEquals("function", vis.visit(oma));
-	}
-
-	@Test(expected = NoRepresentationAvailableException.class)
-	public void testVisitObjectWithWrongObject() throws EvaluatorException {
-		vis.visit(new Integer(10));
-		vis.visit(new OMATP());
-	}
-
-	@Test(expected = NoRepresentationAvailableException.class)
-	public void testVisitOMOBJWithWrongChild() throws EvaluatorException {
-		OMR omr = new OMR();
-		OMOBJ omobj = new OMOBJ();
-		omobj.setOMR(omr);
-		vis.visit(omobj);
-		vis.visit(new OMOBJ());
-	}
-	
-	
 	
 	@Test(expected = EvaluatorException.class)
-	public void testVisitNonExisitngFunction() throws EvaluatorException {
-		vis.visit(OMCreator.createOMS("NonExisitingCD", "NonExisitingFunction"));
+	public void testVisitWrongImplementation() throws EvaluatorException {
+		new ImplVisitor();
+	}
+	
+	private class ImplVisitor2 extends OMToSyntaxVisitor<String> {
+		
+		public ImplVisitor2() throws EvaluatorException {
+			super();
+		}
+		
+		/*only for Test in JUnit, it is unused*/
+		@SuppressWarnings("unused")
+		public ImplVisitor2 getInstance() throws EvaluatorException {
+			return new ImplVisitor2();
+		}
+
+		@Override
+		protected String visit(OMF omf) {
+			return "omf";
+		}
+
+		@Override
+		protected String visit(OMI omi) {
+			return "omi";
+		}
+
+		@Override
+		protected String visit(OMSTR omstr) {
+			return "omstr";
+		}
+
+		@Override
+		protected String visit(OMV omv) {
+			return "omv";
+		}
+
+		@Override
+		protected String getSyntaxRepresentationForFunction(Function function, OMS oms, List<Object> omel) {
+			return "function";
+		}
+
+	}
+	
+	@Test(expected = EvaluatorException.class)
+	public void testVisitWrongImplementation2() throws EvaluatorException {
+		new ImplVisitor2();
 	}
 }

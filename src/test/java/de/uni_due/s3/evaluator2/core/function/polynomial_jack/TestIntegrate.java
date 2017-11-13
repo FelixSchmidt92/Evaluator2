@@ -152,7 +152,7 @@ public class TestIntegrate extends TestFunctionAbstract {
 	@Test
 	public void testIntegrateIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("integrate('2*x','x')", null, null);
-		OMOBJ result = new OMToResultVisitor().execute(omobj);
+		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
 		OMOBJ expected = ExpressionParser.parse("x^2", null, null);
 		assertEquals(expected, result);
 	}

@@ -74,7 +74,7 @@ public class TestGreaterThan extends TestFunctionAbstract {
 	@Test
 	public void testGratherThanLatexSyntax() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = ExpressionParser.parse("1 > 3", new HashMap<>(), new HashMap<>());
-		String latex = new OMToLatexVisitor().visit(obj);
+		String latex = OMToLatexVisitor.getInstance().visit(obj);
 		assertEquals("1>3", latex);
 	}
 
@@ -117,7 +117,7 @@ public class TestGreaterThan extends TestFunctionAbstract {
 	@Test
 	public void testGreaterThanIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("10 > 5", null, null);
-		OMOBJ result = new OMToResultVisitor().execute(omobj);
+		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
 		assertEquals(OMSymbol.LOGIC1_TRUE, result.getOMS());
 	}
 

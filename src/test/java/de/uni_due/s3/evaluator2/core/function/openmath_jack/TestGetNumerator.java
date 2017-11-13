@@ -49,7 +49,7 @@ public class TestGetNumerator extends TestFunctionAbstract {
 	@Test
 	public void TestGetNumeratorCaseIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ t = ExpressionParser.parse("getNumerator(2/3)", null, null);
-		OMOBJ actual = new OMToResultVisitor().execute(t);
+		OMOBJ actual = OMToResultVisitor.getInstance().execute(t);
 
 		assertEquals(OMCreator.createOMI(2), actual.getOMI());
 	}
@@ -57,7 +57,7 @@ public class TestGetNumerator extends TestFunctionAbstract {
 	@Test
 	public void TestGetNumeratorCaseIntegrationWithFloat() throws OpenMathException, EvaluatorException {
 		OMOBJ t = ExpressionParser.parse("getNumerator(2.2/3)", null, null);
-		OMOBJ actual = new OMToResultVisitor().execute(t);
+		OMOBJ actual = OMToResultVisitor.getInstance().execute(t);
 
 		assertEquals(OMCreator.createOMF(2.2), actual.getOMF());
 	}
