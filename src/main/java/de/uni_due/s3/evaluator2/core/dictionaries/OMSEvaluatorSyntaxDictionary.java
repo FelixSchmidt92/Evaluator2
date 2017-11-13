@@ -158,14 +158,14 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("equalSet", OMSymbol.SETJACK_EQUALSET);
 
 		functionSymbolMap.put("emptySet", OMSymbol.SET1_EMPTYSET);
-		functionSymbolMap.put("in", OMSymbol.SET1_IN);
+		functionSymbolMap.put("isElementOf", OMSymbol.SET1_IN);
 		functionSymbolMap.put("intersect", OMSymbol.SET1_INTERSECT);
-		functionSymbolMap.put("notIn", OMSymbol.SET1_NOTIN);
+		functionSymbolMap.put("isNoElementOf", OMSymbol.SET1_NOTIN);
 		functionSymbolMap.put("set", OMSymbol.LIST1_LIST);
-		functionSymbolMap.put("setDiff", OMSymbol.SET1_SETDIFF);
+		functionSymbolMap.put("complement", OMSymbol.SET1_SETDIFF);
 		functionSymbolMap.put("sizeOfSet", OMSymbol.SET1_SIZE);
-		functionSymbolMap.put("subset", OMSymbol.SET1_SUBSET);
-		functionSymbolMap.put("union", OMSymbol.SET1_UNION);
+		functionSymbolMap.put("isSubsetOf", OMSymbol.SET1_SUBSET);
+		functionSymbolMap.put("unite", OMSymbol.SET1_UNION);
 
 		functionSymbolMap.put("cc", OMSymbol.SETNAME1_C);
 		functionSymbolMap.put("nn", OMSymbol.SETNAME1_N);
