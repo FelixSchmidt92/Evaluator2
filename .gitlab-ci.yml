@@ -2,7 +2,7 @@ image: maven:3-jdk-8
 
 variables:
   ARTIFACTORY_URL: "https://harbor.paluno.uni-due.de/artifactory/libs-release-local/de/uni_due/s3/Evaluator/2.0.0/Evaluator-2.0.0new.jar"
-  EVALUATOR_JAR: "/root/.m2/repository/de/uni_due/s3/Evaluator/2.0.0/Evaluator-2.0.0.jar"
+  EVALUATOR_JAR: "/builds/JACK/Evaluator2/target/Evaluator-2.0.0.jar"
 
 stages:
   - build
@@ -11,7 +11,7 @@ stages:
 job1:
   stage: build
   script:
-    - "mvn install -B"
+    - "mvn package -B"
   artifacts:
     paths:
     - $EVALUATOR_JAR
