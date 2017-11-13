@@ -1,14 +1,14 @@
 package de.uni_due.s3.evaluator2.core.visitor.syntax;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.HashMap;
 
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator2.Evaluator;
-import de.uni_due.s3.evaluator2.core.visitor.primitve.OMToStringVisitor;
-import de.uni_due.s3.evaluator2.core.visitor.syntax.OMToLatexVisitor;
+import de.uni_due.s3.evaluator2.core.visitor.OMToSyntaxVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
@@ -69,6 +69,14 @@ public class TestOMToLatexVisitor {
 		OMOBJ obj = Evaluator.evaluate("'\\sum{hello}'", new HashMap<>(), new HashMap<>());
 		String latex = OMToLatexVisitor.getInstance().visit(obj);
 		assertEquals("\\sum{hello}", latex);
+	}
+	
+	@Test
+	public void isSingletonPattern() throws EvaluatorException {
+		OMToSyntaxVisitor<?> obj1 = OMToLatexVisitor.getInstance();
+		OMToSyntaxVisitor<?> obj2 = OMToLatexVisitor.getInstance();
+		
+		assertTrue(obj1 == obj2);
 	}
 		
 }

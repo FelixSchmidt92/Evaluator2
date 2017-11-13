@@ -1,13 +1,14 @@
 package de.uni_due.s3.evaluator2.core.visitor.operation;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.HashMap;
 
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator2.Evaluator;
-import de.uni_due.s3.evaluator2.core.visitor.operation.OMCountVisitor;
+import de.uni_due.s3.evaluator2.core.visitor.OMToSyntaxVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
@@ -68,4 +69,12 @@ public class TestOMCountVisitor {
 		Integer expected = 15;
 		assertEquals(expected, result);
 	}		
+	
+	@Test
+	public void isSingletonPattern() throws EvaluatorException {
+		OMToSyntaxVisitor<?> obj1 = OMCountVisitor.getInstance();
+		OMToSyntaxVisitor<?> obj2 = OMCountVisitor.getInstance();
+		
+		assertTrue(obj1 == obj2);
+	}
 }

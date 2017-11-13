@@ -1,6 +1,7 @@
 package de.uni_due.s3.evaluator2.core.visitor.operation;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -11,6 +12,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
+import de.uni_due.s3.evaluator2.core.visitor.OMToSyntaxVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMB;
@@ -111,5 +113,13 @@ public class TestOMToResultVisitor {
 		OMOBJ expected = OMConverter.toObject(
 				"<OMOBJ><OMA><OMS name=\"power\" cd=\"arith1\"/><OMA><OMS name=\"cos\" cd=\"transc1\"/><OMV name=\"x\"/></OMA><OMI>2</OMI></OMA></OMOBJ>");
 		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void isSingletonPattern() throws EvaluatorException {
+		OMToSyntaxVisitor<?> obj1 = OMToResultVisitor.getInstance();
+		OMToSyntaxVisitor<?> obj2 = OMToResultVisitor.getInstance();
+		
+		assertTrue(obj1 == obj2);
 	}
 }

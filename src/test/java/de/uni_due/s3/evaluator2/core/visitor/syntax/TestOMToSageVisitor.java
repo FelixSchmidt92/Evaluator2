@@ -1,6 +1,7 @@
 package de.uni_due.s3.evaluator2.core.visitor.syntax;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -99,5 +100,13 @@ public class TestOMToSageVisitor {
 	public void testVisitApplication() throws EvaluatorException {
 		assertEquals("(( ( (" + omiString + ") + (" + omfString + ") ) ))", OMToSageVisitor.getInstance().visit(oma));
 		assertEquals("(( ( (" + omiString + ") + (" + omfString + ") ) ))", OMToSageVisitor.getInstance().visit(omobj));
+	}
+	
+	@Test
+	public void isSingletonPattern() throws EvaluatorException {
+		OMToSyntaxVisitor<?> obj1 = OMToSageVisitor.getInstance();
+		OMToSyntaxVisitor<?> obj2 = OMToSageVisitor.getInstance();
+		
+		assertTrue(obj1 == obj2);
 	}
 }

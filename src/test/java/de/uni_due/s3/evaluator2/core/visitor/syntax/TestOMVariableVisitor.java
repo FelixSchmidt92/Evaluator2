@@ -1,6 +1,7 @@
 package de.uni_due.s3.evaluator2.core.visitor.syntax;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -9,7 +10,7 @@ import java.util.Set;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator2.Evaluator;
-import de.uni_due.s3.evaluator2.core.visitor.syntax.OMVariableVisitor;
+import de.uni_due.s3.evaluator2.core.visitor.OMToSyntaxVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.jaxb.OMV;
@@ -112,4 +113,13 @@ public class TestOMVariableVisitor {
 
 		assertEquals(res, omvSet);
 	}
+	
+	@Test
+	public void isSingletonPattern() throws EvaluatorException {
+		OMToSyntaxVisitor<?> obj1 = OMVariableVisitor.getInstance();
+		OMToSyntaxVisitor<?> obj2 = OMVariableVisitor.getInstance();
+		
+		assertTrue(obj1 == obj2);
+	}
+	
 }

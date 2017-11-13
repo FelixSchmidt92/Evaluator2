@@ -1,6 +1,7 @@
 package de.uni_due.s3.evaluator2.core.visitor.primitve;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.HashMap;
 
@@ -8,7 +9,7 @@ import org.junit.Test;
 
 import de.uni_due.s3.evaluator2.Evaluator;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
-import de.uni_due.s3.evaluator2.core.visitor.primitve.OMToBooleanVisitor;
+import de.uni_due.s3.evaluator2.core.visitor.OMToSyntaxVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
@@ -74,5 +75,13 @@ public class TestOMToBooleanVisitor {
 	public void TestOMBooleanVisitor8() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("a", new HashMap<>(), new HashMap<>());
 		OMToBooleanVisitor.getInstance().visit(obj);
+	}
+	
+	@Test
+	public void isSingletonPattern() throws EvaluatorException {
+		OMToSyntaxVisitor<?> obj1 = OMToBooleanVisitor.getInstance();
+		OMToSyntaxVisitor<?> obj2 = OMToBooleanVisitor.getInstance();
+		
+		assertTrue(obj1 == obj2);
 	}
 }
