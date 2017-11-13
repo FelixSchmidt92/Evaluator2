@@ -48,6 +48,7 @@ import de.uni_due.s3.openmath.jaxb.OMI;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.jaxb.OMSTR;
+import de.uni_due.s3.openmath.jaxb.OMV;
 import de.uni_due.s3.openmath.omutils.OMConverter;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
@@ -104,7 +105,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	 * @return OMA with the operation and two operands
 	 */
 	@Override
-	public Object visitBinaryOperatorArithLineInExpression(BinaryOperatorArithLineInExpressionContext ctx) {
+	public OMA visitBinaryOperatorArithLineInExpression(BinaryOperatorArithLineInExpressionContext ctx) {
 		List<Object> omel = new ArrayList<>();
 		omel.add(visit(ctx.getChild(0))); // left side
 		omel.add(visit(ctx.getChild(2))); // right side
@@ -117,7 +118,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	 * @return OMS with ARITH LINE
 	 */
 	@Override
-	public Object visitBinaryOperatorArithLine(BinaryOperatorArithLineContext ctx) {
+	public OMS visitBinaryOperatorArithLine(BinaryOperatorArithLineContext ctx) {
 		switch (ctx.operator.getText()) {
 		case "+":
 			return OMSymbol.ARITH1_PLUS;
@@ -136,7 +137,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	 * @return OMA with the operation and two operands
 	 */
 	@Override
-	public Object visitBinaryOperatorArithPointInExpression(BinaryOperatorArithPointInExpressionContext ctx) {
+	public OMA visitBinaryOperatorArithPointInExpression(BinaryOperatorArithPointInExpressionContext ctx) {
 		List<Object> omel = new ArrayList<>();
 		omel.add(visit(ctx.getChild(0))); // left side
 		omel.add(visit(ctx.getChild(2))); // right side
@@ -149,7 +150,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	 * @return OMS with ARITH POINT
 	 */
 	@Override
-	public Object visitBinaryOperatorArithPoint(BinaryOperatorArithPointContext ctx) {
+	public OMS visitBinaryOperatorArithPoint(BinaryOperatorArithPointContext ctx) {
 		switch (ctx.operator.getText()) {
 		case "*":
 			return OMSymbol.ARITH1_TIMES;
@@ -169,7 +170,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	 * @return OMA with the operation and two operands
 	 */
 	@Override
-	public Object visitBinaryOperatorBooleanInExpression(BinaryOperatorBooleanInExpressionContext ctx) {
+	public OMA visitBinaryOperatorBooleanInExpression(BinaryOperatorBooleanInExpressionContext ctx) {
 		List<Object> omel = new ArrayList<>();
 		omel.add(visit(ctx.getChild(0))); // left side
 		omel.add(visit(ctx.getChild(2))); // right side
@@ -182,7 +183,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	 * @return OMS with LOGIC
 	 */
 	@Override
-	public Object visitBinaryOperatorBoolean(BinaryOperatorBooleanContext ctx) {
+	public OMS visitBinaryOperatorBoolean(BinaryOperatorBooleanContext ctx) {
 		switch (ctx.operator.getText()) {
 		case "&&":
 			return OMSymbol.LOGIC1_AND;
@@ -201,7 +202,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	 * @return OMA with the operation and two operands
 	 */
 	@Override
-	public Object visitBinaryOperatorCircumflexInExpression(BinaryOperatorCircumflexInExpressionContext ctx) {
+	public OMA visitBinaryOperatorCircumflexInExpression(BinaryOperatorCircumflexInExpressionContext ctx) {
 		List<Object> omel = new ArrayList<>();
 		omel.add(visit(ctx.getChild(0))); // left side
 		omel.add(visit(ctx.getChild(2))); // right side
@@ -215,7 +216,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	 * @return OMA with the operation and two operands
 	 */
 	@Override
-	public Object visitBinaryOperatorRelationalInExpression(BinaryOperatorRelationalInExpressionContext ctx) {
+	public OMA visitBinaryOperatorRelationalInExpression(BinaryOperatorRelationalInExpressionContext ctx) {
 		List<Object> omel = new ArrayList<>();
 		omel.add(visit(ctx.getChild(0))); // left side
 		omel.add(visit(ctx.getChild(2))); // right side
@@ -228,7 +229,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	 * @return OMS with RELATION
 	 */
 	@Override
-	public Object visitBinaryOperatorRelational(BinaryOperatorRelationalContext ctx) {
+	public OMS visitBinaryOperatorRelational(BinaryOperatorRelationalContext ctx) {
 		switch (ctx.operator.getText()) {
 		case "<":
 			return OMSymbol.RELATION1_LT;
@@ -256,7 +257,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	}
 
 	@Override
-	public Object visitConstant(ConstantContext ctx) {
+	public OMS visitConstant(ConstantContext ctx) {
 		switch (ctx.name.getText()) {
 		case "E":
 			return OMSymbol.NUMS1_E;
@@ -401,7 +402,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	 * @return OMA with the function and its arguments
 	 */
 	@Override
-	public Object visitFunction(FunctionContext ctx) {
+	public OMA visitFunction(FunctionContext ctx) {
 		List<Object> omel = new ArrayList<>();
 		OMS oms = OMSEvaluatorSyntaxDictionary.getInstance().getOMS(ctx.name.getText());
 
@@ -500,7 +501,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	 * @return OMA
 	 */
 	@Override
-	public Object visitUnaryOperatorInExpression(UnaryOperatorInExpressionContext ctx) {
+	public OMA visitUnaryOperatorInExpression(UnaryOperatorInExpressionContext ctx) {
 		List<Object> omel = new ArrayList<>();
 		omel.add(visit(ctx.getChild(1)));
 		return OMCreator.createOMA((OMS) visit(ctx.getChild(0)), omel);
@@ -512,7 +513,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	 * @return OMS with unary
 	 */
 	@Override
-	public Object visitUnaryOperator(UnaryOperatorContext ctx) {
+	public OMS visitUnaryOperator(UnaryOperatorContext ctx) {
 		switch (ctx.operator.getText()) {
 		case "+":
 			return OMSymbol.ARITH1_UNARY_PLUS;
@@ -533,7 +534,7 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 	 * @return OMV
 	 */
 	@Override
-	public Object visitVariableInExpression(VariableInExpressionContext ctx) {
+	public OMV visitVariableInExpression(VariableInExpressionContext ctx) {
 		return OMCreator.createOMV(ctx.name.getText());
 	}
 

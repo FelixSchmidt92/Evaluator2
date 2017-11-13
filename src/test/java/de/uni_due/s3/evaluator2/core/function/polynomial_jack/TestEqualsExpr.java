@@ -15,6 +15,7 @@ import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
 import de.uni_due.s3.evaluator2.core.visitor.operation.OMToResultVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
+import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
@@ -106,4 +107,12 @@ public class TestEqualsExpr extends TestFunctionAbstract {
 
 		assertEquals("var('x');bool((( ( ((( (x)^(2) ) - ( (( ( (5) * (x) ) )) ))) + (6) ) ))==(( ( ((( x ) - ( 2 ))) * ((( x ) - ( 3 ))) ) )))", func.getPartialSageSyntax(args));
 	}
+	
+	
+	@Test(expected = FunctionException.class)
+	public void testEqualsExprIntegrationWorngInput() throws OpenMathException, EvaluatorException {
+		OMOBJ omobj = ExpressionParser.parse("equalsExpr('1+x^3','Something classified as NONSENSE')", null, null);
+		new OMToResultVisitor().execute(omobj);
+	}
+	
 }

@@ -27,7 +27,7 @@ public class TestR {
 
 	public static void initR() {
 		List<RConn> rConnectionsList = new ArrayList<>();
-		rConnectionsList.add(new RConn("192.168.68.207", 6312));
+		rConnectionsList.add(new RConn("192.168.68.73", 6351));
 		R.init(rConnectionsList);
 	}
 
