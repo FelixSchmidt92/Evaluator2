@@ -27,3 +27,5 @@ job2:
   stage: deploy
   script:
     - "curl -u s3gitlab:$ARTIFACTORY_KEY -X PUT \"$ARTIFACTORY_URL\" -T \"$EVALUATOR_JAR\""
+  only:
+    - master
