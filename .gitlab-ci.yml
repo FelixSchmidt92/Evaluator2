@@ -1,7 +1,7 @@
 image: maven:3-jdk-8
 
 variables:
-  ARTIFACTORY_URL: "https://harbor.paluno.uni-due.de/artifactory/libs-release-local/de/uni_due/s3/Evaluator/2.0.0/Evaluator-2.0.0new.jar"
+  ARTIFACTORY_URL: "https://harbor.paluno.uni-due.de/artifactory/libs-release-local/de/uni_due/s3/Evaluator/2.0.0/Evaluator-2.0.0.jar"
   EVALUATOR_JAR: "/builds/JACK/Evaluator2/target/Evaluator-2.0.0.jar"
   MAVEN_CLI_OPTS: "-s .m2/settings.xml --batch-mode"
   MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
@@ -27,3 +27,5 @@ job2:
   stage: deploy
   script:
     - "curl -u s3gitlab:$ARTIFACTORY_KEY -X PUT \"$ARTIFACTORY_URL\" -T \"$EVALUATOR_JAR\""
+  only:
+    - master
