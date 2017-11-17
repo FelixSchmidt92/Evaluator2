@@ -73,7 +73,7 @@ public class TestRandom extends TestFunctionAbstract {
 		OMOBJ p = ExpressionParser.parse("random()", null, null); // Test for
 																	// Empty
 																	// Arguments!
-		OMToResultVisitor.getInstance().execute(p);
+		OMToResultVisitor.getInstance().visit(p);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
@@ -81,7 +81,7 @@ public class TestRandom extends TestFunctionAbstract {
 		OMOBJ p = ExpressionParser.parse("random(2)", null, null); // Test for
 																	// Empty
 																	// Arguments!
-		OMToResultVisitor.getInstance().execute(p);
+		OMToResultVisitor.getInstance().visit(p);
 		fail();
 	}
 

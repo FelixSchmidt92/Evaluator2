@@ -157,7 +157,7 @@ public class TestNotEqual extends TestFunctionAbstract {
 	@Test
 	public void testNotEqualsIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("notEqual(10,3)", null, null);
-		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
+		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMSymbol.LOGIC1_TRUE, result.getOMS());
 	}
 

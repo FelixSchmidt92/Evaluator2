@@ -37,15 +37,15 @@ public class TestIEEERemainder {
 	@Test
 	public void testIEEERemainderIntegration1() throws OpenMathException, InputMismatchException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("IEEEremainder(10,5)", null, null);
-		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
-		assertEquals(OMCreator.createOMI(0), result.getOMI());
+		Object result = OMToResultVisitor.getInstance().visit(omobj);
+		assertEquals(OMCreator.createOMI(0), result);
 	}
 
 	@Test
 	public void testIEEERemainderIntegration2() throws OpenMathException, InputMismatchException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("IEEEremainder(3,-2)", null, null);
-		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
-		assertEquals(OMCreator.createOMI(-1), result.getOMI());
+		Object result = OMToResultVisitor.getInstance().visit(omobj);
+		assertEquals(OMCreator.createOMI(-1), result);
 	}
 	
 	@Test
@@ -58,21 +58,21 @@ public class TestIEEERemainder {
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testIEEERemainderWithLessArguments() throws OpenMathException, InputMismatchException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("IEEEremainder('5')", null, null);
-		OMToResultVisitor.getInstance().execute(omobj);
+		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testIEEERemainderWithMoreArguments() throws OpenMathException, InputMismatchException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("IEEEremainder('2','5', 1)", null, null);
-		OMToResultVisitor.getInstance().execute(omobj);
+		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void testIEEERemainderWithWrongArguments() throws OpenMathException, InputMismatchException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("IEEEremainder('test','5')", null, null);
-		OMToResultVisitor.getInstance().execute(omobj);
+		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 

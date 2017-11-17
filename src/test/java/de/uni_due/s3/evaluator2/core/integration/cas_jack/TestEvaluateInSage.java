@@ -28,7 +28,7 @@ public class TestEvaluateInSage extends TestFunctionAbstract {
 		exer.put("a", t1);
 
 		OMOBJ t = ExpressionParser.parse("evaluateInSage('[var=a].imag()')", exer, fill);
-		OMOBJ actual = OMToResultVisitor.getInstance().execute(t);
+		OMOBJ actual = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(t));
 
 		assertEquals(OMCreator.createOMI(0), actual.getOMI());
 	}
@@ -42,7 +42,7 @@ public class TestEvaluateInSage extends TestFunctionAbstract {
 		exer.put("a", t1);
 
 		OMOBJ t = ExpressionParser.parse("evaluateInSage('[var=a].real()')", exer, fill);
-		OMOBJ actual = OMToResultVisitor.getInstance().execute(t);
+		OMOBJ actual = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(t));
 
 		assertEquals(OMCreator.createOMI(55), actual.getOMI());
 	}
@@ -56,7 +56,7 @@ public class TestEvaluateInSage extends TestFunctionAbstract {
 		exer.put("a", t1);
 
 		OMOBJ t = ExpressionParser.parse("evaluateInSage('s = [var=a].real(); s*([var=a]-53)')", exer, fill);
-		OMOBJ actual = OMToResultVisitor.getInstance().execute(t);
+		OMOBJ actual = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(t));
 
 		assertEquals(OMCreator.createOMI(110), actual.getOMI());
 	}
@@ -71,7 +71,7 @@ public class TestEvaluateInSage extends TestFunctionAbstract {
 		fill.put(2, t1);
 
 		OMOBJ t = ExpressionParser.parse("evaluateInSage('s = [var=a].real(); s*[pos=2]')", exer, fill);
-		OMOBJ actual = OMToResultVisitor.getInstance().execute(t);
+		OMOBJ actual = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(t));
 
 		assertEquals(OMCreator.createOMI(25), actual.getOMI());
 	}

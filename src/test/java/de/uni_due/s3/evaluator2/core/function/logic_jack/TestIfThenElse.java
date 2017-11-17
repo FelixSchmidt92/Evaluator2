@@ -95,11 +95,11 @@ public class TestIfThenElse extends TestFunctionAbstract {
 	@Test
 	public void testIfThenEleseIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("ifthenelse('5*3*9>=10','true','false')", null, null);
-		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
+		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals("true", result.getOMSTR().getContent());
 
 		omobj = ExpressionParser.parse("ifthenelse('5*3*10==10','true','false')", null, null);
-		result = OMToResultVisitor.getInstance().execute(omobj);
+		result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals("false", result.getOMSTR().getContent());
 	}
 

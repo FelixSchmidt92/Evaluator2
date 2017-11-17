@@ -48,7 +48,7 @@ public class TestMatrixRow extends TestFunctionAbstract {
 	@Test
 	public void testMatrixRowIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("matrixrow(1,3,0.0)", null, null);
-		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
+		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(1));
 		args.add(OMCreator.createOMI(3));
@@ -67,7 +67,7 @@ public class TestMatrixRow extends TestFunctionAbstract {
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testMatrixRowWithLessThanMinParam() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("matrixrow()", null, null);
-		OMToResultVisitor.getInstance().execute(omobj);
+		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 	

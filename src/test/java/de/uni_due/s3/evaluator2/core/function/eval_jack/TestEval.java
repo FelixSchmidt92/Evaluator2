@@ -25,15 +25,15 @@ public class TestEval extends TestFunctionAbstract {
 	@Test
 	public void testEvalIntegration1() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("eval(2+3)", null, null);
-		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
-		assertEquals(OMCreator.createOMI(5), result.getOMI());
+		Object result = OMToResultVisitor.getInstance().visit(omobj);
+		assertEquals(OMCreator.createOMI(5), result);
 	}
 
 	@Test
 	public void testEvalIntegration2() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("eval(2+4/4)", null, null);
-		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
-		assertEquals(OMCreator.createOMI(3), result.getOMI());
+		Object result = OMToResultVisitor.getInstance().visit(omobj);
+		assertEquals(OMCreator.createOMI(3), result);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)

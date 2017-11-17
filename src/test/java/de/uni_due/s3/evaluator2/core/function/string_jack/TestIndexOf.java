@@ -44,28 +44,28 @@ public class TestIndexOf extends TestFunctionAbstract {
 	@Test
 	public void testIndexOfIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("indexOf('Hallo', 'l', 3)", null, null);
-		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
+		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMI(3), result.getOMI());
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testIndexOfWithLessThanMinParam() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("indexOf('Test')", null, null);
-		OMToResultVisitor.getInstance().execute(omobj);
+		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testIndexOfWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("indexOf('Test', 2 ,'Test', 3)", null, null);
-		OMToResultVisitor.getInstance().execute(omobj);
+		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void testIndexOfWithWrongArguments() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("indexOf('Test', vector(4))", null, null);
-		OMToResultVisitor.getInstance().execute(omobj);
+		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 }

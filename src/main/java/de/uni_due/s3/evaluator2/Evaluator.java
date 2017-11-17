@@ -22,6 +22,7 @@ import de.uni_due.s3.evaluator2.r.RConn;
 import de.uni_due.s3.evaluator2.sage.Sage;
 import de.uni_due.s3.evaluator2.sage.SageConnection;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
+import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
@@ -109,7 +110,7 @@ public class Evaluator {
 			HashMap<Integer, OMOBJ> fillInVariableMap) throws EvaluatorException, OpenMathException {
 
 		OMOBJ omobj = ExpressionParser.parse(expression, exerciseVariableMap, fillInVariableMap);
-		return OMToResultVisitor.getInstance().execute(omobj);
+		return OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 	}
 
 	/**
@@ -125,7 +126,7 @@ public class Evaluator {
 	 * @throws CasEvaluationException
 	 */
 	public static OMOBJ evaluate(OMOBJ omobj) throws EvaluatorException, OpenMathException {
-		return OMToResultVisitor.getInstance().execute(omobj);
+		return OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 	}
 
 	/**

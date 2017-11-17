@@ -77,7 +77,7 @@ public class TestDegree_wrt extends TestFunctionAbstract {
 	@Test
 	public void testDegreeWrtIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("deg('1+x^3','x')", null, null);
-		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
+		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMI(3), result.getOMI());
 	}
 

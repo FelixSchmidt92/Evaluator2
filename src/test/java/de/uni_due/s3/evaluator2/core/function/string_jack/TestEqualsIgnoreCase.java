@@ -44,35 +44,35 @@ public class TestEqualsIgnoreCase extends TestFunctionAbstract {
 	@Test
 	public void testEqualsIgnoreCaseIntegrationTrue() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("equalsIgnoreCase('Hello', 'Hello')", null, null);
-		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
+		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMSymbol.LOGIC1_TRUE, result.getOMS());
 	}
 
 	@Test
 	public void testEqualsIgnoreCaseIntegrationFalse() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("equalsIgnoreCase('Hallo', 'llo')", null, null);
-		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
+		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMSymbol.LOGIC1_FALSE, result.getOMS());
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testEqualsIgnoreCaseWithLessThanMinParam() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("equalsIgnoreCase('Test')", null, null);
-		OMToResultVisitor.getInstance().execute(omobj);
+		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testEqualsIgnoreCaseWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("equalsIgnoreCase('Test', 'Test', 'Test')", null, null);
-		OMToResultVisitor.getInstance().execute(omobj);
+		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void testEqualsIgnoreCaseWithWrongArguments() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("equalsIgnoreCase('Test', vector(2))", null, null);
-		OMToResultVisitor.getInstance().execute(omobj);
+		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 }

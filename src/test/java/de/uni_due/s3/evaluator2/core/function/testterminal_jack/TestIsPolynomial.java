@@ -13,6 +13,7 @@ import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
+import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestIsPolynomial extends TestFunctionAbstract {
@@ -24,7 +25,7 @@ public class TestIsPolynomial extends TestFunctionAbstract {
 
 		OMOBJ t = ExpressionParser.parse("isPolynomial('a*2+ c', 'x')", null, null);
 
-		OMOBJ actual = OMToResultVisitor.getInstance().execute(t);
+		OMOBJ actual = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(t));
 
 		OMOBJ expected = new OMOBJ();
 		expected.setOMS(OMSymbol.LOGIC1_TRUE);
@@ -36,7 +37,7 @@ public class TestIsPolynomial extends TestFunctionAbstract {
 
 		OMOBJ t = ExpressionParser.parse("isPolynomial('a*2+ c', '1')", null, null);
 
-		OMOBJ actual = OMToResultVisitor.getInstance().execute(t);
+		OMOBJ actual = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(t));
 
 		OMOBJ expected = new OMOBJ();
 		expected.setOMS(OMSymbol.LOGIC1_TRUE);
@@ -48,7 +49,7 @@ public class TestIsPolynomial extends TestFunctionAbstract {
 
 		OMOBJ t = ExpressionParser.parse("isPolynomial('x^2+x+1', 'x')", null, null);
 
-		OMOBJ actual = OMToResultVisitor.getInstance().execute(t);
+		OMOBJ actual = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(t));
 
 		OMOBJ expected = new OMOBJ();
 		expected.setOMS(OMSymbol.LOGIC1_TRUE);
@@ -60,7 +61,7 @@ public class TestIsPolynomial extends TestFunctionAbstract {
 
 		OMOBJ t = ExpressionParser.parse("isPolynomial('sin(x)+ y^3', 'x')", null, null);
 
-		OMOBJ actual = OMToResultVisitor.getInstance().execute(t);
+		OMOBJ actual = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(t));
 
 		OMOBJ expected = new OMOBJ();
 		expected.setOMS(OMSymbol.LOGIC1_FALSE);
@@ -72,7 +73,7 @@ public class TestIsPolynomial extends TestFunctionAbstract {
 
 		OMOBJ t = ExpressionParser.parse("isPolynomial('sin(x)+ y^3', 'y')", null, null);
 
-		OMOBJ actual = OMToResultVisitor.getInstance().execute(t);
+		OMOBJ actual = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(t));
 
 		OMOBJ expected = new OMOBJ();
 		expected.setOMS(OMSymbol.LOGIC1_TRUE);
@@ -84,7 +85,7 @@ public class TestIsPolynomial extends TestFunctionAbstract {
 
 		OMOBJ t = ExpressionParser.parse("isPolynomial('sin(x)+ -y^3', 'y')", null, null);
 
-		OMOBJ actual = OMToResultVisitor.getInstance().execute(t);
+		OMOBJ actual = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(t));
 
 		OMOBJ expected = new OMOBJ();
 		expected.setOMS(OMSymbol.LOGIC1_TRUE);
@@ -96,7 +97,7 @@ public class TestIsPolynomial extends TestFunctionAbstract {
 
 		OMOBJ t = ExpressionParser.parse("isPolynomial('sin(x)+ -y^3', 'abcd')", null, null);
 
-		OMToResultVisitor.getInstance().execute(t);
+		OMToResultVisitor.getInstance().visit(t);
 	}
 
 	@Test(expected = CasEvaluationException.class)
@@ -104,7 +105,7 @@ public class TestIsPolynomial extends TestFunctionAbstract {
 
 		OMOBJ t = ExpressionParser.parse("isPolynomial('abcd', 'a')", null, null);
 
-		OMToResultVisitor.getInstance().execute(t);
+		OMToResultVisitor.getInstance().visit(t);
 	}
 	
 	@Test
@@ -112,7 +113,7 @@ public class TestIsPolynomial extends TestFunctionAbstract {
 
 		OMOBJ t = ExpressionParser.parse("isPolynomial('2*x^2 + y^-1 + 2*x*a^-1', 'x')", null, null);
 
-		OMOBJ actual = OMToResultVisitor.getInstance().execute(t);
+		OMOBJ actual = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(t));
 
 		OMOBJ expected = new OMOBJ();
 		expected.setOMS(OMSymbol.LOGIC1_TRUE);
@@ -124,7 +125,7 @@ public class TestIsPolynomial extends TestFunctionAbstract {
 
 		OMOBJ t = ExpressionParser.parse("isPolynomial('0', 'x')", null, null);
 
-		OMOBJ actual = OMToResultVisitor.getInstance().execute(t);
+		OMOBJ actual = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(t));
 
 		OMOBJ expected = new OMOBJ();
 		expected.setOMS(OMSymbol.LOGIC1_TRUE);

@@ -98,7 +98,7 @@ public class TestAnd extends TestFunctionAbstract {
 	@Test
 	public void testBooleanAndIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("countNodes(1+2)", null, null);
-		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
+		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMI(4), result.getOMI());
 	}
 

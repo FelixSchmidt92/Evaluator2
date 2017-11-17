@@ -64,7 +64,7 @@ public class TestSize extends TestFunctionAbstract {
 	@Test
 	public void testSizeIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("sizeOfSet({1;2;3})", null, null);
-		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
+		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMI(3), result.getOMI());
 	}
 }

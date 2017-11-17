@@ -82,15 +82,15 @@ public class TestEvalPolynomialCplx extends TestFunctionAbstract {
 	@Test
 	public void testEvalTerm2Integration1() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("evalPolynomialCplx('x+x', 'x', '1')", null, null);
-		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
-		assertEquals(OMCreator.createOMI(2), result.getOMI());
+		Object result = OMToResultVisitor.getInstance().visit(omobj);
+		assertEquals(OMCreator.createOMI(2), result);
 	}
 
 	@Test
 	public void testEvalPolynomialIntegration2() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("evalPolynomialCplx('x+2*x', 3*x, -4)", null, null);
-		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
-		assertEquals(OMCreator.createOMI(-4), result.getOMI());
+		Object result = OMToResultVisitor.getInstance().visit(omobj);
+		assertEquals(OMCreator.createOMI(-4), result);
 	}
 
 	@Test

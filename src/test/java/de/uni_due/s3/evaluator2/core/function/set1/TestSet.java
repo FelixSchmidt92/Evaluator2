@@ -64,7 +64,7 @@ public class TestSet extends TestFunctionAbstract {
 	@Test
 	public void testSetIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("{1;2;3}", null, null);
-		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
+		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		List<Object> value = result.getOMA().getOmel();
 		assertEquals(OMCreator.createOMI(1), value.get(1));
 		assertEquals(OMCreator.createOMI(2), value.get(2));
@@ -74,14 +74,14 @@ public class TestSet extends TestFunctionAbstract {
 	@Test
 	public void testSetIntegrationWithZero() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("{}", null, null);
-		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
+		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMA(OMSymbol.LIST1_LIST, new ArrayList<Object>()), result.getOMA());
 	}
 
 	@Test
 	public void testSetIntegrationAsFunction() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("list(1,2,3)", null, null);
-		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
+		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		List<Object> value = result.getOMA().getOmel();
 		assertEquals(OMCreator.createOMI(1), value.get(1));
 		assertEquals(OMCreator.createOMI(2), value.get(2));
@@ -91,7 +91,7 @@ public class TestSet extends TestFunctionAbstract {
 	@Test
 	public void testSetIntegrationInBrace() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("{1;2;3}", null, null);
-		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
+		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		List<Object> value = result.getOMA().getOmel();
 		assertEquals(OMCreator.createOMI(1), value.get(1));
 		assertEquals(OMCreator.createOMI(2), value.get(2));

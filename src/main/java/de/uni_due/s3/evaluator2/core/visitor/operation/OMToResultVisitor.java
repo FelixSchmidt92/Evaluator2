@@ -98,21 +98,5 @@ public class OMToResultVisitor extends OMToSyntaxVisitor<Object>{
 		return null;
 
 	}
-	
-	
-	/**
-	 * Visits a OMOBJ object and return its child object. The Class of child is
-	 * determined by the OMOBJ-Object. 
-	 * 
-	 * @param omobj
-	 *            the whole OpenMath object starting with <OMOBJ>...
-	 * @return OMOBJ result
-	 * @throws EvaluatorException
-	 * @throws OpenMathException
-	 */
-	public OMOBJ execute(OMOBJ omobj) throws EvaluatorException, OpenMathException {
-		Object result = visit(omobj);
-		return OMCreator.createOMOBJ(result);
-	}
 
 }

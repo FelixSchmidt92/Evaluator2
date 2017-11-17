@@ -61,7 +61,7 @@ public class TestRint extends TestFunctionAbstract {
 		OMOBJ tree = ExpressionParser.parse("rint(22.2)", null, null);
 		OMOBJ expected = new OMOBJ();
 		expected.setOMI(OMCreator.createOMI(22));
-		OMOBJ actual = OMToResultVisitor.getInstance().execute(tree);
+		OMOBJ actual = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(tree));
 
 		assertEquals(expected, actual);
 	}
@@ -71,7 +71,7 @@ public class TestRint extends TestFunctionAbstract {
 		OMOBJ tree = ExpressionParser.parse("rint('22.2')", null, null);
 		OMOBJ expected = new OMOBJ();
 		expected.setOMI(OMCreator.createOMI(22));
-		OMOBJ actual = OMToResultVisitor.getInstance().execute(tree);
+		OMOBJ actual = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(tree));
 
 		assertEquals(expected, actual);
 	}

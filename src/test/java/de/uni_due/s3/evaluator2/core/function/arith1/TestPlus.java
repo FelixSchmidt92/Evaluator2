@@ -54,15 +54,15 @@ public class TestPlus extends TestFunctionAbstract {
 	@Test
 	public void testPlusIntegration1() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("10+5", null, null);
-		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
-		assertEquals(OMCreator.createOMI(15), result.getOMI());
+		Object result = OMToResultVisitor.getInstance().visit(omobj);
+		assertEquals(OMCreator.createOMI(15), result);
 	}
 
 	@Test
 	public void testPlusIntegration2() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("plus(10,17)", null, null);
-		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
-		assertEquals(OMCreator.createOMI(27), result.getOMI());
+		Object result = OMToResultVisitor.getInstance().visit(omobj);
+		assertEquals(OMCreator.createOMI(27), result);
 	}
 
 	@Test
@@ -76,14 +76,14 @@ public class TestPlus extends TestFunctionAbstract {
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void testPlusWithWrongArguments1() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("10+'test'", null, null);
-		OMToResultVisitor.getInstance().execute(omobj);
+		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void testPlusWithWrongArguments2() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("plus('test',17)", null, null);
-		OMToResultVisitor.getInstance().execute(omobj);
+		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 

@@ -52,7 +52,7 @@ public class TestMatrix extends TestFunctionAbstract {
 	@Test
 	public void testMatrixIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("matrix(matrixrow(1,3),matrixrow(0.0,4))", null, null);
-		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
+		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		List<Object> matrix = new ArrayList<Object>();
 		List<Object> matrixrow1 = new ArrayList<Object>();
 		matrixrow1.add(OMCreator.createOMI(1));
@@ -82,13 +82,13 @@ public class TestMatrix extends TestFunctionAbstract {
 	@Test
 	public void testMatrixWithZeroParam() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("matrix()", null, null);
-		OMToResultVisitor.getInstance().execute(omobj);
+		OMToResultVisitor.getInstance().visit(omobj);
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void testMatrixWithWrongArguments() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("matrix('Test')", null, null);
-		OMToResultVisitor.getInstance().execute(omobj);
+		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 	

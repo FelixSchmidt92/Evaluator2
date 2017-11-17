@@ -12,6 +12,7 @@ import de.uni_due.s3.evaluator2.core.visitor.operation.OMToResultVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMConverter;
+import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestInt extends TestFunctionAbstract{
@@ -33,12 +34,12 @@ public class TestInt extends TestFunctionAbstract{
 				"</OMA>" + 
 				"</OMBIND>" + 
 				"</OMA></OMOBJ>");
-		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
+		Object result = OMToResultVisitor.getInstance().visit(omobj);
 		OMOBJ expected = OMConverter.toObject("<OMOBJ>"
 				+"<OMA><OMS name=\"power\" cd=\"arith1\"/><OMV name=\"x\"/><OMI>2</OMI></OMA>"
 				+"</OMOBJ>");
 		
-		assertEquals(expected,result);
+		assertEquals(expected,OMCreator.createOMOBJ(result));
 	}
 	
 	@Test

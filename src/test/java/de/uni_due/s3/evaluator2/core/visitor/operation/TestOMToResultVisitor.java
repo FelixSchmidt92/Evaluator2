@@ -22,6 +22,7 @@ import de.uni_due.s3.openmath.jaxb.OMFOREIGN;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.jaxb.OMR;
 import de.uni_due.s3.openmath.omutils.OMConverter;
+import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 @RunWith(Parameterized.class)
@@ -75,7 +76,7 @@ public class TestOMToResultVisitor {
 	public void visitorTestOMOBJ() throws JAXBException, OpenMathException, EvaluatorException {
 		// test OMI, OMF, OMS, OMSTR, OMV
 		OMOBJ current = (OMOBJ) OMConverter.toObject(terminalStringToObject);
-		OMOBJ curResult = OMToResultVisitor.getInstance().execute(current);
+		OMOBJ curResult = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(current));
 		OMOBJ expected = OMConverter.toObject(terminalStringToObject);
 		assertEquals(expected, curResult);
 	}
@@ -83,7 +84,7 @@ public class TestOMToResultVisitor {
 	@Test
 	public void visitorTestOMA() throws JAXBException, OpenMathException, EvaluatorException {
 		OMOBJ current = OMConverter.toObject(omaStringToObject);
-		OMOBJ curResult = OMToResultVisitor.getInstance().execute(current);
+		OMOBJ curResult = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(current));
 		OMOBJ expected = OMConverter.toObject(resultStringToObject);
 		assertEquals(expected, curResult);
 	}
@@ -101,14 +102,14 @@ public class TestOMToResultVisitor {
 		if (foreignChild instanceof OMR)
 			omobj.setOMR((OMR) foreignChild);
 
-		OMToResultVisitor.getInstance().execute(omobj);
+		OMToResultVisitor.getInstance().visit(omobj);
 	}
 
 	@Test
 	public void testVisitAlternateTree() throws OpenMathException, EvaluatorException, JAXBException {
 		OMOBJ eval = OMConverter.toObject(
 				"<OMOBJ><OMA><OMA><OMS name=\"power\" cd=\"arith1\"/><OMS name=\"cos\" cd=\"transc1\"/><OMI>2</OMI></OMA><OMV name=\"x\"/></OMA></OMOBJ>");
-		OMOBJ actual = OMToResultVisitor.getInstance().execute(eval);
+		OMOBJ actual = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(eval));
 
 		OMOBJ expected = OMConverter.toObject(
 				"<OMOBJ><OMA><OMS name=\"power\" cd=\"arith1\"/><OMA><OMS name=\"cos\" cd=\"transc1\"/><OMV name=\"x\"/></OMA><OMI>2</OMI></OMA></OMOBJ>");

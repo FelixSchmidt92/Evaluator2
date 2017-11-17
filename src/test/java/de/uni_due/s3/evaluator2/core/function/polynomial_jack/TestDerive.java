@@ -104,7 +104,7 @@ public class TestDerive extends TestFunctionAbstract {
 	@Test
 	public void testDeriveIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("derive('1+x^3','x')", null, null);
-		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
+		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		OMOBJ expected = ExpressionParser.parse("3*x^2", null, null);
 		assertEquals(expected, result);
 	}

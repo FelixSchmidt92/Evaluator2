@@ -17,6 +17,7 @@ import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMConverter;
+import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestSum extends TestFunctionAbstract{
@@ -47,7 +48,7 @@ public class TestSum extends TestFunctionAbstract{
 				"                    </OMBIND>" + 
 				"                </OMA>" + 
 				"            </OMOBJ>");
-		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
+		Object result = OMToResultVisitor.getInstance().visit(omobj);
 		OMOBJ expected = OMConverter.toObject("<OMOBJ>"
 				+"<OMA>"
 				+"<OMS cd=\"arith1\" name=\"times\"/>"
@@ -56,7 +57,7 @@ public class TestSum extends TestFunctionAbstract{
 				+ "</OMA>"
 				+"</OMOBJ>");
 		
-		assertEquals(expected,result);
+		assertEquals(expected,OMCreator.createOMOBJ(result));
 	}
 	
 	@Test

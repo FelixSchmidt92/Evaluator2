@@ -73,7 +73,7 @@ public class TestRational extends TestFunctionAbstract {
 	@Test
 	public void testRationalIntegration1() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("rational(10, 5)", null, null);
-		Object result = OMToResultVisitor.getInstance().execute(omobj);
+		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		
 		ArrayList<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMI(10));
@@ -89,7 +89,7 @@ public class TestRational extends TestFunctionAbstract {
 	@Test
 	public void testRationalIntegration2() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("rational(1,-4)", null, null);
-		Object result = OMToResultVisitor.getInstance().execute(omobj);
+		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		
 		ArrayList<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMI(1));
@@ -105,9 +105,7 @@ public class TestRational extends TestFunctionAbstract {
 	@Test
 	public void testRationalIntegration3() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("rational(10, 0)", null, null);
-		
-
-		Object result = OMToResultVisitor.getInstance().execute(omobj);
+		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		
 		ArrayList<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMI(10));

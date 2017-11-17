@@ -47,21 +47,21 @@ public class TestRandomIntegerBetween {
 	public void testRandomBetweenIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ p = ExpressionParser.parse("randomBetween(3,10)", null, null);
 
-		double result = OMToResultVisitor.getInstance().execute(p).getOMF().getDec();
+		double result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(p)).getOMF().getDec();
 		assertTrue(3 <= result && result < 10);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
 	public void testRandomBetweenIntegerationTooFewArguments() throws OpenMathException, EvaluatorException {
 		OMOBJ p = ExpressionParser.parse("randomBetween()", null, null);
-		OMToResultVisitor.getInstance().execute(p);
+		OMToResultVisitor.getInstance().visit(p);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void testRandomBetweenIntegerationWithWrongArguments() throws OpenMathException, EvaluatorException {
 		OMOBJ p = ExpressionParser.parse("randomBetween('','')", null, null);
-		OMToResultVisitor.getInstance().execute(p);
+		OMToResultVisitor.getInstance().visit(p);
 		fail();
 	}
 }

@@ -62,28 +62,28 @@ public class TestDivide extends TestFunctionAbstract {
 	@Test
 	public void testDivideIntegration1() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("10/5", null, null);
-		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
-		assertEquals(OMCreator.createOMI(2), result.getOMI());
+		Object result = OMToResultVisitor.getInstance().visit(omobj);
+		assertEquals(OMCreator.createOMI(2), result);
 	}
 
 	@Test
 	public void testDivideIntegration2() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("divide(1,-4)", null, null);
-		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
-		assertEquals(OMCreator.createOMF(-0.25), result.getOMF());
+		Object result = OMToResultVisitor.getInstance().visit(omobj);
+		assertEquals(OMCreator.createOMF(-0.25), result);
 	}
 
 	@Test(expected = FunctionInvalidArgumentException.class)
 	public void testDivideIntegrationWithWrongParam() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("10/0", null, null);
-		OMToResultVisitor.getInstance().execute(omobj);
+		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentException.class)
 	public void testDivideIntegrationWithWrongParam2() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("10/(1-1.0)", null, null);
-		OMToResultVisitor.getInstance().execute(omobj);
+		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
@@ -98,7 +98,7 @@ public class TestDivide extends TestFunctionAbstract {
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void testDivideWithWrongArguments() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("10/'test'", null, null);
-		OMToResultVisitor.getInstance().execute(omobj);
+		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 	

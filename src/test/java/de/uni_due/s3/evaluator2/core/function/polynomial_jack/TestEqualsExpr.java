@@ -86,7 +86,7 @@ public class TestEqualsExpr extends TestFunctionAbstract {
 	@Test
 	public void testEqualsExprIntegration() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("equalsExpr('1+x^3','x*x*x+1')", null, null);
-		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
+		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMSymbol.LOGIC1_TRUE, result.getOMS());
 	}
 
@@ -112,7 +112,7 @@ public class TestEqualsExpr extends TestFunctionAbstract {
 	@Test(expected = FunctionException.class)
 	public void testEqualsExprIntegrationWorngInput() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("equalsExpr('1+x^3','Something classified as NONSENSE')", null, null);
-		OMToResultVisitor.getInstance().execute(omobj);
+		OMToResultVisitor.getInstance().visit(omobj);
 	}
 	
 }

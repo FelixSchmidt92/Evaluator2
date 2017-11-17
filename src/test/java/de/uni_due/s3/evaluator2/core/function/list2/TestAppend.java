@@ -71,7 +71,7 @@ public class TestAppend {
 	@Test
 	public void testListIntegration1() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("appendToList(list(1,2,3),2)", null, null);
-		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
+		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		List<Object> l3 = new ArrayList<>();
 		l3.add(OMCreator.createOMI(1));
 		l3.add(OMCreator.createOMI(2));
@@ -83,7 +83,7 @@ public class TestAppend {
 	@Test
 	public void testListIntegration2() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("appendToList(list(1,2,3),{2})", null, null);
-		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
+		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		List<Object> l3 = new ArrayList<>();
 		l3.add(OMCreator.createOMI(1));
 		l3.add(OMCreator.createOMI(2));
@@ -95,7 +95,7 @@ public class TestAppend {
 	@Test
 	public void testListIntegration3() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("appendToList(list(1,2,3),{vector(1)})", null, null);
-		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
+		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		List<Object> l3 = new ArrayList<>();
 		l3.add(OMCreator.createOMI(1));
 		l3.add(OMCreator.createOMI(2));
@@ -110,7 +110,7 @@ public class TestAppend {
 	@Test
 	public void testListIntegration4() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("appendToList(2,vector(1))", null, null);
-		OMOBJ result = OMToResultVisitor.getInstance().execute(omobj);
+		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		List<Object> l3 = new ArrayList<>();
 		l3.add(OMCreator.createOMI(2));
 		List<Object> arg1 = new ArrayList<>();
