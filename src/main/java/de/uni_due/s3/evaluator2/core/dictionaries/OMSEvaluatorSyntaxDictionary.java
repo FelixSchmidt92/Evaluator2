@@ -119,6 +119,10 @@ public class OMSEvaluatorSyntaxDictionary {
 
 		functionSymbolMap.put("mcindex", OMSymbol.MCJACK_MCINDEX);
 
+		functionSymbolMap.put("conste", OMSymbol.NUMS1_E);
+		functionSymbolMap.put("infinity", OMSymbol.NUMS1_INFINITY);
+		functionSymbolMap.put("imaginary", OMSymbol.NUMS1_I);
+		functionSymbolMap.put("constpi", OMSymbol.NUMS1_PI);
 		functionSymbolMap.put("rational", OMSymbol.NUMS1_RATIONAL);
 
 		functionSymbolMap.put("countBasicOperations", OMSymbol.OPENMATHJACK_COUNTBASICOPERATIONS);

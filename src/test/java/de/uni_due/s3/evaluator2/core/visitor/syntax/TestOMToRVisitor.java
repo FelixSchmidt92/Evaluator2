@@ -50,7 +50,7 @@ public class TestOMToRVisitor {
 
 	@Test
 	public void TestOMRVisitor5() throws OpenMathException, EvaluatorException {
-		OMOBJ obj = Evaluator.evaluate("PI", new HashMap<>(), new HashMap<>());
+		OMOBJ obj = Evaluator.evaluate("constpi()", new HashMap<>(), new HashMap<>());
 		String result = OMToRVisitor.getInstance().visit(obj);
 		String expected = "pi";
 		assertEquals(expected, result);

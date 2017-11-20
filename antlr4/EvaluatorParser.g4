@@ -88,10 +88,6 @@ constant
 	(
 		True
 		| False
-		| E
-		| I
-		| Infinity
-		| Pi
 	)
 ;
 

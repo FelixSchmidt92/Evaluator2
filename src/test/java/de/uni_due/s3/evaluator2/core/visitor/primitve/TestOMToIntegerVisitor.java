@@ -58,7 +58,7 @@ public class TestOMToIntegerVisitor {
 
 	@Test(expected = NoRepresentationAvailableException.class)
 	public void TestOMIntegerVisitor6() throws OpenMathException, EvaluatorException {
-		OMOBJ obj = Evaluator.evaluate("PI", new HashMap<>(), new HashMap<>());
+		OMOBJ obj = Evaluator.evaluate("constpi()", new HashMap<>(), new HashMap<>());
 		OMToIntegerVisitor.getInstance().visit(obj);
 	}
 

@@ -24,7 +24,7 @@ public class TestInfinity extends TestFunctionAbstract {
 		OMOBJ expected = new OMOBJ();
 		expected.setOMS(OMSymbol.NUMS1_INFINITY);
 		
-		OMOBJ actual = Evaluator.evaluate("INFINITY", null, null);
+		OMOBJ actual = Evaluator.evaluate("infinity()", null, null);
 		
 		assertEquals(expected, actual);
 	}

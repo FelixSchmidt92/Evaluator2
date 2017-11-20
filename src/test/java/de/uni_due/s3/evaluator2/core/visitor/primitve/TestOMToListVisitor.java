@@ -58,7 +58,7 @@ public class TestOMToListVisitor {
 
 	@Test
 	public void TestOMListVisitor5() throws OpenMathException, EvaluatorException {
-		OMOBJ obj = Evaluator.evaluate("PI", new HashMap<>(), new HashMap<>());
+		OMOBJ obj = Evaluator.evaluate("[var=PI]", new HashMap<>(), new HashMap<>());
 		List<Object> result = OMToListVisitor.getInstance().visit(obj);
 		List<Object> expected = new ArrayList<>();
 		expected.add(OMSymbol.NUMS1_PI);
