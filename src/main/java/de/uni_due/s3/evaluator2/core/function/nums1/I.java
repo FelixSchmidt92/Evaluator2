@@ -1,9 +1,10 @@
 package de.uni_due.s3.evaluator2.core.function.nums1;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
-import de.uni_due.s3.evaluator2.core.function.Function;
+import de.uni_due.s3.evaluator2.core.function.ConstructorFunction;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
@@ -13,7 +14,7 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
  * @author spobel
  *
  */
-public class I extends Function {
+public class I extends ConstructorFunction {
 
 	@Override
 	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
@@ -43,6 +44,18 @@ public class I extends Function {
 	@Override
 	protected int maxArgs() {
 		return 0;
+	}
+
+	@Override
+	public List<Object> getPartialListSyntax(List<Object> omel) throws EvaluatorException {
+		List<Object> omList = new ArrayList<>();
+		omList.add(OMSymbol.NUMS1_I);
+		return omList;
+	}
+
+	@Override
+	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException {
+		return "complex(0,0,1)";
 	}
 
 }
