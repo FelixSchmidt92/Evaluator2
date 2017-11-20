@@ -2,6 +2,7 @@ package de.uni_due.s3.evaluator2.core.function;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -73,7 +74,16 @@ public abstract class BinaryFunction extends Function {
 					throw new NoRepresentationAvailableException("The BinaryFunction " + this.getClass() + " has no priority defined!");
 				}
 			} else {
-				return childFunc.getPartialLatexSyntax(childOmel);
+				try {
+					return childFunc.getPartialLatexSyntax(childOmel);
+				} catch (NoRepresentationAvailableException nr) {
+					// standard latex implementation for functions
+					List<String> children = new LinkedList<String>();
+					for (Object childFromChild : childOmel) {
+						children.add(OMToLatexVisitor.getInstance().visit(childFromChild));
+					}
+					return "\\mbox{" + childOMS.getName() + "}\\left(" + String.join(",", children) + "\\right)";
+				}
 			}
 		} else {
 			// Do not call the getLatexSyntax-Function in Function so to propagate to the

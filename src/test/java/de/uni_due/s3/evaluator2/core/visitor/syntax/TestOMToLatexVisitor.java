@@ -28,6 +28,15 @@ public class TestOMToLatexVisitor {
 		String latex = OMToLatexVisitor.getInstance().visit(obj);
 		assertEquals("a-2 \\cdot b", latex);
 	}
+	
+	@Test
+	public void testOMToLatexVisitorWithoutParenthesisAndTwoDifferentOperation() throws OpenMathException, EvaluatorException {
+		OMOBJ obj = ExpressionParser.parse("1*cos(1)", new HashMap<>(), new HashMap<>());
+		String latex = OMToLatexVisitor.getInstance().visit(obj);
+		System.out.println(latex);
+		assertEquals("1 \\cdot \\mbox{cos}\\left(1\\right)", latex);
+	}
+	
 	@Test
 	public void testOMToLatexVisitorWithParenthesis() throws OpenMathException, EvaluatorException {
 		OMOBJ obj = Evaluator.evaluate("(a-b)*2", new HashMap<>(), new HashMap<>());
