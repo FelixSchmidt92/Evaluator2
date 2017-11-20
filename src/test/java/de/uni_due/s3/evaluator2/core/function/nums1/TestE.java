@@ -25,14 +25,14 @@ public class TestE extends TestFunctionAbstract {
 		OMOBJ expected = new OMOBJ();
 		expected.setOMS(OMSymbol.NUMS1_E);
 		
-		OMOBJ actual = Evaluator.evaluate("E", null, null);
+		OMOBJ actual = Evaluator.evaluate("conste()", null, null);
 		
 		assertEquals(expected, actual);
 	}
 	
 	@Test
 	public void testEIntegration2() throws EvaluatorException, OpenMathException {
-		OMOBJ actual = Evaluator.evaluate("E*2", null, null);
+		OMOBJ actual = Evaluator.evaluate("[var=E]*2", null, null);
 		
 		assertEquals(OMCreator.createOMF(5.43656365691809), actual.getOMF());
 	}

@@ -20,11 +20,21 @@ public class TestPi extends TestFunctionAbstract {
 	Function func = new Pi();
 
 	@Test
-	public void testPiIntegration() throws EvaluatorException, OpenMathException {
+	public void testPiIntegration1() throws EvaluatorException, OpenMathException {
 		OMOBJ expected = new OMOBJ();
 		expected.setOMS(OMSymbol.NUMS1_PI);
 
-		OMOBJ actual = Evaluator.evaluate("PI", null, null);
+		OMOBJ actual = Evaluator.evaluate("constpi()", null, null);
+
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testPiIntegration2() throws EvaluatorException, OpenMathException {
+		OMOBJ expected = new OMOBJ();
+		expected.setOMS(OMSymbol.NUMS1_PI);
+
+		OMOBJ actual = Evaluator.evaluate("[var=PI]", null, null);
 
 		assertEquals(expected, actual);
 	}

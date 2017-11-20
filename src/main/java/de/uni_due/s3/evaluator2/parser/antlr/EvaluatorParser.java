@@ -22,9 +22,8 @@ public class EvaluatorParser extends Parser {
 		Plus=6, Minus=7, BooleanNot=8, Multiplication=9, Division=10, Modulus=11, 
 		LessThan=12, LessThanOrEqual=13, GreaterThan=14, GreaterThanOrEqual=15, 
 		Equal=16, NotEqual=17, BooleanAnd=18, BooleanOr=19, ExerciseVariable=20, 
-		FillInVariable=21, Variable=22, True=23, False=24, E=25, I=26, Infinity=27, 
-		Pi=28, FunctionName=29, ArgumentSeparator=30, ListArgumentSeparator=31, 
-		Integer=32, Float=33, String=34, WS=35;
+		FillInVariable=21, Variable=22, True=23, False=24, FunctionName=25, ArgumentSeparator=26, 
+		ListArgumentSeparator=27, Integer=28, Float=29, String=30, WS=31;
 	public static final int
 		RULE_expression = 0, RULE_unaryOperator = 1, RULE_binaryOperatorBoolean = 2, 
 		RULE_binaryOperatorRelational = 3, RULE_binaryOperatorArithLine = 4, RULE_binaryOperatorArithPoint = 5, 
@@ -38,17 +37,15 @@ public class EvaluatorParser extends Parser {
 	private static final String[] _LITERAL_NAMES = {
 		null, "'('", "')'", "'{'", "'}'", "'^'", "'+'", "'-'", "'!'", "'*'", "'/'", 
 		"'%'", "'<'", "'<='", "'>'", "'>='", null, "'!='", "'&&'", "'||'", null, 
-		null, null, null, null, "'E'", "'I'", "'INFINITY'", "'PI'", null, "','", 
-		"';'"
+		null, null, null, null, null, "','", "';'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
 		null, "LeftParenthesis", "RightParenthesis", "ListOpen", "ListClose", 
 		"Circumflex", "Plus", "Minus", "BooleanNot", "Multiplication", "Division", 
 		"Modulus", "LessThan", "LessThanOrEqual", "GreaterThan", "GreaterThanOrEqual", 
 		"Equal", "NotEqual", "BooleanAnd", "BooleanOr", "ExerciseVariable", "FillInVariable", 
-		"Variable", "True", "False", "E", "I", "Infinity", "Pi", "FunctionName", 
-		"ArgumentSeparator", "ListArgumentSeparator", "Integer", "Float", "String", 
-		"WS"
+		"Variable", "True", "False", "FunctionName", "ArgumentSeparator", "ListArgumentSeparator", 
+		"Integer", "Float", "String", "WS"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -344,10 +341,6 @@ public class EvaluatorParser extends Parser {
 				break;
 			case True:
 			case False:
-			case E:
-			case I:
-			case Infinity:
-			case Pi:
 				{
 				_localctx = new ConstantInExpressionContext(_localctx);
 				_ctx = _localctx;
@@ -780,10 +773,6 @@ public class EvaluatorParser extends Parser {
 		public Token name;
 		public TerminalNode True() { return getToken(EvaluatorParser.True, 0); }
 		public TerminalNode False() { return getToken(EvaluatorParser.False, 0); }
-		public TerminalNode E() { return getToken(EvaluatorParser.E, 0); }
-		public TerminalNode I() { return getToken(EvaluatorParser.I, 0); }
-		public TerminalNode Infinity() { return getToken(EvaluatorParser.Infinity, 0); }
-		public TerminalNode Pi() { return getToken(EvaluatorParser.Pi, 0); }
 		public ConstantContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -805,7 +794,7 @@ public class EvaluatorParser extends Parser {
 			setState(71);
 			((ConstantContext)_localctx).name = _input.LT(1);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << True) | (1L << False) | (1L << E) | (1L << I) | (1L << Infinity) | (1L << Pi))) != 0)) ) {
+			if ( !(_la==True || _la==False) ) {
 				((ConstantContext)_localctx).name = (Token)_errHandler.recoverInline(this);
 			}
 			else {
@@ -869,7 +858,7 @@ public class EvaluatorParser extends Parser {
 			setState(83);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << LeftParenthesis) | (1L << ListOpen) | (1L << Plus) | (1L << Minus) | (1L << BooleanNot) | (1L << ExerciseVariable) | (1L << FillInVariable) | (1L << Variable) | (1L << True) | (1L << False) | (1L << E) | (1L << I) | (1L << Infinity) | (1L << Pi) | (1L << FunctionName) | (1L << Integer) | (1L << Float) | (1L << String))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << LeftParenthesis) | (1L << ListOpen) | (1L << Plus) | (1L << Minus) | (1L << BooleanNot) | (1L << ExerciseVariable) | (1L << FillInVariable) | (1L << Variable) | (1L << True) | (1L << False) | (1L << FunctionName) | (1L << Integer) | (1L << Float) | (1L << String))) != 0)) {
 				{
 				setState(75);
 				((FunctionContext)_localctx).expression = expression(0);
@@ -948,7 +937,7 @@ public class EvaluatorParser extends Parser {
 			setState(96);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << LeftParenthesis) | (1L << ListOpen) | (1L << Plus) | (1L << Minus) | (1L << BooleanNot) | (1L << ExerciseVariable) | (1L << FillInVariable) | (1L << Variable) | (1L << True) | (1L << False) | (1L << E) | (1L << I) | (1L << Infinity) | (1L << Pi) | (1L << FunctionName) | (1L << Integer) | (1L << Float) | (1L << String))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << LeftParenthesis) | (1L << ListOpen) | (1L << Plus) | (1L << Minus) | (1L << BooleanNot) | (1L << ExerciseVariable) | (1L << FillInVariable) | (1L << Variable) | (1L << True) | (1L << False) | (1L << FunctionName) | (1L << Integer) | (1L << Float) | (1L << String))) != 0)) {
 				{
 				setState(88);
 				((ListContext)_localctx).expression = expression(0);
@@ -1012,7 +1001,7 @@ public class EvaluatorParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3%g\4\2\t\2\4\3\t\3"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3!g\4\2\t\2\4\3\t\3"+
 		"\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\3\2\3\2\3\2\3"+
 		"\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\5\2&\n\2\3\2\3"+
 		"\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2"+
@@ -1020,24 +1009,24 @@ public class EvaluatorParser extends Parser {
 		"\b\3\t\3\t\3\t\3\t\3\t\7\tQ\n\t\f\t\16\tT\13\t\5\tV\n\t\3\t\3\t\3\n\3"+
 		"\n\3\n\3\n\7\n^\n\n\f\n\16\na\13\n\5\nc\n\n\3\n\3\n\3\n\2\3\2\13\2\4\6"+
 		"\b\n\f\16\20\22\2\b\3\2\b\n\3\2\24\25\3\2\16\23\3\2\b\t\3\2\13\r\3\2\31"+
-		"\36\2p\2%\3\2\2\2\4?\3\2\2\2\6A\3\2\2\2\bC\3\2\2\2\nE\3\2\2\2\fG\3\2\2"+
+		"\32\2p\2%\3\2\2\2\4?\3\2\2\2\6A\3\2\2\2\bC\3\2\2\2\nE\3\2\2\2\fG\3\2\2"+
 		"\2\16I\3\2\2\2\20K\3\2\2\2\22Y\3\2\2\2\24\25\b\2\1\2\25&\7\30\2\2\26&"+
 		"\5\16\b\2\27&\5\20\t\2\30\31\7\3\2\2\31\32\5\2\2\2\32\33\7\4\2\2\33&\3"+
-		"\2\2\2\34\35\5\4\3\2\35\36\5\2\2\16\36&\3\2\2\2\37&\5\22\n\2 &\7\"\2\2"+
-		"!&\7#\2\2\"&\7\26\2\2#&\7\27\2\2$&\7$\2\2%\24\3\2\2\2%\26\3\2\2\2%\27"+
-		"\3\2\2\2%\30\3\2\2\2%\34\3\2\2\2%\37\3\2\2\2% \3\2\2\2%!\3\2\2\2%\"\3"+
-		"\2\2\2%#\3\2\2\2%$\3\2\2\2&<\3\2\2\2\'(\f\r\2\2()\7\7\2\2);\5\2\2\16*"+
-		"+\f\f\2\2+,\5\f\7\2,-\5\2\2\r-;\3\2\2\2./\f\13\2\2/\60\5\n\6\2\60\61\5"+
-		"\2\2\f\61;\3\2\2\2\62\63\f\n\2\2\63\64\5\b\5\2\64\65\5\2\2\13\65;\3\2"+
-		"\2\2\66\67\f\t\2\2\678\5\6\4\289\5\2\2\n9;\3\2\2\2:\'\3\2\2\2:*\3\2\2"+
-		"\2:.\3\2\2\2:\62\3\2\2\2:\66\3\2\2\2;>\3\2\2\2<:\3\2\2\2<=\3\2\2\2=\3"+
-		"\3\2\2\2><\3\2\2\2?@\t\2\2\2@\5\3\2\2\2AB\t\3\2\2B\7\3\2\2\2CD\t\4\2\2"+
-		"D\t\3\2\2\2EF\t\5\2\2F\13\3\2\2\2GH\t\6\2\2H\r\3\2\2\2IJ\t\7\2\2J\17\3"+
-		"\2\2\2KL\7\37\2\2LU\7\3\2\2MR\5\2\2\2NO\7 \2\2OQ\5\2\2\2PN\3\2\2\2QT\3"+
-		"\2\2\2RP\3\2\2\2RS\3\2\2\2SV\3\2\2\2TR\3\2\2\2UM\3\2\2\2UV\3\2\2\2VW\3"+
-		"\2\2\2WX\7\4\2\2X\21\3\2\2\2Yb\7\5\2\2Z_\5\2\2\2[\\\7!\2\2\\^\5\2\2\2"+
-		"][\3\2\2\2^a\3\2\2\2_]\3\2\2\2_`\3\2\2\2`c\3\2\2\2a_\3\2\2\2bZ\3\2\2\2"+
-		"bc\3\2\2\2cd\3\2\2\2de\7\6\2\2e\23\3\2\2\2\t%:<RU_b";
+		"\2\2\2\34\35\5\4\3\2\35\36\5\2\2\16\36&\3\2\2\2\37&\5\22\n\2 &\7\36\2"+
+		"\2!&\7\37\2\2\"&\7\26\2\2#&\7\27\2\2$&\7 \2\2%\24\3\2\2\2%\26\3\2\2\2"+
+		"%\27\3\2\2\2%\30\3\2\2\2%\34\3\2\2\2%\37\3\2\2\2% \3\2\2\2%!\3\2\2\2%"+
+		"\"\3\2\2\2%#\3\2\2\2%$\3\2\2\2&<\3\2\2\2\'(\f\r\2\2()\7\7\2\2);\5\2\2"+
+		"\16*+\f\f\2\2+,\5\f\7\2,-\5\2\2\r-;\3\2\2\2./\f\13\2\2/\60\5\n\6\2\60"+
+		"\61\5\2\2\f\61;\3\2\2\2\62\63\f\n\2\2\63\64\5\b\5\2\64\65\5\2\2\13\65"+
+		";\3\2\2\2\66\67\f\t\2\2\678\5\6\4\289\5\2\2\n9;\3\2\2\2:\'\3\2\2\2:*\3"+
+		"\2\2\2:.\3\2\2\2:\62\3\2\2\2:\66\3\2\2\2;>\3\2\2\2<:\3\2\2\2<=\3\2\2\2"+
+		"=\3\3\2\2\2><\3\2\2\2?@\t\2\2\2@\5\3\2\2\2AB\t\3\2\2B\7\3\2\2\2CD\t\4"+
+		"\2\2D\t\3\2\2\2EF\t\5\2\2F\13\3\2\2\2GH\t\6\2\2H\r\3\2\2\2IJ\t\7\2\2J"+
+		"\17\3\2\2\2KL\7\33\2\2LU\7\3\2\2MR\5\2\2\2NO\7\34\2\2OQ\5\2\2\2PN\3\2"+
+		"\2\2QT\3\2\2\2RP\3\2\2\2RS\3\2\2\2SV\3\2\2\2TR\3\2\2\2UM\3\2\2\2UV\3\2"+
+		"\2\2VW\3\2\2\2WX\7\4\2\2X\21\3\2\2\2Yb\7\5\2\2Z_\5\2\2\2[\\\7\35\2\2\\"+
+		"^\5\2\2\2][\3\2\2\2^a\3\2\2\2_]\3\2\2\2_`\3\2\2\2`c\3\2\2\2a_\3\2\2\2"+
+		"bZ\3\2\2\2bc\3\2\2\2cd\3\2\2\2de\7\6\2\2e\23\3\2\2\2\t%:<RU_b";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
