@@ -59,9 +59,9 @@ public class TestI extends TestFunctionAbstract {
 		assertEquals("I", func.getPartialStringSyntax(new ArrayList<>()));
 	}
 
-	@Test(expected = NoRepresentationAvailableException.class)
+	@Test
 	public void testIR() throws EvaluatorException {
-		func.getPartialRSyntax(new ArrayList<>());
+		assertEquals("complex(0,0,1)", func.getPartialRSyntax(new ArrayList<>()));
 	}
 
 }

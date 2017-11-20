@@ -67,8 +67,8 @@ public class TestE extends TestFunctionAbstract {
 		assertEquals("E", func.getPartialStringSyntax(new ArrayList<>()));
 	}
 
-	@Test(expected = NoRepresentationAvailableException.class)
+	@Test
 	public void testER() throws EvaluatorException {
-		func.getPartialRSyntax(new ArrayList<>());
+		assertEquals("exp(1)", func.getPartialRSyntax(new ArrayList<>()));
 	}
 }

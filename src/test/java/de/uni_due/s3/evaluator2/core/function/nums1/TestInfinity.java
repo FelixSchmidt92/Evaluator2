@@ -59,9 +59,9 @@ public class TestInfinity extends TestFunctionAbstract {
 		assertEquals("Infinity", func.getPartialStringSyntax(new ArrayList<>()));
 	}
 
-	@Test(expected = NoRepresentationAvailableException.class)
+	@Test
 	public void testInfinityR() throws EvaluatorException {
-		func.getPartialRSyntax(new ArrayList<>());
+		assertEquals("Inf", func.getPartialRSyntax(new ArrayList<>()));
 	}
 	
 }
