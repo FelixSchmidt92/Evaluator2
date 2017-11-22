@@ -13,10 +13,10 @@ A not working Sage- or R-Server leads to a failure in build, caused by not worki
 ## Building locally
 Since the Evaluator uses JAXBOpenMath provided by Artifactory https://harbor.paluno.uni-due.de/artifactory/ (works only inside the university) you need to copy ``.m2/settings.xml`` from this repository to your local ``.m2`` directory.
 
-# Deployment pipeline
+## Deployment pipeline
 The master branch is automatically deployed to artifactory.
 
-# Using it in your project
+## Using it in your project
  The Evaluator can be used in S3-Artifactory enabled maven environments (see "Building locally") like this:
 ```xml
 <dependency>
