@@ -180,8 +180,8 @@ public abstract class OMToSyntaxVisitor<T> {
 	/**
 	 * Implement here the String-Representation of this OMS-Element
 	 * 
-	 * Note: If this OMS is visited, it is an Parameter in a Function, so a Terminal
-	 * like pi, e, NaN or i
+	 * Note: If this OMS is visited, it is an Parameter in a Function or a Terminal
+	 * like pi, e, NaN or i. All Terminals are also Functions, so always get a function!
 	 * 
 	 * @param oms
 	 *            the element which is visited now

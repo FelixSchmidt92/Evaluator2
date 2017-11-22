@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import de.uni_due.s3.evaluator2.Evaluator;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
@@ -75,4 +76,24 @@ public class TestEquals extends TestFunctionAbstract {
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
+	
+	
+	@Test
+	public void testEqualsIntegrationwithI() throws OpenMathException, EvaluatorException {
+		OMOBJ res = Evaluator.evaluate("equals('+I', '+I')", null, null);
+		assertEquals(OMSymbol.LOGIC1_TRUE, res.getOMS());
+	}
+	
+	@Test
+	public void testEqualsIntegrationwithI2() throws OpenMathException, EvaluatorException {
+		OMOBJ res = Evaluator.evaluate("equals('I', '+I')", null, null);
+		assertEquals(OMSymbol.LOGIC1_FALSE, res.getOMS());
+	}
+	
+	@Test
+	public void testEqualsIntegrationwithI3() throws OpenMathException, EvaluatorException {
+		OMOBJ res = Evaluator.evaluate("equals('+II', '+II')", null, null);
+		assertEquals(OMSymbol.LOGIC1_TRUE, res.getOMS());
+	}
+	
 }
