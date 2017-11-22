@@ -23,7 +23,8 @@ public class Cos extends Function {
 	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		Object result;
 		if (OMTypeChecker.isOMNumber(arguments.get(0))) {
-			result = Sage.evaluateInCAS(getPartialSageSyntax(arguments));
+			String sageString = getPartialSageSyntax(arguments);
+			result = Sage.evaluateInCAS(Sage.getSagePreVariable(sageString) + sageString);
 		} else {
 			if (OMTypeChecker.isOMV(arguments.get(0))
 					|| OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.SYMBOLIC_EXPRESSION)) {

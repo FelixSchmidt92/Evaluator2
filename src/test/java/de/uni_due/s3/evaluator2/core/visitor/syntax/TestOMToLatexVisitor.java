@@ -33,7 +33,6 @@ public class TestOMToLatexVisitor {
 	public void testOMToLatexVisitorWithoutParenthesisAndTwoDifferentOperation() throws OpenMathException, EvaluatorException {
 		OMOBJ obj = ExpressionParser.parse("1*cos(1)", new HashMap<>(), new HashMap<>());
 		String latex = OMToLatexVisitor.getInstance().visit(obj);
-		System.out.println(latex);
 		assertEquals("1 \\cdot \\mbox{cos}\\left(1\\right)", latex);
 	}
 	
