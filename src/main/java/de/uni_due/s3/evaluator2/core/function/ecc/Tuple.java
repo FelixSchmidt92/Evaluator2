@@ -31,7 +31,7 @@ public class Tuple extends ConstructorFunction {
 
 	@Override
 	protected int minArgs() {
-		return 1;
+		return 2;
 	}
 
 	@Override
