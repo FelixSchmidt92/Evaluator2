@@ -105,6 +105,7 @@ import de.uni_due.s3.evaluator2.core.function.setname1.P;
 import de.uni_due.s3.evaluator2.core.function.setname1.Q;
 import de.uni_due.s3.evaluator2.core.function.setname1.R;
 import de.uni_due.s3.evaluator2.core.function.setname1.Z;
+import de.uni_due.s3.evaluator2.core.function.sparql_jack.QuerySparql;
 import de.uni_due.s3.evaluator2.core.function.string_jack.CharAt;
 import de.uni_due.s3.evaluator2.core.function.string_jack.CompareTo;
 import de.uni_due.s3.evaluator2.core.function.string_jack.CompareToIgnoreCase;
@@ -315,6 +316,8 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.SETNAME1_Q, new Q());
 		functions.put(OMSymbol.SETNAME1_R, new R());
 		functions.put(OMSymbol.SETNAME1_Z, new Z());
+
+		functions.put(OMSymbol.SPARQLJACK_QUERYSPARQL, new QuerySparql());
 
 		functions.put(OMSymbol.STRINGJACK_CHARAT, new CharAt());
 		functions.put(OMSymbol.STRINGJACK_COMPARETO, new CompareTo());

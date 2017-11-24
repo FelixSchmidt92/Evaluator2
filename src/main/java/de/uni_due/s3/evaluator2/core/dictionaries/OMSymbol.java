@@ -48,7 +48,7 @@ public class OMSymbol {
 	public static final OMS EVALJACK_EVALPOLYNOMIALCPLX = OMCreator.createOMS("evalJACK", "evalPolynomialCplx");
 	public static final OMS EVALJACK_EVALTERM2 = OMCreator.createOMS("evalJACK", "evalterm2");
 	
-	public static final OMS ECC_TUPLE = OMCreator.createOMS("ecc", "Tuple");
+	public static final OMS ECC_TUPLE = OMCreator.createOMS("ecc", "tuple");
 
 	public static final OMS FNS1_LAMBDA = OMCreator.createOMS("fns1", "lambda");
 
@@ -152,6 +152,8 @@ public class OMSymbol {
 	public static final OMS SETNAME1_Q = OMCreator.createOMS("setname1", "Q");
 	public static final OMS SETNAME1_R = OMCreator.createOMS("setname1", "R");
 	public static final OMS SETNAME1_Z = OMCreator.createOMS("setname1", "Z");
+
+	public static final OMS SPARQLJACK_QUERYSPARQL = OMCreator.createOMS("sparqljack", "querySparql");
 
 	public static final OMS STRINGJACK_CHARAT = OMCreator.createOMS("stringJACK", "charAt");
 	public static final OMS STRINGJACK_COMPARETO = OMCreator.createOMS("stringJACK", "compareTo");

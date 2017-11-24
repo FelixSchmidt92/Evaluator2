@@ -178,6 +178,8 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("rr", OMSymbol.SETNAME1_R);
 		functionSymbolMap.put("zz", OMSymbol.SETNAME1_Z);
 
+		functionSymbolMap.put("querySparql", OMSymbol.SPARQLJACK_QUERYSPARQL);
+
 		functionSymbolMap.put("charAt", OMSymbol.STRINGJACK_CHARAT);
 		functionSymbolMap.put("compareTo", OMSymbol.STRINGJACK_COMPARETO);
 		functionSymbolMap.put("compareToIgnoreCase", OMSymbol.STRINGJACK_COMPARETOIGNORECASE);
