@@ -78,7 +78,11 @@ public class Sparql {
 			String[] selectResultArray = selectResultList.split(" ");
 			
 			String service = query.substring(query.indexOf("Service:") + 8, query.length());
-			results = executeQuery(query, service);
+
+			Query queryObject = QueryFactory.create(query);
+			QueryEngineHTTP queryEngine = QueryExecutionFactory.createServiceRequest(service, queryObject);
+			queryEngine.setTimeout(15, TimeUnit.SECONDS);
+			results = queryEngine.execSelect();
 
 			List<Object> resultList = new ArrayList<>();
 			
@@ -103,7 +107,9 @@ public class Sparql {
 					resultList.add(tupleContent.get(0));
 				}
 			}
-
+			
+			queryEngine.close();
+			
 			if (resultList.size() > 1) {
 				return OMCreator.createOMA(OMSymbol.LIST1_LIST, resultList);
 			} else {
