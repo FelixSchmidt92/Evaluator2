@@ -10,6 +10,8 @@ import org.apache.jena.query.QueryFactory;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.sparql.engine.http.QueryEngineHTTP;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
@@ -18,6 +20,9 @@ import de.uni_due.s3.openmath.omutils.OMCreator;
 public class Sparql {
 
 	public static Object evaluate(String query) throws CasEvaluationException {
+
+		// Suppress some annoying warnings from underlying implementation
+		Logger.getLogger(org.apache.http.client.protocol.ResponseProcessCookies.class).setLevel(Level.ERROR);
 		
 		ArrayList<String> resultArray = new ArrayList<String>();
 		ResultSet results = null;
