@@ -23,6 +23,10 @@ public class GetFromList extends Function {
 		int pos = getIntegerSyntax(arguments.get(0));
 		List<Object> list1 = getListSyntax(arguments.get(1));
 
+		if (pos < 0) {
+			throw new FunctionInvalidArgumentException(this, "First argument must not be negative.");
+		}
+
 		if (list1.size() == 0) {
 			throw new FunctionInvalidArgumentException(this, "List has to have at least one element.");
 		}
