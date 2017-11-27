@@ -4,12 +4,8 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
-import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
+import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator2.sparql.Sparql;
-import de.uni_due.s3.openmath.jaxb.OMSTR;
-import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
@@ -30,26 +26,24 @@ public class QuerySparql extends Function {
 
 	@Override
 	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
-		if (arguments.size() != 2)
-			throw new FunctionInvalidNumberOfArgumentsException(this, "Invalid argument inputs for querySparql(). Missing argument, query or Select result statement.");
+		// with minArgs and maxArgs it is guaranteed, that arguments has this length.
 		
-		if (!(OMTypeChecker.isOMSTR(arguments.get(0)) && OMTypeChecker.isOMSTR(arguments.get(1))))
-			throw new FunctionInvalidArgumentTypeException("Invalid argument inputs for querySparql(). Malformed argument. Both endpoint and query must be strings.");
-
-		String endpoint = ((OMSTR)arguments.get(0)).getContent();
-		String query = ((OMSTR)arguments.get(1)).getContent();
+		// getStringSyntax throws automatically the FunctionInvalidArgumentTypeException
+		// if String is not representable in String
+		String endpoint = getStringSyntax(arguments.get(0));
+		String query = getStringSyntax(arguments.get(1));
 		
 		if (endpoint.isEmpty() || query.isEmpty())
-			throw new CasEvaluationException("Invalid argument inputs for querySparql(). Malformed argument. Both endpoint and query must not be empty strings.");
+			throw new FunctionInvalidArgumentException(this, "Invalid argument inputs for querySparql(). Malformed argument. Both endpoint and query must not be empty strings.");
 		
 		if (!(endpoint.startsWith("http://") || endpoint.startsWith("https://")))
-			throw new CasEvaluationException("Invalid argument inputs for querySparql(). Sparql service endpoint input requires http(s):// as prefix.");
+			throw new FunctionInvalidArgumentException(this, "Invalid argument inputs for querySparql(). Sparql service endpoint input requires http(s):// as prefix.");
 
 		if (!(query.matches(".*\\bSELECT\\b.*") && query.matches(".*\\bWHERE\\b.*")))
-			throw new CasEvaluationException("Invalid argument inputs for querySparql(). Missing SELECT or WHERE statement.");
+			throw new FunctionInvalidArgumentException(this, "Invalid argument inputs for querySparql(). Missing SELECT or WHERE statement.");
 		
 		if (query.contains("*"))
-			throw new CasEvaluationException("Invalid argument inputs for querySparql(). Invalid SELECT statement. *-Operator is not permitted.");
+			throw new FunctionInvalidArgumentException(this, "Invalid argument inputs for querySparql(). Invalid SELECT statement. *-Operator is not permitted.");
 			
 		return Sparql.evaluate(query + " #ManualQuery: Service:" + endpoint);
 	}
