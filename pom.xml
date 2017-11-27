@@ -37,7 +37,6 @@
 			<artifactId>JAXBOpenMath</artifactId>
 			<version>2.0</version>
 		</dependency>
-
 		<dependency>
     		<groupId>org.apache.jena</groupId>
     		<artifactId>apache-jena-libs</artifactId>
