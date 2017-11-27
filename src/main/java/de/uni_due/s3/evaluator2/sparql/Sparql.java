@@ -23,7 +23,7 @@ import de.uni_due.s3.openmath.omutils.OMCreator;
  * Evaluates a Query to the specified Server.
  * 
  * 
- * @author ?
+ * @author Michael Striewe
  *
  */
 public class Sparql {
