@@ -172,6 +172,13 @@ public class TestGetFromList extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidArgumentException.class)
+	public void testGetFromListIntegration6() throws OpenMathException, EvaluatorException {
+		OMOBJ omobj = ExpressionParser.parse("getFromList(-1, {1})", null, null);
+		OMToResultVisitor.getInstance().visit(omobj);
+		fail();
+	}
+
+	@Test(expected = FunctionInvalidArgumentException.class)
 	public void testGetFromListWithZeroArgs() throws OpenMathException, EvaluatorException {
 		OMOBJ omobj = ExpressionParser.parse("getFromList(0, {})", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
