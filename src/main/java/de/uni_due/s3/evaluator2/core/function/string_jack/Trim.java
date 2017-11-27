@@ -5,6 +5,7 @@ import java.util.List;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * Returns a string whose value is this string, with any leading and trailing
@@ -34,7 +35,7 @@ import de.uni_due.s3.openmath.omutils.OMCreator;
 public class Trim extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 			String string = getStringSyntax(arguments.get(0));
 			return OMCreator.createOMSTR(string.trim());
 	}

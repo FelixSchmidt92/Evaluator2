@@ -46,7 +46,7 @@ public class Cos extends Function {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return "cos(" + getSageSyntax(arguments.get(0)) + ")";
 	}
 

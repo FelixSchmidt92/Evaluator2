@@ -25,7 +25,7 @@ public class TestMin extends TestFunctionAbstract {
 	private Function func = new Min();
 
 	@Test
-	public void testMinInteger() throws OpenMathException, EvaluatorException {
+	public void testMinInteger() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(1));
 		args.add(OMCreator.createOMI(2));
@@ -34,7 +34,7 @@ public class TestMin extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testMinFloat() throws OpenMathException, EvaluatorException {
+	public void testMinFloat() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(2.5));
 		args.add(OMCreator.createOMF(5.8));
@@ -43,7 +43,7 @@ public class TestMin extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testMinMixed() throws OpenMathException, EvaluatorException {
+	public void testMinMixed() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(1));
 		args.add(OMCreator.createOMF(2.5));
@@ -52,14 +52,14 @@ public class TestMin extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testMinIntegration1() throws OpenMathException, EvaluatorException {
+	public void testMinIntegration1() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("min(5,10)", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
 		assertEquals(OMCreator.createOMI(5), result);
 	}
 
 	@Test
-	public void testMinIntegration2() throws OpenMathException, EvaluatorException {
+	public void testMinIntegration2() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("min(10.1,17)", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
 		assertEquals(OMCreator.createOMF(10.1), result);
@@ -73,28 +73,28 @@ public class TestMin extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testMinWithWrongArguments1() throws OpenMathException, EvaluatorException {
+	public void testMinWithWrongArguments1() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("min(10,'test')", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testMinWithWrongArguments2() throws OpenMathException, EvaluatorException {
+	public void testMinWithWrongArguments2() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("min('test',17)", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testMinWithWrongNumberOfArgs1() throws OpenMathException, EvaluatorException {
+	public void testMinWithWrongNumberOfArgs1() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("min('test',17, 3)", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testMinWithWrongNumberOfArgs2() throws OpenMathException, EvaluatorException {
+	public void testMinWithWrongNumberOfArgs2() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("min('test')", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();

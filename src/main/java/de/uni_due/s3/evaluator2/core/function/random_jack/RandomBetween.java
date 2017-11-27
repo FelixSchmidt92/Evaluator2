@@ -23,7 +23,7 @@ public class RandomBetween extends Function {
 	 * @throws EvaluatorException 
 	 */
 	@Override
-	protected Object execute(List<Object> arguments) throws OpenMathException, EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 			double min = getDoubleSyntax(arguments.get(0));
 			double max = getDoubleSyntax(arguments.get(1));
 

@@ -19,7 +19,7 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 public class TestOMToDoubleVisitor {
 
 	@Test
-	public void TestOMDoubleVisitor1() throws OpenMathException, EvaluatorException {
+	public void TestOMDoubleVisitor1() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("1==1", new HashMap<>(), new HashMap<>());
 		Double result = OMToDoubleVisitor.getInstance().visit(obj);
 		Double expected = 1.0;
@@ -27,7 +27,7 @@ public class TestOMToDoubleVisitor {
 	}
 
 	@Test
-	public void TestOMDoubleVisitor2() throws OpenMathException, EvaluatorException {
+	public void TestOMDoubleVisitor2() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("1!=1", new HashMap<>(), new HashMap<>());
 		Double result = OMToDoubleVisitor.getInstance().visit(obj);
 		Double expected = 0.0;
@@ -35,7 +35,7 @@ public class TestOMToDoubleVisitor {
 	}
 
 	@Test
-	public void TestOMDoubleVisitor3() throws OpenMathException, EvaluatorException {
+	public void TestOMDoubleVisitor3() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("1.3", new HashMap<>(), new HashMap<>());
 		Double result = OMToDoubleVisitor.getInstance().visit(obj);
 		Double expected = 1.3;
@@ -43,7 +43,7 @@ public class TestOMToDoubleVisitor {
 	}
 
 	@Test
-	public void TestOMDoubleVisitor4() throws OpenMathException, EvaluatorException {
+	public void TestOMDoubleVisitor4() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("0.123", new HashMap<>(), new HashMap<>());
 		Double result = OMToDoubleVisitor.getInstance().visit(obj);
 		Double expected = 0.123;
@@ -51,7 +51,7 @@ public class TestOMToDoubleVisitor {
 	}
 
 	@Test
-	public void TestOMDoubleVisitor5() throws OpenMathException, EvaluatorException {
+	public void TestOMDoubleVisitor5() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("1", new HashMap<>(), new HashMap<>());
 		Double result = OMToDoubleVisitor.getInstance().visit(obj);
 		Double expected = 1.0;
@@ -59,7 +59,7 @@ public class TestOMToDoubleVisitor {
 	}
 
 	@Test
-	public void TestOMDoubleVisitor6() throws OpenMathException, EvaluatorException {
+	public void TestOMDoubleVisitor6() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("0", new HashMap<>(), new HashMap<>());
 		Double result = OMToDoubleVisitor.getInstance().visit(obj);
 		Double expected = 0.0;
@@ -67,7 +67,7 @@ public class TestOMToDoubleVisitor {
 	}
 	
 	@Test
-	public void TestOMDoubleVisitor7() throws OpenMathException, EvaluatorException {
+	public void TestOMDoubleVisitor7() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("constpi()", new HashMap<>(), new HashMap<>());
 		Double result = OMToDoubleVisitor.getInstance().visit(obj);
 		Double expected = Math.PI;
@@ -87,7 +87,7 @@ public class TestOMToDoubleVisitor {
 	}
 	
 	@Test
-	public void isSingletonPattern() throws EvaluatorException {
+	public void isSingletonPattern() throws EvaluatorException, OpenMathException {
 		OMToSyntaxVisitor<?> obj1 = OMToDoubleVisitor.getInstance();
 		OMToSyntaxVisitor<?> obj2 = OMToDoubleVisitor.getInstance();
 		

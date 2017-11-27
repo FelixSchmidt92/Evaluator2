@@ -2,6 +2,7 @@ package de.uni_due.s3.evaluator2.core.dictionaries;
 
 import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.omutils.OMCreator;
+import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 
 /**
  * This Class is a Dataholder for all the OMSymbols in this Evaluator.
@@ -47,7 +48,7 @@ public class OMSymbol {
 	public static final OMS EVALJACK_EVALPOLYNOMIAL = OMCreator.createOMS("evalJACK", "evalpolynomial");
 	public static final OMS EVALJACK_EVALPOLYNOMIALCPLX = OMCreator.createOMS("evalJACK", "evalPolynomialCplx");
 	public static final OMS EVALJACK_EVALTERM2 = OMCreator.createOMS("evalJACK", "evalterm2");
-	
+
 	public static final OMS ECC_TUPLE = OMCreator.createOMS("ecc", "tuple");
 
 	public static final OMS FNS1_LAMBDA = OMCreator.createOMS("fns1", "lambda");
@@ -178,10 +179,8 @@ public class OMSymbol {
 	public static final OMS TESTTERMINALJACK_ISFRACTION = OMCreator.createOMS("testterminalJACK", "isFraction");
 	public static final OMS TESTTERMINALJACK_ISINTEGERNUMBER = OMCreator.createOMS("testterminalJACK",
 			"isIntegerNumber");
-	public static final OMS TESTTERMINALJACK_ISMATRIX = OMCreator.createOMS("testterminalJACK",
-			"isMatrix");
-	public static final OMS TESTTERMINALJACK_ISMNMATRIX = OMCreator.createOMS("testterminalJACK",
-			"isMNMatrix");
+	public static final OMS TESTTERMINALJACK_ISMATRIX = OMCreator.createOMS("testterminalJACK", "isMatrix");
+	public static final OMS TESTTERMINALJACK_ISMNMATRIX = OMCreator.createOMS("testterminalJACK", "isMNMatrix");
 	public static final OMS TESTTERMINALJACK_ISNATURALNUMBER = OMCreator.createOMS("testterminalJACK",
 			"isNaturalNumber");
 	public static final OMS TESTTERMINALJACK_ISNPOLYNOMIAL = OMCreator.createOMS("testterminalJACK", "isNPolynomial");
@@ -208,5 +207,22 @@ public class OMSymbol {
 
 	public static final OMS[] SYMBOLIC_EXPRESSION = { ARITH1_ABS, ARITH1_DIVIDE, ARITH1_MINUS, ARITH1_PLUS,
 			ARITH1_POWER, ARITH1_ROOT, ARITH1_TIMES, ARITH1_UNARY_MINUS, TRANSC1_ARCCOS, TRANSC1_ARCSIN, TRANSC1_ARCTAN,
-			TRANSC1_COS, TRANSC1_EXP, TRANSC1_LOG, TRANSC1_SIN, TRANSC1_TAN, LINALG2_VECTOR, LINALG2_MATRIX };
+			TRANSC1_COS, TRANSC1_EXP, TRANSC1_LOG, TRANSC1_SIN, TRANSC1_TAN };
+
+	public static final OMS[] TERMINALS = { ECC_TUPLE, INTERVAL1_INTERVALCC, INTERVAL1_INTERVALCO, INTERVAL1_INTERVALOC,
+			INTERVAL1_INTERVALOO, LINALG2_MATRIX, LINALG2_MATRIXROW, LINALG2_VECTOR, LIST1_LIST, MCJACK_MCINDEX,
+			NUMS1_RATIONAL, SET1_SET, STRINGJACK_TEXTWITHVARIABLES };
+
+	public static boolean isSymbolicExpression(Object obj) {
+		return (OMTypeChecker.isOMI(obj) || OMTypeChecker.isOMF(obj) || OMTypeChecker.isOMV(obj)
+				|| OMTypeChecker.isOMS(obj) || OMTypeChecker.isOMAWithSymbol(obj, TERMINALS)
+				|| OMTypeChecker.isOMAWithSymbol(obj, SYMBOLIC_EXPRESSION));
+	}
+
+	public static boolean isTerminal(Object obj) {
+		return (OMTypeChecker.isOMI(obj) || OMTypeChecker.isOMF(obj) || OMTypeChecker.isOMV(obj)
+				|| OMTypeChecker.isOMS(obj) || OMTypeChecker.isOMSTR(obj)
+				|| OMTypeChecker.isOMAWithSymbol(obj, TERMINALS)
+				|| OMTypeChecker.isOMAWithSymbol(obj, SYMBOLIC_EXPRESSION));
+	}
 }

@@ -47,7 +47,7 @@ public class Exp extends Function {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return "exp(" + getSageSyntax(arguments.get(0)) + ")";
 	}
 

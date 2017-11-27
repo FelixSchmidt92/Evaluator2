@@ -75,14 +75,14 @@ public class TestEvalTerm2 extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testEvalTerm2WithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testEvalTerm2WithLessThanMinParam() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<Object>();
 		func.evaluate(args);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testEvalTerm2WithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
+	public void testEvalTerm2WithMoreThanMaxParam() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("test"));
 		args.add(OMCreator.createOMSTR("test"));
@@ -93,21 +93,21 @@ public class TestEvalTerm2 extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testEvalTerm2Integration1() throws OpenMathException, EvaluatorException {
+	public void testEvalTerm2Integration1() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("evalterm2('x+y','1','2')", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
 		assertEquals(OMCreator.createOMI(3), result);
 	}
 
 	@Test
-	public void testEvalTerm2Integration2() throws OpenMathException, EvaluatorException {
+	public void testEvalTerm2Integration2() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("evalterm2('x+y','1', -3)", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
 		assertEquals(OMCreator.createOMI(-2), result);
 	}
 
 	@Test
-	public void testEvalTermSageSyntax() throws JAXBException, EvaluatorException {
+	public void testEvalTermSageSyntax() throws EvaluatorException, OpenMathException, JAXBException {
 		ArrayList<Object> args = new ArrayList<Object>();
 		OMOBJ arg1 = OMConverter
 				.toObject("<OMOBJ><OMA><OMS cd=\"arith1\" name=\"plus\"/>" + "<OMA><OMS cd =\"arith1\" name=\"minus\"/>"

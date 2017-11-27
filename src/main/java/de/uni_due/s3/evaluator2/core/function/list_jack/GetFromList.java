@@ -5,6 +5,7 @@ import java.util.List;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * Implements a get Function for List.
@@ -18,7 +19,7 @@ public class GetFromList extends Function {
 	
 
 	@Override
-	protected Object execute(List<Object> arguments) throws EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		int pos = getIntegerSyntax(arguments.get(0));
 		List<Object> list1 = getListSyntax(arguments.get(1));
 

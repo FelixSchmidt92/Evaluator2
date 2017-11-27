@@ -11,6 +11,7 @@ import de.uni_due.s3.openmath.jaxb.OMI;
 import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.jaxb.OMSTR;
 import de.uni_due.s3.openmath.jaxb.OMV;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class OMCountVisitor extends OMToSyntaxVisitor<Integer> {
 
@@ -47,7 +48,7 @@ public class OMCountVisitor extends OMToSyntaxVisitor<Integer> {
 	}
 
 	@Override
-	protected Integer getSyntaxRepresentationForFunction(Function function, OMS oms, List<Object> omel) {
+	protected Integer getSyntaxRepresentationForFunction(Function function, OMS oms, List<Object> omel) throws OpenMathException {
 		Integer result = 0;
 		result++; //OMA
 		result++; //OMS (this)

@@ -23,7 +23,7 @@ public class TestIsFraction extends TestFunctionAbstract {
 	Function func = new IsFraction();
 
 	@Test
-	public void testIsFractionWithRational() throws OpenMathException, EvaluatorException {
+	public void testIsFractionWithRational() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> omel = new ArrayList<>();
 		omel.add(OMCreator.createOMI(2));
 		omel.add(OMCreator.createOMF(1.1));
@@ -37,7 +37,7 @@ public class TestIsFraction extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testIsFractionWithDivide() throws OpenMathException, EvaluatorException {
+	public void testIsFractionWithDivide() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> omel = new ArrayList<>();
 		omel.add(OMCreator.createOMI(2));
 		omel.add(OMCreator.createOMF(1.1));
@@ -51,7 +51,7 @@ public class TestIsFraction extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testIsFractionWithOMI() throws OpenMathException, EvaluatorException {
+	public void testIsFractionWithOMI() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMI(2));
 
@@ -59,7 +59,7 @@ public class TestIsFraction extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testIsFractionWithOMF() throws OpenMathException, EvaluatorException {
+	public void testIsFractionWithOMF() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMF(2.1));
 
@@ -67,7 +67,7 @@ public class TestIsFraction extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testIsFractionWithOMV() throws OpenMathException, EvaluatorException {
+	public void testIsFractionWithOMV() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMV("x"));
 
@@ -75,7 +75,7 @@ public class TestIsFraction extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testIsFractionWithOMSTR() throws OpenMathException, EvaluatorException {
+	public void testIsFractionWithOMSTR() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMSTR("string"));
 
@@ -83,7 +83,7 @@ public class TestIsFraction extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testIsFractionCaseIntegration() throws OpenMathException, EvaluatorException {
+	public void testIsFractionCaseIntegration() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("isFraction(3/4)", null, null);
 		assertEquals(OMSymbol.LOGIC1_TRUE, OMToResultVisitor.getInstance().visit(omobj));
 	}

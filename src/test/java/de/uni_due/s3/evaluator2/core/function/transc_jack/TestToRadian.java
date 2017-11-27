@@ -25,7 +25,7 @@ public class TestToRadian extends TestFunctionAbstract {
 	private static Function func = new ToRadian();
 
 	@Test
-	public void testToRadianPI() throws OpenMathException, EvaluatorException {
+	public void testToRadianPI() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(180));
 		Object result = func.evaluate(args);
@@ -33,7 +33,7 @@ public class TestToRadian extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testToRadianMinusPI() throws OpenMathException, EvaluatorException {
+	public void testToRadianMinusPI() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(-180));
 		Object result = func.evaluate(args);
@@ -41,7 +41,7 @@ public class TestToRadian extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testToRadianFloat() throws OpenMathException, EvaluatorException {
+	public void testToRadianFloat() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(0.0));
 		Object result = func.evaluate(args);
@@ -49,14 +49,14 @@ public class TestToRadian extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testToRadianIntegration1() throws OpenMathException, EvaluatorException {
+	public void testToRadianIntegration1() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("toRadian(180)", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMF(Math.PI), result.getOMF());
 	}
 
 	@Test
-	public void testToRadianIntegration2() throws OpenMathException, EvaluatorException {
+	public void testToRadianIntegration2() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("toRadian(720)", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMF(Math.PI * 4), result.getOMF());
@@ -70,21 +70,21 @@ public class TestToRadian extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testToRadianWithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testToRadianWithLessThanMinParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("toRadian()", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testToRadianWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
+	public void testToRadianWithMoreThanMaxParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("toRadian(1,3)", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testToRadianWithWrongArguments() throws OpenMathException, EvaluatorException {
+	public void testToRadianWithWrongArguments() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("toRadian('Test')", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();

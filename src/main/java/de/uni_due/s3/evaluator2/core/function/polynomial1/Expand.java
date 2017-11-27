@@ -33,7 +33,7 @@ public class Expand extends Function {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		String term = getSageSyntax(arguments.get(0));
 		if (term.equals("''"))
 			throw new FunctionInvalidArgumentException(this, "(0) String(not empty)");

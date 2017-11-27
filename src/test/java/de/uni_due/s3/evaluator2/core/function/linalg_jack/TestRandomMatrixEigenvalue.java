@@ -24,14 +24,14 @@ public class TestRandomMatrixEigenvalue extends TestFunctionAbstract {
 	static OMOBJ omobj3 = null;
 
 	@BeforeClass
-	public static void init() throws OpenMathException, EvaluatorException {
+	public static void init() throws EvaluatorException, OpenMathException {
 		omobj3 = ExpressionParser.parse("matrix(matrixrow(1,0,0), matrixrow(0,1,0), matrixrow(0,0,1))", null, null);
 		omobj2 = ExpressionParser.parse("matrix(matrixrow(1,0), matrixrow(0,1))", null, null);
 		omobj1 = ExpressionParser.parse("matrix(matrixrow(1))", null, null);
 	}
 
 	@Test
-	public void testRandomMatrixEigenValueWithIntegration1() throws OpenMathException, EvaluatorException {
+	public void testRandomMatrixEigenValueWithIntegration1() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = ExpressionParser.parse("randomMatrixEigenvalue('QQ', 1, '[1]', '[1]')", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(obj);
 
@@ -39,7 +39,7 @@ public class TestRandomMatrixEigenvalue extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testRandomMatrixEigenValueCaseIntegration2() throws OpenMathException, EvaluatorException {
+	public void testRandomMatrixEigenValueCaseIntegration2() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = ExpressionParser.parse("randomMatrixEigenvalue('QQ', 2, '[1,1]', '[1,1]')", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(obj);
 
@@ -47,7 +47,7 @@ public class TestRandomMatrixEigenvalue extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testRandomMatrixEigenValueCaseIntegration3() throws OpenMathException, EvaluatorException {
+	public void testRandomMatrixEigenValueCaseIntegration3() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = ExpressionParser.parse("randomMatrixEigenvalue('QQ', 3, '[1,1,1]', '[1,1,1]')", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(obj);
 
@@ -55,7 +55,7 @@ public class TestRandomMatrixEigenvalue extends TestFunctionAbstract {
 	}
 
 	@Test(expected = CasEvaluationException.class)
-	public void testRandomMatrixEigenValueCaseIntegration4() throws OpenMathException, EvaluatorException {
+	public void testRandomMatrixEigenValueCaseIntegration4() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = ExpressionParser.parse("randomMatrixEigenvalue('QQ', 3, '[1,1,1]', 12)", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(obj);
 
@@ -63,7 +63,7 @@ public class TestRandomMatrixEigenvalue extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testRandomMatrixEigenValueCaseIntegration5() throws OpenMathException, EvaluatorException {
+	public void testRandomMatrixEigenValueCaseIntegration5() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = ExpressionParser.parse("randomMatrixEigenvalue(qq(), 3, list(1,1,1), list(1,1,1))", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(obj);
 

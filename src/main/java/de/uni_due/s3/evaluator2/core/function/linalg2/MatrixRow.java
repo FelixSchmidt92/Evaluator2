@@ -39,7 +39,7 @@ public class MatrixRow extends ConstructorFunction {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		String sageExpression = "[";
 
 		for (int i = 0; i < arguments.size(); i++) {
@@ -54,7 +54,7 @@ public class MatrixRow extends ConstructorFunction {
 	}
 
 	@Override
-	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		String args = "";
 
 		for (int i = 0; i < arguments.size(); i++) {
@@ -66,7 +66,7 @@ public class MatrixRow extends ConstructorFunction {
 	}
 	
 	@Override
-	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		throw new NoRepresentationAvailableException(
 				"There is no R-representation for function " + this.getClass().getSimpleName());		
 	}

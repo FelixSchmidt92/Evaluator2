@@ -21,7 +21,7 @@ public class TestRint extends TestFunctionAbstract {
 	Function func = new Rint();
 
 	@Test
-	public void testRintInfintiy() throws OpenMathException, EvaluatorException {
+	public void testRintInfintiy() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMF(Double.POSITIVE_INFINITY));
 
@@ -29,7 +29,7 @@ public class TestRint extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testRintNaN() throws OpenMathException, EvaluatorException {
+	public void testRintNaN() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMF(Double.NaN));
 
@@ -37,7 +37,7 @@ public class TestRint extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testRintZero() throws OpenMathException, EvaluatorException {
+	public void testRintZero() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMF(0));
 
@@ -45,7 +45,7 @@ public class TestRint extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testRintRandomDoubles() throws OpenMathException, EvaluatorException {
+	public void testRintRandomDoubles() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args;
 		for (int i = 0; i < 1000; i++) {
 			double t = new Random().nextDouble() * new Random().nextInt(100); // generate a double between 0 and 100
@@ -57,7 +57,7 @@ public class TestRint extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testRintCaseIntegrationNumber() throws OpenMathException, EvaluatorException {
+	public void testRintCaseIntegrationNumber() throws EvaluatorException, OpenMathException {
 		OMOBJ tree = ExpressionParser.parse("rint(22.2)", null, null);
 		OMOBJ expected = new OMOBJ();
 		expected.setOMI(OMCreator.createOMI(22));
@@ -67,7 +67,7 @@ public class TestRint extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testRintCaseIntegrationText() throws OpenMathException, EvaluatorException {
+	public void testRintCaseIntegrationText() throws EvaluatorException, OpenMathException {
 		OMOBJ tree = ExpressionParser.parse("rint('22.2')", null, null);
 		OMOBJ expected = new OMOBJ();
 		expected.setOMI(OMCreator.createOMI(22));

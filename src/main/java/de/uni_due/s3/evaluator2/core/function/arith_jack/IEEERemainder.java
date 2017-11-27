@@ -4,9 +4,7 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.function.BinaryFunction;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
@@ -31,7 +29,7 @@ public class IEEERemainder extends BinaryFunction {
 	 * @throws EvaluatorException
 	 */
 	@Override
-	protected Object execute(List<Object> arguments) throws OpenMathException, EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 
 		Double leftValue = getDoubleSyntax(arguments.get(0));
 		Double rightValue = getDoubleSyntax(arguments.get(1));
@@ -55,7 +53,7 @@ public class IEEERemainder extends BinaryFunction {
 
 	@Override
 	public String getPartialLatexSyntax(List<Object> arguments)
-			throws EvaluatorException, FunctionException, NoRepresentationAvailableException {
+			throws EvaluatorException, OpenMathException {
 
 		return getLatexSyntax(arguments.get(0)) + "\\mathbin{\\%}" + getLatexSyntax(arguments.get(1));
 	}

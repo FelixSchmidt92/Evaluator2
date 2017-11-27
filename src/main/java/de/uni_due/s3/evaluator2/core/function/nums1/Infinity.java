@@ -22,7 +22,7 @@ public class Infinity extends ConstructorFunction {
 	}
 	
 	@Override
-	public Double getPartialDoubleSyntax(List<Object> arguments) throws EvaluatorException {
+	public Double getPartialDoubleSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return Double.POSITIVE_INFINITY;
 	}
 	
@@ -32,12 +32,12 @@ public class Infinity extends ConstructorFunction {
 	}
 	
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return "Infinity";
 	}
 
 	@Override
-	public String getPartialStringSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialStringSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return "Infinity";
 	}
 	
@@ -59,7 +59,7 @@ public class Infinity extends ConstructorFunction {
 	}
 
 	@Override
-	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return "Inf";
 	}
 

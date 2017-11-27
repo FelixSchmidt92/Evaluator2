@@ -46,7 +46,7 @@ public class ArcTan extends Function {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return "arctan(" + getSageSyntax(arguments.get(0)) + ")";
 	}
 

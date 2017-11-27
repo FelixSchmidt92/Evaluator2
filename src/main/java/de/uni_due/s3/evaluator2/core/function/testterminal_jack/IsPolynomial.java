@@ -20,7 +20,7 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 public class IsPolynomial extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws OpenMathException, EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		String term = getSageSyntax(arguments.get(0));
 		String var = getSageSyntax(arguments.get(1));
 

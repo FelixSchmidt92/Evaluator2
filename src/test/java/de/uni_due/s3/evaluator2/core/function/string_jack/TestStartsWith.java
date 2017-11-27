@@ -24,7 +24,7 @@ public class TestStartsWith extends TestFunctionAbstract {
 	private static Function func = new StartsWith();
 
 	@Test
-	public void testStartsWithEqualStrings1() throws OpenMathException, EvaluatorException {
+	public void testStartsWithEqualStrings1() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("Test"));
 		args.add(OMCreator.createOMSTR("Te"));
@@ -33,7 +33,7 @@ public class TestStartsWith extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testStartsWithEqualStrings2() throws OpenMathException, EvaluatorException {
+	public void testStartsWithEqualStrings2() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("Test"));
 		args.add(OMCreator.createOMSTR("es"));
@@ -43,7 +43,7 @@ public class TestStartsWith extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testStartsWithNotEqualStrings1() throws OpenMathException, EvaluatorException {
+	public void testStartsWithNotEqualStrings1() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("Test"));
 		args.add(OMCreator.createOMSTR("e"));
@@ -52,7 +52,7 @@ public class TestStartsWith extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testStartsWithNotEqualStrings2() throws OpenMathException, EvaluatorException {
+	public void testStartsWithNotEqualStrings2() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("Test"));
 		args.add(OMCreator.createOMSTR("H"));
@@ -62,42 +62,42 @@ public class TestStartsWith extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testStartsWithIntegration1() throws OpenMathException, EvaluatorException {
+	public void testStartsWithIntegration1() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("startsWith('Hallo', 'Ha')", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMSymbol.LOGIC1_TRUE, result.getOMS());
 	}
 
 	@Test
-	public void testStartsWithIntegration2() throws OpenMathException, EvaluatorException {
+	public void testStartsWithIntegration2() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("startsWith('Hallo', 'al', 1)", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMSymbol.LOGIC1_TRUE, result.getOMS());
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testStartsWithWithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testStartsWithWithLessThanMinParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("startsWith('Test')", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testStartsWithWithMoreThanMaxParam1() throws OpenMathException, EvaluatorException {
+	public void testStartsWithWithMoreThanMaxParam1() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("startsWith('Test', 1, 'Test')", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testStartsWithWithMoreThanMaxParam2() throws OpenMathException, EvaluatorException {
+	public void testStartsWithWithMoreThanMaxParam2() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("startsWith('Test', 'Test', 'Test')", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testStartsWithWithWrongArguments() throws OpenMathException, EvaluatorException {
+	public void testStartsWithWithWrongArguments() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("startsWith('Test', vector(2))", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();

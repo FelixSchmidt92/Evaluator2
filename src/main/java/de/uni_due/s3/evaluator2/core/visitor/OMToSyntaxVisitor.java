@@ -25,6 +25,7 @@ import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.jaxb.OMSTR;
 import de.uni_due.s3.openmath.jaxb.OMV;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * This is a Template! For implementing an OMOBJ to Something inherit this
@@ -86,13 +87,14 @@ public abstract class OMToSyntaxVisitor<T> {
 	 *            the Element to visit
 	 * @return
 	 * @return the String Representation of this omElement (including its children!)
+	 * @throws OpenMathException 
 	 * @throws NoRepresentationAvailableException
 	 * @throws FunctionInvalidNumberOfArgumentsException
 	 * @throws FunctionInvalidArgumentTypeException
 	 * @throws FunctionInvalidArgumentException
 	 * @throws CasException
 	 */
-	public T visit(Object omElement) throws EvaluatorException {
+	public T visit(Object omElement) throws EvaluatorException, OpenMathException {
 		if (omElement == null)
 			throw new NoRepresentationAvailableException(
 					"No Representation available for a Null-Object. Function got null instead of a parameter.");
@@ -126,13 +128,14 @@ public abstract class OMToSyntaxVisitor<T> {
 	 * @param omobj
 	 *            the OMOBJ-"Container"
 	 * @return the String representation of this OMOBJ excluding OMOBJ!!
+	 * @throws OpenMathException 
 	 * @throws NoRepresentationAvailableException
 	 * @throws FunctionInvalidNumberOfArgumentsException
 	 * @throws FunctionInvalidArgumentTypeException
 	 * @throws FunctionInvalidArgumentException
 	 * @throws CasException
 	 */
-	private T visit(OMOBJ omobj) throws EvaluatorException {
+	private T visit(OMOBJ omobj) throws EvaluatorException, OpenMathException {
 		if (omobj != null) {
 			if (omobj.getOMF() != null) {
 				return visit(omobj.getOMF());
@@ -186,9 +189,10 @@ public abstract class OMToSyntaxVisitor<T> {
 	 * @param oms
 	 *            the element which is visited now
 	 * @return the String-Representation
+	 * @throws OpenMathException 
 	 * @throws NoRepresentationAvailableException
 	 */
-	private T visit(OMS oms) throws EvaluatorException {
+	private T visit(OMS oms) throws EvaluatorException, OpenMathException {
 		Function function = null;
 		try {
 			function = OMSFunctionDictionary.getInstance().getFunction(oms);
@@ -224,9 +228,10 @@ public abstract class OMToSyntaxVisitor<T> {
 	 * @param ome
 	 *            the element which is visited now
 	 * @return the String-Representation
+	 * @throws OpenMathException 
 	 * @throws EvaluatorException
 	 */
-	protected T visit(OME ome) throws NoRepresentationAvailableException {
+	protected T visit(OME ome) throws NoRepresentationAvailableException, OpenMathException {
 		throw new NoRepresentationAvailableException("processing of OME not supported");
 	}
 
@@ -238,13 +243,14 @@ public abstract class OMToSyntaxVisitor<T> {
 	 * @param oma
 	 *            the visited oma
 	 * @return the String Representation of this oma and its childs
+	 * @throws OpenMathException 
 	 * @throws FunctionInvalidNumberOfArgumentsException
 	 * @throws NoRepresentationAvailableException
 	 * @throws FunctionInvalidArgumentTypeException
 	 * @throws FunctionInvalidArgumentException
 	 * @throws CasException
 	 */
-	private T visit(OMA oma) throws EvaluatorException {
+	private T visit(OMA oma) throws EvaluatorException, OpenMathException {
 
 		if (OMTypeChecker.isOMA(oma.getOmel().get(0))) {
 			// Change Structure, so that always an OMS is the first argument in an OMA
@@ -298,9 +304,10 @@ public abstract class OMToSyntaxVisitor<T> {
 	 *            returns false
 	 * @return a String which is in CAS-Syntax
 	 * @throws EvaluatorException
+	 * @throws OpenMathException 
 	 * 
 	 */
 	protected abstract T getSyntaxRepresentationForFunction(Function function, OMS oms, List<Object> omel)
-			throws EvaluatorException;
+			throws EvaluatorException, OpenMathException;
 
 }

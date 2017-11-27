@@ -45,7 +45,7 @@ public class Tan extends Function {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return "tan(" + getSageSyntax(arguments.get(0)) + ")";
 	}
 }

@@ -24,7 +24,7 @@ public class TestIsSet extends TestFunctionAbstract {
 	Function func = new IsSet();
 
 	@Test
-	public void testIsSetWithOtherTerminals() throws OpenMathException, EvaluatorException {
+	public void testIsSetWithOtherTerminals() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 
 		OMI omi = OMCreator.createOMI(2);
@@ -53,7 +53,7 @@ public class TestIsSet extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testIsSetWithFullSet() throws OpenMathException, EvaluatorException {
+	public void testIsSetWithFullSet() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> omel = new ArrayList<>();
 
 		OMI omi = OMCreator.createOMI(2);
@@ -69,7 +69,7 @@ public class TestIsSet extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testIsSetWithEmptySet() throws OpenMathException, EvaluatorException {
+	public void testIsSetWithEmptySet() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 
 		OMA oma = OMCreator.createOMA(OMSymbol.SET1_SET, new ArrayList<>());
@@ -80,7 +80,7 @@ public class TestIsSet extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testIsSetWithOMA() throws OpenMathException, EvaluatorException {
+	public void testIsSetWithOMA() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 
 		OMA oma = OMCreator.createOMA(OMSymbol.LINALG2_MATRIXROW, new ArrayList<>());

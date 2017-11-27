@@ -21,56 +21,56 @@ public class TestCountNodes extends TestFunctionAbstract {
 	private final Function func = new CountNodes();
 
 	@Test
-	public void testCountNodesWithOMI() throws OpenMathException, EvaluatorException {
+	public void testCountNodesWithOMI() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> omel = new ArrayList<>();
 		omel.add(OMCreator.createOMI(1));
 		assertEquals(OMCreator.createOMI(1), func.evaluate(omel));
 	}
 
 	@Test
-	public void testCountNodesWithOMF() throws OpenMathException, EvaluatorException {
+	public void testCountNodesWithOMF() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> omel = new ArrayList<>();
 		omel.add(OMCreator.createOMF(2.3));
 		assertEquals(OMCreator.createOMI(1), func.evaluate(omel));
 	}
 
 	@Test
-	public void testCountNodesWithOMSTR() throws OpenMathException, EvaluatorException {
+	public void testCountNodesWithOMSTR() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> omel = new ArrayList<>();
 		omel.add(OMCreator.createOMSTR("String"));
 		assertEquals(OMCreator.createOMI(1), func.evaluate(omel));
 	}
 
 	@Test
-	public void testCountNodesIntegration1() throws OpenMathException, EvaluatorException {
+	public void testCountNodesIntegration1() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("countNodes(1+2)", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMI(4), result.getOMI());
 	}
 
 	@Test
-	public void testCountNodesIntegration2() throws OpenMathException, EvaluatorException {
+	public void testCountNodesIntegration2() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("countNodes(1+2/3)", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMI(7), result.getOMI());
 	}
 
 	@Test
-	public void testCountNodesWithOMS() throws OpenMathException, EvaluatorException {
+	public void testCountNodesWithOMS() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> omel = new ArrayList<>();
 		omel.add(OMCreator.createOMS("someCD", "someName"));
 		assertEquals(OMCreator.createOMI(1), func.evaluate(omel));
 	}
 
 	@Test
-	public void testCountNodesWithOMV() throws OpenMathException, EvaluatorException {
+	public void testCountNodesWithOMV() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> omel = new ArrayList<>();
 		omel.add(OMCreator.createOMV("someX"));
 		assertEquals(OMCreator.createOMI(1), func.evaluate(omel));
 	}
 
 	@Test
-	public void testCountNodesWithOMAWith3() throws OpenMathException, EvaluatorException {
+	public void testCountNodesWithOMAWith3() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 		ArrayList<Object> omel = new ArrayList<>();
 		omel.add(OMCreator.createOMF(45.1));
@@ -83,7 +83,7 @@ public class TestCountNodes extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testCountNodesWithOMAWith4in3Recursively() throws OpenMathException, EvaluatorException {
+	public void testCountNodesWithOMAWith4in3Recursively() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 		ArrayList<Object> omel = new ArrayList<>();
 		ArrayList<Object> omel2 = new ArrayList<>();
@@ -104,7 +104,7 @@ public class TestCountNodes extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testCountNodesWithOMAWith4in4in2Recursively() throws OpenMathException, EvaluatorException {
+	public void testCountNodesWithOMAWith4in4in2Recursively() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 		ArrayList<Object> omel = new ArrayList<>();
 		ArrayList<Object> omel2 = new ArrayList<>();

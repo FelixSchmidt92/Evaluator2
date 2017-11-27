@@ -66,17 +66,17 @@ public class TestTuple extends TestFunctionAbstract{
 	}
 
 	@Test(expected = NoRepresentationAvailableException.class)
-	public void testTupleDouble() throws EvaluatorException {
+	public void testTupleDouble() throws EvaluatorException, OpenMathException {
 		assertEquals(new Double(Math.E), func.getPartialDoubleSyntax(new ArrayList<>()), 0);
 	}
 
 	@Test(expected = NoRepresentationAvailableException.class)
-	public void testTupleInteger() throws EvaluatorException {
+	public void testTupleInteger() throws EvaluatorException, OpenMathException {
 		func.getPartialIntegerSyntax(new ArrayList<>());
 	}
 
 	@Test
-	public void testTupleLatex() throws EvaluatorException {
+	public void testTupleLatex() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> omel = new ArrayList<>();
 		omel.add(OMCreator.createOMI(1));
 		omel.add(OMCreator.createOMI(2));
@@ -85,7 +85,7 @@ public class TestTuple extends TestFunctionAbstract{
 	}
 
 	@Test
-	public void testTupleSage() throws EvaluatorException {
+	public void testTupleSage() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> omel = new ArrayList<>();
 		omel.add(OMCreator.createOMV("a"));
 		omel.add(OMCreator.createOMI(2));
@@ -94,12 +94,12 @@ public class TestTuple extends TestFunctionAbstract{
 	}
 
 	@Test(expected = NoRepresentationAvailableException.class)
-	public void testTupleString() throws EvaluatorException {
+	public void testTupleString() throws EvaluatorException, OpenMathException {
 		func.getPartialStringSyntax(new ArrayList<>());
 	}
 
 	@Test
-	public void testTupleR() throws EvaluatorException {
+	public void testTupleR() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> omel = new ArrayList<>();
 		omel.add(OMCreator.createOMI(1));
 		omel.add(OMCreator.createOMI(2));
@@ -108,7 +108,7 @@ public class TestTuple extends TestFunctionAbstract{
 	}
 	
 	@Test
-	public void testTupleList() throws EvaluatorException {
+	public void testTupleList() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> omel = new ArrayList<>();
 		omel.add(OMCreator.createOMI(1));
 		omel.add(OMCreator.createOMI(2));

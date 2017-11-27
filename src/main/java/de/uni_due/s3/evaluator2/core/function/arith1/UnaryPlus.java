@@ -22,7 +22,7 @@ public class UnaryPlus extends BinaryFunction {
 	 * @throws EvaluatorException
 	 */
 	@Override
-	protected Object execute(List<Object> arguments) throws OpenMathException, EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return arguments.get(0);
 	}
 
@@ -37,37 +37,37 @@ public class UnaryPlus extends BinaryFunction {
 	}
 
 	@Override
-	public Integer getPartialIntegerSyntax(List<Object> arguments) throws EvaluatorException {
+	public Integer getPartialIntegerSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return getIntegerSyntax(arguments.get(0));
 	}
 
 	@Override
-	public Double getPartialDoubleSyntax(List<Object> arguments) throws EvaluatorException {
+	public Double getPartialDoubleSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return getDoubleSyntax(arguments.get(0));
 	}
 
 	@Override
-	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return getLatexSyntax(arguments.get(0));
 	}
 
 	@Override
-	public List<Object> getPartialListSyntax(List<Object> arguments) throws EvaluatorException {
+	public List<Object> getPartialListSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return getListSyntax(arguments.get(0));
 	}
 	
 	@Override
-	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return getRSyntax(arguments.get(0));
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return getSageSyntax(arguments.get(0));
 	}
 
 	@Override
-	public String getPartialStringSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialStringSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return getStringSyntax(arguments.get(0));
 	}
 }

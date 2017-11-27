@@ -38,37 +38,37 @@ public class TestE extends TestFunctionAbstract {
 	}
 	
 	@Test(expected = NoRepresentationAvailableException.class)
-	public void testEBoolean() throws EvaluatorException {
+	public void testEBoolean() throws EvaluatorException, OpenMathException {
 		assertEquals(new Boolean(true), func.getPartialBooleanSyntax(new ArrayList<>()));
 	}
 
 	@Test
-	public void testEDouble() throws EvaluatorException {
+	public void testEDouble() throws EvaluatorException, OpenMathException {
 		assertEquals(new Double(Math.E), func.getPartialDoubleSyntax(new ArrayList<>()), 0);
 	}
 
 	@Test(expected = NoRepresentationAvailableException.class)
-	public void testEInteger() throws EvaluatorException {
+	public void testEInteger() throws EvaluatorException, OpenMathException {
 		func.getPartialIntegerSyntax(new ArrayList<>());
 	}
 
 	@Test
-	public void testELatex() throws EvaluatorException {
+	public void testELatex() throws EvaluatorException, OpenMathException {
 		assertEquals("\\mathrm{e}", func.getPartialLatexSyntax(new ArrayList<>()));
 	}
 
 	@Test
-	public void testESage() throws EvaluatorException {
+	public void testESage() throws EvaluatorException, OpenMathException {
 		assertEquals("e", func.getPartialSageSyntax(new ArrayList<>()));
 	}
 
 	@Test
-	public void testEString() throws EvaluatorException {
+	public void testEString() throws EvaluatorException, OpenMathException {
 		assertEquals("E", func.getPartialStringSyntax(new ArrayList<>()));
 	}
 
 	@Test
-	public void testER() throws EvaluatorException {
+	public void testER() throws EvaluatorException, OpenMathException {
 		assertEquals("exp(1)", func.getPartialRSyntax(new ArrayList<>()));
 	}
 }

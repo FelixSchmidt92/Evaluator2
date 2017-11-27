@@ -31,7 +31,7 @@ public class TestRandom extends TestFunctionAbstract {
 	Function func = new Random();
 
 	@Test
-	public void testRandom() throws OpenMathException, EvaluatorException {
+	public void testRandom() throws EvaluatorException, OpenMathException {
 
 		for (int i = 0; i < 10000; i++) {
 			OMF omf = (OMF) func.evaluate(new ArrayList<>());
@@ -41,7 +41,7 @@ public class TestRandom extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testRandomStatistically() throws OpenMathException, EvaluatorException {
+	public void testRandomStatistically() throws EvaluatorException, OpenMathException {
 		HashMap<Double, Integer> statistics = new HashMap<>(); // <'Random
 																// Number',
 																// 'Occurrences'>
@@ -69,7 +69,7 @@ public class TestRandom extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testRandomCaseIntegrationEmptyArguments() throws OpenMathException, EvaluatorException {
+	public void testRandomCaseIntegrationEmptyArguments() throws EvaluatorException, OpenMathException {
 		OMOBJ p = ExpressionParser.parse("random()", null, null); // Test for
 																	// Empty
 																	// Arguments!
@@ -77,7 +77,7 @@ public class TestRandom extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testRandomIntegerationWithMoreArguments() throws OpenMathException, EvaluatorException {
+	public void testRandomIntegerationWithMoreArguments() throws EvaluatorException, OpenMathException {
 		OMOBJ p = ExpressionParser.parse("random(2)", null, null); // Test for
 																	// Empty
 																	// Arguments!

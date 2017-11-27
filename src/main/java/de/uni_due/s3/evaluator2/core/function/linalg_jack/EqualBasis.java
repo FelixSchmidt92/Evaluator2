@@ -7,7 +7,7 @@ import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
-import de.uni_due.s3.evaluator2.exceptions.function.InvalidResultTypeException;
+import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidResultTypeException;
 import de.uni_due.s3.evaluator2.sage.Sage;
 import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
@@ -47,7 +47,7 @@ public class EqualBasis extends Function {
 
 		if (!(OMTypeChecker.isOMS(result)
 				&& (((OMS) result).equals(OMSymbol.LOGIC1_TRUE) || ((OMS) result).equals(OMSymbol.LOGIC1_FALSE)))) {
-			throw new InvalidResultTypeException(this, "true, false");
+			throw new FunctionInvalidResultTypeException(this);
 		}
 		return result;
 	}
@@ -63,7 +63,7 @@ public class EqualBasis extends Function {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		StringBuilder preVector = new StringBuilder();
 		List<String> vList1 = new ArrayList<>();
 		List<Object> vectorList1 = getListSyntax(arguments.get(0));

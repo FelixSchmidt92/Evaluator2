@@ -30,37 +30,37 @@ public class TestI extends TestFunctionAbstract {
 	}
 	
 	@Test(expected = NoRepresentationAvailableException.class)
-	public void testIBoolean() throws EvaluatorException {
+	public void testIBoolean() throws EvaluatorException, OpenMathException {
 		func.getPartialBooleanSyntax(new ArrayList<>());
 	}
 
 	@Test(expected = NoRepresentationAvailableException.class)
-	public void testIDouble() throws EvaluatorException {
+	public void testIDouble() throws EvaluatorException, OpenMathException {
 		func.getPartialDoubleSyntax(new ArrayList<>());
 	}
 
 	@Test(expected = NoRepresentationAvailableException.class)
-	public void testIInteger() throws EvaluatorException {
+	public void testIInteger() throws EvaluatorException, OpenMathException {
 		func.getPartialIntegerSyntax(new ArrayList<>());
 	}
 
 	@Test
-	public void testILatex() throws EvaluatorException {
+	public void testILatex() throws EvaluatorException, OpenMathException {
 		assertEquals("\\mathrm{i}", func.getPartialLatexSyntax(new ArrayList<>()));
 	}
 
 	@Test
-	public void testISage() throws EvaluatorException {
+	public void testISage() throws EvaluatorException, OpenMathException {
 		assertEquals("I", func.getPartialSageSyntax(new ArrayList<>()));
 	}
 
 	@Test
-	public void testIString() throws EvaluatorException {
+	public void testIString() throws EvaluatorException, OpenMathException {
 		assertEquals("I", func.getPartialStringSyntax(new ArrayList<>()));
 	}
 
 	@Test
-	public void testIR() throws EvaluatorException {
+	public void testIR() throws EvaluatorException, OpenMathException {
 		assertEquals("complex(0,0,1)", func.getPartialRSyntax(new ArrayList<>()));
 	}
 

@@ -26,12 +26,12 @@ public class R extends Function {
 	}
 	
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return "RR";
 	}
 
 	@Override
-	public String getPartialStringSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialStringSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return "R";
 	}
 	

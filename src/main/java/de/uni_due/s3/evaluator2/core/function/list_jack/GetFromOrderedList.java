@@ -11,6 +11,7 @@ import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeE
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * Implements a get Function for Set (List).
@@ -21,7 +22,7 @@ import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 public class GetFromOrderedList extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		int pos = getIntegerSyntax(arguments.get(0));
 
 		List<Object> list1 = getListSyntax(arguments.get(1));

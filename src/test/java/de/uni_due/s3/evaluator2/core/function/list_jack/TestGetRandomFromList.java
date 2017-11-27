@@ -30,7 +30,7 @@ public class TestGetRandomFromList extends TestFunctionAbstract {
 	private static Function func = new GetRandomFromList();
 
 	@Test
-	public void testGetRandomFromList1() throws OpenMathException, EvaluatorException {
+	public void testGetRandomFromList1() throws EvaluatorException, OpenMathException {
 		List<Object> set = new ArrayList<Object>();
 		List<Object> args = new ArrayList<Object>();
 
@@ -47,7 +47,7 @@ public class TestGetRandomFromList extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testGetRandomFromList2() throws OpenMathException, EvaluatorException {
+	public void testGetRandomFromList2() throws EvaluatorException, OpenMathException {
 		List<Object> set = new ArrayList<Object>();
 		List<Object> args = new ArrayList<Object>();
 
@@ -65,7 +65,7 @@ public class TestGetRandomFromList extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testGetRandomFromList3() throws OpenMathException, EvaluatorException {
+	public void testGetRandomFromList3() throws EvaluatorException, OpenMathException {
 		List<Object> set = new ArrayList<Object>();
 		List<Object> args = new ArrayList<Object>();
 
@@ -80,7 +80,7 @@ public class TestGetRandomFromList extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testGetRandomFromListWithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testGetRandomFromListWithLessThanMinParam() throws EvaluatorException, OpenMathException {
 
 		List<Object> args = new ArrayList<Object>();
 		func.evaluate(args);
@@ -88,7 +88,7 @@ public class TestGetRandomFromList extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testGetRandomFromListWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
+	public void testGetRandomFromListWithMoreThanMaxParam() throws EvaluatorException, OpenMathException {
 		List<Object> plus = new ArrayList<Object>();
 		plus.add(OMCreator.createOMI(20));
 		plus.add(OMCreator.createOMI(1));
@@ -105,35 +105,35 @@ public class TestGetRandomFromList extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testGetRandomFromListWithWrongArguments1() throws OpenMathException, EvaluatorException {
+	public void testGetRandomFromListWithWrongArguments1() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		func.evaluate(args);
 		fail();
 	}
 
 	@Test
-	public void testGetRandomFromListIntegration1() throws OpenMathException, EvaluatorException {
+	public void testGetRandomFromListIntegration1() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("getRandomFromList({1})", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMI(1), result.getOMI());
 	}
 
 	@Test(expected = FunctionInvalidArgumentException.class)
-	public void testGetRandomFromListWithEmptyArgs() throws OpenMathException, EvaluatorException {
+	public void testGetRandomFromListWithEmptyArgs() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("getRandomFromList({})", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testGetRandomFromListWithLessArgs() throws OpenMathException, EvaluatorException {
+	public void testGetRandomFromListWithLessArgs() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("getRandomFromList()", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testGetRandomFromListWithMoreArgs() throws OpenMathException, EvaluatorException {
+	public void testGetRandomFromListWithMoreArgs() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("getRandomFromList({}, 0, 4)", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();

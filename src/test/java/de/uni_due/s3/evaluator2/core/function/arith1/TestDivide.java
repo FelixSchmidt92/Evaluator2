@@ -24,7 +24,7 @@ public class TestDivide extends TestFunctionAbstract {
 	private static Function func = new Divide();
 
 	@Test
-	public void testDivideInteger() throws OpenMathException, EvaluatorException {
+	public void testDivideInteger() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(3));
 		args.add(OMCreator.createOMI(4));
@@ -33,7 +33,7 @@ public class TestDivide extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidArgumentException.class)
-	public void testDivideZero() throws OpenMathException, EvaluatorException {
+	public void testDivideZero() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(3));
 		args.add(OMCreator.createOMI(0));
@@ -42,7 +42,7 @@ public class TestDivide extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testDivideFloat() throws OpenMathException, EvaluatorException {
+	public void testDivideFloat() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(2.5));
 		args.add(OMCreator.createOMF(5.6));
@@ -51,7 +51,7 @@ public class TestDivide extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testDivideMixed() throws OpenMathException, EvaluatorException {
+	public void testDivideMixed() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(1000));
 		args.add(OMCreator.createOMF(2.00));
@@ -60,35 +60,35 @@ public class TestDivide extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testDivideIntegration1() throws OpenMathException, EvaluatorException {
+	public void testDivideIntegration1() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("10/5", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
 		assertEquals(OMCreator.createOMI(2), result);
 	}
 
 	@Test
-	public void testDivideIntegration2() throws OpenMathException, EvaluatorException {
+	public void testDivideIntegration2() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("divide(1,-4)", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
 		assertEquals(OMCreator.createOMF(-0.25), result);
 	}
 
 	@Test(expected = FunctionInvalidArgumentException.class)
-	public void testDivideIntegrationWithWrongParam() throws OpenMathException, EvaluatorException {
+	public void testDivideIntegrationWithWrongParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("10/0", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentException.class)
-	public void testDivideIntegrationWithWrongParam2() throws OpenMathException, EvaluatorException {
+	public void testDivideIntegrationWithWrongParam2() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("10/(1-1.0)", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test
-	public void testDivideSageSyntax() throws EvaluatorException {
+	public void testDivideSageSyntax() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(1.0));
 		args.add(OMCreator.createOMI(10));
@@ -96,14 +96,20 @@ public class TestDivide extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testDivideWithWrongArguments() throws OpenMathException, EvaluatorException {
+	public void testDivideWithWrongArguments1() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("10/'test'", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 	
+	@Test(expected = FunctionInvalidArgumentTypeException.class)
+	public void testDivideWithWrongArguments2() throws EvaluatorException, OpenMathException {
+		OMOBJ omobj = ExpressionParser.parse("a/'test'", null, null);
+		OMToResultVisitor.getInstance().visit(omobj);
+	}
+	
 	@Test
-	public void testDivideLatex() throws EvaluatorException {
+	public void testDivideLatex() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMF(1.2));
 		args.add(OMCreator.createOMI(5));

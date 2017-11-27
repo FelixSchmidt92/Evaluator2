@@ -20,7 +20,7 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 public class IsTuple extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws OpenMathException, EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		if (OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.ECC_TUPLE)) {
 			return OMSymbol.LOGIC1_TRUE;
 		}

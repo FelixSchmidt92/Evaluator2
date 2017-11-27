@@ -6,6 +6,7 @@ import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.BinaryFunction;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * Implement openmath logic not. Example: !true => false
@@ -24,7 +25,7 @@ public class Not extends BinaryFunction {
 	 * @throws FunctionInvalidArgumentTypeException
 	 */
 	@Override
-	protected Object execute(List<Object> arguments) throws EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return (getBooleanSyntax(arguments.get(0))) ? OMSymbol.LOGIC1_FALSE : OMSymbol.LOGIC1_TRUE;
 	}
 
@@ -39,12 +40,12 @@ public class Not extends BinaryFunction {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return "not(" + getLatexSyntax(arguments.get(0)) + ")";
 	}
 
 	@Override
-	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return "\\neg" + getLatexSyntax(arguments.get(0));
 	}
 }

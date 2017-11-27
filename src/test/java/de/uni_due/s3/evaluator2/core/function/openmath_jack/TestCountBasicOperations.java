@@ -20,7 +20,7 @@ public class TestCountBasicOperations extends TestFunctionAbstract {
 	Function func = new CountBasicOperations();
 
 	@Test
-	public void TestCountBasicOperationsWithIntegration() throws OpenMathException, EvaluatorException {
+	public void TestCountBasicOperationsWithIntegration() throws EvaluatorException, OpenMathException {
 		OMOBJ parsed = ExpressionParser.parse("countBasicOperations('2+1-3/2*2-1-2*sin(x)')", null, null);
 
 		OMOBJ actual = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(parsed));
@@ -28,7 +28,7 @@ public class TestCountBasicOperations extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void TestCountBasicOperationsWithIntegration1() throws OpenMathException, EvaluatorException {
+	public void TestCountBasicOperationsWithIntegration1() throws EvaluatorException, OpenMathException {
 		OMOBJ parsed = ExpressionParser.parse("countBasicOperations('-', '2+1+1*1*1--1')", null, null);
 
 		OMOBJ actual = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(parsed));
@@ -36,7 +36,7 @@ public class TestCountBasicOperations extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void TestCountBasicOperationsWithIntegration2() throws OpenMathException, EvaluatorException {
+	public void TestCountBasicOperationsWithIntegration2() throws EvaluatorException, OpenMathException {
 		OMOBJ parsed = ExpressionParser.parse("countBasicOperations('/', '2+1+1*1*1--1')", null, null);
 
 		OMOBJ actual = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(parsed));
@@ -44,7 +44,7 @@ public class TestCountBasicOperations extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void TestCountBasicOperationsWithIntegration3() throws OpenMathException, EvaluatorException {
+	public void TestCountBasicOperationsWithIntegration3() throws EvaluatorException, OpenMathException {
 		OMOBJ parsed = ExpressionParser.parse("countBasicOperations('*', '2+1+1*1*1--1')", null, null);
 
 		OMOBJ actual = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(parsed));
@@ -52,14 +52,14 @@ public class TestCountBasicOperations extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidArgumentException.class)
-	public void TestCountBasicOperationsWithIntegrationWrongArguments() throws OpenMathException, EvaluatorException {
+	public void TestCountBasicOperationsWithIntegrationWrongArguments() throws EvaluatorException, OpenMathException {
 		OMOBJ parsed = ExpressionParser.parse("countBasicOperations('#', '2+1+1*1*1--1')", null, null);
 		OMToResultVisitor.getInstance().visit(parsed);
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void TestCountBasicOperationsWithIntegrationWrongArgumentType()
-			throws OpenMathException, EvaluatorException {
+			throws EvaluatorException, OpenMathException {
 		OMOBJ parsed = ExpressionParser.parse("countBasicOperations(2, '2+1+1*1*1--1')", null, null);
 		OMToResultVisitor.getInstance().visit(parsed);
 	}

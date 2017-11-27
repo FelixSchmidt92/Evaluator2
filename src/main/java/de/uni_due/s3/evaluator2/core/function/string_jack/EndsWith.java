@@ -5,6 +5,7 @@ import java.util.List;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * Implements endsWith operation for strings.
@@ -17,7 +18,7 @@ import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 public class EndsWith extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		String string1 = getStringSyntax(arguments.get(0));
 		String string2 = getStringSyntax(arguments.get(1));
 

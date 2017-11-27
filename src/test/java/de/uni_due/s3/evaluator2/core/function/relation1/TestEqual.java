@@ -26,7 +26,7 @@ public class TestEqual extends TestFunctionAbstract {
 	private static Function func = new Equal();
 
 	@Test
-	public void testEqualsOMI1() throws OpenMathException, EvaluatorException {
+	public void testEqualsOMI1() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(10));
 		args.add(OMCreator.createOMF(10.0));
@@ -35,7 +35,7 @@ public class TestEqual extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testEqualsOMI2() throws OpenMathException, EvaluatorException {
+	public void testEqualsOMI2() throws EvaluatorException, OpenMathException {
 
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(120976));
@@ -45,7 +45,7 @@ public class TestEqual extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testEqualsOMF1() throws OpenMathException, EvaluatorException {
+	public void testEqualsOMF1() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(0.546363));
 		args.add(OMCreator.createOMF(0.546363));
@@ -54,7 +54,7 @@ public class TestEqual extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testEqualsOMF2() throws OpenMathException, EvaluatorException {
+	public void testEqualsOMF2() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(12.3045));
 		args.add(OMCreator.createOMF(12.3044));
@@ -63,7 +63,7 @@ public class TestEqual extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testEqualsOMS1() throws OpenMathException, EvaluatorException {
+	public void testEqualsOMS1() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMSymbol.ARITH1_PLUS);
 		args.add(OMSymbol.ARITH1_PLUS);
@@ -72,7 +72,7 @@ public class TestEqual extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testEqualsOMS2() throws OpenMathException, EvaluatorException {
+	public void testEqualsOMS2() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMSymbol.ARITH1_MINUS);
 		args.add(OMSymbol.ARITH1_PLUS);
@@ -81,7 +81,7 @@ public class TestEqual extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testEqualsOMA1() throws OpenMathException, EvaluatorException {
+	public void testEqualsOMA1() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> matrixRow1 = new ArrayList<Object>();
 
 		matrixRow1.add(OMCreator.createOMI(10));
@@ -96,7 +96,7 @@ public class TestEqual extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testEqualsOMA2() throws OpenMathException, EvaluatorException {
+	public void testEqualsOMA2() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> matrixRow1 = new ArrayList<Object>();
 
 		matrixRow1.add(OMCreator.createOMI(10));
@@ -117,7 +117,7 @@ public class TestEqual extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testEqualsOMSTR1() throws OpenMathException, EvaluatorException {
+	public void testEqualsOMSTR1() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("test"));
 		args.add(OMCreator.createOMSTR("test"));
@@ -133,7 +133,7 @@ public class TestEqual extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testEqualsOMSTR2() throws OpenMathException, EvaluatorException {
+	public void testEqualsOMSTR2() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("test"));
 		args.add(OMCreator.createOMSTR("tes t"));
@@ -142,7 +142,7 @@ public class TestEqual extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testEqualsWithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testEqualsWithLessThanMinParam() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("test"));
 		func.evaluate(args);
@@ -150,7 +150,7 @@ public class TestEqual extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testEqualsWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
+	public void testEqualsWithMoreThanMaxParam() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("test"));
 		args.add(OMCreator.createOMSTR("test"));
@@ -160,28 +160,28 @@ public class TestEqual extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testEqualsIntegration1() throws OpenMathException, EvaluatorException {
+	public void testEqualsIntegration1() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("equal(10,10)", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMSymbol.LOGIC1_TRUE, result.getOMS());
 	}
 
 	@Test
-	public void testEqualsIntegration2() throws OpenMathException, EvaluatorException {
+	public void testEqualsIntegration2() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("10=10", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMSymbol.LOGIC1_TRUE, result.getOMS());
 	}
 
 	@Test
-	public void testEqualsIntegration3() throws OpenMathException, EvaluatorException {
+	public void testEqualsIntegration3() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("10==10", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMSymbol.LOGIC1_TRUE, result.getOMS());
 	}
 
 	@Test
-	public void testEqualsSageSyntax() throws EvaluatorException {
+	public void testEqualsSageSyntax() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(10));
 		args.add(OMCreator.createOMI(10));

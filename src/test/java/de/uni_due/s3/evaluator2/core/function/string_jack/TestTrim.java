@@ -23,7 +23,7 @@ public class TestTrim extends TestFunctionAbstract {
 	private static Function func = new Trim();
 
 	@Test
-	public void testTrimStrings1() throws OpenMathException, EvaluatorException {
+	public void testTrimStrings1() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("Test    "));
 		Object result = func.evaluate(args);
@@ -31,7 +31,7 @@ public class TestTrim extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testTrimStrings2() throws OpenMathException, EvaluatorException {
+	public void testTrimStrings2() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("    Hello World! "));
 		Object result = func.evaluate(args);
@@ -39,28 +39,28 @@ public class TestTrim extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testTrimIntegration() throws OpenMathException, EvaluatorException {
+	public void testTrimIntegration() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("trim('  ja ')", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMSTR("ja"), result.getOMSTR());
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testTrimWithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testTrimWithLessThanMinParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("trim()", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testTrimWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
+	public void testTrimWithMoreThanMaxParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("trim('Test', 'Test')", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testTrimWithWrongArguments() throws OpenMathException, EvaluatorException {
+	public void testTrimWithWrongArguments() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("trim(vector(3))", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();

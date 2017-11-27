@@ -46,7 +46,7 @@ public class ArcSin extends Function {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return "arcsin(" + getSageSyntax(arguments.get(0)) + ")";
 	}
 

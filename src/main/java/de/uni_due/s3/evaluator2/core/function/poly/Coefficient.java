@@ -38,7 +38,7 @@ public class Coefficient extends Function {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		String polynom = getSageSyntax(arguments.get(0));
 		String var = getSageSyntax(arguments.get(1));
 		String n = getSageSyntax(arguments.get(2));

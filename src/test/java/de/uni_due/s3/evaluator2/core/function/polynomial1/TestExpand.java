@@ -26,7 +26,7 @@ public class TestExpand extends TestFunctionAbstract {
 	private Function func = new Expand();
 
 	@Test
-	public void testDegreeWrtWithOneVariable() throws OpenMathException, EvaluatorException {
+	public void testDegreeWrtWithOneVariable() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(ExpressionParser.parse("(2+x) * 2", null, null));
 		Object result = func.evaluate(args);
@@ -44,14 +44,14 @@ public class TestExpand extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testDegreeWrtWithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testDegreeWrtWithLessThanMinParam() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<Object>();
 		func.evaluate(args);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testDegreeWrtWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
+	public void testDegreeWrtWithMoreThanMaxParam() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("test"));
 		args.add(OMCreator.createOMSTR("test"));

@@ -11,6 +11,7 @@ import de.uni_due.s3.openmath.jaxb.OMI;
 import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.jaxb.OMSTR;
 import de.uni_due.s3.openmath.jaxb.OMV;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class OMToIntegerVisitor extends OMToSyntaxVisitor<Integer> {
 
@@ -60,7 +61,7 @@ public class OMToIntegerVisitor extends OMToSyntaxVisitor<Integer> {
 
 	@Override
 	protected Integer getSyntaxRepresentationForFunction(Function function, OMS oms, List<Object> omel)
-			throws EvaluatorException {
+			throws EvaluatorException, OpenMathException {
 		return function.getPartialIntegerSyntax(omel);
 	}
 

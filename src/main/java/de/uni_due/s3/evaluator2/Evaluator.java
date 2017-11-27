@@ -135,8 +135,9 @@ public class Evaluator {
 	 * @param omobj
 	 * @return latex
 	 * @throws EvaluatorException
+	 * @throws OpenMathException 
 	 */
-	public static String getLaTeX(OMOBJ omobj) throws EvaluatorException {
+	public static String getLaTeX(OMOBJ omobj) throws EvaluatorException, OpenMathException {
 		return OMToLatexVisitor.getInstance().visit(omobj);
 	}
 
@@ -146,8 +147,9 @@ public class Evaluator {
 	 * @param omobj
 	 * @return string
 	 * @throws EvaluatorException
+	 * @throws OpenMathException 
 	 */
-	public static String getString(OMOBJ omobj) throws EvaluatorException {
+	public static String getString(OMOBJ omobj) throws EvaluatorException, OpenMathException {
 		return OMToStringVisitor.getInstance().visit(omobj);
 	}
 	

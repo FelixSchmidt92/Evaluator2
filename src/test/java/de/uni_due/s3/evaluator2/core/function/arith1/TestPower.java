@@ -22,7 +22,7 @@ public class TestPower extends TestFunctionAbstract {
 	private Power func = new Power();
 
 	@Test
-	public void testPowerWithInteger() throws OpenMathException, EvaluatorException {
+	public void testPowerWithInteger() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(2));
 		args.add(OMCreator.createOMI(3));
@@ -31,7 +31,7 @@ public class TestPower extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testPowerWithFloat() throws OpenMathException, EvaluatorException {
+	public void testPowerWithFloat() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMF(2.4));
 		args.add(OMCreator.createOMF(3.9));
@@ -40,7 +40,7 @@ public class TestPower extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testPowerWithMixedArgs() throws OpenMathException, EvaluatorException {
+	public void testPowerWithMixedArgs() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(2));
 		args.add(OMCreator.createOMF(3.5));
@@ -49,21 +49,21 @@ public class TestPower extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testPowerIntegration() throws OpenMathException, EvaluatorException {
+	public void testPowerIntegration() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("pow(2,3)", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
 		assertEquals(OMCreator.createOMI(8), result);
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testPowerWithInvalidArgumentType() throws OpenMathException, EvaluatorException {
+	public void testPowerWithInvalidArgumentType() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("pow(5,'Test')", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test
-	public void testPowerSageSyntax() throws EvaluatorException {
+	public void testPowerSageSyntax() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(1.45));
 		args.add(OMCreator.createOMF(3));

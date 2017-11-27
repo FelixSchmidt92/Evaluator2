@@ -7,9 +7,7 @@ import de.uni_due.s3.evaluator2.core.dictionaries.OMSFunctionDictionary;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OMBIND;
 import de.uni_due.s3.openmath.jaxb.OMBVAR;
@@ -64,8 +62,7 @@ public class Int extends Function{
 	}
 	
 	@Override
-	public String getPartialLatexSyntax(List<Object> arguments)
-			throws EvaluatorException, FunctionException, NoRepresentationAvailableException {
+	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		OMBIND ombind = (OMBIND) arguments.get(0);
 		OMBVAR ombvar = (OMBVAR) ombind.getContent().get(1);
 		OMV omv = (OMV) ombvar.getOmvar().get(0); // use just one variable

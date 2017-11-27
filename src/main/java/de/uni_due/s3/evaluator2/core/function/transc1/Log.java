@@ -9,6 +9,7 @@ import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentExcep
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * Returns the natural logarithm (base e) of a double value.
@@ -20,7 +21,7 @@ import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 public class Log extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		Object result;
 		if (OMTypeChecker.isOMNumber(arguments.get(0))) {
 			Double arg1 = getDoubleSyntax(arguments.get(0));

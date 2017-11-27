@@ -24,7 +24,7 @@ public class TestConcat extends TestFunctionAbstract {
 	private static Function func = new Concat();
 
 	@Test
-	public void testConcatEqualStrings() throws OpenMathException, EvaluatorException {
+	public void testConcatEqualStrings() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("to"));
 		args.add(OMCreator.createOMSTR("get"));
@@ -34,21 +34,21 @@ public class TestConcat extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testConcatCaseIntegration() throws OpenMathException, EvaluatorException {
+	public void testConcatCaseIntegration() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("concat('Hello', ' ', 'World', '!')", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMSTR("Hello World!"), result.getOMSTR());
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testConcatWithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testConcatWithLessThanMinParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("concat('Test')", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testConcatWithWrongArguments() throws OpenMathException, EvaluatorException {
+	public void testConcatWithWrongArguments() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("concat('Test', vector(2))", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();

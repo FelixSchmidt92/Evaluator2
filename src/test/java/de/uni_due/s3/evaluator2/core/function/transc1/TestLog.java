@@ -25,7 +25,7 @@ public class TestLog extends TestFunctionAbstract {
 	private static Function func = new Log();
 
 	@Test(expected = FunctionInvalidArgumentException.class)
-	public void testLogFloat() throws OpenMathException, EvaluatorException {
+	public void testLogFloat() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(0.0));
 		func.evaluate(args);
@@ -33,7 +33,7 @@ public class TestLog extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testLogInteger() throws OpenMathException, EvaluatorException {
+	public void testLogInteger() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(1));
 		Object result = func.evaluate(args);
@@ -41,28 +41,28 @@ public class TestLog extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidArgumentException.class)
-	public void testLogIntegration() throws OpenMathException, EvaluatorException {
+	public void testLogIntegration() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("log(0)", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testLogWithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testLogWithLessThanMinParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("log()", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testLogWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
+	public void testLogWithMoreThanMaxParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("log(1,3)", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testLogWithWrongArguments() throws OpenMathException, EvaluatorException {
+	public void testLogWithWrongArguments() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("log('Test')", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();

@@ -26,12 +26,12 @@ public class C extends Function {
 	}
 	
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return "CC";
 	}
 
 	@Override
-	public String getPartialStringSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialStringSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return "C";
 	}
 	

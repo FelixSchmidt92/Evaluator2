@@ -27,7 +27,7 @@ public class TestSin extends TestFunctionAbstract {
 			.getFunction(OMSEvaluatorSyntaxDictionary.getInstance().getOMS("sin"));
 
 	@Test
-	public void testSinFloat() throws OpenMathException, EvaluatorException {
+	public void testSinFloat() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(0.0));
 		Object result = func.evaluate(args);
@@ -35,7 +35,7 @@ public class TestSin extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testSinInteger() throws OpenMathException, EvaluatorException {
+	public void testSinInteger() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(1));
 		Object result = func.evaluate(args);
@@ -43,34 +43,34 @@ public class TestSin extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testSinIntegration() throws OpenMathException, EvaluatorException {
+	public void testSinIntegration() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("sin(0)", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMI(0), result.getOMI());
 	}
 
 	@Test
-	public void testSinSageSyntax() throws EvaluatorException {
+	public void testSinSageSyntax() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMF(1.0));
 		assertEquals("sin(1)", func.getPartialSageSyntax(args));
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testSinWithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testSinWithLessThanMinParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("sin()", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testSinWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
+	public void testSinWithMoreThanMaxParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("sin(1,3)", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testSinWithWrongArguments() throws OpenMathException, EvaluatorException {
+	public void testSinWithWrongArguments() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("sin('Test')", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();

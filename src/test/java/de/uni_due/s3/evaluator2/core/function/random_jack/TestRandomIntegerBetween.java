@@ -34,7 +34,7 @@ public class TestRandomIntegerBetween {
 	}
 
 	@Test
-	public void testRandomBetween() throws OpenMathException, EvaluatorException {
+	public void testRandomBetween() throws EvaluatorException, OpenMathException {
 
 		for (int i = 0; i < 10000; i++) {
 			OMI omi = (OMI) func.evaluate(args);
@@ -44,7 +44,7 @@ public class TestRandomIntegerBetween {
 	}
 
 	@Test
-	public void testRandomBetweenIntegration() throws OpenMathException, EvaluatorException {
+	public void testRandomBetweenIntegration() throws EvaluatorException, OpenMathException {
 		OMOBJ p = ExpressionParser.parse("randomBetween(3,10)", null, null);
 
 		double result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(p)).getOMF().getDec();
@@ -52,14 +52,14 @@ public class TestRandomIntegerBetween {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testRandomBetweenIntegerationTooFewArguments() throws OpenMathException, EvaluatorException {
+	public void testRandomBetweenIntegerationTooFewArguments() throws EvaluatorException, OpenMathException {
 		OMOBJ p = ExpressionParser.parse("randomBetween()", null, null);
 		OMToResultVisitor.getInstance().visit(p);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testRandomBetweenIntegerationWithWrongArguments() throws OpenMathException, EvaluatorException {
+	public void testRandomBetweenIntegerationWithWrongArguments() throws EvaluatorException, OpenMathException {
 		OMOBJ p = ExpressionParser.parse("randomBetween('','')", null, null);
 		OMToResultVisitor.getInstance().visit(p);
 		fail();

@@ -19,7 +19,7 @@ public class TestMatches extends TestFunctionAbstract {
 	Function func = new Matches();
 
 	@Test
-	public void testMatchesWithAlphabet() throws OpenMathException, EvaluatorException {
+	public void testMatchesWithAlphabet() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 		OMSTR in = OMCreator.createOMSTR("abcdefghijklmnopqrstuvwxyz");
 		OMSTR reg = OMCreator.createOMSTR("abcdefghijklmnopqrstuvwxyz");
@@ -30,7 +30,7 @@ public class TestMatches extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testMatchesWithRegex() throws OpenMathException, EvaluatorException {
+	public void testMatchesWithRegex() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 		OMSTR in = OMCreator.createOMSTR("abcdefghijklmnopqrstuvwxyz");
 		OMSTR reg = OMCreator.createOMSTR("[a-z]+");
@@ -41,7 +41,7 @@ public class TestMatches extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testMatchesWithNumber() throws OpenMathException, EvaluatorException {
+	public void testMatchesWithNumber() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 		OMSTR in = OMCreator.createOMSTR("2");
 		OMSTR reg = OMCreator.createOMSTR("\\d");

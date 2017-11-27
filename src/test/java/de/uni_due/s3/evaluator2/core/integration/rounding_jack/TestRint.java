@@ -42,108 +42,108 @@ public class TestRint extends TestIntegration {
 	}
 
 	@Test
-	public void testRint1() throws OpenMathException, EvaluatorException {
+	public void testRint1() throws EvaluatorException, OpenMathException {
 		assertEquals(12, Evaluator.getNumberResult("rint(12.4999)", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testRint2() throws OpenMathException, EvaluatorException {
+	public void testRint2() throws EvaluatorException, OpenMathException {
 		assertEquals(13, Evaluator.getNumberResult("rint(12.500001)", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testRint3() throws OpenMathException, EvaluatorException {
+	public void testRint3() throws EvaluatorException, OpenMathException {
 		assertEquals(12, Evaluator.getNumberResult("rint(12.5)", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testRint4() throws OpenMathException, EvaluatorException {
+	public void testRint4() throws EvaluatorException, OpenMathException {
 		assertEquals(14, Evaluator.getNumberResult("rint(13.5)", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testRint5() throws OpenMathException, EvaluatorException {
+	public void testRint5() throws EvaluatorException, OpenMathException {
 		assertEquals(-99, Evaluator.getNumberResult("rint(-99.4999)", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testRint6() throws OpenMathException, EvaluatorException {
+	public void testRint6() throws EvaluatorException, OpenMathException {
 		assertEquals(-100, Evaluator.getNumberResult("rint(-99.5999)", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testRint7() throws OpenMathException, EvaluatorException {
+	public void testRint7() throws EvaluatorException, OpenMathException {
 		assertEquals(0, Evaluator.getNumberResult("rint(-0.00001)", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testRint8() throws OpenMathException, EvaluatorException {
+	public void testRint8() throws EvaluatorException, OpenMathException {
 		assertEquals(0, Evaluator.getNumberResult("rint(0.00001)", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testRintWithInput1() throws OpenMathException, EvaluatorException {
+	public void testRintWithInput1() throws EvaluatorException, OpenMathException {
 		assertEquals(5, Evaluator.getNumberResult("rint([pos=5])", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testRintWithInput2() throws OpenMathException, EvaluatorException {
+	public void testRintWithInput2() throws EvaluatorException, OpenMathException {
 		assertEquals(1234, Evaluator.getNumberResult("rint([pos=1234])", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testRintWithVariables1() throws OpenMathException, EvaluatorException {
+	public void testRintWithVariables1() throws EvaluatorException, OpenMathException {
 		assertEquals(50, Evaluator.getNumberResult("rint([var=f1])", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testRintWithVariables2() throws OpenMathException, EvaluatorException {
+	public void testRintWithVariables2() throws EvaluatorException, OpenMathException {
 		assertEquals(100, Evaluator.getNumberResult("rint([var=h])", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testRintWithPointNumbers1() throws OpenMathException, EvaluatorException {
+	public void testRintWithPointNumbers1() throws EvaluatorException, OpenMathException {
 		assertEquals(0, Evaluator.getNumberResult("rint(0.2)", exerVar, fillIn), 0);
 
 	}
 
 	@Test
-	public void testRintWithPointNumbers2() throws OpenMathException, EvaluatorException {
+	public void testRintWithPointNumbers2() throws EvaluatorException, OpenMathException {
 		assertEquals(0, Evaluator.getNumberResult("rint(-0.2)", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testRintWithExpressions1() throws OpenMathException, EvaluatorException {
+	public void testRintWithExpressions1() throws EvaluatorException, OpenMathException {
 		assertEquals(-2, Evaluator.getNumberResult("rint(rint(-2.2))", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testRintWithExpressions2() throws OpenMathException, EvaluatorException {
+	public void testRintWithExpressions2() throws EvaluatorException, OpenMathException {
 		assertEquals(2, Evaluator.getNumberResult("rint(rint(rint(2.1)))", exerVar, fillIn), 0);
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testRintWithWrongInputCharacter() throws OpenMathException, EvaluatorException {
+	public void testRintWithWrongInputCharacter() throws EvaluatorException, OpenMathException {
 		Evaluator.getNumberResult("rint(a)", exerVar, fillIn);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testRintWithTwoArguments() throws OpenMathException, EvaluatorException {
+	public void testRintWithTwoArguments() throws EvaluatorException, OpenMathException {
 		Evaluator.getNumberResult("rint(4.2, 3.1)", exerVar, fillIn);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testRintWithThreeArguments() throws OpenMathException, EvaluatorException {
+	public void testRintWithThreeArguments() throws EvaluatorException, OpenMathException {
 		Evaluator.getNumberResult("rint(2.1, 2.2, 2.3)", exerVar, fillIn);
 	}
 
 	@Test(expected = UndefinedExerciseVariableException.class)
-	public void testRintWithMissingExerciseVariable() throws OpenMathException, EvaluatorException {
+	public void testRintWithMissingExerciseVariable() throws EvaluatorException, OpenMathException {
 		Evaluator.getNumberResult("rint('[var=j]')", exerVar, fillIn);
 	}
 
 	@Test(expected = UndefinedFillInVariableException.class)
-	public void testRintWithMissingInput() throws OpenMathException, EvaluatorException {
+	public void testRintWithMissingInput() throws EvaluatorException, OpenMathException {
 		Evaluator.getNumberResult("rint('[pos=42]')", exerVar, fillIn);
 	}
 }

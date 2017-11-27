@@ -25,7 +25,7 @@ public class TestMax extends TestFunctionAbstract {
 	private Function func = new Max();
 
 	@Test
-	public void testMaxInteger() throws OpenMathException, EvaluatorException {
+	public void testMaxInteger() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(1));
 		args.add(OMCreator.createOMI(2));
@@ -34,7 +34,7 @@ public class TestMax extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testMaxFloat() throws OpenMathException, EvaluatorException {
+	public void testMaxFloat() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(2.5));
 		args.add(OMCreator.createOMF(5.8));
@@ -43,7 +43,7 @@ public class TestMax extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testMaxMixed() throws OpenMathException, EvaluatorException {
+	public void testMaxMixed() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(1));
 		args.add(OMCreator.createOMF(2.5));
@@ -52,14 +52,14 @@ public class TestMax extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testMaxIntegration1() throws OpenMathException, EvaluatorException {
+	public void testMaxIntegration1() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("max(5,10)", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
 		assertEquals(OMCreator.createOMI(10), result);
 	}
 
 	@Test
-	public void testMaxIntegration2() throws OpenMathException, EvaluatorException {
+	public void testMaxIntegration2() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("max(10.1,17)", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
 		assertEquals(OMCreator.createOMI(17), result);
@@ -73,28 +73,28 @@ public class TestMax extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testMaxWithWrongArguments1() throws OpenMathException, EvaluatorException {
+	public void testMaxWithWrongArguments1() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("max(10,'test')", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testMaxWithWrongArguments2() throws OpenMathException, EvaluatorException {
+	public void testMaxWithWrongArguments2() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("max('test',17)", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testMaxWithWrongNumberOfArgs1() throws OpenMathException, EvaluatorException {
+	public void testMaxWithWrongNumberOfArgs1() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("max('test',17, 3)", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testMaxWithWrongNumberOfArgs2() throws OpenMathException, EvaluatorException {
+	public void testMaxWithWrongNumberOfArgs2() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("max('test')", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();

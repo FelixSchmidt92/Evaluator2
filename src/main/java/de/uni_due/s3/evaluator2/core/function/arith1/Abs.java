@@ -26,7 +26,7 @@ public class Abs extends Function {
 	 * @throws EvaluatorException
 	 */
 	@Override
-	protected Object execute(List<Object> arguments) throws OpenMathException, EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		try {
 			Double argValue = getDoubleSyntax(arguments.get(0));
 			return OMCreator.createOMIOMF(Math.abs(argValue));
@@ -50,18 +50,18 @@ public class Abs extends Function {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return "abs(" + getSageSyntax(arguments.get(0)) + ")";
 	}
 
 	@Override
-	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 
 		return "\\left|" + getLatexSyntax(arguments.get(0)) + "\\right|";
 	}
 
 	@Override
-	public String getPartialStringSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialStringSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return "|" + getStringSyntax(arguments.get(0)) + "|";
 	}
 

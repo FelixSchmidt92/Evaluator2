@@ -41,87 +41,87 @@ public class TestIsRealNumber extends TestIntegration {
 	}
 
 	@Test
-	public void testIsRealNumber1() throws OpenMathException, EvaluatorException {
+	public void testIsRealNumber1() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isRealNumber('10')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsRealNumber2() throws OpenMathException, EvaluatorException {
+	public void testIsRealNumber2() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isRealNumber('1234567890')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsRealNumber3() throws OpenMathException, EvaluatorException {
+	public void testIsRealNumber3() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isRealNumber('-101230')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsRealNumber4() throws OpenMathException, EvaluatorException {
+	public void testIsRealNumber4() throws EvaluatorException, OpenMathException {
 		assertEquals(false, Evaluator.getBooleanResult("isRealNumber('12$56&')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsRealNumber5() throws OpenMathException, EvaluatorException {
+	public void testIsRealNumber5() throws EvaluatorException, OpenMathException {
 		assertEquals(false, Evaluator.getBooleanResult("isRealNumber('&!§$%&/()123asdf')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsRealNumber6() throws OpenMathException, EvaluatorException {
+	public void testIsRealNumber6() throws EvaluatorException, OpenMathException {
 		assertEquals(false, Evaluator.getBooleanResult("isRealNumber('abcde')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsRealNumberWithInput1() throws OpenMathException, EvaluatorException {
+	public void testIsRealNumberWithInput1() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isRealNumber('[pos=1]')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsRealNumberWithInput2() throws OpenMathException, EvaluatorException {
+	public void testIsRealNumberWithInput2() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isRealNumber('[pos=2]')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsRealNumberWithInput3() throws OpenMathException, EvaluatorException {
+	public void testIsRealNumberWithInput3() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isRealNumber('[pos=3]')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsRealNumberWithVariables1() throws OpenMathException, EvaluatorException {
+	public void testIsRealNumberWithVariables1() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isRealNumber('[var=a]')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsRealNumberWithVariables2() throws OpenMathException, EvaluatorException {
+	public void testIsRealNumberWithVariables2() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isRealNumber('[var=b]')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsRealNumberWithVariables3() throws OpenMathException, EvaluatorException {
+	public void testIsRealNumberWithVariables3() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isRealNumber('[var=c]')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsRealNumberWithWrongInputCharacter() throws OpenMathException, EvaluatorException {
+	public void testIsRealNumberWithWrongInputCharacter() throws EvaluatorException, OpenMathException {
 		assertEquals(false, Evaluator.getBooleanResult("isRealNumber(a)", exerVar, fillIn));
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testIsRealNumberWithTwoArguments() throws OpenMathException, EvaluatorException {
+	public void testIsRealNumberWithTwoArguments() throws EvaluatorException, OpenMathException {
 		Evaluator.getBooleanResult("isRealNumber(3/2 , 0)", exerVar, fillIn);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testIsRealNumberWithThreeArguments() throws OpenMathException, EvaluatorException {
+	public void testIsRealNumberWithThreeArguments() throws EvaluatorException, OpenMathException {
 		Evaluator.getBooleanResult("isRealNumber(3/2, 1/3, 3/1)", exerVar, fillIn);
 	}
 
 	@Test(expected = UndefinedExerciseVariableException.class)
-	public void testIsRealNumberWithMissingExerciseVariable() throws OpenMathException, EvaluatorException {
+	public void testIsRealNumberWithMissingExerciseVariable() throws EvaluatorException, OpenMathException {
 		Evaluator.getBooleanResult("isRealNumber('[var=j]')", exerVar, fillIn);
 	}
 
 	@Test(expected = UndefinedFillInVariableException.class)
-	public void testIsRealNumberWithMissingInput() throws OpenMathException, EvaluatorException {
+	public void testIsRealNumberWithMissingInput() throws EvaluatorException, OpenMathException {
 		Evaluator.getBooleanResult("isNumber('[pos=42]')", exerVar, fillIn);
 	}
 }

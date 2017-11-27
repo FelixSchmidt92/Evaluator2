@@ -5,10 +5,8 @@ import java.util.List;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.evaluator2.sage.Sage;
 import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OMBIND;
@@ -53,7 +51,7 @@ public class Product extends Function {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		OMA intervall = (OMA) arguments.get(0);
 		String lowerBound, upperBound;
 		
@@ -73,8 +71,7 @@ public class Product extends Function {
 	}
 	
 	@Override
-	public String getPartialLatexSyntax(List<Object> arguments)
-			throws EvaluatorException, FunctionException, NoRepresentationAvailableException {
+	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		
 		OMA intervall = (OMA) arguments.get(0);
 		String lowerBound, upperBound;

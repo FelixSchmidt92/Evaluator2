@@ -7,6 +7,7 @@ import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * This Class checks iff the first argument matches a Regex-Pattern from the
@@ -18,7 +19,7 @@ import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentExcep
 public class Matches extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		String in = getStringSyntax(arguments.get(0));
 		String regex = getStringSyntax(arguments.get(1));
 		try {

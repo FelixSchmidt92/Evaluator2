@@ -24,7 +24,7 @@ public class TestTan extends TestFunctionAbstract {
 	private static Function func = new Tan();
 
 	@Test
-	public void testTanFloat() throws OpenMathException, EvaluatorException {
+	public void testTanFloat() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(0.0));
 		Object result = func.evaluate(args);
@@ -32,7 +32,7 @@ public class TestTan extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testTanInteger() throws OpenMathException, EvaluatorException {
+	public void testTanInteger() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(1));
 		Object result = func.evaluate(args);
@@ -40,35 +40,35 @@ public class TestTan extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testTanIntegration() throws OpenMathException, EvaluatorException {
+	public void testTanIntegration() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("tan(0)", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMI(0), result.getOMI());
 	}
 
 	@Test
-	public void testTanSageSyntax() throws EvaluatorException {
+	public void testTanSageSyntax() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMF(1.0));
 		assertEquals("tan(1)", func.getPartialSageSyntax(args));
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testTanWithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testTanWithLessThanMinParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("tan()", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testTanWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
+	public void testTanWithMoreThanMaxParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("tan(1,3)", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testTanWithWrongArguments() throws OpenMathException, EvaluatorException {
+	public void testTanWithWrongArguments() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("tan('Test')", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();

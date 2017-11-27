@@ -6,6 +6,7 @@ import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * Returns the index within this string of the last occurrence of the specified
@@ -21,7 +22,7 @@ import de.uni_due.s3.openmath.omutils.OMCreator;
 public class LastIndexOf extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		String string = getStringSyntax(arguments.get(0));
 		String muster = getStringSyntax(arguments.get(1));
 		int pos = string.length() - 1;

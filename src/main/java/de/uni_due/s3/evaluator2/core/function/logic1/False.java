@@ -21,17 +21,17 @@ public class False extends Function {
 	}
 	
 	@Override
-	public Boolean getPartialBooleanSyntax(List<Object> arguments) throws EvaluatorException {
+	public Boolean getPartialBooleanSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return false;
 	}
 	
 	@Override
-	public Double getPartialDoubleSyntax(List<Object> arguments) throws EvaluatorException {
+	public Double getPartialDoubleSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return 0.0;
 	}
 	
 	@Override
-	public Integer getPartialIntegerSyntax(List<Object> arguments) throws EvaluatorException {
+	public Integer getPartialIntegerSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return 0;
 	}
 	
@@ -41,17 +41,17 @@ public class False extends Function {
 	}
 	
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return "False";
 	}
 
 	@Override
-	public String getPartialStringSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialStringSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return "False";
 	}
 	
 	@Override
-	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return "FALSE";
 	}
 	

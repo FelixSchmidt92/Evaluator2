@@ -28,7 +28,7 @@ public class Power extends BinaryFunction {
 	 * @throws EvaluatorException
 	 */
 	@Override
-	protected Object execute(List<Object> arguments) throws OpenMathException, EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		try {
 			Double b = getDoubleSyntax(arguments.get(0));
 			Double e = getDoubleSyntax(arguments.get(1));
@@ -54,22 +54,22 @@ public class Power extends BinaryFunction {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return "(" + getSageSyntax(arguments.get(0)) + ")^(" + getSageSyntax(arguments.get(1)) + ")";
 	}
 
 	@Override
-	public String getPartialLatexSyntax(List<Object> arguments)	throws EvaluatorException {
+	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return "{" + getLatexSyntax(arguments.get(0)) + "}^{" + getLatexSyntax(arguments.get(1)) + "}";
 	}
 
 	@Override
-	public String getPartialStringSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialStringSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return getStringSyntax(arguments.get(0)) + "^" + getStringSyntax(arguments.get(1));
 	}
 
 	@Override
-	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return "(" + getRSyntax(arguments.get(0)) + "^" + getRSyntax(arguments.get(1)) + ")";
 	}
 }

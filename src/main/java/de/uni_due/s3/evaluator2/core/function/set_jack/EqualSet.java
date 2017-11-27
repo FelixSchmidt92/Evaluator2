@@ -8,6 +8,7 @@ import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * Implements equalSet Function
@@ -25,7 +26,7 @@ public class EqualSet extends Function {
 	 * 
 	 */
 	@Override
-	protected Object execute(List<Object> arguments) throws EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		List<Object> firstList = getListSyntax(arguments.get(0));
 		List<Object> secondList = getListSyntax(arguments.get(1));
 		Set<Object> firstSet = new HashSet<>(firstList);

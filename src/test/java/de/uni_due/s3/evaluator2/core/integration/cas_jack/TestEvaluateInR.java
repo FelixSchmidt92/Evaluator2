@@ -19,7 +19,7 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 public class TestEvaluateInR extends TestIntegration  {
 	
 	@Test
-	public void testEvaluateInRInteger() throws OpenMathException, EvaluatorException {
+	public void testEvaluateInRInteger() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("evaluateInR('9')", null, null);
 		OMOBJ actual = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		
@@ -30,7 +30,7 @@ public class TestEvaluateInR extends TestIntegration  {
 	}
 	
 	@Test
-	public void testEvaluateInRFloat() throws OpenMathException, EvaluatorException {
+	public void testEvaluateInRFloat() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("evaluateInR('9.123')", null, null);
 		OMOBJ actual = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		
@@ -41,7 +41,7 @@ public class TestEvaluateInR extends TestIntegration  {
 	}
 	
 	@Test
-	public void testEvaluateInRString() throws OpenMathException, EvaluatorException {
+	public void testEvaluateInRString() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("evaluateInR('\"This\"')", null, null);
 		OMOBJ actual = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		
@@ -52,7 +52,7 @@ public class TestEvaluateInR extends TestIntegration  {
 	}
 	
 	@Test
-	public void testEvaluateInRBool() throws OpenMathException, EvaluatorException {
+	public void testEvaluateInRBool() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("evaluateInR('TRUE')", null, null);
 		OMOBJ actual = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		
@@ -63,7 +63,7 @@ public class TestEvaluateInR extends TestIntegration  {
 	}
 	
 	@Test
-	public void testEvaluateInRList() throws OpenMathException, EvaluatorException {
+	public void testEvaluateInRList() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("evaluateInR('list(1, 2, 3, 4)')", null, null);
 		OMOBJ actual = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		
@@ -81,7 +81,7 @@ public class TestEvaluateInR extends TestIntegration  {
 	}
 	
 	@Test
-	public void testEvaluateInRWithExerciseVariables() throws OpenMathException, EvaluatorException {
+	public void testEvaluateInRWithExerciseVariables() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("evaluateInR('[var=a]')",exerciseVariableMap, fillInVariableMap);
 		OMOBJ actual = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		
@@ -89,7 +89,7 @@ public class TestEvaluateInR extends TestIntegration  {
 	}
 	
 	@Test
-	public void testEvaluateInRWithFillInVariables() throws OpenMathException, EvaluatorException {
+	public void testEvaluateInRWithFillInVariables() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("evaluateInR('[pos=1]')",exerciseVariableMap, fillInVariableMap);
 		OMOBJ actual = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		
@@ -97,7 +97,7 @@ public class TestEvaluateInR extends TestIntegration  {
 	}
 	
 	@Test
-	public void testEvaluateInRWithFillInVariablesAsVector() throws OpenMathException, EvaluatorException {
+	public void testEvaluateInRWithFillInVariablesAsVector() throws EvaluatorException, OpenMathException {
 		fillInVariableMap.put(20, ExpressionParser.parse("vector(1,2)", exerciseVariableMap, fillInVariableMap));
 		OMOBJ omobj = ExpressionParser.parse("evaluateInR('[pos=20]')",exerciseVariableMap, fillInVariableMap);
 		OMOBJ actual = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
@@ -113,7 +113,7 @@ public class TestEvaluateInR extends TestIntegration  {
 	}
 	
 	@Test(expected = CasEvaluationException.class)
-	public void testEvaluateInRWrongSyntax() throws OpenMathException, EvaluatorException {
+	public void testEvaluateInRWrongSyntax() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("evaluateInR('wrong input')", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 	}

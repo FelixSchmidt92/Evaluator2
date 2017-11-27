@@ -36,7 +36,7 @@ public class EvalTerm2 extends Function {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 
 		String term = getSageSyntax(arguments.get(0));
 		String value1 = getSageSyntax(arguments.get(1));

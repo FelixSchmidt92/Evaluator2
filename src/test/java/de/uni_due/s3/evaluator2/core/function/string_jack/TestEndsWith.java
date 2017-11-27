@@ -24,7 +24,7 @@ public class TestEndsWith extends TestFunctionAbstract {
 	private static Function func = new EndsWith();
 
 	@Test
-	public void testEndsWithEqualStrings() throws OpenMathException, EvaluatorException {
+	public void testEndsWithEqualStrings() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("Test"));
 		args.add(OMCreator.createOMSTR("st"));
@@ -33,7 +33,7 @@ public class TestEndsWith extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testEndsWithNotEqualStrings() throws OpenMathException, EvaluatorException {
+	public void testEndsWithNotEqualStrings() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("Test"));
 		args.add(OMCreator.createOMSTR("Hello"));
@@ -42,28 +42,28 @@ public class TestEndsWith extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testEndsWithIntegration() throws OpenMathException, EvaluatorException {
+	public void testEndsWithIntegration() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("endsWith('Hallo', 'llo')", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMSymbol.LOGIC1_TRUE, result.getOMS());
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testEndsWithWithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testEndsWithWithLessThanMinParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("endsWith('Test')", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testEndsWithWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
+	public void testEndsWithWithMoreThanMaxParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("endsWith('Test', 'Test', 'Test')", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testEndsWithWithWrongArguments() throws OpenMathException, EvaluatorException {
+	public void testEndsWithWithWrongArguments() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("endsWith('Test', vector(2))", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();

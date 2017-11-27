@@ -3,6 +3,7 @@ package de.uni_due.s3.evaluator2.core.function;
 import java.util.List;
 import java.util.Set;
 
+import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.visitor.primitve.OMToBooleanVisitor;
 import de.uni_due.s3.evaluator2.core.visitor.primitve.OMToDoubleVisitor;
 import de.uni_due.s3.evaluator2.core.visitor.primitve.OMToIntegerVisitor;
@@ -20,6 +21,7 @@ import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
+import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidResultTypeException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMV;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
@@ -83,9 +85,14 @@ public abstract class Function {
 		if (arguments == null)
 			throw new FunctionInvalidArgumentException(this, "The List of arguments is of Type NULL");
 		argsBetweenMinMax(arguments); // Double-Check!
-		return execute(arguments);
+		Object result = execute(arguments);
+		
+		if (OMSymbol.isTerminal(result)) {
+			return result;
+		}
+		throw new FunctionInvalidResultTypeException(this);
 	}
-
+	
 	/**
 	 * This Method just tests if the length of the Arguments is in between minArgs
 	 * and maxArgs. If not then a FunctionInvalidNumberOfArgumentsException is
@@ -129,6 +136,27 @@ public abstract class Function {
 	public boolean argumentsShouldBeEvaluated() {
 		return true;
 	}
+	
+	/**
+	 * Define here how the Syntax should look like in Boolean for this specific
+	 * Function All Arguments that are passed here can be recursively called again
+	 * with getBooleanSyntax(omElement). So only deal here with the Representation
+	 * of this Function and call (usually) the arguments in
+	 * getBooleanSyntax(omElement) For Examples: see Plus, Minus or Set
+	 * 
+	 * @param arguments
+	 *            A List of Arguments for this Function. Note: The arguments are not
+	 *            evaluated!
+	 * @return A Boolean Representation of this Function AND all innerFunction
+	 * @throws NoRepresentationAvailableException
+	 * @throws FunctionInvalidNumberOfArgumentsException
+	 * @throws FunctionInvalidArgumentTypeException
+	 * @throws FunctionInvalidArgumentException
+	 * @throws CasException
+	 */
+	public Object getPartialSymbolicSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
+		throw new FunctionInvalidArgumentTypeException(this, "integer, float, double, variable, symbolic");
+	}
 
 	/**
 	 * Specify here the minimum number of Arguments for your Function. If minArgs
@@ -170,12 +198,13 @@ public abstract class Function {
 	 * @param omElement
 	 *            the argument, which should be represented in Boolean
 	 * @return a String representation of this argument in Boolean
+	 * @throws OpenMathException 
 	 * @throws NoRepresentationAvailableException
 	 * @throws FunctionInvalidNumberOfArgumentsException
 	 * @throws FunctionInvalidArgumentTypeException
 	 * @throws CasException
 	 */
-	protected final Boolean getBooleanSyntax(Object omElement) throws EvaluatorException {
+	protected final Boolean getBooleanSyntax(Object omElement) throws EvaluatorException, OpenMathException {
 		try {
 			return OMToBooleanVisitor.getInstance().visit(omElement);
 		} catch (NoRepresentationAvailableException e) {
@@ -200,7 +229,7 @@ public abstract class Function {
 	 * @throws FunctionInvalidArgumentException
 	 * @throws CasException
 	 */
-	public Boolean getPartialBooleanSyntax(List<Object> arguments) throws EvaluatorException {
+	public Boolean getPartialBooleanSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		throw new NoRepresentationAvailableException(
 				"There is no Boolean-representation for function " + this.getClass().getSimpleName());
 	}
@@ -214,12 +243,13 @@ public abstract class Function {
 	 * @param omElement
 	 *            the argument, which should be represented in Double
 	 * @return a Double representation of this argument in Double
+	 * @throws OpenMathException 
 	 * @throws NoRepresentationAvailableException
 	 * @throws FunctionInvalidNumberOfArgumentsException
 	 * @throws FunctionInvalidArgumentTypeException
 	 * @throws CasException
 	 */
-	protected final Double getDoubleSyntax(Object omElement) throws EvaluatorException {
+	protected final Double getDoubleSyntax(Object omElement) throws EvaluatorException, OpenMathException {
 		try {
 			return OMToDoubleVisitor.getInstance().visit(omElement);
 		} catch (NoRepresentationAvailableException e) {
@@ -243,7 +273,7 @@ public abstract class Function {
 	 * @throws FunctionInvalidArgumentException
 	 * @throws CasException
 	 */
-	public Double getPartialDoubleSyntax(List<Object> arguments) throws EvaluatorException {
+	public Double getPartialDoubleSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		throw new NoRepresentationAvailableException(
 				"There is no Double-representation for function " + this.getClass().getSimpleName());
 	}
@@ -257,12 +287,13 @@ public abstract class Function {
 	 * @param omElement
 	 *            the argument, which should be represented in Integer
 	 * @return a Integer representation of this argument in Integer
+	 * @throws OpenMathException 
 	 * @throws NoRepresentationAvailableException
 	 * @throws FunctionInvalidNumberOfArgumentsException
 	 * @throws FunctionInvalidArgumentTypeException
 	 * @throws CasException
 	 */
-	protected final Integer getIntegerSyntax(Object omElement) throws EvaluatorException {
+	protected final Integer getIntegerSyntax(Object omElement) throws EvaluatorException, OpenMathException {
 		try {
 			return OMToIntegerVisitor.getInstance().visit(omElement);
 		} catch (NoRepresentationAvailableException e) {
@@ -287,7 +318,7 @@ public abstract class Function {
 	 * @throws FunctionInvalidArgumentException
 	 * @throws CasException
 	 */
-	public Integer getPartialIntegerSyntax(List<Object> arguments) throws EvaluatorException {
+	public Integer getPartialIntegerSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		throw new NoRepresentationAvailableException(
 				"There is no Integer-representation for function " + this.getClass().getSimpleName());
 	}
@@ -300,8 +331,9 @@ public abstract class Function {
 	 *            OM-Object of which you want the latex syntax
 	 * @return Latex-String
 	 * @throws EvaluatorException
+	 * @throws OpenMathException 
 	 */
-	protected final String getLatexSyntax(Object omElement) throws EvaluatorException {
+	protected final String getLatexSyntax(Object omElement) throws EvaluatorException, OpenMathException {
 		if (this instanceof BinaryFunction) {
 			return ((BinaryFunction) this).getBinaryLatex(omElement);
 		} else {
@@ -318,7 +350,7 @@ public abstract class Function {
 	 * @throws FunctionException
 	 * @throws NoRepresentationAvailableException
 	 */
-	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		throw new NoRepresentationAvailableException(
 				"There is no LaTeX representation for function " + this.getClass().getSimpleName());
 	}
@@ -331,8 +363,9 @@ public abstract class Function {
 	 *            OM-Object of which you want the List-Syntax
 	 * @return A List
 	 * @throws EvaluatorException
+	 * @throws OpenMathException 
 	 */
-	protected final List<Object> getListSyntax(Object omElement) throws EvaluatorException {
+	protected final List<Object> getListSyntax(Object omElement) throws EvaluatorException, OpenMathException {
 		return OMToListVisitor.getInstance().visit(omElement);
 	}
 
@@ -342,10 +375,11 @@ public abstract class Function {
 	 * 
 	 * @param omel
 	 * @return the specific List-Representation for that Function
+	 * @throws OpenMathException 
 	 * @throws FunctionException
 	 * @throws NoRepresentationAvailableException
 	 */
-	public List<Object> getPartialListSyntax(List<Object> omel) throws EvaluatorException {
+	public List<Object> getPartialListSyntax(List<Object> omel) throws EvaluatorException, OpenMathException {
 		throw new NoRepresentationAvailableException(
 				"There is no List representation for function " + this.getClass().getSimpleName());
 	}
@@ -359,12 +393,13 @@ public abstract class Function {
 	 * @param omElement
 	 *            the argument, which should be represented in R
 	 * @return a String representation of this argument in R
+	 * @throws OpenMathException 
 	 * @throws NoRepresentationAvailableException
 	 * @throws FunctionInvalidNumberOfArgumentsException
 	 * @throws FunctionInvalidArgumentTypeException
 	 * @throws CasException
 	 */
-	protected final String getRSyntax(Object omElement) throws EvaluatorException {
+	protected final String getRSyntax(Object omElement) throws EvaluatorException, OpenMathException {
 		return OMToRVisitor.getInstance().visit(omElement);
 	}
 
@@ -385,7 +420,7 @@ public abstract class Function {
 	 * @throws FunctionInvalidArgumentException
 	 * @throws CasException
 	 */
-	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		throw new NoRepresentationAvailableException(
 				"There is no R representation for function " + this.getClass().getSimpleName());
 	}
@@ -399,12 +434,13 @@ public abstract class Function {
 	 * @param omElement
 	 *            the argument, which should be represented in Sage
 	 * @return a String representation of this argument in Sage
+	 * @throws OpenMathException 
 	 * @throws NoRepresentationAvailableException
 	 * @throws FunctionInvalidNumberOfArgumentsException
 	 * @throws FunctionInvalidArgumentTypeException
 	 * @throws CasException
 	 */
-	protected final String getSageSyntax(Object omElement) throws EvaluatorException {
+	protected final String getSageSyntax(Object omElement) throws EvaluatorException, OpenMathException {
 		return OMToSageVisitor.getInstance().visit(omElement);
 
 	}
@@ -426,7 +462,7 @@ public abstract class Function {
 	 * @throws FunctionInvalidArgumentException
 	 * @throws CasException
 	 */
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		throw new NoRepresentationAvailableException(
 				"There is no Sage representation for function " + this.getClass().getSimpleName());
 	}
@@ -444,12 +480,13 @@ public abstract class Function {
 	 * @param omElement
 	 *            the argument, which should be represented in String
 	 * @return a String representation of this argument in String
+	 * @throws OpenMathException 
 	 * @throws NoRepresentationAvailableException
 	 * @throws FunctionInvalidNumberOfArgumentsException
 	 * @throws FunctionInvalidArgumentTypeException
 	 * @throws CasException
 	 */
-	protected final String getStringSyntax(Object omElement) throws EvaluatorException {
+	protected final String getStringSyntax(Object omElement) throws EvaluatorException, OpenMathException {
 		try {
 			return OMToStringVisitor.getInstance().visit(omElement);
 		} catch (NoRepresentationAvailableException e) {
@@ -473,7 +510,7 @@ public abstract class Function {
 	 * @throws FunctionInvalidArgumentException
 	 * @throws CasException
 	 */
-	public String getPartialStringSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialStringSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		throw new NoRepresentationAvailableException(
 				"There is no String-representation for function " + this.getClass().getSimpleName());
 	}
@@ -487,8 +524,9 @@ public abstract class Function {
 	 * @param omElement
 	 * @return
 	 * @throws EvaluatorException
+	 * @throws OpenMathException 
 	 */
-	protected final Set<OMV> getVariablesAsOMVSet(Object omElement) throws EvaluatorException {
+	protected final Set<OMV> getVariablesAsOMVSet(Object omElement) throws EvaluatorException, OpenMathException {
 		return OMVariableVisitor.getInstance().visit(omElement);
 	}
 	

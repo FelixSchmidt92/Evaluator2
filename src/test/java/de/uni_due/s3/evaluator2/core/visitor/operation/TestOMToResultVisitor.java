@@ -90,7 +90,7 @@ public class TestOMToResultVisitor {
 	}
 
 	@Test(expected = NoRepresentationAvailableException.class)
-	public void testNotImplementedOMobject() throws OpenMathException, EvaluatorException {
+	public void testNotImplementedOMobject() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = new OMOBJ();
 
 		if (foreignChild instanceof OMB)
@@ -117,7 +117,7 @@ public class TestOMToResultVisitor {
 	}
 	
 	@Test
-	public void isSingletonPattern() throws EvaluatorException {
+	public void isSingletonPattern() throws EvaluatorException, OpenMathException {
 		OMToSyntaxVisitor<?> obj1 = OMToResultVisitor.getInstance();
 		OMToSyntaxVisitor<?> obj2 = OMToResultVisitor.getInstance();
 		

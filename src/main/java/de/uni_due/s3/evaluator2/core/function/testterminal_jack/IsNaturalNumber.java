@@ -6,6 +6,7 @@ import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * This Function tests if the first Argument can be casted to OMI, if it does
@@ -18,7 +19,7 @@ import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeE
 public class IsNaturalNumber extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		try {
 			Integer toTest = getIntegerSyntax(arguments.get(0));
 			if (toTest < 0) return OMSymbol.LOGIC1_FALSE;

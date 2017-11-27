@@ -26,7 +26,7 @@ public class TestUnaryMinus extends TestFunctionAbstract {
 	private Function func = new UnaryMinus();
 
 	@Test
-	public void testUnaryMinusInteger() throws OpenMathException, EvaluatorException {
+	public void testUnaryMinusInteger() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(3));
 		Object result = func.evaluate(args);
@@ -34,7 +34,7 @@ public class TestUnaryMinus extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testUnaryMinusFloat() throws OpenMathException, EvaluatorException {
+	public void testUnaryMinusFloat() throws EvaluatorException, OpenMathException {
 
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMF(2.5));
@@ -43,21 +43,21 @@ public class TestUnaryMinus extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testUnaryMinusIntegration1() throws OpenMathException, EvaluatorException {
+	public void testUnaryMinusIntegration1() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("-1075", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
 		assertEquals(OMCreator.createOMI(-1075), result);
 	}
 
 	@Test
-	public void testUnaryMinusIntegration2() throws OpenMathException, EvaluatorException {
+	public void testUnaryMinusIntegration2() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("-2075.32", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
 		assertEquals(OMCreator.createOMF(-2075.32), result);
 	}
 
 	@Test
-	public void testUnaryMinusSageSyntax() throws EvaluatorException {
+	public void testUnaryMinusSageSyntax() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(1.0));
 		assertEquals("-1", func.getPartialSageSyntax(args));
@@ -71,14 +71,14 @@ public class TestUnaryMinus extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testUnaryMinusWithWrongArguments() throws OpenMathException, EvaluatorException {
+	public void testUnaryMinusWithWrongArguments() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("-'test'", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 	
 	@Test
-	public void testUnaryPlus() throws OpenMathException, EvaluatorException {
+	public void testUnaryPlus() throws EvaluatorException, OpenMathException {
 		OMOBJ expected =new OMOBJ();
 		expected.setOMI(OMCreator.createOMI(1));
 		OMOBJ actual = Evaluator.evaluate("++++1", null, null);	

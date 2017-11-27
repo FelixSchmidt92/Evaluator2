@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.function.Function;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OMF;
 import de.uni_due.s3.openmath.jaxb.OMI;
@@ -12,6 +13,7 @@ import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.jaxb.OMSTR;
 import de.uni_due.s3.openmath.jaxb.OMV;
 import de.uni_due.s3.openmath.omutils.OMCreator;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * This Class counts all Nodes.
@@ -22,7 +24,7 @@ import de.uni_due.s3.openmath.omutils.OMCreator;
 public class CountNodes extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		Object obj = arguments.get(0);
 
 		if (obj instanceof OMI || obj instanceof OMF || obj instanceof OMSTR || obj instanceof OMS

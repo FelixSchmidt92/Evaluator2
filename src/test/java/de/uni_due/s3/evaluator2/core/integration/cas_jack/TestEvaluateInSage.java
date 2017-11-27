@@ -20,7 +20,7 @@ public class TestEvaluateInSage extends TestFunctionAbstract {
 	Function func = new EvaluateInSage();
 
 	@Test
-	public void testEvaluateInSageIntegration1() throws OpenMathException, EvaluatorException {
+	public void testEvaluateInSageIntegration1() throws EvaluatorException, OpenMathException {
 		HashMap<String, OMOBJ> exer = new HashMap<>();
 		HashMap<Integer, OMOBJ> fill = new HashMap<>();
 		OMOBJ t1 = new OMOBJ();
@@ -34,7 +34,7 @@ public class TestEvaluateInSage extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testEvaluateInSageIntegration2() throws OpenMathException, EvaluatorException {
+	public void testEvaluateInSageIntegration2() throws EvaluatorException, OpenMathException {
 		HashMap<String, OMOBJ> exer = new HashMap<>();
 		HashMap<Integer, OMOBJ> fill = new HashMap<>();
 		OMOBJ t1 = new OMOBJ();
@@ -48,7 +48,7 @@ public class TestEvaluateInSage extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testEvaluateInSageIntegration3() throws OpenMathException, EvaluatorException {
+	public void testEvaluateInSageIntegration3() throws EvaluatorException, OpenMathException {
 		HashMap<String, OMOBJ> exer = new HashMap<>();
 		HashMap<Integer, OMOBJ> fill = new HashMap<>();
 		OMOBJ t1 = new OMOBJ();
@@ -62,7 +62,7 @@ public class TestEvaluateInSage extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testEvaluateInSageIntegration4() throws OpenMathException, EvaluatorException {
+	public void testEvaluateInSageIntegration4() throws EvaluatorException, OpenMathException {
 		HashMap<String, OMOBJ> exer = new HashMap<>();
 		HashMap<Integer, OMOBJ> fill = new HashMap<>();
 		OMOBJ t1 = new OMOBJ();

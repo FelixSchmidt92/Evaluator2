@@ -22,7 +22,7 @@ public class TestRandomMatrixRank extends TestFunctionAbstract {
 	Function func = new RandomMatrixRank();
 
 	@Test
-	public void testRandomMatrixRankWithZerosAsArgument() throws OpenMathException, EvaluatorException {
+	public void testRandomMatrixRankWithZerosAsArgument() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMSTR("QQ"));
 		args.add(OMCreator.createOMI(0));
@@ -37,7 +37,7 @@ public class TestRandomMatrixRank extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testRandomMatrixRankWithOnesAsArgument() throws OpenMathException, EvaluatorException {
+	public void testRandomMatrixRankWithOnesAsArgument() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMSTR("QQ"));
 		args.add(OMCreator.createOMI(1));
@@ -56,7 +56,7 @@ public class TestRandomMatrixRank extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testRandomMatrixRank() throws OpenMathException, EvaluatorException {
+	public void testRandomMatrixRank() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMSTR("ZZ"));
 		args.add(OMCreator.createOMI(10));
@@ -68,28 +68,28 @@ public class TestRandomMatrixRank extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testRandomMatrixRankIntegration4Arguments() throws OpenMathException, EvaluatorException {
+	public void testRandomMatrixRankIntegration4Arguments() throws EvaluatorException, OpenMathException {
 		OMOBJ t = ExpressionParser.parse("randomMatrixRank('QQ', 2, 3, 2)", null, null);
 
 		OMToResultVisitor.getInstance().visit(t);
 	}
 
 	@Test
-	public void testRandomMatrixRankIntegration5Arguments() throws OpenMathException, EvaluatorException {
+	public void testRandomMatrixRankIntegration5Arguments() throws EvaluatorException, OpenMathException {
 		OMOBJ t = ExpressionParser.parse("randomMatrixRank('QQ', 2, 3, 2, 10)", null, null);
 
 		OMToResultVisitor.getInstance().visit(t);
 	}
 
 	@Test
-	public void testRandomMatrixRankIntegration6Arguments() throws OpenMathException, EvaluatorException {
+	public void testRandomMatrixRankIntegration6Arguments() throws EvaluatorException, OpenMathException {
 		OMOBJ t = ExpressionParser.parse("randomMatrixRank('QQ', '2', '3', '2', '10')", null, null);
 
 		OMToResultVisitor.getInstance().visit(t);
 	}
 	
 	@Test
-	public void testRandomMatrixRankIntegration7Arguments() throws OpenMathException, EvaluatorException {
+	public void testRandomMatrixRankIntegration7Arguments() throws EvaluatorException, OpenMathException {
 		OMOBJ t = ExpressionParser.parse("randomMatrixRank(zz(), 2, 3, 2, 10)", null, null);
 
 		OMToResultVisitor.getInstance().visit(t);

@@ -48,7 +48,7 @@ public class Matrix extends ConstructorFunction {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		String sageExpression = "matrix([";
 
 		for (int i = 0; i < arguments.size(); i++) {
@@ -63,7 +63,7 @@ public class Matrix extends ConstructorFunction {
 	}
 
 	@Override
-	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		String begin = "\\left(\\begin{array}{";
 		String args = "";
 
@@ -83,7 +83,7 @@ public class Matrix extends ConstructorFunction {
 		return result;
 	}
 	@Override
-	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		//arguments should be oma of matrixrow
 		int nrow,ncol;
 		nrow = arguments.size();

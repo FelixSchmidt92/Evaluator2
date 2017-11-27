@@ -4,9 +4,8 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * Returns the largest (closest to positive infinity) double value that is less
@@ -18,7 +17,7 @@ import de.uni_due.s3.openmath.omutils.OMCreator;
 public class Floor extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 			double value = getDoubleSyntax(arguments.get(0));
 			value = Math.floor(value);
 			return OMCreator.createOMIOMF(value);
@@ -35,8 +34,7 @@ public class Floor extends Function {
 	}
 	
 	@Override
-	public String getPartialLatexSyntax(List<Object> arguments)
-			throws EvaluatorException, FunctionException, NoRepresentationAvailableException {
+	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		
 		return "\\left\\lfloor " +getLatexSyntax(arguments.get(0))+ " \\right\\rfloor";
 	}

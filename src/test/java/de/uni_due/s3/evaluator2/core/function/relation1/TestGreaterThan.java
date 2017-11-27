@@ -27,7 +27,7 @@ public class TestGreaterThan extends TestFunctionAbstract {
 	private final Function func = new GreaterThan();
 
 	@Test
-	public void testGreaterThanOMI1() throws OpenMathException, EvaluatorException {
+	public void testGreaterThanOMI1() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(10));
 		args.add(OMCreator.createOMI(1));
@@ -36,7 +36,7 @@ public class TestGreaterThan extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testGreaterThanOMI2() throws OpenMathException, EvaluatorException {
+	public void testGreaterThanOMI2() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(109345));
 		args.add(OMCreator.createOMI(9000000));
@@ -45,7 +45,7 @@ public class TestGreaterThan extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testGreaterThanOMF1() throws OpenMathException, EvaluatorException {
+	public void testGreaterThanOMF1() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMF(0.546363));
 		args.add(OMCreator.createOMF(0.546362));
@@ -54,7 +54,7 @@ public class TestGreaterThan extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testGreaterThanOMF2() throws OpenMathException, EvaluatorException {
+	public void testGreaterThanOMF2() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMF(12.3045));
 		args.add(OMCreator.createOMF(12.3046));
@@ -63,7 +63,7 @@ public class TestGreaterThan extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testGreaterThanOMFAndOMI1() throws OpenMathException, EvaluatorException {
+	public void testGreaterThanOMFAndOMI1() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMF(0.546363));
 		args.add(OMCreator.createOMI(-3));
@@ -79,7 +79,7 @@ public class TestGreaterThan extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testGreaterThanOMFAndOMI2() throws OpenMathException, EvaluatorException {
+	public void testGreaterThanOMFAndOMI2() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(2));
 		args.add(OMCreator.createOMF(12.3046));
@@ -88,7 +88,7 @@ public class TestGreaterThan extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testGreaterThanWithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testGreaterThanWithLessThanMinParam() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMSTR("test"));
 		func.evaluate(args);
@@ -96,7 +96,7 @@ public class TestGreaterThan extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testGreaterThanWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
+	public void testGreaterThanWithMoreThanMaxParam() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMSTR("test"));
 		args.add(OMCreator.createOMSTR("test"));
@@ -106,7 +106,7 @@ public class TestGreaterThan extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testGreaterThanWithWrongArguments() throws OpenMathException, EvaluatorException {
+	public void testGreaterThanWithWrongArguments() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(null);
 		args.add(OMCreator.createOMSTR(null));
@@ -115,14 +115,14 @@ public class TestGreaterThan extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testGreaterThanIntegration() throws OpenMathException, EvaluatorException {
+	public void testGreaterThanIntegration() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("10 > 5", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMSymbol.LOGIC1_TRUE, result.getOMS());
 	}
 
 	@Test
-	public void testGreaterThanSageSyntax() throws EvaluatorException {
+	public void testGreaterThanSageSyntax() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(10));
 		args.add(OMCreator.createOMI(9));

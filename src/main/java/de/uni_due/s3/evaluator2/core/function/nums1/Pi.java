@@ -22,7 +22,7 @@ public class Pi extends ConstructorFunction {
 	}
 	
 	@Override
-	public Double getPartialDoubleSyntax(List<Object> arguments) throws EvaluatorException {
+	public Double getPartialDoubleSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return Math.PI;
 	}
 	
@@ -32,17 +32,17 @@ public class Pi extends ConstructorFunction {
 	}
 	
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return "pi";
 	}
 
 	@Override
-	public String getPartialStringSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialStringSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return "PI";
 	}
 	
 	@Override
-	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return "pi";
 	}
 	

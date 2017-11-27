@@ -21,7 +21,7 @@ public class TestGetDenominator extends TestFunctionAbstract {
 	Function func = new GetDenominator();
 
 	@Test
-	public void testGetDenominator1() throws OpenMathException, EvaluatorException {
+	public void testGetDenominator1() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 		ArrayList<Object> omel = new ArrayList<>();
 		omel.add(OMCreator.createOMI(10));
@@ -34,7 +34,7 @@ public class TestGetDenominator extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testGetDenominator2() throws OpenMathException, EvaluatorException {
+	public void testGetDenominator2() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 		ArrayList<Object> omel = new ArrayList<>();
 		omel.add(OMCreator.createOMF(1.1));
@@ -47,7 +47,7 @@ public class TestGetDenominator extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void TestGetDenominatorCaseIntegration() throws OpenMathException, EvaluatorException {
+	public void TestGetDenominatorCaseIntegration() throws EvaluatorException, OpenMathException {
 		OMOBJ t = ExpressionParser.parse("getDenominator(2/3)", null, null);
 		OMOBJ actual = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(t));
 
@@ -55,7 +55,7 @@ public class TestGetDenominator extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void TestGetDenominatorCaseIntegrationWithFloat() throws OpenMathException, EvaluatorException {
+	public void TestGetDenominatorCaseIntegrationWithFloat() throws EvaluatorException, OpenMathException {
 		OMOBJ t = ExpressionParser.parse("getDenominator(2/3.3)", null, null);
 		OMOBJ actual = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(t));
 

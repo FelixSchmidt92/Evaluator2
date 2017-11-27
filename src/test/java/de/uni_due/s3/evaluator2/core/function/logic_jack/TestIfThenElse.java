@@ -19,6 +19,7 @@ import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvaila
 import de.uni_due.s3.evaluator2.parser.ExpressionParser;
 import de.uni_due.s3.evaluator2.sage.Sage;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
+import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
@@ -30,7 +31,7 @@ public class TestIfThenElse extends TestFunctionAbstract {
 	private Object result;
 
 	@Test
-	public void testIfThenElseConditionOMF() throws OpenMathException, EvaluatorException {
+	public void testIfThenElseConditionOMF() throws EvaluatorException, OpenMathException {
 		args = new ArrayList<Object>(3);
 		args.add(OMCreator.createOMF(3.0));
 		args.add(OMCreator.createOMSTR("true"));
@@ -47,7 +48,7 @@ public class TestIfThenElse extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testIfThenElseConditionOMI() throws OpenMathException, EvaluatorException {
+	public void testIfThenElseConditionOMI() throws EvaluatorException, OpenMathException {
 		args = new ArrayList<Object>(3);
 		args.add(OMCreator.createOMI(3));
 		args.add(OMCreator.createOMSTR("true"));
@@ -64,7 +65,7 @@ public class TestIfThenElse extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testIfThenElseConditionBoolean() throws OpenMathException, EvaluatorException {
+	public void testIfThenElseConditionBoolean() throws EvaluatorException, OpenMathException {
 		args = new ArrayList<Object>(3);
 		args.add(OMSymbol.LOGIC1_TRUE);
 		args.add(OMCreator.createOMSTR("true"));
@@ -81,19 +82,20 @@ public class TestIfThenElse extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testIfThenElseAnyReturnType() throws OpenMathException, EvaluatorException {
-		args = new ArrayList<Object>(3);
-		Object obj = new Object();
+	public void testIfThenElseAnyReturnType() throws EvaluatorException, OpenMathException {
+		args = new ArrayList<Object>();
+		OMS obj =  OMSymbol.NUMS1_E;
+		OMS obj2 =  OMSymbol.NUMS1_PI;
 		args.add(OMSymbol.LOGIC1_TRUE);
 		args.add(obj);
-		args.add(null);
+		args.add(obj2);
 		result = func.evaluate(args);
 		assertEquals(obj, result);
 
 	}
 
 	@Test
-	public void testIfThenEleseIntegration() throws OpenMathException, EvaluatorException {
+	public void testIfThenEleseIntegration() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("ifthenelse('5*3*9>=10','true','false')", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals("true", result.getOMSTR().getContent());
@@ -104,7 +106,7 @@ public class TestIfThenElse extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testIfThenEleseWithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testIfThenEleseWithLessThanMinParam() throws EvaluatorException, OpenMathException {
 		args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMSTR("test"));
 		args.add(OMCreator.createOMSTR("test"));
@@ -113,7 +115,7 @@ public class TestIfThenElse extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testIfThenEleseWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
+	public void testIfThenEleseWithMoreThanMaxParam() throws EvaluatorException, OpenMathException {
 		args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMSTR("test"));
 		args.add(OMCreator.createOMSTR("test"));
@@ -124,7 +126,7 @@ public class TestIfThenElse extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testIfThenEleseWithWrongArguments() throws OpenMathException, EvaluatorException {
+	public void testIfThenEleseWithWrongArguments() throws EvaluatorException, OpenMathException {
 		args = new ArrayList<Object>(2);
 		args.add(null);
 		args.add(OMCreator.createOMSTR(null));
@@ -134,7 +136,7 @@ public class TestIfThenElse extends TestFunctionAbstract {
 	}
 
 	@Test(expected = NoRepresentationAvailableException.class)
-	public void testIfThenElseSageSyntax() throws OpenMathException, EvaluatorException {
+	public void testIfThenElseSageSyntax() throws EvaluatorException, OpenMathException {
 		args = new ArrayList<Object>(3);
 		args.add(OMSymbol.LOGIC1_TRUE);
 		args.add(OMCreator.createOMI(3));

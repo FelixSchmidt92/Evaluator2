@@ -6,10 +6,10 @@ import java.util.List;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
 import de.uni_due.s3.openmath.jaxb.OMSTR;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * This Function is not registered in OMSEvaluatorSyntaxDictionary.
@@ -29,7 +29,7 @@ public class TextWithVariables extends Function {
 
 
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return OMCreator.createOMA(OMSymbol.STRINGJACK_TEXTWITHVARIABLES, arguments);
 	}
 
@@ -44,7 +44,7 @@ public class TextWithVariables extends Function {
 	}
 
 	@Override
-	public String getPartialStringSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialStringSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		StringBuilder sb = new StringBuilder();
 		for (Object arg : arguments) {
 			sb.append(getStringSyntax(arg));
@@ -53,7 +53,7 @@ public class TextWithVariables extends Function {
 	}
 
 	@Override
-	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		String temp = "";
 
 		for (Object obj : arguments) {
@@ -104,7 +104,7 @@ public class TextWithVariables extends Function {
 	 * 
 	 */
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		String temp = "";
 
 		for (Object obj : arguments) {
@@ -116,7 +116,7 @@ public class TextWithVariables extends Function {
 	
 	
 	@Override
-	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		String temp = "";
 
 		for (Object obj : arguments) {

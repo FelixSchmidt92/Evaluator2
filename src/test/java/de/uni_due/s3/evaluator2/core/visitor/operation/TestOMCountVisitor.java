@@ -16,21 +16,21 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 public class TestOMCountVisitor {
 	
 	@Test
-	public void testOMCountVisitor1() throws OpenMathException, EvaluatorException {
+	public void testOMCountVisitor1() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("(a-b)", new HashMap<>(), new HashMap<>());
 		Integer result = OMCountVisitor.getInstance().visit(obj);
 		Integer expected = 4; //OMA OMS OMV OMV
 		assertEquals(expected, result);
 	}
 	@Test
-	public void testOMCountVisitor2() throws OpenMathException, EvaluatorException {
+	public void testOMCountVisitor2() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("a-b*2", new HashMap<>(), new HashMap<>());
 		Integer result = OMCountVisitor.getInstance().visit(obj);
 		Integer expected = 7;
 		assertEquals(expected, result);
 	}
 	@Test
-	public void testOMCountVisitor3() throws OpenMathException, EvaluatorException {
+	public void testOMCountVisitor3() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("(a-b)*2", new HashMap<>(), new HashMap<>());
 		Integer result = OMCountVisitor.getInstance().visit(obj);
 		Integer expected = 7;
@@ -39,7 +39,7 @@ public class TestOMCountVisitor {
 	
 	
 	@Test
-	public void testOMCountVisitor4() throws OpenMathException, EvaluatorException {
+	public void testOMCountVisitor4() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("3*x^(a-b)*2", new HashMap<>(), new HashMap<>());
 		Integer result = OMCountVisitor.getInstance().visit(obj);
 		Integer expected = 13;
@@ -71,7 +71,7 @@ public class TestOMCountVisitor {
 	}		
 	
 	@Test
-	public void isSingletonPattern() throws EvaluatorException {
+	public void isSingletonPattern() throws EvaluatorException, OpenMathException {
 		OMToSyntaxVisitor<?> obj1 = OMCountVisitor.getInstance();
 		OMToSyntaxVisitor<?> obj2 = OMCountVisitor.getInstance();
 		

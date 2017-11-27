@@ -25,7 +25,7 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 public class RandomMatrixEigenvalue extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws OpenMathException, EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 			return Sage.evaluateInCAS(getPartialSageSyntax(arguments));
 	}
 
@@ -40,7 +40,7 @@ public class RandomMatrixEigenvalue extends Function {
 	}
 	
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		StringBuilder sb = new StringBuilder();
 		sb.append("sage.matrix.constructor.random_diagonalizable_matrix(sage.matrix.matrix_space.MatrixSpace(");
 		sb.append(getSageSyntax(arguments.get(0)));

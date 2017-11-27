@@ -47,7 +47,7 @@ public class TestDefint extends TestFunctionAbstract{
 	}
 	
 	@Test
-	public void testDefntLatexSyntax() throws JAXBException, EvaluatorException {
+	public void testDefntLatexSyntax() throws EvaluatorException, OpenMathException, JAXBException {
 		OMOBJ omobj = OMConverter.toObject("<OMOBJ><OMA>" + 
 				"<OMS cd=\"calculus1\" name=\"defint\"/>" + 
 				"<OMA>" +

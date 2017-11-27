@@ -95,7 +95,7 @@ public class TestFactorial extends TestFunctionAbstract{
 	
 	
 	@Test
-	public void testFactorialIntegration() throws OpenMathException, EvaluatorException {
+	public void testFactorialIntegration() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("factorial(5)", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
 		assertEquals(OMCreator.createOMI(120), result);

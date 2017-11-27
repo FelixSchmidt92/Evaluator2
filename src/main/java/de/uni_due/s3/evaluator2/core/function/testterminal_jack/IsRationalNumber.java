@@ -6,6 +6,7 @@ import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.sage.Sage;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * This Function tests if the first Argument can be casted to OMI|OMF, if it
@@ -19,7 +20,7 @@ import de.uni_due.s3.evaluator2.sage.Sage;
 public class IsRationalNumber extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		String toTest = getSageSyntax(arguments.get(0));
 		try {
 			if (Sage.evaluateInCAS("isinstance(" + toTest + ", sage.rings.rational.Rational)")

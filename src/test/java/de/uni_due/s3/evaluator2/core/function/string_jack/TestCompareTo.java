@@ -23,7 +23,7 @@ public class TestCompareTo extends TestFunctionAbstract {
 	private static Function func = new CompareTo();
 
 	@Test
-	public void testCompareToEqualStrings() throws OpenMathException, EvaluatorException {
+	public void testCompareToEqualStrings() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("Test"));
 		args.add(OMCreator.createOMSTR("Test"));
@@ -32,7 +32,7 @@ public class TestCompareTo extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testCompareToNotEqualStrings() throws OpenMathException, EvaluatorException {
+	public void testCompareToNotEqualStrings() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("Testin"));
 		args.add(OMCreator.createOMSTR("Tester"));
@@ -41,28 +41,28 @@ public class TestCompareTo extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testCompareToIntegration() throws OpenMathException, EvaluatorException {
+	public void testCompareToIntegration() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("compareTo('Hallo', 'Test')", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMI(-12), result.getOMI());
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testCompareToWithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testCompareToWithLessThanMinParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("compareTo('Test')", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testCompareToWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
+	public void testCompareToWithMoreThanMaxParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("compareTo('Test', 'Test', 'Test')", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testCompareToWithWrongArguments() throws OpenMathException, EvaluatorException {
+	public void testCompareToWithWrongArguments() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("compareTo('Test', vector(2))", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();

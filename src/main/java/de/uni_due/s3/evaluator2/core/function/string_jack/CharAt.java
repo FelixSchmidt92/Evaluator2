@@ -6,6 +6,7 @@ import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * Implements charAt operation for strings.
@@ -23,7 +24,7 @@ import de.uni_due.s3.openmath.omutils.OMCreator;
 public class CharAt extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 			String string = getStringSyntax(arguments.get(0));
 			int pos = getIntegerSyntax(arguments.get(1));
 

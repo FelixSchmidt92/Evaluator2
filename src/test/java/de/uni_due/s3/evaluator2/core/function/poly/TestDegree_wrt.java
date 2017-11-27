@@ -24,7 +24,7 @@ public class TestDegree_wrt extends TestFunctionAbstract {
 	private Function func = new Degree_wrt();
 
 	@Test
-	public void testDegreeWrtWithOneVariable() throws OpenMathException, EvaluatorException {
+	public void testDegreeWrtWithOneVariable() throws EvaluatorException, OpenMathException {
 		List<Object> pow = new ArrayList<Object>();
 		pow.add(OMCreator.createOMV("a"));
 		pow.add(OMCreator.createOMI(2));
@@ -39,7 +39,7 @@ public class TestDegree_wrt extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testDegreeWrtWithTwoVariable() throws OpenMathException, EvaluatorException {
+	public void testDegreeWrtWithTwoVariable() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>(1);
 		args.add(ExpressionParser.parse("1+a^2-b^5", null, null));
 		args.add(OMCreator.createOMV("b"));
@@ -48,7 +48,7 @@ public class TestDegree_wrt extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testDegreeWrtWithEmptyVariable() throws OpenMathException, EvaluatorException {
+	public void testDegreeWrtWithEmptyVariable() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>(1);
 		args.add(ExpressionParser.parse("1+a^6-b^5", null, null));
 		args.add(OMCreator.createOMV("a"));
@@ -57,7 +57,7 @@ public class TestDegree_wrt extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testDegreeWrtWithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testDegreeWrtWithLessThanMinParam() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("test"));
 		func.evaluate(args);
@@ -65,7 +65,7 @@ public class TestDegree_wrt extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testDegreeWrtWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
+	public void testDegreeWrtWithMoreThanMaxParam() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("test"));
 		args.add(OMCreator.createOMSTR("test"));
@@ -75,7 +75,7 @@ public class TestDegree_wrt extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testDegreeWrtIntegration() throws OpenMathException, EvaluatorException {
+	public void testDegreeWrtIntegration() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("deg('1+x^3','x')", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMI(3), result.getOMI());

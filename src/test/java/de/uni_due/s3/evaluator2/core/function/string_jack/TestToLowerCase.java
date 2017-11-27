@@ -23,7 +23,7 @@ public class TestToLowerCase extends TestFunctionAbstract {
 	private static Function func = new ToLowerCase();
 
 	@Test
-	public void testToLowerCaseStrings1() throws OpenMathException, EvaluatorException {
+	public void testToLowerCaseStrings1() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("ELEFANT"));
 		Object result = func.evaluate(args);
@@ -31,7 +31,7 @@ public class TestToLowerCase extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testToLowerCaseStrings2() throws OpenMathException, EvaluatorException {
+	public void testToLowerCaseStrings2() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("LaTeX"));
 		Object result = func.evaluate(args);
@@ -39,7 +39,7 @@ public class TestToLowerCase extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testToLowerCaseStrings3() throws OpenMathException, EvaluatorException {
+	public void testToLowerCaseStrings3() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("Test oder NICHT"));
 		Object result = func.evaluate(args);
@@ -47,7 +47,7 @@ public class TestToLowerCase extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testToLowerCaseStrings4() throws OpenMathException, EvaluatorException {
+	public void testToLowerCaseStrings4() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR(""));
 		Object result = func.evaluate(args);
@@ -55,28 +55,28 @@ public class TestToLowerCase extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testToLowerCaseIntegration1() throws OpenMathException, EvaluatorException {
+	public void testToLowerCaseIntegration1() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("toLowerCase('Hello')", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMSTR("hello"), result.getOMSTR());
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testToLowerCaseWithWrongArguments() throws OpenMathException, EvaluatorException {
+	public void testToLowerCaseWithWrongArguments() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("toLowerCase(vector(1))", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testToLowerCaseWithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testToLowerCaseWithLessThanMinParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("toLowerCase()", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testToLowerCaseWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
+	public void testToLowerCaseWithMoreThanMaxParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("toLowerCase('Test', 'Zwei')", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();

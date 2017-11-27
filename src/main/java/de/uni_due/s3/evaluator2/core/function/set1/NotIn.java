@@ -5,8 +5,7 @@ import java.util.List;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * 
@@ -16,7 +15,7 @@ import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvaila
 public class NotIn extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		List<Object> list = getListSyntax(arguments.get(1));
 		if (list.contains(arguments.get(0)) || arguments.get(0).equals(OMSymbol.SET1_EMPTYSET)) {
 			return OMSymbol.LOGIC1_FALSE;
@@ -36,8 +35,7 @@ public class NotIn extends Function {
 	}
 
 	@Override
-	public String getPartialLatexSyntax(List<Object> arguments)
-			throws EvaluatorException, FunctionException, NoRepresentationAvailableException {
+	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return getLatexSyntax(arguments.get(0)) + "\\notin" + getLatexSyntax(arguments.get(1));
 	}
 }

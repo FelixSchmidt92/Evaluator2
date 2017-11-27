@@ -24,7 +24,7 @@ public class TestAbs extends TestFunctionAbstract {
 	private Function func = new Abs();
 
 	@Test
-	public void testAbsInteger() throws OpenMathException, EvaluatorException {
+	public void testAbsInteger() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(-3));
 		Object result = func.evaluate(args);
@@ -32,7 +32,7 @@ public class TestAbs extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testAbsFloat() throws OpenMathException, EvaluatorException {
+	public void testAbsFloat() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(-2.5));
 		Object result = func.evaluate(args);
@@ -40,28 +40,28 @@ public class TestAbs extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testAbsIntegration1() throws OpenMathException, EvaluatorException {
+	public void testAbsIntegration1() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("abs(-13)", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
 		assertEquals(OMCreator.createOMI(13), result);
 	}
 
 	@Test
-	public void testAbsIntegration2() throws OpenMathException, EvaluatorException {
+	public void testAbsIntegration2() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("abs(10)", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
 		assertEquals(OMCreator.createOMI(10), result);
 	}
 
 	@Test
-	public void testAbsSageSyntax1() throws EvaluatorException {
+	public void testAbsSageSyntax1() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMI(5));
 		assertEquals("abs(5)", func.getPartialSageSyntax(args));
 	}
 
 	@Test
-	public void testAbsSageSyntax2() throws EvaluatorException {
+	public void testAbsSageSyntax2() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMF(1.0));
 		assertEquals("abs(1)", func.getPartialSageSyntax(args));
@@ -75,7 +75,7 @@ public class TestAbs extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testAbsWithWrongArguments() throws OpenMathException, EvaluatorException {
+	public void testAbsWithWrongArguments() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("abs('test')", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();

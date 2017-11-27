@@ -5,11 +5,13 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.jaxb.OMSTR;
 import de.uni_due.s3.openmath.jaxb.OMV;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * OMI OMF are not Empty, so they return always false
@@ -23,7 +25,7 @@ import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 public class IsEmpty extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		
 		boolean isEmpty = false;
 		Object obj = arguments.get(0);

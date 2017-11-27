@@ -38,102 +38,102 @@ public class TestRound extends TestIntegration {
 	}
 
 	@Test
-	public void testRound1() throws OpenMathException, EvaluatorException {
+	public void testRound1() throws EvaluatorException, OpenMathException {
 		assertEquals(6, Evaluator.getNumberResult("round(6.3)", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testRound2() throws OpenMathException, EvaluatorException {
+	public void testRound2() throws EvaluatorException, OpenMathException {
 		assertEquals(93, Evaluator.getNumberResult("round(93.49999)", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testRound3() throws OpenMathException, EvaluatorException {
+	public void testRound3() throws EvaluatorException, OpenMathException {
 		assertEquals(94, Evaluator.getNumberResult("round(93.50001)", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testRound4() throws OpenMathException, EvaluatorException {
+	public void testRound4() throws EvaluatorException, OpenMathException {
 		assertEquals(-93, Evaluator.getNumberResult("round(-93.49999)", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testRound5() throws OpenMathException, EvaluatorException {
+	public void testRound5() throws EvaluatorException, OpenMathException {
 		assertEquals(-94, Evaluator.getNumberResult("round(-93.50001)", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testRound6() throws OpenMathException, EvaluatorException {
+	public void testRound6() throws EvaluatorException, OpenMathException {
 		assertEquals(4, Evaluator.getNumberResult("round(3.5)", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testRound7() throws OpenMathException, EvaluatorException {
+	public void testRound7() throws EvaluatorException, OpenMathException {
 		assertEquals(3, Evaluator.getNumberResult("round(2.5)", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testRoundWithInput1() throws OpenMathException, EvaluatorException {
+	public void testRoundWithInput1() throws EvaluatorException, OpenMathException {
 		assertEquals(4, Evaluator.getNumberResult("round([pos=4])", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testRoundWithInput2() throws OpenMathException, EvaluatorException {
+	public void testRoundWithInput2() throws EvaluatorException, OpenMathException {
 		assertEquals(93, Evaluator.getNumberResult("round([pos=93])", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testRoundWithVariable1() throws OpenMathException, EvaluatorException {
+	public void testRoundWithVariable1() throws EvaluatorException, OpenMathException {
 		assertEquals(4, Evaluator.getNumberResult("round([var=a])", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testRoundWithVariable2() throws OpenMathException, EvaluatorException {
+	public void testRoundWithVariable2() throws EvaluatorException, OpenMathException {
 		assertEquals(93, Evaluator.getNumberResult("round([var=b])", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testRoundWithPointNumbers1() throws OpenMathException, EvaluatorException {
+	public void testRoundWithPointNumbers1() throws EvaluatorException, OpenMathException {
 		assertEquals(0, Evaluator.getNumberResult("round(0.2)", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testRoundWithPointNumbers2() throws OpenMathException, EvaluatorException {
+	public void testRoundWithPointNumbers2() throws EvaluatorException, OpenMathException {
 		assertEquals(0, Evaluator.getNumberResult("round(-0.2)", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testRoundWithExpressions1() throws OpenMathException, EvaluatorException {
+	public void testRoundWithExpressions1() throws EvaluatorException, OpenMathException {
 		assertEquals(-2, Evaluator.getNumberResult("round(round(-2.2))", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testRoundWithExpressions2() throws OpenMathException, EvaluatorException {
+	public void testRoundWithExpressions2() throws EvaluatorException, OpenMathException {
 		assertEquals(2, Evaluator.getNumberResult("round(round(round(2.1)))", exerVar, fillIn), 0);
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testRoundWithWrongInputCharacter() throws OpenMathException, EvaluatorException {
+	public void testRoundWithWrongInputCharacter() throws EvaluatorException, OpenMathException {
 		Evaluator.getNumberResult("round(a)", exerVar, fillIn);
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testRoundWithTwoArguments() throws OpenMathException, EvaluatorException {
+	public void testRoundWithTwoArguments() throws EvaluatorException, OpenMathException {
 		Evaluator.getNumberResult("round(1.2, 1.3)", exerVar, fillIn);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testRoundWithThreeArguments() throws OpenMathException, EvaluatorException {
+	public void testRoundWithThreeArguments() throws EvaluatorException, OpenMathException {
 		Evaluator.getNumberResult("round(2.1, 2.2, 2.3)", exerVar, fillIn);
 	}
 
 	@Test(expected = UndefinedExerciseVariableException.class)
-	public void testRoundWithMissingExerciseVariable() throws OpenMathException, EvaluatorException {
+	public void testRoundWithMissingExerciseVariable() throws EvaluatorException, OpenMathException {
 		Evaluator.getNumberResult("round('[var=j]')", exerVar, fillIn);
 	}
 
 	@Test(expected = UndefinedFillInVariableException.class)
-	public void testRoundWithMissingInput() throws OpenMathException, EvaluatorException {
+	public void testRoundWithMissingInput() throws EvaluatorException, OpenMathException {
 		Evaluator.getNumberResult("round('[pos=42]')", exerVar, fillIn);
 	}
 }

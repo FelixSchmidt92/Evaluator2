@@ -4,11 +4,13 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
+import de.uni_due.s3.evaluator2.core.visitor.operation.OMToResultVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * Returns the Denominator of the Division (a/b --> returns b)
@@ -19,7 +21,7 @@ import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 public class GetDenominator extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		if (!OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.ARITH1_DIVIDE) && 
 				!OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.NUMS1_RATIONAL)) {
 			throw new FunctionInvalidArgumentTypeException(this, "(0)Division");
@@ -29,7 +31,7 @@ public class GetDenominator extends Function {
 		if (getDoubleSyntax(oma.getOmel().get(2)) == 0) {
 			throw new FunctionInvalidArgumentException(this, "Denominator cannot be 0");
 		}
-		return ((OMA) arguments.get(0)).getOmel().get(2);
+		return OMToResultVisitor.getInstance().visit(((OMA) arguments.get(0)).getOmel().get(2));
 
 	}
 
@@ -49,7 +51,7 @@ public class GetDenominator extends Function {
 	}
 	
 	@Override
-	public Double getPartialDoubleSyntax(List<Object> arguments) throws EvaluatorException {
+	public Double getPartialDoubleSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		OMA oma = (OMA) arguments.get(0);
 		return new Double(getDoubleSyntax(oma.getOmel().get(2)));
 	}

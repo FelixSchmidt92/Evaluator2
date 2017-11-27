@@ -24,7 +24,7 @@ public class TestTimes extends TestFunctionAbstract {
 	private static Times func = new Times();
 
 	@Test
-	public void testTimesInteger() throws OpenMathException, EvaluatorException {
+	public void testTimesInteger() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(3));
 		args.add(OMCreator.createOMI(4));
@@ -33,7 +33,7 @@ public class TestTimes extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testTimesFloat() throws OpenMathException, EvaluatorException {
+	public void testTimesFloat() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMF(2.5));
 		args.add(OMCreator.createOMF(5.8));
@@ -42,7 +42,7 @@ public class TestTimes extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testTimesMixed() throws OpenMathException, EvaluatorException {
+	public void testTimesMixed() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(1000));
 		args.add(OMCreator.createOMF(4.892));
@@ -51,21 +51,21 @@ public class TestTimes extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testTimesIntegration1() throws OpenMathException, EvaluatorException {
+	public void testTimesIntegration1() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("10*5", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
 		assertEquals(OMCreator.createOMI(50), result);
 	}
 
 	@Test
-	public void testTimesIntegration2() throws OpenMathException, EvaluatorException {
+	public void testTimesIntegration2() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("times(10,-17)", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
 		assertEquals(OMCreator.createOMI(-170), result);
 	}
 
 	@Test
-	public void testTimesSageSyntax1() throws EvaluatorException {
+	public void testTimesSageSyntax1() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(1.0));
 		args.add(OMCreator.createOMI(10));
@@ -73,21 +73,21 @@ public class TestTimes extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testTimesWithWrongArguments1() throws OpenMathException, EvaluatorException {
+	public void testTimesWithWrongArguments1() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("10*'test'", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testTimesWithWrongArguments2() throws OpenMathException, EvaluatorException {
+	public void testTimesWithWrongArguments2() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("times('test',17)", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 	
 	@Test
-	public void testTimesThreeArguments() throws OpenMathException, EvaluatorException {
+	public void testTimesThreeArguments() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(2));
 		args.add(OMCreator.createOMI(3));
@@ -97,7 +97,7 @@ public class TestTimes extends TestFunctionAbstract {
 	}
 	
 	@Test
-	public void testTimesFourArguments() throws OpenMathException, EvaluatorException {
+	public void testTimesFourArguments() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(2));
 		args.add(OMCreator.createOMI(3));
@@ -108,7 +108,7 @@ public class TestTimes extends TestFunctionAbstract {
 	}
 	
 	@Test
-	public void testTimesFourArgumentsWithFirstVariable() throws OpenMathException, EvaluatorException {
+	public void testTimesFourArgumentsWithFirstVariable() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMV("a"));
 		args.add(OMCreator.createOMI(3));
@@ -125,7 +125,7 @@ public class TestTimes extends TestFunctionAbstract {
 	}
 	
 	@Test
-	public void testTimesFourArgumentsWithLastVariable() throws OpenMathException, EvaluatorException {
+	public void testTimesFourArgumentsWithLastVariable() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(2));
 		args.add(OMCreator.createOMI(3));
@@ -143,7 +143,7 @@ public class TestTimes extends TestFunctionAbstract {
 	
 	
 	@Test
-	public void testTimesFourArgumentsLatex() throws OpenMathException, EvaluatorException {
+	public void testTimesFourArgumentsLatex() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(2));
 		args.add(OMCreator.createOMI(3));

@@ -41,98 +41,98 @@ public class TestIsRationalNumber extends TestIntegration {
 	}
 
 	@Test
-	public void testIsRationalNumber1() throws OpenMathException, EvaluatorException {
+	public void testIsRationalNumber1() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isRationalNumber('10')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsRationalNumber2() throws OpenMathException, EvaluatorException {
+	public void testIsRationalNumber2() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isRationalNumber('1234567890')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsRationalNumber3() throws OpenMathException, EvaluatorException {
+	public void testIsRationalNumber3() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isRationalNumber('-101230')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsRationalNumber4() throws OpenMathException, EvaluatorException {
+	public void testIsRationalNumber4() throws EvaluatorException, OpenMathException {
 		assertEquals(false, Evaluator.getBooleanResult("isRationalNumber('12$56&')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsRationalNumber5() throws OpenMathException, EvaluatorException {
+	public void testIsRationalNumber5() throws EvaluatorException, OpenMathException {
 		assertEquals(false, Evaluator.getBooleanResult("isRationalNumber('&!§$%&/()123asdf')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsRationalNumber6() throws OpenMathException, EvaluatorException {
+	public void testIsRationalNumber6() throws EvaluatorException, OpenMathException {
 		assertEquals(false, Evaluator.getBooleanResult("isRationalNumber('abcde')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsRationalNumber7() throws OpenMathException, EvaluatorException {
+	public void testIsRationalNumber7() throws EvaluatorException, OpenMathException {
 		assertEquals(false, Evaluator.getBooleanResult("isRationalNumber([var=E])", exerVar, fillIn));
 	}
 	
 	@Test
-	public void testIsRationalNumber8() throws OpenMathException, EvaluatorException {
+	public void testIsRationalNumber8() throws EvaluatorException, OpenMathException {
 		assertEquals(false, Evaluator.getBooleanResult("isRationalNumber([var=PI])", exerVar, fillIn));
 	}
 	
 	@Test
-	public void testIsRationalNumberWithInput1() throws OpenMathException, EvaluatorException {
+	public void testIsRationalNumberWithInput1() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isRationalNumber('[pos=1]')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsRationalNumberWithInput2() throws OpenMathException, EvaluatorException {
+	public void testIsRationalNumberWithInput2() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isRationalNumber('[pos=2]')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsRationalNumberWithInput3() throws OpenMathException, EvaluatorException {
+	public void testIsRationalNumberWithInput3() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isRationalNumber('[pos=3]')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsRationalNumberWithVariables1() throws OpenMathException, EvaluatorException {
+	public void testIsRationalNumberWithVariables1() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isRationalNumber('[var=a]')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsRationalNumberWithVariables2() throws OpenMathException, EvaluatorException {
+	public void testIsRationalNumberWithVariables2() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isRationalNumber('[var=b]')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsRationalNumberWithVariables3() throws OpenMathException, EvaluatorException {
+	public void testIsRationalNumberWithVariables3() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isRationalNumber('[var=c]')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsRationalNumberWithWrongInputCharacter() throws OpenMathException, EvaluatorException {
+	public void testIsRationalNumberWithWrongInputCharacter() throws EvaluatorException, OpenMathException {
 		assertEquals(false, Evaluator.getBooleanResult("isRationalNumber(a)", exerVar, fillIn));
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testIsRationalNumberWithTwoArguments() throws OpenMathException, EvaluatorException {
+	public void testIsRationalNumberWithTwoArguments() throws EvaluatorException, OpenMathException {
 		Evaluator.getBooleanResult("isRationalNumber(3/2 , 0)", exerVar, fillIn);
 	}
 	
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testIsRationalNumberWithThreeArguments() throws OpenMathException, EvaluatorException {
+	public void testIsRationalNumberWithThreeArguments() throws EvaluatorException, OpenMathException {
 		Evaluator.getBooleanResult("isRationalNumber(3/2, 1/3, 3/1)", exerVar, fillIn);
 	}
 
 	@Test(expected = UndefinedExerciseVariableException.class)
-	public void testIsRationalNumberWithMissingExerciseVariable() throws OpenMathException, EvaluatorException {
+	public void testIsRationalNumberWithMissingExerciseVariable() throws EvaluatorException, OpenMathException {
 		Evaluator.getBooleanResult("isRationalNumber('[var=j]')", exerVar, fillIn);
 	}
 
 	@Test(expected = UndefinedFillInVariableException.class)
-	public void testIsRationalNumberWithMissingInput() throws OpenMathException, EvaluatorException {
+	public void testIsRationalNumberWithMissingInput() throws EvaluatorException, OpenMathException {
 		Evaluator.getBooleanResult("isRationalNumber('[pos=42]')", exerVar, fillIn);
 	}
 }

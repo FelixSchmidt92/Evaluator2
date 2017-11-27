@@ -25,7 +25,7 @@ public class TestFloor extends TestFunctionAbstract {
 	private Function func = new Floor();
 
 	@Test
-	public void testFloorInteger() throws OpenMathException, EvaluatorException {
+	public void testFloorInteger() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(3));
 		Object result = func.evaluate(args);
@@ -33,7 +33,7 @@ public class TestFloor extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testFloorFloat1() throws OpenMathException, EvaluatorException {
+	public void testFloorFloat1() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(2.5));
 		Object result = func.evaluate(args);
@@ -41,7 +41,7 @@ public class TestFloor extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testFloorFloat2() throws OpenMathException, EvaluatorException {
+	public void testFloorFloat2() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(2.8));
 		Object result = func.evaluate(args);
@@ -49,14 +49,14 @@ public class TestFloor extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testFloorIntegration1() throws OpenMathException, EvaluatorException {
+	public void testFloorIntegration1() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("floor(12.2)", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMI(12), result.getOMI());
 	}
 
 	@Test
-	public void testFloorIntegration2() throws OpenMathException, EvaluatorException {
+	public void testFloorIntegration2() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("floor(10)", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMI(10), result.getOMI());
@@ -71,21 +71,21 @@ public class TestFloor extends TestFunctionAbstract {
 	
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testFloorWithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testFloorWithLessThanMinParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("floor()", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testFloorWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
+	public void testFloorWithMoreThanMaxParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("floor(1,3)", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testFloorWithWrongArguments() throws OpenMathException, EvaluatorException {
+	public void testFloorWithWrongArguments() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("floor('test')", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
