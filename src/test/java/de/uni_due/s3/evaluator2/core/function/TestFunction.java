@@ -34,7 +34,7 @@ public class TestFunction {
 		@Override
 		protected Object execute(List<Object> arguments) throws FunctionException, CasEvaluationException,
 				CasNotAvailableException, NoRepresentationAvailableException, OpenMathException {
-			return "evaluated";
+			return OMCreator.createOMSTR("evaluated");
 		}
 	};
 
@@ -50,30 +50,30 @@ public class TestFunction {
 	}
 
 	@Test
-	public void testExecute() throws OpenMathException, EvaluatorException {
-		assertEquals("evaluated", myFunction.execute(null));
+	public void testExecute() throws EvaluatorException, OpenMathException {
+		assertEquals(OMCreator.createOMSTR("evaluated"), myFunction.execute(null));
 	}
 
 	@Test
-	public void testEvaluate() throws OpenMathException, EvaluatorException {
+	public void testEvaluate() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> arguments = new ArrayList<>();
 		arguments.add(OMCreator.createOMI(15));
-		assertEquals("evaluated", myFunction.evaluate(arguments));
+		assertEquals(OMCreator.createOMSTR("evaluated"), myFunction.evaluate(arguments));
 	}
 
 	@Test(expected = FunctionInvalidArgumentException.class)
-	public void testEvaluateWithNull() throws OpenMathException, EvaluatorException {
+	public void testEvaluateWithNull() throws EvaluatorException, OpenMathException {
 		myFunction.evaluate(null);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testEvaluateWithWrongAmountOfArguments0() throws OpenMathException, EvaluatorException {
+	public void testEvaluateWithWrongAmountOfArguments0() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> arguments = new ArrayList<>();
 		myFunction.evaluate(arguments);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testEvaluateWithWrongAmountOfArguments4() throws OpenMathException, EvaluatorException {
+	public void testEvaluateWithWrongAmountOfArguments4() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> arguments = new ArrayList<>();
 		arguments.add("1");
 		arguments.add("2");
@@ -99,22 +99,22 @@ public class TestFunction {
 	}
 
 	@Test(expected = NoRepresentationAvailableException.class)
-	public void testGetPartialSageSyntax() throws EvaluatorException {
+	public void testGetPartialSageSyntax() throws EvaluatorException, OpenMathException {
 		myFunction.getPartialSageSyntax(null);
 	}
 
 	@Test(expected = NoRepresentationAvailableException.class)
-	public void testGetSageSyntax() throws EvaluatorException {
+	public void testGetSageSyntax() throws EvaluatorException, OpenMathException {
 		myFunction.getSageSyntax(null);
 	}
 	
 	@Test(expected = NoRepresentationAvailableException.class)
-	public void testGetPartialRSyntax() throws EvaluatorException {
+	public void testGetPartialRSyntax() throws EvaluatorException, OpenMathException {
 		myFunction.getPartialSageSyntax(null);
 	}
 
 	@Test(expected = NoRepresentationAvailableException.class)
-	public void testGetRSyntax() throws EvaluatorException {
+	public void testGetRSyntax() throws EvaluatorException, OpenMathException {
 		myFunction.getSageSyntax(null);
 	}
 }

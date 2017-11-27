@@ -47,117 +47,117 @@ public class TestToDegrees extends TestIntegration {
 	}
 
 	@Test
-	public void testToDegrees1() throws OpenMathException, EvaluatorException {
+	public void testToDegrees1() throws EvaluatorException, OpenMathException {
 		assertEquals(540, Evaluator.getNumberResult("toDegrees(" + 3 * PI + ")", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testToDegrees2() throws OpenMathException, EvaluatorException {
+	public void testToDegrees2() throws EvaluatorException, OpenMathException {
 		assertEquals(360, Evaluator.getNumberResult("toDegrees(" + 2 * PI + ")", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testToDegrees3() throws OpenMathException, EvaluatorException {
+	public void testToDegrees3() throws EvaluatorException, OpenMathException {
 		assertEquals(180, Evaluator.getNumberResult("toDegrees(" + PI + ")", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testToDegrees4() throws OpenMathException, EvaluatorException {
+	public void testToDegrees4() throws EvaluatorException, OpenMathException {
 		assertEquals(-180, Evaluator.getNumberResult("toDegrees(" + -PI + ")", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testToDegrees5() throws OpenMathException, EvaluatorException {
+	public void testToDegrees5() throws EvaluatorException, OpenMathException {
 		assertEquals(90, Evaluator.getNumberResult("toDegrees(" + PI / 2 + ")", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testToDegrees6() throws OpenMathException, EvaluatorException {
+	public void testToDegrees6() throws EvaluatorException, OpenMathException {
 		assertEquals(45, Evaluator.getNumberResult("toDegrees(" + PI / 4 + ")", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testToDegrees7() throws OpenMathException, EvaluatorException {
+	public void testToDegrees7() throws EvaluatorException, OpenMathException {
 		assertEquals(180 / PI, Evaluator.getNumberResult("toDegrees(1)", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testToDegreesWithInput1() throws OpenMathException, EvaluatorException {
+	public void testToDegreesWithInput1() throws EvaluatorException, OpenMathException {
 		assertEquals(90, Evaluator.getNumberResult("toDegrees('[pos=90]')", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testToDegreesWithInput2() throws OpenMathException, EvaluatorException {
+	public void testToDegreesWithInput2() throws EvaluatorException, OpenMathException {
 		assertEquals(45, Evaluator.getNumberResult("toDegrees('[pos=45]')", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testToDegreesWithInput3() throws OpenMathException, EvaluatorException {
+	public void testToDegreesWithInput3() throws EvaluatorException, OpenMathException {
 		assertEquals(180 / PI, Evaluator.getNumberResult("toDegrees('[pos=1]')", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testToDegreesWithVariables1() throws OpenMathException, EvaluatorException {
+	public void testToDegreesWithVariables1() throws EvaluatorException, OpenMathException {
 		assertEquals(360, Evaluator.getNumberResult("toDegrees('[var=degd]')", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testToDegreesWithVariables2() throws OpenMathException, EvaluatorException {
+	public void testToDegreesWithVariables2() throws EvaluatorException, OpenMathException {
 		assertEquals(180, Evaluator.getNumberResult("toDegrees('[var=degc]')", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testToDegreesWithVariables3() throws OpenMathException, EvaluatorException {
+	public void testToDegreesWithVariables3() throws EvaluatorException, OpenMathException {
 		assertEquals(180 / PI, Evaluator.getNumberResult("toDegrees('[var=b]')", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testToDegreesWithVariables4() throws OpenMathException, EvaluatorException {
+	public void testToDegreesWithVariables4() throws EvaluatorException, OpenMathException {
 		assertEquals(180, Evaluator.getNumberResult("toDegrees('[var=PI]')", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testToDegreesWithPointNumbers1() throws OpenMathException, EvaluatorException {
+	public void testToDegreesWithPointNumbers1() throws EvaluatorException, OpenMathException {
 		assertEquals(.2 * 180 / (PI), Evaluator.getNumberResult("toDegrees(0.2)", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testToDegreesWithPointNumbers2() throws OpenMathException, EvaluatorException {
+	public void testToDegreesWithPointNumbers2() throws EvaluatorException, OpenMathException {
 		assertEquals(.1 * 180 / (-PI), Evaluator.getNumberResult("toDegrees(-0.1)", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testToDegreesWithExpressions1() throws OpenMathException, EvaluatorException {
+	public void testToDegreesWithExpressions1() throws EvaluatorException, OpenMathException {
 		assertEquals(0, Evaluator.getNumberResult("toDegrees(toDegrees(0))", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testToDegreesWithExpressions2() throws OpenMathException, EvaluatorException {
+	public void testToDegreesWithExpressions2() throws EvaluatorException, OpenMathException {
 		assertEquals(0, Evaluator.getNumberResult("toDegrees(toDegrees(toDegrees(0)))", exerVar, fillIn), 0);
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testToDegreesWithWrongInputCharacter() throws OpenMathException, EvaluatorException {
+	public void testToDegreesWithWrongInputCharacter() throws EvaluatorException, OpenMathException {
 		Evaluator.getNumberResult("toDegrees(a)", exerVar, fillIn);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testToDegreesWithTwoArguments() throws OpenMathException, EvaluatorException {
+	public void testToDegreesWithTwoArguments() throws EvaluatorException, OpenMathException {
 		Evaluator.getNumberResult("toDegrees(4, 3)", exerVar, fillIn);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testToDegreesWithThreeArguments() throws OpenMathException, EvaluatorException {
+	public void testToDegreesWithThreeArguments() throws EvaluatorException, OpenMathException {
 		Evaluator.getNumberResult("toDegrees(2, 3, 4)", exerVar, fillIn);
 	}
 
 	@Test(expected = UndefinedExerciseVariableException.class)
-	public void testToDegreesWithMissingExerciseVariable() throws OpenMathException, EvaluatorException {
+	public void testToDegreesWithMissingExerciseVariable() throws EvaluatorException, OpenMathException {
 		Evaluator.getNumberResult("toDegrees('[var=j]')", exerVar, fillIn);
 	}
 
 	@Test(expected = UndefinedFillInVariableException.class)
-	public void testToDegreesWithMissingInput() throws OpenMathException, EvaluatorException {
+	public void testToDegreesWithMissingInput() throws EvaluatorException, OpenMathException {
 		Evaluator.getNumberResult("toDegrees('[pos=42]')", exerVar, fillIn);
 	}
 }

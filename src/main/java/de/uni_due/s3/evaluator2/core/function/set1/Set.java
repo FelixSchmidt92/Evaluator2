@@ -6,9 +6,8 @@ import java.util.List;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.ConstructorFunction;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * Implements a list. Values can occur more than ones in this list. In a normal
@@ -21,7 +20,7 @@ import de.uni_due.s3.openmath.omutils.OMCreator;
 public class Set extends ConstructorFunction {
 
 	@Override
-	protected Object execute(List<Object> arguments) {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		//Wir erzeugen nur noch Listen, Sets sind im Evaluator nicht passend, 
 		//wir wollen immer vollständige Eingaben haben, Sets würden doppelte Elemente löschen
 		return OMCreator.createOMA(OMSymbol.LIST1_LIST, arguments);
@@ -38,8 +37,7 @@ public class Set extends ConstructorFunction {
 	}
 
 	@Override
-	public String getPartialLatexSyntax(List<Object> arguments)
-			throws EvaluatorException, FunctionException, NoRepresentationAvailableException {
+	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		List<String> args = new ArrayList<String>();
 		for (Object arg : arguments) {
 			args.add(getLatexSyntax(arg));
@@ -53,7 +51,7 @@ public class Set extends ConstructorFunction {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		String set = "{";
 		for (Object arg : arguments) {
 			set += getSageSyntax(arg) + ", ";
@@ -64,7 +62,7 @@ public class Set extends ConstructorFunction {
 	}
 
 	@Override
-	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		String set = "{";
 		for (Object arg : arguments) {
 			set += getSageSyntax(arg) + ", ";

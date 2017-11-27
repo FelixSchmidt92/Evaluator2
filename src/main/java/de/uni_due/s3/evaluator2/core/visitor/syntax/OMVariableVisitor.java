@@ -16,6 +16,7 @@ import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.jaxb.OMSTR;
 import de.uni_due.s3.openmath.jaxb.OMV;
 import de.uni_due.s3.openmath.omutils.OMCreator;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class OMVariableVisitor extends OMToSyntaxVisitor<Set<OMV>> {
 
@@ -58,7 +59,7 @@ public class OMVariableVisitor extends OMToSyntaxVisitor<Set<OMV>> {
 	}
 
 	@Override
-	protected Set<OMV> getSyntaxRepresentationForFunction(Function function, OMS oms, List<Object> omel) {
+	protected Set<OMV> getSyntaxRepresentationForFunction(Function function, OMS oms, List<Object> omel) throws OpenMathException {
 		Set<OMV> omvSet = new HashSet<>();
 		for (Object omObj : omel) {
 			try {

@@ -21,7 +21,7 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 public class IsMNMatrix extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws OpenMathException, EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		int m = getIntegerSyntax(arguments.get(1));
 		int n = getIntegerSyntax(arguments.get(2));
 

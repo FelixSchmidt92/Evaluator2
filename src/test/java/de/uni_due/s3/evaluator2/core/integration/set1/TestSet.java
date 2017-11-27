@@ -13,7 +13,7 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 public class TestSet extends TestIntegration {
 
 	@Test
-	public void testSet() throws OpenMathException, EvaluatorException {
+	public void testSet() throws EvaluatorException, OpenMathException {
 		assertEquals(ExpressionParser.parse("set(vector(1,1), vector(1,2))", exerciseVariableMap, fillInVariableMap),
 				Evaluator.evaluate("set(vector(1,1), vector(1,2))", exerciseVariableMap, fillInVariableMap));
 	}

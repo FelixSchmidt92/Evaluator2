@@ -24,7 +24,7 @@ public class TestIsLinearlyIndependent extends TestFunctionAbstract {
 	Function func = new IsLinearlyIndependent();
 
 	@Test
-	public void testIsLinearlyIndependent1() throws OpenMathException, EvaluatorException {
+	public void testIsLinearlyIndependent1() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> vector1 = new ArrayList<>();
 		vector1.add(OMCreator.createOMI(1));
 		vector1.add(OMCreator.createOMI(0));
@@ -42,7 +42,7 @@ public class TestIsLinearlyIndependent extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testIsLinearlyIndependent2() throws OpenMathException, EvaluatorException {
+	public void testIsLinearlyIndependent2() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> vector1 = new ArrayList<>();
 		vector1.add(OMCreator.createOMI(0));
 		vector1.add(OMCreator.createOMI(2));
@@ -60,21 +60,21 @@ public class TestIsLinearlyIndependent extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testIsLinearlyIndependentIntegration1() throws OpenMathException, EvaluatorException {
+	public void testIsLinearlyIndependentIntegration1() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("isLinearlyIndependent(set(vector(1,2,3), vector(3,2,1)))", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
 		assertEquals(OMSymbol.LOGIC1_TRUE, result);
 	}
 
 	@Test
-	public void testIsLinearlyIndependentIntegration2() throws OpenMathException, EvaluatorException {
+	public void testIsLinearlyIndependentIntegration2() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("isLinearlyIndependent(set(vector(1,1,0), vector(1,1,1)))", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
 		assertEquals(OMSymbol.LOGIC1_TRUE, result);
 	}
 
 	@Test
-	public void testIsLinearlyIndependentIntegration3() throws OpenMathException, EvaluatorException {
+	public void testIsLinearlyIndependentIntegration3() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser
 				.parse("isLinearlyIndependent({vector(1,1,0); vector(1,1,1); vector(1.5, 1.1, 1.11)})", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
@@ -82,14 +82,14 @@ public class TestIsLinearlyIndependent extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testIsLinearlyIndependentIntegration4() throws OpenMathException, EvaluatorException {
+	public void testIsLinearlyIndependentIntegration4() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("isLinearlyIndependent(set(vector(1,1,0),  vector(2, 2, 0)))", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
 		assertEquals(OMSymbol.LOGIC1_FALSE, result);
 	}
 
 	@Test(expected = FunctionInvalidArgumentException.class)
-	public void testIsLinearlyIndependentWithWrongInput1() throws OpenMathException, EvaluatorException {
+	public void testIsLinearlyIndependentWithWrongInput1() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("isLinearlyIndependent(set(vector(1,1,0),  vector(2, 2, 0), 3))", null,
 				null);
 		OMToResultVisitor.getInstance().visit(omobj);
@@ -97,21 +97,21 @@ public class TestIsLinearlyIndependent extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testIsLinearlyIndependentWithWrongInput2() throws OpenMathException, EvaluatorException {
+	public void testIsLinearlyIndependentWithWrongInput2() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("isLinearlyIndependent(vector(1,1,0))", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
 		assertEquals(OMSymbol.LOGIC1_TRUE, result);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testIsLinearlyIndependentWithLess() throws OpenMathException, EvaluatorException {
+	public void testIsLinearlyIndependentWithLess() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("isLinearlyIndependent(vector(1,1,0), vector(1,1,0))", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testIsLinearlyIndependentWithMore() throws OpenMathException, EvaluatorException {
+	public void testIsLinearlyIndependentWithMore() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("isLinearlyIndependent()", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();

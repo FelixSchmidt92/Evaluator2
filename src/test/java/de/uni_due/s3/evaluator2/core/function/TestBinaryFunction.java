@@ -40,7 +40,7 @@ public class TestBinaryFunction {
 	
 	
 	@Test(expected = NoRepresentationAvailableException.class)
-	public void testGetBinaryLatexOMA() throws EvaluatorException {
+	public void testGetBinaryLatexOMA() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMIOMF(1));
 		args.add(OMCreator.createOMIOMF(2));
@@ -50,34 +50,34 @@ public class TestBinaryFunction {
 	}
 	
 	@Test
-	public void testGetBinaryLatexOMS() throws EvaluatorException {
+	public void testGetBinaryLatexOMS() throws EvaluatorException, OpenMathException {
 		String result = bfunc.getBinaryLatex(OMSymbol.NUMS1_NAN);
 		assertEquals("NaN", result);
 	}
 	
 	@Test
-	public void testGetBinaryLatexOMI() throws EvaluatorException {
+	public void testGetBinaryLatexOMI() throws EvaluatorException, OpenMathException {
 		OMI omi = OMCreator.createOMI(1);
 		String result = bfunc.getBinaryLatex(omi);
 		assertEquals("1", result);
 	}
 	
 	@Test
-	public void testGetBinaryLatexOMSTR() throws EvaluatorException {
+	public void testGetBinaryLatexOMSTR() throws EvaluatorException, OpenMathException {
 		OMSTR omstr = OMCreator.createOMSTR("test");
 		String result = bfunc.getBinaryLatex(omstr);
 		assertEquals("test", result);
 	}
 	
 	@Test
-	public void testGetBinaryLatexOMF() throws EvaluatorException {
+	public void testGetBinaryLatexOMF() throws EvaluatorException, OpenMathException {
 		OMF omf = OMCreator.createOMF(1.234);
 		String result = bfunc.getBinaryLatex(omf);
 		assertEquals("1.234", result);
 	}
 	
 	@Test
-	public void testGetBinaryLatexOMV() throws EvaluatorException {
+	public void testGetBinaryLatexOMV() throws EvaluatorException, OpenMathException {
 		OMV omv = OMCreator.createOMV("a");
 		String result = bfunc.getBinaryLatex(omv);
 		assertEquals("a", result);

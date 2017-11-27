@@ -6,6 +6,7 @@ import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.openmath.jaxb.OMSTR;
 import de.uni_due.s3.openmath.omutils.OMCreator;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * This Class returns the BinaryRepresentation of the OMF or OMI
@@ -24,7 +25,7 @@ import de.uni_due.s3.openmath.omutils.OMCreator;
 public class ConvertToBinary extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		Double value = getDoubleSyntax(arguments.get(0));
 
 		if ((value == Math.floor(value)) && !Double.isInfinite(value)) {

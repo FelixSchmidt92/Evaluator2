@@ -24,7 +24,7 @@ public class TestEqualBasis extends TestFunctionAbstract {
 	Function func = new EqualBasis();
 
 	@Test
-	public void testEqualBasis1() throws OpenMathException, EvaluatorException {
+	public void testEqualBasis1() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> vector1 = new ArrayList<>();
 		vector1.add(OMCreator.createOMI(1));
 		vector1.add(OMCreator.createOMI(0));
@@ -53,7 +53,7 @@ public class TestEqualBasis extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testEqualBasis2() throws OpenMathException, EvaluatorException {
+	public void testEqualBasis2() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> vector1 = new ArrayList<>();
 		vector1.add(OMCreator.createOMI(1));
 		vector1.add(OMCreator.createOMI(0));
@@ -82,7 +82,7 @@ public class TestEqualBasis extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testEqualBasisIntegration1() throws OpenMathException, EvaluatorException {
+	public void testEqualBasisIntegration1() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse(
 				"equalBasis(set(vector(1,2,3), vector(3,2,1)), set(vector(1,2,3), vector(3,2,1)), 3)", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
@@ -90,7 +90,7 @@ public class TestEqualBasis extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testEqualBasisIntegration2() throws OpenMathException, EvaluatorException {
+	public void testEqualBasisIntegration2() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser
 				.parse("equalBasis(set(vector(1,0), vector(0,1)), set(vector(1,0), vector(1,0)), 2)", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
@@ -98,7 +98,7 @@ public class TestEqualBasis extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testEqualBasisWithWrongInput() throws OpenMathException, EvaluatorException {
+	public void testEqualBasisWithWrongInput() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser
 				.parse("equalBasis(set(vector(1,0), vector(0,1)), set(vector(1,0), vector(1,0)), 'Hello')", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
@@ -106,7 +106,7 @@ public class TestEqualBasis extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testEqualBasisWithLess() throws OpenMathException, EvaluatorException {
+	public void testEqualBasisWithLess() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("equalBasis(set(vector(1,0), vector(0,1)), set(vector(1,0), vector(1,0)))",
 				null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
@@ -114,7 +114,7 @@ public class TestEqualBasis extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testEqualBasisWithMore() throws OpenMathException, EvaluatorException {
+	public void testEqualBasisWithMore() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser
 				.parse("equalBasis(set(vector(1,0), vector(0,1)), set(vector(1,0), vector(1,0)), 1, 2)", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
@@ -122,7 +122,7 @@ public class TestEqualBasis extends TestFunctionAbstract {
 	}
 	
 	@Test
-	public void testEqualBasisIntegration4() throws OpenMathException, EvaluatorException {
+	public void testEqualBasisIntegration4() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser
 				.parse("equalBasis(set(vector(1,1,0), vector(0,1,1)), set(vector(1,1,0), vector(0,1,1)), 3)", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(omobj);

@@ -21,7 +21,7 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 public class IsMatrix extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws OpenMathException, EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		if (OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.LINALG2_MATRIX)) {
 			OMA matrix = (OMA) arguments.get(0);
 

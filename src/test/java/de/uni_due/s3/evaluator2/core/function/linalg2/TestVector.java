@@ -26,7 +26,7 @@ public class TestVector extends TestFunctionAbstract {
 	private static ConstructorFunction func = new Vector();
 
 	@Test
-	public void testVectorInteger() throws OpenMathException, EvaluatorException {
+	public void testVectorInteger() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(1));
 		args.add(OMCreator.createOMI(2));
@@ -37,7 +37,7 @@ public class TestVector extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testVectorFloat() throws OpenMathException, EvaluatorException {
+	public void testVectorFloat() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(0.0));
 		Object result = func.evaluate(args);
@@ -45,7 +45,7 @@ public class TestVector extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testVectorIntegration() throws OpenMathException, EvaluatorException {
+	public void testVectorIntegration() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("vector(1,2,3)", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		List<Object> args = new ArrayList<Object>();
@@ -56,7 +56,7 @@ public class TestVector extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testVectorEvaluation() throws OpenMathException, EvaluatorException {
+	public void testVectorEvaluation() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = Evaluator.evaluate("vector(1,2,3)", null, null);
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(1));
@@ -66,7 +66,7 @@ public class TestVector extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testVectorSageSyntax() throws EvaluatorException {
+	public void testVectorSageSyntax() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(2));
 		args.add(OMCreator.createOMI(3));
@@ -75,14 +75,14 @@ public class TestVector extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testVectorWithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testVectorWithLessThanMinParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("vector()", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 	
 	@Test
-	public void testOMToLatexVisitorWithVector() throws OpenMathException, EvaluatorException {
+	public void testOMToLatexVisitorWithVector() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("vector(1,2,3,4)", new HashMap<>(), new HashMap<>());
 		String latex = OMToLatexVisitor.getInstance().visit(obj);
 		assertEquals("\\left(\\begin{array}{r}" + 
@@ -96,7 +96,7 @@ public class TestVector extends TestFunctionAbstract {
 	}
 	
 	@Test
-	public void testOMToLatexVisitorWithVector2() throws OpenMathException, EvaluatorException {
+	public void testOMToLatexVisitorWithVector2() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("vector(123,2.023,[var=PI])", new HashMap<>(), new HashMap<>());
 		String latex = OMToLatexVisitor.getInstance().visit(obj);
 		assertEquals("\\left(\\begin{array}{r}" + 

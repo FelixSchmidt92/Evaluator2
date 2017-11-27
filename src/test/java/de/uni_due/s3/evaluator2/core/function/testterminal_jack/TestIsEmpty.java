@@ -26,7 +26,7 @@ public class TestIsEmpty extends TestFunctionAbstract {
 	Function func = new IsEmpty();
 
 	@Test
-	public void testIsEmptyOMI() throws OpenMathException, EvaluatorException {
+	public void testIsEmptyOMI() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 		OMI omi = OMCreator.createOMI(0);
 		args.add(omi);
@@ -36,7 +36,7 @@ public class TestIsEmpty extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testIsEmptyOMF() throws OpenMathException, EvaluatorException {
+	public void testIsEmptyOMF() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 		OMF omf = OMCreator.createOMF(0.0);
 		args.add(omf);
@@ -46,7 +46,7 @@ public class TestIsEmpty extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testIsEmptyOMSTR() throws OpenMathException, EvaluatorException {
+	public void testIsEmptyOMSTR() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 		OMSTR omstr = OMCreator.createOMSTR("");
 		args.add(omstr);
@@ -63,7 +63,7 @@ public class TestIsEmpty extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testIsEmptyOMS() throws OpenMathException, EvaluatorException {
+	public void testIsEmptyOMS() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 		OMS oms = OMSymbol.SET1_EMPTYSET;
 		args.add(oms);
@@ -81,7 +81,7 @@ public class TestIsEmpty extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testIsEmptyOMV() throws OpenMathException, EvaluatorException {
+	public void testIsEmptyOMV() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 		OMV omv = OMCreator.createOMV("");
 		args.add(omv);
@@ -98,7 +98,7 @@ public class TestIsEmpty extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testIsEmptyOMANotEmptyMatrix() throws OpenMathException, EvaluatorException {
+	public void testIsEmptyOMANotEmptyMatrix() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 
 		ArrayList<Object> rowele = new ArrayList<>();
@@ -122,7 +122,7 @@ public class TestIsEmpty extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testIsEmptyOMAEmptyMatrix() throws OpenMathException, EvaluatorException {
+	public void testIsEmptyOMAEmptyMatrix() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 
 		ArrayList<Object> rowele = new ArrayList<>();
@@ -146,7 +146,7 @@ public class TestIsEmpty extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testIsEmptyOMAEmptySet() throws OpenMathException, EvaluatorException {
+	public void testIsEmptyOMAEmptySet() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 
 		ArrayList<Object> setele = new ArrayList<>();
@@ -160,7 +160,7 @@ public class TestIsEmpty extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testIsEmptyOMANotEmptySet() throws OpenMathException, EvaluatorException {
+	public void testIsEmptyOMANotEmptySet() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 
 		ArrayList<Object> setele = new ArrayList<>();

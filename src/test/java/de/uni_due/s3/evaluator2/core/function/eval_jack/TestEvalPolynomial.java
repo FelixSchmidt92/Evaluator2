@@ -59,14 +59,14 @@ public class TestEvalPolynomial extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testEvalPolynomialWithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testEvalPolynomialWithLessThanMinParam() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<Object>();
 		func.evaluate(args);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testEvalPolynomialWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
+	public void testEvalPolynomialWithMoreThanMaxParam() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("test"));
 		args.add(OMCreator.createOMSTR("test"));
@@ -77,21 +77,21 @@ public class TestEvalPolynomial extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testEvalPolynomialIntegration1() throws OpenMathException, EvaluatorException {
+	public void testEvalPolynomialIntegration1() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("evalpolynomial('x+x','1')", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
 		assertEquals(OMCreator.createOMI(2), result);
 	}
 
 	@Test
-	public void testEvalPolynomialIntegration2() throws OpenMathException, EvaluatorException {
+	public void testEvalPolynomialIntegration2() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("evalpolynomial('x+2*x',-4)", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
 		assertEquals(OMCreator.createOMI(-12), result);
 	}
 
 	@Test
-	public void testEvalPolynomialSageSyntax() throws JAXBException, EvaluatorException {
+	public void testEvalPolynomialSageSyntax() throws EvaluatorException, OpenMathException, JAXBException {
 		ArrayList<Object> args = new ArrayList<Object>();
 		OMOBJ arg1 = OMConverter
 				.toObject("<OMOBJ><OMA><OMS cd=\"arith1\" name=\"plus\"/>" + "<OMA><OMS cd =\"arith1\" name=\"minus\"/>"

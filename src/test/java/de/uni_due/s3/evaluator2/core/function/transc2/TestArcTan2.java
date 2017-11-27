@@ -25,7 +25,7 @@ public class TestArcTan2 extends TestFunctionAbstract {
 	private static Function func = new ArcTan2();
 
 	@Test
-	public void testArcTan2Float() throws OpenMathException, EvaluatorException {
+	public void testArcTan2Float() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(1.0));
 		args.add(OMCreator.createOMF(1.0));
@@ -42,7 +42,7 @@ public class TestArcTan2 extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testArcTan2Integer() throws OpenMathException, EvaluatorException {
+	public void testArcTan2Integer() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(1));
 		args.add(OMCreator.createOMI(0));
@@ -59,14 +59,14 @@ public class TestArcTan2 extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testArcTan2Integration() throws OpenMathException, EvaluatorException {
+	public void testArcTan2Integration() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("atan2(2,1)", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMF(1.10714871779409), result.getOMF());
 	}
 
 	@Test
-	public void testArcTan2SageSyntax() throws EvaluatorException {
+	public void testArcTan2SageSyntax() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMF(1.0));
 		args.add(OMCreator.createOMF(1.1));
@@ -74,21 +74,21 @@ public class TestArcTan2 extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testArcTan2WithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testArcTan2WithLessThanMinParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("atan2(1)", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testArcTan2WithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
+	public void testArcTan2WithMoreThanMaxParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("atan2(1,3,7)", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testArcTan2WithWrongArguments() throws OpenMathException, EvaluatorException {
+	public void testArcTan2WithWrongArguments() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("atan2('Test',2)", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();

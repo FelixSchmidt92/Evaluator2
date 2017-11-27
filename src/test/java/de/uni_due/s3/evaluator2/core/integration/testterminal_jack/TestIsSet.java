@@ -37,17 +37,17 @@ public class TestIsSet extends TestIntegration {
 	}
 
 	@Test
-	public void testIsSet() throws OpenMathException, EvaluatorException {
+	public void testIsSet() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isSet(set(vector(1,1), vector(1,2)))", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsSetWithInput() throws OpenMathException, EvaluatorException {
+	public void testIsSetWithInput() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isSet('[pos=1]')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsSetWithVariables() throws OpenMathException, EvaluatorException {
+	public void testIsSetWithVariables() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isSet('[var=a]')", exerVar, fillIn));
 	}
 }

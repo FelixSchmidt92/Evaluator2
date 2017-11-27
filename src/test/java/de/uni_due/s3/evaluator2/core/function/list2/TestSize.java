@@ -27,7 +27,7 @@ public class TestSize extends TestFunctionAbstract {
 	private Object result;
 
 	@Test
-	public void testSize() throws OpenMathException, EvaluatorException {
+	public void testSize() throws EvaluatorException, OpenMathException {
 		args = new ArrayList<Object>(1);
 		List<Object> arguments = new ArrayList<Object>();
 		arguments.add(OMCreator.createOMI(10));
@@ -38,14 +38,14 @@ public class TestSize extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testSizeWithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testSizeWithLessThanMinParam() throws EvaluatorException, OpenMathException {
 		args = new ArrayList<Object>(0);
 		func.evaluate(args);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testSizeWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
+	public void testSizeWithMoreThanMaxParam() throws EvaluatorException, OpenMathException {
 		args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMSTR("test"));
 		args.add(OMCreator.createOMSTR("test"));
@@ -54,7 +54,7 @@ public class TestSize extends TestFunctionAbstract {
 	}
 
 	@Test(expected = NoRepresentationAvailableException.class)
-	public void testSizeWithWrongArguments() throws OpenMathException, EvaluatorException {
+	public void testSizeWithWrongArguments() throws EvaluatorException, OpenMathException {
 		args = new ArrayList<Object>(2);
 		args.add(null);
 		func.evaluate(args);
@@ -62,7 +62,7 @@ public class TestSize extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testSizeIntegration() throws OpenMathException, EvaluatorException {
+	public void testSizeIntegration() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("sizeOfList(list(1,2,3))", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMI(3), result.getOMI());

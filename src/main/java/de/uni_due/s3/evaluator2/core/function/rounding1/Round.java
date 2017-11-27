@@ -5,6 +5,7 @@ import java.util.List;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * Returns the closest long to the argument, with ties rounding to positive
@@ -16,7 +17,7 @@ import de.uni_due.s3.openmath.omutils.OMCreator;
 public class Round extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		if (arguments.size()==1) {
 			double param1 = getDoubleSyntax(arguments.get(0));
 			double result = Math.round(param1);
@@ -41,7 +42,7 @@ public class Round extends Function {
 	}
 
 	@Override
-	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return "round(" + getRSyntax(arguments.get(0)) + ", " + getRSyntax(arguments.get(1)) + ")";
 	}
 

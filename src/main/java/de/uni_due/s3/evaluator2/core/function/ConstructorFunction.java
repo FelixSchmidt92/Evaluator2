@@ -3,6 +3,7 @@ package de.uni_due.s3.evaluator2.core.function;
 import java.util.List;
 
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * ConstructorFunction is an abstract Class where Constructors can be executed with
@@ -27,15 +28,15 @@ import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 public abstract class ConstructorFunction extends Function {
 
 	@Override
-	public abstract List<Object> getPartialListSyntax(List<Object> omel) throws EvaluatorException;
+	public abstract List<Object> getPartialListSyntax(List<Object> omel) throws EvaluatorException, OpenMathException;
 	
 	@Override
-	public abstract String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException;
+	public abstract String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException;
 
 	@Override
-	public abstract String getPartialRSyntax(List<Object> arguments) throws EvaluatorException;
+	public abstract String getPartialRSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException;
 
 	@Override
-	public abstract String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException;
+	public abstract String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException;
 
 }

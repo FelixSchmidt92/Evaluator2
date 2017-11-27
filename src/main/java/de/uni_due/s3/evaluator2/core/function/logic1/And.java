@@ -6,6 +6,7 @@ import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.BinaryFunction;
 import de.uni_due.s3.evaluator2.core.visitor.operation.OMToResultVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * Implements openmath logic and. Example true && true => true
@@ -19,7 +20,7 @@ import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 public class And extends BinaryFunction {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		if (!getBooleanSyntax(OMToResultVisitor.getInstance().visit(arguments.get(0)))) {
 			return OMSymbol.LOGIC1_FALSE;
 		} else {
@@ -47,12 +48,12 @@ public class And extends BinaryFunction {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return getSageSyntax(arguments.get(0)) + " & " + getSageSyntax(arguments.get(1));
 	}
 
 	@Override
-	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return getLatexSyntax(arguments.get(0)) + "\\mbox{and}" + getLatexSyntax(arguments.get(1));
 	}
 }

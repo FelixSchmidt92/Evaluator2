@@ -24,7 +24,7 @@ public class TestRoot extends TestFunctionAbstract {
 	private Function func = new Root();
 
 	@Test
-	public void testRootInteger() throws OpenMathException, EvaluatorException {
+	public void testRootInteger() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(9));
 		Object result = func.evaluate(args);
@@ -32,7 +32,7 @@ public class TestRoot extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testRootFloat() throws OpenMathException, EvaluatorException {
+	public void testRootFloat() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(6.25));
 		Object result = func.evaluate(args);
@@ -40,14 +40,14 @@ public class TestRoot extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testRootIntegration1() throws OpenMathException, EvaluatorException {
+	public void testRootIntegration1() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("root(25)", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
 		assertEquals(OMCreator.createOMI(5), result);
 	}
 
 	@Test
-	public void testRootIntegration2() throws OpenMathException, EvaluatorException {
+	public void testRootIntegration2() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("root(25)", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
 		assertEquals(OMCreator.createOMI(5), result);
@@ -69,21 +69,21 @@ public class TestRoot extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testRootIntegration3() throws OpenMathException, EvaluatorException {
+	public void testRootIntegration3() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("root(125, 3)", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
 		assertEquals(OMCreator.createOMI(5), result);
 	}
 
 	@Test
-	public void testRootIntegration4() throws OpenMathException, EvaluatorException {
+	public void testRootIntegration4() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("root(-125, 3)", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
 		assertEquals(OMCreator.createOMI(-5), result);
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testAbsWithWrongArguments() throws OpenMathException, EvaluatorException {
+	public void testAbsWithWrongArguments() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("root('test')", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();

@@ -23,7 +23,7 @@ public class TestMinus extends TestFunctionAbstract {
 	private Function func = new Minus();
 
 	@Test
-	public void testMinusInteger() throws OpenMathException, EvaluatorException {
+	public void testMinusInteger() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(1));
 		args.add(OMCreator.createOMI(1));
@@ -32,7 +32,7 @@ public class TestMinus extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testMinusFloat() throws OpenMathException, EvaluatorException {
+	public void testMinusFloat() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(2.5));
 		args.add(OMCreator.createOMF(5.8));
@@ -41,7 +41,7 @@ public class TestMinus extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testMinusMixed() throws OpenMathException, EvaluatorException {
+	public void testMinusMixed() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(1));
 		args.add(OMCreator.createOMF(2.5));
@@ -50,21 +50,21 @@ public class TestMinus extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testMinusIntegration1() throws OpenMathException, EvaluatorException {
+	public void testMinusIntegration1() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("10-5", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
 		assertEquals(OMCreator.createOMI(5), result);
 	}
 
 	@Test
-	public void testMinusIntegration2() throws OpenMathException, EvaluatorException {
+	public void testMinusIntegration2() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("minus(10,17)", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
 		assertEquals(OMCreator.createOMI(-7), result);
 	}
 
 	@Test
-	public void testMinusSageSyntax() throws EvaluatorException {
+	public void testMinusSageSyntax() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(1.0));
 		args.add(OMCreator.createOMI(1));
@@ -72,14 +72,14 @@ public class TestMinus extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testMinusWithWrongArguments1() throws OpenMathException, EvaluatorException {
+	public void testMinusWithWrongArguments1() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("10-'test'", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testMinusWithWrongArguments2() throws OpenMathException, EvaluatorException {
+	public void testMinusWithWrongArguments2() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("minus('test',17)", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();

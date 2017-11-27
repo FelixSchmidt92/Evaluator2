@@ -26,7 +26,7 @@ public class TestChooseFromComplement extends TestFunctionAbstract {
 	private static Function func = new ChooseFromComplement();
 
 	@Test
-	public void testChooseFromComplement1() throws OpenMathException, EvaluatorException {
+	public void testChooseFromComplement1() throws EvaluatorException, OpenMathException {
 		List<Object> set1 = new ArrayList<Object>();
 		set1.add(OMCreator.createOMI(1));
 		set1.add(OMCreator.createOMI(20));
@@ -44,7 +44,7 @@ public class TestChooseFromComplement extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testChooseFromComplement2() throws OpenMathException, EvaluatorException {
+	public void testChooseFromComplement2() throws EvaluatorException, OpenMathException {
 		List<Object> set1 = new ArrayList<Object>();
 		set1.add(OMCreator.createOMI(1));
 		set1.add(OMCreator.createOMI(20));
@@ -62,7 +62,7 @@ public class TestChooseFromComplement extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testChooseFromComplementWithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testChooseFromComplementWithLessThanMinParam() throws EvaluatorException, OpenMathException {
 		List<Object> set = new ArrayList<Object>();
 		set.add(OMCreator.createOMSTR("Test"));
 		set.add(OMCreator.createOMI(20));
@@ -73,7 +73,7 @@ public class TestChooseFromComplement extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testChooseFromComplementWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
+	public void testChooseFromComplementWithMoreThanMaxParam() throws EvaluatorException, OpenMathException {
 		List<Object> set = new ArrayList<Object>();
 		set.add(OMCreator.createOMSTR("Test"));
 		set.add(OMCreator.createOMI(20));
@@ -86,7 +86,7 @@ public class TestChooseFromComplement extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidArgumentException.class)
-	public void testChooseFromComplementWithWrongArguments1() throws OpenMathException, EvaluatorException {
+	public void testChooseFromComplementWithWrongArguments1() throws EvaluatorException, OpenMathException {
 		List<Object> set = new ArrayList<Object>();
 		set.add(OMCreator.createOMSTR("Test"));
 		set.add(OMCreator.createOMI(20));
@@ -98,14 +98,14 @@ public class TestChooseFromComplement extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testChooseFromComplementIntegration1() throws OpenMathException, EvaluatorException {
+	public void testChooseFromComplementIntegration1() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("chooseFromComplement({1;2;3;4},{1;2;3})", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMI(4), result.getOMI());
 	}
 
 	@Test
-	public void testChooseFromComplementIntegration2() throws OpenMathException, EvaluatorException {
+	public void testChooseFromComplementIntegration2() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser
 				.parse("chooseFromComplement({1;'test';vector(1,2,3);4},{1;'test';vector(1,2,3)})", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
@@ -113,7 +113,7 @@ public class TestChooseFromComplement extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testChooseFromComplementIntegration3() throws OpenMathException, EvaluatorException {
+	public void testChooseFromComplementIntegration3() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("chooseFromComplement({1;'test';vector(1,2,3);4},{1;'test';4})", null,
 				null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
@@ -125,28 +125,28 @@ public class TestChooseFromComplement extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testChooseFromComplementIntegrationArgsInList() throws OpenMathException, EvaluatorException {
+	public void testChooseFromComplementIntegrationArgsInList() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("chooseFromComplement({1;'Test'},1)", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMSTR("Test"), result.getOMSTR());
 	}
 
 	@Test(expected = FunctionInvalidArgumentException.class)
-	public void testChooseFromComplementWithZeroArgs() throws OpenMathException, EvaluatorException {
+	public void testChooseFromComplementWithZeroArgs() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("chooseFromComplement({}, {2;3})", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testGetFromOrderedListWithLessArgs() throws OpenMathException, EvaluatorException {
+	public void testGetFromOrderedListWithLessArgs() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("getFromOrderedList({})", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testChooseFromComplementWithMoreArgs() throws OpenMathException, EvaluatorException {
+	public void testChooseFromComplementWithMoreArgs() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("getFromOrderedList({}, {}, 1)", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();

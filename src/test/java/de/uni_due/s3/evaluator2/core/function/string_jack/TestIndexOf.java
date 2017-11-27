@@ -23,7 +23,7 @@ public class TestIndexOf extends TestFunctionAbstract {
 	private static Function func = new IndexOf();
 
 	@Test
-	public void testIndexOfTwoParams() throws OpenMathException, EvaluatorException {
+	public void testIndexOfTwoParams() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("Tester"));
 		args.add(OMCreator.createOMSTR("e"));
@@ -32,7 +32,7 @@ public class TestIndexOf extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testIndexOfThreeParams() throws OpenMathException, EvaluatorException {
+	public void testIndexOfThreeParams() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("Tester"));
 		args.add(OMCreator.createOMSTR("e"));
@@ -42,28 +42,28 @@ public class TestIndexOf extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testIndexOfIntegration() throws OpenMathException, EvaluatorException {
+	public void testIndexOfIntegration() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("indexOf('Hallo', 'l', 3)", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMI(3), result.getOMI());
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testIndexOfWithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testIndexOfWithLessThanMinParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("indexOf('Test')", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testIndexOfWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
+	public void testIndexOfWithMoreThanMaxParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("indexOf('Test', 2 ,'Test', 3)", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testIndexOfWithWrongArguments() throws OpenMathException, EvaluatorException {
+	public void testIndexOfWithWrongArguments() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("indexOf('Test', vector(4))", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();

@@ -5,6 +5,7 @@ import java.util.List;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * Implements the jack
@@ -24,7 +25,7 @@ public class IfThenElse extends Function {
 	 * @throws FunctionInvalidArgumentTypeException
 	 */
 	@Override
-	protected Object execute(List<Object> arguments) throws EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		boolean condition = getBooleanSyntax(arguments.get(0));
 
 		if (condition) {

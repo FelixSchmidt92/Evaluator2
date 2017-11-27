@@ -27,7 +27,7 @@ public class TestConvertToBinary extends TestFunctionAbstract {
 	Function func = new ConvertToBinary();
 
 	@Test
-	public void TestConvertToBinaryOMI() throws OpenMathException, EvaluatorException {
+	public void TestConvertToBinaryOMI() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 		OMI omi = OMCreator.createOMI(3);
 
@@ -37,7 +37,7 @@ public class TestConvertToBinary extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void TestConvertToBinaryNegativeOMI() throws OpenMathException, EvaluatorException {
+	public void TestConvertToBinaryNegativeOMI() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 		OMI omi = OMCreator.createOMI(-3);
 
@@ -47,7 +47,7 @@ public class TestConvertToBinary extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void TestConvertToBinaryOMF() throws OpenMathException, EvaluatorException {
+	public void TestConvertToBinaryOMF() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 		OMF omf = OMCreator.createOMF(1.2);
 
@@ -57,7 +57,7 @@ public class TestConvertToBinary extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void TestConvertToBinaryNegativeOMF() throws OpenMathException, EvaluatorException {
+	public void TestConvertToBinaryNegativeOMF() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 		OMF omf = OMCreator.createOMF(-1.2);
 
@@ -67,7 +67,7 @@ public class TestConvertToBinary extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void TestConvertToBinaryOMSTR() throws OpenMathException, EvaluatorException {
+	public void TestConvertToBinaryOMSTR() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 		OMSTR omstr = OMCreator.createOMSTR("String");
 
@@ -76,28 +76,28 @@ public class TestConvertToBinary extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void TestConvertToBinaryIntegration() throws OpenMathException, EvaluatorException {
+	public void TestConvertToBinaryIntegration() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("convertToBinary(3)", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
 		assertEquals(OMCreator.createOMSTR("11"), result);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void TestConvertToBinaryWithMoreArgs() throws OpenMathException, EvaluatorException {
+	public void TestConvertToBinaryWithMoreArgs() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("convertToBinary(3, 2)", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void TestConvertToBinaryWithLesssArgs() throws OpenMathException, EvaluatorException {
+	public void TestConvertToBinaryWithLesssArgs() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("convertToBinary()", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void TestConvertToBinaryOMV() throws OpenMathException, EvaluatorException {
+	public void TestConvertToBinaryOMV() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 		OMV omv = OMCreator.createOMV("StringX");
 

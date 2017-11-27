@@ -54,14 +54,14 @@ public class TestNumberOfVariables extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testEqualsExpreWithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testEqualsExpreWithLessThanMinParam() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<Object>();
 		func.evaluate(args);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testEqualsExprWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
+	public void testEqualsExprWithMoreThanMaxParam() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("test"));
 		args.add(OMCreator.createOMSTR("test"));
@@ -71,7 +71,7 @@ public class TestNumberOfVariables extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testEqualsExprIntegration() throws OpenMathException, EvaluatorException {
+	public void testEqualsExprIntegration() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("numberOfVariables('1+x^3+a')", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMI(2), result.getOMI());

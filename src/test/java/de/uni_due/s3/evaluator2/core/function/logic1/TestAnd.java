@@ -27,7 +27,7 @@ public class TestAnd extends TestFunctionAbstract {
 	private final Function func = new And();
 
 	@Test
-	public void TestBooleanAndWithBothArgumentsTrue() throws OpenMathException, EvaluatorException {
+	public void TestBooleanAndWithBothArgumentsTrue() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMSymbol.LOGIC1_TRUE);
 		args.add(OMSymbol.LOGIC1_TRUE);
@@ -36,7 +36,7 @@ public class TestAnd extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void TestBooleanAndWithOneTrueOneFalse1() throws OpenMathException, EvaluatorException {
+	public void TestBooleanAndWithOneTrueOneFalse1() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMSymbol.LOGIC1_TRUE);
 		args.add(OMSymbol.LOGIC1_FALSE);
@@ -45,7 +45,7 @@ public class TestAnd extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void TestBooleanAndWithOneTrueOneFalse2() throws OpenMathException, EvaluatorException {
+	public void TestBooleanAndWithOneTrueOneFalse2() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMSymbol.LOGIC1_FALSE);
 		args.add(OMSymbol.LOGIC1_TRUE);
@@ -54,7 +54,7 @@ public class TestAnd extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void TestBooleanAndWithBothArgumentsFalse() throws OpenMathException, EvaluatorException {
+	public void TestBooleanAndWithBothArgumentsFalse() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMSymbol.LOGIC1_FALSE);
 		args.add(OMSymbol.LOGIC1_FALSE);
@@ -63,14 +63,14 @@ public class TestAnd extends TestFunctionAbstract {
 	}
 	
 	@Test
-	public void testBooleanAndLatexSyntax() throws OpenMathException, EvaluatorException {
+	public void testBooleanAndLatexSyntax() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = ExpressionParser.parse("3 && 2", new HashMap<>(), new HashMap<>());
 		String latex = OMToLatexVisitor.getInstance().visit(obj);
 		assertEquals("3\\mbox{and}2", latex);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testBooleanAndWithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testBooleanAndWithLessThanMinParam() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMSymbol.LOGIC1_FALSE);
 		func.evaluate(args);
@@ -78,7 +78,7 @@ public class TestAnd extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testBooleanAndWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
+	public void testBooleanAndWithMoreThanMaxParam() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMSymbol.LOGIC1_FALSE);
 		args.add(OMSymbol.LOGIC1_FALSE);
@@ -88,7 +88,7 @@ public class TestAnd extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testEqualsWithWrongArguments() throws OpenMathException, EvaluatorException {
+	public void testEqualsWithWrongArguments() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMSymbol.NUMS1_RATIONAL);
 		args.add(OMSymbol.LOGIC1_FALSE);
@@ -96,14 +96,14 @@ public class TestAnd extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testBooleanAndIntegration() throws OpenMathException, EvaluatorException {
+	public void testBooleanAndIntegration() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("countNodes(1+2)", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMI(4), result.getOMI());
 	}
 
 	@Test
-	public void testBooleanAndSageSyntax() throws OpenMathException, EvaluatorException {
+	public void testBooleanAndSageSyntax() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMSymbol.LOGIC1_TRUE);
 		args.add(OMSymbol.LOGIC1_TRUE);
@@ -111,7 +111,7 @@ public class TestAnd extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testBooleaAndPartialEvaluation() throws OpenMathException, EvaluatorException {
+	public void testBooleaAndPartialEvaluation() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = ExpressionParser.parse("FALSE && evaluateInSage('Something not executable')", new HashMap<>(), new HashMap<>());
 		OMOBJ actual = Evaluator.evaluate(obj);
 		OMOBJ expected = OMCreator.createOMOBJ(OMSymbol.LOGIC1_FALSE);

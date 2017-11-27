@@ -34,7 +34,7 @@ public class EvalEq extends Function {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		String term1 = getSageSyntax(arguments.get(0));
 		String term2 = getSageSyntax(arguments.get(1));
 		if ((term1.length() == 2 && term1.startsWith("'")) || (term2.length() == 2 && term2.startsWith("'"))) {

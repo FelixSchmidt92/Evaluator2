@@ -29,37 +29,37 @@ public class TestTrue extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testTrueBoolean() throws EvaluatorException {
+	public void testTrueBoolean() throws EvaluatorException, OpenMathException {
 		assertEquals(new Boolean(true), func.getPartialBooleanSyntax(new ArrayList<>()));
 	}
 
 	@Test
-	public void testTrueDouble() throws EvaluatorException {
+	public void testTrueDouble() throws EvaluatorException, OpenMathException {
 		assertEquals(new Double(1.0), func.getPartialDoubleSyntax(new ArrayList<>()), 0);
 	}
 
 	@Test
-	public void testTrueInteger() throws EvaluatorException {
+	public void testTrueInteger() throws EvaluatorException, OpenMathException {
 		assertEquals(new Integer(1), func.getPartialIntegerSyntax(new ArrayList<>()));
 	}
 
 	@Test
-	public void testTrueLatex() throws EvaluatorException {
+	public void testTrueLatex() throws EvaluatorException, OpenMathException {
 		assertEquals("True", func.getPartialLatexSyntax(new ArrayList<>()));
 	}
 
 	@Test
-	public void testTrueSage() throws EvaluatorException {
+	public void testTrueSage() throws EvaluatorException, OpenMathException {
 		assertEquals("True", func.getPartialSageSyntax(new ArrayList<>()));
 	}
 
 	@Test
-	public void testTrueString() throws EvaluatorException {
+	public void testTrueString() throws EvaluatorException, OpenMathException {
 		assertEquals("True", func.getPartialStringSyntax(new ArrayList<>()));
 	}
 
 	@Test
-	public void testTrueR() throws EvaluatorException {
+	public void testTrueR() throws EvaluatorException, OpenMathException {
 		assertEquals("TRUE", func.getPartialRSyntax(new ArrayList<>()));
 	}
 

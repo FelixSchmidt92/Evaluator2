@@ -13,6 +13,7 @@ import de.uni_due.s3.openmath.jaxb.OMI;
 import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.jaxb.OMSTR;
 import de.uni_due.s3.openmath.jaxb.OMV;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * 
@@ -69,9 +70,10 @@ public class OMToLatexVisitor extends OMToSyntaxVisitor<String> {
 	/**
 	 * Returns the content of an OME as a String. No special latex commands are
 	 * used, because mathjax can't handle them (see jack2).
+	 * @throws OpenMathException 
 	 */
 	@Override
-	protected String visit(OME ome) throws NoRepresentationAvailableException {
+	protected String visit(OME ome) throws NoRepresentationAvailableException, OpenMathException {
 		String messages = "";
 		for (Object m : ome.getOMSOrOMVOrOMI()) {
 			try {
@@ -93,10 +95,11 @@ public class OMToLatexVisitor extends OMToSyntaxVisitor<String> {
 	 * 
 	 * In every getPartialLatexSyntax() in BinaryFunction it is not needed to call
 	 * getLatexSyntax() on the arguments.
+	 * @throws OpenMathException 
 	 */
 	@Override
 	protected String getSyntaxRepresentationForFunction(Function function, OMS oms, List<Object> omel)
-			throws EvaluatorException {
+			throws EvaluatorException, OpenMathException {
 		try {
 			return function.getPartialLatexSyntax(omel);
 		} catch (NoRepresentationAvailableException nr) {

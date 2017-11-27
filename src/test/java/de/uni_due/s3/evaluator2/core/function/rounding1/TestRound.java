@@ -24,7 +24,7 @@ public class TestRound extends TestFunctionAbstract {
 	private Function func = new Round();
 
 	@Test
-	public void testRoundInteger() throws OpenMathException, EvaluatorException {
+	public void testRoundInteger() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(3));
 		Object result = func.evaluate(args);
@@ -32,7 +32,7 @@ public class TestRound extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testRoundFloat1() throws OpenMathException, EvaluatorException {
+	public void testRoundFloat1() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(2.5));
 		Object result = func.evaluate(args);
@@ -40,7 +40,7 @@ public class TestRound extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testRoundFloat2() throws OpenMathException, EvaluatorException {
+	public void testRoundFloat2() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(2.2));
 		Object result = func.evaluate(args);
@@ -48,42 +48,42 @@ public class TestRound extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testRoundIntegration1() throws OpenMathException, EvaluatorException {
+	public void testRoundIntegration1() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("round(12.2)", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMI(12), result.getOMI());
 	}
 
 	@Test
-	public void testRoundIntegration2() throws OpenMathException, EvaluatorException {
+	public void testRoundIntegration2() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("round(10.123)", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMI(10), result.getOMI());
 	}
 	
 	@Test
-	public void testRoundIntegration3() throws OpenMathException, EvaluatorException {
+	public void testRoundIntegration3() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("round(10.123,2)", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMF(10.12), result.getOMF());
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testRoundWithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testRoundWithLessThanMinParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("round()", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testRoundWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
+	public void testRoundWithMoreThanMaxParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("round(1,3,3)", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testRoundWithWrongArguments() throws OpenMathException, EvaluatorException {
+	public void testRoundWithWrongArguments() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("round('test')", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();

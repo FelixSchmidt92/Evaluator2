@@ -40,37 +40,37 @@ public class TestPi extends TestFunctionAbstract {
 	}
 
 	@Test(expected = NoRepresentationAvailableException.class)
-	public void testPiBoolean() throws EvaluatorException {
+	public void testPiBoolean() throws EvaluatorException, OpenMathException {
 		assertEquals(new Boolean(true), func.getPartialBooleanSyntax(new ArrayList<>()));
 	}
 
 	@Test
-	public void testPiDouble() throws EvaluatorException {
+	public void testPiDouble() throws EvaluatorException, OpenMathException {
 		assertEquals(Math.PI, func.getPartialDoubleSyntax(new ArrayList<>()), 0);
 	}
 
 	@Test(expected = NoRepresentationAvailableException.class)
-	public void testPiInteger() throws EvaluatorException {
+	public void testPiInteger() throws EvaluatorException, OpenMathException {
 		func.getPartialIntegerSyntax(new ArrayList<>());
 	}
 
 	@Test
-	public void testPiLatex() throws EvaluatorException {
+	public void testPiLatex() throws EvaluatorException, OpenMathException {
 		assertEquals("\\pi", func.getPartialLatexSyntax(new ArrayList<>()));
 	}
 
 	@Test
-	public void testPiSage() throws EvaluatorException {
+	public void testPiSage() throws EvaluatorException, OpenMathException {
 		assertEquals("pi", func.getPartialSageSyntax(new ArrayList<>()));
 	}
 
 	@Test
-	public void testPiString() throws EvaluatorException {
+	public void testPiString() throws EvaluatorException, OpenMathException {
 		assertEquals("PI", func.getPartialStringSyntax(new ArrayList<>()));
 	}
 
 	@Test
-	public void testPiR() throws EvaluatorException {
+	public void testPiR() throws EvaluatorException, OpenMathException {
 		assertEquals("pi", func.getPartialRSyntax(new ArrayList<>()));
 	}
 }

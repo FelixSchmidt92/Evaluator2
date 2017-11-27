@@ -27,7 +27,7 @@ public class TestDeterminant extends TestFunctionAbstract{
 	private final Function func = new Determinant();
 	
 	@Test
-	public void testDeterminantLatexSyntax() throws FunctionException, NoRepresentationAvailableException, EvaluatorException {
+	public void testDeterminantLatexSyntax() throws EvaluatorException, OpenMathException {
 		List<Object> matrix = new ArrayList<Object>();
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(1));
@@ -47,7 +47,7 @@ public class TestDeterminant extends TestFunctionAbstract{
 	}
 	
 	@Test
-	public void testDeterminantSageSyntax() throws FunctionException, NoRepresentationAvailableException, EvaluatorException {
+	public void testDeterminantSageSyntax() throws EvaluatorException, OpenMathException {
 		List<Object> matrix = new ArrayList<Object>();
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(1));
@@ -95,21 +95,21 @@ public class TestDeterminant extends TestFunctionAbstract{
 	}
 	
 	@Test
-	public void testDeterminantIntegration() throws OpenMathException, EvaluatorException {
+	public void testDeterminantIntegration() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("det(matrix(matrixrow(1,2),matrixrow(1,2)))", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
 		assertEquals(OMCreator.createOMI(0), result);
 	}
 	
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testDeterminantWithZeroParam() throws OpenMathException, EvaluatorException {
+	public void testDeterminantWithZeroParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("det()", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testDeterminantWithWrongArguments() throws OpenMathException, EvaluatorException {
+	public void testDeterminantWithWrongArguments() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("det(3)", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();

@@ -25,7 +25,7 @@ public class TestEquals extends TestFunctionAbstract {
 	private static Function func = new Equals();
 
 	@Test
-	public void testEqualsEqualStrings() throws OpenMathException, EvaluatorException {
+	public void testEqualsEqualStrings() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("Test"));
 		args.add(OMCreator.createOMSTR("Test"));
@@ -34,7 +34,7 @@ public class TestEquals extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testEqualsNotEqualStrings() throws OpenMathException, EvaluatorException {
+	public void testEqualsNotEqualStrings() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("Test"));
 		args.add(OMCreator.createOMSTR("est"));
@@ -43,35 +43,35 @@ public class TestEquals extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testEqualsIntegrationTrue() throws OpenMathException, EvaluatorException {
+	public void testEqualsIntegrationTrue() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("equals('Hello', 'Hello')", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMSymbol.LOGIC1_TRUE, result.getOMS());
 	}
 
 	@Test
-	public void testEqualsIntegrationFalse() throws OpenMathException, EvaluatorException {
+	public void testEqualsIntegrationFalse() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("equals('Hallo', 'llo')", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMSymbol.LOGIC1_FALSE, result.getOMS());
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testEqualsWithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testEqualsWithLessThanMinParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("equals('Test')", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testEqualsWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
+	public void testEqualsWithMoreThanMaxParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("equals('Test', 'Test', 'Test')", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testEqualsWithWrongArguments() throws OpenMathException, EvaluatorException {
+	public void testEqualsWithWrongArguments() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("equals('Test', vector(2))", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
@@ -79,19 +79,19 @@ public class TestEquals extends TestFunctionAbstract {
 	
 	
 	@Test
-	public void testEqualsIntegrationwithI() throws OpenMathException, EvaluatorException {
+	public void testEqualsIntegrationwithI() throws EvaluatorException, OpenMathException {
 		OMOBJ res = Evaluator.evaluate("equals('+I', '+I')", null, null);
 		assertEquals(OMSymbol.LOGIC1_TRUE, res.getOMS());
 	}
 	
 	@Test
-	public void testEqualsIntegrationwithI2() throws OpenMathException, EvaluatorException {
+	public void testEqualsIntegrationwithI2() throws EvaluatorException, OpenMathException {
 		OMOBJ res = Evaluator.evaluate("equals('I', '+I')", null, null);
 		assertEquals(OMSymbol.LOGIC1_FALSE, res.getOMS());
 	}
 	
 	@Test
-	public void testEqualsIntegrationwithI3() throws OpenMathException, EvaluatorException {
+	public void testEqualsIntegrationwithI3() throws EvaluatorException, OpenMathException {
 		OMOBJ res = Evaluator.evaluate("equals('+II', '+II')", null, null);
 		assertEquals(OMSymbol.LOGIC1_TRUE, res.getOMS());
 	}

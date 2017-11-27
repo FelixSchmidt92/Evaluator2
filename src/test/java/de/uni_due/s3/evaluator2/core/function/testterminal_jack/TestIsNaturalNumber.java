@@ -27,7 +27,7 @@ public class TestIsNaturalNumber extends TestFunctionAbstract {
 	Function func = new IsNaturalNumber();
 
 	@Test
-	public void testIsNaturalNumberOMI() throws OpenMathException, EvaluatorException {
+	public void testIsNaturalNumberOMI() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 		OMI omi = OMCreator.createOMI(1);
 		args.add(omi);
@@ -36,7 +36,7 @@ public class TestIsNaturalNumber extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testIsNaturalNumberOMF() throws OpenMathException, EvaluatorException {
+	public void testIsNaturalNumberOMF() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 		OMF omf = OMCreator.createOMF(1.1);
 		args.add(omf);
@@ -45,7 +45,7 @@ public class TestIsNaturalNumber extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testIsNaturalNumberOMSTR() throws OpenMathException, EvaluatorException {
+	public void testIsNaturalNumberOMSTR() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 		OMSTR omstr = OMCreator.createOMSTR("string");
 		args.add(omstr);
@@ -54,7 +54,7 @@ public class TestIsNaturalNumber extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testIsNaturalNumberOMV() throws OpenMathException, EvaluatorException {
+	public void testIsNaturalNumberOMV() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 		OMV omstr = OMCreator.createOMV("x");
 		args.add(omstr);
@@ -63,7 +63,7 @@ public class TestIsNaturalNumber extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testIsNaturalNumberOMA() throws OpenMathException, EvaluatorException {
+	public void testIsNaturalNumberOMA() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 		ArrayList<Object> args2 = new ArrayList<>();
 		args2.add(OMCreator.createOMF(1));
@@ -75,7 +75,7 @@ public class TestIsNaturalNumber extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testIsNaturalNumberOMS1() throws OpenMathException, EvaluatorException {
+	public void testIsNaturalNumberOMS1() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 		OMS oms = OMSymbol.NUMS1_PI;
 		args.add(oms);
@@ -84,7 +84,7 @@ public class TestIsNaturalNumber extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testIsNaturalNumberOMS2() throws OpenMathException, EvaluatorException {
+	public void testIsNaturalNumberOMS2() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 		OMS oms = OMSymbol.NUMS1_E;
 		args.add(oms);
@@ -93,25 +93,25 @@ public class TestIsNaturalNumber extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testIsNaturalNumberCaseIntegration1() throws OpenMathException, EvaluatorException {
+	public void testIsNaturalNumberCaseIntegration1() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("isNaturalNumber(3)", null, null);
 		assertEquals(OMSymbol.LOGIC1_TRUE, OMToResultVisitor.getInstance().visit(omobj));
 	}
 
 	@Test
-	public void testIsNaturalNumberCaseIntegration2() throws OpenMathException, EvaluatorException {
+	public void testIsNaturalNumberCaseIntegration2() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("isNaturalNumber(3/3)", null, null);
 		assertEquals(OMSymbol.LOGIC1_FALSE, OMToResultVisitor.getInstance().visit(omobj));
 	}
 
 	@Test
-	public void testIsNaturalNumberCaseIntegration3() throws OpenMathException, EvaluatorException {
+	public void testIsNaturalNumberCaseIntegration3() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("isNaturalNumber(abs(3))", null, null);
 		assertEquals(OMSymbol.LOGIC1_FALSE, OMToResultVisitor.getInstance().visit(omobj));
 	}
 	
 	@Test
-	public void testIsNaturalNumberCaseIntegration4() throws OpenMathException, EvaluatorException {
+	public void testIsNaturalNumberCaseIntegration4() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("isNaturalNumber(-3)", null, null);
 		assertEquals(OMSymbol.LOGIC1_FALSE, OMToResultVisitor.getInstance().visit(omobj));
 	}

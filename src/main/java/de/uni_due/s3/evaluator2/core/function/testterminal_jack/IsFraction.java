@@ -4,11 +4,12 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
+import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OMF;
 import de.uni_due.s3.openmath.jaxb.OMI;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * This Function just checks if the given argument is an OMA containing the OMS
@@ -23,7 +24,7 @@ import de.uni_due.s3.openmath.jaxb.OMI;
 public class IsFraction extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws FunctionException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		if ((arguments.get(0) instanceof OMI) || (arguments.get(0) instanceof OMF)) {
 			return OMSymbol.LOGIC1_FALSE;
 		}

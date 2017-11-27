@@ -53,7 +53,7 @@ public class TestEqualsBinary extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testEqualsBinary() throws OpenMathException, EvaluatorException {
+	public void testEqualsBinary() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMSTR(left));
 		args.add(OMCreator.createOMSTR(right));
@@ -62,7 +62,7 @@ public class TestEqualsBinary extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testEqualsBinaryWithInvalidType() throws OpenMathException, EvaluatorException {
+	public void testEqualsBinaryWithInvalidType() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 		args.add(invalidType);
 		args.add(invalidType);

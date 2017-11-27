@@ -34,21 +34,21 @@ public class TestRemainder extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testModulusIntegration1() throws OpenMathException, EvaluatorException {
+	public void testModulusIntegration1() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("10%5", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
 		assertEquals(OMCreator.createOMI(0), result);
 	}
 
 	@Test
-	public void testModulusIntegration2() throws OpenMathException, EvaluatorException {
+	public void testModulusIntegration2() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("remainder(3,-2)", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
 		assertEquals(OMCreator.createOMI(1), result);
 	}
 
 	@Test
-	public void testModulusSageSyntax() throws EvaluatorException {
+	public void testModulusSageSyntax() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMF(1.0));
 		args.add(OMCreator.createOMI(10));
@@ -63,7 +63,7 @@ public class TestRemainder extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testMinusWithWrongArguments() throws OpenMathException, EvaluatorException {
+	public void testMinusWithWrongArguments() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("10%'test'", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();

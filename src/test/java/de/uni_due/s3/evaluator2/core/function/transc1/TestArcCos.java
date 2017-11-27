@@ -25,7 +25,7 @@ public class TestArcCos extends TestFunctionAbstract {
 	private static Function func = new ArcCos();
 
 	@Test
-	public void testArcCosInteger() throws OpenMathException, EvaluatorException {
+	public void testArcCosInteger() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(1));
 		Object result = func.evaluate(args);
@@ -33,7 +33,7 @@ public class TestArcCos extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testArcCosFloat() throws OpenMathException, EvaluatorException {
+	public void testArcCosFloat() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(0.0));
 		Object result = func.evaluate(args);
@@ -48,35 +48,35 @@ public class TestArcCos extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testArcCosIntegration() throws OpenMathException, EvaluatorException {
+	public void testArcCosIntegration() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("acos(1)", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMI(0), result.getOMI());
 	}
 
 	@Test
-	public void testArcCosSageSyntax() throws EvaluatorException {
+	public void testArcCosSageSyntax() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMF(1.0));
 		assertEquals("arccos(1)", func.getPartialSageSyntax(args));
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testArcCosWithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testArcCosWithLessThanMinParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("acos()", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testArcCosWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
+	public void testArcCosWithMoreThanMaxParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("acos(1,3)", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testArcCosWithWrongArguments() throws OpenMathException, EvaluatorException {
+	public void testArcCosWithWrongArguments() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("acos('Test')", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();

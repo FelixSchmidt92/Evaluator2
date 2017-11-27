@@ -9,6 +9,7 @@ import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.openmath.InputMismatchException;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * This function checks if the 2 given Binary Strings are equal to each other It
@@ -20,7 +21,7 @@ import de.uni_due.s3.evaluator2.exceptions.openmath.InputMismatchException;
 public class EqualsBinary extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		try {
 			String left = getStringSyntax(arguments.get(0)); // Normal Number
 			String right = getStringSyntax(arguments.get(1)); // Binary Number

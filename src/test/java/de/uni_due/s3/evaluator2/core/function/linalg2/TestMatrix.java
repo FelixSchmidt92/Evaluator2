@@ -28,7 +28,7 @@ public class TestMatrix extends TestFunctionAbstract {
 	private static ConstructorFunction func = new Matrix();
 
 	@Test
-	public void testMatrixInteger() throws OpenMathException, EvaluatorException {
+	public void testMatrixInteger() throws EvaluatorException, OpenMathException {
 		List<Object> matrix = new ArrayList<Object>();
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(1));
@@ -40,7 +40,7 @@ public class TestMatrix extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testMatrixFloat() throws OpenMathException, EvaluatorException {
+	public void testMatrixFloat() throws EvaluatorException, OpenMathException {
 		List<Object> matrix = new ArrayList<Object>();
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(0.0));
@@ -50,7 +50,7 @@ public class TestMatrix extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testMatrixIntegration() throws OpenMathException, EvaluatorException {
+	public void testMatrixIntegration() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("matrix(matrixrow(1,3),matrixrow(0.0,4))", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		List<Object> matrix = new ArrayList<Object>();
@@ -66,7 +66,7 @@ public class TestMatrix extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testMatrixSageSyntax() throws EvaluatorException {
+	public void testMatrixSageSyntax() throws EvaluatorException, OpenMathException {
 		List<Object> matrix = new ArrayList<>();
 		List<Object> matrixrow1 = new ArrayList<>();
 		matrixrow1.add(OMCreator.createOMF(0.0));
@@ -80,20 +80,20 @@ public class TestMatrix extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testMatrixWithZeroParam() throws OpenMathException, EvaluatorException {
+	public void testMatrixWithZeroParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("matrix()", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testMatrixWithWrongArguments() throws OpenMathException, EvaluatorException {
+	public void testMatrixWithWrongArguments() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("matrix('Test')", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 	
 	@Test
-	public void testMatrixLatexSyntax() throws OpenMathException, EvaluatorException {
+	public void testMatrixLatexSyntax() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("matrix(matrixrow(1,2,3),matrixrow(4,5))", new HashMap<>(), new HashMap<>());
 		String latex = OMToLatexVisitor.getInstance().visit(obj);
 		assertEquals("\\left(\\begin{array}{rr}"
@@ -104,7 +104,7 @@ public class TestMatrix extends TestFunctionAbstract {
 	}
 	
 	@Test
-	public void testMatrixRSyntax() throws OpenMathException, EvaluatorException {
+	public void testMatrixRSyntax() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("matrix(matrixrow(1,2,3),matrixrow(4,5,6))", new HashMap<>(), new HashMap<>());
 		String r = OMToRVisitor.getInstance().visit(obj);
 		assertEquals("matrix(c(1,2,3,4,5,6), nrow=2, ncol=3, byrow=TRUE",r);

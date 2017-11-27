@@ -1,6 +1,6 @@
 package de.uni_due.s3.evaluator2.core.function.arith1;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
@@ -13,8 +13,6 @@ import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
 import de.uni_due.s3.evaluator2.core.visitor.operation.OMToResultVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMConverter;
 import de.uni_due.s3.openmath.omutils.OMCreator;
@@ -65,7 +63,7 @@ public class TestProduct extends TestFunctionAbstract{
 	}
 	
 	@Test
-	public void testProductSageSyntax() throws JAXBException, FunctionException, NoRepresentationAvailableException, EvaluatorException {
+	public void testProductSageSyntax() throws EvaluatorException, OpenMathException, JAXBException {
 		OMOBJ omobj = OMConverter.toObject(""
 				+ "<OMOBJ>" + 
 				"                <OMA>" + 
@@ -95,7 +93,7 @@ public class TestProduct extends TestFunctionAbstract{
 	}
 	
 	@Test
-	public void testProductLatexSyntax() throws JAXBException, EvaluatorException {
+	public void testProductLatexSyntax() throws EvaluatorException, OpenMathException, JAXBException {
 		OMOBJ omobj = OMConverter.toObject(""
 				+ "<OMOBJ>" + 
 				"                <OMA>" + 

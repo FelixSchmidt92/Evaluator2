@@ -53,7 +53,7 @@ public class List extends ConstructorFunction {
 	}
 
 	@Override
-	public String getPartialLatexSyntax(java.util.List<Object> arguments) throws EvaluatorException {
+	public String getPartialLatexSyntax(java.util.List<Object> arguments) throws EvaluatorException, OpenMathException {
 		String args = "";
 		for (Object arg : arguments) {
 			args += getLatexSyntax(arg) + ",";
@@ -68,7 +68,7 @@ public class List extends ConstructorFunction {
 	}
 
 	@Override
-	public String getPartialRSyntax(java.util.List<Object> arguments) throws EvaluatorException {
+	public String getPartialRSyntax(java.util.List<Object> arguments) throws EvaluatorException, OpenMathException {
 		String list = "list(";
 		for (Object arg : arguments) {
 			list += getRSyntax(arg) + ", ";
@@ -79,7 +79,7 @@ public class List extends ConstructorFunction {
 	}
 
 	@Override
-	public String getPartialSageSyntax(java.util.List<Object> arguments) throws EvaluatorException {
+	public String getPartialSageSyntax(java.util.List<Object> arguments) throws EvaluatorException, OpenMathException {
 		String set = "[";
 		for (Object arg : arguments) {
 			set += getSageSyntax(arg) + ", ";

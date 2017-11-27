@@ -17,7 +17,7 @@ public class TestOMToRVisitor {
 
 	
 	@Test
-	public void TestOMRVisitor1() throws OpenMathException, EvaluatorException {
+	public void TestOMRVisitor1() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("1==1", new HashMap<>(), new HashMap<>());
 		String result = OMToRVisitor.getInstance().visit(obj);
 		String expected = "TRUE";
@@ -25,7 +25,7 @@ public class TestOMToRVisitor {
 	}
 
 	@Test
-	public void TestOMRVisitor2() throws OpenMathException, EvaluatorException {
+	public void TestOMRVisitor2() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("1!=1", new HashMap<>(), new HashMap<>());
 		String result = OMToRVisitor.getInstance().visit(obj);
 		String expected = "FALSE";
@@ -33,7 +33,7 @@ public class TestOMToRVisitor {
 	}
 
 	@Test
-	public void TestOMRVisitor3() throws OpenMathException, EvaluatorException {
+	public void TestOMRVisitor3() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("1", new HashMap<>(), new HashMap<>());
 		String result = OMToRVisitor.getInstance().visit(obj);
 		String expected = "1";
@@ -41,7 +41,7 @@ public class TestOMToRVisitor {
 	}
 
 	@Test
-	public void TestOMRVisitor4() throws OpenMathException, EvaluatorException {
+	public void TestOMRVisitor4() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("0", new HashMap<>(), new HashMap<>());
 		String result = OMToRVisitor.getInstance().visit(obj);
 		String expected = "0";
@@ -49,7 +49,7 @@ public class TestOMToRVisitor {
 	}
 
 	@Test
-	public void TestOMRVisitor5() throws OpenMathException, EvaluatorException {
+	public void TestOMRVisitor5() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("constpi()", new HashMap<>(), new HashMap<>());
 		String result = OMToRVisitor.getInstance().visit(obj);
 		String expected = "pi";
@@ -73,7 +73,7 @@ public class TestOMToRVisitor {
 	}
 	
 	@Test
-	public void isSingletonPattern() throws EvaluatorException {
+	public void isSingletonPattern() throws EvaluatorException, OpenMathException {
 		OMToSyntaxVisitor<?> obj1 = OMToRVisitor.getInstance();
 		OMToSyntaxVisitor<?> obj2 = OMToRVisitor.getInstance();
 		

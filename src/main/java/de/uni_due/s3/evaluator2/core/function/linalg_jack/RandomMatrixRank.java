@@ -41,7 +41,7 @@ public class RandomMatrixRank extends Function {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		StringBuilder sb = new StringBuilder();
 		sb.append("sage.matrix.constructor.random_echelonizable_matrix(sage.matrix.matrix_space.MatrixSpace(");
 		sb.append(getSageSyntax(arguments.get(0)));// field

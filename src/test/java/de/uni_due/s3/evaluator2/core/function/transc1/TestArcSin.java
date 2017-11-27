@@ -27,7 +27,7 @@ public class TestArcSin extends TestFunctionAbstract {
 	private static Function func = new ArcSin();
 
 	@Test
-	public void testArcSinFloat() throws OpenMathException, EvaluatorException {
+	public void testArcSinFloat() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(0.0));
 		Object result = func.evaluate(args);
@@ -45,35 +45,35 @@ public class TestArcSin extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testArcSinIntegration() throws OpenMathException, EvaluatorException {
+	public void testArcSinIntegration() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("asin(0)", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMI(0), result.getOMI());
 	}
 
 	@Test
-	public void testArcSinSageSyntax() throws EvaluatorException {
+	public void testArcSinSageSyntax() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMF(1.0));
 		assertEquals("arcsin(1)", func.getPartialSageSyntax(args));
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testArcSinWithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testArcSinWithLessThanMinParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("asin()", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testArcSinWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
+	public void testArcSinWithMoreThanMaxParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("asin(1,3)", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testArcSinWithWrongArguments() throws OpenMathException, EvaluatorException {
+	public void testArcSinWithWrongArguments() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("asin('Test')", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();

@@ -20,7 +20,7 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 public class TestOMVariableVisitor {
 
 	@Test
-	public void testOMVariableVisitor1() throws OpenMathException, EvaluatorException {
+	public void testOMVariableVisitor1() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("(a-b)", new HashMap<>(), new HashMap<>());
 		Set<OMV> omvSet = OMVariableVisitor.getInstance().visit(obj);
 		Set<OMV> expected = new HashSet<>();
@@ -30,7 +30,7 @@ public class TestOMVariableVisitor {
 	}
 
 	@Test
-	public void testOMVariableVisitor2() throws OpenMathException, EvaluatorException {
+	public void testOMVariableVisitor2() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("a-b*2", new HashMap<>(), new HashMap<>());
 		Set<OMV> omvSet = OMVariableVisitor.getInstance().visit(obj);
 		Set<OMV> expected = new HashSet<>();
@@ -40,7 +40,7 @@ public class TestOMVariableVisitor {
 	}
 
 	@Test
-	public void testOMVariableVisitor3() throws OpenMathException, EvaluatorException {
+	public void testOMVariableVisitor3() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("(a-b)*2", new HashMap<>(), new HashMap<>());
 		Set<OMV> omvSet = OMVariableVisitor.getInstance().visit(obj);
 		Set<OMV> expected = new HashSet<>();
@@ -50,7 +50,7 @@ public class TestOMVariableVisitor {
 	}
 
 	@Test
-	public void testOMVariableVisitor4() throws OpenMathException, EvaluatorException {
+	public void testOMVariableVisitor4() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("3*x^(a-b)*2", new HashMap<>(), new HashMap<>());
 		Set<OMV> omvSet = OMVariableVisitor.getInstance().visit(obj);
 		Set<OMV> expected = new HashSet<>();
@@ -115,7 +115,7 @@ public class TestOMVariableVisitor {
 	}
 	
 	@Test
-	public void isSingletonPattern() throws EvaluatorException {
+	public void isSingletonPattern() throws EvaluatorException, OpenMathException {
 		OMToSyntaxVisitor<?> obj1 = OMVariableVisitor.getInstance();
 		OMToSyntaxVisitor<?> obj2 = OMVariableVisitor.getInstance();
 		

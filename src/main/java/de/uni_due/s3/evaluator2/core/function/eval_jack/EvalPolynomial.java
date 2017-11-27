@@ -32,7 +32,7 @@ public class EvalPolynomial extends Function {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		String term = getSageSyntax(arguments.get(0));
 		Double value1 = getDoubleSyntax(arguments.get(1));
 

@@ -70,7 +70,7 @@ public class TestDependsOn extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testDependsOnWithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testDependsOnWithLessThanMinParam() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("test"));
 		func.evaluate(args);
@@ -78,7 +78,7 @@ public class TestDependsOn extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testDependsOnWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
+	public void testDependsOnWithMoreThanMaxParam() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("test"));
 		args.add(OMCreator.createOMSTR("test"));
@@ -88,7 +88,7 @@ public class TestDependsOn extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testDependsOnWithWrongArguments() throws OpenMathException, EvaluatorException {
+	public void testDependsOnWithWrongArguments() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<Object>();
 		args.add(null);
 		args.add(OMCreator.createOMI(10));
@@ -97,14 +97,14 @@ public class TestDependsOn extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testEqualsIntegration1() throws OpenMathException, EvaluatorException {
+	public void testEqualsIntegration1() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("dependsOn('1+3+a*c','a')", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMSymbol.LOGIC1_TRUE, result.getOMS());
 	}
 	
 	@Test
-	public void testEqualsIntegration2() throws OpenMathException, EvaluatorException {
+	public void testEqualsIntegration2() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("dependsOn(a,'a')", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMSymbol.LOGIC1_TRUE, result.getOMS());

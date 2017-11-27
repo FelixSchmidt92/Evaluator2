@@ -22,7 +22,7 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 public class TestQuerySparql extends TestFunctionAbstract{
 
 	@Test
-	public void testQuerySparqlTupleList() throws OpenMathException, EvaluatorException {
+	public void testQuerySparqlTupleList() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("querySparql('https://query.wikidata.org/sparql', 'PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX wdt: <http://www.wikidata.org/prop/direct/> PREFIX wikibase: <http://wikiba.se/ontology#> PREFIX wd: <http://www.wikidata.org/entity/> PREFIX bd: <http://www.bigdata.com/rdf#> SELECT DISTINCT ?cityLabel ?prov ?city WHERE {{?city wdt:P31 wd:Q515.} UNION {?city wdt:P31 wd:Q839954.} ?city wdt:P131 ?prov. ?prov wdt:P31 wd:Q182547. ?prov rdfs:label ?provL. ?city rdfs:label ?cityL. FILTER (langMatches( lang(?provL), \"de\" ) ) FILTER (langMatches( lang(?cityL), \"de\" ) ) SERVICE wikibase:label { bd:serviceParam wikibase:language \"de\". }}')", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
 		assertEquals(true, OMTypeChecker.isOMAWithSymbol(result,OMSymbol.LIST1_LIST));
@@ -33,14 +33,14 @@ public class TestQuerySparql extends TestFunctionAbstract{
 	}
 	
 	@Test
-	public void testQuerySparqlSingleTuple() throws OpenMathException, EvaluatorException {
+	public void testQuerySparqlSingleTuple() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("querySparql('https://query.wikidata.org/sparql', 'PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX wdt: <http://www.wikidata.org/prop/direct/> PREFIX wikibase: <http://wikiba.se/ontology#> PREFIX wd: <http://www.wikidata.org/entity/> PREFIX bd: <http://www.bigdata.com/rdf#> SELECT DISTINCT ?cityLabel ?prov ?city WHERE {{?city wdt:P31 wd:Q515.} UNION {?city wdt:P31 wd:Q839954.} ?city wdt:P131 ?prov. ?prov wdt:P31 wd:Q182547. ?prov rdfs:label ?provL. ?city rdfs:label ?cityL. FILTER (langMatches( lang(?provL), \"de\" ) ) FILTER (langMatches( lang(?cityL), \"de\" ) ) SERVICE wikibase:label { bd:serviceParam wikibase:language \"de\". }} LIMIT 1')", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
 		assertEquals(true, OMTypeChecker.isOMAWithSymbol(result, OMSymbol.LIST1_LIST));
 	}
 	
 	@Test
-	public void testQuerySparqlStringList() throws OpenMathException, EvaluatorException {
+	public void testQuerySparqlStringList() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("querySparql('https://query.wikidata.org/sparql', 'PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX wdt: <http://www.wikidata.org/prop/direct/> PREFIX wikibase: <http://wikiba.se/ontology#> PREFIX wd: <http://www.wikidata.org/entity/> PREFIX bd: <http://www.bigdata.com/rdf#> SELECT ?cityLabel WHERE {{?city wdt:P31 wd:Q515.} UNION {?city wdt:P31 wd:Q839954.} ?city wdt:P131 ?prov. ?prov wdt:P31 wd:Q182547. ?prov rdfs:label ?provL. ?city rdfs:label ?cityL. FILTER (langMatches( lang(?provL), \"de\" ) ) FILTER (langMatches( lang(?cityL), \"de\" ) ) SERVICE wikibase:label { bd:serviceParam wikibase:language \"de\". }}')", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
 		assertEquals(true, OMTypeChecker.isOMAWithSymbol(result, OMSymbol.LIST1_LIST));
@@ -51,14 +51,14 @@ public class TestQuerySparql extends TestFunctionAbstract{
 	}
 	
 	@Test
-	public void testQuerySparqlSingleString() throws OpenMathException, EvaluatorException {
+	public void testQuerySparqlSingleString() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("querySparql('https://query.wikidata.org/sparql', 'PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX wdt: <http://www.wikidata.org/prop/direct/> PREFIX wikibase: <http://wikiba.se/ontology#> PREFIX wd: <http://www.wikidata.org/entity/> PREFIX bd: <http://www.bigdata.com/rdf#> SELECT ?cityLabel WHERE {{?city wdt:P31 wd:Q515.} UNION {?city wdt:P31 wd:Q839954.} ?city wdt:P131 ?prov. ?prov wdt:P31 wd:Q182547. ?prov rdfs:label ?provL. ?city rdfs:label ?cityL. FILTER (langMatches( lang(?provL), \"de\" ) ) FILTER (langMatches( lang(?cityL), \"de\" ) ) SERVICE wikibase:label { bd:serviceParam wikibase:language \"de\". }} LIMIT 1')", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
 		assertEquals(true, OMTypeChecker.isOMSTR(result));
 	}
 	
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testDeterminantWithZeroParam() throws OpenMathException, EvaluatorException {
+	public void testDeterminantWithZeroParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("querySparql()", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();

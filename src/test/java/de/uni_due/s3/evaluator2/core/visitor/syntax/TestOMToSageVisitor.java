@@ -13,7 +13,6 @@ import org.junit.runners.Parameterized;
 
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.visitor.OMToSyntaxVisitor;
-import de.uni_due.s3.evaluator2.core.visitor.syntax.OMToSageVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OMF;
@@ -23,6 +22,7 @@ import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.jaxb.OMSTR;
 import de.uni_due.s3.openmath.jaxb.OMV;
 import de.uni_due.s3.openmath.omutils.OMCreator;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 @RunWith(Parameterized.class)
 public class TestOMToSageVisitor {
@@ -87,7 +87,7 @@ public class TestOMToSageVisitor {
 	}
 
 	@Test
-	public void testVisitTerminals() throws EvaluatorException {
+	public void testVisitTerminals() throws EvaluatorException, OpenMathException {
 		assertEquals(omiString, OMToSageVisitor.getInstance().visit(omi));
 		assertEquals(omfString, OMToSageVisitor.getInstance().visit(omf));
 		assertEquals(omvString, OMToSageVisitor.getInstance().visit(omv));
@@ -97,13 +97,13 @@ public class TestOMToSageVisitor {
 
 	/* The Class Plus has to be implemented in Functions */
 	@Test
-	public void testVisitApplication() throws EvaluatorException {
+	public void testVisitApplication() throws EvaluatorException, OpenMathException {
 		assertEquals("(( ( (" + omiString + ") + (" + omfString + ") ) ))", OMToSageVisitor.getInstance().visit(oma));
 		assertEquals("(( ( (" + omiString + ") + (" + omfString + ") ) ))", OMToSageVisitor.getInstance().visit(omobj));
 	}
 	
 	@Test
-	public void isSingletonPattern() throws EvaluatorException {
+	public void isSingletonPattern() throws EvaluatorException, OpenMathException {
 		OMToSyntaxVisitor<?> obj1 = OMToSageVisitor.getInstance();
 		OMToSyntaxVisitor<?> obj2 = OMToSageVisitor.getInstance();
 		

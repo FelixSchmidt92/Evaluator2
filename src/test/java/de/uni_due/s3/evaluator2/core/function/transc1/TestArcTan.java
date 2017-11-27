@@ -25,7 +25,7 @@ public class TestArcTan extends TestFunctionAbstract {
 	private static Function func = new ArcTan();
 
 	@Test
-	public void testArcTanFloat() throws OpenMathException, EvaluatorException {
+	public void testArcTanFloat() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(0.0));
 		Object result = func.evaluate(args);
@@ -33,7 +33,7 @@ public class TestArcTan extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testArcTanInteger() throws OpenMathException, EvaluatorException {
+	public void testArcTanInteger() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(1));
 		Object result = func.evaluate(args);
@@ -48,35 +48,35 @@ public class TestArcTan extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testArcTanIntegration() throws OpenMathException, EvaluatorException {
+	public void testArcTanIntegration() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("atan(0)", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMI(0), result.getOMI());
 	}
 
 	@Test
-	public void testArcTanSageSyntax() throws EvaluatorException {
+	public void testArcTanSageSyntax() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMF(1.0));
 		assertEquals("arctan(1)", func.getPartialSageSyntax(args));
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testArcTanWithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testArcTanWithLessThanMinParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("atan()", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testArcTanWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
+	public void testArcTanWithMoreThanMaxParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("atan(1,3)", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testArcTanWithWrongArguments() throws OpenMathException, EvaluatorException {
+	public void testArcTanWithWrongArguments() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("atan('Test')", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();

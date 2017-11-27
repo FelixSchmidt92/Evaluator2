@@ -6,6 +6,7 @@ import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.BinaryFunction;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * Implements Openmath relation1 eq operation. Example: equal(2,2) => true
@@ -23,7 +24,7 @@ public class Equal extends BinaryFunction {
 	 * 
 	 */
 	@Override
-	protected Object execute(List<Object> arguments) throws EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		try {
 			double first = getDoubleSyntax(arguments.get(0));
 			double second = getDoubleSyntax(arguments.get(1));
@@ -47,12 +48,12 @@ public class Equal extends BinaryFunction {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return getSageSyntax(arguments.get(0)) + " == " + getSageSyntax(arguments.get(1));
 	}
 
 	@Override
-	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return getLatexSyntax(arguments.get(0)) + "=" + getLatexSyntax(arguments.get(1));
 	}
 }

@@ -25,7 +25,7 @@ public class TestGCD extends TestFunctionAbstract {
 	private static Function func = new GCD();
 
 	@Test
-	public void testGcdInteger() throws OpenMathException, EvaluatorException {
+	public void testGcdInteger() throws EvaluatorException, OpenMathException {
 
 		List<Object> args = new ArrayList<Object>(2);
 		args.add(OMCreator.createOMI(12));
@@ -35,7 +35,7 @@ public class TestGCD extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testGcdIntegration() throws OpenMathException, EvaluatorException {
+	public void testGcdIntegration() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("gcd(10,5)", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
 		assertEquals(OMCreator.createOMI(5), result);
@@ -49,7 +49,7 @@ public class TestGCD extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testGcdSageSyntax() throws EvaluatorException {
+	public void testGcdSageSyntax() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>(1);
 		args.add(OMCreator.createOMF(1.0));
 		args.add(OMCreator.createOMI(1));
@@ -57,7 +57,7 @@ public class TestGCD extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testGcdWithWrongArguments() throws OpenMathException, EvaluatorException {
+	public void testGcdWithWrongArguments() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("gcd(2,'test')", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();

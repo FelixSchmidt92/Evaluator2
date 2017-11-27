@@ -6,6 +6,7 @@ import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * Returns a string that is a substring of this string. The substring begins at
@@ -31,7 +32,7 @@ public class Substring extends Function {
 	 * 
 	 */
 	@Override
-	protected Object execute(List<Object> arguments) throws EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		String string = getStringSyntax(arguments.get(0));
 		int begin = getIntegerSyntax(arguments.get(1));
 		int end = string.length();

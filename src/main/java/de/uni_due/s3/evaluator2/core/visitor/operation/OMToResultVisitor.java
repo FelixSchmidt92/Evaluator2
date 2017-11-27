@@ -2,9 +2,11 @@ package de.uni_due.s3.evaluator2.core.visitor.operation;
 
 import java.util.List;
 
+import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.visitor.OMToSyntaxVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
+import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OMF;
@@ -26,11 +28,12 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
  *
  */
 
-public class OMToResultVisitor extends OMToSyntaxVisitor<Object>{
+public class OMToResultVisitor extends OMToSyntaxVisitor<Object> {
 
 	private static OMToResultVisitor visitor;
-	
-	private OMToResultVisitor() throws EvaluatorException { }
+
+	private OMToResultVisitor() throws EvaluatorException {
+	}
 
 	public static OMToResultVisitor getInstance() throws EvaluatorException {
 		if (visitor != null) {
@@ -39,7 +42,7 @@ public class OMToResultVisitor extends OMToSyntaxVisitor<Object>{
 		visitor = new OMToResultVisitor();
 		return visitor;
 	}
-	
+
 	@Override
 	protected Object visit(OMF omf) throws NoRepresentationAvailableException {
 		return omf;
@@ -60,15 +63,13 @@ public class OMToResultVisitor extends OMToSyntaxVisitor<Object>{
 		return omv;
 	}
 
-	
 	/**
-	 * Visits a OpenMath Application Object (OMA). 
+	 * Visits a OpenMath Application Object (OMA).
 	 * 
-	 * If the function (defined by the OMS) allows that
-	 * Children of the type OMA can be visited, they will be visited and the Result
-	 * of that will be used as an Argument instead of the OMA itself. All children of a
-	 * OMA will be passed to the function as arguments and
-	 * the function will be executed with evaluate.
+	 * If the function (defined by the OMS) allows that Children of the type OMA can
+	 * be visited, they will be visited and the Result of that will be used as an
+	 * Argument instead of the OMA itself. All children of a OMA will be passed to
+	 * the function as arguments and the function will be executed with evaluate.
 	 * 
 	 * @param oma
 	 *            OpenMath application object <OMA>...</OMA>
@@ -79,7 +80,7 @@ public class OMToResultVisitor extends OMToSyntaxVisitor<Object>{
 
 	@Override
 	protected Object getSyntaxRepresentationForFunction(Function function, OMS oms, List<Object> omel)
-			throws EvaluatorException {
+			throws EvaluatorException, OpenMathException {
 		for (int i = 0; i < omel.size(); i++) {
 			Object o = omel.get(i);
 			if (o instanceof OMA) {
@@ -89,12 +90,14 @@ public class OMToResultVisitor extends OMToSyntaxVisitor<Object>{
 		}
 		try {
 			return function.evaluate(omel);
-		} catch (OpenMathException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (FunctionInvalidArgumentTypeException e) {
+			for (Object omelement : omel) {
+				if (OMSymbol.isSymbolicExpression(omelement))
+					continue;
+				throw e;
+			}
+			return function.getPartialSymbolicSyntax(omel);
 		}
-		return null;
-
 	}
 
 }

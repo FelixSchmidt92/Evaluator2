@@ -13,6 +13,7 @@ import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.jaxb.OMSTR;
 import de.uni_due.s3.openmath.jaxb.OMV;
 import de.uni_due.s3.openmath.omutils.OMCreator;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class OMToListVisitor extends OMToSyntaxVisitor<List<Object>> {
 
@@ -66,7 +67,7 @@ public class OMToListVisitor extends OMToSyntaxVisitor<List<Object>> {
 
 	@Override
 	protected List<Object> getSyntaxRepresentationForFunction(Function function, OMS oms, List<Object> omel)
-			throws EvaluatorException {
+			throws EvaluatorException, OpenMathException {
 		if (omel == null) {
 			omel = new ArrayList<>();
 		}

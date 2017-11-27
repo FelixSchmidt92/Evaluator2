@@ -9,6 +9,7 @@ import java.util.Set;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * Implements a get Function for List. First List will be ordered.
@@ -19,7 +20,7 @@ import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentExcep
 public class ChooseFromComplement extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		Set<Object> set = new HashSet<Object>();
 
 		List<Object> list1 = getListSyntax(arguments.get(0));

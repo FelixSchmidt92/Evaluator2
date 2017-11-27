@@ -9,6 +9,7 @@ import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.openmath.jaxb.OMV;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * Tests if a given polynomial depends on a specified variable Example:
@@ -25,7 +26,7 @@ public class DependsOn extends Function {
 	 * @throws EvaluatorException 
 	 */
 	@Override
-	protected Object execute(List<Object> arguments) throws EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		if (!OMTypeChecker.isOMV(arguments.get(1))) {
 			throw new FunctionInvalidArgumentTypeException(this, "(1)Char");
 		}

@@ -13,8 +13,6 @@ import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
 import de.uni_due.s3.evaluator2.core.visitor.operation.OMToResultVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMOBJ;
 import de.uni_due.s3.openmath.omutils.OMConverter;
 import de.uni_due.s3.openmath.omutils.OMCreator;
@@ -25,7 +23,7 @@ public class TestSum extends TestFunctionAbstract{
 	private final Function func = new Sum();
 	
 	@Test
-	public void testSum() throws JAXBException, OpenMathException, EvaluatorException {
+	public void testSum() throws EvaluatorException, OpenMathException, JAXBException {
 		OMOBJ omobj = OMConverter.toObject(""
 				+ "<OMOBJ>" + 
 				"                <OMA>" + 
@@ -61,7 +59,7 @@ public class TestSum extends TestFunctionAbstract{
 	}
 	
 	@Test
-	public void testSumSageSyntax() throws JAXBException, FunctionException, NoRepresentationAvailableException, EvaluatorException {
+	public void testSumSageSyntax() throws EvaluatorException, OpenMathException, JAXBException {
 		OMOBJ omobj = OMConverter.toObject(""
 				+ "<OMOBJ>" + 
 				"                <OMA>" + 
@@ -91,7 +89,7 @@ public class TestSum extends TestFunctionAbstract{
 	}
 	
 	@Test
-	public void testSumLatexSyntax() throws JAXBException, EvaluatorException {
+	public void testSumLatexSyntax() throws EvaluatorException, OpenMathException, JAXBException {
 		OMOBJ omobj = OMConverter.toObject(""
 				+ "<OMOBJ>" + 
 				"                <OMA>" + 

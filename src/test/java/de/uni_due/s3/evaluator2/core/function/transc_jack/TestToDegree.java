@@ -24,7 +24,7 @@ public class TestToDegree extends TestFunctionAbstract {
 	private static Function func = new ToDegree();
 
 	@Test
-	public void testToDegreePI() throws OpenMathException, EvaluatorException {
+	public void testToDegreePI() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(Math.PI));
 		Object result = func.evaluate(args);
@@ -32,7 +32,7 @@ public class TestToDegree extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testToDegreeMinusPI() throws OpenMathException, EvaluatorException {
+	public void testToDegreeMinusPI() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(-Math.PI));
 		Object result = func.evaluate(args);
@@ -40,7 +40,7 @@ public class TestToDegree extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testToDegreeFloat() throws OpenMathException, EvaluatorException {
+	public void testToDegreeFloat() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(0.0));
 		Object result = func.evaluate(args);
@@ -48,35 +48,35 @@ public class TestToDegree extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testToDegreeIntegration1() throws OpenMathException, EvaluatorException {
+	public void testToDegreeIntegration1() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("toDegree(1)", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMF(57.29577951308232), result.getOMF());
 	}
 
 	@Test
-	public void testToDegreeIntegration2() throws OpenMathException, EvaluatorException {
+	public void testToDegreeIntegration2() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("toDegree(7)", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMF(401.07045659157626), result.getOMF());
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testToDegreeWithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testToDegreeWithLessThanMinParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("toDegree()", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testToDegreeWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
+	public void testToDegreeWithMoreThanMaxParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("toDegree(1,3)", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testToDegreeWithWrongArguments() throws OpenMathException, EvaluatorException {
+	public void testToDegreeWithWrongArguments() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("toDegree('Test')", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();

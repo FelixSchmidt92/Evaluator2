@@ -27,7 +27,7 @@ public class TestGetFromList extends TestFunctionAbstract {
 	private static Function func = new GetFromList();
 
 	@Test
-	public void testGetFromList1() throws OpenMathException, EvaluatorException {
+	public void testGetFromList1() throws EvaluatorException, OpenMathException {
 		List<Object> set = new ArrayList<Object>();
 		set.add(OMCreator.createOMSTR("Test"));
 		set.add(OMCreator.createOMI(20));
@@ -40,7 +40,7 @@ public class TestGetFromList extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testGetFromList2() throws OpenMathException, EvaluatorException {
+	public void testGetFromList2() throws EvaluatorException, OpenMathException {
 		List<Object> set = new ArrayList<Object>();
 		set.add(OMCreator.createOMSTR("Test"));
 		set.add(OMCreator.createOMI(20));
@@ -53,7 +53,7 @@ public class TestGetFromList extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testGetFromList3() throws OpenMathException, EvaluatorException {
+	public void testGetFromList3() throws EvaluatorException, OpenMathException {
 		List<Object> plus = new ArrayList<Object>();
 		plus.add(OMCreator.createOMI(20));
 		plus.add(OMCreator.createOMI(1));
@@ -69,7 +69,7 @@ public class TestGetFromList extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testGetFromListWithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testGetFromListWithLessThanMinParam() throws EvaluatorException, OpenMathException {
 		List<Object> plus = new ArrayList<Object>();
 		plus.add(OMCreator.createOMI(20));
 		plus.add(OMCreator.createOMI(1));
@@ -84,7 +84,7 @@ public class TestGetFromList extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testGetFromListWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
+	public void testGetFromListWithMoreThanMaxParam() throws EvaluatorException, OpenMathException {
 		List<Object> plus = new ArrayList<Object>();
 		plus.add(OMCreator.createOMI(20));
 		plus.add(OMCreator.createOMI(1));
@@ -101,7 +101,7 @@ public class TestGetFromList extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidArgumentException.class)
-	public void testGetFromListWithWrongArguments1() throws OpenMathException, EvaluatorException {
+	public void testGetFromListWithWrongArguments1() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(1));
 		args.add(OMCreator.createOMI(1)); // wrong
@@ -110,7 +110,7 @@ public class TestGetFromList extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testGetFromListWithWrongArguments2() throws OpenMathException, EvaluatorException {
+	public void testGetFromListWithWrongArguments2() throws EvaluatorException, OpenMathException {
 		List<Object> plus = new ArrayList<Object>();
 		plus.add(OMCreator.createOMI(20));
 		plus.add(OMCreator.createOMI(1));
@@ -126,28 +126,28 @@ public class TestGetFromList extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testGetFromListIntegration1() throws OpenMathException, EvaluatorException {
+	public void testGetFromListIntegration1() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("getFromList(0,{1;2})", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMI(1), result.getOMI());
 	}
 
 	@Test
-	public void testGetFromListIntegration2() throws OpenMathException, EvaluatorException {
+	public void testGetFromListIntegration2() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("getFromList(1, {1;'Test'})", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMSTR("Test"), result.getOMSTR());
 	}
 
 	@Test(expected = FunctionInvalidArgumentException.class)
-	public void testGetFromListIntegration3() throws OpenMathException, EvaluatorException {
+	public void testGetFromListIntegration3() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("getFromList(2, {1})", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test
-	public void testGetFromListIntegration4() throws OpenMathException, EvaluatorException {
+	public void testGetFromListIntegration4() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("getFromList(1, {1; matrix(matrixrow(1,2));getFromList(0, {vector(1,2)})})",
 				null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
@@ -160,7 +160,7 @@ public class TestGetFromList extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testGetFromListIntegration5() throws OpenMathException, EvaluatorException {
+	public void testGetFromListIntegration5() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser
 				.parse("getFromList(2, {1; matrix(matrixrow(1,2)); getFromList(0, {vector(1,2,7.1); 0})})", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
@@ -186,21 +186,21 @@ public class TestGetFromList extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testGetFromListWithLessArgs() throws OpenMathException, EvaluatorException {
+	public void testGetFromListWithLessArgs() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("getFromList({})", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testGetFromListWithMoreArgs() throws OpenMathException, EvaluatorException {
+	public void testGetFromListWithMoreArgs() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("getFromList({}, 0, 4)", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 	
 	@Test
-	public void testGetFromListIntegration7() throws OpenMathException, EvaluatorException {
+	public void testGetFromListIntegration7() throws EvaluatorException, OpenMathException {
 		HashMap<String, OMOBJ> vars = new HashMap<>();
 		OMOBJ p0 = new OMOBJ();
 		OMOBJ p00 = new OMOBJ();

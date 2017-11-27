@@ -25,37 +25,37 @@ public class TestNaN {
 	}
 
 	@Test(expected = NoRepresentationAvailableException.class)
-	public void testNaNBoolean() throws EvaluatorException {
+	public void testNaNBoolean() throws EvaluatorException, OpenMathException {
 		func.getPartialBooleanSyntax(new ArrayList<>());
 	}
 
 	@Test(expected = NoRepresentationAvailableException.class)
-	public void testNaNDouble() throws EvaluatorException {
+	public void testNaNDouble() throws EvaluatorException, OpenMathException {
 		func.getPartialDoubleSyntax(new ArrayList<>());
 	}
 
 	@Test(expected = NoRepresentationAvailableException.class)
-	public void testNaNInteger() throws EvaluatorException {
+	public void testNaNInteger() throws EvaluatorException, OpenMathException {
 		func.getPartialIntegerSyntax(new ArrayList<>());
 	}
 
 	@Test
-	public void testNaNLatex() throws EvaluatorException {
+	public void testNaNLatex() throws EvaluatorException, OpenMathException {
 		assertEquals("NaN", func.getPartialLatexSyntax(new ArrayList<>()));
 	}
 
 	@Test
-	public void testNaNSage() throws EvaluatorException {
+	public void testNaNSage() throws EvaluatorException, OpenMathException {
 		assertEquals("NaN", func.getPartialSageSyntax(new ArrayList<>()));
 	}
 
 	@Test
-	public void testNaNString() throws EvaluatorException {
+	public void testNaNString() throws EvaluatorException, OpenMathException {
 		assertEquals("NaN", func.getPartialStringSyntax(new ArrayList<>()));
 	}
 
 	@Test
-	public void testNaNR() throws EvaluatorException {
+	public void testNaNR() throws EvaluatorException, OpenMathException {
 		assertEquals("NaN", func.getPartialRSyntax(new ArrayList<>()));
 	}
 }

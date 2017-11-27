@@ -10,6 +10,7 @@ import de.uni_due.s3.openmath.jaxb.OMI;
 import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.jaxb.OMSTR;
 import de.uni_due.s3.openmath.jaxb.OMV;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class OMToRVisitor extends OMToSyntaxVisitor<String> {
 
@@ -58,7 +59,7 @@ public class OMToRVisitor extends OMToSyntaxVisitor<String> {
 
 	@Override
 	protected String getSyntaxRepresentationForFunction(Function function, OMS oms, List<Object> omel)
-			throws EvaluatorException {
+			throws EvaluatorException, OpenMathException {
 		return function.getPartialRSyntax(omel);
 	}
 

@@ -23,7 +23,7 @@ public class Rational extends Function {
 	}
 
 	@Override
-	public Boolean getPartialBooleanSyntax(List<Object> arguments) throws EvaluatorException {
+	public Boolean getPartialBooleanSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		Double arg1 = getDoubleSyntax(arguments.get(0));
 		Double arg2 = getDoubleSyntax(arguments.get(1));
 		if ((arg1 / arg2) == 0) return false;
@@ -32,7 +32,7 @@ public class Rational extends Function {
 	}
 
 	@Override
-	public Double getPartialDoubleSyntax(List<Object> arguments) throws EvaluatorException {
+	public Double getPartialDoubleSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		Double arg1 = getDoubleSyntax(arguments.get(0));
 		Double arg2 = getDoubleSyntax(arguments.get(1));
 
@@ -40,12 +40,12 @@ public class Rational extends Function {
 	}
 
 	@Override
-	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return "\\frac{" + getLatexSyntax(arguments.get(0)) + "}{" + getLatexSyntax(arguments.get(1)) + "}";
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return getSageSyntax(arguments.get(0)) + "/" + getSageSyntax(arguments.get(1));
 	}
 

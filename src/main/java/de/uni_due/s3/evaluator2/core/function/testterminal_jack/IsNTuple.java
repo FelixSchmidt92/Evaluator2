@@ -21,7 +21,7 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 public class IsNTuple extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws OpenMathException, EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		int n = getIntegerSyntax(arguments.get(1));
 		
 		if (!OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.ECC_TUPLE)) {

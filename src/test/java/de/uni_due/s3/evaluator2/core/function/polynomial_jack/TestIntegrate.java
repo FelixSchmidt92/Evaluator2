@@ -124,14 +124,14 @@ public class TestIntegrate extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testIntegrateWithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testIntegrateWithLessThanMinParam() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		func.evaluate(args);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testIntegrateWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
+	public void testIntegrateWithMoreThanMaxParam() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("test"));
 		args.add(OMCreator.createOMSTR("test"));
@@ -141,7 +141,7 @@ public class TestIntegrate extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testIntegrateWithWrongArguments() throws OpenMathException, EvaluatorException {
+	public void testIntegrateWithWrongArguments() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("''"));
 		args.add(OMCreator.createOMSTR("test"));
@@ -150,7 +150,7 @@ public class TestIntegrate extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testIntegrateIntegration() throws OpenMathException, EvaluatorException {
+	public void testIntegrateIntegration() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("integrate('2*x','x')", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		OMOBJ expected = ExpressionParser.parse("x^2", null, null);
@@ -158,7 +158,7 @@ public class TestIntegrate extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testIntegrateSageSyntax() throws JAXBException, EvaluatorException {
+	public void testIntegrateSageSyntax() throws EvaluatorException, OpenMathException, JAXBException {
 		List<Object> args = new ArrayList<Object>();
 		OMOBJ arg1 = OMConverter
 				.toObject("<OMOBJ><OMA><OMS cd=\"arith1\" name=\"plus\"/>" + "<OMA><OMS cd =\"arith1\" name=\"minus\"/>"

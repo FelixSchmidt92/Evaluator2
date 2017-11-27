@@ -11,12 +11,13 @@ import de.uni_due.s3.openmath.jaxb.OMI;
 import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.jaxb.OMSTR;
 import de.uni_due.s3.openmath.jaxb.OMV;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestOMToSyntaxVisitor {
 
 	private class ImplVisitor extends OMToSyntaxVisitor<String> {
 		
-		public ImplVisitor() throws EvaluatorException {
+		public ImplVisitor() throws EvaluatorException, OpenMathException {
 			super();
 		}
 		
@@ -49,19 +50,19 @@ public class TestOMToSyntaxVisitor {
 	}
 	
 	@Test(expected = EvaluatorException.class)
-	public void testVisitWrongImplementation() throws EvaluatorException {
+	public void testVisitWrongImplementation() throws EvaluatorException, OpenMathException {
 		new ImplVisitor();
 	}
 	
 	private class ImplVisitor2 extends OMToSyntaxVisitor<String> {
 		
-		public ImplVisitor2() throws EvaluatorException {
+		public ImplVisitor2() throws EvaluatorException, OpenMathException {
 			super();
 		}
 		
 		/*only for Test in JUnit, it is unused*/
 		@SuppressWarnings("unused")
-		public ImplVisitor2 getInstance() throws EvaluatorException {
+		public ImplVisitor2 getInstance() throws EvaluatorException, OpenMathException {
 			return new ImplVisitor2();
 		}
 
@@ -93,7 +94,7 @@ public class TestOMToSyntaxVisitor {
 	}
 	
 	@Test(expected = EvaluatorException.class)
-	public void testVisitWrongImplementation2() throws EvaluatorException {
+	public void testVisitWrongImplementation2() throws EvaluatorException, OpenMathException {
 		new ImplVisitor2();
 	}
 }

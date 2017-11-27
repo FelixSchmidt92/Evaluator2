@@ -38,100 +38,100 @@ public class TestIsPolynomial extends TestIntegration {
 	}
 
 	@Test
-	public void testIsPolynomial1() throws OpenMathException, EvaluatorException {
+	public void testIsPolynomial1() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isPolynomial('x^2+x+1','x')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsPolynomial2() throws OpenMathException, EvaluatorException {
+	public void testIsPolynomial2() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isPolynomial('y^2+3*y+4','y')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsPolynomial3() throws OpenMathException, EvaluatorException {
+	public void testIsPolynomial3() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isPolynomial('3*a^5+2*a^3-a','a')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsPolynomial4() throws OpenMathException, EvaluatorException {
+	public void testIsPolynomial4() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isPolynomial('m^3+2*m-2','m')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsPolynomial5() throws OpenMathException, EvaluatorException {
+	public void testIsPolynomial5() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isPolynomial('x^2+x+1','y')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsPolynomial6() throws OpenMathException, EvaluatorException {
+	public void testIsPolynomial6() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isPolynomial('x','x')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsPolynomial7() throws OpenMathException, EvaluatorException {
+	public void testIsPolynomial7() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isPolynomial('sin(x)+ y^3', 'y')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsPolynomial8() throws OpenMathException, EvaluatorException {
+	public void testIsPolynomial8() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isPolynomial('e^(x) + y^3', 'y')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsPolynomial9() throws OpenMathException, EvaluatorException {
+	public void testIsPolynomial9() throws EvaluatorException, OpenMathException {
 		assertEquals(false, Evaluator.getBooleanResult("isPolynomial('sin(x)+ y^3', 'x')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsPolynomial10() throws OpenMathException, EvaluatorException {
+	public void testIsPolynomial10() throws EvaluatorException, OpenMathException {
 		assertEquals(false, Evaluator.getBooleanResult("isPolynomial('e^(x) + y^3', 'x')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsPolynomialWithInput() throws OpenMathException, EvaluatorException {
+	public void testIsPolynomialWithInput() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isPolynomial('x^2+x+1','[pos=1]')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsPolynomialWithVariables() throws OpenMathException, EvaluatorException {
+	public void testIsPolynomialWithVariables() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isPolynomial('x^2+x+1','[var=a]')", exerVar, fillIn));
 	}
 
 	@Test // (expected=AssertionError.class)
-	public void testIsPolynomialWithNumberAsSecondArgument1() throws OpenMathException, EvaluatorException {
+	public void testIsPolynomialWithNumberAsSecondArgument1() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isPolynomial('sin(x)', '1')", exerVar, fillIn));// Look if 1 is
 																										// Polynomial
 	}
 
 	@Test // (expected=AssertionError.class)
-	public void testIsPolynomialWithNumberAsSecondArgument2() throws OpenMathException, EvaluatorException {
+	public void testIsPolynomialWithNumberAsSecondArgument2() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isPolynomial('e^(x)', '0')", exerVar, fillIn)); // Look if 0 is
 																										// Polynomial
 	}
 
 	@Test // (expected=AssertionError.class)
-	public void testIsPolynomialWithNumberAsSecondArgument3() throws OpenMathException, EvaluatorException {
+	public void testIsPolynomialWithNumberAsSecondArgument3() throws EvaluatorException, OpenMathException {
 		assertEquals(false, Evaluator.getBooleanResult("isPolynomial('x^2+x+1','2')", exerVar, fillIn));// Look if 2 is
 																										// Polynomial
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testIsPolynomialWithEmptyStringArguments() throws OpenMathException, EvaluatorException {
+	public void testIsPolynomialWithEmptyStringArguments() throws EvaluatorException, OpenMathException {
 		Evaluator.getBooleanResult("isPolynomial('', '')", exerVar, fillIn);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testIsPolynomialWithEmptyArgument() throws OpenMathException, EvaluatorException {
+	public void testIsPolynomialWithEmptyArgument() throws EvaluatorException, OpenMathException {
 		Evaluator.getBooleanResult("isPolynomial()", exerVar, fillIn);
 	}
 
 	@Test(expected = UndefinedExerciseVariableException.class)
-	public void testIsPolynomialWithoutExerciseVariable() throws OpenMathException, EvaluatorException {
+	public void testIsPolynomialWithoutExerciseVariable() throws EvaluatorException, OpenMathException {
 		Evaluator.getBooleanResult("isPolynomial('[var=j]', '[var=j]')", exerVar, fillIn);
 	}
 
 	@Test(expected = UndefinedFillInVariableException.class)
-	public void testIsPolynomialWithoutInput() throws OpenMathException, EvaluatorException {
+	public void testIsPolynomialWithoutInput() throws EvaluatorException, OpenMathException {
 		Evaluator.getBooleanResult("isPolynomial('[pos=42]', '[pos=42]')", exerVar, fillIn);
 	}
 }

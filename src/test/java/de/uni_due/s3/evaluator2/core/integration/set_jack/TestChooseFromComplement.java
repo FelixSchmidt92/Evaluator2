@@ -49,43 +49,43 @@ public class TestChooseFromComplement extends TestIntegration {
 	}
 
 	@Test
-	public void testChooseFromComplement1() throws OpenMathException, EvaluatorException {
+	public void testChooseFromComplement1() throws EvaluatorException, OpenMathException {
 		OMOBJ expected = new OMOBJ();
 		expected.setOMV(OMCreator.createOMV("c"));
 		assertTrue(expected.equals(Evaluator.evaluate("chooseFromComplement('{a;b;c}','{a;b}')", exerVar, fillIn)));
 	}
 
 	@Test
-	public void testChooseFromComplement2() throws OpenMathException, EvaluatorException {
+	public void testChooseFromComplement2() throws EvaluatorException, OpenMathException {
 		OMOBJ expected = new OMOBJ();
 		expected.setOMV(OMCreator.createOMV("h"));
 		assertTrue(expected.equals(Evaluator.evaluate("chooseFromComplement('{h;10;m}','{m;10}')", exerVar, fillIn)));
 	}
 
 	@Test
-	public void testChooseFromComplement3() throws OpenMathException, EvaluatorException {
+	public void testChooseFromComplement3() throws EvaluatorException, OpenMathException {
 		OMOBJ expected = new OMOBJ();
 		expected.setOMV(OMCreator.createOMV("a"));
 		assertTrue(expected.equals(Evaluator.evaluate("chooseFromComplement('{a}','{b;c}')", exerVar, fillIn)));
 	}
 
 	@Test
-	public void testChooseFromComplement4() throws OpenMathException, EvaluatorException {
+	public void testChooseFromComplement4() throws EvaluatorException, OpenMathException {
 		assertTrue(results.contains(Evaluator.evaluate("chooseFromComplement('{a;b;c}','{d;e;f}')", exerVar, fillIn)));
 	}
 
 	@Test
-	public void testChooseFromComplement5() throws OpenMathException, EvaluatorException {
+	public void testChooseFromComplement5() throws EvaluatorException, OpenMathException {
 		assertTrue(results.contains(Evaluator.evaluate("chooseFromComplement('{a;b;c}','{d;e;f}')", exerVar, fillIn)));
 	}
 
 	@Test
-	public void testChooseFromComplement6() throws OpenMathException, EvaluatorException {
+	public void testChooseFromComplement6() throws EvaluatorException, OpenMathException {
 		assertTrue(results.contains(Evaluator.evaluate("chooseFromComplement('{a;b;c}','{d;e;f}')", exerVar, fillIn)));
 	}
 
 	@Test
-	public void testChooseFromComplementWithInput1() throws OpenMathException, EvaluatorException {
+	public void testChooseFromComplementWithInput1() throws EvaluatorException, OpenMathException {
 		OMOBJ expected = new OMOBJ();
 		expected.setOMV(OMCreator.createOMV("c"));
 		assertTrue(
@@ -93,7 +93,7 @@ public class TestChooseFromComplement extends TestIntegration {
 	}
 
 	@Test
-	public void testChooseFromComplementWithInput2() throws OpenMathException, EvaluatorException {
+	public void testChooseFromComplementWithInput2() throws EvaluatorException, OpenMathException {
 		OMOBJ expected = new OMOBJ();
 		expected.setOMSTR(OMCreator.createOMSTR("hallo"));
 		assertTrue(expected
@@ -101,7 +101,7 @@ public class TestChooseFromComplement extends TestIntegration {
 	}
 
 	@Test
-	public void testChooseFromComplementWithVariables1() throws OpenMathException, EvaluatorException {
+	public void testChooseFromComplementWithVariables1() throws EvaluatorException, OpenMathException {
 		OMOBJ expected = new OMOBJ();
 		expected.setOMV(OMCreator.createOMV("c"));
 		assertTrue(
@@ -109,7 +109,7 @@ public class TestChooseFromComplement extends TestIntegration {
 	}
 
 	@Test
-	public void testChooseFromComplementWithVariables2() throws OpenMathException, EvaluatorException {
+	public void testChooseFromComplementWithVariables2() throws EvaluatorException, OpenMathException {
 		OMOBJ expected = new OMOBJ();
 		expected.setOMSTR(OMCreator.createOMSTR("hallo"));
 		assertTrue(expected
@@ -117,12 +117,12 @@ public class TestChooseFromComplement extends TestIntegration {
 	}
 
 	@Test(expected = FunctionInvalidArgumentException.class)
-	public void testChooseFromComplementWithSameElements() throws OpenMathException, EvaluatorException {
+	public void testChooseFromComplementWithSameElements() throws EvaluatorException, OpenMathException {
 		Evaluator.evaluate("chooseFromComplement('{a;b;1.5}','{a;b;1.5}')", exerVar, fillIn);
 	}
 
 	@Test
-	public void testChooseFromComplementWithInputCharacter() throws OpenMathException, EvaluatorException {
+	public void testChooseFromComplementWithInputCharacter() throws EvaluatorException, OpenMathException {
 		OMOBJ expected = new OMOBJ();
 		expected.setOMV(OMCreator.createOMV("b"));
 		assertTrue(expected
@@ -130,22 +130,22 @@ public class TestChooseFromComplement extends TestIntegration {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testChooseFromComplementWithOneArgument() throws OpenMathException, EvaluatorException {
+	public void testChooseFromComplementWithOneArgument() throws EvaluatorException, OpenMathException {
 		Evaluator.evaluate("chooseFromComplement('{a;b;c;d}')", exerVar, fillIn);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testChooseFromComplementWithThreeArguments() throws OpenMathException, EvaluatorException {
+	public void testChooseFromComplementWithThreeArguments() throws EvaluatorException, OpenMathException {
 		Evaluator.evaluate("chooseFromComplement('{a;b;c;d}', '{a;b}', '{c}')", exerVar, fillIn);
 	}
 
 	@Test(expected = UndefinedExerciseVariableException.class)
-	public void testChooseFromComplementWithMissingExcerciseVariable() throws OpenMathException, EvaluatorException {
+	public void testChooseFromComplementWithMissingExcerciseVariable() throws EvaluatorException, OpenMathException {
 		Evaluator.evaluate("chooseFromComplement('[var=j]', '{a}')", exerVar, fillIn);
 	}
 
 	@Test(expected = UndefinedFillInVariableException.class)
-	public void testChooseFromComplementWithMissingInput() throws OpenMathException, EvaluatorException {
+	public void testChooseFromComplementWithMissingInput() throws EvaluatorException, OpenMathException {
 		Evaluator.evaluate("chooseFromComplement('[pos=42]', '{a}')", exerVar, fillIn);
 	}
 

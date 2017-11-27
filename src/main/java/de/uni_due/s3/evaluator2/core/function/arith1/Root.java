@@ -20,7 +20,7 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 public class Root extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws OpenMathException, EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		try {
 			if (arguments.size() == 1) {
 				Double argValue =getDoubleSyntax(arguments.get(0));
@@ -64,7 +64,7 @@ public class Root extends Function {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		if (arguments.size() == 1) {
 			return "sqrt(" + getSageSyntax(arguments.get(0)) + ")";
 		} else {
@@ -74,7 +74,7 @@ public class Root extends Function {
 	
 	@Override
 	public String getPartialLatexSyntax(List<Object> arguments)
-			throws EvaluatorException {
+			throws EvaluatorException, OpenMathException {
 		
 		if(arguments.size() == 1) {
 			return "\\sqrt{" + getLatexSyntax(arguments.get(0))  + "}";

@@ -19,7 +19,7 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 public class TestOMToIntegerVisitor {
 
 	@Test
-	public void TestOMIntegerVisitor1() throws OpenMathException, EvaluatorException {
+	public void TestOMIntegerVisitor1() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("1==1", new HashMap<>(), new HashMap<>());
 		Integer result = OMToIntegerVisitor.getInstance().visit(obj);
 		Integer expected = 1;
@@ -27,7 +27,7 @@ public class TestOMToIntegerVisitor {
 	}
 
 	@Test
-	public void TestOMIntegerVisitor2() throws OpenMathException, EvaluatorException {
+	public void TestOMIntegerVisitor2() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("1!=1", new HashMap<>(), new HashMap<>());
 		Integer result = OMToIntegerVisitor.getInstance().visit(obj);
 		Integer expected = 0;
@@ -35,13 +35,13 @@ public class TestOMToIntegerVisitor {
 	}
 
 	@Test(expected = NoRepresentationAvailableException.class)
-	public void TestOMIntegerVisitor3() throws OpenMathException, EvaluatorException {
+	public void TestOMIntegerVisitor3() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("1.3", new HashMap<>(), new HashMap<>());
 		OMToIntegerVisitor.getInstance().visit(obj);
 	}
 
 	@Test
-	public void TestOMIntegerVisitor4() throws OpenMathException, EvaluatorException {
+	public void TestOMIntegerVisitor4() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("0.0", new HashMap<>(), new HashMap<>());
 		Integer result = OMToIntegerVisitor.getInstance().visit(obj);
 		Integer expected = 0;
@@ -49,7 +49,7 @@ public class TestOMToIntegerVisitor {
 	}
 
 	@Test
-	public void TestOMIntegerVisitor5() throws OpenMathException, EvaluatorException {
+	public void TestOMIntegerVisitor5() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("1", new HashMap<>(), new HashMap<>());
 		Integer result = OMToIntegerVisitor.getInstance().visit(obj);
 		Integer expected = 1;
@@ -57,7 +57,7 @@ public class TestOMToIntegerVisitor {
 	}
 
 	@Test(expected = NoRepresentationAvailableException.class)
-	public void TestOMIntegerVisitor6() throws OpenMathException, EvaluatorException {
+	public void TestOMIntegerVisitor6() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("constpi()", new HashMap<>(), new HashMap<>());
 		OMToIntegerVisitor.getInstance().visit(obj);
 	}
@@ -75,7 +75,7 @@ public class TestOMToIntegerVisitor {
 	}
 	
 	@Test
-	public void isSingletonPattern() throws EvaluatorException {
+	public void isSingletonPattern() throws EvaluatorException, OpenMathException {
 		OMToSyntaxVisitor<?> obj1 = OMToIntegerVisitor.getInstance();
 		OMToSyntaxVisitor<?> obj2 = OMToIntegerVisitor.getInstance();
 		

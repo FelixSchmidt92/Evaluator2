@@ -23,7 +23,7 @@ public class TestReplace extends TestFunctionAbstract {
 	private static Function func = new Replace();
 
 	@Test
-	public void testReplaceStrings1() throws OpenMathException, EvaluatorException {
+	public void testReplaceStrings1() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("elefant"));
 		args.add(OMCreator.createOMSTR("f"));
@@ -33,7 +33,7 @@ public class TestReplace extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testReplaceStrings2() throws OpenMathException, EvaluatorException {
+	public void testReplaceStrings2() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("Hello"));
 		args.add(OMCreator.createOMSTR("H"));
@@ -43,7 +43,7 @@ public class TestReplace extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testReplaceStrings3() throws OpenMathException, EvaluatorException {
+	public void testReplaceStrings3() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("Funktion"));
 		args.add(OMCreator.createOMSTR("Fun"));
@@ -53,7 +53,7 @@ public class TestReplace extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testReplaceStrings4() throws OpenMathException, EvaluatorException {
+	public void testReplaceStrings4() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("elefant"));
 		args.add(OMCreator.createOMSTR("z"));
@@ -63,28 +63,28 @@ public class TestReplace extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testReplaceCaseIntegration1() throws OpenMathException, EvaluatorException {
+	public void testReplaceCaseIntegration1() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("replace('Hello', 'e', 'a')", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMSTR("Hallo"), result.getOMSTR());
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testReplaceWithWrongArguments() throws OpenMathException, EvaluatorException {
+	public void testReplaceWithWrongArguments() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("replace('Hello', '1', vector(3))", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testReplaceWithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testReplaceWithLessThanMinParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("replace('Test')", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testReplaceWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
+	public void testReplaceWithMoreThanMaxParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("replace('Test', 'Zwei', 'Zwei', 'Zwei')", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();

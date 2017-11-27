@@ -7,9 +7,8 @@ import java.util.List;
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * @author spobel
@@ -18,7 +17,7 @@ import de.uni_due.s3.openmath.omutils.OMCreator;
 public class Setdiff extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		java.util.Set<Object> set1 = new HashSet<>(getListSyntax(arguments.get(0)));
 		java.util.Set<Object> set2 = new HashSet<>(getListSyntax(arguments.get(1)));
 		set1.removeAll(set2);
@@ -37,8 +36,7 @@ public class Setdiff extends Function {
 	}
 
 	@Override
-	public String getPartialLatexSyntax(List<Object> arguments)
-			throws EvaluatorException, FunctionException, NoRepresentationAvailableException {
+	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return getLatexSyntax(arguments.get(0)) + "\\setminus" + getLatexSyntax(arguments.get(1));
 	}
 }

@@ -11,6 +11,7 @@ import de.uni_due.s3.openmath.jaxb.OMI;
 import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.jaxb.OMSTR;
 import de.uni_due.s3.openmath.jaxb.OMV;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class OMToDoubleVisitor extends OMToSyntaxVisitor<Double> {
 
@@ -56,7 +57,7 @@ public class OMToDoubleVisitor extends OMToSyntaxVisitor<Double> {
 
 	@Override
 	protected Double getSyntaxRepresentationForFunction(Function function, OMS oms, List<Object> omel)
-			throws EvaluatorException {
+			throws EvaluatorException, OpenMathException {
 		return function.getPartialDoubleSyntax(omel);
 	}
 }

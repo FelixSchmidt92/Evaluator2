@@ -26,7 +26,7 @@ public class TestList {
 	private Object result;
 
 	@Test
-	public void testListWithOMI() throws OpenMathException, EvaluatorException {
+	public void testListWithOMI() throws EvaluatorException, OpenMathException {
 		args = new ArrayList<Object>(3);
 		args.add(OMCreator.createOMI(10));
 		args.add(OMCreator.createOMI(20));
@@ -36,7 +36,7 @@ public class TestList {
 	}
 
 	@Test
-	public void testListWithOMF() throws OpenMathException, EvaluatorException {
+	public void testListWithOMF() throws EvaluatorException, OpenMathException {
 		args = new ArrayList<Object>(3);
 		args.add(OMCreator.createOMF(10.0));
 		args.add(OMCreator.createOMF(20.3));
@@ -46,7 +46,7 @@ public class TestList {
 	}
 
 	@Test
-	public void testListWithOMA() throws OpenMathException, EvaluatorException {
+	public void testListWithOMA() throws EvaluatorException, OpenMathException {
 		args = new ArrayList<Object>(3);
 		args.add(OMCreator.createOMF(10.0));
 		args.add(OMCreator.createOMF(20.3));
@@ -61,7 +61,7 @@ public class TestList {
 	}
 
 	@Test
-	public void testListIntegration() throws OpenMathException, EvaluatorException {
+	public void testListIntegration() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("list(1,2,3)", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		List<Object> value = result.getOMA().getOmel();

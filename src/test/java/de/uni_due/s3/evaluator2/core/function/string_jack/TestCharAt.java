@@ -23,7 +23,7 @@ public class TestCharAt extends TestFunctionAbstract {
 	private static Function func = new CharAt();
 
 	@Test
-	public void testCharAtInteger() throws OpenMathException, EvaluatorException {
+	public void testCharAtInteger() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("Test"));
 		args.add(OMCreator.createOMI(1));
@@ -32,7 +32,7 @@ public class TestCharAt extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testCharAtFloat() throws OpenMathException, EvaluatorException {
+	public void testCharAtFloat() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("Test"));
 		args.add(OMCreator.createOMF(1.0));
@@ -41,28 +41,28 @@ public class TestCharAt extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testCharAtIntegration() throws OpenMathException, EvaluatorException {
+	public void testCharAtIntegration() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("charAt('Hallo', 3)", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMSTR("l"), result.getOMSTR());
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testCharAtWithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testCharAtWithLessThanMinParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("charAt('Test')", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testCharAtWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
+	public void testCharAtWithMoreThanMaxParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("charAt('Test',2,'Test')", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testCharAtWithWrongArguments() throws OpenMathException, EvaluatorException {
+	public void testCharAtWithWrongArguments() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("charAt('Test','Te')", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();

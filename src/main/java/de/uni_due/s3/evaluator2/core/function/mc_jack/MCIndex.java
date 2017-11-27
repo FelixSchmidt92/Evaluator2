@@ -37,7 +37,7 @@ public class MCIndex extends Function {
 	}
 	
 	@Override
-	public Integer getPartialIntegerSyntax(List<Object> arguments) throws EvaluatorException {
+	public Integer getPartialIntegerSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return getIntegerSyntax(arguments.get(0));
 	}
 	

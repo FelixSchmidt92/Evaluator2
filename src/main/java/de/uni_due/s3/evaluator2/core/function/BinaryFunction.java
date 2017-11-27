@@ -32,6 +32,7 @@ import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedRuntim
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OMS;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * This class is a special kind of Function. Each BinaryFunction represents a
@@ -46,7 +47,7 @@ import de.uni_due.s3.openmath.jaxb.OMS;
  */
 public abstract class BinaryFunction extends Function {
 
-	protected final String getBinaryLatex(Object omElement) throws EvaluatorException {
+	protected final String getBinaryLatex(Object omElement) throws EvaluatorException, OpenMathException {
 		if (omElement instanceof OMA) {
 			OMA child = (OMA) omElement;
 			List<Object> childOmel = new ArrayList<Object>(child.getOmel().size() - 1);

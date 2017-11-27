@@ -49,92 +49,92 @@ public class TestIsFraction extends TestIntegration {
 	}
 
 	@Test
-	public void testIsFraction1() throws OpenMathException, EvaluatorException {
+	public void testIsFraction1() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isFraction(1/3)", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsFraction2() throws OpenMathException, EvaluatorException {
+	public void testIsFraction2() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isFraction(7/10)", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsFraction3() throws OpenMathException, EvaluatorException {
+	public void testIsFraction3() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isFraction(90/65)", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsFraction4() throws OpenMathException, EvaluatorException {
+	public void testIsFraction4() throws EvaluatorException, OpenMathException {
 		assertEquals(true, !Evaluator.getBooleanResult("isFraction(1)", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsFraction5() throws OpenMathException, EvaluatorException {
+	public void testIsFraction5() throws EvaluatorException, OpenMathException {
 		assertEquals(true, !Evaluator.getBooleanResult("isFraction(10.76)", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsFractionWithInput1() throws OpenMathException, EvaluatorException {
+	public void testIsFractionWithInput1() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isFraction([pos=1])", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsFractionWithInput2() throws OpenMathException, EvaluatorException {
+	public void testIsFractionWithInput2() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isFraction([pos=2])", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsFractionWithInput3() throws OpenMathException, EvaluatorException {
+	public void testIsFractionWithInput3() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isFraction([pos=3])", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsFractionWithInput4() throws OpenMathException, EvaluatorException {
+	public void testIsFractionWithInput4() throws EvaluatorException, OpenMathException {
 		assertEquals(true, !Evaluator.getBooleanResult("isFraction([pos=4])", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsFractionWithVariables1() throws OpenMathException, EvaluatorException {
+	public void testIsFractionWithVariables1() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isFraction([var=a])", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsFractionWithVariables2() throws OpenMathException, EvaluatorException {
+	public void testIsFractionWithVariables2() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isFraction([var=b])", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsFractionWithVariables3() throws OpenMathException, EvaluatorException {
+	public void testIsFractionWithVariables3() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isFraction([var=c])", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsFractionWithVariables4() throws OpenMathException, EvaluatorException {
+	public void testIsFractionWithVariables4() throws EvaluatorException, OpenMathException {
 		assertEquals(true, !Evaluator.getBooleanResult("isFraction([var=d])", exerVar, fillIn));
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testIsFractionWithWrongInputCharacter() throws OpenMathException, EvaluatorException {
+	public void testIsFractionWithWrongInputCharacter() throws EvaluatorException, OpenMathException {
 		Evaluator.getBooleanResult("isFraction(a)", exerVar, fillIn);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testIsFractionWithTwoArguments() throws OpenMathException, EvaluatorException {
+	public void testIsFractionWithTwoArguments() throws EvaluatorException, OpenMathException {
 		Evaluator.getBooleanResult("isFraction(3/2 , 0)", exerVar, fillIn);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testIsFractionWithThreeArguments() throws OpenMathException, EvaluatorException {
+	public void testIsFractionWithThreeArguments() throws EvaluatorException, OpenMathException {
 		Evaluator.getBooleanResult("isFraction(3/2, 1/3, 3/1)", exerVar, fillIn);
 	}
 
 	@Test(expected = UndefinedExerciseVariableException.class)
-	public void testIsFractionWithMissingExerciseVariable() throws OpenMathException, EvaluatorException {
+	public void testIsFractionWithMissingExerciseVariable() throws EvaluatorException, OpenMathException {
 		Evaluator.getBooleanResult("isFraction('[var=j]')", exerVar, fillIn);
 	}
 
 	@Test(expected = UndefinedFillInVariableException.class)
-	public void testIsFractionWithMissingInput() throws OpenMathException, EvaluatorException {
+	public void testIsFractionWithMissingInput() throws EvaluatorException, OpenMathException {
 		Evaluator.getBooleanResult("isFraction('[pos=42]')", exerVar, fillIn);
 	}
 

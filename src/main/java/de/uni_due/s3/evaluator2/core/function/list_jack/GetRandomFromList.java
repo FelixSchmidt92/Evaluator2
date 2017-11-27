@@ -5,6 +5,7 @@ import java.util.List;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * Implements a get Function for Set (List).
@@ -17,7 +18,7 @@ import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentExcep
 public class GetRandomFromList extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		List<Object> set = getListSyntax(arguments.get(0));
 		if (set.size() == 0) {
 			throw new FunctionInvalidArgumentException(this, "Set has to have at least one element.");

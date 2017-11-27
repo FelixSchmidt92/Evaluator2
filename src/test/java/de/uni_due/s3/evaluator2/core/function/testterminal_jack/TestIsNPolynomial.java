@@ -21,7 +21,7 @@ public class TestIsNPolynomial extends TestFunctionAbstract {
 	Function func = new IsNPolynomial();
 
 	@Test
-	public void isPolynomialWithIntegration1() throws OpenMathException, EvaluatorException {
+	public void isPolynomialWithIntegration1() throws EvaluatorException, OpenMathException {
 
 		OMOBJ t = ExpressionParser.parse("isNPolynomial('a*2+ c', x, 1)", null, null);
 
@@ -33,7 +33,7 @@ public class TestIsNPolynomial extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void isPolynomialWithIntegration2() throws OpenMathException, EvaluatorException {
+	public void isPolynomialWithIntegration2() throws EvaluatorException, OpenMathException {
 
 		OMOBJ t = ExpressionParser.parse("isNPolynomial('a*2+ c',a,'1')", null, null);
 
@@ -45,7 +45,7 @@ public class TestIsNPolynomial extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void isPolynomialWithIntegration3() throws OpenMathException, EvaluatorException {
+	public void isPolynomialWithIntegration3() throws EvaluatorException, OpenMathException {
 
 		OMOBJ t = ExpressionParser.parse("isNPolynomial('x^2+x+1', 'x',2)", null, null);
 
@@ -57,7 +57,7 @@ public class TestIsNPolynomial extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void isPolynomialWithIntegration4() throws OpenMathException, EvaluatorException {
+	public void isPolynomialWithIntegration4() throws EvaluatorException, OpenMathException {
 
 		OMOBJ t = ExpressionParser.parse("isNPolynomial('sin(x)+ y^3', 'x',1)", null, null);
 
@@ -69,7 +69,7 @@ public class TestIsNPolynomial extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void isPolynomialWithIntegration5() throws OpenMathException, EvaluatorException {
+	public void isPolynomialWithIntegration5() throws EvaluatorException, OpenMathException {
 
 		OMOBJ t = ExpressionParser.parse("isNPolynomial('sin(x)+ y^3', 'y',3)", null, null);
 
@@ -81,7 +81,7 @@ public class TestIsNPolynomial extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void isPolynomialWithIntegration6() throws OpenMathException, EvaluatorException {
+	public void isPolynomialWithIntegration6() throws EvaluatorException, OpenMathException {
 
 		OMOBJ t = ExpressionParser.parse("isNPolynomial('sin(x)+ -y^3', 'y',0)", null, null);
 
@@ -93,7 +93,7 @@ public class TestIsNPolynomial extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void isPolynomialWithIntegration7() throws OpenMathException, EvaluatorException {
+	public void isPolynomialWithIntegration7() throws EvaluatorException, OpenMathException {
 
 		OMOBJ t = ExpressionParser.parse("isNPolynomial('sin(x)+ -y^3', 'abcd',1)", null, null);
 
@@ -101,7 +101,7 @@ public class TestIsNPolynomial extends TestFunctionAbstract {
 	}
 
 	@Test(expected = CasEvaluationException.class)
-	public void isPolynomialWithIntegration8() throws OpenMathException, EvaluatorException {
+	public void isPolynomialWithIntegration8() throws EvaluatorException, OpenMathException {
 
 		OMOBJ t = ExpressionParser.parse("isNPolynomial('abcd', 'a',1)", null, null);
 
@@ -109,7 +109,7 @@ public class TestIsNPolynomial extends TestFunctionAbstract {
 	}
 	
 	@Test
-	public void isPolynomialWithIntegration9() throws OpenMathException, EvaluatorException {
+	public void isPolynomialWithIntegration9() throws EvaluatorException, OpenMathException {
 
 		OMOBJ t = ExpressionParser.parse("isNPolynomial('2*x^2 + y^-1 + 2*x*a^-1', 'x',2)", null, null);
 
@@ -121,7 +121,7 @@ public class TestIsNPolynomial extends TestFunctionAbstract {
 	}
 	
 	@Test
-	public void isPolynomialWithIntegration10() throws OpenMathException, EvaluatorException {
+	public void isPolynomialWithIntegration10() throws EvaluatorException, OpenMathException {
 
 		OMOBJ t = ExpressionParser.parse("isNPolynomial('0', 'x',0)", null, null);
 

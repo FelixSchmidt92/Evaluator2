@@ -4,9 +4,8 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * Returns the greater of two double values.
@@ -20,9 +19,10 @@ public class Max extends Function {
 	 * Returns the greater of two double values.
 	 * 
 	 * @throws EvaluatorException
+	 * @throws OpenMathException 
 	 */
 	@Override
-	protected Object execute(List<Object> arguments) throws EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 
 		Double leftValue = getDoubleSyntax(arguments.get(0));
 		Double rightValue = getDoubleSyntax(arguments.get(1));
@@ -42,8 +42,7 @@ public class Max extends Function {
 	}
 
 	@Override
-	public String getPartialLatexSyntax(List<Object> arguments)
-			throws EvaluatorException, FunctionException, NoRepresentationAvailableException {
+	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return "\\mbox{max}\\left(" + getLatexSyntax(arguments.get(0)) + "," + getLatexSyntax(arguments.get(1))
 				+ "\\right)";
 	}

@@ -24,7 +24,7 @@ public class TestCoefficient extends TestFunctionAbstract {
 	private Function func = new Coefficient();
 
 	@Test
-	public void testCoefficientWithOneVariable1() throws OpenMathException, EvaluatorException {
+	public void testCoefficientWithOneVariable1() throws EvaluatorException, OpenMathException {
 		List<Object> pow = new ArrayList<Object>();
 		pow.add(OMCreator.createOMV("a"));
 		pow.add(OMCreator.createOMI(2));
@@ -40,7 +40,7 @@ public class TestCoefficient extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testCoefficientWithOneVariable2() throws OpenMathException, EvaluatorException {
+	public void testCoefficientWithOneVariable2() throws EvaluatorException, OpenMathException {
 		List<Object> pow = new ArrayList<Object>();
 		pow.add(OMCreator.createOMV("a"));
 		pow.add(OMCreator.createOMI(2));
@@ -56,7 +56,7 @@ public class TestCoefficient extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testCoefficientWithTwoVariable1() throws OpenMathException, EvaluatorException {
+	public void testCoefficientWithTwoVariable1() throws EvaluatorException, OpenMathException {
 		List<Object> pow = new ArrayList<Object>();
 		pow.add(OMCreator.createOMV("a"));
 		pow.add(OMCreator.createOMI(2));
@@ -72,7 +72,7 @@ public class TestCoefficient extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testCoefficientWithTwoVariable2() throws OpenMathException, EvaluatorException {
+	public void testCoefficientWithTwoVariable2() throws EvaluatorException, OpenMathException {
 		List<Object> pow = new ArrayList<Object>();
 		pow.add(OMCreator.createOMV("a"));
 		pow.add(OMCreator.createOMI(2));
@@ -88,7 +88,7 @@ public class TestCoefficient extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testCoefficientWithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testCoefficientWithLessThanMinParam() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("test"));
 		func.evaluate(args);
@@ -96,7 +96,7 @@ public class TestCoefficient extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testCoefficientIntegration() throws OpenMathException, EvaluatorException {
+	public void testCoefficientIntegration() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("factorOf('1+2*x^3','x','3')", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMI(2), result.getOMI());

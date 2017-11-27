@@ -43,111 +43,111 @@ public class TestGetFromOrderedSet extends TestIntegration {
 	}
 
 	@Test
-	public void testGetFromOrderedSet1() throws OpenMathException, EvaluatorException {
+	public void testGetFromOrderedSet1() throws EvaluatorException, OpenMathException {
 		assertTrue(3 == Evaluator.getNumberResult("getFromOrderedSet('1', '{2;3;5;6}')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testGetFromOrderedSet2() throws OpenMathException, EvaluatorException {
+	public void testGetFromOrderedSet2() throws EvaluatorException, OpenMathException {
 		assertTrue(-2.6 == Evaluator.getNumberResult("getFromOrderedSet('0', '{3;5;6;-2.6}')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testGetFromOrderedSet3() throws OpenMathException, EvaluatorException {
+	public void testGetFromOrderedSet3() throws EvaluatorException, OpenMathException {
 		assertTrue(0 == Evaluator.getNumberResult("getFromOrderedSet('1', '{-2.6;3;5;0}')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testGetFromOrderedSet4() throws OpenMathException, EvaluatorException {
+	public void testGetFromOrderedSet4() throws EvaluatorException, OpenMathException {
 		assertTrue(5 == Evaluator.getNumberResult("getFromOrderedSet('3', '{-2.6;3;5;0}')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testGetFromOrderedSet5() throws OpenMathException, EvaluatorException {
+	public void testGetFromOrderedSet5() throws EvaluatorException, OpenMathException {
 		assertTrue(1 == Evaluator.getNumberResult("getFromOrderedSet('0', '{1;1;1;1}')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testGetFromOrderedSet6() throws OpenMathException, EvaluatorException {
+	public void testGetFromOrderedSet6() throws EvaluatorException, OpenMathException {
 		assertTrue(1 == Evaluator.getNumberResult("getFromOrderedSet('3', '{1;1;1;1}')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testGetFromOrderedSetWithInput1() throws OpenMathException, EvaluatorException {
+	public void testGetFromOrderedSetWithInput1() throws EvaluatorException, OpenMathException {
 		assertTrue(20 == Evaluator.getNumberResult("getFromOrderedSet('2', '{[pos=3];4;5}')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testGetFromOrderedSetWithInput2() throws OpenMathException, EvaluatorException {
+	public void testGetFromOrderedSetWithInput2() throws EvaluatorException, OpenMathException {
 		assertTrue(-4 == Evaluator.getNumberResult("getFromOrderedSet('0', '{[pos=3];4;5;[pos=2]}')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testGetFromOrderedSetWithInput3() throws OpenMathException, EvaluatorException {
+	public void testGetFromOrderedSetWithInput3() throws EvaluatorException, OpenMathException {
 		assertTrue(-4 == Evaluator.getNumberResult("getFromOrderedSet('[pos=1]', '{[pos=3];4;5;[pos=2]}')", exerVar,
 				fillIn));
 	}
 
 	@Test
-	public void testGetFromOrderedSetWithVariables1() throws OpenMathException, EvaluatorException {
+	public void testGetFromOrderedSetWithVariables1() throws EvaluatorException, OpenMathException {
 		assertTrue(20 == Evaluator.getNumberResult("getFromOrderedSet('2', '{[var=c];4;5}')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testGetFromOrderedSetWithVariables2() throws OpenMathException, EvaluatorException {
+	public void testGetFromOrderedSetWithVariables2() throws EvaluatorException, OpenMathException {
 		assertTrue(-4 == Evaluator.getNumberResult("getFromOrderedSet('0', '{[var=c];4;5;[var=b]}')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testGetFromOrderedSetWithVariables3() throws OpenMathException, EvaluatorException {
+	public void testGetFromOrderedSetWithVariables3() throws EvaluatorException, OpenMathException {
 		assertTrue(-4 == Evaluator.getNumberResult("getFromOrderedSet('[var=a]', '{[var=c];4;5;[var=b]}')", exerVar,
 				fillIn));
 	}
 
 	@Test
-	public void testGetFromOrderedSetWithOneRationalAndOneTextArgument() throws OpenMathException, EvaluatorException {
+	public void testGetFromOrderedSetWithOneRationalAndOneTextArgument() throws EvaluatorException, OpenMathException {
 		assertTrue(4 == Evaluator.getNumberResult("getFromOrderedSet('1', '{2;4;5}')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testGetFromOrderedSetWithTwoTextArguments() throws OpenMathException, EvaluatorException {
+	public void testGetFromOrderedSetWithTwoTextArguments() throws EvaluatorException, OpenMathException {
 		assertTrue(4 == Evaluator.getNumberResult("getFromOrderedSet('1', '{2;4;5}')", exerVar, fillIn));
 	}
 
 	@Test // (expected=FunctionInvalidArgumentTypeException.class) Now works, single chars
 			// are recognized as Variables
-	public void testGetFromOrderedSetWithWrongInputCharacters() throws OpenMathException, EvaluatorException {
+	public void testGetFromOrderedSetWithWrongInputCharacters() throws EvaluatorException, OpenMathException {
 		assertEquals(OMCreator.createOMOBJ(OMCreator.createOMSTR("b")),
 				Evaluator.evaluate("getFromOrderedSet('1', '{a;b;c;d}')", exerVar, fillIn));
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testGetFromOrderedSetWithWrongInputCharacterIndex() throws OpenMathException, EvaluatorException {
+	public void testGetFromOrderedSetWithWrongInputCharacterIndex() throws EvaluatorException, OpenMathException {
 		Evaluator.getNumberResult("getFromOrderedSet('a', '{1;2;3;4}')", exerVar, fillIn);
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testGetFromOrderedSetWithWrongInputDoubleIndex() throws OpenMathException, EvaluatorException {
+	public void testGetFromOrderedSetWithWrongInputDoubleIndex() throws EvaluatorException, OpenMathException {
 		Evaluator.getNumberResult("getFromOrderedSet('5.5', '{1;2;3;4}')", exerVar, fillIn);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testGetFromOrderedSetWithOneArgument() throws OpenMathException, EvaluatorException {
+	public void testGetFromOrderedSetWithOneArgument() throws EvaluatorException, OpenMathException {
 		Evaluator.getNumberResult("getFromOrderedSet('7')", exerVar, fillIn);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testGetFromOrderedSetWithThreeArguments() throws OpenMathException, EvaluatorException {
+	public void testGetFromOrderedSetWithThreeArguments() throws EvaluatorException, OpenMathException {
 		Evaluator.getNumberResult("getFromOrderedSet('4', '{3;1;-1}', '{12;-3}')", exerVar, fillIn);
 	}
 
 	@Test(expected = UndefinedFillInVariableException.class)
-	public void testGetFromOrderedSetWithMissingInput() throws OpenMathException, EvaluatorException {
+	public void testGetFromOrderedSetWithMissingInput() throws EvaluatorException, OpenMathException {
 		Evaluator.getNumberResult("getFromOrderedSet('2', '{[pos=42];4;5}')", exerVar, fillIn);
 	}
 
 	@Test(expected = UndefinedExerciseVariableException.class)
-	public void testGetFromOrderedSetWithMissingExerciseVariable() throws OpenMathException, EvaluatorException {
+	public void testGetFromOrderedSetWithMissingExerciseVariable() throws EvaluatorException, OpenMathException {
 		Evaluator.getNumberResult("getFromOrderedSet('2', '{[var=j];4;5}')", exerVar, fillIn);
 	}
 }

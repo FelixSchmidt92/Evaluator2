@@ -30,37 +30,37 @@ public class TestInfinity extends TestFunctionAbstract {
 	}
 	
 	@Test(expected = NoRepresentationAvailableException.class)
-	public void testInfinityBoolean() throws EvaluatorException {
+	public void testInfinityBoolean() throws EvaluatorException, OpenMathException {
 		assertEquals(new Boolean(true), func.getPartialBooleanSyntax(new ArrayList<>()));
 	}
 
 	@Test
-	public void testInfinityDouble() throws EvaluatorException {
+	public void testInfinityDouble() throws EvaluatorException, OpenMathException {
 		assertEquals(Double.POSITIVE_INFINITY, func.getPartialDoubleSyntax(new ArrayList<>()), 0);
 	}
 
 	@Test(expected = NoRepresentationAvailableException.class)
-	public void testInfinityInteger() throws EvaluatorException {
+	public void testInfinityInteger() throws EvaluatorException, OpenMathException {
 		func.getPartialIntegerSyntax(new ArrayList<>());
 	}
 
 	@Test
-	public void testInfinityLatex() throws EvaluatorException {
+	public void testInfinityLatex() throws EvaluatorException, OpenMathException {
 		assertEquals("\\\\infty", func.getPartialLatexSyntax(new ArrayList<>()));
 	}
 
 	@Test
-	public void testInfinitySage() throws EvaluatorException {
+	public void testInfinitySage() throws EvaluatorException, OpenMathException {
 		assertEquals("Infinity", func.getPartialSageSyntax(new ArrayList<>()));
 	}
 
 	@Test
-	public void testInfinityString() throws EvaluatorException {
+	public void testInfinityString() throws EvaluatorException, OpenMathException {
 		assertEquals("Infinity", func.getPartialStringSyntax(new ArrayList<>()));
 	}
 
 	@Test
-	public void testInfinityR() throws EvaluatorException {
+	public void testInfinityR() throws EvaluatorException, OpenMathException {
 		assertEquals("Inf", func.getPartialRSyntax(new ArrayList<>()));
 	}
 	

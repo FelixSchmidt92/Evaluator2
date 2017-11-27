@@ -24,7 +24,7 @@ public class TestCos extends TestFunctionAbstract {
 	private static Function func = new Cos();
 
 	@Test
-	public void testCosFloat() throws OpenMathException, EvaluatorException {
+	public void testCosFloat() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(0.0));
 		Object result = func.evaluate(args);
@@ -32,7 +32,7 @@ public class TestCos extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testCosInteger() throws OpenMathException, EvaluatorException {
+	public void testCosInteger() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMI(1));
 		Object result = func.evaluate(args);
@@ -40,35 +40,35 @@ public class TestCos extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testCosIntegration() throws OpenMathException, EvaluatorException {
+	public void testCosIntegration() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("cos(0)", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMI(1), result.getOMI());
 	}
 
 	@Test
-	public void testCosSageSyntax() throws EvaluatorException {
+	public void testCosSageSyntax() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<>();
 		args.add(OMCreator.createOMF(1.0));
 		assertEquals("cos(1)", func.getPartialSageSyntax(args));
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testCosWithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testCosWithLessThanMinParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("cos()", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testCosWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
+	public void testCosWithMoreThanMaxParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("cos(1,3)", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testCosWithWrongArguments() throws OpenMathException, EvaluatorException {
+	public void testCosWithWrongArguments() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("cos('Test')", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();

@@ -6,9 +6,7 @@ import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.function.BinaryFunction;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
-import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
@@ -28,8 +26,7 @@ public class Divide extends BinaryFunction {
 	 * @throws FunctionInvalidArgumentException
 	 */
 	@Override
-	protected Object execute(List<Object> arguments) throws OpenMathException, EvaluatorException {
-		try {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 			Double leftValue = getDoubleSyntax(arguments.get(0));
 			Double rightValue = getDoubleSyntax(arguments.get(1));
 			if (rightValue == 0.0) {
@@ -37,14 +34,11 @@ public class Divide extends BinaryFunction {
 						"Second argument of Division / has to be unequal zero.");
 			}
 			return OMCreator.createOMIOMF(leftValue / rightValue);
-		} catch (FunctionInvalidArgumentTypeException e) {
-			if (OMTypeChecker.isOMV(arguments.get(0)) || OMTypeChecker.isOMV(arguments.get(1))
-					|| OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.SYMBOLIC_EXPRESSION)
-					|| OMTypeChecker.isOMAWithSymbol(arguments.get(1), OMSymbol.SYMBOLIC_EXPRESSION)) {
-				return OMCreator.createOMA(OMSymbol.ARITH1_DIVIDE, arguments);
-			}
-			throw new FunctionInvalidArgumentTypeException(this, "integer, float, double");
-		}
+	}
+	
+	@Override
+	public Object getPartialSymbolicSyntax(List<Object> arguments) throws EvaluatorException {
+		return OMCreator.createOMA(OMSymbol.ARITH1_DIVIDE, arguments);
 	}
 	
 	@Override
@@ -59,22 +53,22 @@ public class Divide extends BinaryFunction {
 
 	@Override
 	public String getPartialSageSyntax(List<Object> arguments)
-			throws EvaluatorException {
+			throws EvaluatorException, OpenMathException {
 		return "(( " + getSageSyntax(arguments.get(0)) + " ) / ( " + getSageSyntax(arguments.get(1)) + " ))";
 	}
 	
 	@Override
-	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return "\\frac{" + getLatexSyntax(arguments.get(0)) + "}{" + getLatexSyntax(arguments.get(1)) + "}";
 	}
 
 	@Override
-	public String getPartialStringSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialStringSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return getStringSyntax(arguments.get(0)) + "/" + getStringSyntax(arguments.get(1));
 	}
 	
 	@Override
-	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return  "(( " + getRSyntax(arguments.get(0)) + " ) / ( " + getRSyntax(arguments.get(1)) + " ))";
 	}
 }

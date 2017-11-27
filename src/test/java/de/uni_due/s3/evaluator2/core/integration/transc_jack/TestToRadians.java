@@ -40,98 +40,98 @@ public class TestToRadians extends TestIntegration {
 	}
 
 	@Test
-	public void testToRadians1() throws OpenMathException, EvaluatorException {
+	public void testToRadians1() throws EvaluatorException, OpenMathException {
 		assertEquals(PI, Evaluator.getNumberResult("toRadians(180)", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testToRadians2() throws OpenMathException, EvaluatorException {
+	public void testToRadians2() throws EvaluatorException, OpenMathException {
 		assertEquals(2 * PI, Evaluator.getNumberResult("toRadians(360)", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testToRadians3() throws OpenMathException, EvaluatorException {
+	public void testToRadians3() throws EvaluatorException, OpenMathException {
 		assertEquals(3 * PI, Evaluator.getNumberResult("toRadians(540)", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testToRadians4() throws OpenMathException, EvaluatorException {
+	public void testToRadians4() throws EvaluatorException, OpenMathException {
 		assertEquals(PI / 2, Evaluator.getNumberResult("toRadians(90)", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testToRadians5() throws OpenMathException, EvaluatorException {
+	public void testToRadians5() throws EvaluatorException, OpenMathException {
 		assertEquals(-PI, Evaluator.getNumberResult("toRadians(-180)", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testToRadians6() throws OpenMathException, EvaluatorException {
+	public void testToRadians6() throws EvaluatorException, OpenMathException {
 		assertEquals(0, Evaluator.getNumberResult("toRadians(0)", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testToRadiansWithInput1() throws OpenMathException, EvaluatorException {
+	public void testToRadiansWithInput1() throws EvaluatorException, OpenMathException {
 		assertEquals(PI, Evaluator.getNumberResult("toRadians('[pos=1]')", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testToRadiansWithInput2() throws OpenMathException, EvaluatorException {
+	public void testToRadiansWithInput2() throws EvaluatorException, OpenMathException {
 		assertEquals(0, Evaluator.getNumberResult("toRadians('[pos=2]')", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testToRadiansWithVariables1() throws OpenMathException, EvaluatorException {
+	public void testToRadiansWithVariables1() throws EvaluatorException, OpenMathException {
 		assertEquals(PI, Evaluator.getNumberResult("toRadians('[var=a]')", exerVar, fillIn), 0);
 
 	}
 
 	@Test
-	public void testToRadiansWithVariables2() throws OpenMathException, EvaluatorException {
+	public void testToRadiansWithVariables2() throws EvaluatorException, OpenMathException {
 		assertEquals(0, Evaluator.getNumberResult("toRadians('[var=b]')", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testToRadiansWithPointNumbers1() throws OpenMathException, EvaluatorException {
+	public void testToRadiansWithPointNumbers1() throws EvaluatorException, OpenMathException {
 		assertEquals((PI * .2) / 180, Evaluator.getNumberResult("toRadians(0.2)", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testToRadiansWithPointNumbers2() throws OpenMathException, EvaluatorException {
+	public void testToRadiansWithPointNumbers2() throws EvaluatorException, OpenMathException {
 		assertEquals((-PI * .1) / 180, Evaluator.getNumberResult("toRadians(-0.1)", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testToRadiansWithExpressions1() throws OpenMathException, EvaluatorException {
+	public void testToRadiansWithExpressions1() throws EvaluatorException, OpenMathException {
 		assertEquals(0, Evaluator.getNumberResult("toRadians(toRadians(0))", exerVar, fillIn), 0);
 	}
 
 	@Test
-	public void testToRadiansWithExpressions2() throws OpenMathException, EvaluatorException {
+	public void testToRadiansWithExpressions2() throws EvaluatorException, OpenMathException {
 		assertEquals(0, Evaluator.getNumberResult("toRadians(toRadians(toRadians(0)))", exerVar, fillIn), 0);
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testToRadiansWithWrongInputCharacter() throws OpenMathException, EvaluatorException {
+	public void testToRadiansWithWrongInputCharacter() throws EvaluatorException, OpenMathException {
 		Evaluator.getNumberResult("toRadians(a)", exerVar, fillIn);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testToRadiansWithTwoArguments() throws OpenMathException, EvaluatorException {
+	public void testToRadiansWithTwoArguments() throws EvaluatorException, OpenMathException {
 		Evaluator.getNumberResult("toRadians(180, 90)", exerVar, fillIn);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testToRadiansWithThreeArguments() throws OpenMathException, EvaluatorException {
+	public void testToRadiansWithThreeArguments() throws EvaluatorException, OpenMathException {
 		Evaluator.getNumberResult("toRadians(45, 90, 180)", exerVar, fillIn);
 	}
 
 	@Test(expected = UndefinedExerciseVariableException.class)
-	public void testToRadiansWithMissingExerciseVariable() throws OpenMathException, EvaluatorException {
+	public void testToRadiansWithMissingExerciseVariable() throws EvaluatorException, OpenMathException {
 		Evaluator.getNumberResult("toRadians('[var=j]')", exerVar, fillIn);
 	}
 
 	@Test(expected = UndefinedFillInVariableException.class)
-	public void testToRadiansWithMissingInput() throws OpenMathException, EvaluatorException {
+	public void testToRadiansWithMissingInput() throws EvaluatorException, OpenMathException {
 		Evaluator.getNumberResult("toRadians('[pos=42]')", exerVar, fillIn);
 	}
 }

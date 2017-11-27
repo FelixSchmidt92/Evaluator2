@@ -23,7 +23,7 @@ public class TestSubstring extends TestFunctionAbstract {
 	private static Function func = new Substring();
 
 	@Test
-	public void testSubstringStrings1() throws OpenMathException, EvaluatorException {
+	public void testSubstringStrings1() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("together"));
 		args.add(OMCreator.createOMI(2));
@@ -33,7 +33,7 @@ public class TestSubstring extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testSubstringStrings2() throws OpenMathException, EvaluatorException {
+	public void testSubstringStrings2() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("Unit"));
 		args.add(OMCreator.createOMI(2));
@@ -42,28 +42,28 @@ public class TestSubstring extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testSubstringCaseIntegration1() throws OpenMathException, EvaluatorException {
+	public void testSubstringCaseIntegration1() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("substring('Hello', 1, '2')", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMSTR("e"), result.getOMSTR());
 	}
 
 	@Test
-	public void testSubstringCaseIntegration2() throws OpenMathException, EvaluatorException {
+	public void testSubstringCaseIntegration2() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("substring('Hello', '1', 3)", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMSTR("el"), result.getOMSTR());
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testSubstringWithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testSubstringWithLessThanMinParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("substring('Test')", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testSubstringWithWrongArguments() throws OpenMathException, EvaluatorException {
+	public void testSubstringWithWrongArguments() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("substring('Test', 'Zwei')", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();

@@ -21,7 +21,7 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 public class TestOMToListVisitor {
 	
 	@Test
-	public void TestOMListVisitor1() throws OpenMathException, EvaluatorException {
+	public void TestOMListVisitor1() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("1==1", new HashMap<>(), new HashMap<>());
 		List<Object> result = OMToListVisitor.getInstance().visit(obj);
 		List<Object> expected = new ArrayList<>();
@@ -30,7 +30,7 @@ public class TestOMToListVisitor {
 	}
 
 	@Test
-	public void TestOMListVisitor2() throws OpenMathException, EvaluatorException {
+	public void TestOMListVisitor2() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("1!=1", new HashMap<>(), new HashMap<>());
 		List<Object> result = OMToListVisitor.getInstance().visit(obj);
 		List<Object> expected = new ArrayList<>();
@@ -39,7 +39,7 @@ public class TestOMToListVisitor {
 	}
 
 	@Test
-	public void TestOMListVisitor3() throws OpenMathException, EvaluatorException {
+	public void TestOMListVisitor3() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("1", new HashMap<>(), new HashMap<>());
 		List<Object> result = OMToListVisitor.getInstance().visit(obj);
 		List<Object> expected = new ArrayList<>();
@@ -48,7 +48,7 @@ public class TestOMToListVisitor {
 	}
 
 	@Test
-	public void TestOMListVisitor4() throws OpenMathException, EvaluatorException {
+	public void TestOMListVisitor4() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("0", new HashMap<>(), new HashMap<>());
 		List<Object> result = OMToListVisitor.getInstance().visit(obj);
 		List<Object> expected = new ArrayList<>();
@@ -57,7 +57,7 @@ public class TestOMToListVisitor {
 	}
 
 	@Test
-	public void TestOMListVisitor5() throws OpenMathException, EvaluatorException {
+	public void TestOMListVisitor5() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("[var=PI]", new HashMap<>(), new HashMap<>());
 		List<Object> result = OMToListVisitor.getInstance().visit(obj);
 		List<Object> expected = new ArrayList<>();
@@ -84,7 +84,7 @@ public class TestOMToListVisitor {
 	}
 	
 	@Test
-	public void isSingletonPattern() throws EvaluatorException {
+	public void isSingletonPattern() throws EvaluatorException, OpenMathException {
 		OMToSyntaxVisitor<?> obj1 = OMToListVisitor.getInstance();
 		OMToSyntaxVisitor<?> obj2 = OMToListVisitor.getInstance();
 		

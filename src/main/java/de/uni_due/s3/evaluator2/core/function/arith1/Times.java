@@ -23,7 +23,7 @@ public class Times extends BinaryFunction {
 
 	
 	@Override
-	protected Object execute(List<Object> arguments) throws OpenMathException, EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		Double rightValue = null;
 		Double result = 1d;
 		List<Integer> failures = new ArrayList<>();
@@ -49,7 +49,7 @@ public class Times extends BinaryFunction {
 
 			for (int faili : failures) {
 				if (OMTypeChecker.isOMV(arguments.get(faili))
-						|| OMTypeChecker.isOMAWithSymbol(arguments.get(faili), OMSymbol.SYMBOLIC_EXPRESSION)) {
+						|| OMTypeChecker.isOMAWithSymbol(arguments.get(faili), OMSymbol.SYMBOLIC_EXPRESSION) || OMTypeChecker.isOMAWithSymbol(arguments.get(faili), OMSymbol.TERMINALS)) {
 					// Only allow some specific non-evaluated Arguments!
 					// as OMVs, or a Divide, or an Rational (see: OMSymbol.SYMBOLIC_EXPRESSION)
 					newArgs.add(arguments.get(faili));
@@ -74,7 +74,7 @@ public class Times extends BinaryFunction {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		String sage = "(" + getSageSyntax(arguments.get(0)) + ")";
 		
 		for(int i = 1; i < arguments.size(); i++) {
@@ -85,7 +85,7 @@ public class Times extends BinaryFunction {
 	}
 
 	@Override
-	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		String latex = getLatexSyntax(arguments.get(0));
 		
 		for(int i = 1; i < arguments.size(); i++) {
@@ -96,7 +96,7 @@ public class Times extends BinaryFunction {
 	}
 
 	@Override
-	public String getPartialStringSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialStringSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		String string = getStringSyntax(arguments.get(0));
 		
 		for(int i = 1; i < arguments.size(); i++) {
@@ -107,7 +107,7 @@ public class Times extends BinaryFunction {
 	}
 
 	@Override
-	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		String r = "(" + getRSyntax(arguments.get(0)) + ")";
 		
 		for(int i = 1; i < arguments.size(); i++) {

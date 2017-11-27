@@ -7,6 +7,7 @@ import de.uni_due.s3.evaluator2.core.visitor.primitve.OMToStringVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * Converts a list to a string representation suitable for fill-in fields in JACK.
@@ -20,7 +21,7 @@ public class ToDropDownList extends Function {
 	
 
 	@Override
-	protected Object execute(List<Object> arguments) throws EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		List<Object> list = getListSyntax(arguments.get(0));
 
 		if (list.size() == 0) {

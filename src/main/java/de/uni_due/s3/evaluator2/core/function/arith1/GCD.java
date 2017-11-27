@@ -6,6 +6,7 @@ import java.util.List;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * Implements greatest-common-divisor with integers. For example gcd(12,6) = 3
@@ -22,7 +23,7 @@ public class GCD extends Function {
 	 * @throws EvaluatorException
 	 */
 	@Override
-	protected Object execute(List<Object> arguments) throws EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		BigInteger leftValue = BigInteger.valueOf(getIntegerSyntax(arguments.get(0)));
 		BigInteger rightValue = BigInteger.valueOf(getIntegerSyntax(arguments.get(1)));
 		return OMCreator.createOMIOMF(leftValue.gcd(rightValue).doubleValue());
@@ -39,12 +40,12 @@ public class GCD extends Function {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return "gcd(" + getSageSyntax(arguments.get(0)) + "," + getSageSyntax(arguments.get(1)) + ")";
 	}
 
 	@Override
-	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 
 		return "\\mbox{gcd}\\left(" + getLatexSyntax(arguments.get(0)) + "," + getLatexSyntax(arguments.get(1))
 				+ "\\right)";

@@ -17,27 +17,27 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 public class TestOMToLatexVisitor {
 	
 	@Test
-	public void testOMToLatexVisitorWithoutParenthesisAndOneOperation() throws OpenMathException, EvaluatorException {
+	public void testOMToLatexVisitorWithoutParenthesisAndOneOperation() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("(a-b)", new HashMap<>(), new HashMap<>());
 		String latex = OMToLatexVisitor.getInstance().visit(obj);
 		assertEquals("a-b", latex);
 	}
 	@Test
-	public void testOMToLatexVisitorWithoutParenthesisAndTwoOperation() throws OpenMathException, EvaluatorException {
+	public void testOMToLatexVisitorWithoutParenthesisAndTwoOperation() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("a-b*2", new HashMap<>(), new HashMap<>());
 		String latex = OMToLatexVisitor.getInstance().visit(obj);
 		assertEquals("a-2 \\cdot b", latex);
 	}
 	
 	@Test
-	public void testOMToLatexVisitorWithoutParenthesisAndTwoDifferentOperation() throws OpenMathException, EvaluatorException {
+	public void testOMToLatexVisitorWithoutParenthesisAndTwoDifferentOperation() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = ExpressionParser.parse("1*cos(1)", new HashMap<>(), new HashMap<>());
 		String latex = OMToLatexVisitor.getInstance().visit(obj);
 		assertEquals("1 \\cdot \\mbox{cos}\\left(1\\right)", latex);
 	}
 	
 	@Test
-	public void testOMToLatexVisitorWithParenthesis() throws OpenMathException, EvaluatorException {
+	public void testOMToLatexVisitorWithParenthesis() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("(a-b)*2", new HashMap<>(), new HashMap<>());
 		String latex = OMToLatexVisitor.getInstance().visit(obj);
 		assertEquals("2 \\cdot \\left(a-b\\right)", latex);
@@ -45,7 +45,7 @@ public class TestOMToLatexVisitor {
 	
 	
 	@Test
-	public void testOMToLatexVisitorWithPolynomial() throws OpenMathException, EvaluatorException {
+	public void testOMToLatexVisitorWithPolynomial() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("3*x^(a-b)*2", new HashMap<>(), new HashMap<>());
 		String latex = OMToLatexVisitor.getInstance().visit(obj);
 		assertEquals("2 \\cdot 3 \\cdot {x}^{\\left(a-b\\right)}", latex);
@@ -80,7 +80,7 @@ public class TestOMToLatexVisitor {
 	}
 	
 	@Test
-	public void isSingletonPattern() throws EvaluatorException {
+	public void isSingletonPattern() throws EvaluatorException, OpenMathException {
 		OMToSyntaxVisitor<?> obj1 = OMToLatexVisitor.getInstance();
 		OMToSyntaxVisitor<?> obj2 = OMToLatexVisitor.getInstance();
 		

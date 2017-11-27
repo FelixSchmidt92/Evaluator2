@@ -32,7 +32,7 @@ public class Vector extends ConstructorFunction {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		String sageExpression = "vector([";
 
 		for (int i = 0; i < arguments.size(); i++) {
@@ -47,7 +47,7 @@ public class Vector extends ConstructorFunction {
 	}
 
 	@Override
-	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 
 		String begin = "\\left(\\begin{array}{r}";
 		String args = "";
@@ -67,7 +67,7 @@ public class Vector extends ConstructorFunction {
 	}
 
 	@Override
-	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		String sageExpression = "c(";
 
 		for (int i = 0; i < arguments.size(); i++) {
@@ -82,7 +82,7 @@ public class Vector extends ConstructorFunction {
 	}
 
 	@Override
-	public String getPartialStringSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialStringSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		throw new NoRepresentationAvailableException(
 				"There is no String-representation for function " + this.getClass().getSimpleName());
 	}

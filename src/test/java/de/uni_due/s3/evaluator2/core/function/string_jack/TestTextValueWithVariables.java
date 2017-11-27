@@ -11,13 +11,14 @@ import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.function.TestFunctionAbstract;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class TestTextValueWithVariables extends TestFunctionAbstract {
 
 	Function func = new TextWithVariables();
 
 	@Test
-	public void testTextValueWithVariablesSageSyntax1() throws EvaluatorException {
+	public void testTextValueWithVariablesSageSyntax1() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 
 		args.add(OMCreator.createOMSTR("SomeFunc("));
@@ -31,7 +32,7 @@ public class TestTextValueWithVariables extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testTextValueWithVariablesSageSyntax2() throws EvaluatorException {
+	public void testTextValueWithVariablesSageSyntax2() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 
 		args.add(OMCreator.createOMSTR("SomeFunc("));
@@ -47,7 +48,7 @@ public class TestTextValueWithVariables extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testTextValueWithVariablesSageSyntax3() throws EvaluatorException {
+	public void testTextValueWithVariablesSageSyntax3() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 
 		args.add(OMCreator.createOMSTR("["));
@@ -59,7 +60,7 @@ public class TestTextValueWithVariables extends TestFunctionAbstract {
 	}
 	
 	@Test
-	public void testTextValueWithVariablesLatexSyntax() throws EvaluatorException {
+	public void testTextValueWithVariablesLatexSyntax() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<>();
 
 		args.add(OMCreator.createOMSTR("["));

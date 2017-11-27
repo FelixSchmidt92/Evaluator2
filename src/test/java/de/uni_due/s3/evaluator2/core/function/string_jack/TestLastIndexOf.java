@@ -23,7 +23,7 @@ public class TestLastIndexOf extends TestFunctionAbstract {
 	private static Function func = new LastIndexOf();
 
 	@Test
-	public void testLastIndexOfTwoParams() throws OpenMathException, EvaluatorException {
+	public void testLastIndexOfTwoParams() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("Tester"));
 		args.add(OMCreator.createOMSTR("e"));
@@ -32,7 +32,7 @@ public class TestLastIndexOf extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testLastIndexOfThreeParams() throws OpenMathException, EvaluatorException {
+	public void testLastIndexOfThreeParams() throws EvaluatorException, OpenMathException {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("Tester"));
 		args.add(OMCreator.createOMSTR("e"));
@@ -42,35 +42,35 @@ public class TestLastIndexOf extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testLastIndexOfIntegration() throws OpenMathException, EvaluatorException {
+	public void testLastIndexOfIntegration() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("lastIndexOf('Hallo', 'l', 3)", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMI(3), result.getOMI());
 	}
 	
 	@Test
-	public void testLastIndexOfIntegration2() throws OpenMathException, EvaluatorException {
+	public void testLastIndexOfIntegration2() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("lastIndexOf('Hello World!', 'o')", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMI(7), result.getOMI());
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testLastIndexOfWithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testLastIndexOfWithLessThanMinParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("lastIndexOf('Test')", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testLastIndexOfWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
+	public void testLastIndexOfWithMoreThanMaxParam() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("lastIndexOf('Test', 2 ,'Test', 3)", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
-	public void testLastIndexOfWithWrongArguments() throws OpenMathException, EvaluatorException {
+	public void testLastIndexOfWithWrongArguments() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("lastIndexOf('Test', vector(4))", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();

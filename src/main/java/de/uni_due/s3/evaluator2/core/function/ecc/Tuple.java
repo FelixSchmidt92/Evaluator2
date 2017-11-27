@@ -47,7 +47,7 @@ public class Tuple extends ConstructorFunction {
 	}
 
 	@Override
-	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		String latex = "(";
 		for (Object obj : arguments) {
 			latex += getLatexSyntax(obj) + ", ";
@@ -57,7 +57,7 @@ public class Tuple extends ConstructorFunction {
 	}
 
 	@Override
-	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		String r = "tuple(";
 		for (Object obj : arguments) {
 			r += getLatexSyntax(obj) + ", ";
@@ -67,7 +67,7 @@ public class Tuple extends ConstructorFunction {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 
 		String sage = "tuple([";
 		for (Object obj : arguments) {

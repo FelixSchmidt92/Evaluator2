@@ -18,7 +18,7 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 public class TestOMToBooleanVisitor {
 
 	@Test
-	public void TestOMBooleanVisitor1() throws OpenMathException, EvaluatorException {
+	public void TestOMBooleanVisitor1() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("1==1", new HashMap<>(), new HashMap<>());
 		Boolean result = OMToBooleanVisitor.getInstance().visit(obj);
 		Boolean expected = true;
@@ -26,7 +26,7 @@ public class TestOMToBooleanVisitor {
 	}
 
 	@Test
-	public void TestOMBooleanVisitor2() throws OpenMathException, EvaluatorException {
+	public void TestOMBooleanVisitor2() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("1!=1", new HashMap<>(), new HashMap<>());
 		Boolean result = OMToBooleanVisitor.getInstance().visit(obj);
 		Boolean expected = false;
@@ -34,7 +34,7 @@ public class TestOMToBooleanVisitor {
 	}
 
 	@Test
-	public void TestOMBooleanVisitor3() throws OpenMathException, EvaluatorException {
+	public void TestOMBooleanVisitor3() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("1", new HashMap<>(), new HashMap<>());
 		Boolean result = OMToBooleanVisitor.getInstance().visit(obj);
 		Boolean expected = true;
@@ -42,7 +42,7 @@ public class TestOMToBooleanVisitor {
 	}
 
 	@Test
-	public void TestOMBooleanVisitor4() throws OpenMathException, EvaluatorException {
+	public void TestOMBooleanVisitor4() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("0", new HashMap<>(), new HashMap<>());
 		Boolean result = OMToBooleanVisitor.getInstance().visit(obj);
 		Boolean expected = false;
@@ -50,7 +50,7 @@ public class TestOMToBooleanVisitor {
 	}
 
 	@Test
-	public void TestOMBooleanVisitor5() throws OpenMathException, EvaluatorException {
+	public void TestOMBooleanVisitor5() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("1.0", new HashMap<>(), new HashMap<>());
 		Boolean result = OMToBooleanVisitor.getInstance().visit(obj);
 		Boolean expected = true;
@@ -58,7 +58,7 @@ public class TestOMToBooleanVisitor {
 	}
 
 	@Test
-	public void TestOMBooleanVisitor6() throws OpenMathException, EvaluatorException {
+	public void TestOMBooleanVisitor6() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("0.0", new HashMap<>(), new HashMap<>());
 		Boolean result = OMToBooleanVisitor.getInstance().visit(obj);
 		Boolean expected = false;
@@ -78,7 +78,7 @@ public class TestOMToBooleanVisitor {
 	}
 	
 	@Test
-	public void isSingletonPattern() throws EvaluatorException {
+	public void isSingletonPattern() throws EvaluatorException, OpenMathException {
 		OMToSyntaxVisitor<?> obj1 = OMToBooleanVisitor.getInstance();
 		OMToSyntaxVisitor<?> obj2 = OMToBooleanVisitor.getInstance();
 		

@@ -26,7 +26,7 @@ public class UnaryMinus extends BinaryFunction {
 	 * @throws EvaluatorException
 	 */
 	@Override
-	protected Object execute(List<Object> arguments) throws OpenMathException, EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		try {
 			Double value = getDoubleSyntax(arguments.get(0));
 			return OMCreator.createOMIOMF(value * -1);
@@ -50,33 +50,33 @@ public class UnaryMinus extends BinaryFunction {
 	}
 
 	@Override
-	public Integer getPartialIntegerSyntax(List<Object> arguments) throws EvaluatorException {
+	public Integer getPartialIntegerSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		Integer value = getIntegerSyntax(arguments.get(0));
 		return -1 * value;
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return "-" + getSageSyntax(arguments.get(0));
 	}
 
 	@Override
-	public String getPartialLatexSyntax(List<Object> arguments)	throws EvaluatorException {
+	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return "-" + getLatexSyntax(arguments.get(0));
 	}
 
 	@Override
-	public String getPartialStringSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialStringSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return "-" + getStringSyntax(arguments.get(0));
 	}
 
 	@Override
-	public Double getPartialDoubleSyntax(List<Object> arguments) throws EvaluatorException {
+	public Double getPartialDoubleSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return new Double(-1 * getDoubleSyntax(arguments.get(0)));
 	}
 
 	@Override
-	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		return "(-" + getRSyntax(arguments.get(0)) + ")";
 	}
 }

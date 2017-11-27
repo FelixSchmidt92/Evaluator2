@@ -37,22 +37,22 @@ public class TestConstructorFunction {
 		}
 
 		@Override
-		public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
+		public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 			return "sage";
 		}
 
 		@Override
-		public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException {
+		public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 			return "r";
 		}
 
 		@Override
-		public List<Object> getPartialListSyntax(List<Object> omel) throws EvaluatorException {
+		public List<Object> getPartialListSyntax(List<Object> omel) throws EvaluatorException, OpenMathException {
 			return new ArrayList<>();
 		}
 
 		@Override
-		public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException {
+		public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 			return "latex";
 		}
 	};
@@ -73,22 +73,22 @@ public class TestConstructorFunction {
 	}
 	
 	@Test
-	public void testGetPartialSageSyntax() throws EvaluatorException {
+	public void testGetPartialSageSyntax() throws EvaluatorException, OpenMathException {
 		assertEquals(cfunc.getPartialSageSyntax(null), "sage");
 	}
 	
 	@Test
-	public void testGetPartialRSyntax() throws EvaluatorException {
+	public void testGetPartialRSyntax() throws EvaluatorException, OpenMathException {
 		assertEquals(cfunc.getPartialRSyntax(null), "r");
 	}
 	
 	@Test
-	public void testGetPartialListSyntax() throws EvaluatorException {
+	public void testGetPartialListSyntax() throws EvaluatorException, OpenMathException {
 		assertEquals(cfunc.getPartialListSyntax(null), new ArrayList<>());
 	}
 	
 	@Test
-	public void testGetPartialLatexSyntax() throws EvaluatorException {
+	public void testGetPartialLatexSyntax() throws EvaluatorException, OpenMathException {
 		assertEquals(cfunc.getPartialLatexSyntax(null), "latex");
 	}
 

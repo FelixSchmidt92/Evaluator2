@@ -17,7 +17,7 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 public class TestOMToStringVisitor {
 
 	@Test
-	public void TestOMStringVisitor1() throws OpenMathException, EvaluatorException {
+	public void TestOMStringVisitor1() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("1==1", new HashMap<>(), new HashMap<>());
 		String result = OMToStringVisitor.getInstance().visit(obj);
 		String expected = "True";
@@ -25,7 +25,7 @@ public class TestOMToStringVisitor {
 	}
 
 	@Test
-	public void TestOMStringVisitor2() throws OpenMathException, EvaluatorException {
+	public void TestOMStringVisitor2() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("1!=1", new HashMap<>(), new HashMap<>());
 		String result = OMToStringVisitor.getInstance().visit(obj);
 		String expected = "False";
@@ -33,7 +33,7 @@ public class TestOMToStringVisitor {
 	}
 
 	@Test
-	public void TestOMStringVisitor3() throws OpenMathException, EvaluatorException {
+	public void TestOMStringVisitor3() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("1", new HashMap<>(), new HashMap<>());
 		String result = OMToStringVisitor.getInstance().visit(obj);
 		String expected = "1";
@@ -41,7 +41,7 @@ public class TestOMToStringVisitor {
 	}
 
 	@Test
-	public void TestOMStringVisitor4() throws OpenMathException, EvaluatorException {
+	public void TestOMStringVisitor4() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("0", new HashMap<>(), new HashMap<>());
 		String result = OMToStringVisitor.getInstance().visit(obj);
 		String expected = "0";
@@ -49,7 +49,7 @@ public class TestOMToStringVisitor {
 	}
 
 	@Test
-	public void TestOMStringVisitor5() throws OpenMathException, EvaluatorException {
+	public void TestOMStringVisitor5() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("1.1", new HashMap<>(), new HashMap<>());
 		String result = OMToStringVisitor.getInstance().visit(obj);
 		String expected = "1.1";
@@ -73,7 +73,7 @@ public class TestOMToStringVisitor {
 	}
 	
 	@Test
-	public void isSingletonPattern() throws EvaluatorException {
+	public void isSingletonPattern() throws EvaluatorException, OpenMathException {
 		OMToSyntaxVisitor<?> obj1 = OMToStringVisitor.getInstance();
 		OMToSyntaxVisitor<?> obj2 = OMToStringVisitor.getInstance();
 		

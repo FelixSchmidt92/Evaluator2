@@ -31,57 +31,57 @@ public class TestIsEmpty extends TestIntegration {
 	}
 
 	@Test
-	public void testIsEmpty1() throws OpenMathException, EvaluatorException {
+	public void testIsEmpty1() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isEmpty('')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsEmpty2() throws OpenMathException, EvaluatorException {
+	public void testIsEmpty2() throws EvaluatorException, OpenMathException {
 		assertEquals(true, Evaluator.getBooleanResult("isEmpty('   ')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsEmpty3() throws OpenMathException, EvaluatorException {
+	public void testIsEmpty3() throws EvaluatorException, OpenMathException {
 		assertEquals(false, Evaluator.getBooleanResult("isEmpty('a')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsEmpty4() throws OpenMathException, EvaluatorException {
+	public void testIsEmpty4() throws EvaluatorException, OpenMathException {
 		assertEquals(false, Evaluator.getBooleanResult("isEmpty('5')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsEmptyWithInput() throws OpenMathException, EvaluatorException {
+	public void testIsEmptyWithInput() throws EvaluatorException, OpenMathException {
 		assertEquals(false, Evaluator.getBooleanResult("isEmpty('[pos=2]')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsEmptyWithVariables() throws OpenMathException, EvaluatorException {
+	public void testIsEmptyWithVariables() throws EvaluatorException, OpenMathException {
 		assertEquals(false, Evaluator.getBooleanResult("isEmpty('[var=b]')", exerVar, fillIn));
 	}
 
 	@Test
-	public void testIsEmptyWithWrongInputCharacter() throws OpenMathException, EvaluatorException {
+	public void testIsEmptyWithWrongInputCharacter() throws EvaluatorException, OpenMathException {
 		assertEquals(false, Evaluator.getBooleanResult("isEmpty(a)", exerVar, fillIn));
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testIsEmptyWithTwoArguments() throws OpenMathException, EvaluatorException {
+	public void testIsEmptyWithTwoArguments() throws EvaluatorException, OpenMathException {
 		Evaluator.getBooleanResult("isEmpty('a', 0)", exerVar, fillIn);
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testIsEmptyWithThreeArguments() throws OpenMathException, EvaluatorException {
+	public void testIsEmptyWithThreeArguments() throws EvaluatorException, OpenMathException {
 		Evaluator.getBooleanResult("isEmpty('string', 1, 3)", exerVar, fillIn);
 	}
 
 	@Test(expected = UndefinedExerciseVariableException.class)
-	public void testIsEmptyWithMissingExerciseVariable() throws OpenMathException, EvaluatorException {
+	public void testIsEmptyWithMissingExerciseVariable() throws EvaluatorException, OpenMathException {
 		Evaluator.getBooleanResult("isEmpty('[var=j]')", exerVar, fillIn);
 	}
 
 	@Test(expected = UndefinedFillInVariableException.class)
-	public void testIsEmptyWithMissingInput() throws OpenMathException, EvaluatorException {
+	public void testIsEmptyWithMissingInput() throws EvaluatorException, OpenMathException {
 		Evaluator.getBooleanResult("isEmpty('[pos=42]')", exerVar, fillIn);
 	}
 }

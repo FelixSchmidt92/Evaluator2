@@ -5,6 +5,7 @@ import java.util.List;
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * Returns the length of this string. The length is equal to the number of
@@ -16,7 +17,7 @@ import de.uni_due.s3.openmath.omutils.OMCreator;
 public class Length extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 			String string =getStringSyntax(arguments.get(0));
 			return OMCreator.createOMI(string.length());
 	}

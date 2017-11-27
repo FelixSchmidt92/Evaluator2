@@ -17,7 +17,7 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 public class Rint extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws OpenMathException, EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		double arg = getDoubleSyntax(arguments.get(0));
 		if (Double.isInfinite(arg) || Double.isNaN(arg)) {
 			return OMCreator.createOMF(Math.rint(arg));

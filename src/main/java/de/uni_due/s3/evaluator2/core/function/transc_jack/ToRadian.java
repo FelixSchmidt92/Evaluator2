@@ -4,9 +4,8 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
-import de.uni_due.s3.evaluator2.exceptions.function.FunctionException;
-import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
+import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
  * Converts an angle measured in degrees to an approximately equivalent angle
@@ -19,7 +18,7 @@ import de.uni_due.s3.openmath.omutils.OMCreator;
 public class ToRadian extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws EvaluatorException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 			Double value = getDoubleSyntax(arguments.get(0));
 			return OMCreator.createOMIOMF(Math.toRadians(value));
 	}
@@ -35,8 +34,7 @@ public class ToRadian extends Function {
 	}
 	
 	@Override
-	public String getPartialLatexSyntax(List<Object> arguments)
-			throws EvaluatorException, FunctionException, NoRepresentationAvailableException {
+	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		
 		return "\\mbox{toRadian}\\left("+getLatexSyntax(arguments.get(0))+"\\degree\\right)";
 	}

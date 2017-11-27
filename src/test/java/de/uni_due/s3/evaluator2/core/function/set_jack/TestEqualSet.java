@@ -24,7 +24,7 @@ public class TestEqualSet extends TestFunctionAbstract {
 	private static Function func = new EqualSet();
 
 	@Test
-	public void testEqualSet1() throws OpenMathException, EvaluatorException {
+	public void testEqualSet1() throws EvaluatorException, OpenMathException {
 		List<Object> set1 = new ArrayList<Object>();
 		set1.add(OMCreator.createOMI(1));
 		set1.add(OMCreator.createOMI(20));
@@ -42,7 +42,7 @@ public class TestEqualSet extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testEqualSet2() throws OpenMathException, EvaluatorException {
+	public void testEqualSet2() throws EvaluatorException, OpenMathException {
 		List<Object> set1 = new ArrayList<Object>();
 		set1.add(OMCreator.createOMI(1));
 		set1.add(OMCreator.createOMI(20));
@@ -59,7 +59,7 @@ public class TestEqualSet extends TestFunctionAbstract {
 	}
 	
 	@Test
-	public void testEqualSet3() throws OpenMathException, EvaluatorException {
+	public void testEqualSet3() throws EvaluatorException, OpenMathException {
 		List<Object> set1 = new ArrayList<Object>();
 		set1.add(OMCreator.createOMI(1));
 		set1.add(OMCreator.createOMI(20));
@@ -78,7 +78,7 @@ public class TestEqualSet extends TestFunctionAbstract {
 	}
 	
 	@Test
-	public void testEqualSet4() throws OpenMathException, EvaluatorException {
+	public void testEqualSet4() throws EvaluatorException, OpenMathException {
 		List<Object> set1 = new ArrayList<Object>();
 		set1.add(OMCreator.createOMI(1));
 		set1.add(OMCreator.createOMI(20));
@@ -97,7 +97,7 @@ public class TestEqualSet extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testEqualSetWithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testEqualSetWithLessThanMinParam() throws EvaluatorException, OpenMathException {
 		List<Object> set = new ArrayList<Object>();
 		set.add(OMCreator.createOMSTR("Test"));
 		set.add(OMCreator.createOMI(20));
@@ -108,7 +108,7 @@ public class TestEqualSet extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testEqualSetWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
+	public void testEqualSetWithMoreThanMaxParam() throws EvaluatorException, OpenMathException {
 		List<Object> set = new ArrayList<Object>();
 		set.add(OMCreator.createOMSTR("Test"));
 		set.add(OMCreator.createOMI(20));
@@ -121,14 +121,14 @@ public class TestEqualSet extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testEqualSetIntegration1() throws OpenMathException, EvaluatorException {
+	public void testEqualSetIntegration1() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("equalSet({1;2;3;4},{1;2;3})", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMSymbol.LOGIC1_FALSE, result.getOMS());
 	}
 
 	@Test
-	public void testEqualSetIntegration2() throws OpenMathException, EvaluatorException {
+	public void testEqualSetIntegration2() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser
 				.parse("equalSet({1;'test';vector(1,2,3)},{1;'test';vector(1,2,3)})", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
@@ -136,7 +136,7 @@ public class TestEqualSet extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testEqualSetIntegration3() throws OpenMathException, EvaluatorException {
+	public void testEqualSetIntegration3() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("equalSet({1;'test';vector(1,2,3);4},{1;'test';4})", null,
 				null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
@@ -144,42 +144,42 @@ public class TestEqualSet extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testEqualSetIntegrationArgsNotInSet1() throws OpenMathException, EvaluatorException {
+	public void testEqualSetIntegrationArgsNotInSet1() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("equalSet({1;'Test'},1)", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMSymbol.LOGIC1_FALSE, result.getOMS());
 	}
 	
 	@Test
-	public void testEqualSetIntegrationArgsNotInSet2() throws OpenMathException, EvaluatorException {
+	public void testEqualSetIntegrationArgsNotInSet2() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("equalSet({1},1)", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMSymbol.LOGIC1_TRUE, result.getOMS());
 	}
 
 	@Test
-	public void testEqualSetWithZeroArgs1() throws OpenMathException, EvaluatorException {
+	public void testEqualSetWithZeroArgs1() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("equalSet({}, {2;3})", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMSymbol.LOGIC1_FALSE, result.getOMS());
 	}
 
 	@Test
-	public void testEqualSetWithZeroArgs2() throws OpenMathException, EvaluatorException {
+	public void testEqualSetWithZeroArgs2() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("equalSet({}, {})", null, null);
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMSymbol.LOGIC1_TRUE, result.getOMS());
 	}
 	
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testEqualSetWithLessArgs() throws OpenMathException, EvaluatorException {
+	public void testEqualSetWithLessArgs() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("equalSet({})", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testEqualSetWithMoreArgs() throws OpenMathException, EvaluatorException {
+	public void testEqualSetWithMoreArgs() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("equalSet({}, {}, 1)", null, null);
 		OMToResultVisitor.getInstance().visit(omobj);
 		fail();

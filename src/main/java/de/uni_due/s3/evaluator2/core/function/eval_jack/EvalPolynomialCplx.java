@@ -35,7 +35,7 @@ public class EvalPolynomialCplx extends Function {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException {
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 
 		try {
 			String term = getSageSyntax(arguments.get(0));

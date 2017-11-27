@@ -89,14 +89,14 @@ public class TestEvalEq extends TestFunctionAbstract {
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testEvalEqWithLessThanMinParam() throws OpenMathException, EvaluatorException {
+	public void testEvalEqWithLessThanMinParam() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<Object>();
 		func.evaluate(args);
 		fail();
 	}
 
 	@Test(expected = FunctionInvalidNumberOfArgumentsException.class)
-	public void testEvalEqWithMoreThanMaxParam() throws OpenMathException, EvaluatorException {
+	public void testEvalEqWithMoreThanMaxParam() throws EvaluatorException, OpenMathException {
 		ArrayList<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMSTR("test"));
 		args.add(OMCreator.createOMSTR("test"));
@@ -106,14 +106,14 @@ public class TestEvalEq extends TestFunctionAbstract {
 	}
 
 	@Test
-	public void testEvalEqIntegration() throws OpenMathException, EvaluatorException {
+	public void testEvalEqIntegration() throws EvaluatorException, OpenMathException {
 		OMOBJ omobj = ExpressionParser.parse("evalEq('1+x^3','x*x*x+1')", null, null);
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
 		assertEquals(OMCreator.createOMI(0), result);
 	}
 
 	@Test
-	public void testEvalEqSageSyntax() throws JAXBException, EvaluatorException {
+	public void testEvalEqSageSyntax() throws EvaluatorException, OpenMathException, JAXBException {
 		ArrayList<Object> args = new ArrayList<Object>();
 		OMOBJ arg1 = OMConverter
 				.toObject("<OMOBJ><OMA><OMS cd=\"arith1\" name=\"plus\"/>" + "<OMA><OMS cd =\"arith1\" name=\"minus\"/>"
