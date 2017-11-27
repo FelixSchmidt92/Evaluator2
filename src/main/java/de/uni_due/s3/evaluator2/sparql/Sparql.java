@@ -88,7 +88,6 @@ public class Sparql {
 
 		} else if (query.contains("Service:") && query.contains("#ManualQuery:")) {
 			//CASE: Service: Custom with a ManualQuerry
-
 			String selectResultList = query
 					.substring(query.indexOf("SELECT ") + 7, query.indexOf("WHERE") - 1)
 					.replace("?", "").replace("DISTINCT", "").trim();
@@ -125,6 +124,7 @@ public class Sparql {
 				// is  
 				if (tupleContent.size() > 1) {
 					resultList.add(OMCreator.createOMA(OMSymbol.LIST1_LIST, tupleContent));
+
 				} else if (tupleContent.size() == 1){
 					resultList.add(tupleContent.get(0));
 				}
@@ -137,6 +137,7 @@ public class Sparql {
 			if (resultList.size() > 1) {
 				return OMCreator.createOMA(OMSymbol.LIST1_LIST, resultList);
 			} else if (resultList.size() == 1){
+
 				return resultList.get(0);
 			} else {
 				return OMCreator.createOMA(OMSymbol.LIST1_LIST, resultList);
