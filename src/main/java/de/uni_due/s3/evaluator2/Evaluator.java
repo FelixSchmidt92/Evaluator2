@@ -8,6 +8,7 @@ import de.uni_due.s3.evaluator2.core.visitor.operation.OMToResultVisitor;
 import de.uni_due.s3.evaluator2.core.visitor.primitve.OMToDoubleVisitor;
 import de.uni_due.s3.evaluator2.core.visitor.primitve.OMToStringVisitor;
 import de.uni_due.s3.evaluator2.core.visitor.syntax.OMToLatexVisitor;
+import de.uni_due.s3.evaluator2.core.visitor.syntax.OMToRVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasNotAvailableException;
@@ -160,7 +161,7 @@ public class Evaluator {
 	 * @return r-syntax
 	 * @throws EvaluatorException
 	 */
-	public static String getRSyntax(OMOBJ omobj) throws EvaluatorException {
-		throw new EvaluatorException("CasVisitor is not implemented yet");
+	public static String getRSyntax(OMOBJ omobj) throws EvaluatorException, OpenMathException {
+		return OMToRVisitor.getInstance().visit(omobj);
 	}
 }
