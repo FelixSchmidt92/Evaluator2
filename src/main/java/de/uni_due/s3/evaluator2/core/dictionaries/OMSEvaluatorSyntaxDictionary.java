@@ -106,7 +106,6 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("getFromOrderedSet", OMSymbol.LISTJACK_GETFROMORDEREDLIST);
 		// Deprecated
 		functionSymbolMap.put("getFromSet", OMSymbol.LISTJACK_GETFROMLIST);
-		functionSymbolMap.put("toDropDownList", OMSymbol.LISTJACK_TODROPDOWNLIST);
 
 		functionSymbolMap.put("list", OMSymbol.LIST1_LIST);
 

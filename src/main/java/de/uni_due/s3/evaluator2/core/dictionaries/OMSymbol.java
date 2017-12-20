@@ -78,7 +78,6 @@ public class OMSymbol {
 	public static final OMS LISTJACK_GETFROMLIST = OMCreator.createOMS("listJACK", "getFromList");
 	public static final OMS LISTJACK_GETFROMORDEREDLIST = OMCreator.createOMS("listJACK", "getFromOrderedList");
 	public static final OMS LISTJACK_GETRANDOMFROMSET = OMCreator.createOMS("listJACK", "getRandomFromSet");
-	public static final OMS LISTJACK_TODROPDOWNLIST = OMCreator.createOMS("listJACK", "toDropDownList");
 
 	public static final OMS LIST1_LIST = OMCreator.createOMS("list1", "list");
 

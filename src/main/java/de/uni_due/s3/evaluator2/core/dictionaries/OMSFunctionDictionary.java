@@ -52,7 +52,6 @@ import de.uni_due.s3.evaluator2.core.function.list_jack.ChooseFromComplement;
 import de.uni_due.s3.evaluator2.core.function.list_jack.GetFromList;
 import de.uni_due.s3.evaluator2.core.function.list_jack.GetFromOrderedList;
 import de.uni_due.s3.evaluator2.core.function.list_jack.GetRandomFromList;
-import de.uni_due.s3.evaluator2.core.function.list_jack.ToDropDownList;
 import de.uni_due.s3.evaluator2.core.function.logic1.And;
 import de.uni_due.s3.evaluator2.core.function.logic1.False;
 import de.uni_due.s3.evaluator2.core.function.logic1.Not;
@@ -252,7 +251,6 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.LISTJACK_GETFROMLIST, new GetFromList());
 		functions.put(OMSymbol.LISTJACK_GETFROMORDEREDLIST, new GetFromOrderedList());
 		functions.put(OMSymbol.LISTJACK_GETRANDOMFROMSET, new GetRandomFromList());
-		functions.put(OMSymbol.LISTJACK_TODROPDOWNLIST, new ToDropDownList());
 		
 		functions.put(OMSymbol.LIST1_LIST, new List());
 		
