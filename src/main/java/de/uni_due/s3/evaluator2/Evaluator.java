@@ -1,11 +1,13 @@
 package de.uni_due.s3.evaluator2;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.core.visitor.operation.OMToResultVisitor;
 import de.uni_due.s3.evaluator2.core.visitor.primitve.OMToDoubleVisitor;
+import de.uni_due.s3.evaluator2.core.visitor.primitve.OMToListVisitor;
 import de.uni_due.s3.evaluator2.core.visitor.primitve.OMToStringVisitor;
 import de.uni_due.s3.evaluator2.core.visitor.syntax.OMToLatexVisitor;
 import de.uni_due.s3.evaluator2.core.visitor.syntax.OMToRVisitor;
@@ -129,7 +131,7 @@ public class Evaluator {
 	public static OMOBJ evaluate(OMOBJ omobj) throws EvaluatorException, OpenMathException {
 		return OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 	}
-
+	
 	/**
 	 * Converts a OpenMath-Object into latex
 	 * 
@@ -140,6 +142,25 @@ public class Evaluator {
 	 */
 	public static String getLaTeX(OMOBJ omobj) throws EvaluatorException, OpenMathException {
 		return OMToLatexVisitor.getInstance().visit(omobj);
+	}
+	
+	/**
+	 * Converts a OpenMath-Object into list
+	 * 
+	 * @param omobj
+	 * @return list of OMOBJs
+	 * @throws EvaluatorException
+	 * @throws OpenMathException 
+	 */
+	public static List<OMOBJ> getList(OMOBJ omobj) throws EvaluatorException, OpenMathException {
+		List<OMOBJ> toReturn = new ArrayList<>();
+		
+		//Die aus dem OMToListVisitor resultierende Liste enthält OMElemente wie OMI OMSTR etc.
+		//Die Listenelemente müssen in OMOBJs geändert werden!
+		for (Object omelement : OMToListVisitor.getInstance().visit(omobj)) {
+			toReturn.add(OMCreator.createOMOBJ(omelement));
+		}
+		return toReturn;
 	}
 
 	/**

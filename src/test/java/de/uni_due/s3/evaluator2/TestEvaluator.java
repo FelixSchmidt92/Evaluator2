@@ -1,6 +1,10 @@
 package de.uni_due.s3.evaluator2;
 
+import static org.junit.Assert.assertEquals;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.xml.bind.JAXBException;
 
@@ -45,6 +49,19 @@ public class TestEvaluator extends TestFunctionAbstract{
 				OMConverter.toString(Evaluator
 						.evaluate((OMOBJ) OMConverter.toObject("<OMOBJ xmlns=\"http://www.openmath.org/OpenMath\"><OMA>" + "<OMS name=\"plus\" cd=\"arith1\"/>"
 								+ "<OMI>2</OMI>" + "<OMI>13</OMI>" + "</OMA></OMOBJ>"))));
+	}
+	
+	@Test
+	public void testEvaluatorGetList() throws JAXBException, OpenMathException, EvaluatorException {
+		List<OMOBJ> expected = new ArrayList<>();
+		expected.add(OMCreator.createOMOBJ(OMCreator.createOMI(1)));
+		expected.add(OMCreator.createOMOBJ(OMCreator.createOMSTR("Hello World!")));
+		expected.add(OMCreator.createOMOBJ(OMCreator.createOMI(5)));
+		expected.add(OMCreator.createOMOBJ(OMCreator.createOMF(1.2345)));
+		expected.add(OMCreator.createOMOBJ(OMCreator.createOMV("a")));
+		
+		List<OMOBJ> result = Evaluator.getList(Evaluator.evaluate("list(1,'Hello World!', 5, 1.2345, a)", null, null));
+		assertEquals(expected, result);
 	}
 	
 	@Test
