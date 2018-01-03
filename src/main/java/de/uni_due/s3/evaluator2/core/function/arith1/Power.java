@@ -7,7 +7,6 @@ import de.uni_due.s3.evaluator2.core.function.BinaryFunction;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
-import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
@@ -29,18 +28,14 @@ public class Power extends BinaryFunction {
 	 */
 	@Override
 	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
-		try {
-			Double b = getDoubleSyntax(arguments.get(0));
-			Double e = getDoubleSyntax(arguments.get(1));
-			return OMCreator.createOMIOMF(Math.pow(b, e));
-		} catch (FunctionInvalidArgumentTypeException e) {
-			if (OMTypeChecker.isOMV(arguments.get(0)) || OMTypeChecker.isOMV(arguments.get(1))
-					|| OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.SYMBOLIC_EXPRESSION)
-					|| OMTypeChecker.isOMAWithSymbol(arguments.get(1), OMSymbol.SYMBOLIC_EXPRESSION)) {
-				return OMCreator.createOMA(OMSymbol.ARITH1_POWER, arguments);
-			}
-			throw new FunctionInvalidArgumentTypeException(this, "integer, float, double");
-		}
+		Double b = getDoubleSyntax(arguments.get(0));
+		Double e = getDoubleSyntax(arguments.get(1));
+		return OMCreator.createOMIOMF(Math.pow(b, e));
+	}
+	
+	@Override
+	public Object getPartialSymbolicSyntax(List<Object> arguments) throws EvaluatorException {
+		return OMCreator.createOMA(OMSymbol.ARITH1_POWER, arguments);
 	}
 
 	@Override

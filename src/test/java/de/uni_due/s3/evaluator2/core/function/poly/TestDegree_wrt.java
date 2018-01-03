@@ -80,12 +80,4 @@ public class TestDegree_wrt extends TestFunctionAbstract {
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMI(3), result.getOMI());
 	}
-
-	@Test
-	public void testDegreeWrtSageSyntax() throws EvaluatorException, OpenMathException {
-		ArrayList<Object> args = new ArrayList<Object>();
-		args.add(ExpressionParser.parse("1+a^2-b", null, null));
-		args.add(OMCreator.createOMV("a"));
-		assertEquals("var('a b');f = (( (( ( (1) + ((a)^(2)) ) )) ) - ( b )); f.degree(a)", func.getPartialSageSyntax(args));
-	}
 }

@@ -8,7 +8,6 @@ import de.uni_due.s3.evaluator2.core.function.BinaryFunction;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
-import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
@@ -21,9 +20,20 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
  */
 public class Plus extends BinaryFunction {
 
-	
 	@Override
 	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
+		Double rightValue = null;
+		Double result = 0d;
+		for (int i = 0; i < arguments.size(); i++) {
+				rightValue = getDoubleSyntax(arguments.get(i));
+				result = result + rightValue;
+		}
+		return OMCreator.createOMIOMF(result);
+	}
+	
+	
+	@Override
+	public Object getPartialSymbolicSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		Double rightValue = null;
 		Double result = 0d;
 		List<Integer> failures = new ArrayList<>();
@@ -34,33 +44,18 @@ public class Plus extends BinaryFunction {
 			} catch (FunctionInvalidArgumentTypeException e) {
 				failures.add(i);
 			}
-
+		}
+		ArrayList<Object> newArgs = new ArrayList<>();
+		
+		if(result != 0 || failures.size() == 1) {
+			newArgs.add(OMCreator.createOMIOMF(result)); // add evaluated result
+		}
+		for (int faili : failures) {
+			// Failures are Beforehand Type-checked.
+			newArgs.add(arguments.get(faili));
 		}
 
-		if (failures.isEmpty()) { // No Operation failed only Numbers in Arguments
-			return OMCreator.createOMIOMF(result);
-
-		} else { // Some Operation failed return an OMA
-			ArrayList<Object> newArgs = new ArrayList<>();
-			
-			if(result != 0 || failures.size() == 1) {
-				newArgs.add(OMCreator.createOMIOMF(result)); // add evaluated result
-			}
-			for (int faili : failures) {
-				if (OMTypeChecker.isOMV(arguments.get(faili))
-						|| OMTypeChecker.isOMAWithSymbol(arguments.get(faili), OMSymbol.SYMBOLIC_EXPRESSION) || OMTypeChecker.isOMAWithSymbol(arguments.get(faili), OMSymbol.TERMINALS
-								)) {
-					// Only allow some specific non-evaluated Arguments!
-					// as OMVs, or a Divide, or an Rational (see: OMSymbol.SYMBOLIC_EXPRESSION)
-					newArgs.add(arguments.get(faili));
-				} else {
-					throw new FunctionInvalidArgumentTypeException(this, "integer, float, double, symbolicExpression");
-				}
-
-			}
-
-			return OMCreator.createOMA(OMSymbol.ARITH1_PLUS, newArgs);
-		}
+		return OMCreator.createOMA(OMSymbol.ARITH1_PLUS, newArgs);
 	}
 
 	@Override

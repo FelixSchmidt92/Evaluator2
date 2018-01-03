@@ -96,7 +96,12 @@ public class OMToResultVisitor extends OMToSyntaxVisitor<Object> {
 					continue;
 				throw e;
 			}
-			return function.getPartialSymbolicSyntax(omel);
+			try {
+				return function.getPartialSymbolicSyntax(omel);
+			} catch (FunctionInvalidArgumentTypeException e1) {
+				throw e; // Throwing e again, if this Function is not implemented and does not need to,
+							// so the initial cause is represented by the user
+			}
 		}
 	}
 

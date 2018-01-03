@@ -25,7 +25,9 @@ public class EqualsExpr extends Function {
 	@Override
 	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		try{
-		Object result = Sage.evaluateInCAS(getPartialSageSyntax(arguments));
+			String sage = getPartialSageSyntax(arguments);
+			String sageVar = Sage.getSagePreVariable(sage);
+		Object result = Sage.evaluateInCAS(sageVar + sage);
 		return result;
 		
 		} catch(CasException ce) {
@@ -47,12 +49,7 @@ public class EqualsExpr extends Function {
 	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		String term1 = getSageSyntax(arguments.get(0));
 		String term2 = getSageSyntax(arguments.get(1));
-
-		String sageVar = Sage.getSagePreVariable(term1 + term2);
-
 		StringBuilder sb = new StringBuilder();
-
-		sb.append(sageVar);
 		sb.append("bool(");
 		sb.append(term1);
 		sb.append("==");

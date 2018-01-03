@@ -24,21 +24,6 @@ public class Degree_wrt extends Function {
 	 */
 	@Override
 	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
-		return Sage.evaluateInCAS(getPartialSageSyntax(arguments));
-	}
-
-	@Override
-	protected int minArgs() {
-		return 2;
-	}
-
-	@Override
-	protected int maxArgs() {
-		return 2;
-	}
-
-	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		String polynom = getSageSyntax(arguments.get(0));
 		String var = getSageSyntax(arguments.get(1));
 
@@ -51,8 +36,17 @@ public class Degree_wrt extends Function {
 		sb.append("; f.degree(");
 		sb.append(var);
 		sb.append(")");
+		return Sage.evaluateInCAS(sb.toString());
+	}
 
-		return sb.toString();
+	@Override
+	protected int minArgs() {
+		return 2;
+	}
+
+	@Override
+	protected int maxArgs() {
+		return 2;
 	}
 
 }

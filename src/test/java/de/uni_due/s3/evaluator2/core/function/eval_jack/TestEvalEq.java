@@ -111,23 +111,4 @@ public class TestEvalEq extends TestFunctionAbstract {
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
 		assertEquals(OMCreator.createOMI(0), result);
 	}
-
-	@Test
-	public void testEvalEqSageSyntax() throws EvaluatorException, OpenMathException, JAXBException {
-		ArrayList<Object> args = new ArrayList<Object>();
-		OMOBJ arg1 = OMConverter
-				.toObject("<OMOBJ><OMA><OMS cd=\"arith1\" name=\"plus\"/>" + "<OMA><OMS cd =\"arith1\" name=\"minus\"/>"
-						+ "<OMA><OMS cd=\"arith1\" name=\"power\" /><OMV name=\"x\"/><OMI>2</OMI></OMA>"
-						+ "<OMA><OMS cd=\"arith1\" name=\"times\" /><OMI>5</OMI><OMV name=\"x\"/></OMA>" + "</OMA>"
-						+ "<OMI>6</OMI>" + "</OMA></OMOBJ>");
-		OMOBJ arg2 = OMConverter.toObject(
-				"<OMOBJ><OMA><OMS cd=\"arith1\" name=\"times\"/>" + "<OMA><OMS cd =\"arith1\" name=\"minus\" />"
-						+ "<OMV name=\"x\"/>" + "<OMI>2</OMI>" + "</OMA>" + "<OMA><OMS cd =\"arith1\" name=\"minus\" />"
-						+ "<OMV name=\"x\"/>" + "<OMI>3</OMI>" + "</OMA>" + "</OMA></OMOBJ>");
-		args.add(arg1.getOMA());
-		args.add(arg2.getOMA());
-		assertEquals(
-				"var('x');expand(((( ( ((( (x)^(2) ) - ( (( ( (5) * (x) ) )) ))) + (6) ) ))) - ((( ( ((( x ) - ( 2 ))) * ((( x ) - ( 3 ))) ) ))))",
-				func.getPartialSageSyntax(args));
-	}
 }

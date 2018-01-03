@@ -17,23 +17,7 @@ import de.uni_due.s3.openmath.omutils.OpenMathException;
 public class Expand extends Function {
 
 	@Override
-	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
-		Object result = Sage.evaluateInCAS(getPartialSageSyntax(arguments));
-		return result;
-	}
-
-	@Override
-	protected int minArgs() {
-		return 1;
-	}
-
-	@Override
-	protected int maxArgs() {
-		return 1;
-	}
-
-	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
+	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {	
 		String term = getSageSyntax(arguments.get(0));
 		if (term.equals("''"))
 			throw new FunctionInvalidArgumentException(this, "(0) String(not empty)");
@@ -45,6 +29,18 @@ public class Expand extends Function {
 		sb.append("f = ");
 		sb.append(term);
 		sb.append("; f.expand()");
-		return sb.toString();
+		
+		Object result = Sage.evaluateInCAS(sb.toString());
+		return result;
+	}
+
+	@Override
+	protected int minArgs() {
+		return 1;
+	}
+
+	@Override
+	protected int maxArgs() {
+		return 1;
 	}
 }

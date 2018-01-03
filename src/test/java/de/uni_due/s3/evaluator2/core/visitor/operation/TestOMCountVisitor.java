@@ -66,7 +66,7 @@ public class TestOMCountVisitor {
 	public void testOMCountVisitor7() throws EvaluatorException, OpenMathException {
 		OMOBJ obj = Evaluator.evaluate("a*vector(a,a,a)+vector(b,c,d)", new HashMap<>(), new HashMap<>());
 		Integer result = OMCountVisitor.getInstance().visit(obj);
-		Integer expected = 15;
+		Integer expected = 16;
 		assertEquals(expected, result);
 	}		
 	

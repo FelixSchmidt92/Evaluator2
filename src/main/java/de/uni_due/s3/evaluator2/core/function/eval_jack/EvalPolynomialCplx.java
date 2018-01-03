@@ -20,8 +20,29 @@ public class EvalPolynomialCplx extends Function {
 
 	@Override
 	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
-		Object result = Sage.evaluateInCAS(getPartialSageSyntax(arguments));
-		return result;
+		try {
+			String term = getSageSyntax(arguments.get(0));
+			String sageVar = Sage.getSagePreVariable(term + "; x;");
+			StringBuilder sb = new StringBuilder();
+			sb.append(sageVar);
+			sb.append("(");
+			sb.append(term);
+			sb.append(").expand()");
+
+			String evaledTerm = getSageSyntax(Sage.evaluateInCAS(sb.toString()));
+			String target = getSageSyntax(arguments.get(1));
+			String replacement = getSageSyntax(arguments.get(2));
+			String resultTerm = evaledTerm.replace(target, replacement);
+			
+			Object result = Sage.evaluateInCAS("(" + resultTerm + ")");
+			return result;
+		} catch (CasEvaluationException e) {
+			throw new FunctionInvalidArgumentTypeException(this, "(0)Term");
+		} catch (CasNotAvailableException e) {
+			throw new FunctionInvalidArgumentTypeException(this, "(0)Term");
+		} catch (OpenMathException e) {
+			throw new FunctionInvalidArgumentTypeException(this, "(0)Term");
+		}
 	}
 
 	@Override
@@ -32,34 +53,5 @@ public class EvalPolynomialCplx extends Function {
 	@Override
 	protected int maxArgs() {
 		return 3;
-	}
-
-	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
-
-		try {
-			String term = getSageSyntax(arguments.get(0));
-
-			String sageVar = Sage.getSagePreVariable(term + "; x;");
-
-			StringBuilder sb = new StringBuilder();
-			sb.append(sageVar);
-			sb.append("(");
-			sb.append(term);
-			sb.append(").expand()");
-
-			String evaledTerm = getSageSyntax(Sage.evaluateInCAS(sb.toString()));
-
-			String target = getSageSyntax(arguments.get(1));
-			String replacement = getSageSyntax(arguments.get(2));
-			String resultTerm = evaledTerm.replace(target, replacement);
-			return "(" + resultTerm + ")";
-		} catch (CasEvaluationException e) {
-			throw new FunctionInvalidArgumentTypeException(this, "(0)Term");
-		} catch (CasNotAvailableException e) {
-			throw new FunctionInvalidArgumentTypeException(this, "(0)Term");
-		} catch (OpenMathException e) {
-			throw new FunctionInvalidArgumentTypeException(this, "(0)Term");
-		}
 	}
 }

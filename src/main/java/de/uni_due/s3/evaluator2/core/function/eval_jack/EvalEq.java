@@ -20,21 +20,6 @@ public class EvalEq extends Function {
 
 	@Override
 	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
-		return Sage.evaluateInCAS(getPartialSageSyntax(arguments));
-	}
-
-	@Override
-	protected int minArgs() {
-		return 2;
-	}
-
-	@Override
-	protected int maxArgs() {
-		return 2;
-	}
-
-	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		String term1 = getSageSyntax(arguments.get(0));
 		String term2 = getSageSyntax(arguments.get(1));
 		if ((term1.length() == 2 && term1.startsWith("'")) || (term2.length() == 2 && term2.startsWith("'"))) {
@@ -51,6 +36,18 @@ public class EvalEq extends Function {
 		sb.append(") - (");
 		sb.append(term2);
 		sb.append("))");
-		return sb.toString();
+		
+		
+		return Sage.evaluateInCAS(sb.toString());
+	}
+
+	@Override
+	protected int minArgs() {
+		return 2;
+	}
+
+	@Override
+	protected int maxArgs() {
+		return 2;
 	}
 }

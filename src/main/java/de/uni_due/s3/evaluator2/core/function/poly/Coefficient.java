@@ -23,22 +23,7 @@ public class Coefficient extends Function {
 				||getStringSyntax(arguments.get(2)).equals("")) {
 			throw new FunctionInvalidArgumentTypeException("(0)Expression, (1)Variable, (2)Integer");
 		}
-
-		return Sage.evaluateInCAS(getPartialSageSyntax(arguments));
-	}
-
-	@Override
-	protected int minArgs() {
-		return 3;
-	}
-
-	@Override
-	protected int maxArgs() {
-		return 3;
-	}
-
-	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
+		
 		String polynom = getSageSyntax(arguments.get(0));
 		String var = getSageSyntax(arguments.get(1));
 		String n = getSageSyntax(arguments.get(2));
@@ -55,7 +40,16 @@ public class Coefficient extends Function {
 		sb.append(n);
 		sb.append(")");
 
-		return sb.toString();
+		return Sage.evaluateInCAS(sb.toString());
 	}
 
+	@Override
+	protected int minArgs() {
+		return 3;
+	}
+
+	@Override
+	protected int maxArgs() {
+		return 3;
+	}
 }

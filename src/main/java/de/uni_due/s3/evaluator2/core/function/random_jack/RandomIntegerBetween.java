@@ -18,9 +18,6 @@ public class RandomIntegerBetween extends Function {
 
 	/**
 	 * Expects two arguments: (1) integer or float (2) integer or float
-	 * 
-	 * If the thrid argument is not given, it will return random float-Numbers
-	 * @throws EvaluatorException 
 	 */
 	@Override
 	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {

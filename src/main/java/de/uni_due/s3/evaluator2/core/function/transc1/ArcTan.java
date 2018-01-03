@@ -22,19 +22,17 @@ public class ArcTan extends Function {
 
 	@Override
 	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
-		Object result;
 		if (OMTypeChecker.isOMNumber(arguments.get(0))) {
-			result = Sage.evaluateInCAS(getPartialSageSyntax(arguments));
+			return Sage.evaluateInCAS(getPartialSageSyntax(arguments));
 		} else {
-			if (OMTypeChecker.isOMV(arguments.get(0))
-					|| OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.SYMBOLIC_EXPRESSION)) {
-				return OMCreator.createOMA(OMSymbol.TRANSC1_ARCTAN, arguments);
-			}
 			throw new FunctionInvalidArgumentTypeException(this, "integer, float, double, variable");
 		}
-		return result;
 	}
 
+	@Override
+	public Object getPartialSymbolicSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
+		return OMCreator.createOMA(OMSymbol.TRANSC1_ARCTAN, arguments);
+	}
 	@Override
 	protected int minArgs() {
 		return 1;

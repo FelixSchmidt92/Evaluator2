@@ -35,7 +35,7 @@ public class IEEERemainder extends BinaryFunction {
 		Double rightValue = getDoubleSyntax(arguments.get(1));
 		if (rightValue == 0.0) {
 			throw new FunctionInvalidArgumentException(this,
-					"Second argument for IEEERemainder has to be unequal 0.0 .");
+					"Second argument for IEEERemainder has to be unequal 0 .");
 		}
 		return OMCreator.createOMIOMF(Math.IEEEremainder(leftValue, rightValue));
 

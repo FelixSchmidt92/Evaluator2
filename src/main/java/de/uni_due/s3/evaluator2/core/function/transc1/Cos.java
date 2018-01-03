@@ -21,18 +21,17 @@ public class Cos extends Function {
 
 	@Override
 	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
-		Object result;
 		if (OMTypeChecker.isOMNumber(arguments.get(0))) {
 			String sageString = getPartialSageSyntax(arguments);
-			result = Sage.evaluateInCAS(Sage.getSagePreVariable(sageString) + sageString);
+			return Sage.evaluateInCAS(Sage.getSagePreVariable(sageString) + sageString);
 		} else {
-			if (OMTypeChecker.isOMV(arguments.get(0))
-					|| OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.SYMBOLIC_EXPRESSION)) {
-				return OMCreator.createOMA(OMSymbol.TRANSC1_COS, arguments);
-			}
 			throw new FunctionInvalidArgumentTypeException(this, "integer, float, double, variable");
 		}
-		return result;
+	}
+	
+	@Override
+	public Object getPartialSymbolicSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
+		return OMCreator.createOMA(OMSymbol.TRANSC1_COS, arguments);
 	}
 
 	@Override

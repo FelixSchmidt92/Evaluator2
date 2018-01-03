@@ -10,6 +10,13 @@ import de.uni_due.s3.evaluator2.sage.Sage;
 import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
+/**
+ * This function calculated the determinant of a matrix with Sage.
+ * 
+ * 
+ * @author ??
+ *
+ */
 public class Determinant extends Function {
 
 	/**
@@ -17,7 +24,17 @@ public class Determinant extends Function {
 	 */
 	@Override
 	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
+		// check if argument is of type matrix or vector
+		if (!OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.LINALG2_MATRIX)
+				&& !OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.LINALG2_VECTOR)) {
+			throw new FunctionInvalidArgumentTypeException(this, "(0) matrix");
+		}
 		return Sage.evaluateInCAS(getPartialSageSyntax(arguments));
+	}
+
+	@Override
+	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
+		return "(" + getSageSyntax(arguments.get(0)) + ").determinant()";
 	}
 
 	@Override
@@ -31,29 +48,8 @@ public class Determinant extends Function {
 	}
 
 	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
-		// check if argument is of type matrix or vector
-		if (!OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.LINALG2_MATRIX)
-				&& !OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.LINALG2_VECTOR)) {
-
-			throw new FunctionInvalidArgumentTypeException(this, "(0) matrix");
-		}
-
-		return "M=" + getSageSyntax(arguments.get(0)) + "; M.determinant()";
-	}
-
-	@Override
 	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
-
 		return "\\det{" + getLatexSyntax(arguments.get(0)) + "}";
-	}
-
-	/**
-	 * argument should not be evaluated, because this function will do it
-	 */
-	@Override
-	public boolean argumentsShouldBeEvaluated() {
-		return false;
 	}
 
 }

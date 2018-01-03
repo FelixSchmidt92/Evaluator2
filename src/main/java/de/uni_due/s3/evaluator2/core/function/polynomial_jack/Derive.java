@@ -18,7 +18,14 @@ public class Derive extends Function {
 
 	@Override
 	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
-		Object result = Sage.evaluateInCAS(getPartialSageSyntax(arguments));
+		
+		if (getSageSyntax(arguments.get(1)).length() != 1) {
+			throw new FunctionInvalidArgumentTypeException(this, "(0)Term, (1)Char");
+		}
+
+		String sage = getPartialSageSyntax(arguments);
+		String sageVar = Sage.getSagePreVariable(sage);
+		Object result = Sage.evaluateInCAS(sageVar + sage);
 		return result;
 	}
 
@@ -36,16 +43,7 @@ public class Derive extends Function {
 	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		String term = getSageSyntax(arguments.get(0));
 		String var = getSageSyntax(arguments.get(1));
-
-		if (var.length() != 1) {
-			throw new FunctionInvalidArgumentTypeException(this, "(0)Term, (1)Char");
-		}
-
-		String sageVar = Sage.getSagePreVariable(term + var);
-
 		StringBuilder sb = new StringBuilder();
-
-		sb.append(sageVar);
 		sb.append("derivative(");
 		sb.append(term);
 		sb.append(", ");

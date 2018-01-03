@@ -57,6 +57,11 @@ public class Minus extends BinaryFunction {
 	}
 
 	@Override
+	public Object getPartialSymbolicSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
+		return OMCreator.createOMA(OMSymbol.ARITH1_MINUS, arguments);
+	}
+
+	@Override
 	protected int minArgs() {
 		return 2;
 	}

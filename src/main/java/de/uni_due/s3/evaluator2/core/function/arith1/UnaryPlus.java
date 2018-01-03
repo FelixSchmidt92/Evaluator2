@@ -4,10 +4,11 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.function.BinaryFunction;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
+import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
- * Implements openMath unary_minus for numbers Example: -3, -4.56
+ * Implements openMath unary plus for numbers Example:  ++3   +++++1     +1    +-1 
  * 
  * @author frichtscheid, spobel
  *
@@ -23,7 +24,8 @@ public class UnaryPlus extends BinaryFunction {
 	 */
 	@Override
 	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
-		return arguments.get(0);
+		Double value = getDoubleSyntax(arguments.get(0));
+		return OMCreator.createOMIOMF(value);
 	}
 
 	@Override

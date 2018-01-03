@@ -23,12 +23,10 @@ public class Max extends Function {
 	 */
 	@Override
 	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
-
 		Double leftValue = getDoubleSyntax(arguments.get(0));
 		Double rightValue = getDoubleSyntax(arguments.get(1));
 		Double result = Math.max(leftValue, rightValue);
 		return OMCreator.createOMIOMF(result);
-
 	}
 
 	@Override

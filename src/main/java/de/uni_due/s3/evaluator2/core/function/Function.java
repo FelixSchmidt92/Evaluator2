@@ -138,21 +138,18 @@ public abstract class Function {
 	}
 	
 	/**
-	 * Define here how the Syntax should look like in Boolean for this specific
-	 * Function All Arguments that are passed here can be recursively called again
-	 * with getBooleanSyntax(omElement). So only deal here with the Representation
+	 * Define here how the Syntax should look like with Symbols for this specific
+	 * Function. All Arguments that are passed here can be recursively called again
+	 * with getPartialSymbolicSyntax(omElement). So only deal here with the Representation
 	 * of this Function and call (usually) the arguments in
-	 * getBooleanSyntax(omElement) For Examples: see Plus, Minus or Set
+	 * getPartialSymbolicSyntax(omElement) For Examples: see Plus, Minus
 	 * 
 	 * @param arguments
 	 *            A List of Arguments for this Function. Note: The arguments are not
 	 *            evaluated!
-	 * @return A Boolean Representation of this Function AND all innerFunction
-	 * @throws NoRepresentationAvailableException
-	 * @throws FunctionInvalidNumberOfArgumentsException
-	 * @throws FunctionInvalidArgumentTypeException
-	 * @throws FunctionInvalidArgumentException
-	 * @throws CasException
+	 * @return A Symbolic Representation of this Function AND all innerFunction
+	 * @throws EvaluatorException
+	 * @throws OpenMathException
 	 */
 	public Object getPartialSymbolicSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		throw new FunctionInvalidArgumentTypeException(this, "integer, float, double, variable, symbolic");

@@ -17,7 +17,23 @@ public class EvalPolynomial extends Function {
 
 	@Override
 	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
-		Object result = Sage.evaluateInCAS(getPartialSageSyntax(arguments));
+		String term = getSageSyntax(arguments.get(0));
+		Double value1 = getDoubleSyntax(arguments.get(1));
+		String sageVar = Sage.getSagePreVariable(term + "; x;");
+		String[] varArray = sageVar.substring(5, sageVar.length()-3).split(" ");
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append(sageVar);
+		for(String var : varArray) {
+			sb.append(var + " =");
+			sb.append(value1);
+			sb.append(";");
+		}
+		sb.append("(");
+		sb.append(term);
+		sb.append(")");
+		
+		Object result = Sage.evaluateInCAS(sb.toString());
 		return result;
 	}
 
@@ -29,31 +45,5 @@ public class EvalPolynomial extends Function {
 	@Override
 	protected int maxArgs() {
 		return 2;
-	}
-
-	@Override
-	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
-		String term = getSageSyntax(arguments.get(0));
-		Double value1 = getDoubleSyntax(arguments.get(1));
-
-		String sageVar = Sage.getSagePreVariable(term + "; x;");
-
-		String[] varArray = sageVar.substring(5, sageVar.length()-3).split(" ");
-		
-		
-		
-		StringBuilder sb = new StringBuilder();
-		sb.append(sageVar);
-		for(String var : varArray) {
-			sb.append(var + " =");
-			sb.append(value1);
-			sb.append(";");
-		}
-
-		sb.append("(");
-		sb.append(term);
-		sb.append(")");
-
-		return sb.toString();
 	}
 }

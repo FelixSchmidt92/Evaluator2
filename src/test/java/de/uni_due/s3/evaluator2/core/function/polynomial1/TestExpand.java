@@ -76,12 +76,4 @@ public class TestExpand extends TestFunctionAbstract {
 				"<OMOBJ><OMA><OMS name=\"plus\" cd=\"arith1\"/><OMA><OMS name=\"power\" cd=\"arith1\"/><OMV name=\"x\"/><OMI>2</OMI></OMA><OMI>-4</OMI></OMA></OMOBJ>")),
 				result.getOMA());
 	}
-
-	@Test
-	public void testDegreeWrtSageSyntax() throws EvaluatorException, OpenMathException {
-		ArrayList<Object> args = new ArrayList<Object>();
-		args.add(ExpressionParser.parse("1+a^2-b", null, null));
-		args.add(OMCreator.createOMV("a"));
-		assertEquals("var('a b');f = (( (( ( (1) + ((a)^(2)) ) )) ) - ( b )); f.expand()", func.getPartialSageSyntax(args));
-	}
 }

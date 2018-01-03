@@ -92,18 +92,4 @@ public class TestEvalPolynomialCplx extends TestFunctionAbstract {
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
 		assertEquals(OMCreator.createOMI(-4), result);
 	}
-
-	@Test
-	public void testEvalPolynomialSageSyntax() throws EvaluatorException, OpenMathException, JAXBException {
-		ArrayList<Object> args = new ArrayList<Object>();
-		OMOBJ arg1 = OMConverter
-				.toObject("<OMOBJ><OMA><OMS cd=\"arith1\" name=\"plus\"/>" + "<OMA><OMS cd =\"arith1\" name=\"minus\"/>"
-						+ "<OMA><OMS cd=\"arith1\" name=\"power\" /><OMV name=\"x\"/><OMI>2</OMI></OMA>"
-						+ "<OMA><OMS cd=\"arith1\" name=\"times\" /><OMI>5</OMI><OMV name=\"a\"/></OMA>" + "</OMA>"
-						+ "<OMI>6</OMI>" + "</OMA></OMOBJ>");
-		args.add(arg1.getOMA());
-		args.add(OMCreator.createOMI(-5));
-		args.add(OMCreator.createOMI(1));
-		assertEquals("((( ( ( ((x)^(2)) + ((( ( (1) * (a) ) ))) ) + (6) ) )))", func.getPartialSageSyntax(args));
-	}
 }

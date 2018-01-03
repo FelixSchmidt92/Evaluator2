@@ -115,7 +115,7 @@ public class TestPlus extends TestFunctionAbstract {
 		args.add(OMCreator.createOMI(3));
 		args.add(OMCreator.createOMI(4));
 		args.add(OMCreator.createOMI(5));
-		Object result = func.evaluate(args);
+		Object result = func.getPartialSymbolicSyntax(args);
 		
 		
 		List<Object> expArgs = new ArrayList<Object>(2);
@@ -132,7 +132,7 @@ public class TestPlus extends TestFunctionAbstract {
 		args.add(OMCreator.createOMI(3));
 		args.add(OMCreator.createOMI(4));
 		args.add(OMCreator.createOMV("a"));
-		Object result = func.evaluate(args);
+		Object result = func.getPartialSymbolicSyntax(args);
 		
 		
 		List<Object> expArgs = new ArrayList<Object>(2);

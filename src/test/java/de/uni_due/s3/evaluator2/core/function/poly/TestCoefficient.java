@@ -101,15 +101,4 @@ public class TestCoefficient extends TestFunctionAbstract {
 		OMOBJ result = OMCreator.createOMOBJ(OMToResultVisitor.getInstance().visit(omobj));
 		assertEquals(OMCreator.createOMI(2), result.getOMI());
 	}
-
-	@Test
-	public void testCoefficientSageSyntax() throws EvaluatorException, OpenMathException {
-		ArrayList<Object> args = new ArrayList<Object>();
-		args.add(ExpressionParser.parse("1+a^2-b", null, null));
-		args.add(OMCreator.createOMV("a"));
-		args.add(OMCreator.createOMI(0));
-		args.add(OMCreator.createOMV("b"));
-		args.add(OMCreator.createOMI(0));
-		assertEquals("var('a b');f = (( (( ( (1) + ((a)^(2)) ) )) ) - ( b )); f.coefficient(a,0)", func.getPartialSageSyntax(args));
-	}
 }

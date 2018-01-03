@@ -24,7 +24,6 @@ public class ArcTan2 extends Function {
 		if (!OMTypeChecker.isOMNumber(arguments.get(0))) {
 			throw new FunctionInvalidArgumentTypeException(this, "integer, float, double");
 		}
-
 		Object result = Sage.evaluateInCAS(getPartialSageSyntax(arguments));
 
 		if (OMTypeChecker.isOMS(result) && result.equals(OMSymbol.NUMS1_NAN)) {

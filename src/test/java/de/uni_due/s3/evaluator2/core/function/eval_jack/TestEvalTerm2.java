@@ -105,18 +105,4 @@ public class TestEvalTerm2 extends TestFunctionAbstract {
 		Object result = OMToResultVisitor.getInstance().visit(omobj);
 		assertEquals(OMCreator.createOMI(-2), result);
 	}
-
-	@Test
-	public void testEvalTermSageSyntax() throws EvaluatorException, OpenMathException, JAXBException {
-		ArrayList<Object> args = new ArrayList<Object>();
-		OMOBJ arg1 = OMConverter
-				.toObject("<OMOBJ><OMA><OMS cd=\"arith1\" name=\"plus\"/>" + "<OMA><OMS cd =\"arith1\" name=\"minus\"/>"
-						+ "<OMA><OMS cd=\"arith1\" name=\"power\" /><OMV name=\"x\"/><OMI>2</OMI></OMA>"
-						+ "<OMA><OMS cd=\"arith1\" name=\"times\" /><OMI>5</OMI><OMV name=\"a\"/></OMA>" + "</OMA>"
-						+ "<OMI>6</OMI>" + "</OMA></OMOBJ>");
-		args.add(arg1.getOMA());
-		args.add(OMCreator.createOMI(1));
-		args.add(OMCreator.createOMI(2));
-		assertEquals("var('a b x y');x = a =1;y = b =2;((( ( ((( (x)^(2) ) - ( (( ( (5) * (a) ) )) ))) + (6) ) )))", func.getPartialSageSyntax(args));
-	}
 }

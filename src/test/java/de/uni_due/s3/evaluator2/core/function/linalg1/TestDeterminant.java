@@ -58,7 +58,7 @@ public class TestDeterminant extends TestFunctionAbstract{
 		OMA oma = OMCreator.createOMA(OMSymbol.LINALG2_MATRIX, matrix);
 		args = new ArrayList<Object>();
 		args.add(oma);
-		assertEquals("M=matrix([[1,2],[1,2]]); M.determinant()",func.getPartialSageSyntax(args));
+		assertEquals("(matrix([[1,2],[1,2]])).determinant()",func.getPartialSageSyntax(args));
 	}
 	
 	@Test
