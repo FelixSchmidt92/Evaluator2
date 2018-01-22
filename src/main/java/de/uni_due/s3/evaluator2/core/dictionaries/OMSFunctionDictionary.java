@@ -116,6 +116,7 @@ import de.uni_due.s3.evaluator2.core.function.string_jack.EqualsIgnoreCase;
 import de.uni_due.s3.evaluator2.core.function.string_jack.IndexOf;
 import de.uni_due.s3.evaluator2.core.function.string_jack.LastIndexOf;
 import de.uni_due.s3.evaluator2.core.function.string_jack.Length;
+import de.uni_due.s3.evaluator2.core.function.string_jack.LevenshteinDistance;
 import de.uni_due.s3.evaluator2.core.function.string_jack.Matches;
 import de.uni_due.s3.evaluator2.core.function.string_jack.Replace;
 import de.uni_due.s3.evaluator2.core.function.string_jack.StartsWith;
@@ -329,6 +330,7 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.STRINGJACK_INDEXOF, new IndexOf());
 		functions.put(OMSymbol.STRINGJACK_LASTINDEXOF, new LastIndexOf());
 		functions.put(OMSymbol.STRINGJACK_LENGTH, new Length());
+		functions.put(OMSymbol.STRINGJACK_LEVENSHTEINDISTANCE, new LevenshteinDistance());
 		functions.put(OMSymbol.STRINGJACK_MATCHES, new Matches());
 		functions.put(OMSymbol.STRINGJACK_REPLACE, new Replace());
 		functions.put(OMSymbol.STRINGJACK_STARTSWITH, new StartsWith());

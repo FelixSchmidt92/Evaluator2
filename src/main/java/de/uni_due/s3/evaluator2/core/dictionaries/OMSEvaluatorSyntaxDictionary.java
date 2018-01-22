@@ -190,6 +190,7 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("indexOf", OMSymbol.STRINGJACK_INDEXOF);
 		functionSymbolMap.put("lastIndexOf", OMSymbol.STRINGJACK_LASTINDEXOF);
 		functionSymbolMap.put("length", OMSymbol.STRINGJACK_LENGTH);
+		functionSymbolMap.put("levenshteinDistance", OMSymbol.STRINGJACK_LEVENSHTEINDISTANCE);
 		functionSymbolMap.put("matches", OMSymbol.STRINGJACK_MATCHES);
 		functionSymbolMap.put("startsWith", OMSymbol.STRINGJACK_STARTSWITH);
 		functionSymbolMap.put("replace", OMSymbol.STRINGJACK_REPLACE);
