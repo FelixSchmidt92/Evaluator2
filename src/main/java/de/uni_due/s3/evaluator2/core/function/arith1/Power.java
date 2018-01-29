@@ -50,7 +50,7 @@ public class Power extends BinaryFunction {
 
 	@Override
 	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
-		return "(" + getSageSyntax(arguments.get(0)) + ")^(" + getSageSyntax(arguments.get(1)) + ")";
+		return "((" + getSageSyntax(arguments.get(0)) + ")^(" + getSageSyntax(arguments.get(1)) + "))";
 	}
 
 	@Override
@@ -65,6 +65,6 @@ public class Power extends BinaryFunction {
 
 	@Override
 	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
-		return "(" + getRSyntax(arguments.get(0)) + "^" + getRSyntax(arguments.get(1)) + ")";
+		return "((" + getRSyntax(arguments.get(0)) + ")^(" + getRSyntax(arguments.get(1)) + "))";
 	}
 }

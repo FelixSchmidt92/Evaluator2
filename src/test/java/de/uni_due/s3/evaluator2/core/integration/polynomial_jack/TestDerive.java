@@ -62,13 +62,13 @@ public class TestDerive extends TestIntegration {
 
 	@Test
 	public void testDerive4() throws EvaluatorException, OpenMathException {
-		assertEquals(ExpressionParser.parse("x", null, null),
+		assertEquals(ExpressionParser.parse("1*x", null, null),
 				Evaluator.evaluate("derive('0.5*x^2','x')", deriveExerciseVariableMap, deriveFillInVariableMap));
 	}
 
 	@Test
 	public void testDerive5() throws EvaluatorException, OpenMathException {
-		assertEquals(ExpressionParser.parse("x", null, null),
+		assertEquals(ExpressionParser.parse("1*x", null, null),
 				Evaluator.evaluate("derive('.5*x^2','x')", deriveExerciseVariableMap, deriveFillInVariableMap));
 	}
 
@@ -102,7 +102,7 @@ public class TestDerive extends TestIntegration {
 
 	@Test
 	public void testDeriveWithInput1() throws EvaluatorException, OpenMathException {
-		assertEquals(ExpressionParser.parse("x", null, null),
+		assertEquals(ExpressionParser.parse("1*x", null, null),
 				Evaluator.evaluate("derive('0.5*x^2 + 3','x')", deriveExerciseVariableMap, deriveFillInVariableMap));
 	}
 
@@ -114,13 +114,13 @@ public class TestDerive extends TestIntegration {
 
 	@Test
 	public void testDeriveWithExpressions() throws EvaluatorException, OpenMathException {
-		assertEquals(ExpressionParser.parse("x", null, null), Evaluator.evaluate("derive(derive('(1/6)*x^3', 'x'),'x')",
+		assertEquals(ExpressionParser.parse("1*x", null, null), Evaluator.evaluate("derive(derive('(1/6)*x^3', x),x)",
 				deriveExerciseVariableMap, deriveFillInVariableMap));
 	}
 
 	@Test
 	public void testDeriveWithVariables1() throws EvaluatorException, OpenMathException {
-		assertEquals(ExpressionParser.parse("x", null, null),
+		assertEquals(ExpressionParser.parse("1*x", null, null),
 				Evaluator.evaluate("derive('0.5*x^2 + 3','x')", deriveExerciseVariableMap, deriveFillInVariableMap));
 	}
 

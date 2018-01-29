@@ -66,6 +66,8 @@ public class OMSEvaluatorSyntaxDictionary {
 
 		functionSymbolMap.put("evaluateInR", OMSymbol.CASJACK_EVALUATEINR);
 		functionSymbolMap.put("evaluateInSage", OMSymbol.CASJACK_EVALUATEINSAGE);
+		
+		functionSymbolMap.put("complex", OMSymbol.COMPLEX1_CARTESIAN_COMPLEX);
 
 		// TODO: should the integral calculus function be added?
 

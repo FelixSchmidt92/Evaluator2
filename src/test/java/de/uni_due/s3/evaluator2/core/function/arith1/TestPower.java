@@ -67,6 +67,6 @@ public class TestPower extends TestFunctionAbstract {
 		List<Object> args = new ArrayList<Object>();
 		args.add(OMCreator.createOMF(1.45));
 		args.add(OMCreator.createOMF(3));
-		assertEquals("(1.45)^(3)", func.getPartialSageSyntax(args));
+		assertEquals("((1.45)^(3))", func.getPartialSageSyntax(args));
 	}
 }

@@ -25,6 +25,7 @@ import de.uni_due.s3.evaluator2.core.function.calculus1.DefInt;
 import de.uni_due.s3.evaluator2.core.function.calculus1.Int;
 import de.uni_due.s3.evaluator2.core.function.cas_jack.EvaluateInR;
 import de.uni_due.s3.evaluator2.core.function.cas_jack.EvaluateInSage;
+import de.uni_due.s3.evaluator2.core.function.complex1.Complex_Cartesian;
 import de.uni_due.s3.evaluator2.core.function.ecc.Tuple;
 import de.uni_due.s3.evaluator2.core.function.editor1.InputBox;
 import de.uni_due.s3.evaluator2.core.function.eval_jack.Eval;
@@ -211,6 +212,8 @@ public class OMSFunctionDictionary {
 		
 		functions.put(OMSymbol.CALCULUS1_INT, new Int());
 		functions.put(OMSymbol.CALCULUS1_DEFINT, new DefInt());
+		
+		functions.put(OMSymbol.COMPLEX1_CARTESIAN_COMPLEX, new Complex_Cartesian());
 		
 		functions.put(OMSymbol.ECC_TUPLE, new Tuple());
 		

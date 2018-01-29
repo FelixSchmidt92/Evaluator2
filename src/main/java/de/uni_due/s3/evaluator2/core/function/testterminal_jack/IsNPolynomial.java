@@ -47,12 +47,13 @@ public class IsNPolynomial extends Function {
 		sb.append(var);
 		sb.append(") and ");
 
-		sb.append("SR(");
+		sb.append("bool(SR(");
 		sb.append(term);
 		sb.append(").degree(");
 		sb.append(var);
 		sb.append(")==");
 		sb.append(grad);
+		sb.append(")");
 
 		Object result = Sage.evaluateInCAS(sb.toString());
 		return result;

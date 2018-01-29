@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
+import de.uni_due.s3.evaluator2.core.visitor.operation.OMCountVisitor;
 import de.uni_due.s3.evaluator2.core.visitor.primitve.OMToBooleanVisitor;
 import de.uni_due.s3.evaluator2.core.visitor.primitve.OMToDoubleVisitor;
 import de.uni_due.s3.evaluator2.core.visitor.primitve.OMToIntegerVisitor;
@@ -137,6 +138,18 @@ public abstract class Function {
 		return true;
 	}
 	
+	/**
+	 * Call this Function for getting number of OpenMath Nodes.
+	 * 
+	 * @param omElement
+	 * @return number of OpenMath Nodes
+	 * @throws EvaluatorException
+	 * @throws OpenMathException
+	 */
+	protected final Integer countNodes(Object omElement) throws EvaluatorException, OpenMathException {
+		return OMCountVisitor.getInstance().visit(omElement);
+	}
+
 	/**
 	 * Define here how the Syntax should look like with Symbols for this specific
 	 * Function. All Arguments that are passed here can be recursively called again

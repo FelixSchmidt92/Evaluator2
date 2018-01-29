@@ -25,13 +25,12 @@ public class Plus extends BinaryFunction {
 		Double rightValue = null;
 		Double result = 0d;
 		for (int i = 0; i < arguments.size(); i++) {
-				rightValue = getDoubleSyntax(arguments.get(i));
-				result = result + rightValue;
+			rightValue = getDoubleSyntax(arguments.get(i));
+			result = result + rightValue;
 		}
 		return OMCreator.createOMIOMF(result);
 	}
-	
-	
+
 	@Override
 	public Object getPartialSymbolicSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		Double rightValue = null;
@@ -46,8 +45,8 @@ public class Plus extends BinaryFunction {
 			}
 		}
 		ArrayList<Object> newArgs = new ArrayList<>();
-		
-		if(result != 0 || failures.size() == 1) {
+
+		if (result != 0 || failures.size() == 1) {
 			newArgs.add(OMCreator.createOMIOMF(result)); // add evaluated result
 		}
 		for (int faili : failures) {
@@ -71,45 +70,45 @@ public class Plus extends BinaryFunction {
 	@Override
 	public String getPartialSageSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		String sage = "(" + getSageSyntax(arguments.get(0)) + ")";
-		
-		for(int i = 1; i < arguments.size(); i++) {
+
+		for (int i = 1; i < arguments.size(); i++) {
 			sage = "( " + sage + " + (" + getSageSyntax(arguments.get(i)) + ") )";
 		}
-		
-		return "(( " + sage + " ))";
+
+		return "(" + sage + ")";
 	}
 
 	@Override
 	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		String latex = getLatexSyntax(arguments.get(0));
-		
-		for(int i = 1; i < arguments.size(); i++) {
+
+		for (int i = 1; i < arguments.size(); i++) {
 			latex += " + " + getLatexSyntax(arguments.get(i));
 		}
-		
+
 		return latex;
 	}
 
 	@Override
 	public String getPartialStringSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		String string = getLatexSyntax(arguments.get(0));
-		
-		for(int i = 1; i < arguments.size(); i++) {
+
+		for (int i = 1; i < arguments.size(); i++) {
 			string += "+" + getLatexSyntax(arguments.get(i));
 		}
-		
+
 		return string;
 	}
-	
+
 	@Override
 	public String getPartialRSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		String r = "(" + getRSyntax(arguments.get(0)) + ")";
-		
-		for(int i = 1; i < arguments.size(); i++) {
+
+		for (int i = 1; i < arguments.size(); i++) {
 			r = "( " + r + " + (" + getRSyntax(arguments.get(i)) + ") )";
 		}
-		
-		return "(( " + r + " ))";
+
+		return "(" + r + ")";
 	}
 
 }

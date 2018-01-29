@@ -1,16 +1,19 @@
 package de.uni_due.s3.evaluator2.core.visitor.operation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.function.Function;
 import de.uni_due.s3.evaluator2.core.visitor.OMToSyntaxVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
+import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OMF;
 import de.uni_due.s3.openmath.jaxb.OMI;
 import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.jaxb.OMSTR;
 import de.uni_due.s3.openmath.jaxb.OMV;
+import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class OMCountVisitor extends OMToSyntaxVisitor<Integer> {
@@ -37,6 +40,10 @@ public class OMCountVisitor extends OMToSyntaxVisitor<Integer> {
 		return 1;
 	}
 
+	protected Integer visit(OMS oms) throws EvaluatorException, OpenMathException {
+		return getSyntaxRepresentationForFunction(null, oms, new ArrayList<>());
+	}
+	
 	@Override
 	protected Integer visit(OMSTR omstr) throws NoRepresentationAvailableException {
 		return 1;
@@ -48,9 +55,40 @@ public class OMCountVisitor extends OMToSyntaxVisitor<Integer> {
 	}
 
 	@Override
+	protected Integer visit(OMA oma) throws OpenMathException, EvaluatorException {
+		if (OMTypeChecker.isOMA(oma.getOmel().get(0))) {
+			// Change Structure, so that always an OMS is the first argument in an OMA
+			OMA second = (OMA) oma.getOmel().get(0);
+
+			Object secondinner = second.getOmel().get(1);
+
+			oma.getOmel().set(0, secondinner);
+
+			second.getOmel().set(1, oma);
+
+			oma = second;
+		}
+
+		List<Object> omel = new ArrayList<>();
+
+		for (int i = 1; i < oma.getOmel().size(); i++) {
+			omel.add(oma.getOmel().get(i)); // Deep Copy of List (oma.getOmel
+											// should not be changed)
+		}
+		OMS oms = null;
+		try {
+			oms = (OMS) oma.getOmel().get(0); // First element of OMA is always OMS
+		} catch (ClassCastException e) {
+			throw new EvaluatorException("OpenMath-Object is invalid!", e);
+		}
+		Integer result = 0;
+		result++; //OMA (this)
+		return result + getSyntaxRepresentationForFunction(null, oms, omel);
+	}
+	
+	@Override
 	protected Integer getSyntaxRepresentationForFunction(Function function, OMS oms, List<Object> omel) throws OpenMathException {
 		Integer result = 0;
-		result++; //OMA
 		result++; //OMS (this)
 		for (Object omObj : omel) {
 			try {

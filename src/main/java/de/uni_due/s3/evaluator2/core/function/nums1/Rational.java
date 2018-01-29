@@ -38,6 +38,13 @@ public class Rational extends Function {
 
 		return arg1 / arg2;
 	}
+	
+	@Override
+	public Integer getPartialIntegerSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
+		Double arg1 = getDoubleSyntax(arguments.get(0));
+		Double arg2 = getDoubleSyntax(arguments.get(1));
+		return getIntegerSyntax(OMCreator.createOMIOMF(arg1 / arg2));
+	}
 
 	@Override
 	public String getPartialLatexSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {

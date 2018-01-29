@@ -37,6 +37,8 @@ public class OMSymbol {
 
 	public static final OMS CALCULUS1_INT = OMCreator.createOMS("calculus1", "int");
 	public static final OMS CALCULUS1_DEFINT = OMCreator.createOMS("calculus1", "defint");
+	
+	public static final OMS COMPLEX1_CARTESIAN_COMPLEX = OMCreator.createOMS("complex1", "complex_cartesian");
 
 	public static final OMS EDITOR1_INPUT_BOX = OMCreator.createOMS("editor1", "input_box");
 	public static final OMS EDITOR1_PALETTE = OMCreator.createOMS("editor1", "palette");
@@ -212,7 +214,7 @@ public class OMSymbol {
 
 	public static final OMS[] TERMINALS = { ECC_TUPLE, INTERVAL1_INTERVALCC, INTERVAL1_INTERVALCO, INTERVAL1_INTERVALOC,
 			INTERVAL1_INTERVALOO, LINALG2_MATRIX, LINALG2_MATRIXROW, LINALG2_VECTOR, LIST1_LIST, MCJACK_MCINDEX,
-			NUMS1_RATIONAL, SET1_SET, STRINGJACK_TEXTWITHVARIABLES };
+			NUMS1_RATIONAL, SET1_SET, STRINGJACK_TEXTWITHVARIABLES, COMPLEX1_CARTESIAN_COMPLEX };
 
 	public static boolean isSymbolicExpression(Object obj) {
 		return (OMTypeChecker.isOMI(obj) || OMTypeChecker.isOMF(obj) || OMTypeChecker.isOMV(obj)

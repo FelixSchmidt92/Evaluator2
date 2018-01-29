@@ -76,7 +76,7 @@ public class Times extends BinaryFunction {
 			sage = "( " + sage + " * (" + getSageSyntax(arguments.get(i)) + ") )";
 		}
 		
-		return "(( " + sage + " ))";
+		return "( " + sage + " )";
 	}
 
 	@Override
@@ -109,7 +109,7 @@ public class Times extends BinaryFunction {
 			r = "( " + r + " * (" + getRSyntax(arguments.get(i)) + ") )";
 		}
 		
-		return "(( " + r + " ))";
+		return "( " + r + " )";
 	}
 
 }

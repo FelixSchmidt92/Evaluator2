@@ -113,7 +113,7 @@ public abstract class OMToSyntaxVisitor<T> {
 		case "OMV":
 			return visit((OMV) omElement);
 		case "OMA":
-			return visit((OMA) omElement);
+			return this.visit((OMA) omElement);
 		default:
 			throw new NoRepresentationAvailableException(
 					"Please inform JACK Admin! There is no Representation for OpenMath Object:"
@@ -192,7 +192,7 @@ public abstract class OMToSyntaxVisitor<T> {
 	 * @throws OpenMathException 
 	 * @throws NoRepresentationAvailableException
 	 */
-	private T visit(OMS oms) throws EvaluatorException, OpenMathException {
+	protected T visit(OMS oms) throws EvaluatorException, OpenMathException {
 		Function function = null;
 		try {
 			function = OMSFunctionDictionary.getInstance().getFunction(oms);
@@ -250,7 +250,7 @@ public abstract class OMToSyntaxVisitor<T> {
 	 * @throws FunctionInvalidArgumentException
 	 * @throws CasException
 	 */
-	private T visit(OMA oma) throws EvaluatorException, OpenMathException {
+	protected T visit(OMA oma) throws EvaluatorException, OpenMathException {
 
 		if (OMTypeChecker.isOMA(oma.getOmel().get(0))) {
 			// Change Structure, so that always an OMS is the first argument in an OMA

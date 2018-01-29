@@ -98,8 +98,8 @@ public class TestOMToSageVisitor {
 	/* The Class Plus has to be implemented in Functions */
 	@Test
 	public void testVisitApplication() throws EvaluatorException, OpenMathException {
-		assertEquals("(( ( (" + omiString + ") + (" + omfString + ") ) ))", OMToSageVisitor.getInstance().visit(oma));
-		assertEquals("(( ( (" + omiString + ") + (" + omfString + ") ) ))", OMToSageVisitor.getInstance().visit(omobj));
+		assertEquals("(( (" + omiString + ") + (" + omfString + ") ))", OMToSageVisitor.getInstance().visit(oma));
+		assertEquals("(( (" + omiString + ") + (" + omfString + ") ))", OMToSageVisitor.getInstance().visit(omobj));
 	}
 	
 	@Test

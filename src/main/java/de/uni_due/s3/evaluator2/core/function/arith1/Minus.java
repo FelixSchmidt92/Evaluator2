@@ -11,7 +11,6 @@ import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeE
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgumentsException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
-import de.uni_due.s3.openmath.omutils.OMTypeChecker;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 /**
@@ -36,24 +35,9 @@ public class Minus extends BinaryFunction {
 	 */
 	@Override
 	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
-		try {
-			Double leftValue = getDoubleSyntax(arguments.get(0));
-			Double rightValue = getDoubleSyntax(arguments.get(1));
-			return OMCreator.createOMIOMF(leftValue - rightValue);
-		} catch (FunctionInvalidArgumentTypeException e) {
-			if (OMTypeChecker.isOMV(arguments.get(0)) || OMTypeChecker.isOMV(arguments.get(1))
-					|| OMTypeChecker.isOMAWithSymbol(arguments.get(0), OMSymbol.SYMBOLIC_EXPRESSION)
-					|| OMTypeChecker.isOMAWithSymbol(arguments.get(1), OMSymbol.SYMBOLIC_EXPRESSION)) {
-				return OMCreator.createOMA(OMSymbol.ARITH1_MINUS, arguments); // In
-																				// Termen
-																				// für
-																				// weitere
-																				// Anwendung
-																				// oder
-																				// Darstellung
-			}
-			throw new FunctionInvalidArgumentTypeException(this, "integer, float, double");
-		}
+		Double leftValue = getDoubleSyntax(arguments.get(0));
+		Double rightValue = getDoubleSyntax(arguments.get(1));
+		return OMCreator.createOMIOMF(leftValue - rightValue);
 	}
 
 	@Override

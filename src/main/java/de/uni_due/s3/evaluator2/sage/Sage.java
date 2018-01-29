@@ -137,6 +137,11 @@ public class Sage {
 				vars.add(var.substring(1, 2));
 		}
 		
+		vars.remove("e");
+		vars.remove("i");
+		vars.remove("E");
+		vars.remove("I");
+		
 		result.append(String.join(" ", vars));
 		
 		if (vars.size() != 0) {
