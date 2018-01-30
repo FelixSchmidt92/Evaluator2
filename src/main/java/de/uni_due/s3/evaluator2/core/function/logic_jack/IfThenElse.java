@@ -3,6 +3,7 @@ package de.uni_due.s3.evaluator2.core.function.logic_jack;
 import java.util.List;
 
 import de.uni_due.s3.evaluator2.core.function.Function;
+import de.uni_due.s3.evaluator2.core.visitor.operation.OMToResultVisitor;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
@@ -26,12 +27,12 @@ public class IfThenElse extends Function {
 	 */
 	@Override
 	protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
-		boolean condition = getBooleanSyntax(arguments.get(0));
+		boolean condition = getBooleanSyntax(OMToResultVisitor.getInstance().visit(arguments.get(0)));
 
 		if (condition) {
-			return arguments.get(1);
+			return OMToResultVisitor.getInstance().visit(arguments.get(1));
 		} else {
-			return arguments.get(2);
+			return OMToResultVisitor.getInstance().visit(arguments.get(2));
 		}
 	}
 
@@ -43,5 +44,10 @@ public class IfThenElse extends Function {
 	@Override
 	protected int maxArgs() {
 		return 3;
+	}
+	
+	@Override
+	public boolean argumentsShouldBeEvaluated() {
+		return false;
 	}
 }

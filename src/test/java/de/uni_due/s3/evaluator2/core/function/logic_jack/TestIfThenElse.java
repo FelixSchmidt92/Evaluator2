@@ -128,7 +128,7 @@ public class TestIfThenElse extends TestFunctionAbstract {
 	@Test(expected = FunctionInvalidArgumentTypeException.class)
 	public void testIfThenEleseWithWrongArguments() throws EvaluatorException, OpenMathException {
 		args = new ArrayList<Object>(2);
-		args.add(null);
+		args.add(OMCreator.createOMV("a"));
 		args.add(OMCreator.createOMSTR(null));
 		args.add(OMCreator.createOMSTR("test"));
 		func.evaluate(args);
@@ -143,6 +143,22 @@ public class TestIfThenElse extends TestFunctionAbstract {
 		args.add(OMCreator.createOMSTR("false"));
 		Sage.evaluateInCAS(func.getPartialSageSyntax(args));
 		fail();
+	}
+	
+	public void testIfThenElsePartialEvaluation1() throws EvaluatorException, OpenMathException {
+		args = new ArrayList<Object>(3);
+		args.add(OMSymbol.LOGIC1_TRUE);
+		args.add(OMCreator.createOMI(3));
+		args.add(null);
+		assertEquals(func.evaluate(args), OMCreator.createOMI(3));
+	}
+	
+	public void testIfThenElsePartialEvaluation2() throws EvaluatorException, OpenMathException {
+		args = new ArrayList<Object>(3);
+		args.add(OMSymbol.LOGIC1_FALSE);
+		args.add(null);
+		args.add(OMCreator.createOMSTR("false"));
+		assertEquals(OMCreator.createOMSTR("false"), func.evaluate(args));
 	}
 
 }
