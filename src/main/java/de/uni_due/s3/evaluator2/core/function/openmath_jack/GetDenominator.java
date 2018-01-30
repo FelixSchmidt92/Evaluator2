@@ -53,7 +53,7 @@ public class GetDenominator extends Function {
 	@Override
 	public Double getPartialDoubleSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
 		OMA oma = (OMA) arguments.get(0);
-		return new Double(getDoubleSyntax(oma.getOmel().get(2)));
+		return Double.valueOf(getDoubleSyntax(oma.getOmel().get(2)));
 	}
 
 }

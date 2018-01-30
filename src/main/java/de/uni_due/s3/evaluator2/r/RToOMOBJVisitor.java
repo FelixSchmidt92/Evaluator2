@@ -151,7 +151,7 @@ public class RToOMOBJVisitor {
 
 		for (int i = 0; i < results.length; i++) {
 			if (results[i] == Math.floor(results[i])) {
-				omList += "<OMI>" + new Double(results[i]).intValue() + "</OMI>";
+				omList += "<OMI>" + Double.valueOf(results[i]).intValue() + "</OMI>";
 			} else {
 				omList += "<OMF dec=\"" + results[i] + "\"/>";
 			}
@@ -175,7 +175,7 @@ public class RToOMOBJVisitor {
 			String omPartList = "<OMA><OMS cd=\"linalg2\" name=\"matrixrow\"/>";
 			for (int x = 0; x < matrix[y].length; x++) {
 				if (matrix[y][x] == Math.floor(matrix[y][x])) {
-					omPartList += "<OMI>" + new Double(matrix[y][x]).intValue() + "</OMI>";
+					omPartList += "<OMI>" + Double.valueOf(matrix[y][x]).intValue() + "</OMI>";
 				} else {
 					omPartList += "<OMF dec=\"" + matrix[y][x] + "\"/>";
 				}

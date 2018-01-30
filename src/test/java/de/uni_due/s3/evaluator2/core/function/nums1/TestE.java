@@ -39,12 +39,12 @@ public class TestE extends TestFunctionAbstract {
 	
 	@Test(expected = NoRepresentationAvailableException.class)
 	public void testEBoolean() throws EvaluatorException, OpenMathException {
-		assertEquals(new Boolean(true), func.getPartialBooleanSyntax(new ArrayList<>()));
+		assertEquals(Boolean.valueOf(true), func.getPartialBooleanSyntax(new ArrayList<>()));
 	}
 
 	@Test
 	public void testEDouble() throws EvaluatorException, OpenMathException {
-		assertEquals(new Double(Math.E), func.getPartialDoubleSyntax(new ArrayList<>()), 0);
+		assertEquals(Double.valueOf(Math.E), func.getPartialDoubleSyntax(new ArrayList<>()), 0);
 	}
 
 	@Test(expected = NoRepresentationAvailableException.class)

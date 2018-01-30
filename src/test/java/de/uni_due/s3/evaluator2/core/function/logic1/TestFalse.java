@@ -29,17 +29,17 @@ public class TestFalse {
 
 	@Test
 	public void testFalseBoolean() throws EvaluatorException, OpenMathException {
-		assertEquals(new Boolean(false), func.getPartialBooleanSyntax(new ArrayList<>()));
+		assertEquals(Boolean.valueOf(false), func.getPartialBooleanSyntax(new ArrayList<>()));
 	}
 
 	@Test
 	public void testFalseDouble() throws EvaluatorException, OpenMathException {
-		assertEquals(new Double(0.0), func.getPartialDoubleSyntax(new ArrayList<>()), 0);
+		assertEquals(Double.valueOf(0.0), func.getPartialDoubleSyntax(new ArrayList<>()), 0);
 	}
 
 	@Test
 	public void testFalseInteger() throws EvaluatorException, OpenMathException {
-		assertEquals(new Integer(0), func.getPartialIntegerSyntax(new ArrayList<>()));
+		assertEquals(Integer.valueOf(0), func.getPartialIntegerSyntax(new ArrayList<>()));
 	}
 
 	@Test

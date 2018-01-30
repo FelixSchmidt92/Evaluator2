@@ -67,7 +67,7 @@ public class TestTuple extends TestFunctionAbstract{
 
 	@Test(expected = NoRepresentationAvailableException.class)
 	public void testTupleDouble() throws EvaluatorException, OpenMathException {
-		assertEquals(new Double(Math.E), func.getPartialDoubleSyntax(new ArrayList<>()), 0);
+		assertEquals(Math.E, func.getPartialDoubleSyntax(new ArrayList<>()), 0);
 	}
 
 	@Test(expected = NoRepresentationAvailableException.class)

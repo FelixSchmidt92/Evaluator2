@@ -67,7 +67,7 @@ public class UnaryMinus extends BinaryFunction {
 
 	@Override
 	public Double getPartialDoubleSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException {
-		return new Double(-1 * getDoubleSyntax(arguments.get(0)));
+		return Double.valueOf(-1 * getDoubleSyntax(arguments.get(0)));
 	}
 
 	@Override

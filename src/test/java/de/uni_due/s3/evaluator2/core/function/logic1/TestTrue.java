@@ -30,17 +30,17 @@ public class TestTrue extends TestFunctionAbstract {
 
 	@Test
 	public void testTrueBoolean() throws EvaluatorException, OpenMathException {
-		assertEquals(new Boolean(true), func.getPartialBooleanSyntax(new ArrayList<>()));
+		assertEquals(Boolean.valueOf(true), func.getPartialBooleanSyntax(new ArrayList<>()));
 	}
 
 	@Test
 	public void testTrueDouble() throws EvaluatorException, OpenMathException {
-		assertEquals(new Double(1.0), func.getPartialDoubleSyntax(new ArrayList<>()), 0);
+		assertEquals(Double.valueOf(1.0), func.getPartialDoubleSyntax(new ArrayList<>()), 0);
 	}
 
 	@Test
 	public void testTrueInteger() throws EvaluatorException, OpenMathException {
-		assertEquals(new Integer(1), func.getPartialIntegerSyntax(new ArrayList<>()));
+		assertEquals(Integer.valueOf(1), func.getPartialIntegerSyntax(new ArrayList<>()));
 	}
 
 	@Test

@@ -33,7 +33,7 @@ public class TestConstructorFunction {
 
 		@Override
 		protected Object execute(List<Object> arguments) throws EvaluatorException, OpenMathException {
-			return new Double(1.3);
+			return Double.valueOf(1.3);
 		}
 
 		@Override
@@ -69,7 +69,7 @@ public class TestConstructorFunction {
 	
 	@Test
 	public void testExecute() throws EvaluatorException, OpenMathException {
-		assertEquals(cfunc.execute(null), new Double(1.3));
+		assertEquals(cfunc.execute(null), Double.valueOf(1.3));
 	}
 	
 	@Test

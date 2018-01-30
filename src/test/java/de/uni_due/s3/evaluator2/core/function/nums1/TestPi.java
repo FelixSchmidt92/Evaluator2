@@ -41,7 +41,7 @@ public class TestPi extends TestFunctionAbstract {
 
 	@Test(expected = NoRepresentationAvailableException.class)
 	public void testPiBoolean() throws EvaluatorException, OpenMathException {
-		assertEquals(new Boolean(true), func.getPartialBooleanSyntax(new ArrayList<>()));
+		assertEquals(Boolean.valueOf(true), func.getPartialBooleanSyntax(new ArrayList<>()));
 	}
 
 	@Test
