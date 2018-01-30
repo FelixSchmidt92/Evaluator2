@@ -118,12 +118,12 @@ public class TestToDegrees extends TestIntegration {
 
 	@Test
 	public void testToDegreesWithPointNumbers1() throws EvaluatorException, OpenMathException {
-		assertEquals(.2 * 180 / (PI), Evaluator.getNumberResult("toDegrees(0.2)", exerVar, fillIn), 0);
+		assertEquals(.2 * 180 / (PI), Evaluator.getNumberResult("toDegrees(0.2)", exerVar, fillIn), 1e-14);
 	}
 
 	@Test
 	public void testToDegreesWithPointNumbers2() throws EvaluatorException, OpenMathException {
-		assertEquals(.1 * 180 / (-PI), Evaluator.getNumberResult("toDegrees(-0.1)", exerVar, fillIn), 0);
+		assertEquals(.1 * 180 / (-PI), Evaluator.getNumberResult("toDegrees(-0.1)", exerVar, fillIn), 1e-14);
 	}
 
 	@Test
