@@ -99,7 +99,7 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("matrixrow", OMSymbol.LINALG2_MATRIXROW);
 		functionSymbolMap.put("vector", OMSymbol.LINALG2_VECTOR);
 
-		functionSymbolMap.put("chooseFrom	Complement", OMSymbol.LISTJACK_CHOOSEFROMCOMPLEMENT);
+		functionSymbolMap.put("chooseFromComplement", OMSymbol.LISTJACK_CHOOSEFROMCOMPLEMENT);
 		functionSymbolMap.put("getFromList", OMSymbol.LISTJACK_GETFROMLIST);
 		functionSymbolMap.put("getFromOrderedList", OMSymbol.LISTJACK_GETFROMORDEREDLIST);
 		functionSymbolMap.put("getRandomFromList", OMSymbol.LISTJACK_GETRANDOMFROMSET);
