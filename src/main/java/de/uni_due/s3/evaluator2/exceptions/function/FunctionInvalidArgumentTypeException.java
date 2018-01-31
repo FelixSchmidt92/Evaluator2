@@ -1,6 +1,6 @@
 package de.uni_due.s3.evaluator2.exceptions.function;
 
-import de.uni_due.s3.evaluator2.core.function.Function;
+import de.uni_due.s3.evaluator2.function.Function;
 
 public class FunctionInvalidArgumentTypeException extends FunctionException {
 

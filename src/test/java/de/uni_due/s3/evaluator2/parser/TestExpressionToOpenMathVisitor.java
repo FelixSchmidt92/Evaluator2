@@ -19,7 +19,7 @@ import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
-import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
+import de.uni_due.s3.evaluator2.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedRuntimeException;
 import de.uni_due.s3.evaluator2.exceptions.parserruntime.ParserRuntimeException;
 import de.uni_due.s3.evaluator2.parser.ExpressionToOpenMathVisitor;

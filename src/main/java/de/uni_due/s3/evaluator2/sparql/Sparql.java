@@ -13,7 +13,7 @@ import org.apache.jena.sparql.engine.http.QueryEngineHTTP;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
+import de.uni_due.s3.evaluator2.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.exceptions.cas.CasEvaluationException;
 import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.omutils.OMCreator;

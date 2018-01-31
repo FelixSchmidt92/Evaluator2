@@ -8,8 +8,8 @@ import java.util.regex.Pattern;
 
 import org.antlr.v4.runtime.tree.ParseTree;
 
-import de.uni_due.s3.evaluator2.core.dictionaries.OMSEvaluatorSyntaxDictionary;
-import de.uni_due.s3.evaluator2.core.dictionaries.OMSymbol;
+import de.uni_due.s3.evaluator2.dictionaries.OMSEvaluatorSyntaxDictionary;
+import de.uni_due.s3.evaluator2.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedRuntimeException;
 import de.uni_due.s3.evaluator2.exceptions.parserruntime.ErroneousExerciseVariableRuntimeException;
 import de.uni_due.s3.evaluator2.exceptions.parserruntime.ErroneousFillInVariableRuntimeException;
