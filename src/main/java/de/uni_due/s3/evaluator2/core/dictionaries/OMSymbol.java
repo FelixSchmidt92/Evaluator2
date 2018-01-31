@@ -41,9 +41,6 @@ public class OMSymbol {
 	public static final OMS COMPLEX1_CARTESIAN_COMPLEX = OMCreator.createOMS("complex1", "complex_cartesian");
 
 	public static final OMS EDITOR1_INPUT_BOX = OMCreator.createOMS("editor1", "input_box");
-	public static final OMS EDITOR1_PALETTE = OMCreator.createOMS("editor1", "palette");
-	public static final OMS EDITOR1_PALETTE_TAB = OMCreator.createOMS("editor1", "palette_tab");
-	public static final OMS EDITOR1_PALETTE_ROW = OMCreator.createOMS("editor1", "palette_row");
 
 	public static final OMS EVALJACK_EVAL = OMCreator.createOMS("evalJACK", "eval");
 	public static final OMS EVALJACK_EVALEQ = OMCreator.createOMS("evalJACK", "evalEq");

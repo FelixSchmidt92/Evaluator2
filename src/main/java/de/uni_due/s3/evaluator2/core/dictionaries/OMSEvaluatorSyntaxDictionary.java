@@ -72,13 +72,12 @@ public class OMSEvaluatorSyntaxDictionary {
 		// TODO: should the integral calculus function be added?
 
 		functionSymbolMap.put("tuple", OMSymbol.ECC_TUPLE);
-		
-		functionSymbolMap.put("palette", OMSymbol.EDITOR1_PALETTE);
-		functionSymbolMap.put("palettetab", OMSymbol.EDITOR1_PALETTE_TAB);
-		functionSymbolMap.put("paletterow", OMSymbol.EDITOR1_PALETTE_ROW);
 
 		functionSymbolMap.put("eval", OMSymbol.EVALJACK_EVAL);
-		functionSymbolMap.put("evalcplx", OMSymbol.POLYNOMIAL1_EXPAND);
+		
+		//DEPRECATED: Redirecting to Expand
+		functionSymbolMap.put("evalcplx", OMSymbol.POLYNOMIAL1_EXPAND); 
+		
 		functionSymbolMap.put("evalEq", OMSymbol.EVALJACK_EVALEQ);
 		functionSymbolMap.put("evalpolynomial", OMSymbol.EVALJACK_EVALPOLYNOMIAL);
 		functionSymbolMap.put("evalPolynomialCplx", OMSymbol.EVALJACK_EVALPOLYNOMIALCPLX);
@@ -100,7 +99,7 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("matrixrow", OMSymbol.LINALG2_MATRIXROW);
 		functionSymbolMap.put("vector", OMSymbol.LINALG2_VECTOR);
 
-		functionSymbolMap.put("chooseFromComplement", OMSymbol.LISTJACK_CHOOSEFROMCOMPLEMENT);
+		functionSymbolMap.put("chooseFrom	Complement", OMSymbol.LISTJACK_CHOOSEFROMCOMPLEMENT);
 		functionSymbolMap.put("getFromList", OMSymbol.LISTJACK_GETFROMLIST);
 		functionSymbolMap.put("getFromOrderedList", OMSymbol.LISTJACK_GETFROMORDEREDLIST);
 		functionSymbolMap.put("getRandomFromList", OMSymbol.LISTJACK_GETRANDOMFROMSET);
@@ -135,7 +134,9 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("factorOf", OMSymbol.POLY_COEFFICIENT);
 		functionSymbolMap.put("deg", OMSymbol.POLY_DEGREE_WRT);
 
+		//DEPRECATED: Redirecting to Equal
 		functionSymbolMap.put("equalsemisem", OMSymbol.RELATION1_EQ);
+		
 		functionSymbolMap.put("equalsExpr", OMSymbol.POLYNOMIALJACK_EQUALSEXPR);
 		functionSymbolMap.put("dependsOn", OMSymbol.POLYNOMIALJACK_DEPENDSON);
 		functionSymbolMap.put("derive", OMSymbol.POLYNOMIALJACK_DERIVE);
