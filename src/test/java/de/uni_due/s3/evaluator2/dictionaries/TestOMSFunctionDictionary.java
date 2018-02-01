@@ -9,9 +9,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import de.uni_due.s3.evaluator2.dictionaries.OMSFunctionDictionary;
-import de.uni_due.s3.evaluator2.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedRuntimeException;
+import de.uni_due.s3.evaluator2.function.AbstractFunction;
 import de.uni_due.s3.evaluator2.function.Function;
 import de.uni_due.s3.evaluator2.function.arith1.Divide;
 import de.uni_due.s3.evaluator2.function.arith1.Minus;
@@ -64,7 +63,7 @@ public class TestOMSFunctionDictionary {
 	
 	@Test
 	public void testGetFunction() {
-		Function f = omsfd.getFunction(inMap);
+		AbstractFunction f = omsfd.getFunction(inMap);
 		assertTrue(f.getClass().isInstance(expected));
 	}
 

@@ -3,7 +3,7 @@ package de.uni_due.s3.evaluator2.dictionaries;
 import java.util.HashMap;
 
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedRuntimeException;
-import de.uni_due.s3.evaluator2.function.Function;
+import de.uni_due.s3.evaluator2.function.AbstractFunction;
 import de.uni_due.s3.evaluator2.function.arith1.Abs;
 import de.uni_due.s3.evaluator2.function.arith1.Divide;
 import de.uni_due.s3.evaluator2.function.arith1.GCD;
@@ -151,6 +151,8 @@ import de.uni_due.s3.evaluator2.function.transc1.Tan;
 import de.uni_due.s3.evaluator2.function.transc2.ArcTan2;
 import de.uni_due.s3.evaluator2.function.transc_jack.ToDegree;
 import de.uni_due.s3.evaluator2.function.transc_jack.ToRadian;
+import de.uni_due.s3.evaluator2.function.variable_jack.Exercise;
+import de.uni_due.s3.evaluator2.function.variable_jack.FillIn;
 import de.uni_due.s3.openmath.jaxb.OMS;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 
@@ -161,7 +163,7 @@ import de.uni_due.s3.openmath.omutils.OMCreator;
  */
 public class OMSFunctionDictionary {
 
-	private HashMap<OMS, Function> functions = new HashMap<>();
+	private HashMap<OMS, AbstractFunction> functions = new HashMap<>();
 
 	private static OMSFunctionDictionary omsfd = new OMSFunctionDictionary();
 
@@ -370,6 +372,9 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.TRANSC1_TAN, new Tan());
 
 		functions.put(OMSymbol.TRANSC2_ARCTAN2, new ArcTan2());
+		
+		functions.put(OMSymbol.VARIABLEJACK_EXERCISE, new Exercise());
+		functions.put(OMSymbol.VARIABLEJACK_FILLIN, new FillIn());
 	}
 
 	/**
@@ -381,7 +386,7 @@ public class OMSFunctionDictionary {
 	 * @throws FunctionNotImplementedRuntimeException
 	 *             if Function is not found in HashMap
 	 */
-	public Function getFunction(OMS oms) throws FunctionNotImplementedRuntimeException {
+	public AbstractFunction getFunction(OMS oms) throws FunctionNotImplementedRuntimeException {
 		if (oms == null)
 			throw new FunctionNotImplementedRuntimeException(OMCreator.createOMS("NULL", "NULL"));
 

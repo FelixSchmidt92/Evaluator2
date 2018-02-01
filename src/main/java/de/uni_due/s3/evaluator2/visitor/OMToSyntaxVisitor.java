@@ -15,7 +15,7 @@ import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidNumberOfArgum
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionNotImplementedRuntimeException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
-import de.uni_due.s3.evaluator2.function.Function;
+import de.uni_due.s3.evaluator2.function.AbstractFunction;
 import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OME;
 import de.uni_due.s3.openmath.jaxb.OMF;
@@ -193,7 +193,7 @@ public abstract class OMToSyntaxVisitor<T> {
 	 * @throws NoRepresentationAvailableException
 	 */
 	protected T visit(OMS oms) throws EvaluatorException, OpenMathException {
-		Function function = null;
+		AbstractFunction function = null;
 		try {
 			function = OMSFunctionDictionary.getInstance().getFunction(oms);
 		} catch (FunctionNotImplementedRuntimeException er) {
@@ -278,7 +278,7 @@ public abstract class OMToSyntaxVisitor<T> {
 			throw new EvaluatorException("OpenMath-Object is invalid!", e);
 		}
 
-		Function function = null;
+		AbstractFunction function = null;
 		try {
 			function = OMSFunctionDictionary.getInstance().getFunction(oms);
 		} catch (FunctionNotImplementedRuntimeException er) {
@@ -307,7 +307,7 @@ public abstract class OMToSyntaxVisitor<T> {
 	 * @throws OpenMathException 
 	 * 
 	 */
-	protected abstract T getSyntaxRepresentationForFunction(Function function, OMS oms, List<Object> omel)
+	protected abstract T getSyntaxRepresentationForFunction(AbstractFunction function, OMS oms, List<Object> omel)
 			throws EvaluatorException, OpenMathException;
 
 }

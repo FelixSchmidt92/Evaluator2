@@ -5,7 +5,7 @@ import java.util.List;
 
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
-import de.uni_due.s3.evaluator2.function.Function;
+import de.uni_due.s3.evaluator2.function.AbstractFunction;
 import de.uni_due.s3.evaluator2.visitor.OMToSyntaxVisitor;
 import de.uni_due.s3.openmath.jaxb.OMF;
 import de.uni_due.s3.openmath.jaxb.OMI;
@@ -66,7 +66,7 @@ public class OMToListVisitor extends OMToSyntaxVisitor<List<Object>> {
 	}
 
 	@Override
-	protected List<Object> getSyntaxRepresentationForFunction(Function function, OMS oms, List<Object> omel)
+	protected List<Object> getSyntaxRepresentationForFunction(AbstractFunction function, OMS oms, List<Object> omel)
 			throws EvaluatorException, OpenMathException {
 		if (omel == null) {
 			omel = new ArrayList<>();

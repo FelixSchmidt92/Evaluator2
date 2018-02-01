@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
-import de.uni_due.s3.evaluator2.function.Function;
+import de.uni_due.s3.evaluator2.function.AbstractFunction;
 import de.uni_due.s3.evaluator2.visitor.OMToSyntaxVisitor;
 import de.uni_due.s3.openmath.jaxb.OMF;
 import de.uni_due.s3.openmath.jaxb.OMI;
@@ -59,7 +59,7 @@ public class OMVariableVisitor extends OMToSyntaxVisitor<Set<OMV>> {
 	}
 
 	@Override
-	protected Set<OMV> getSyntaxRepresentationForFunction(Function function, OMS oms, List<Object> omel) throws OpenMathException {
+	protected Set<OMV> getSyntaxRepresentationForFunction(AbstractFunction function, OMS oms, List<Object> omel) throws OpenMathException {
 		Set<OMV> omvSet = new HashSet<>();
 		for (Object omObj : omel) {
 			try {

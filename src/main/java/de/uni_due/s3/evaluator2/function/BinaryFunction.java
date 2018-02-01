@@ -54,7 +54,7 @@ public abstract class BinaryFunction extends Function {
 			List<Object> childOmel = new ArrayList<Object>(child.getOmel().size() - 1);
 			OMS childOMS = (OMS) child.getOmel().get(0);
 
-			Function childFunc = null;
+			AbstractFunction childFunc = null;
 			try {
 				childFunc = OMSFunctionDictionary.getInstance().getFunction(childOMS);
 			} catch (FunctionNotImplementedRuntimeException er) {

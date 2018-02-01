@@ -5,8 +5,7 @@ import java.util.List;
 import org.junit.Test;
 
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
-import de.uni_due.s3.evaluator2.function.Function;
-import de.uni_due.s3.evaluator2.visitor.OMToSyntaxVisitor;
+import de.uni_due.s3.evaluator2.function.AbstractFunction;
 import de.uni_due.s3.openmath.jaxb.OMF;
 import de.uni_due.s3.openmath.jaxb.OMI;
 import de.uni_due.s3.openmath.jaxb.OMS;
@@ -44,7 +43,7 @@ public class TestOMToSyntaxVisitor {
 		}
 
 		@Override
-		protected String getSyntaxRepresentationForFunction(Function function, OMS oms, List<Object> omel) {
+		protected String getSyntaxRepresentationForFunction(AbstractFunction function, OMS oms, List<Object> omel) {
 			return "function";
 		}
 
@@ -88,7 +87,7 @@ public class TestOMToSyntaxVisitor {
 		}
 
 		@Override
-		protected String getSyntaxRepresentationForFunction(Function function, OMS oms, List<Object> omel) {
+		protected String getSyntaxRepresentationForFunction(AbstractFunction function, OMS oms, List<Object> omel) {
 			return "function";
 		}
 

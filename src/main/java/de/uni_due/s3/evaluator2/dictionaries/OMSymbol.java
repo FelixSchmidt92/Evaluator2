@@ -202,6 +202,9 @@ public class OMSymbol {
 	public static final OMS TRANSC1_LOG = OMCreator.createOMS("transc1", "log");
 	public static final OMS TRANSC1_SIN = OMCreator.createOMS("transc1", "sin");
 	public static final OMS TRANSC1_TAN = OMCreator.createOMS("transc1", "tan");
+	
+	public static final OMS VARIABLEJACK_FILLIN = OMCreator.createOMS("variableJACK", "fillIn");
+	public static final OMS VARIABLEJACK_EXERCISE = OMCreator.createOMS("variableJACK", "exercise");
 
 	public static final OMS TRANSC2_ARCTAN2 = OMCreator.createOMS("transc2", "arctan");
 

@@ -40,7 +40,7 @@ public interface IPartialMethods {
 
 	public Integer getPartialIntegerSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException;
 
-	public List<?> getPartialListSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException;
+	public List<Object> getPartialListSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException;
 
 	public String getPartialStringSyntax(List<Object> arguments) throws EvaluatorException, OpenMathException;
 

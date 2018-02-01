@@ -299,6 +299,8 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 			// removes the OMOBJ-tags from the variable and returns its child
 			OMOBJ varOmobj = exerciseVariableMap.get(varName);
 			try {
+//				OMA exer = OMCreator.createOMA(OMSymbol.VARIABLEJACK_EXERCISE, Arrays.asList(OMConverter.toElement(varOmobj)));
+//				return exer; // Issue 84
 				return OMConverter.toElement(varOmobj);
 			} catch (OpenMathException e) {
 				throw new ErroneousExerciseVariableRuntimeException(varName);
@@ -330,6 +332,8 @@ public class ExpressionToOpenMathVisitor extends EvaluatorParserBaseVisitor<Obje
 		if (fillInVariableMap != null && fillInVariableMap.containsKey(varNumber)) {
 			OMOBJ varOmobj = fillInVariableMap.get(varNumber);
 			try {
+//				OMA fillIn = OMCreator.createOMA(OMSymbol.VARIABLEJACK_FILLIN, Arrays.asList(OMConverter.toElement(varOmobj)));
+//				return fillIn; // Issue 84
 				return OMConverter.toElement(varOmobj);
 			} catch (OpenMathException e) {
 				throw new ErroneousFillInVariableRuntimeException(String.valueOf(varNumber));

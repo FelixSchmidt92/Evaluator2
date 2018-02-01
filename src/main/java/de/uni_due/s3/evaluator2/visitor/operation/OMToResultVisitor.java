@@ -6,7 +6,7 @@ import de.uni_due.s3.evaluator2.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.exceptions.function.FunctionInvalidArgumentTypeException;
 import de.uni_due.s3.evaluator2.exceptions.representation.NoRepresentationAvailableException;
-import de.uni_due.s3.evaluator2.function.Function;
+import de.uni_due.s3.evaluator2.function.AbstractFunction;
 import de.uni_due.s3.evaluator2.visitor.OMToSyntaxVisitor;
 import de.uni_due.s3.openmath.jaxb.OMA;
 import de.uni_due.s3.openmath.jaxb.OMF;
@@ -79,7 +79,7 @@ public class OMToResultVisitor extends OMToSyntaxVisitor<Object> {
 	 */
 
 	@Override
-	protected Object getSyntaxRepresentationForFunction(Function function, OMS oms, List<Object> omel)
+	protected Object getSyntaxRepresentationForFunction(AbstractFunction function, OMS oms, List<Object> omel)
 			throws EvaluatorException, OpenMathException {
 		for (int i = 0; i < omel.size(); i++) {
 			Object o = omel.get(i);
