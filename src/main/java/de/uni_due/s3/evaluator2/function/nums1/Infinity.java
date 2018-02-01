@@ -28,7 +28,7 @@ public class Infinity extends ConstructorFunction {
 	
 	@Override
 	public String getPartialLatexSyntax(List<Object> omel) throws EvaluatorException {
-		return "\\\\infty";
+		return "\\infty";
 	}
 	
 	@Override

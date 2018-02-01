@@ -1,6 +1,6 @@
 package de.uni_due.s3.evaluator2.exceptions.function;
 
-import de.uni_due.s3.evaluator2.function.Function;
+import de.uni_due.s3.evaluator2.function.AbstractFunction;
 
 /**
  * This exception is thrown when a function gets to much or to few arguments
@@ -10,7 +10,7 @@ import de.uni_due.s3.evaluator2.function.Function;
  */
 public class FunctionInvalidNumberOfArgumentsException extends FunctionException {
 
-	public FunctionInvalidNumberOfArgumentsException(Function function, String message) {
+	public FunctionInvalidNumberOfArgumentsException(AbstractFunction function, String message) {
 		super("Function: " + function.getClass().getSimpleName() + message);
 	}
 

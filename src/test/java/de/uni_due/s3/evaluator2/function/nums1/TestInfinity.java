@@ -47,7 +47,7 @@ public class TestInfinity extends TestFunctionAbstract {
 
 	@Test
 	public void testInfinityLatex() throws EvaluatorException, OpenMathException {
-		assertEquals("\\\\infty", func.getPartialLatexSyntax(new ArrayList<>()));
+		assertEquals("\\infty", func.getPartialLatexSyntax(new ArrayList<>()));
 	}
 
 	@Test
