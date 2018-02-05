@@ -225,9 +225,7 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.EVALJACK_EVALPOLYNOMIAL, new EvalPolynomial());
 		functions.put(OMSymbol.EVALJACK_EVALPOLYNOMIALCPLX, new EvalPolynomialCplx());
 		functions.put(OMSymbol.EVALJACK_EVALTERM2, new EvalTerm2());
-		
-		functions.put(OMSymbol.GEN_SENTENCE_TRANS, new GenerateSentenceTransformation());
-		
+				
 		functions.put(OMSymbol.INTEGER1_REMAINDER, new Remainder());
 		functions.put(OMSymbol.INTEGER1_FACTORIAL, new Factorial());
 		
@@ -243,6 +241,8 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.LOGIC1_NOT, new Not());
 		functions.put(OMSymbol.LOGIC1_TRUE, new True());
 		functions.put(OMSymbol.LOGIC1_FALSE, new False());
+		
+		functions.put(OMSymbol.TESTFEST, new CharAt());
 
 		functions.put(OMSymbol.LINALGJACK_EQUALBASIS, new EqualBasis());
 		functions.put(OMSymbol.LINALGJACK_ISLINEARLYINDEPENDENT, new IsLinearlyIndependent());
