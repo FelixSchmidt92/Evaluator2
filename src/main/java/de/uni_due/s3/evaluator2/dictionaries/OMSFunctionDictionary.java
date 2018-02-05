@@ -242,7 +242,7 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.LOGIC1_TRUE, new True());
 		functions.put(OMSymbol.LOGIC1_FALSE, new False());
 		
-		functions.put(OMSymbol.TESTFEST, new CharAt());
+		functions.put(OMSymbol.GENERATE_SENTENCE_TRANSFORMATION, new GenerateSentenceTransformation());
 
 		functions.put(OMSymbol.LINALGJACK_EQUALBASIS, new EqualBasis());
 		functions.put(OMSymbol.LINALGJACK_ISLINEARLYINDEPENDENT, new IsLinearlyIndependent());

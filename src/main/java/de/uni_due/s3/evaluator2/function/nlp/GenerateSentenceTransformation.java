@@ -22,12 +22,18 @@ public class GenerateSentenceTransformation extends Function{
 	@Override
 	protected Object getPartialOpenMathElementResult(List<Object> arguments)
 			throws EvaluatorException, OpenMathException {
-		// TODO Auto-generated method stub
+//		// TODO Auto-generated method stub
+//		
+//		String context = ((String) arguments.get(0)).toUpperCase(); 
+//		String source_tense = ((String) arguments.get(1)).toUpperCase();  
+//		String target_tense = ((String) arguments.get(2)).toUpperCase(); 
+//		String difficulty = ((String) arguments.get(3)).toUpperCase();
 		
-		String context = ((String) arguments.get(0)).toUpperCase(); 
-		String source_tense = ((String) arguments.get(1)).toUpperCase();  
-		String target_tense = ((String) arguments.get(2)).toUpperCase(); 
-		String difficulty = ((String) arguments.get(3)).toUpperCase(); 
+
+		String context = "";
+		String source_tense = "";  
+		String target_tense = ""; 
+		String difficulty = ""; 
 		
 		ArrayList<String> sentences;
 		try {
@@ -39,7 +45,9 @@ public class GenerateSentenceTransformation extends Function{
 		List<Object> list = new ArrayList<>();
 		list.add(sentences.get(0));
 		list.add(sentences.get(1));
-		return OMCreator.createOMA(OMSymbol.LIST1_LIST, list);
+//		return OMCreator.createOMA(OMSymbol.LIST1_LIST, list);
+		
+		return OMCreator.createOMSTR(sentences.get(0));
 	}
 
 	@Override
