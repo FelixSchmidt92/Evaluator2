@@ -100,6 +100,9 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("vector", OMSymbol.LINALG2_VECTOR);
 
 		functionSymbolMap.put("chooseFromComplement", OMSymbol.LISTJACK_CHOOSEFROMCOMPLEMENT);
+		
+		functionSymbolMap.put("gen_sentence_trans", OMSymbol.GEN_SENTENCE_TRANS);
+		
 		functionSymbolMap.put("getFromList", OMSymbol.LISTJACK_GETFROMLIST);
 		functionSymbolMap.put("getFromOrderedList", OMSymbol.LISTJACK_GETFROMORDEREDLIST);
 		functionSymbolMap.put("getRandomFromList", OMSymbol.LISTJACK_GETRANDOMFROMSET);
@@ -234,6 +237,7 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("tan", OMSymbol.TRANSC1_TAN);
 
 		functionSymbolMap.put("atan2", OMSymbol.TRANSC2_ARCTAN2);
+		
 	}
 
 	/**

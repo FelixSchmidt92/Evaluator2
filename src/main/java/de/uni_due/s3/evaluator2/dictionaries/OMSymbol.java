@@ -51,6 +51,8 @@ public class OMSymbol {
 	public static final OMS ECC_TUPLE = OMCreator.createOMS("ecc", "Tuple"); // T is big, see OpenMath 2.0 ecc.Tuple
 
 	public static final OMS FNS1_LAMBDA = OMCreator.createOMS("fns1", "lambda");
+	
+	public static final OMS GEN_SENTENCE_TRANS = OMCreator.createOMS("nlp", "gen_sentence_trans");
 
 	public static final OMS INTEGER1_REMAINDER = OMCreator.createOMS("integer1", "remainder");
 	public static final OMS INTEGER1_FACTORIAL = OMCreator.createOMS("integer1", "factorial");

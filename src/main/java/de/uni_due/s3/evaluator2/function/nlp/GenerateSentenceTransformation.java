@@ -1,9 +1,16 @@
 package de.uni_due.s3.evaluator2.function.nlp;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import de.uni_due.s3.evaluator2.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.function.Function;
+import de.uni_due.s3.evaluator2.nlp.Context;
+import de.uni_due.s3.evaluator2.nlp.Difficulty;
+import de.uni_due.s3.evaluator2.nlp.SimpleNLGSentenceFactory;
+import de.uni_due.s3.evaluator2.nlp.Tense;
+import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
 public class GenerateSentenceTransformation extends Function{
@@ -12,19 +19,29 @@ public class GenerateSentenceTransformation extends Function{
 	protected Object getPartialOpenMathElementResult(List<Object> arguments)
 			throws EvaluatorException, OpenMathException {
 		// TODO Auto-generated method stub
-		return null;
+		
+		String context = ((String) arguments.get(0)).toUpperCase(); 
+		String source_tense = ((String) arguments.get(1)).toUpperCase();  
+		String target_tense = ((String) arguments.get(2)).toUpperCase(); 
+		String difficulty = ((String) arguments.get(3)).toUpperCase(); 
+		
+		ArrayList<String> sentences = (new SimpleNLGSentenceFactory()).createSentenceTransformation(context, source_tense, target_tense, difficulty);
+		List<Object> list = new ArrayList<>();
+		list.add(sentences.get(0));
+		list.add(sentences.get(1));
+		return OMCreator.createOMA(OMSymbol.LIST1_LIST, list);
 	}
 
 	@Override
 	protected int minArgs() {
 		// TODO Auto-generated method stub
-		return 0;
+		return 4;
 	}
 
 	@Override
 	protected int maxArgs() {
 		// TODO Auto-generated method stub
-		return 0;
+		return 4;
 	}
 
 }

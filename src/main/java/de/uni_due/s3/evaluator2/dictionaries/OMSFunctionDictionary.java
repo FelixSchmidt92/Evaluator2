@@ -61,6 +61,7 @@ import de.uni_due.s3.evaluator2.function.logic1.Or;
 import de.uni_due.s3.evaluator2.function.logic1.True;
 import de.uni_due.s3.evaluator2.function.logic_jack.IfThenElse;
 import de.uni_due.s3.evaluator2.function.mc_jack.MCIndex;
+import de.uni_due.s3.evaluator2.function.nlp.GenerateSentenceTransformation;
 import de.uni_due.s3.evaluator2.function.nums1.E;
 import de.uni_due.s3.evaluator2.function.nums1.I;
 import de.uni_due.s3.evaluator2.function.nums1.Infinity;
@@ -225,6 +226,8 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.EVALJACK_EVALPOLYNOMIALCPLX, new EvalPolynomialCplx());
 		functions.put(OMSymbol.EVALJACK_EVALTERM2, new EvalTerm2());
 		
+		functions.put(OMSymbol.GEN_SENTENCE_TRANS, new GenerateSentenceTransformation());
+		
 		functions.put(OMSymbol.INTEGER1_REMAINDER, new Remainder());
 		functions.put(OMSymbol.INTEGER1_FACTORIAL, new Factorial());
 		
@@ -370,6 +373,8 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.TRANSC1_TAN, new Tan());
 
 		functions.put(OMSymbol.TRANSC2_ARCTAN2, new ArcTan2());
+		
+		
 	}
 
 	/**
