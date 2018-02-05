@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public interface ISentenceFactory {
 	
-	public ArrayList<String> createSentenceTransformation(Context context, Tense source_tense, Tense target_tense,
-														  Difficulty difficulty);
+	public ArrayList<String> createSentenceTransformation(String context, String source_tense, String target_tense,
+			  String difficulty);
 	
 
 }
