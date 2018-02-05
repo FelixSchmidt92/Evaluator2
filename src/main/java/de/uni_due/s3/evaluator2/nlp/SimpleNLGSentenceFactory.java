@@ -2,18 +2,20 @@ package de.uni_due.s3.evaluator2.nlp;
 
 import java.util.ArrayList;
 
+import de.uni_due.s3.evaluator2.nlp.exceptions.InvalidContextException;
+import de.uni_due.s3.evaluator2.nlp.exceptions.InvalidDifficultyExeption;
+import de.uni_due.s3.evaluator2.nlp.exceptions.InvalidTenseException;
+
 public class SimpleNLGSentenceFactory implements ISentenceFactory {
 	
 	
 
 	@Override
 	public ArrayList<String> createSentenceTransformation(String context, String source_tense, String target_tense,
-			  String difficulty) {
+			  String difficulty)  throws InvalidContextException, InvalidDifficultyExeption, InvalidTenseException{
 		ArrayList<String> result = new ArrayList<String>();
 		result.add("This is the source sentence");
-		result.add("This is the target sentence");
-		// TODO Auto-generated method stub
-		
+		result.add("This is the target sentence");		
 		return result;
 	}
 
