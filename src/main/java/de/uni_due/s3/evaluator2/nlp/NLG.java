@@ -6,5 +6,4 @@ public class NLG {
 	
 	Lexicon lexicon = Lexicon.getDefaultLexicon();
 
-
 }
