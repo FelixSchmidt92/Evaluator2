@@ -49,6 +49,11 @@
 			<artifactId>commons-text</artifactId>
 			<version>1.2</version>
 		</dependency>
+		<dependency>
+			<groupId>SimpleNLG</groupId>
+			<artifactId>SimpleNLG</artifactId>
+			<version>4.4.8</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
