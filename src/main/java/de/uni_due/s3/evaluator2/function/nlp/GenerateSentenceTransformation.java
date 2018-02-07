@@ -22,8 +22,7 @@ public class GenerateSentenceTransformation extends Function{
 	@Override
 	protected Object getPartialOpenMathElementResult(List<Object> arguments)
 			throws EvaluatorException, OpenMathException {
-//		// TODO Auto-generated method stub
-//		
+
 //		String context = ((String) arguments.get(0)).toUpperCase(); 
 //		String source_tense = ((String) arguments.get(1)).toUpperCase();  
 //		String target_tense = ((String) arguments.get(2)).toUpperCase(); 
@@ -39,15 +38,16 @@ public class GenerateSentenceTransformation extends Function{
 		try {
 			sentences = (new SimpleNLGSentenceFactory()).createSentenceTransformation(context, source_tense, target_tense, difficulty);
 		} catch (InvalidContextException | InvalidDifficultyExeption | InvalidTenseException e) {
-			// TODO Auto-generated catch block
 			throw new FunctionInvalidArgumentException(this, "");
 		};
 		List<Object> list = new ArrayList<>();
-		list.add(sentences.get(0));
-		list.add(sentences.get(1));
-//		return OMCreator.createOMA(OMSymbol.LIST1_LIST, list);
+		Object a = OMCreator.createOMSTR(sentences.get(0));
+		Object b = OMCreator.createOMSTR(sentences.get(1));
+		list.add(a);
+		list.add(b);
+		return OMCreator.createOMA(OMSymbol.LIST1_LIST, list);
 		
-		return OMCreator.createOMSTR(sentences.get(0));
+
 	}
 
 	@Override
