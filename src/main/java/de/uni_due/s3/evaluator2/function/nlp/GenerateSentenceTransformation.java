@@ -24,28 +24,31 @@ public class GenerateSentenceTransformation extends Function{
 			throws EvaluatorException, OpenMathException {
 		// TODO Auto-generated method stub
 		
-		String context = ((String) arguments.get(0)).toUpperCase(); 
+		/*String context = ((String) arguments.get(0)).toUpperCase(); 
 		String source_tense = ((String) arguments.get(1)).toUpperCase();  
 		String target_tense = ((String) arguments.get(2)).toUpperCase(); 
-		String difficulty = ((String) arguments.get(3)).toUpperCase(); 
+		String difficulty = ((String) arguments.get(3)).toUpperCase(); */
 		
-		ArrayList<String> sentences;
-		try {
-			sentences = (new SimpleNLGSentenceFactory()).createSentenceTransformation(context, source_tense, target_tense, difficulty);
+		
+		ArrayList<String> sentences = new ArrayList<String>();
+		sentences.add("this is a test1");
+		sentences.add("this is a test2");
+		/*try {
+			//sentences = (new SimpleNLGSentenceFactory()).createSentenceTransformation(context, source_tense, target_tense, difficulty);		
 		} catch (InvalidContextException | InvalidDifficultyExeption | InvalidTenseException e) {
 			// TODO Auto-generated catch block
 			throw new FunctionInvalidArgumentException(this, "");
-		};
+		};*/
 		List<Object> list = new ArrayList<>();
 		list.add(sentences.get(0));
 		list.add(sentences.get(1));
-		return OMCreator.createOMA(OMSymbol.LIST1_LIST, list);
+		return OMCreator.createOMI(8);
 	}
 
 	@Override
 	protected int minArgs() {
 		// TODO Auto-generated method stub
-		return 4;
+		return 0;
 	}
 
 	@Override

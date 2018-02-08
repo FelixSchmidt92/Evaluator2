@@ -101,7 +101,7 @@ public class OMSEvaluatorSyntaxDictionary {
 
 		functionSymbolMap.put("chooseFromComplement", OMSymbol.LISTJACK_CHOOSEFROMCOMPLEMENT);
 		
-		functionSymbolMap.put("gen_sentence_trans", OMSymbol.GEN_SENTENCE_TRANS);
+		functionSymbolMap.put("sentence_trans", OMSymbol.GEN_SENTENCE_TRANS);
 		
 		functionSymbolMap.put("getFromList", OMSymbol.LISTJACK_GETFROMLIST);
 		functionSymbolMap.put("getFromOrderedList", OMSymbol.LISTJACK_GETFROMORDEREDLIST);
