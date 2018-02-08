@@ -1,4 +1,4 @@
-package de.uni_due.s3.evaluator2.function.nlp;
+package de.uni_due.s3.evaluator2.function.integer1;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,41 +22,30 @@ public class GenerateSentenceTransformation extends Function{
 	@Override
 	protected Object getPartialOpenMathElementResult(List<Object> arguments)
 			throws EvaluatorException, OpenMathException {
-
-//		String context = ((String) arguments.get(0)).toUpperCase(); 
-//		String source_tense = ((String) arguments.get(1)).toUpperCase();  
-//		String target_tense = ((String) arguments.get(2)).toUpperCase(); 
-//		String difficulty = ((String) arguments.get(3)).toUpperCase();
+		// TODO Auto-generated method stub
 		
-
-		String context = "";
-		String source_tense = "";  
-		String target_tense = ""; 
-		String difficulty = ""; 
+		String context = ((String) arguments.get(0)).toUpperCase(); 
+		String source_tense = ((String) arguments.get(1)).toUpperCase();  
+		String target_tense = ((String) arguments.get(2)).toUpperCase(); 
+		String difficulty = ((String) arguments.get(3)).toUpperCase(); 
 		
-		
-		ArrayList<String> sentences = new ArrayList<String>();
-		sentences.add("this is a test1");
-		sentences.add("this is a test2");
-		/*try {
-			//sentences = (new SimpleNLGSentenceFactory()).createSentenceTransformation(context, source_tense, target_tense, difficulty);		
+		ArrayList<String> sentences;
+		try {
+			sentences = (new SimpleNLGSentenceFactory()).createSentenceTransformation(context, source_tense, target_tense, difficulty);
 		} catch (InvalidContextException | InvalidDifficultyExeption | InvalidTenseException e) {
+			// TODO Auto-generated catch block
 			throw new FunctionInvalidArgumentException(this, "");
-		};*/
+		};
 		List<Object> list = new ArrayList<>();
-
-		Object a = OMCreator.createOMSTR(sentences.get(0));
-		Object b = OMCreator.createOMSTR(sentences.get(1));
-		list.add(a);
-		list.add(b);
+		list.add(sentences.get(0));
+		list.add(sentences.get(1));
 		return OMCreator.createOMA(OMSymbol.LIST1_LIST, list);
-	
 	}
 
 	@Override
 	protected int minArgs() {
 		// TODO Auto-generated method stub
-		return 0;
+		return 4;
 	}
 
 	@Override
