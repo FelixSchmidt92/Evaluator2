@@ -23,26 +23,26 @@ public class GenerateSentenceTransformation extends Function{
 	protected Object getPartialOpenMathElementResult(List<Object> arguments)
 			throws EvaluatorException, OpenMathException {
 
-//		String context = ((String) arguments.get(0)).toUpperCase(); 
-//		String source_tense = ((String) arguments.get(1)).toUpperCase();  
-//		String target_tense = ((String) arguments.get(2)).toUpperCase(); 
-//		String difficulty = ((String) arguments.get(3)).toUpperCase();
+/*		String context = ((String) arguments.get(0)).toUpperCase(); 
+		String source_tense = ((String) arguments.get(1)).toUpperCase();  
+		String target_tense = ((String) arguments.get(2)).toUpperCase(); 
+		String difficulty = ((String) arguments.get(3)).toUpperCase();*/
 		
 
-		String context = "";
+		String context = "TESTCONTEXT";
 		String source_tense = "";  
 		String target_tense = ""; 
-		String difficulty = ""; 
+		String difficulty = "";
 		
 		
 		ArrayList<String> sentences = new ArrayList<String>();
-		sentences.add("this is a test1");
-		sentences.add("this is a test2");
-		/*try {
-			//sentences = (new SimpleNLGSentenceFactory()).createSentenceTransformation(context, source_tense, target_tense, difficulty);		
+		/*sentences.add("this is a test1");
+		sentences.add("this is a test2");*/
+		try {
+			sentences = (new SimpleNLGSentenceFactory()).createSentenceTransformation(context, source_tense, target_tense, difficulty);		
 		} catch (InvalidContextException | InvalidDifficultyExeption | InvalidTenseException e) {
 			throw new FunctionInvalidArgumentException(this, "");
-		};*/
+		};
 		List<Object> list = new ArrayList<>();
 
 		Object a = OMCreator.createOMSTR(sentences.get(0));
