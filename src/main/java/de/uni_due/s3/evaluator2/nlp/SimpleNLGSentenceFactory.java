@@ -1,5 +1,8 @@
 package de.uni_due.s3.evaluator2.nlp;
 
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -21,6 +24,7 @@ import simplenlg.realiser.english.Realiser;
 
 public class SimpleNLGSentenceFactory implements ISentenceFactory {
 
+	
 	@Override
 	public ArrayList<String> createSentenceTransformation(String context, String source_tense, String target_tense,
 			String difficulty) throws InvalidContextException, InvalidDifficultyExeption, InvalidTenseException {
@@ -31,28 +35,35 @@ public class SimpleNLGSentenceFactory implements ISentenceFactory {
 		System.out.println("createSentenceTransformation ... ");
 		switch (context) {
 			case "TESTCONTEXT":
-				//String filename = "./src/main/java/de/uni_due/s3/evaluator2/nlp/lexicon/default-lexicon.xml";
-				String filename = "C:/Users/Wilfried/Documents/Uni-Duisburg-Essen/Bachelor/Wintersemester2017/Projekt/Jack2-Development-37ecbcb79389ba2e8ba6486e8d4d76f2f3b2b5c4/de.uni_due.s3.jack2.server.core/resources/default-lexicon.xml";
-				LexiconBuilder lex = new LexiconBuilder();
 				try {
-					lex.buildLexicon(filename);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}	
+				de.uni_due.s3.evaluator2.nlp.lexicon.Lexicon lex = LexiconBuilder.buildDefaultLexicon();
+
 				subject = lex.getNouns().get(rand.nextInt(lex.getNouns().size())).getBase();
 				Word _verb = lex.getVerbs().get(rand.nextInt(lex.getVerbs().size()));
 				while(!_verb.getProperties().contains(Property.transitive)){
 					_verb = lex.getVerbs().get(rand.nextInt(lex.getVerbs().size()));
 				}
+				for(int i = 0; i<lex.getNouns().size()-1;i++) {
+					System.out.println(lex.getNouns().get(i).getBase());
+		
+				}
 				verb = _verb.getBase();
+				System.out.println(verb);
 				object = lex.getNouns().get(rand.nextInt(lex.getNouns().size())).getBase();
+				System.out.println(object);
+				System.out.println(subject);
+				
+				}
+				
+				catch (Exception e) {
+					// TODO: handle exception
+				}
 				break;
+				
 			default:
 				break;
 		}
-		 
-		
+				 
 		Lexicon lexicon = Lexicon.getDefaultLexicon();
 		NLGFactory nlgFactory = new NLGFactory(lexicon);
 		Realiser realiser = new Realiser(lexicon);
@@ -63,17 +74,20 @@ public class SimpleNLGSentenceFactory implements ISentenceFactory {
 		sentence.setVerb(verb);
 		sentence.setObject(object);
 		
-		//sentence.setFeature(Feature.TENSE, Tense.PRESENT);
+		sentence.setFeature(Feature.TENSE, simplenlg.features.Tense.PRESENT);
 		String source_sentence = realiser.realiseSentence(sentence);
 		
 		System.out.println("createSentenceTransformation done ... ");
 		
-		//String target_sentence = 
+		sentence.setFeature(Feature.TENSE, simplenlg.features.Tense.PAST);
+		String target_sentence = realiser.realiseSentence(sentence);
+		
+		System.out.println("source: " + source_sentence + " target: " + target_sentence);
 
 		ArrayList<String> result = new ArrayList<String>();
 		result.add(source_sentence);
 		//result.add(subject+" "+ verb+" "+ object);
-		result.add("This is the target sentence");
+		result.add(target_sentence);
 		return result;
 	}
 

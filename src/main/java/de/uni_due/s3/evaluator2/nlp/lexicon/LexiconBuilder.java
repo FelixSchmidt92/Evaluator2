@@ -21,15 +21,18 @@ public class LexiconBuilder {
 	private ArrayList<Word> adverbs = new ArrayList<Word>();
 	private ArrayList<Word> prepositions = new ArrayList<Word>();
 	private ArrayList<Word> conjunctions = new ArrayList<Word>();
+	
+	private static Lexicon defaultLexicon;
+	private static String DEFAULT_LEXICON_FILE_PATH = System.getProperty("jboss.server.data.dir") + "/default-lexicon.xml";
 
 	public void buildLexicon(String filename) throws Exception {
+	
 
 		File inputFile = new File(filename);
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 		Document doc = dBuilder.parse(inputFile);
 		doc.getDocumentElement().normalize();
-		//System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
 		NodeList nList = doc.getElementsByTagName("word");
 		//System.out.println("----------------------------");
 
@@ -191,6 +194,155 @@ public class LexiconBuilder {
 
 			}
 		}
+
+	}
+	
+public static Lexicon buildDefaultLexicon() throws Exception {
+		
+	
+		if(defaultLexicon!=null) {
+			
+			Lexicon lexiconToBuild = new Lexicon();
+		
+			File inputFile = new File(DEFAULT_LEXICON_FILE_PATH);
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+			Document doc = dBuilder.parse(inputFile);
+			doc.getDocumentElement().normalize();
+			NodeList nList = doc.getElementsByTagName("word");
+	
+			for (int temp = 0; temp < nList.getLength(); temp++) {
+				Node nNode = nList.item(temp);
+	
+				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+					Element eElement = (Element) nNode;
+					Word word = new Word();
+					
+					word.setBase(eElement.getElementsByTagName("base").item(0).getTextContent());
+					word.setCategory(eElement.getElementsByTagName("category").item(0).getTextContent());
+					if (eElement.getElementsByTagName("id").item(0) != null) {
+						word.setId(eElement.getElementsByTagName("id").item(0).getTextContent());
+					}
+	
+					switch (word.getCategory()) {
+					case "noun":
+						if (eElement.getElementsByTagName("plural").item(0) != null) {
+							String plura = (String) eElement.getElementsByTagName("plural").item(0).getTextContent();
+							word.setPlural(eElement.getElementsByTagName("plural").item(0).getTextContent());
+						}
+	
+						if (eElement.getElementsByTagName("nonCount").item(0) != null) {
+							word.getProperties().add(Property.nonCount);
+						}
+	
+						lexiconToBuild.getNouns().add(word);
+						break;
+	
+					case "pronoun":
+						lexiconToBuild.getPronouns().add(word);
+						break;
+	
+					case "determiner":
+						lexiconToBuild.getDeterminers().add(word);
+						break;
+	
+					case "verb":
+						if (eElement.getElementsByTagName("transitive").item(0) != null) {
+							word.getProperties().add(Property.transitive);
+						}
+	
+						if (eElement.getElementsByTagName("intransitive").item(0) != null) {
+							word.getProperties().add(Property.intransitive);
+						}
+	
+						if (eElement.getElementsByTagName("ditransitive").item(0) != null) {
+							word.getProperties().add(Property.ditransitive);
+						}
+	
+						if (eElement.getElementsByTagName("present3s").item(0) != null) {
+							word.setPresent3s(eElement.getElementsByTagName("present3s").item(0).getTextContent());
+						}
+	
+						if (eElement.getElementsByTagName("past").item(0) != null) {
+							word.setPast(eElement.getElementsByTagName("past").item(0).getTextContent());
+						}
+	
+						if (eElement.getElementsByTagName("pastParticiple").item(0) != null) {
+							word.setPastParticiple(
+									eElement.getElementsByTagName("pastParticiple").item(0).getTextContent());
+						}
+	
+						if (eElement.getElementsByTagName("presentParticiple").item(0) != null) {
+							word.setPresentParticiple(
+									eElement.getElementsByTagName("presentParticiple").item(0).getTextContent());
+						}
+						lexiconToBuild.getVerbs().add(word);
+						break;
+	
+					case "adjective":
+						if (eElement.getElementsByTagName("classifying").item(0) != null) {
+							word.getProperties().add(Property.classifying);
+						}
+	
+						if (eElement.getElementsByTagName("predicative").item(0) != null) {
+							word.getProperties().add(Property.predicative);
+						}
+	
+						if (eElement.getElementsByTagName("qualitative").item(0) != null) {
+							word.getProperties().add(Property.qualitative);
+						}
+	
+						if (eElement.getElementsByTagName("comparative").item(0) != null) {
+							word.setComparative(eElement.getElementsByTagName("comparative").item(0).getTextContent());
+						}
+	
+						if (eElement.getElementsByTagName("superlative").item(0) != null) {
+							word.setSuperlative(eElement.getElementsByTagName("superlative").item(0).getTextContent());
+						}
+	
+						lexiconToBuild.getAdjectives().add(word);
+						break;
+	
+					case "adverb": 
+						if (eElement.getElementsByTagName("intensifier").item(0) != null) {
+							word.getProperties().add(Property.intensifier);
+						}
+	
+						if (eElement.getElementsByTagName("verb_modifier").item(0) != null) {
+							word.getProperties().add(Property.verb_modifier);
+						}
+	
+						if (eElement.getElementsByTagName("sentence_modifier").item(0) != null) {
+							word.getProperties().add(Property.sentence_modifier);
+						}
+	
+						lexiconToBuild.getAdverbs().add(word);
+						break;
+	
+					case "preposition":
+						lexiconToBuild.getPrepositions().add(word);
+						break;
+	
+					case "modal":
+						lexiconToBuild.getModals().add(word);
+						break;
+	
+					case "conjunction":
+						lexiconToBuild.getConjunctions().add(word);
+						break;
+	
+					default:
+
+						break;
+					}
+	
+				}
+			}
+			defaultLexicon = lexiconToBuild;
+			return defaultLexicon;
+		}
+		
+		else return defaultLexicon;
 
 	}
 
