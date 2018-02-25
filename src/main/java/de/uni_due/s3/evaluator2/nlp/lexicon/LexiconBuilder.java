@@ -200,7 +200,7 @@ public class LexiconBuilder {
 public static Lexicon buildDefaultLexicon() throws Exception {
 		
 	
-		if(defaultLexicon!=null) {
+		if(defaultLexicon==null) {
 			
 			Lexicon lexiconToBuild = new Lexicon();
 		
