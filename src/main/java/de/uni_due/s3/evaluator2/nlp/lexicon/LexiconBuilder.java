@@ -202,6 +202,7 @@ public static Lexicon buildDefaultLexicon() throws Exception {
 	
 		if(defaultLexicon==null) {
 			
+			System.out.println("Lexicon wird geladen..");
 			Lexicon lexiconToBuild = new Lexicon();
 		
 			File inputFile = new File(DEFAULT_LEXICON_FILE_PATH);

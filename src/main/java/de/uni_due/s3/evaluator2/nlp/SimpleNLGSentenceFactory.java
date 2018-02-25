@@ -32,7 +32,7 @@ public class SimpleNLGSentenceFactory implements ISentenceFactory {
 		
 		Random rand = new Random();
 		String subject="", object="", verb="";
-		System.out.println("createSentenceTransformation ... ");
+//		System.out.println("createSentenceTransformation ... ");
 		switch (context) {
 			case "TESTCONTEXT":
 				try {
@@ -43,16 +43,8 @@ public class SimpleNLGSentenceFactory implements ISentenceFactory {
 				while(!_verb.getProperties().contains(Property.transitive)){
 					_verb = lex.getVerbs().get(rand.nextInt(lex.getVerbs().size()));
 				}
-				for(int i = 0; i<lex.getNouns().size()-1;i++) {
-					System.out.println(lex.getNouns().get(i).getBase());
-		
-				}
 				verb = _verb.getBase();
-				System.out.println(verb);
-				object = lex.getNouns().get(rand.nextInt(lex.getNouns().size())).getBase();
-				System.out.println(object);
-				System.out.println(subject);
-				
+				object = lex.getNouns().get(rand.nextInt(lex.getNouns().size())).getBase();	
 				}
 				
 				catch (Exception e) {
@@ -77,17 +69,16 @@ public class SimpleNLGSentenceFactory implements ISentenceFactory {
 		sentence.setFeature(Feature.TENSE, simplenlg.features.Tense.PRESENT);
 		String source_sentence = realiser.realiseSentence(sentence);
 		
-		System.out.println("createSentenceTransformation done ... ");
+//		System.out.println("createSentenceTransformation done ... ");
 		
 		sentence.setFeature(Feature.TENSE, simplenlg.features.Tense.PAST);
 		String target_sentence = realiser.realiseSentence(sentence);
 		
-		System.out.println("source: " + source_sentence + " target: " + target_sentence);
+//		System.out.println("source: " + source_sentence + " target: " + target_sentence);
 
 		ArrayList<String> result = new ArrayList<String>();
 		result.add(source_sentence);
-		//result.add(subject+" "+ verb+" "+ object);
-		result.add(target_sentence);
+		result.add(target_sentence);	
 		return result;
 	}
 
