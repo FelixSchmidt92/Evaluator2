@@ -16,7 +16,6 @@ import simplenlg.lexicon.Lexicon;
 import simplenlg.phrasespec.NPPhraseSpec;
 import simplenlg.phrasespec.SPhraseSpec;
 import simplenlg.phrasespec.VPPhraseSpec;
-//import simplenlg.lexicon.Lexicon;
 import simplenlg.realiser.english.Realiser;
 
 public class SimpleNLGSentenceFactory implements ISentenceFactory {
