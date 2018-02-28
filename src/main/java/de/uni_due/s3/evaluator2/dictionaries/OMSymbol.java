@@ -62,6 +62,7 @@ public class OMSymbol {
 	public static final OMS INTERVAL1_INTEGER_INTERVAL = OMCreator.createOMS("interval1", "integer_interval");
 	
 	public static final OMS GENERATE_SENTENCE_TRANSFORMATION =  OMCreator.createOMS("nlp", "genTransform");
+	public static final OMS GENERATE_SENTENCE_WITH_TENSE =  OMCreator.createOMS("nlp", "genWithTen");
 
 	public static final OMS LINALGJACK_EQUALBASIS = OMCreator.createOMS("linalgJACK", "equalBasis");
 	public static final OMS LINALGJACK_ISLINEARLYINDEPENDENT = OMCreator.createOMS("linalgJACK",

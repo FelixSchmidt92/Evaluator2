@@ -62,6 +62,7 @@ import de.uni_due.s3.evaluator2.function.logic1.True;
 import de.uni_due.s3.evaluator2.function.logic_jack.IfThenElse;
 import de.uni_due.s3.evaluator2.function.mc_jack.MCIndex;
 import de.uni_due.s3.evaluator2.function.nlp.GenerateSentenceTransformation;
+import de.uni_due.s3.evaluator2.function.nlp.GenerateSentenceWithTense;
 import de.uni_due.s3.evaluator2.function.nums1.E;
 import de.uni_due.s3.evaluator2.function.nums1.I;
 import de.uni_due.s3.evaluator2.function.nums1.Infinity;
@@ -243,6 +244,7 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.LOGIC1_FALSE, new False());
 		
 		functions.put(OMSymbol.GENERATE_SENTENCE_TRANSFORMATION, new GenerateSentenceTransformation());
+		functions.put(OMSymbol.GENERATE_SENTENCE_WITH_TENSE, new GenerateSentenceWithTense());
 
 		functions.put(OMSymbol.LINALGJACK_EQUALBASIS, new EqualBasis());
 		functions.put(OMSymbol.LINALGJACK_ISLINEARLYINDEPENDENT, new IsLinearlyIndependent());

@@ -185,6 +185,7 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("querySparql", OMSymbol.SPARQLJACK_QUERYSPARQL);
 
 		functionSymbolMap.put("genTransform", OMSymbol.GENERATE_SENTENCE_TRANSFORMATION);
+		functionSymbolMap.put("genWithTen", OMSymbol.GENERATE_SENTENCE_WITH_TENSE);
 		
 		functionSymbolMap.put("charAt", OMSymbol.STRINGJACK_CHARAT);
 		functionSymbolMap.put("compareTo", OMSymbol.STRINGJACK_COMPARETO);
