@@ -108,7 +108,7 @@ public class SimpleNLGSentenceFactory implements ISentenceFactory {
 	 * @param context
 	 *            of the sentence to generate.
 	 */
-	private SPhraseSpec generateRandomSentence(String tense, String context, Lexicon lexicon, NLGFactory nlgFactory) {
+	private SPhraseSpec generateRandomSentence(String context, Lexicon lexicon, NLGFactory nlgFactory) {
 		// TODO write a method to fetch the words of the sentence according to
 		// the context/difficulty
 		Random rand = new Random();
@@ -155,7 +155,7 @@ public class SimpleNLGSentenceFactory implements ISentenceFactory {
 		NLGFactory nlgFactory = new NLGFactory(lexicon);
 		Realiser realiser = new Realiser(lexicon);
 
-		SPhraseSpec sentence = generateRandomSentence(source_tense, context, lexicon, nlgFactory);
+		SPhraseSpec sentence = generateRandomSentence(context, lexicon, nlgFactory);
 
 		setCompleteTenseForSentence(sentence, sourceTense);
 		String source_sentence = realiser.realiseSentence(sentence);
@@ -178,16 +178,17 @@ public class SimpleNLGSentenceFactory implements ISentenceFactory {
 		NLGFactory nlgFactory = new NLGFactory(lexicon);
 		Realiser realiser = new Realiser(lexicon);
 
-		SPhraseSpec sentence = generateRandomSentence(tense, context, lexicon, nlgFactory);
+		SPhraseSpec sentence = generateRandomSentence(context, lexicon, nlgFactory);
+		setCompleteTenseForSentence(sentence, mapTense(tense));
+		String rand_sentence = realiser.realiseSentence(sentence);
 
-		String rand_sentence = realiser.realiseSentence(sentence);// generate random sentence with a given tense
 		System.out.println(rand_sentence);
 		System.out.println(tense);
 		ArrayList<String> result = new ArrayList<String>();
-		result.add("rand_sentence: "+rand_sentence);
-		result.add("tense:"+tense);
+		result.add(rand_sentence);
+		result.add(tense);
 
-		return null;
+		return result;
 	}
 
 }
