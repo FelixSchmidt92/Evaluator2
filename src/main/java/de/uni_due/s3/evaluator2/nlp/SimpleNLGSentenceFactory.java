@@ -4,6 +4,7 @@ import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import de.uni_due.s3.evaluator2.nlp.exceptions.InvalidContextException;
@@ -153,6 +154,22 @@ public class SimpleNLGSentenceFactory implements ISentenceFactory {
 		result.add(source_sentence);
 		result.add(target_sentence);	
 		return result;
+	}
+
+	@Override
+	public ArrayList<String> createSentenceWithTense(List<Object> tenses)
+			throws InvalidContextException, InvalidDifficultyExeption, InvalidTenseException {
+		
+		Random rand = new Random();
+		String rand_tense = (String)tenses.get(rand.nextInt(tenses.size()));
+		String rand_sentence = "";// generate random sentence with a given tense
+		
+		
+		ArrayList<String> result = new ArrayList<String>();
+		result.add(rand_sentence);
+		result.add(rand_tense);
+		
+		return null;
 	}
 
 }
