@@ -64,6 +64,15 @@ public class SimpleNLGSentenceFactory implements ISentenceFactory {
 		case "future perfect":
 			tenseCombination = new TenseCombination(simplenlg.features.Tense.FUTURE, Feature.PERFECT);
 			break;
+		case "present perfect progressive":
+			tenseCombination = new TenseCombination(simplenlg.features.Tense.PRESENT, Feature.PERFECT + Feature.PROGRESSIVE);
+			break;
+		case "past perfect progressive":
+			tenseCombination = new TenseCombination(simplenlg.features.Tense.PAST, Feature.PERFECT + Feature.PROGRESSIVE);
+			break;
+		case "future perfect progressive":
+			tenseCombination = new TenseCombination(simplenlg.features.Tense.FUTURE, Feature.PERFECT + Feature.PROGRESSIVE);
+			break;
 		default:
 				throw new InvalidTenseException( );
 		}
@@ -82,7 +91,7 @@ public class SimpleNLGSentenceFactory implements ISentenceFactory {
 	private void setCompleteTenseForSentence(SPhraseSpec sentence, TenseCombination sentenceTense) {
 		sentence.setFeature(Feature.TENSE, sentenceTense.getTense());
 		sentence.setFeature(Feature.PROGRESSIVE, sentenceTense.isProgressive());
-		sentence.setFeature(Feature.PROGRESSIVE, sentenceTense.isPerfect());
+		sentence.setFeature(Feature.PERFECT, sentenceTense.isPerfect());
 	}
 		
 	

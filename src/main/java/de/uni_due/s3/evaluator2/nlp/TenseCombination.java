@@ -33,6 +33,10 @@ public class TenseCombination {
 		
 		switch(form) {
 		
+		case Feature.PERFECT + Feature.PROGRESSIVE:
+			isPerfect = true;
+			isProgressive = true;
+			break;
 		case Feature.PROGRESSIVE:
 			isProgressive = true;
 			break;	
