@@ -12,7 +12,7 @@ public interface ISentenceFactory {
 	public ArrayList<String> createSentenceTransformation(String context, String source_tense, String target_tense,
 			  String difficulty) throws InvalidContextException, InvalidDifficultyExeption, InvalidTenseException;
 	
-	public ArrayList<String> createSentenceWithTense(List<Object> tenses) throws InvalidContextException, InvalidDifficultyExeption, InvalidTenseException;
+	public ArrayList<String> createSentenceWithTense(String tense, String context) throws InvalidContextException, InvalidDifficultyExeption, InvalidTenseException;
 	
 
 }

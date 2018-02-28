@@ -25,22 +25,22 @@ import simplenlg.realiser.english.Realiser;
 
 public class SimpleNLGSentenceFactory implements ISentenceFactory {
 
-	
 	/**
 	 * method to map the XML Tense Parameter to the corresponding SimpleNLG Enum
 	 * 
-	 * @param xmlTense the xmlTense Parameter to be mapped
+	 * @param xmlTense
+	 *            the xmlTense Parameter to be mapped
 	 * @return the Combination of Form and Tense in SimpleNLG Format
 	 */
-	private static TenseCombination mapTense(String xmlTense) throws InvalidTenseException{
-		
+	private static TenseCombination mapTense(String xmlTense) throws InvalidTenseException {
+
 		TenseCombination tenseCombination;
-		
-		switch(xmlTense) {
-		
+
+		switch (xmlTense) {
+
 		case "past simple":
 			tenseCombination = new TenseCombination(simplenlg.features.Tense.PAST, "simple");
-			break;		
+			break;
 		case "present simple":
 			tenseCombination = new TenseCombination(simplenlg.features.Tense.PRESENT, "simple");
 			break;
@@ -66,109 +66,127 @@ public class SimpleNLGSentenceFactory implements ISentenceFactory {
 			tenseCombination = new TenseCombination(simplenlg.features.Tense.FUTURE, Feature.PERFECT);
 			break;
 		case "present perfect progressive":
-			tenseCombination = new TenseCombination(simplenlg.features.Tense.PRESENT, Feature.PERFECT + Feature.PROGRESSIVE);
+			tenseCombination = new TenseCombination(simplenlg.features.Tense.PRESENT,
+					Feature.PERFECT + Feature.PROGRESSIVE);
 			break;
 		case "past perfect progressive":
-			tenseCombination = new TenseCombination(simplenlg.features.Tense.PAST, Feature.PERFECT + Feature.PROGRESSIVE);
+			tenseCombination = new TenseCombination(simplenlg.features.Tense.PAST,
+					Feature.PERFECT + Feature.PROGRESSIVE);
 			break;
 		case "future perfect progressive":
-			tenseCombination = new TenseCombination(simplenlg.features.Tense.FUTURE, Feature.PERFECT + Feature.PROGRESSIVE);
+			tenseCombination = new TenseCombination(simplenlg.features.Tense.FUTURE,
+					Feature.PERFECT + Feature.PROGRESSIVE);
 			break;
 		default:
-				throw new InvalidTenseException( );
+			throw new InvalidTenseException();
 		}
-		
+
 		return tenseCombination;
-		
-		
+
 	}
-	
+
 	/**
-	 * method to set the complete tense for a sentence (consisting of tense (e.g. past, perfect, ... ) and form (simple, perfect, ... ) ).
+	 * method to set the complete tense for a sentence (consisting of tense
+	 * (e.g. past, perfect, ... ) and form (simple, perfect, ... ) ).
 	 * 
-	 * @param sentence the tense of this sentence will be adjusted.
-	 * @param sentenceTense the target tense for the sentence to be adjusted.
+	 * @param sentence
+	 *            the tense of this sentence will be adjusted.
+	 * @param sentenceTense
+	 *            the target tense for the sentence to be adjusted.
 	 */
 	private void setCompleteTenseForSentence(SPhraseSpec sentence, TenseCombination sentenceTense) {
 		sentence.setFeature(Feature.TENSE, sentenceTense.getTense());
 		sentence.setFeature(Feature.PROGRESSIVE, sentenceTense.isProgressive());
 		sentence.setFeature(Feature.PERFECT, sentenceTense.isPerfect());
 	}
-		
-	
-	@Override
-	public ArrayList<String> createSentenceTransformation(String context, String source_tense, String target_tense,
-			String difficulty) throws InvalidContextException, InvalidDifficultyExeption, InvalidTenseException {
 
-		
-		TenseCombination sourceTense = mapTense(source_tense);
-		TenseCombination targetTense = mapTense(target_tense);
-	
-		
-		// TODO write a method to fetch the words of the sentence according to the context/difficulty
+	/**
+	 * method to generate a sentence in a given tense.
+	 * 
+	 * @param tense
+	 *            of the sentence to generate.
+	 * @param context
+	 *            of the sentence to generate.
+	 */
+	private SPhraseSpec generateRandomSentence(String tense, String context, Lexicon lexicon, NLGFactory nlgFactory) {
+		// TODO write a method to fetch the words of the sentence according to
+		// the context/difficulty
 		Random rand = new Random();
-		String subject="", object="", verb="";
+		String subject = "", object = "", verb = "";
 		switch (context) {
-			case "TESTCONTEXT":
-				try {
+		case "TESTCONTEXT":
+			try {
 				de.uni_due.s3.evaluator2.nlp.lexicon.Lexicon lex = LexiconBuilder.buildDefaultLexicon();
 
 				subject = lex.getNouns().get(rand.nextInt(lex.getNouns().size())).getBase();
 				Word _verb = lex.getVerbs().get(rand.nextInt(lex.getVerbs().size()));
-				while(!_verb.getProperties().contains(Property.transitive)){
+				while (!_verb.getProperties().contains(Property.transitive)) {
 					_verb = lex.getVerbs().get(rand.nextInt(lex.getVerbs().size()));
 				}
 				verb = _verb.getBase();
-				object = lex.getNouns().get(rand.nextInt(lex.getNouns().size())).getBase();	
-				}
-				
-				catch (Exception e) {
-					// TODO: handle exception
-				}
-				break;
-				
-			default:
-				break;
+				object = lex.getNouns().get(rand.nextInt(lex.getNouns().size())).getBase();
+			}
+
+			catch (Exception e) {
+				// TODO: handle exception
+			}
+			break;
+
+		default:
+			break;
 		}
-		
-		
-		Lexicon lexicon = Lexicon.getDefaultLexicon();
-		NLGFactory nlgFactory = new NLGFactory(lexicon);
-		Realiser realiser = new Realiser(lexicon);
-		
-		
-		SPhraseSpec sentence  = nlgFactory.createClause();
+
+		SPhraseSpec sentence = nlgFactory.createClause();
 		sentence.setSubject(subject);
 		sentence.setVerb(verb);
 		sentence.setObject(object);
-		
-		
+
+		return sentence;
+	}
+
+	@Override
+	public ArrayList<String> createSentenceTransformation(String context, String source_tense, String target_tense,
+			String difficulty) throws InvalidContextException, InvalidDifficultyExeption, InvalidTenseException {
+
+		TenseCombination sourceTense = mapTense(source_tense);
+		TenseCombination targetTense = mapTense(target_tense);
+
+		Lexicon lexicon = Lexicon.getDefaultLexicon();
+		NLGFactory nlgFactory = new NLGFactory(lexicon);
+		Realiser realiser = new Realiser(lexicon);
+
+		SPhraseSpec sentence = generateRandomSentence(source_tense, context, lexicon, nlgFactory);
+
 		setCompleteTenseForSentence(sentence, sourceTense);
 		String source_sentence = realiser.realiseSentence(sentence);
-		
+
 		setCompleteTenseForSentence(sentence, targetTense);
 		String target_sentence = realiser.realiseSentence(sentence);
 		System.out.println(target_sentence);
-		
+
 		ArrayList<String> result = new ArrayList<String>();
 		result.add(source_sentence);
-		result.add(target_sentence);	
+		result.add(target_sentence);
 		return result;
 	}
 
 	@Override
-	public ArrayList<String> createSentenceWithTense(List<Object> tenses)
+	public ArrayList<String> createSentenceWithTense(String tense, String context)
 			throws InvalidContextException, InvalidDifficultyExeption, InvalidTenseException {
 		
-		Random rand = new Random();
-		String rand_tense = (String)tenses.get(rand.nextInt(tenses.size()));
-		String rand_sentence = "";// generate random sentence with a given tense
-		
-		
+		Lexicon lexicon = Lexicon.getDefaultLexicon();
+		NLGFactory nlgFactory = new NLGFactory(lexicon);
+		Realiser realiser = new Realiser(lexicon);
+
+		SPhraseSpec sentence = generateRandomSentence(tense, context, lexicon, nlgFactory);
+
+		String rand_sentence = realiser.realiseSentence(sentence);// generate random sentence with a given tense
+		System.out.println(rand_sentence);
+		System.out.println(tense);
 		ArrayList<String> result = new ArrayList<String>();
-		result.add(rand_sentence);
-		result.add(rand_tense);
-		
+		result.add("rand_sentence: "+rand_sentence);
+		result.add("tense:"+tense);
+
 		return null;
 	}
 

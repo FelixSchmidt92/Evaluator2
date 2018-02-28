@@ -2,6 +2,7 @@ package de.uni_due.s3.evaluator2.function.nlp;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import de.uni_due.s3.evaluator2.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
@@ -23,17 +24,25 @@ public class GenerateSentenceWithTense extends Function{
 	protected Object getPartialOpenMathElementResult(List<Object> arguments)
 			throws EvaluatorException, OpenMathException {
 				
-		List<Object> tenses = getListSyntax(arguments.get(0)); 
-				
-		ArrayList<String> sentences = new ArrayList<String>();
-		sentences.add("sentence");
-		sentences.add("correct tense");
+		List<Object> tenses = getListSyntax(arguments.get(0));
 		
-		/*try {
-			sentences = (new SimpleNLGSentenceFactory()).createSentenceTransformation(context, source_tense, target_tense, difficulty);		
+		for(Object tense : tenses){
+			System.out.println("Tense = "+getStringSyntax(tense));
+		}
+		
+		Random rand = new Random();
+		String rand_tense = getStringSyntax(tenses.get(rand.nextInt(tenses.size())));
+		String context = "TESTCONTEXT";
+						
+		ArrayList<String> sentences = new ArrayList<String>();
+		/*sentences.add("sentence");
+		sentences.add("correct tense");*/
+		
+		try {
+			sentences = (new SimpleNLGSentenceFactory()).createSentenceWithTense(rand_tense, context);		
 		} catch (InvalidContextException | InvalidDifficultyExeption | InvalidTenseException e) {
 			throw new FunctionInvalidArgumentException(this, "");
-		};*/
+		};
 		
 		List<Object> list = new ArrayList<>();
 
