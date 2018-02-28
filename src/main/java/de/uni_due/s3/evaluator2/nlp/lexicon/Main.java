@@ -26,8 +26,10 @@ public class Main {
 		sentence.setVerb(verb);
 		sentence.setObject(object);
 		
-		sentence.setTense(Tense.PAST);
+		sentence.setTense(Tense.PRESENT);
 		sentence.setFeature(Feature.PROGRESSIVE, true);
+//		sentence.setFeature(Feature.PERFECT, true);
+		sentence.setFeature(Feature.PASSIVE, true);
 		
 		
 		System.out.println(realiser.realiseSentence(sentence));
