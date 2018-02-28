@@ -9,7 +9,7 @@
 	
 	<task>
 		Transform the following sentence from [var=sourceTense] tense to [var=targetTense] tense: [var=sourceSentence]
-		Answer: [fillIn groesse="15" editor="false" parser="none"]
+		Answer: [fillIn groesse="100" editor="false" parser="none"]
 	</task>
 	
     <advice>
