@@ -37,31 +37,31 @@ public class SimpleNLGSentenceFactory implements ISentenceFactory {
 		
 		switch(xmlTense) {
 		
-		case "PAST_SIMPLE":
+		case "past simple":
 			tenseCombination = new TenseCombination(simplenlg.features.Tense.PAST, "simple");
 			break;		
-		case "PRESENT_SIMPLE":
+		case "present simple":
 			tenseCombination = new TenseCombination(simplenlg.features.Tense.PAST, "simple");
 			break;
-		case "FUTURE_SIMPLE":
+		case "future simple":
 			tenseCombination = new TenseCombination(simplenlg.features.Tense.PAST, "simple");
 			break;
-		case "PRESENT_PROGRESSIVE":
+		case "present progressive":
 			tenseCombination = new TenseCombination(simplenlg.features.Tense.PAST, Feature.PROGRESSIVE);
 			break;
-		case "PAST_PROGRESSIVE":
+		case "past progressive":
 			tenseCombination = new TenseCombination(simplenlg.features.Tense.PAST, Feature.PROGRESSIVE);
 			break;
-		case "FUTURE_PROGRESSIVE":
+		case "future progressive":
 			tenseCombination = new TenseCombination(simplenlg.features.Tense.PAST, Feature.PROGRESSIVE);
 			break;
-		case "PRESENT_PERFECT":
+		case "present perfect":
 			tenseCombination = new TenseCombination(simplenlg.features.Tense.PAST, Feature.PERFECT);
 			break;
-		case "PAST_PERFECT":
+		case "past perfect":
 			tenseCombination = new TenseCombination(simplenlg.features.Tense.PAST, Feature.PERFECT);
 			break;
-		case "FUTURE_PERFECT":
+		case "future perfect":
 			tenseCombination = new TenseCombination(simplenlg.features.Tense.PAST, Feature.PERFECT);
 			break;
 			
@@ -82,9 +82,8 @@ public class SimpleNLGSentenceFactory implements ISentenceFactory {
 	 */
 	private void setCompleteTenseForSentence(SPhraseSpec sentence, TenseCombination sentenceTense) {
 		sentence.setFeature(Feature.TENSE, sentenceTense.getTense());
-		if(sentenceTense.getForm()!="simple") {
-			sentence.setFeature(sentenceTense.getForm(), true);
-		}
+		sentence.setFeature(Feature.PROGRESSIVE, sentenceTense.isProgressive());
+		sentence.setFeature(Feature.PROGRESSIVE, sentenceTense.isPerfect());
 	}
 		
 	
@@ -100,7 +99,6 @@ public class SimpleNLGSentenceFactory implements ISentenceFactory {
 		// TODO write a method to fetch the words of the sentence according to the context/difficulty
 		Random rand = new Random();
 		String subject="", object="", verb="";
-//		System.out.println("createSentenceTransformation ... ");
 		switch (context) {
 			case "TESTCONTEXT":
 				try {
@@ -139,9 +137,9 @@ public class SimpleNLGSentenceFactory implements ISentenceFactory {
 		setCompleteTenseForSentence(sentence, sourceTense);
 		String source_sentence = realiser.realiseSentence(sentence);
 		
-		sentence.clearAllFeatures();
 		setCompleteTenseForSentence(sentence, targetTense);
 		String target_sentence = realiser.realiseSentence(sentence);
+		System.out.println(target_sentence);
 		
 		ArrayList<String> result = new ArrayList<String>();
 		result.add(source_sentence);

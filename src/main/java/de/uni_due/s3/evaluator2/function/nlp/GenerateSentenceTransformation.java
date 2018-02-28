@@ -24,8 +24,8 @@ public class GenerateSentenceTransformation extends Function{
 			throws EvaluatorException, OpenMathException {
 				
 		String context = getStringSyntax(arguments.get(0)).toUpperCase(); 
-		String source_tense = getStringSyntax(arguments.get(1)).toUpperCase();  
-		String target_tense = getStringSyntax(arguments.get(2)).toUpperCase(); 
+		String source_tense = getStringSyntax(arguments.get(1));  
+		String target_tense = getStringSyntax(arguments.get(2)); 
 		String difficulty = getStringSyntax(arguments.get(3)).toUpperCase();
 		
 		ArrayList<String> sentences = new ArrayList<String>();
