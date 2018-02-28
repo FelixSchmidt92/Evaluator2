@@ -22,7 +22,10 @@ public class GenerateSentenceTransformation extends Function{
 	@Override
 	protected Object getPartialOpenMathElementResult(List<Object> arguments)
 			throws EvaluatorException, OpenMathException {
+		
+		String string1 = getStringSyntax(arguments.get(0));
 
+		System.out.println(string1);
 /*		String context = ((String) arguments.get(0)).toUpperCase(); 
 		String source_tense = ((String) arguments.get(1)).toUpperCase();  
 		String target_tense = ((String) arguments.get(2)).toUpperCase(); 

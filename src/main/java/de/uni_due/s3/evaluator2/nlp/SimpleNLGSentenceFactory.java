@@ -29,6 +29,7 @@ public class SimpleNLGSentenceFactory implements ISentenceFactory {
 	public ArrayList<String> createSentenceTransformation(String context, String source_tense, String target_tense,
 			String difficulty) throws InvalidContextException, InvalidDifficultyExeption, InvalidTenseException {
 		// Lexicon lexicon = Lexicon.getDefaultLexicon();
+	
 		
 		Random rand = new Random();
 		String subject="", object="", verb="";
@@ -55,7 +56,8 @@ public class SimpleNLGSentenceFactory implements ISentenceFactory {
 			default:
 				break;
 		}
-				 
+		
+		
 		Lexicon lexicon = Lexicon.getDefaultLexicon();
 		NLGFactory nlgFactory = new NLGFactory(lexicon);
 		Realiser realiser = new Realiser(lexicon);
