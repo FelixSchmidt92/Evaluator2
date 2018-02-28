@@ -2,10 +2,10 @@
    
    <exercisechain>
     <variables>
-	 <option name="context" value="'DEFAULT'"/>
-	 <option name="sourceTense" value="'SIMPLE_PRESENT'"/>
-	 <option name="targetTense" value="'SIMPLE_PAST'"/>
-     <option name="difficulty" value="'EASY'"/>
+	 <option name="context" value="'TESTCONTEXT'"/>
+	 <option name="sourceTense" value="'present simple'"/>
+	 <option name="targetTense" value="'past simple'"/>
+     <option name="difficulty" value="'TESTDIFFICULTY'"/>
      <option name="sentenceTransformation" value="genTransform([var=context],[var=sourceTense],[var=targetTense],[var=difficulty])"/>
      <option name="sourceSentence" value="getFromList(0,[var=sentenceTransformation])"/>
 	 <option name="targetSentence" value="getFromList(1,[var=sentenceTransformation])"/>
@@ -17,6 +17,6 @@
 	 <input value="[var=targetTense]"/>	 
      <next default="repeat">
      <path target="end" result="100" />
-    </next>
-  </exercisechain>
-   </step>
+     </next>
+    </step>
+   </exercisechain>

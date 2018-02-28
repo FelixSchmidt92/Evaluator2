@@ -41,30 +41,29 @@ public class SimpleNLGSentenceFactory implements ISentenceFactory {
 			tenseCombination = new TenseCombination(simplenlg.features.Tense.PAST, "simple");
 			break;		
 		case "present simple":
-			tenseCombination = new TenseCombination(simplenlg.features.Tense.PAST, "simple");
+			tenseCombination = new TenseCombination(simplenlg.features.Tense.PRESENT, "simple");
 			break;
 		case "future simple":
-			tenseCombination = new TenseCombination(simplenlg.features.Tense.PAST, "simple");
+			tenseCombination = new TenseCombination(simplenlg.features.Tense.FUTURE, "simple");
 			break;
 		case "present progressive":
-			tenseCombination = new TenseCombination(simplenlg.features.Tense.PAST, Feature.PROGRESSIVE);
+			tenseCombination = new TenseCombination(simplenlg.features.Tense.PRESENT, Feature.PROGRESSIVE);
 			break;
 		case "past progressive":
 			tenseCombination = new TenseCombination(simplenlg.features.Tense.PAST, Feature.PROGRESSIVE);
 			break;
 		case "future progressive":
-			tenseCombination = new TenseCombination(simplenlg.features.Tense.PAST, Feature.PROGRESSIVE);
+			tenseCombination = new TenseCombination(simplenlg.features.Tense.FUTURE, Feature.PROGRESSIVE);
 			break;
 		case "present perfect":
-			tenseCombination = new TenseCombination(simplenlg.features.Tense.PAST, Feature.PERFECT);
+			tenseCombination = new TenseCombination(simplenlg.features.Tense.PRESENT, Feature.PERFECT);
 			break;
 		case "past perfect":
 			tenseCombination = new TenseCombination(simplenlg.features.Tense.PAST, Feature.PERFECT);
 			break;
 		case "future perfect":
-			tenseCombination = new TenseCombination(simplenlg.features.Tense.PAST, Feature.PERFECT);
+			tenseCombination = new TenseCombination(simplenlg.features.Tense.FUTURE, Feature.PERFECT);
 			break;
-			
 		default:
 				throw new InvalidTenseException( );
 		}

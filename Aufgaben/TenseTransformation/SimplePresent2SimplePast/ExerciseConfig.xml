@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exercise>
+  <general>
+    <title>SimplePresent2SimplePast</title>
+    <category>Biologie / Botanik</category>
+    <view-type>FORMBASED</view-type>
+    <is-active>true</is-active>
+    <is-public>true</is-public>
+    <level-of-difficulty>2</level-of-difficulty>
+    <discriminant>0.0</discriminant>
+    <exercise-tag-list />
+    <internal-description />
+    <external-description />
+    <penalty-percent>0</penalty-percent>
+    <minimum-correct-result>50</minimum-correct-result>
+    <evaluation-rule />
+  </general>
+  <checker-configurations>
+    <checker-configuration>
+      <instance-name>InstantFillInChecker (1)</instance-name>
+      <result-name>InstantFillInChecker (1) result</result-name>
+      <is-visible>true</is-visible>
+      <is-visible-detail>true</is-visible-detail>
+      <is-active>false</is-active>
+      <checker-id>de.uni_due.s3.jack2.server.core.instantcheckers.FillInChecker</checker-id>
+      <variable-name>c60574</variable-name>
+      <checker-configuration-tuples />
+    </checker-configuration>
+    <checker-configuration>
+      <instance-name>InstantMultipleChoiceChecker (1)</instance-name>
+      <result-name>InstantMultipleChoiceChecker (1) result</result-name>
+      <is-visible>true</is-visible>
+      <is-visible-detail>true</is-visible-detail>
+      <is-active>false</is-active>
+      <checker-id>de.uni_due.s3.jack2.server.core.instantcheckers.MultipleChoiceChecker</checker-id>
+      <variable-name>c60575</variable-name>
+      <checker-configuration-tuples />
+    </checker-configuration>
+  </checker-configurations>
+  <exercise-resources>
+    <exercise-resource>
+      <file-name>exerciseChain.xml</file-name>
+      <type>WORKING_SHEET</type>
+    </exercise-resource>
+    <exercise-resource>
+      <file-name>stage1.xml</file-name>
+      <type>WORKING_SHEET</type>
+    </exercise-resource>
+  </exercise-resources>
+</exercise>
+
