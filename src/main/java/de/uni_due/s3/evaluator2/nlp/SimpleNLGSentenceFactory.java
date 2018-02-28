@@ -19,17 +19,85 @@ import simplenlg.lexicon.Lexicon;
 import simplenlg.phrasespec.NPPhraseSpec;
 import simplenlg.phrasespec.SPhraseSpec;
 import simplenlg.phrasespec.VPPhraseSpec;
+//import simplenlg.lexicon.Lexicon;
 import simplenlg.realiser.english.Realiser;
 
 public class SimpleNLGSentenceFactory implements ISentenceFactory {
 
 	
+	/**
+	 * method to map the XML Tense Parameter to the corresponding SimpleNLG Enum
+	 * 
+	 * @param xmlTense the xmlTense Parameter to be mapped
+	 * @return the Combination of Form and Tense in SimpleNLG Format
+	 */
+	private static TenseCombination mapTense(String xmlTense) throws InvalidTenseException{
+		
+		TenseCombination tenseCombination;
+		
+		switch(xmlTense) {
+		
+		case "PAST_SIMPLE":
+			tenseCombination = new TenseCombination(simplenlg.features.Tense.PAST, "simple");
+			break;		
+		case "PRESENT_SIMPLE":
+			tenseCombination = new TenseCombination(simplenlg.features.Tense.PAST, "simple");
+			break;
+		case "FUTURE_SIMPLE":
+			tenseCombination = new TenseCombination(simplenlg.features.Tense.PAST, "simple");
+			break;
+		case "PRESENT_PROGRESSIVE":
+			tenseCombination = new TenseCombination(simplenlg.features.Tense.PAST, Feature.PROGRESSIVE);
+			break;
+		case "PAST_PROGRESSIVE":
+			tenseCombination = new TenseCombination(simplenlg.features.Tense.PAST, Feature.PROGRESSIVE);
+			break;
+		case "FUTURE_PROGRESSIVE":
+			tenseCombination = new TenseCombination(simplenlg.features.Tense.PAST, Feature.PROGRESSIVE);
+			break;
+		case "PRESENT_PERFECT":
+			tenseCombination = new TenseCombination(simplenlg.features.Tense.PAST, Feature.PERFECT);
+			break;
+		case "PAST_PERFECT":
+			tenseCombination = new TenseCombination(simplenlg.features.Tense.PAST, Feature.PERFECT);
+			break;
+		case "FUTURE_PERFECT":
+			tenseCombination = new TenseCombination(simplenlg.features.Tense.PAST, Feature.PERFECT);
+			break;
+			
+		default:
+				throw new InvalidTenseException( );
+		}
+		
+		return tenseCombination;
+		
+		
+	}
+	
+	/**
+	 * method to set the complete tense for a sentence (consisting of tense (e.g. past, perfect, ... ) and form (simple, perfect, ... ) ).
+	 * 
+	 * @param sentence the tense of this sentence will be adjusted.
+	 * @param sentenceTense the target tense for the sentence to be adjusted.
+	 */
+	private void setCompleteTenseForSentence(SPhraseSpec sentence, TenseCombination sentenceTense) {
+		sentence.setFeature(Feature.TENSE, sentenceTense.getTense());
+		if(sentenceTense.getForm()!="simple") {
+			sentence.setFeature(sentenceTense.getForm(), true);
+		}
+	}
+		
+	
 	@Override
 	public ArrayList<String> createSentenceTransformation(String context, String source_tense, String target_tense,
 			String difficulty) throws InvalidContextException, InvalidDifficultyExeption, InvalidTenseException {
-		// Lexicon lexicon = Lexicon.getDefaultLexicon();
+
+		
+		TenseCombination sourceTense = mapTense(source_tense);
+		TenseCombination targetTense = mapTense(target_tense);
 	
 		
+		// TODO write a method to fetch the words of the sentence according to the context/difficulty
 		Random rand = new Random();
 		String subject="", object="", verb="";
 //		System.out.println("createSentenceTransformation ... ");
@@ -67,16 +135,14 @@ public class SimpleNLGSentenceFactory implements ISentenceFactory {
 		sentence.setVerb(verb);
 		sentence.setObject(object);
 		
-		sentence.setFeature(Feature.TENSE, simplenlg.features.Tense.PRESENT);
+		
+		setCompleteTenseForSentence(sentence, sourceTense);
 		String source_sentence = realiser.realiseSentence(sentence);
 		
-//		System.out.println("createSentenceTransformation done ... ");
-		
-		sentence.setFeature(Feature.TENSE, simplenlg.features.Tense.PAST);
+		sentence.clearAllFeatures();
+		setCompleteTenseForSentence(sentence, targetTense);
 		String target_sentence = realiser.realiseSentence(sentence);
 		
-//		System.out.println("source: " + source_sentence + " target: " + target_sentence);
-
 		ArrayList<String> result = new ArrayList<String>();
 		result.add(source_sentence);
 		result.add(target_sentence);	
