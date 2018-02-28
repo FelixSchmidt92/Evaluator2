@@ -122,6 +122,13 @@ public class Word {
 			word_str += ", presentParticiple=" + this.presentParticiple;
 		if (!this.pastParticiple.equals(""))
 			word_str += ", pastParticiple=" + this.pastParticiple;
+		if (!this.getProperties().isEmpty()){
+			word_str +=", Properties=" ;
+			for(Property p : this.getProperties()){
+				word_str +=p.toString()+", " ;
+			}
+			
+		}
 
 		word_str += "]";
 

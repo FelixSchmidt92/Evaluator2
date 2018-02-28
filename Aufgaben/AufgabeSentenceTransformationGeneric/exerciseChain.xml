@@ -18,5 +18,5 @@
      <next default="repeat">
      <path target="end" result="100" />
     </next>
-  </exercisechain>
    </step>
+   </exercisechain>

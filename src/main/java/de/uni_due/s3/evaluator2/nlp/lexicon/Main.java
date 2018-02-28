@@ -14,7 +14,7 @@ public class Main {
 			e.printStackTrace();
 		}
 		
-//		lex.printLexicon(lex.getNouns());
+		lex.printLexicon(lex.getNouns());
 //		lex.printLexicon(lex.getPronouns());
 //		lex.printLexicon(lex.getAdjectives());
 //		lex.printLexicon(lex.getAdverbs());

@@ -23,20 +23,26 @@ public class GenerateSentenceTransformation extends Function{
 	protected Object getPartialOpenMathElementResult(List<Object> arguments)
 			throws EvaluatorException, OpenMathException {
 		
-		String string1 = getStringSyntax(arguments.get(0));
+/*		String string1 = getStringSyntax(arguments.get(0));
 
-		System.out.println(string1);
-/*		String context = ((String) arguments.get(0)).toUpperCase(); 
-		String source_tense = ((String) arguments.get(1)).toUpperCase();  
-		String target_tense = ((String) arguments.get(2)).toUpperCase(); 
-		String difficulty = ((String) arguments.get(3)).toUpperCase();*/
+		System.out.println(string1);*/
 		
-
+		String context = getStringSyntax(arguments.get(0)).toUpperCase(); 
+		String source_tense = getStringSyntax(arguments.get(1)).toUpperCase();  
+		String target_tense = getStringSyntax(arguments.get(2)).toUpperCase(); 
+		String difficulty = getStringSyntax(arguments.get(3)).toUpperCase();
+		
+		System.out.println("context = "+context);
+		System.out.println("source_tense = "+source_tense);
+		System.out.println("target_tense = "+target_tense);
+		System.out.println("difficulty = "+difficulty);
+		
+/*
 		String context = "TESTCONTEXT";
 		String source_tense = "";  
 		String target_tense = ""; 
 		String difficulty = "";
-		
+*/	
 		
 		ArrayList<String> sentences = new ArrayList<String>();
 		/*sentences.add("this is a test1");
