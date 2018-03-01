@@ -200,9 +200,15 @@ public class SimpleNLGSentenceFactory implements ISentenceFactory {
 		Realiser realiser = new Realiser(lexicon);
 		
 		SPhraseSpec sentence = nlgFactory.createClause();
-		sentence.setSubject("the "+subject);
+		NPPhraseSpec subj = nlgFactory.createNounPhrase();
+		NPPhraseSpec obj = nlgFactory.createNounPhrase();
+		subj.setDeterminer("the");
+		subj.setNoun(subject);
+		sentence.setSubject(subj);
 		sentence.setVerb(verb);
-		sentence.setObject("a "+object);
+		obj.setNoun(object);
+		obj.setPlural(true);
+		sentence.setObject(obj);
 		
 		setCompleteTenseForSentence(sentence, mapTense(tense));
 		String generatedSentence = realiser.realiseSentence(sentence);
