@@ -27,11 +27,11 @@ public class GenerateTenseTransformation extends Function{
 		String source_tense = getStringSyntax(arguments.get(0));  
 		String target_tense = getStringSyntax(arguments.get(1)); 
 		String subject = getStringSyntax(arguments.get(2)); 
-		String object = getStringSyntax(arguments.get(3));
-		String verb = getStringSyntax(arguments.get(4));
+		String verb = getStringSyntax(arguments.get(3));
+		String object = getStringSyntax(arguments.get(4));
 		
 		ArrayList<String> sentences = new ArrayList<String>();
-		
+		System.out.println("GenerateTenseTransformation...");
 		try {
 			sentences = (new SimpleNLGSentenceFactory()).createSentencesForTenseTransformation(source_tense, target_tense, subject, object, verb);		
 		} catch (InvalidContextException | InvalidDifficultyExeption | InvalidTenseException e) {
@@ -57,7 +57,7 @@ public class GenerateTenseTransformation extends Function{
 	@Override
 	protected int maxArgs() {
 		// TODO Auto-generated method stub
-		return 4;
+		return 5;
 	}
 
 }

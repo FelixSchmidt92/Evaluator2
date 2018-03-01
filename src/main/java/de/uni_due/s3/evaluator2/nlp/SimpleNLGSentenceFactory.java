@@ -200,9 +200,9 @@ public class SimpleNLGSentenceFactory implements ISentenceFactory {
 		Realiser realiser = new Realiser(lexicon);
 		
 		SPhraseSpec sentence = nlgFactory.createClause();
-		sentence.setSubject(subject);
+		sentence.setSubject("the "+subject);
 		sentence.setVerb(verb);
-		sentence.setObject(object);
+		sentence.setObject("a "+object);
 		
 		setCompleteTenseForSentence(sentence, mapTense(tense));
 		String generatedSentence = realiser.realiseSentence(sentence);
@@ -224,9 +224,9 @@ public class SimpleNLGSentenceFactory implements ISentenceFactory {
 		Realiser realiser = new Realiser(lexicon);
 		
 		SPhraseSpec sentence = nlgFactory.createClause();
-		sentence.setSubject(subject);
+		sentence.setSubject("the "+subject);
 		sentence.setVerb(verb);
-		sentence.setObject(object);
+		sentence.setObject("a "+object);
 
 		setCompleteTenseForSentence(sentence, sourceTense);
 		String source_sentence = realiser.realiseSentence(sentence);
