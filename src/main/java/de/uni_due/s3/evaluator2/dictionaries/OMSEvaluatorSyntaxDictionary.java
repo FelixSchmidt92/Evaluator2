@@ -186,7 +186,7 @@ public class OMSEvaluatorSyntaxDictionary {
 
 		functionSymbolMap.put("genTransform", OMSymbol.GENERATE_SENTENCE_TRANSFORMATION);
 		functionSymbolMap.put("genWithTen", OMSymbol.GENERATE_SENTENCE_WITH_TENSE);
-		functionSymbolMap.put("genSimpleSentence", OMSymbol.CHOOSE_WORDS_EXIST_IN_LEXICON);
+		functionSymbolMap.put("genSimpleSentence", OMSymbol.GENERATE_SIMPLE_SENTENCE);
 		functionSymbolMap.put("chooseWordsInLexicon", OMSymbol.CHOOSE_WORDS_EXIST_IN_LEXICON);
 		
 		functionSymbolMap.put("charAt", OMSymbol.STRINGJACK_CHARAT);
