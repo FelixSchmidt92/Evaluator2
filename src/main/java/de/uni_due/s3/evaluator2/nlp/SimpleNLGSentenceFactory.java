@@ -211,6 +211,36 @@ public class SimpleNLGSentenceFactory implements ISentenceFactory {
 		
 	}
 
+	@Override
+	public ArrayList<String> createSentencesForTenseTransformation(String source_tense, String target_tense,
+			String subject, String object, String verb)
+			throws InvalidContextException, InvalidDifficultyExeption, InvalidTenseException {
+		
+		TenseCombination sourceTense = mapTense(source_tense);
+		TenseCombination targetTense = mapTense(target_tense);
+		
+		Lexicon lexicon = Lexicon.getDefaultLexicon();
+		NLGFactory nlgFactory = new NLGFactory(lexicon);
+		Realiser realiser = new Realiser(lexicon);
+		
+		SPhraseSpec sentence = nlgFactory.createClause();
+		sentence.setSubject(subject);
+		sentence.setVerb(verb);
+		sentence.setObject(object);
+
+		setCompleteTenseForSentence(sentence, sourceTense);
+		String source_sentence = realiser.realiseSentence(sentence);
+
+		setCompleteTenseForSentence(sentence, targetTense);
+		String target_sentence = realiser.realiseSentence(sentence);
+		System.out.println(target_sentence);
+
+		ArrayList<String> result = new ArrayList<String>();
+		result.add(source_sentence);
+		result.add(target_sentence);
+		return result;
+	}
+
 	
 
 }

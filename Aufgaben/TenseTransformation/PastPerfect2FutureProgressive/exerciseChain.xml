@@ -2,11 +2,23 @@
    
    <exercisechain>
     <variables>
-	 <option name="context" value="'TESTCONTEXT'"/>
+	<option name="listOfSubjects" value="{'animal';'man';'girl';'woman'}" />
+	<option name="listOfVerbs" value="{'eat'}" />
+	<option name="listOfObjects" value="{'fish';'meat';'orange'}" />
+	
+	<option name="possibleSubjects" value="chooseWordsInLexicon('noun', [var=listOfSubjects])"/>
+	<option name="possibleVerbs" value="chooseWordsInLexicon('verb', [var=listOfVerbs])"/>
+	<option name="possibleObjects" value="chooseWordsInLexicon('noun', [var=listOfObjects])"/>
+	
+	<option name="randomSubject" value="getRandomFromList([var=possibleSubjects])"/>
+	<option name="randomVerb" value="getRandomFromList([var=possibleVerbs])"/>
+	<option name="randomObject" value="getRandomFromList([var=possibleObjects])"/>
+		
 	 <option name="sourceTense" value="'past perfect'"/>
 	 <option name="targetTense" value="'future progressive'"/>
-     <option name="difficulty" value="'TESTDIFFICULTY'"/>
-     <option name="sentenceTransformation" value="genTransform([var=context],[var=sourceTense],[var=targetTense],[var=difficulty])"/>
+	 
+     <option name="sentenceTransformation" value="genTenseTransformation([var=sourceTense],[var=targetTense],[var=randomSubject],[var=randomVerb],[var=randomObject])"/>
+	 
      <option name="sourceSentence" value="getFromList(0,[var=sentenceTransformation])"/>
 	 <option name="targetSentence" value="getFromList(1,[var=sentenceTransformation])"/>
     </variables>

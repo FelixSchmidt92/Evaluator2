@@ -2,7 +2,7 @@
 <exercisechain>
 	<variables>	
 		<option name="listOfSubjects" value="{'animal';'man';'girl';'woman'}" />
-		<option name="listOfVerbs" value="{'eat';'be'}" />
+		<option name="listOfVerbs" value="{'eat'}" />
 		<option name="listOfObjects" value="{'fish';'meat';'orange'}" />
 		<option name="possibleTenses" value="{'present simple';'past simple';'future simple';'present perfect';'past perfect';'future perfect'}" />
 		

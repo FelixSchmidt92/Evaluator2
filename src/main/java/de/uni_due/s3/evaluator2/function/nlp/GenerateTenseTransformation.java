@@ -17,21 +17,23 @@ import de.uni_due.s3.evaluator2.nlp.exceptions.InvalidTenseException;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
-public class GenerateSentenceTransformation extends Function{
+public class GenerateTenseTransformation extends Function{
 
 	@Override
 	protected Object getPartialOpenMathElementResult(List<Object> arguments)
 			throws EvaluatorException, OpenMathException {
 				
-		String context = getStringSyntax(arguments.get(0)).toUpperCase(); 
-		String source_tense = getStringSyntax(arguments.get(1));  
-		String target_tense = getStringSyntax(arguments.get(2)); 
-		String difficulty = getStringSyntax(arguments.get(3)).toUpperCase();
+		
+		String source_tense = getStringSyntax(arguments.get(0));  
+		String target_tense = getStringSyntax(arguments.get(1)); 
+		String subject = getStringSyntax(arguments.get(2)); 
+		String object = getStringSyntax(arguments.get(3));
+		String verb = getStringSyntax(arguments.get(4));
 		
 		ArrayList<String> sentences = new ArrayList<String>();
 		
 		try {
-			sentences = (new SimpleNLGSentenceFactory()).createSentenceTransformation(context, source_tense, target_tense, difficulty);		
+			sentences = (new SimpleNLGSentenceFactory()).createSentencesForTenseTransformation(source_tense, target_tense, subject, object, verb);		
 		} catch (InvalidContextException | InvalidDifficultyExeption | InvalidTenseException e) {
 			throw new FunctionInvalidArgumentException(this, "");
 		};

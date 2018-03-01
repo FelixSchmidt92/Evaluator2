@@ -61,7 +61,7 @@ public class OMSymbol {
 	public static final OMS INTERVAL1_INTERVALOO = OMCreator.createOMS("interval1", "interval_oo");
 	public static final OMS INTERVAL1_INTEGER_INTERVAL = OMCreator.createOMS("interval1", "integer_interval");
 	
-	public static final OMS GENERATE_SENTENCE_TRANSFORMATION =  OMCreator.createOMS("nlp", "genTransform");
+	public static final OMS GENERATE_TENSE_TRANSFORMATION =  OMCreator.createOMS("nlp", "genTenseTransformation");
 	public static final OMS GENERATE_SENTENCE_WITH_TENSE =  OMCreator.createOMS("nlp", "genWithTen");
 	public static final OMS CHOOSE_WORDS_EXIST_IN_LEXICON =  OMCreator.createOMS("nlp", "chooseWordsInLexicon");
 	public static final OMS GENERATE_SIMPLE_SENTENCE =  OMCreator.createOMS("nlp", "genSimpleSentence");
