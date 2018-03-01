@@ -61,8 +61,10 @@ import de.uni_due.s3.evaluator2.function.logic1.Or;
 import de.uni_due.s3.evaluator2.function.logic1.True;
 import de.uni_due.s3.evaluator2.function.logic_jack.IfThenElse;
 import de.uni_due.s3.evaluator2.function.mc_jack.MCIndex;
+import de.uni_due.s3.evaluator2.function.nlp.ChooseWordsExistingInLexicon;
 import de.uni_due.s3.evaluator2.function.nlp.GenerateSentenceTransformation;
 import de.uni_due.s3.evaluator2.function.nlp.GenerateSentenceWithTense;
+import de.uni_due.s3.evaluator2.function.nlp.GenerateSimpleSentence;
 import de.uni_due.s3.evaluator2.function.nums1.E;
 import de.uni_due.s3.evaluator2.function.nums1.I;
 import de.uni_due.s3.evaluator2.function.nums1.Infinity;
@@ -245,6 +247,8 @@ public class OMSFunctionDictionary {
 		
 		functions.put(OMSymbol.GENERATE_SENTENCE_TRANSFORMATION, new GenerateSentenceTransformation());
 		functions.put(OMSymbol.GENERATE_SENTENCE_WITH_TENSE, new GenerateSentenceWithTense());
+		functions.put(OMSymbol.CHOOSE_WORDS_EXIST_IN_LEXICON, new ChooseWordsExistingInLexicon());
+		functions.put(OMSymbol.GENERATE_SIMPLE_SENTENCE, new GenerateSimpleSentence());
 
 		functions.put(OMSymbol.LINALGJACK_EQUALBASIS, new EqualBasis());
 		functions.put(OMSymbol.LINALGJACK_ISLINEARLYINDEPENDENT, new IsLinearlyIndependent());

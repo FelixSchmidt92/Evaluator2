@@ -63,7 +63,9 @@ public class OMSymbol {
 	
 	public static final OMS GENERATE_SENTENCE_TRANSFORMATION =  OMCreator.createOMS("nlp", "genTransform");
 	public static final OMS GENERATE_SENTENCE_WITH_TENSE =  OMCreator.createOMS("nlp", "genWithTen");
-
+	public static final OMS CHOOSE_WORDS_EXIST_IN_LEXICON =  OMCreator.createOMS("nlp", "chooseWordsInLexicon");
+	public static final OMS GENERATE_SIMPLE_SENTENCE =  OMCreator.createOMS("nlp", "genSimpleSentence");
+																					   
 	public static final OMS LINALGJACK_EQUALBASIS = OMCreator.createOMS("linalgJACK", "equalBasis");
 	public static final OMS LINALGJACK_ISLINEARLYINDEPENDENT = OMCreator.createOMS("linalgJACK",
 			"isLinearlyIndependent");
@@ -75,7 +77,7 @@ public class OMSymbol {
 	public static final OMS LINALG2_MATRIX = OMCreator.createOMS("linalg2", "matrix");
 	public static final OMS LINALG2_MATRIXROW = OMCreator.createOMS("linalg2", "matrixrow");
 	public static final OMS LINALG2_VECTOR = OMCreator.createOMS("linalg2", "vector");
-
+																							  
 	public static final OMS LISTJACK_CHOOSEFROMCOMPLEMENT = OMCreator.createOMS("listJACK", "chooseFromComplement");
 	public static final OMS LISTJACK_GETFROMLIST = OMCreator.createOMS("listJACK", "getFromList");
 	public static final OMS LISTJACK_GETFROMORDEREDLIST = OMCreator.createOMS("listJACK", "getFromOrderedList");

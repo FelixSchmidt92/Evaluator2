@@ -16,7 +16,6 @@ public class Main {
 		NLGFactory nlgFactory = new NLGFactory(lexicon);
 		Realiser realiser = new Realiser(lexicon);
 		
-		
 		String subject = "Move";
 		String verb = "help";
 		String object = "passenger";
