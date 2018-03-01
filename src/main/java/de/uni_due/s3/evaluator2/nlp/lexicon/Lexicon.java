@@ -17,6 +17,12 @@ public class Lexicon {
 	public ArrayList<Word> getNouns() {
 		return nouns;
 	}
+	
+	public boolean wordExistsForCategory(String word, String category) {
+		return false;
+	}
+	
+	
 
 	public void setNouns(ArrayList<Word> nouns) {
 		this.nouns = nouns;
