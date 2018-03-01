@@ -14,5 +14,6 @@ public interface ISentenceFactory {
 	
 	public ArrayList<String> createSentenceWithTense(String tense, String context) throws InvalidContextException, InvalidDifficultyExeption, InvalidTenseException;
 	
+	public String createSimpleSentenceInTense(String tense, String subject, String object, String verb) throws InvalidTenseException;
 
 }

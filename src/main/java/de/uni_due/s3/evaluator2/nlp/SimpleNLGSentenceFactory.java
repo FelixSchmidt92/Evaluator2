@@ -191,4 +191,26 @@ public class SimpleNLGSentenceFactory implements ISentenceFactory {
 		return result;
 	}
 
+	@Override
+	public String createSimpleSentenceInTense(String tense, String subject, String object, String verb)
+			throws InvalidTenseException {
+		
+		Lexicon lexicon = Lexicon.getDefaultLexicon();
+		NLGFactory nlgFactory = new NLGFactory(lexicon);
+		Realiser realiser = new Realiser(lexicon);
+		
+		SPhraseSpec sentence = nlgFactory.createClause();
+		sentence.setSubject(subject);
+		sentence.setVerb(verb);
+		sentence.setObject(object);
+		
+		setCompleteTenseForSentence(sentence, mapTense(tense));
+		String generatedSentence = realiser.realiseSentence(sentence);
+		
+		return generatedSentence;
+		
+	}
+
+	
+
 }
