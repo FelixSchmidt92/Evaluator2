@@ -15,6 +15,17 @@ public class PartOfSpeechTagger {
 	private static String DEFAULT_MAXENT_LOCATION = System.getProperty("jboss.server.data.dir") + "/en-pos-maxent.bin";
 
 	private static PartOfSpeechTagger singletonInstance;
+	private POSTaggerME tagger;
+	
+	public String[] doPOSTagging(String sentenceToTag ){
+		
+		//TODO tokenize input sentence
+		String sent[] = new String[]{"The", "man", "runs", "home"};		  
+		
+		String tags[] = tagger.tag(sent);
+		return tags;
+		
+	}
 	
 	private PartOfSpeechTagger() throws IOException {
 		
@@ -23,11 +34,7 @@ public class PartOfSpeechTagger {
 		modelIn = new FileInputStream(DEFAULT_MAXENT_LOCATION);
 		POSModel model = new POSModel(modelIn);
 		
-		POSTaggerME tagger = new POSTaggerME(model);
-
-		String sent[] = new String[]{"The", "man", "runs", "home"};		  
-			
-		String tags[] = tagger.tag(sent);	
+		tagger = new POSTaggerME(model);	
 				
 	}
 	
