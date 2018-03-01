@@ -12,14 +12,39 @@ import opennlp.tools.postag.POSTaggerME;
 
 public class PartOfSpeechTagger {
 	
-	private static String DEFAULT_LEXICON_FILE_PATH = System.getProperty("jboss.server.data.dir") + "/en-pos-maxent.bin";
+	private static String DEFAULT_MAXENT_LOCATION = System.getProperty("jboss.server.data.dir") + "/en-pos-maxent.bin";
 
+	private static PartOfSpeechTagger singletonInstance;
+	
+	private PartOfSpeechTagger() throws IOException {
+		
+		InputStream modelIn;
+
+		modelIn = new FileInputStream(DEFAULT_MAXENT_LOCATION);
+		POSModel model = new POSModel(modelIn);
+		
+		POSTaggerME tagger = new POSTaggerME(model);
+
+		String sent[] = new String[]{"The", "man", "runs", "home"};		  
+			
+		String tags[] = tagger.tag(sent);	
+				
+	}
+	
+	public static PartOfSpeechTagger getInstance() throws IOException {
+		
+		if(singletonInstance == null) {
+			singletonInstance = new PartOfSpeechTagger();
+		}
+		
+		return singletonInstance;
+	}
 
 	public static void main(String[] args) {
 		
 		InputStream modelIn;
 		try {
-			modelIn = new FileInputStream(DEFAULT_LEXICON_FILE_PATH);
+			modelIn = new FileInputStream(DEFAULT_MAXENT_LOCATION);
 			POSModel model = new POSModel(modelIn);
 			
 			POSTaggerME tagger = new POSTaggerME(model);
