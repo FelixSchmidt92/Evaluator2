@@ -4,7 +4,7 @@
     <variables>
 	<option name="listOfSubjects" value="{'animal';'man';'girl';'woman'}" />
 	<option name="listOfVerbs" value="{'eat'}" />
-	<option name="listOfObjects" value="{'fish';'meat';'orange'}" />
+	<option name="listOfObjects" value="{'fish';'apple';'orange'}" />
 	
 	<option name="possibleSubjects" value="chooseWordsInLexicon('noun', [var=listOfSubjects])"/>
 	<option name="possibleVerbs" value="chooseWordsInLexicon('verb', [var=listOfVerbs])"/>

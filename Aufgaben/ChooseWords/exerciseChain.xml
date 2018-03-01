@@ -3,7 +3,7 @@
 	<variables>	
 		<option name="listOfSubjects" value="{'animal';'man';'girl';'woman'}" />
 		<option name="listOfVerbs" value="{'eat'}" />
-		<option name="listOfObjects" value="{'fish';'meat';'orange'}" />
+		<option name="listOfObjects" value="{'fish';'apple';'orange'}" />
 		<option name="possibleTenses" value="{'present simple';'past simple';'future simple';'present perfect';'past perfect';'future perfect'}" />
 		
 		<option name="possibleSubjects" value="chooseWordsInLexicon('noun', [var=listOfSubjects])"/>

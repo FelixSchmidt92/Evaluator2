@@ -4,7 +4,7 @@
    <variables>
 		<option name="listOfSubjects" value="{'animal';'man';'girl';'woman'}" />
 		<option name="listOfVerbs" value="{'eat'}" />
-		<option name="listOfObjects" value="{'fish';'meat';'orange'}" />
+		<option name="listOfObjects" value="{'fish';'apple';'orange'}" />
 	
 		<option name="possibleSubjects" value="chooseWordsInLexicon('noun', [var=listOfSubjects])"/>
 		<option name="possibleVerbs" value="chooseWordsInLexicon('verb', [var=listOfVerbs])"/>
@@ -13,11 +13,11 @@
 		<option name="randomSubject" value="getRandomFromList([var=possibleSubjects])"/>
 		<option name="randomVerb" value="getRandomFromList([var=possibleVerbs])"/>
 		<option name="randomObject" value="getRandomFromList([var=possibleObjects])"/>
-		
 		<option name="sourceTense" value="'present simple'"/>
 		<option name="targetTense" value="'past simple'"/>
 	 
 		<option name="sentenceTransformation" value="genTenseTransformation([var=sourceTense],[var=targetTense],[var=randomSubject],[var=randomVerb],[var=randomObject])"/>
+		
 		<option name="sourceSentence" value="getFromList(0,[var=sentenceTransformation])"/>
 		<option name="targetSentence" value="getFromList(1,[var=sentenceTransformation])"/>
     </variables>
