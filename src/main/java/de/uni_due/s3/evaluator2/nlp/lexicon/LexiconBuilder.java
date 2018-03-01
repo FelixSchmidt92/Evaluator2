@@ -22,7 +22,7 @@ public class LexiconBuilder {
 	private ArrayList<Word> prepositions = new ArrayList<Word>();
 	private ArrayList<Word> conjunctions = new ArrayList<Word>();
 	
-	private static Lexicon defaultLexicon;
+	private static LexiconJack defaultLexicon;
 	private static String DEFAULT_LEXICON_FILE_PATH = System.getProperty("jboss.server.data.dir") + "/default-lexicon.xml";
 
 	public void buildLexicon(String filename) throws Exception {
@@ -197,13 +197,13 @@ public class LexiconBuilder {
 
 	}
 	
-public static Lexicon buildDefaultLexicon() throws Exception {
+public static LexiconJack buildDefaultLexicon() throws Exception {
 		
 	
 		if(defaultLexicon==null) {
 			
 			System.out.println("Lexicon wird geladen..");
-			Lexicon lexiconToBuild = new Lexicon();
+			LexiconJack lexiconToBuild = new LexiconJack();
 		
 			File inputFile = new File(DEFAULT_LEXICON_FILE_PATH);
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();

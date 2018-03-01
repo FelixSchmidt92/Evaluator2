@@ -116,7 +116,7 @@ public class SimpleNLGSentenceFactory implements ISentenceFactory {
 		switch (context) {
 		case "TESTCONTEXT":
 			try {
-				de.uni_due.s3.evaluator2.nlp.lexicon.Lexicon lex = LexiconBuilder.buildDefaultLexicon();
+				de.uni_due.s3.evaluator2.nlp.lexicon.LexiconJack lex = LexiconBuilder.buildDefaultLexicon();
 
 				subject = lex.getNouns().get(rand.nextInt(lex.getNouns().size())).getBase();
 				Word _verb = lex.getVerbs().get(rand.nextInt(lex.getVerbs().size()));

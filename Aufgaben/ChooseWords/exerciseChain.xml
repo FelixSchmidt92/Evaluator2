@@ -8,13 +8,13 @@
 		
 		<option name="possibleSubjects" value="chooseWordsInLexicon('noun', [var=listOfSubjects])"/>
 		<option name="possibleVerbs" value="chooseWordsInLexicon('verb', [var=listOfVerbs])"/>
-		<option name="possibleObjects" value="chooseWordsInLexicon('noun, [var=listOfObjects])"/>
+		<option name="possibleObjects" value="chooseWordsInLexicon('noun', [var=listOfObjects])"/>
 		
 		<option name="randomSubject" value="getRandomFromList([var=possibleSubjects])"/>
 		<option name="randomVerb" value="getRandomFromList([var=possibleVerbs])"/>
 		<option name="randomObject" value="getRandomFromList([var=possibleObjects])"/>
-		
 		<option name="correctTense" value="getRandomFromList([var=possibleTenses])"/>
+		
 		<option name="sentence" value="genSimpleSentence([var=randomSubject], [var=randomVerb], [var=randomObject], [var=correctTense])"/>
 
 		<option name="tense1" value="chooseFromComplement([var=possibleTenses],{[var=correctTense]})" />

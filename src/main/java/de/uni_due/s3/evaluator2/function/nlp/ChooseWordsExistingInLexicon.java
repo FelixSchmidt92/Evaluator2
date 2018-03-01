@@ -6,6 +6,8 @@ import java.util.List;
 import de.uni_due.s3.evaluator2.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.function.Function;
+import de.uni_due.s3.evaluator2.nlp.lexicon.LexiconBuilder;
+import de.uni_due.s3.evaluator2.nlp.lexicon.LexiconJack;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
@@ -17,20 +19,25 @@ public class ChooseWordsExistingInLexicon extends Function {
 		
 		List<Object> wordsToCheck = getListSyntax(arguments.get(1));
 		String wordCategory = getStringSyntax(arguments.get(0));
+		List<Object> wordsInLexicon = new ArrayList<>();
+		LexiconJack lexicon;
 		
-		System.out.println("Checke Wörter der Kategorie ..." + wordCategory);
-		for(Object arg : wordsToCheck){
-			System.out.println("Word = "+getStringSyntax(arg));
+		try {
+			lexicon = LexiconBuilder.buildDefaultLexicon();
+			System.out.println("Checke Wörter der Kategorie ..." + wordCategory);
+			for(Object word : wordsToCheck){
+				System.out.println("Word = "+getStringSyntax(word));
+				if(lexicon.wordExistsForCategory(getStringSyntax(word), wordCategory)){
+					wordsInLexicon.add(OMCreator.createOMSTR(getStringSyntax(word)));
+				}
+				
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		
-		List<Object> list = new ArrayList<>();
 
-		Object source_sentence = OMCreator.createOMSTR("Wort");
-		Object target_sentence = OMCreator.createOMSTR("Abc");
-		list.add(source_sentence);
-		list.add(target_sentence);
-		
-		return OMCreator.createOMA(OMSymbol.LIST1_LIST, list);
+		return OMCreator.createOMA(OMSymbol.LIST1_LIST, wordsInLexicon);
 	}
 
 	@Override
