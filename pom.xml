@@ -54,6 +54,12 @@
 			<artifactId>SimpleNLG</artifactId>
 			<version>4.4.8</version>
 		</dependency>
+		<dependency>
+		  <groupId>org.apache.opennlp</groupId>
+		  <artifactId>opennlp-tools</artifactId>
+		  <version>1.8.4</version>
+		</dependency>
+		
 	</dependencies>
 	<build>
 		<plugins>

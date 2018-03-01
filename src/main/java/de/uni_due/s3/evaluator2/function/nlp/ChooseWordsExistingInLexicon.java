@@ -6,6 +6,7 @@ import java.util.List;
 import de.uni_due.s3.evaluator2.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.function.Function;
+import de.uni_due.s3.evaluator2.nlp.PartOfSpeechTagger;
 import de.uni_due.s3.evaluator2.nlp.lexicon.LexiconBuilder;
 import de.uni_due.s3.evaluator2.nlp.lexicon.LexiconJack;
 import de.uni_due.s3.openmath.omutils.OMCreator;
@@ -24,6 +25,7 @@ public class ChooseWordsExistingInLexicon extends Function {
 		
 		try {
 			lexicon = LexiconBuilder.buildDefaultLexicon();
+			PartOfSpeechTagger.main(null);
 			
 			for(Object word : wordsToCheck){
 				//System.out.println("Word = "+getStringSyntax(word));
