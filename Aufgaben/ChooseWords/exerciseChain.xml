@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<exercisechain>
+	<variables>	
+		<option name="listOfSubjects" value="{'animal';'man';'girl';'woman'}" />
+		<option name="listOfVerbs" value="{'eat';'be'}" />
+		<option name="listOfObjects" value="{'fish';'meat';'orange'}" />
+		<option name="possibleTenses" value="{'present simple';'past simple';'future simple';'present perfect';'past perfect';'future perfect'}" />
+		
+		<option name="possibleSubjects" value="chooseWordsInLexicon('noun', [var=listOfSubjects])"/>
+		<option name="possibleVerbs" value="chooseWordsInLexicon('verb', [var=listOfVerbs])"/>
+		<option name="possibleObjects" value="chooseWordsInLexicon('noun, [var=listOfObjects])"/>
+		
+		<option name="randomSubject" value="getRandomFromList([var=possibleSubjects])"/>
+		<option name="randomVerb" value="getRandomFromList([var=possibleVerbs])"/>
+		<option name="randomObject" value="getRandomFromList([var=possibleObjects])"/>
+		
+		<option name="correctTense" value="getRandomFromList([var=possibleTenses])"/>
+		<option name="sentence" value="genSimpleSentence([var=randomSubject], [var=randomVerb], [var=randomObject], [var=correctTense])"/>
+
+		<option name="tense1" value="chooseFromComplement([var=possibleTenses],{[var=correctTense]})" />
+		<option name="tense2" value="chooseFromComplement([var=possibleTenses],{[var=correctTense];[var=tense1]})" />
+		<option name="tense3" value="chooseFromComplement([var=possibleTenses],{[var=correctTense];[var=tense1];[var=tense2]})" />
+		<option name="pattern" value="'1000'" />
+	</variables>
+
+	<step file="stage1.xml" displayName="Stage 1" id="1">
+		<input value="[var=tense1]" />
+		<input value="[var=tense2]" />
+		<input value="[var=tense3]" />
+		<input value="[var=correctTense]" />
+		<input value="[var=sentence]" />
+		<input value="[var=pattern]" />
+
+		<next default="repeat" message="Versuche es noch einmal." >
+			<path result="100" target="end" message="Die Aufgabe ist beendet." />
+		</next>
+	</step>
+</exercisechain>
