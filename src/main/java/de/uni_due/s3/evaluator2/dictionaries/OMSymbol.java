@@ -65,6 +65,9 @@ public class OMSymbol {
 	public static final OMS GENERATE_SENTENCE_WITH_TENSE =  OMCreator.createOMS("nlp", "genWithTen");
 	public static final OMS CHOOSE_WORDS_EXIST_IN_LEXICON =  OMCreator.createOMS("nlp", "chooseWordsInLexicon");
 	public static final OMS GENERATE_SIMPLE_SENTENCE =  OMCreator.createOMS("nlp", "genSimpleSentence");
+
+	public static final OMS POS_TAG_SENTENCE =  OMCreator.createOMS("nlp", "posTagSentence");
+	public static final OMS TOKENIZE_SENTENCE =  OMCreator.createOMS("nlp", "tokenizeSentence");
 																					   
 	public static final OMS LINALGJACK_EQUALBASIS = OMCreator.createOMS("linalgJACK", "equalBasis");
 	public static final OMS LINALGJACK_ISLINEARLYINDEPENDENT = OMCreator.createOMS("linalgJACK",

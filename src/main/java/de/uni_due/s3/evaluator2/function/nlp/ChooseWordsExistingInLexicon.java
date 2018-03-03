@@ -25,7 +25,6 @@ public class ChooseWordsExistingInLexicon extends Function {
 		
 		try {
 			lexicon = LexiconBuilder.buildDefaultLexicon();
-			PartOfSpeechTagger.main(null);
 			
 			for(Object word : wordsToCheck){
 				//System.out.println("Word = "+getStringSyntax(word));

@@ -17,14 +17,9 @@ public class PartOfSpeechTagger {
 	private static PartOfSpeechTagger singletonInstance;
 	private POSTaggerME tagger;
 	
-	public String[] doPOSTagging(String sentenceToTag ){
-		
-		//TODO tokenize input sentence
-		String sent[] = new String[]{"The", "man", "runs", "home"};		  
-		
-		String tags[] = tagger.tag(sent);
+	public String[] doPOSTagging(String[] wordsToTag ) {  
+		String tags[] = tagger.tag(wordsToTag);
 		return tags;
-		
 	}
 	
 	private PartOfSpeechTagger() throws IOException {

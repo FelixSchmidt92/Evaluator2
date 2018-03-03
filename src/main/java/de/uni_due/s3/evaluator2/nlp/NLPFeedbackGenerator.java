@@ -9,10 +9,7 @@ public class NLPFeedbackGenerator {
 		try {
 			PartOfSpeechTagger posTagger = PartOfSpeechTagger.getInstance();
 			
-			String[] correctSentenceTags = posTagger.doPOSTagging(correctSentence);
-			String[] userSentenceTags = posTagger.doPOSTagging(correctSentence);
-			
-			// TODO vergleiche Tags und erzeuge Feedback ...
+
 			
 			
 		} catch (IOException e) {
