@@ -31,7 +31,6 @@ public class GenerateTenseTransformation extends Function{
 		String object = getStringSyntax(arguments.get(4));
 		
 		ArrayList<String> sentences = new ArrayList<String>();
-		System.out.println("GenerateTenseTransformation...");
 		try {
 			sentences = (new SimpleNLGSentenceFactory()).createSentencesForTenseTransformation(source_tense, target_tense, subject, object, verb);		
 		} catch (InvalidContextException | InvalidDifficultyExeption | InvalidTenseException e) {

@@ -34,7 +34,6 @@ public class PartOfSpeechTagSentence extends Function {
 			List<Object> list = new ArrayList<>();
 			
 			for (String tag : posTags) {
-				System.out.println("tag: " + tag);
 				list.add(OMCreator.createOMSTR(tag));
 			}
 			return OMCreator.createOMA(OMSymbol.LIST1_LIST, list);

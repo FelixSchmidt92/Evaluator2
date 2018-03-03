@@ -20,6 +20,10 @@
 		<option name="tense1" value="chooseFromComplement([var=possibleTenses],{[var=correctTense]})" />
 		<option name="tense2" value="chooseFromComplement([var=possibleTenses],{[var=correctTense];[var=tense1]})" />
 		<option name="tense3" value="chooseFromComplement([var=possibleTenses],{[var=correctTense];[var=tense1];[var=tense2]})" />
+		
+		<option name="tokens" value="tokenizeSentence([var=sentence])"/>
+		<option name="posTags" value="posTagSentence([var=tokens])"/>
+		
 		<option name="pattern" value="'1000'" />
 	</variables>
 

@@ -24,7 +24,6 @@ public class TokenizeSentence extends Function {
 		List<Object> list = new ArrayList<>();
 		
 		for (String token : tokens) {
-			System.out.println("token: " + token);
 			list.add(OMCreator.createOMSTR(token));
 		}
 		

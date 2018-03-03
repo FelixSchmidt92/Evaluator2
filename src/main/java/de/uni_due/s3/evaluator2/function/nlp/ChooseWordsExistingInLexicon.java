@@ -27,7 +27,6 @@ public class ChooseWordsExistingInLexicon extends Function {
 			lexicon = LexiconBuilder.buildDefaultLexicon();
 			
 			for(Object word : wordsToCheck){
-				//System.out.println("Word = "+getStringSyntax(word));
 				if(lexicon.wordExistsForCategory(getStringSyntax(word), wordCategory)){
 					wordsInLexicon.add(OMCreator.createOMSTR(getStringSyntax(word)));
 				}

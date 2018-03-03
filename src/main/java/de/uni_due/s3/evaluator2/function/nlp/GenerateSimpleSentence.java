@@ -17,7 +17,6 @@ public class GenerateSimpleSentence extends Function {
 	protected Object getPartialOpenMathElementResult(List<Object> arguments)
 			throws EvaluatorException, OpenMathException {
 		
-		System.out.println("Generiere Satz aus den folgenden Worten ...");
 		String subject = getStringSyntax(arguments.get(0));
 		String verb = getStringSyntax(arguments.get(1));	
 		String object = getStringSyntax(arguments.get(2));
