@@ -30,26 +30,16 @@ public class NLPFeedbackGenerator {
 	
 	private static String DETERMINER_MISSING_MESSAGE = "";
 	
+	private static 
 	
-	public static String generateFeedback(String[] correctSentenceTokens, String[] correctSentencePOSTags, String[] userSentenceTokens, String[] userSentencePOSTags) {
 	
-		for (int i = 0; i < correctSentencePOSTags.length; i++) {
-			
-		}
+	public static String generateFeedbackForSimpleSentence(String[] correctSentenceTokens, String[] correctSentencePOSTags, String[] userSentenceTokens, String[] userSentencePOSTags) {
+	
 		
 		return null;
 		
 	}
-	
-	private static String compareSubjects(String[] correctSentenceSubjectTokens, String[] correctSentenceSubjectPOSTags, String[] userSentenceSubjectTokens, String[] userSentenceSubjectPOSTags){
 		
-		return null;
-	}
-	
-	private static String compareVerbs(String[] correctSentenceSubjectTokens, String[] correctSentenceSubjectPOSTags, String[] userSentenceSubjectTokens, String[] userSentenceSubjectPOSTags) {
-		return null;
-	}
-	
 	private static Span extractFirstIfType(ArrayList<Span> spans, String type) {
 		
 		if( ( !spans.isEmpty() ) && spans.get(0).getType().equals(type)) {
@@ -65,9 +55,11 @@ public class NLPFeedbackGenerator {
 		
 		ArrayList<String> result = new ArrayList<>();
 		
-		String sentence1 = "The animals will have eaten.";
-		String sentence2 = "The animals eat fish";
-		
+		String sentence1 = "The animals had been playing.";
+		String sentence2 = "The animals has playing.";
+
+		System.out.println(sentence1);
+		System.out.println(sentence2);
 		try {
 				
 		   InputStream modelIn;
@@ -86,6 +78,10 @@ public class NLPFeedbackGenerator {
 		   for (int i = 0; i < posS1.length; i++) {
 			System.out.println(posS1[i]);
 		}
+		   for (int i = 0; i < posS2.length; i++) {
+				System.out.println(posS2[i]);
+			}
+					
 				
 		// Get the main Phrases (Subject, Verb, Object)  
 	  
@@ -98,11 +94,17 @@ public class NLPFeedbackGenerator {
 		     
 		    //Generating the chunks 
 		    Span[] spans  = chunkerME.chunkAsSpans(tokensS1, posS1); 
-		    
+		    Span[] spans2  = chunkerME.chunkAsSpans(tokensS2, posS2); 
+
 		    for (int i = 0; i < spans.length; i++) {
 				System.out.println(spans[i]);
 			}
+		    System.out.println("----------");
+		    for (int i = 0; i < spans2.length; i++) {
+						System.out.println(spans2[i]);
+					}
 		    ArrayList<Span> spanList = new ArrayList<Span>( Arrays.asList(spans) );
+		    ArrayList<Span> spanList2 = new ArrayList<Span>( Arrays.asList(spans2) );
 		    
 		    // Satz besteht immer aus Subjekt, Verb, Objekt (in der Reihenfolge)
 		    // 
@@ -110,30 +112,45 @@ public class NLPFeedbackGenerator {
 		    Span subjectSpan = extractFirstIfType(spanList, "NP");
 		    Span verbSpan = extractFirstIfType(spanList, "VP");
 		    Span objectSpan = extractFirstIfType(spanList, "NP");
+		    
+		    Span subjectSpan2 = extractFirstIfType(spanList2, "NP");
+		    Span verbSpan2 = extractFirstIfType(spanList2, "VP");
+		    Span objectSpan2 = extractFirstIfType(spanList2, "NP");
 
-		    if(subjectSpan==null) {
+
+		    if(subjectSpan2==null) {
 		    	result.add(SUBJECT_MISSING_MESSAGE);
 		    }
 		    else {
 		    	
 		    }
-		    if(verbSpan==null) {
+		    if(verbSpan2==null) {
 		    	result.add(VERB_MISSING_MESSAGE);
 		    }
 		    else {
 		    	
 		    }
-		    if(objectSpan==null) {
+		    if(objectSpan2==null) {
 		    	result.add(OBJECT_MISSING_MESSAGE);		    
 		    }
 		    else {
 		    	
 		    }
+		    
+		    String[] correctVerbTokens = Arrays.copyOfRange(tokensS1, verbSpan.getStart(), verbSpan.getEnd());
+		    String[] correctVerbPOSTags = Arrays.copyOfRange(posS1, verbSpan.getStart(), verbSpan.getEnd());
+		    
+		    String[] userVerbTokens = Arrays.copyOfRange(tokensS2, verbSpan2.getStart(), verbSpan2.getEnd());
+		    String[] userVerbPOSTags = Arrays.copyOfRange(posS2, verbSpan2.getStart(), verbSpan2.getEnd());
+		    
+		    VerbPhraseComparator verbPhraseComparator = new VerbPhraseComparator();
+		    result.addAll(verbPhraseComparator.comparePhrase(correctVerbTokens, correctVerbPOSTags, userVerbTokens, userVerbPOSTags));
+		    
 		    for(String s : result) {
 		    	System.out.println(s);
 		    }
 		         
-	        generateFeedback(tokensS1, posS1, tokensS2, posS2);
+	        generateFeedbackForSimpleSentence(correctSentenceTokens, correctSentencePOSTags, userSentenceTokens, userSentencePOSTags)(tokensS1, posS1, tokensS2, posS2);
 						
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
