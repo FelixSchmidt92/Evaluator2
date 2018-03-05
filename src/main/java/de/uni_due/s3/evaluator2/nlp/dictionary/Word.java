@@ -1,4 +1,4 @@
-package de.uni_due.s3.evaluator2.nlp.lexicon;
+package de.uni_due.s3.evaluator2.nlp.dictionary;
 
 import java.util.ArrayList;
 

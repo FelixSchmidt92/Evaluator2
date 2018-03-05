@@ -1,8 +1,8 @@
-package de.uni_due.s3.evaluator2.nlp.lexicon;
+package de.uni_due.s3.evaluator2.nlp.dictionary;
 
 import java.util.ArrayList;
 
-public class LexiconJack {
+public class Dictionary {
 
 	private ArrayList<Word> nouns = new ArrayList<Word>();
 	private ArrayList<Word> pronouns = new ArrayList<Word>();

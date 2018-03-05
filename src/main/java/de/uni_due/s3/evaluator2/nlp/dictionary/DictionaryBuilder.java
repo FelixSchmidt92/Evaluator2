@@ -1,4 +1,4 @@
-package de.uni_due.s3.evaluator2.nlp.lexicon;
+package de.uni_due.s3.evaluator2.nlp.dictionary;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class LexiconBuilder {
+public class DictionaryBuilder {
 	private ArrayList<Word> nouns = new ArrayList<Word>();
 	private ArrayList<Word> pronouns = new ArrayList<Word>();
 	private ArrayList<Word> determiners = new ArrayList<Word>();
@@ -22,7 +22,7 @@ public class LexiconBuilder {
 	private ArrayList<Word> prepositions = new ArrayList<Word>();
 	private ArrayList<Word> conjunctions = new ArrayList<Word>();
 	
-	private static LexiconJack defaultLexicon;
+	private static Dictionary defaultLexicon;
 	private static String DEFAULT_LEXICON_FILE_PATH = System.getProperty("jboss.server.data.dir") + "/default-lexicon.xml";
 
 	public void buildLexicon(String filename) throws Exception {
@@ -197,13 +197,13 @@ public class LexiconBuilder {
 
 	}
 	
-public static LexiconJack buildDefaultLexicon() throws Exception {
+public static Dictionary buildDefaultLexicon() throws Exception {
 		
 	
 		if(defaultLexicon==null) {
 			
 			System.out.println("Lexicon wird geladen..");
-			LexiconJack lexiconToBuild = new LexiconJack();
+			Dictionary lexiconToBuild = new Dictionary();
 		
 			File inputFile = new File(DEFAULT_LEXICON_FILE_PATH);
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();

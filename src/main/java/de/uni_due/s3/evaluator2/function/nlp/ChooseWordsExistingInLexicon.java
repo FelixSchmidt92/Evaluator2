@@ -7,8 +7,8 @@ import de.uni_due.s3.evaluator2.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.function.Function;
 import de.uni_due.s3.evaluator2.nlp.PartOfSpeechTagger;
-import de.uni_due.s3.evaluator2.nlp.lexicon.LexiconBuilder;
-import de.uni_due.s3.evaluator2.nlp.lexicon.LexiconJack;
+import de.uni_due.s3.evaluator2.nlp.dictionary.DictionaryBuilder;
+import de.uni_due.s3.evaluator2.nlp.dictionary.Dictionary;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
@@ -21,10 +21,10 @@ public class ChooseWordsExistingInLexicon extends Function {
 		List<Object> wordsToCheck = getListSyntax(arguments.get(1));
 		String wordCategory = getStringSyntax(arguments.get(0));
 		List<Object> wordsInLexicon = new ArrayList<>();
-		LexiconJack lexicon;
+		Dictionary lexicon;
 		
 		try {
-			lexicon = LexiconBuilder.buildDefaultLexicon();
+			lexicon = DictionaryBuilder.buildDefaultLexicon();
 			
 			for(Object word : wordsToCheck){
 				if(lexicon.wordExistsForCategory(getStringSyntax(word), wordCategory)){

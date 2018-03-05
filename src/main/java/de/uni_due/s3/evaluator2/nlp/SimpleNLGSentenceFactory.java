@@ -7,12 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import de.uni_due.s3.evaluator2.nlp.dictionary.DictionaryBuilder;
+import de.uni_due.s3.evaluator2.nlp.dictionary.Property;
+import de.uni_due.s3.evaluator2.nlp.dictionary.Word;
 import de.uni_due.s3.evaluator2.nlp.exceptions.InvalidContextException;
 import de.uni_due.s3.evaluator2.nlp.exceptions.InvalidDifficultyExeption;
 import de.uni_due.s3.evaluator2.nlp.exceptions.InvalidTenseException;
-import de.uni_due.s3.evaluator2.nlp.lexicon.LexiconBuilder;
-import de.uni_due.s3.evaluator2.nlp.lexicon.Property;
-import de.uni_due.s3.evaluator2.nlp.lexicon.Word;
 import simplenlg.features.*;
 import simplenlg.framework.DocumentElement;
 import simplenlg.framework.NLGFactory;
@@ -116,7 +116,7 @@ public class SimpleNLGSentenceFactory implements ISentenceFactory {
 		switch (context) {
 		case "TESTCONTEXT":
 			try {
-				de.uni_due.s3.evaluator2.nlp.lexicon.LexiconJack lex = LexiconBuilder.buildDefaultLexicon();
+				de.uni_due.s3.evaluator2.nlp.dictionary.Dictionary lex = DictionaryBuilder.buildDefaultLexicon();
 
 				subject = lex.getNouns().get(rand.nextInt(lex.getNouns().size())).getBase();
 				Word _verb = lex.getVerbs().get(rand.nextInt(lex.getVerbs().size()));

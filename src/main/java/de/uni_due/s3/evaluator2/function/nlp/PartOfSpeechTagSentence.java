@@ -8,7 +8,7 @@ import de.uni_due.s3.evaluator2.dictionaries.OMSymbol;
 import de.uni_due.s3.evaluator2.exceptions.EvaluatorException;
 import de.uni_due.s3.evaluator2.function.Function;
 import de.uni_due.s3.evaluator2.nlp.PartOfSpeechTagger;
-import de.uni_due.s3.evaluator2.nlp.lexicon.LexiconJack;
+import de.uni_due.s3.evaluator2.nlp.dictionary.Dictionary;
 import de.uni_due.s3.openmath.omutils.OMCreator;
 import de.uni_due.s3.openmath.omutils.OpenMathException;
 
