@@ -63,7 +63,6 @@ import de.uni_due.s3.evaluator2.function.logic_jack.IfThenElse;
 import de.uni_due.s3.evaluator2.function.mc_jack.MCIndex;
 import de.uni_due.s3.evaluator2.function.nlp.ChooseWordsExistingInLexicon;
 import de.uni_due.s3.evaluator2.function.nlp.GetSimpleSentenceFeedback;
-import de.uni_due.s3.evaluator2.function.nlp.GenerateTenseTransformation;
 import de.uni_due.s3.evaluator2.function.nlp.PartOfSpeechTagSentence;
 import de.uni_due.s3.evaluator2.function.nlp.TokenizeSentence;
 import de.uni_due.s3.evaluator2.function.nlp.GenerateSimpleSentence;
@@ -247,7 +246,6 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.LOGIC1_TRUE, new True());
 		functions.put(OMSymbol.LOGIC1_FALSE, new False());
 		
-		functions.put(OMSymbol.GENERATE_TENSE_TRANSFORMATION, new GenerateTenseTransformation());
 		functions.put(OMSymbol.CHOOSE_WORDS_EXIST_IN_LEXICON, new ChooseWordsExistingInLexicon());
 		functions.put(OMSymbol.GENERATE_SIMPLE_SENTENCE, new GenerateSimpleSentence());
 		functions.put(OMSymbol.GET_SIMPLE_SENTENCE_FEEDBACK, new GetSimpleSentenceFeedback());

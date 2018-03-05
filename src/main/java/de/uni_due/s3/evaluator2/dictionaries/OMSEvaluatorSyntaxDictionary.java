@@ -184,7 +184,6 @@ public class OMSEvaluatorSyntaxDictionary {
 
 		functionSymbolMap.put("querySparql", OMSymbol.SPARQLJACK_QUERYSPARQL);
 
-		functionSymbolMap.put("genTenseTransformation", OMSymbol.GENERATE_TENSE_TRANSFORMATION);
 		functionSymbolMap.put("genSimpleSentence", OMSymbol.GENERATE_SIMPLE_SENTENCE);	
 		functionSymbolMap.put("chooseWordsInLexicon", OMSymbol.CHOOSE_WORDS_EXIST_IN_LEXICON);
 		functionSymbolMap.put("posTagSentence", OMSymbol.POS_TAG_SENTENCE);

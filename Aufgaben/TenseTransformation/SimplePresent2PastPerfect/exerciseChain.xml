@@ -16,10 +16,8 @@
 		<option name="sourceTense" value="'present simple'"/>
 		<option name="targetTense" value="'past perfect'"/>
 
-		<option name="sentenceTransformation" value="genTenseTransformation([var=sourceTense],[var=targetTense],[var=randomSubject],[var=randomVerb],[var=randomObject])"/>
-
-		<option name="sourceSentence" value="getFromList(0,[var=sentenceTransformation])"/>
-		<option name="targetSentence" value="getFromList(1,[var=sentenceTransformation])"/>
+		<option name="sourceSentence" value="genSimpleSentence([var=randomSubject], [var=randomVerb], [var=randomObject], [var=sourceTense])"/>
+		<option name="targetSentence" value="genSimpleSentence([var=randomSubject], [var=randomVerb], [var=randomObject], [var=targetTense])"/>
     </variables>
     <step id="1" file="stage1.xml"> 
 		 <input value="[var=sourceSentence]" />
