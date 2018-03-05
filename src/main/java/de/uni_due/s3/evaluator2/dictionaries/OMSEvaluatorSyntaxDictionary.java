@@ -189,6 +189,8 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("chooseWordsInLexicon", OMSymbol.CHOOSE_WORDS_EXIST_IN_LEXICON);
 		functionSymbolMap.put("posTagSentence", OMSymbol.POS_TAG_SENTENCE);
 		functionSymbolMap.put("tokenizeSentence", OMSymbol.TOKENIZE_SENTENCE);
+		functionSymbolMap.put("getSentenceFeedback", OMSymbol.GET_SIMPLE_SENTENCE_FEEDBACK);
+		
 		
 		functionSymbolMap.put("charAt", OMSymbol.STRINGJACK_CHARAT);
 		functionSymbolMap.put("compareTo", OMSymbol.STRINGJACK_COMPARETO);
