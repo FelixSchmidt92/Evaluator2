@@ -22,7 +22,7 @@ import opennlp.tools.postag.POSTaggerME;
 import opennlp.tools.tokenize.SimpleTokenizer;
 import opennlp.tools.util.Span;
 
-public class NLPFeedbackGenerator {
+public class SimpleSentenceFeedbackGenerator {
 	
 	private static String SUBJECT_MISSING_MESSAGE = "In dem Satz scheint das Subjekt zu fehlen.";
 	private static String VERB_MISSING_MESSAGE = "In dem Satz scheint das Verb zu fehlen.";
