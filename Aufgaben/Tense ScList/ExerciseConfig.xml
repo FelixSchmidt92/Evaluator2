@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <exercise>
   <general>
-    <title>MPC Tense of Sentence</title>
-    <category>English</category>
+    <title>Tense Sclist</title>
+    <category />
     <view-type>FORMBASED</view-type>
     <is-active>false</is-active>
-    <is-public>false</is-public>
+    <is-public>true</is-public>
     <level-of-difficulty>0</level-of-difficulty>
     <discriminant>0.0</discriminant>
-    <exercise-tag-list>Mathe;</exercise-tag-list>
+    <exercise-tag-list />
     <internal-description />
     <external-description />
     <penalty-percent>0</penalty-percent>
@@ -21,9 +21,9 @@
       <result-name>InstantMultipleChoiceChecker (1) result</result-name>
       <is-visible>true</is-visible>
       <is-visible-detail>true</is-visible-detail>
-      <is-active>true</is-active>
+      <is-active>false</is-active>
       <checker-id>de.uni_due.s3.jack2.server.core.instantcheckers.MultipleChoiceChecker</checker-id>
-      <variable-name>c60621</variable-name>
+      <variable-name>c149</variable-name>
       <checker-configuration-tuples />
     </checker-configuration>
   </checker-configurations>

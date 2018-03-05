@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<exercise type="scList">
+	<input>
+		<inputvalue name="tense1" type="string"/>
+		<inputvalue name="tense2" type="string"/>
+		<inputvalue name="tense3" type="string"/>
+		<inputvalue name="tense4" type="string"/>
+		<inputvalue name="tense5" type="string"/>
+		<inputvalue name="sentence1" type="string"/>
+		<inputvalue name="sentence2" type="string"/>
+		<inputvalue name="sentence3" type="string"/>
+		<inputvalue name="sentence4" type="string"/>
+		<inputvalue name="sentence5" type="string"/>
+	</input>
+	<task> Choose the tense of the following sentences: 
+	</task>
+	<questionlist count="row" feedbacktype="manually" columnNames="[var=tense1],[var=tense2],[var=tense3],[var=tense4],[var=tense5]" firstColumn="Sentences">
+      <question assertion="[var=sentence1]" />
+	  <question assertion="[var=sentence2]" />
+	  <question assertion="[var=sentence3]" />
+	  <question assertion="[var=sentence4]" />
+	  <question assertion="[var=sentence5]" />
+    </questionlist>
+	<correctanswer>
+		<choice pattern="10000,01000,00100,00010,00001"/>
+		<message>Sehr gut!</message> 
+	</correctanswer>
+	<feedback>
+		<choice pattern="andere">Das ist leider falsch.</choice>
+	</feedback>
+	<advice/>
+	<output/>
+</exercise>

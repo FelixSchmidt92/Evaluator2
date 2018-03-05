@@ -30,9 +30,7 @@ public class NLPFeedbackGenerator {
 	
 	private static String DETERMINER_MISSING_MESSAGE = "";
 	
-	private static 
-	
-	
+
 	public static String generateFeedbackForSimpleSentence(String[] correctSentenceTokens, String[] correctSentencePOSTags, String[] userSentenceTokens, String[] userSentencePOSTags) {
 	
 		
@@ -150,7 +148,7 @@ public class NLPFeedbackGenerator {
 		    	System.out.println(s);
 		    }
 		         
-	        generateFeedbackForSimpleSentence(correctSentenceTokens, correctSentencePOSTags, userSentenceTokens, userSentencePOSTags)(tokensS1, posS1, tokensS2, posS2);
+	        generateFeedbackForSimpleSentence(tokensS1, posS1, tokensS2, posS2);
 						
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

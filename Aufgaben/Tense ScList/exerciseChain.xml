@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<exercisechain>
+	<variables>	
+		<option name="listOfSubjects" value="{'animal';'man';'girl';'woman'}" />
+		<option name="listOfVerbs" value="{'eat'}" />
+		<option name="listOfObjects" value="{'fish';'apple';'orange'}" />
+		<option name="possibleTenses" value="{'present simple';'past simple';'future simple';'present perfect';'past perfect';'future perfect'}" />
+		
+		<option name="possibleSubjects" value="chooseWordsInLexicon('noun', [var=listOfSubjects])"/>
+		<option name="possibleVerbs" value="chooseWordsInLexicon('verb', [var=listOfVerbs])"/>
+		<option name="possibleObjects" value="chooseWordsInLexicon('noun', [var=listOfObjects])"/>
+		
+		<option name="randomSubject" value="getRandomFromList([var=possibleSubjects])"/>
+		<option name="randomVerb" value="getRandomFromList([var=possibleVerbs])"/>
+		<option name="randomObject" value="getRandomFromList([var=possibleObjects])"/>
+		
+		<option name="tense1" value="getRandomFromList([var=possibleTenses])"/>
+		<option name="tense2" value="chooseFromComplement([var=possibleTenses],{[var=tense1]})" />
+		<option name="tense3" value="chooseFromComplement([var=possibleTenses],{[var=tense1];[var=tense2]})" />
+		<option name="tense4" value="chooseFromComplement([var=possibleTenses],{[var=tense1];[var=tense2];[var=tense3]})" />
+		<option name="tense5" value="chooseFromComplement([var=possibleTenses],{[var=tense1];[var=tense2];[var=tense3];[var=tense4]})" />
+		
+		<option name="sentence1" value="genSimpleSentence([var=randomSubject], [var=randomVerb], [var=randomObject], [var=tense1])"/>
+		<option name="sentence2" value="genSimpleSentence([var=randomSubject], [var=randomVerb], [var=randomObject], [var=tense2])"/>
+		<option name="sentence3" value="genSimpleSentence([var=randomSubject], [var=randomVerb], [var=randomObject], [var=tense3])"/>
+		<option name="sentence4" value="genSimpleSentence([var=randomSubject], [var=randomVerb], [var=randomObject], [var=tense4])"/>
+		<option name="sentence5" value="genSimpleSentence([var=randomSubject], [var=randomVerb], [var=randomObject], [var=tense5])"/>
+		
+		<option name="tenses" value="{[var=tense1];[var=tense2];[var=tense3];[var=tense4];[var=tense5]}" />
+		<option name="sentences" value="{[var=sentence1];[var=sentence2];[var=sentence3];[var=sentence4];[var=sentence5]}" />
+
+		<!--<option name="pattern" value="'1000'" /> -->
+	</variables>
+
+	<step file="stage1.xml" displayName="Stage 1" id="1">
+		<input value="[var=tense1]" />
+		<input value="[var=tense2]" />
+		<input value="[var=tense3]" />
+		<input value="[var=tense4]" />
+		<input value="[var=tense5]" />
+		<input value="[var=sentence1]" />
+		<input value="[var=sentence2]" />
+		<input value="[var=sentence3]" />
+		<input value="[var=sentence4]" />
+		<input value="[var=sentence5]" />
+		<!--<input value="[var=pattern]" /> -->
+		<next default="repeat" message="Versuche es noch einmal." >
+			<path result="100" target="end" message="Die Aufgabe ist beendet." />
+		</next>
+	</step>
+</exercisechain>
