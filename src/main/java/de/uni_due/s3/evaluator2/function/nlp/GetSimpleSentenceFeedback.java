@@ -18,7 +18,7 @@ public class GetSimpleSentenceFeedback extends Function {
 	@Override
 	protected Object getPartialOpenMathElementResult(List<Object> arguments)
 			throws EvaluatorException, OpenMathException {
-
+		
 		List<Object> correctSentenceTokens_1 = getListSyntax(arguments.get(0));
 		List<Object> correctSentencePOSTags_1 = getListSyntax(arguments.get(1));
 		List<Object> userSentenceTokens_1 = getListSyntax(arguments.get(2));
@@ -40,15 +40,16 @@ public class GetSimpleSentenceFeedback extends Function {
 		for (int i = 0; i < userSentenceTokens.length; i++) {
 			userSentenceTokens[i] = getStringSyntax(userSentenceTokens_1.get(i));
 		}
-
+		
 		for (int i = 0; i < userSentencePOSTags.length; i++) {
 			userSentencePOSTags[i] = getStringSyntax(userSentencePOSTags_1.get(i));
 		}
 
-		String generatedSentence;
+		String generatedFeedback;
 		try {
-			generatedSentence = SimpleSentenceFeedbackGenerator.generateFeedbackForSimpleSentence(correctSentenceTokens, correctSentencePOSTags, userSentenceTokens, userSentencePOSTags);
-			return OMCreator.createOMSTR(generatedSentence);
+			generatedFeedback = SimpleSentenceFeedbackGenerator.generateFeedbackForSimpleSentence(correctSentenceTokens, correctSentencePOSTags, userSentenceTokens, userSentencePOSTags);
+			System.out.println("Feeback : "+generatedFeedback);
+			return OMCreator.createOMSTR(generatedFeedback);
 
 		} catch (IOException e) {
 			throw new EvaluatorException("The Chunker file couldn't be loaded");

@@ -25,7 +25,16 @@
 	
 	<feedback>
 		<option result="compareToIgnoreCase('[pos=1]',[var=targetSentence])==0">Check the sentence case!</option>
-		<option result="andere">  </option>
+		<option result="contains(getSentenceFeedback(tokenizeSentence([var=targetSentence]), posTagSentence(tokenizeSentence([var=targetSentence])),tokenizeSentence('[pos=1]'), posTagSentence(tokenizeSentence('[pos=1]'))),'The determiner of the subject is missing in the input sentence.')">The determiner of the object is missing in the input sentence.</option>
+		<option result="contains(getSentenceFeedback(tokenizeSentence([var=targetSentence]), posTagSentence(tokenizeSentence([var=targetSentence])),tokenizeSentence('[pos=1]'), posTagSentence(tokenizeSentence('[pos=1]'))),'The object should not have a determiner.')">The object should not have a determiner.</option>
+		<option result="contains(getSentenceFeedback(tokenizeSentence([var=targetSentence]), posTagSentence(tokenizeSentence([var=targetSentence])),tokenizeSentence('[pos=1]'), posTagSentence(tokenizeSentence('[pos=1]'))),'The object should be in plural but is in singular.')">The object should be in plural but is in singular.</option>
+		<option result="contains(getSentenceFeedback(tokenizeSentence([var=targetSentence]), posTagSentence(tokenizeSentence([var=targetSentence])),tokenizeSentence('[pos=1]'), posTagSentence(tokenizeSentence('[pos=1]'))),'The subject should be in singular but is in plural.')">The subject should be in singular but is in plural.</option>
+		<option result="contains(getSentenceFeedback(tokenizeSentence([var=targetSentence]), posTagSentence(tokenizeSentence([var=targetSentence])),tokenizeSentence('[pos=1]'), posTagSentence(tokenizeSentence('[pos=1]'))),'There seems to be a problem with the tense of your sentence.')">There seems to be a problem with the tense of your sentence.</option>
+		<option result="contains(getSentenceFeedback(tokenizeSentence([var=targetSentence]), posTagSentence(tokenizeSentence([var=targetSentence])),tokenizeSentence('[pos=1]'), posTagSentence(tokenizeSentence('[pos=1]'))),'Tense of input sentence is present simple')">Simple past was requested, tense of input sentence is simple present.</option>
+		<option result="contains(getSentenceFeedback(tokenizeSentence([var=targetSentence]), posTagSentence(tokenizeSentence([var=targetSentence])),tokenizeSentence('[pos=1]'), posTagSentence(tokenizeSentence('[pos=1]'))),'Tense of input sentence is present progressive')">Simple past was requested, tense of input sentence is present progressive.</option>
+		<option result="contains(getSentenceFeedback(tokenizeSentence([var=targetSentence]), posTagSentence(tokenizeSentence([var=targetSentence])),tokenizeSentence('[pos=1]'), posTagSentence(tokenizeSentence('[pos=1]'))),'Tense of input sentence is present perfect')">Simple past was requested, tense of input sentence is present perfect.</option>
+		<option result="contains(getSentenceFeedback(tokenizeSentence([var=targetSentence]), posTagSentence(tokenizeSentence([var=targetSentence])),tokenizeSentence('[pos=1]'), posTagSentence(tokenizeSentence('[pos=1]'))),'Tense of input sentence is present perfect progressive')">Simple past was requested, tense of input sentence is present perfect progressive.</option>
+		<option result="andere"> Andere Feedback </option>
 	</feedback>
 	<output>
 	</output>

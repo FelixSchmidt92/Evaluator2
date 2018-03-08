@@ -117,6 +117,7 @@ import de.uni_due.s3.evaluator2.function.string_jack.CharAt;
 import de.uni_due.s3.evaluator2.function.string_jack.CompareTo;
 import de.uni_due.s3.evaluator2.function.string_jack.CompareToIgnoreCase;
 import de.uni_due.s3.evaluator2.function.string_jack.Concat;
+import de.uni_due.s3.evaluator2.function.string_jack.Contains;
 import de.uni_due.s3.evaluator2.function.string_jack.EndsWith;
 import de.uni_due.s3.evaluator2.function.string_jack.Equals;
 import de.uni_due.s3.evaluator2.function.string_jack.EqualsIgnoreCase;
@@ -342,6 +343,7 @@ public class OMSFunctionDictionary {
 		functions.put(OMSymbol.STRINGJACK_CONCAT, new Concat());
 		functions.put(OMSymbol.STRINGJACK_ENDSWITH, new EndsWith());
 		functions.put(OMSymbol.STRINGJACK_EQUALS, new Equals());
+		functions.put(OMSymbol.STRINGJACK_CONTAINS, new Contains());		
 		functions.put(OMSymbol.STRINGJACK_EQUALSIGNORECASE, new EqualsIgnoreCase());
 		functions.put(OMSymbol.STRINGJACK_INDEXOF, new IndexOf());
 		functions.put(OMSymbol.STRINGJACK_LASTINDEXOF, new LastIndexOf());

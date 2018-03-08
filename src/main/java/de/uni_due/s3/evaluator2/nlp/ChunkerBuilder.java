@@ -11,7 +11,7 @@ import opennlp.tools.chunker.ChunkerModel;
 public class ChunkerBuilder {
 	
 	private static ChunkerME CHUNKER_INSTANCE;
-	private static String PATH_TO_CHUNKER_FILE = "C:/Users/Schwein/Desktop/chunker.bin"; //System.getProperty("jboss.server.data.dir") + "/chunker.bin";
+	private static String PATH_TO_CHUNKER_FILE = System.getProperty("jboss.server.data.dir") + "/chunker.bin"; //"C:/Users/Wilfried/Documents/Uni-Duisburg-Essen/Bachelor/Wintersemester2017/Projekt/jboss_mit_JACK/server/default/data/chunker.bin" ;
 	
 	public static ChunkerME getChunkerInstance() throws IOException{
 		

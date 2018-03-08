@@ -24,16 +24,18 @@ import opennlp.tools.util.Span;
 
 public class SimpleSentenceFeedbackGenerator {
 	
-	private static String SUBJECT_MISSING_MESSAGE = "In dem Satz scheint das Subjekt zu fehlen.";
-	private static String VERB_MISSING_MESSAGE = "In dem Satz scheint das Verb zu fehlen.";
-	private static String OBJECT_MISSING_MESSAGE = "In dem Satz scheint das Objekt zu fehlen";
+	private static String SUBJECT_MISSING_MESSAGE = "The subject is missing in the input sentence.";
+	private static String VERB_MISSING_MESSAGE = "The verb is missing in the input sentence.";
+	private static String OBJECT_MISSING_MESSAGE = "The object is missing in the input sentence.";
 	
 	private static String DETERMINER_MISSING_MESSAGE = "";
 	
 	public static String generateFeedbackForSimpleSentence(String[] correctSentenceTokens, String[] correctSentencePOSTags, String[] userSentenceTokens, String[] userSentencePOSTags) throws IOException {
-	
+		
+		try {
 		// auslagern?
 		ChunkerME chunker = ChunkerBuilder.getChunkerInstance();
+		
 		VerbPhraseComparator verbPhraseComparator = new VerbPhraseComparator();
 		NounPhraseComparator subjectPhraseComparator = new NounPhraseComparator(NounPhraseComparator.TYPE_SUBJECT);
 		NounPhraseComparator objectPhraseComparator = new NounPhraseComparator(NounPhraseComparator.TYPE_OBJECT);
@@ -98,9 +100,17 @@ public class SimpleSentenceFeedbackGenerator {
 	    }
 		
 	    for (String currentMessage : messageList) {
-			message = message + "\n" + currentMessage;
+			message = message + " " + currentMessage;
 		}
+	    System.out.println(message);
+		
 	    return message;
+	    
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 		
 	}
 		
@@ -127,7 +137,7 @@ public class SimpleSentenceFeedbackGenerator {
 		try {
 				
 		   InputStream modelIn;
-		   String pathToFile = "C:/Users/Schwein/Downloads/en-pos-maxent.bin";
+		   String pathToFile = "C:/Users/Wilfried/Documents/Uni-Duisburg-Essen/Bachelor/Wintersemester2017/Projekt/jboss_mit_JACK/server/default/data/en-pos-maxent.bin";
 		   modelIn = new FileInputStream(pathToFile);
 		   POSModel model = new POSModel(modelIn);
 		   

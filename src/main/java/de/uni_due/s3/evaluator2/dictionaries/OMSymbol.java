@@ -168,6 +168,7 @@ public class OMSymbol {
 	public static final OMS STRINGJACK_CONCAT = OMCreator.createOMS("stringJACK", "concat");
 	public static final OMS STRINGJACK_ENDSWITH = OMCreator.createOMS("stringJACK", "endsWith");
 	public static final OMS STRINGJACK_EQUALS = OMCreator.createOMS("stringJACK", "equals");
+	public static final OMS STRINGJACK_CONTAINS = OMCreator.createOMS("stringJACK", "contains");
 	public static final OMS STRINGJACK_EQUALSIGNORECASE = OMCreator.createOMS("stringJACK", "equalsIgnoreCase");
 	public static final OMS STRINGJACK_INDEXOF = OMCreator.createOMS("stringJACK", "indexOf");
 	public static final OMS STRINGJACK_LASTINDEXOF = OMCreator.createOMS("stringJACK", "lastIndexOf");

@@ -197,6 +197,7 @@ public class OMSEvaluatorSyntaxDictionary {
 		functionSymbolMap.put("concat", OMSymbol.STRINGJACK_CONCAT);
 		functionSymbolMap.put("endsWith", OMSymbol.STRINGJACK_ENDSWITH);
 		functionSymbolMap.put("equals", OMSymbol.STRINGJACK_EQUALS);
+		functionSymbolMap.put("contains", OMSymbol.STRINGJACK_CONTAINS);
 		functionSymbolMap.put("equalsIgnoreCase", OMSymbol.STRINGJACK_EQUALSIGNORECASE);
 		functionSymbolMap.put("indexOf", OMSymbol.STRINGJACK_INDEXOF);
 		functionSymbolMap.put("lastIndexOf", OMSymbol.STRINGJACK_LASTINDEXOF);
