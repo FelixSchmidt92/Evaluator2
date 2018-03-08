@@ -53,26 +53,6 @@ public class NounPhraseComparator implements PhraseComparator {
 			else {
 				messages.add(compareNouns(0, correctSentencePOSTags, 0, userSentencePOSTags));
 			}
-//			else if(isProperNoun(correctSentencePOSTags[0])) {
-//				if(isProperNoun(userSentencePOSTags[0]) && (!userSentencePOSTags[0].equals(correctSentencePOSTags[0]))){
-//					if(isPlural(correctSentencePOSTags[0])) {
-//						messages.add("The " + type + " should be in plural but is in singular.");
-//					}
-//					else {
-//						messages.add("The " + type + " should be in singular but is in plural.");
-//					}
-//				}	
-//			}
-//			else if(isNoun(correctSentencePOSTags[0])) {
-//				if(isNoun(userSentencePOSTags[0]) && (!userSentencePOSTags[0].equals(correctSentencePOSTags[0]))){
-//					if(isPlural(correctSentencePOSTags[0])) {
-//						messages.add("The " + type + " should be in plural but is in singular.");
-//					}
-//					else {
-//						messages.add("The " + type + " should be in singular but is in plural.");
-//					}
-//				}
-//			}
 			 
 		}
 

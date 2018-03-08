@@ -46,9 +46,7 @@ public class SimpleSentenceFeedbackGenerator {
 	    
 	    ArrayList<Span> correctSpanList = new ArrayList<Span>( Arrays.asList(correctSentenceSpans) );
 	    ArrayList<Span> userSpanList = new ArrayList<Span>( Arrays.asList(userSentenceSpans) );
-	    
-	    // Satz besteht immer aus Subjekt, Verb, Objekt (in der Reihenfolge) // Eventuell Extractor der die SpanList und Objekt, Subject, Prädikat entgegenimmt als Interface hier,
-	    // dann könnte auch mit anderen Sätzen gearbeitet werden?
+	   
 	    Span correctSubjectSpan = extractFirstIfType(correctSpanList, "NP");
 	    Span correctVerbSpan = extractFirstIfType(correctSpanList, "VP");
 	    Span correctObjectSpan = extractFirstIfType(correctSpanList, "NP");
@@ -141,12 +139,12 @@ public class SimpleSentenceFeedbackGenerator {
 		   String[] posS1 = tagger.tag(tokensS1);
 		   String[] posS2 = tagger.tag(tokensS2);
 		   
-		   for (int i = 0; i < posS1.length; i++) {
-			System.out.println(posS1[i]);
-		}
-		   for (int i = 0; i < posS2.length; i++) {
-				System.out.println(posS2[i]);
-			}
+//		   for (int i = 0; i < posS1.length; i++) {
+//			System.out.println(posS1[i]);
+//		}
+//		   for (int i = 0; i < posS2.length; i++) {
+//				System.out.println(posS2[i]);
+//			}
 					
 				
 //		// Get the main Phrases (Subject, Verb, Object)  

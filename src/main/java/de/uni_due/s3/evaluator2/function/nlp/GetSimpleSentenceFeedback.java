@@ -1,5 +1,6 @@
 package de.uni_due.s3.evaluator2.function.nlp;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,10 +45,14 @@ public class GetSimpleSentenceFeedback extends Function {
 			userSentencePOSTags[i] = getStringSyntax(userSentencePOSTags_1.get(i));
 		}
 
-		String generatedSentence = SimpleSentenceFeedbackGenerator.generateFeedbackForSimpleSentence(correctSentenceTokens, correctSentencePOSTags, userSentenceTokens, userSentencePOSTags);
+		String generatedSentence;
+		try {
+			generatedSentence = SimpleSentenceFeedbackGenerator.generateFeedbackForSimpleSentence(correctSentenceTokens, correctSentencePOSTags, userSentenceTokens, userSentencePOSTags);
+			return OMCreator.createOMSTR(generatedSentence);
 
-		return OMCreator.createOMSTR(generatedSentence);
-
+		} catch (IOException e) {
+			throw new EvaluatorException("The Chunker file couldn't be loaded");
+		}
 	}
 
 	@Override
