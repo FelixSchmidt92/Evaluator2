@@ -14,8 +14,32 @@ public class TestTenseDeterminer {
 		assertEquals("unknown tense", actualTense);
 	}
 	@Test
-	public void testDetermineTenseSimplePresent() {
+	public void testDetermineTenseWithUnknownTense() {
+		String[] posTags = {"VB", "VBN", "VBZ"};
+		String actualTense = TenseDeterminer.determineTense(posTags);
+		assertEquals("unknown tense", actualTense);
+		
+	}
+	@Test
+	public void testDetermineTenseWithUnknownTags() {
+		String[] posTags = {"VBA"};
+		String actualTense = TenseDeterminer.determineTense(posTags);
+		assertEquals("unknown tense", actualTense);
+	}
+	@Test
+	public void testDetermineTenseSimplePresentBase() {
 		String[] posTags = {"VB"};
+		String actualTense = TenseDeterminer.determineTense(posTags);
+		assertEquals("present simple", actualTense);
+	}
+	@Test
+	public void testDetermineTenseSimplePresentNon3rdPerson() {
+		String[] posTags = {"VBP"};
+		String actualTense = TenseDeterminer.determineTense(posTags);
+		assertEquals("present simple", actualTense);
+	}
+	public void testDetermineTenseSimplePresent3rdPerson() {
+		String[] posTags = {"VBZ"};
 		String actualTense = TenseDeterminer.determineTense(posTags);
 		assertEquals("present simple", actualTense);
 	}
